@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- 主页 -->
+    <url>
+        <loc>https://www.connectthedotsprintable.online/index.html</loc>
+        <lastmod>2023-07-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- 生成器页面（主页内锚点） -->
+    <url>
+        <loc>https://www.connectthedotsprintable.online/index.html#generator</loc>
+        <lastmod>2023-07-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 成人页面 -->
+    <url>
+        <loc>https://www.connectthedotsprintable.online/adults.html</loc>
+        <lastmod>2023-07-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- 示例页面（主页内锚点） -->
+    <url>
+        <loc>https://www.connectthedotsprintable.online/index.html#examples</loc>
+        <lastmod>2023-07-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- FAQ页面（主页内锚点） -->
+    <url>
+        <loc>https://www.connectthedotsprintable.online/index.html#faq</loc>
+        <lastmod>2023-07-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- 隐私政策 -->
+    <url>
+        <loc>https://www.connectthedotsprintable.online/privacy.html</loc>
+        <lastmod>2023-07-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- 服务条款 -->
+    <url>
+        <loc>https://www.connectthedotsprintable.online/terms.html</loc>
+        <lastmod>2023-07-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- 博客页面 -->
+    <url>
+        <loc>https://www.connectthedotsprintable.online/blog.html</loc>
+        <lastmod>2023-07-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- 联系我们页面 -->
+    <url>
+        <loc>https://www.connectthedotsprintable.online/contact.html</loc>
+        <lastmod>2023-07-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+</urlset>
+    
