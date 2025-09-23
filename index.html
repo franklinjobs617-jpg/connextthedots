@@ -62,7 +62,7 @@
 </script>
 </head>
 <body>
-     <header class="sticky top-0 z-50 bg-white shadow-md">
+   <header class="sticky top-0 z-50 bg-white shadow-md">
         <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between">
             <a href="/" class="flex items-center">
                 <i class="fas fa-pencil-ruler text-primary text-3xl mr-2"></i>
@@ -72,7 +72,7 @@
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6">
                 <a href="/" class="font-medium hover:text-primary transition">Home</a>
-                <a href="./printable-connect-the-dots" class="font-medium text-primary hover:text-primary/80 transition">All Printables</a>
+                <a href="/printable-connect-the-dots.html" class="font-medium text-primary hover:text-primary/80 transition">All Printables</a>
                 <a href="#" class="font-medium hover:text-primary transition">Worksheets</a>
                 <a href="#" class="font-medium hover:text-primary transition">Free Downloads</a>
                 <a href="#" class="font-medium hover:text-primary transition">Custom Generator</a>
@@ -88,7 +88,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
                 <a href="/" class="py-2 font-medium hover:text-primary transition">Home</a>
-                <a href="/printable-connect-the-dots" class="py-2 font-medium text-primary">All Printables</a>
+                <a href="/printable-connect-the-dots.html" class="py-2 font-medium text-primary">All Printables</a>
                 <a href="#" class="py-2 font-medium hover:text-primary transition">Worksheets</a>
                 <a href="#" class="py-2 font-medium hover:text-primary transition">Free Downloads</a>
                 <a href="#" class="py-2 font-medium hover:text-primary transition">Custom Generator</a>
@@ -255,7 +255,10 @@
                                 <span class="text-sm text-neutral/60">
                                     <i class="fas fa-download mr-1"></i> 2.5k downloads
                                 </span>
-                                <a href="#" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition">
+                                <!-- MODIFIED FOR DOWNLOAD -->
+                                <a href="#" class="download-btn bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition"
+                                   data-img-src="./image/6 Cute Bunny Rabbit Connect the Dots for Young Children (1-20 dots).png"
+                                   data-filename="Bunny-Rabbit-Printable.png">
                                     <i class="fas fa-download mr-1"></i> Download
                                 </a>
                             </div>
@@ -280,9 +283,12 @@
                                 <span class="text-sm text-neutral/60">
                                     <i class="fas fa-download mr-1"></i> 1.8k downloads
                                 </span>
-                                <a href="/printable-connect-the-dots/christmas" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition">
-                                    <i class="fas fa-download mr-1"></i> Download
-                                </a>
+                                 <!-- MODIFIED FOR DOWNLOAD -->
+                                 <a href="#" class="download-btn bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition"
+                                    data-img-src="./image/7 Festive Christmas Tree Connect the Dots Design (1-50 dots).png"
+                                    data-filename="Christmas-Tree-Printable.png">
+                                     <i class="fas fa-download mr-1"></i> Download
+                                 </a>
                             </div>
                         </div>
                     </div>
@@ -305,7 +311,10 @@
                                 <span class="text-sm text-neutral/60">
                                     <i class="fas fa-download mr-1"></i> 3.2k downloads
                                 </span>
-                                <a href="/printable-connect-the-dots/mandala-adult" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition">
+                                <!-- MODIFIED FOR DOWNLOAD -->
+                                <a href="#" class="download-btn bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition"
+                                   data-img-src="./image/8 Advanced Mandala Connect the Dots Design for Adults (Over 100 dots).png"
+                                   data-filename="Advanced-Mandala-Printable.png">
                                     <i class="fas fa-download mr-1"></i> Download
                                 </a>
                             </div>
@@ -314,7 +323,7 @@
                 </div>
                 
                 <div class="text-center mt-10">
-                    <a href="/printable-connect-the-dots" class="inline-flex items-center bg-white border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition">
+                    <a href="/printable-connect-the-dots.html" class="inline-flex items-center bg-white border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition">
                         View All Connect the Dots Printables <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -361,7 +370,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <a href="/custom-generator" class="bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition self-start">
+                            <a href="#" class="bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition self-start">
                                 <i class="fas fa-magic mr-2"></i>Try Custom Generator
                             </a>
                         </div>
@@ -434,7 +443,7 @@
                     </div>
                     
                     <div class="mt-8 pt-6 border-t border-gray-200">
-                        <a href="/printing-guide" class="text-primary font-semibold hover:underline inline-flex items-center">
+                        <a href="#" class="text-primary font-semibold hover:underline inline-flex items-center">
                             View complete printing guide <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -506,7 +515,7 @@
                     </div>
                     
                     <div class="text-center mt-8">
-                        <a href="/faq" class="inline-flex items-center text-primary font-semibold hover:underline">
+                        <a href="#" class="inline-flex items-center text-primary font-semibold hover:underline">
                             View all frequently asked questions <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -534,12 +543,12 @@
         </section>
     </main>
 
-    <footer class="bg-gray-900 text-white pt-16 pb-8">
+    <footer class="bg-neutral text-white pt-16 pb-8">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
                     <div class="flex items-center mb-6">
-                        <i class="fas fa-pencil-ruler text-primary text-3xl mr-2"></i>
+                        <i class="fas fa-pencil-ruler text-white text-3xl mr-2"></i>
                         <span class="text-xl font-bold">ConnectTheDotsPrintable.online</span>
                     </div>
                     <p class="text-gray-400 mb-6">
@@ -564,38 +573,38 @@
                 <div>
                     <h3 class="text-lg font-bold mb-6">Printable Categories</h3>
                     <ul class="space-y-3">
-                        <li><a href="/printable-connect-the-dots" class="text-gray-400 hover:text-white transition">All Printables</a></li>
-                        <li><a href="/kids-connect-the-dots" class="text-gray-400 hover:text-white transition">Kids Connect the Dots</a></li>
-                        <li><a href="/adult-connect-the-dots" class="text-gray-400 hover:text-white transition">Adult Dot to Dot</a></li>
-                        <li><a href="/dot-to-dot-worksheets" class="text-gray-400 hover:text-white transition">Dot to Dot Worksheets</a></li>
-                        <li><a href="/themed-connect-the-dots" class="text-gray-400 hover:text-white transition">Themed Printables</a></li>
+                        <li><a href="./printable-connect-the-dots.html" class="text-gray-400 hover:text-white transition">All Printables</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Kids Connect the Dots</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Adult Dot to Dot</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Dot to Dot Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Themed Printables</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-bold mb-6">Quick Links</h3>
                     <ul class="space-y-3">
-                        <li><a href="/about" class="text-gray-400 hover:text-white transition">About Us</a></li>
-                        <li><a href="/custom-generator" class="text-gray-400 hover:text-white transition">Custom Generator</a></li>
-                        <li><a href="/printing-guide" class="text-gray-400 hover:text-white transition">Printing Guide</a></li>
-                        <li><a href="/faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
-                        <li><a href="/contact" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Custom Generator</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Printing Guide</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-bold mb-6">Legal</h3>
                     <ul class="space-y-3">
-                        <li><a href="/privacy-policy" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="/terms-of-service" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
-                        <li><a href="/copyright" class="text-gray-400 hover:text-white transition">Copyright Information</a></li>
-                        <li><a href="/dmca" class="text-gray-400 hover:text-white transition">DMCA Notice</a></li>
+                        <li><a href="./privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="./terms.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Copyright Information</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">DMCA Notice</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-                <p>&copy; 2023 ConnectTheDotsPrintable.online. All rights reserved.</p>
+                <p>&copy; 2025 ConnectTheDotsPrintable.online. All rights reserved.</p>
                 <p class="mt-2">All printables are for personal and educational use only.</p>
             </div>
         </div>
@@ -616,13 +625,13 @@
                 const icon = this.querySelector('i');
                 
                 content.classList.toggle('hidden');
-                icon.classList.toggle('rotate-45');
+                icon.classList.toggle('fa-plus');
+                icon.classList.toggle('fa-minus');
             });
         });
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            // 假设的平滑滚动代码
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
@@ -633,6 +642,48 @@
                             behavior: 'smooth'
                         });
                     }
+                }
+            });
+        });
+
+        // --- ADDED: Image Download Logic ---
+        async function downloadImage(url, filename) {
+            try {
+                // Fetch the image data as a blob
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok.');
+                const blob = await response.blob();
+
+                const objectUrl = window.URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.style.display = 'none'; 
+                a.href = objectUrl;
+                a.download = filename || 'printable.png'; // Use provided filename or a default
+                document.body.appendChild(a); 
+                a.click(); 
+
+                window.URL.revokeObjectURL(objectUrl);
+                document.body.removeChild(a);
+
+            } catch (error) {
+                console.error('Download failed:', error);
+                alert('Sorry, the image could not be downloaded. Please check the console for errors.');
+            }
+        }
+
+        document.querySelectorAll('.download-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+
+                // Get the image URL and filename from the data attributes
+                const imageUrl = this.dataset.imgSrc;
+                const filename = this.dataset.filename;
+
+                if (imageUrl) {
+                    downloadImage(imageUrl, filename);
+                } else {
+                    console.error('No image source (data-img-src) found for this button.');
                 }
             });
         });

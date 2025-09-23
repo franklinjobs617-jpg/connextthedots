@@ -46,29 +46,36 @@
 </head>
 <body class="font-inter text-dark bg-light">
     <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <a href="index.html" class="flex items-center gap-2">
-                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                        <span class="text-white font-bold text-xl">•</span>
-                    </div>
-                    <span class="text-2xl font-bold text-dark">ConnectTheDots<span class="text-primary">Printable</span></span>
-                </a>
-                
-                <nav class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm md:text-base">
-                    <a href="index.html" class="font-medium hover:text-primary transition-colors">Home</a>
-                    <a href="index.html#generator" class="font-medium hover:text-primary transition-colors">Generator</a>
-                    <a href="adults.html" class="font-medium hover:text-primary transition-colors">For Adults</a>
-                    <a href="index.html#examples" class="font-medium hover:text-primary transition-colors">Examples</a>
-                    <a href="index.html#faq" class="font-medium hover:text-primary transition-colors">FAQ</a>
-                </nav>
-                
-                <div>
-                    <a href="index.html#generator" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg font-medium transition-all shadow-md hover:shadow-lg">
-                        Create Now <i class="fa fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
+      <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between">
+            <a href="/" class="flex items-center">
+                <i class="fas fa-pencil-ruler text-primary text-3xl mr-2"></i>
+                <span class="text-xl font-bold text-primary">ConnectTheDotsPrintable.online</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="/" class="font-medium hover:text-primary transition">Home</a>
+                <a href="/printable-connect-the-dots.html" class="font-medium text-primary hover:text-primary/80 transition">All Printables</a>
+                <a href="#" class="font-medium hover:text-primary transition">Worksheets</a>
+                <a href="#" class="font-medium hover:text-primary transition">Free Downloads</a>
+                <a href="#" class="font-medium hover:text-primary transition">Custom Generator</a>
+            </nav>
+            
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" class="md:hidden text-neutral hover:text-primary">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="/" class="py-2 font-medium hover:text-primary transition">Home</a>
+                <a href="/printable-connect-the-dots.html" class="py-2 font-medium text-primary">All Printables</a>
+                <a href="#" class="py-2 font-medium hover:text-primary transition">Worksheets</a>
+                <a href="#" class="py-2 font-medium hover:text-primary transition">Free Downloads</a>
+                <a href="#" class="py-2 font-medium hover:text-primary transition">Custom Generator</a>
             </div>
         </div>
     </header>
@@ -167,70 +174,69 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-12">
+    <footer class="bg-neutral text-white pt-16 pb-8">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
-                    <a href="index.html" class="flex items-center gap-2 mb-4">
-                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-                            <span class="text-primary font-bold text-xl">•</span>
-                        </div>
-                        <span class="text-2xl font-bold">ConnectTheDots<span class="text-primary">Printable</span></span>
-                    </a>
-                    <p class="text-gray-400 mb-4">
-                        Free online tool to create custom connect the dots printables for all ages and occasions.
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-pencil-ruler text-white text-3xl mr-2"></i>
+                        <span class="text-xl font-bold">ConnectTheDotsPrintable.online</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Your source for high-quality, free connect the dots printables for kids and adults.
                     </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Facebook">
-                            <i class="fa fa-facebook"></i>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
-                            <i class="fa fa-twitter"></i>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
-                            <i class="fa fa-instagram"></i>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-pinterest-p"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Pinterest">
-                            <i class="fa fa-pinterest"></i>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
                         </a>
                     </div>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="index.html#generator" class="text-gray-400 hover:text-white transition-colors">Generator</a></li>
-                        <li><a href="adults.html" class="text-gray-400 hover:text-white transition-colors">For Adults</a></li>
-                        <li><a href="index.html#examples" class="text-gray-400 hover:text-white transition-colors">Examples</a></li>
-                        <li><a href="index.html#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                    <h3 class="text-lg font-bold mb-6">Printable Categories</h3>
+                    <ul class="space-y-3">
+                        <li><a href="./printable-connect-the-dots.html" class="text-gray-400 hover:text-white transition">All Printables</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Kids Connect the Dots</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Adult Dot to Dot</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Dot to Dot Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Themed Printables</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Resources</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Teaching Tips</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Activity Ideas</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Printing Guide</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Custom Generator</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Printing Guide</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Copyright</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a></li>
+                    <h3 class="text-lg font-bold mb-6">Legal</h3>
+                    <ul class="space-y-3">
+                        <li><a href="./privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="./terms.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Copyright Information</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">DMCA Notice</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-                <p>&copy; 2023 ConnectTheDotsPrintable.online. All rights reserved.</p>
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>&copy; 2025 ConnectTheDotsPrintable.online. All rights reserved.</p>
+                <p class="mt-2">All printables are for personal and educational use only.</p>
             </div>
         </div>
     </footer>
