@@ -20,6 +20,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="canonical" href="https://connectthedotsprintable.online/">
     <meta name="google-adsense-account" content="ca-pub-3383070348689557">
+    <script src="./js/opencv.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -54,6 +55,24 @@
             }
         }
     </style>
+
+<style>
+    .controls { width: 300px; flex-shrink: 0; }
+    .preview-container {
+        position: relative;
+        border: 1px solid #ccc;
+        background-color: white;
+    }
+    .preview-container canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+    }
+    .control-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    #loader { font-style: italic; color: #555; }
+</style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
      crossorigin="anonymous"></script>
@@ -128,6 +147,88 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <section class="py-16 bg-white max-w-7xl mx-auto w-full flex flex-col lg:flex-row gap-8">
+
+                <!-- ===== Controls Panel ===== -->
+                  <!-- ===== Controls Panel ===== -->
+        <div class="controls lg:w-96 flex-shrink-0 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg space-y-6">
+            
+            <div class="control-group">
+                <label class="block text-lg font-semibold mb-2 text-gray-900 dark:text-white">1. Select Image</label>
+                <!-- **【重要修改】自定义文件输入按钮** -->
+                <div class="flex items-center">
+                    <!-- 隐藏真正的 input -->
+                    <input type="file" id="imageLoader" accept="image/*" class="hidden"/>
+                    <!-- 这是我们自定义的、漂亮的“按钮”，它是一个 label -->
+                    <label for="imageLoader" class="cursor-pointer bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-semibold text-sm py-2 px-4 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-colors duration-200">
+                        Choose File
+                    </label>
+                    <!-- 用于显示所选文件名的区域 -->
+                    <span id="fileName" class="ml-4 text-sm text-gray-500 dark:text-gray-400 truncate">No file chosen</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="block text-lg font-semibold mb-3 text-gray-900 dark:text-white">2. Hint Type</label>
+                <div class="space-y-2">
+                    <div class="flex items-center">
+                        <input type="radio" id="hintNo" name="imageHint" value="no" checked class="h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+                        <label for="hintNo" class="ml-3 block text-sm font-medium">No (Dots Only)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="hintTrace" name="imageHint" value="trace" class="h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+                        <label for="hintTrace" class="ml-3 block text-sm font-medium">Trace (Outline)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="hintContrast" name="imageHint" value="contrast" class="h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+                        <label for="hintContrast" class="ml-3 block text-sm font-medium">Contrast (Thresholded)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label for="thresholdSlider" class="block text-lg font-semibold mb-2 text-gray-900 dark:text-white">3. Adjust Threshold</label>
+                <div class="flex items-center gap-4">
+                    <input type="range" id="thresholdSlider" min="1" max="254" value="128" class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                    <span id="thresholdValue" class="font-mono text-sm bg-gray-200 dark:bg-gray-700 rounded-md px-2.5 py-1 w-12 text-center">128</span>
+                </div>
+            </div>
+    
+            <div class="control-group">
+                <label for="pointCountSlider" class="block text-lg font-semibold mb-2 text-gray-900 dark:text-white">4. Number of Points</label>
+                <div class="flex items-center gap-4">
+                    <input type="range" id="pointCountSlider" min="10" max="100" value="30" step="1" class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                    <span id="pointCountValue" class="font-mono text-sm bg-gray-200 dark:bg-gray-700 rounded-md px-2.5 py-1 w-12 text-center">18</span>
+                </div>
+            </div>
+    
+            <div class="control-group">
+                <label for="traceAmountSlider" class="block text-lg font-semibold mb-2 text-gray-900 dark:text-white">5. Trace Amount (%)</label>
+                <div class="flex items-center gap-4">
+                    <input type="range" id="traceAmountSlider" min="0" max="100" value="50" step="1" class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                    <span id="traceAmountValue" class="font-mono text-sm bg-gray-200 dark:bg-gray-700 rounded-md px-2.5 py-1 w-12 text-center">50</span>
+                </div>
+            </div>
+        </div>
+    
+        <!-- ===== Preview Area ===== -->
+        <div class="flex-1 min-w-0">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Preview</h2>
+                <button id="downloadBtn" disabled class="inline-flex items-center gap-2 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    Download PNG
+                </button>
+            </div>
+            <div id="previewContainer" class="preview-container w-full aspect-video bg-white dark:bg-gray-800 rounded-2xl shadow-inner border border-gray-200 dark:border-gray-700 relative flex items-center justify-center">
+                <div id="placeholder" class="text-gray-400 dark:text-gray-500">Select an image on the left to get started</div>
+                <canvas id="contrastCanvas" class="rounded-2xl"></canvas>
+                <canvas id="traceCanvas" class="rounded-2xl"></canvas>
+                <canvas id="dotsCanvas" class="rounded-2xl"></canvas>
+            </div>
+            <div id="loader" class="text-center mt-4 text-sm text-gray-500 dark:text-gray-400">OpenCV.js is loading...</div>
+        </div>
         </section>
 
         <!-- Features Section -->
@@ -692,6 +793,252 @@
                 }
             });
         });
-    </script>
+     
+      
+        const imageLoader = document.getElementById('imageLoader');
+        const fileNameSpan = document.getElementById('fileName');
+        const hintRadios = document.querySelectorAll('input[name="imageHint"]');
+        const thresholdSlider = document.getElementById('thresholdSlider');
+        const pointCountSlider = document.getElementById('pointCountSlider');
+        const traceAmountSlider = document.getElementById('traceAmountSlider');
+        const previewContainer = document.getElementById('previewContainer');
+        const placeholder = document.getElementById('placeholder');
+        // The other canvases are kept for potential off-screen drawing but won't be displayed.
+        // dotsCanvas is our main, visible canvas.
+        const dotsCanvas = document.getElementById('dotsCanvas'); 
+        const loader = document.getElementById('loader');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // --- Global Variables ---
+        let originalImage = null;
+        let currentPoints = [];
+        let allContours = null;
+
+        // --- OpenCV Initialization ---
+        function onOpenCvReady() {
+            if(loader) loader.textContent = 'OpenCV.js loaded. Ready to process images.';
+        }
+        const cvInterval = setInterval(() => {
+            if (typeof cv !== 'undefined') {
+                onOpenCvReady();
+                clearInterval(cvInterval);
+            }
+        }, 100);
+
+        // --- Event Listeners ---
+        if(imageLoader) imageLoader.addEventListener('change', handleImageUpload);
+        if(hintRadios) hintRadios.forEach(radio => radio.addEventListener('change', updateDisplay));
+        if(downloadBtn) downloadBtn.addEventListener('click', handleDownload);
+
+        // --- Main Functions ---
+        function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (!file) {
+                if (fileNameSpan) fileNameSpan.textContent = 'No file chosen';
+                return;
+            }
+            if (fileNameSpan) fileNameSpan.textContent = file.name;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                originalImage = new Image();
+                originalImage.onload = () => {
+                    if (placeholder) placeholder.style.display = 'none';
+                    processImage();
+                };
+                originalImage.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleDownload() {
+            if (!originalImage || dotsCanvas.style.display === 'none') return;
+            // The main canvas (dotsCanvas) now contains the complete image, so we download it directly.
+            const link = document.createElement('a');
+            link.download = 'connect-the-dots.png';
+            link.href = dotsCanvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function processImage() {
+            if (!originalImage || typeof cv === 'undefined') return;
+
+            if(downloadBtn) downloadBtn.disabled = false;
+
+            // 1. Calculate the responsive display size based on the container width.
+            const maxWidth = previewContainer.clientWidth;
+            let displayW = originalImage.width;
+            let displayH = originalImage.height;
+
+            if (originalImage.width > maxWidth) {
+                const scaleRatio = maxWidth / originalImage.width;
+                displayW = maxWidth;
+                displayH = Math.floor(originalImage.height * scaleRatio);
+            }
+            
+            // 2. Set the container and the main canvas to this responsive size.
+            previewContainer.style.aspectRatio = displayW / displayH;
+            dotsCanvas.width = displayW;
+            dotsCanvas.height = displayH;
+            
+            // 3. Create a resized image in memory (Mat object) for processing.
+            // All subsequent OpenCV operations use this resized version.
+            let src = cv.imread(originalImage);
+            let resizedSrc = new cv.Mat();
+            cv.resize(src, resizedSrc, new cv.Size(displayW, displayH), 0, 0, cv.INTER_AREA);
+            
+            let gray = new cv.Mat(), binary = new cv.Mat(), contours = new cv.MatVector(), hierarchy = new cv.Mat();
+            cv.cvtColor(resizedSrc, gray, cv.COLOR_RGBA2GRAY, 0);
+            cv.threshold(gray, binary, parseInt(thresholdSlider.value, 10), 255, cv.THRESH_BINARY_INV);
+            cv.findContours(binary, contours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_NONE);
+            
+            if (allContours) allContours.delete();
+            allContours = contours.clone();
+
+            // 4. Find the longest contour from the resized image.
+            let mainContour = null;
+            if (contours.size() > 0) {
+                let maxLength = 0, longestContourIndex = -1;
+                for (let i = 0; i < contours.size(); i++) {
+                    let len = cv.arcLength(contours.get(i), true);
+                    if (len > maxLength) { maxLength = len; longestContourIndex = i; }
+                }
+                if (longestContourIndex !== -1) mainContour = contours.get(longestContourIndex);
+            }
+
+            // 5. Calculate point positions based on the resized contour.
+            currentPoints = [];
+            if (mainContour) {
+                const perimeter = cv.arcLength(mainContour, true);
+                const targetPointCount = parseInt(pointCountSlider.value, 10);
+                if (perimeter > 0) {
+                    const step = perimeter / targetPointCount;
+                    const contourPoints = [];
+                    for (let i = 0; i < mainContour.data32S.length; i += 2) contourPoints.push({ x: mainContour.data32S[i], y: mainContour.data32S[i + 1] });
+                    if (contourPoints.length > 1) contourPoints.push(contourPoints[0]);
+                    
+                    let accumulatedDistance = 0, targetIndex = 0;
+                    const targetDistances = Array.from({ length: targetPointCount }, (_, i) => i * step);
+                    
+                    if(contourPoints.length > 0) {
+                        currentPoints.push(contourPoints[0]);
+                        targetIndex++;
+                    }
+
+                    for (let i = 1; i < contourPoints.length; i++) {
+                        const p1 = contourPoints[i - 1], p2 = contourPoints[i];
+                        const segmentLength = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+                        while (targetIndex < targetDistances.length && accumulatedDistance + segmentLength >= targetDistances[targetIndex]) {
+                            const distanceNeeded = targetDistances[targetIndex] - accumulatedDistance;
+                            const ratio = segmentLength > 0 ? distanceNeeded / segmentLength : 0;
+                            currentPoints.push({ x: p1.x + ratio * (p2.x - p1.x), y: p1.y + ratio * (p2.y - p1.y) });
+                            targetIndex++;
+                        }
+                        accumulatedDistance += segmentLength;
+                    }
+                }
+            }
+            
+            // 6. Trigger the unified display update.
+            updateDisplay();
+
+            // 7. Clean up memory.
+            src.delete(); resizedSrc.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete();
+        }
+
+        // --- Display Functions (Refactored to draw on a single canvas) ---
+
+        function updateDisplay() {
+            if (!originalImage) return;
+
+            const selectedHint = document.querySelector('input[name="imageHint"]:checked').value;
+            const mainCtx = dotsCanvas.getContext('2d');
+
+            // Step 1: Prepare the main canvas (clear it and set a white background).
+            mainCtx.fillStyle = 'white';
+            mainCtx.fillRect(0, 0, dotsCanvas.width, dotsCanvas.height);
+
+            // Step 2: Ensure only the main canvas is visible.
+            dotsCanvas.style.display = 'block';
+
+            // Step 3: Draw background layers onto the main canvas based on the selected hint.
+            if (selectedHint === 'contrast') {
+                drawContrastBackgroundOn(mainCtx);
+                drawTraceBackgroundOn(mainCtx); // Draw trace on top of contrast
+            } else if (selectedHint === 'trace') {
+                drawTraceBackgroundOn(mainCtx);
+            }
+
+            // Step 4: Always draw the dots and numbers on top of everything else.
+            drawDotsAndNumbersOn(mainCtx, currentPoints);
+        }
+
+        function drawDotsAndNumbersOn(ctx, points) {
+            if (!points || points.length === 0) return;
+            ctx.fillStyle = 'black';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            points.forEach((point, index) => {
+                if (!point) return;
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.fillText(index + 1, point.x, point.y - 15);
+            });
+        }
+
+        function drawTraceBackgroundOn(ctx) {
+            if (!allContours) return;
+            const traceAmount = parseInt(traceAmountSlider.value, 10) / 100;
+            ctx.strokeStyle = "rgba(0, 0, 0, 0.4)";
+            ctx.lineWidth = 1;
+            for (let i = 0; i < allContours.size(); ++i) {
+                const contour = allContours.get(i);
+                if (contour.rows < 2) continue;
+                const pointsToDraw = Math.floor(contour.rows * traceAmount);
+                if (pointsToDraw < 1) continue;
+                ctx.beginPath();
+                ctx.moveTo(contour.data32S[0], contour.data32S[1]);
+                for (let j = 2; j < pointsToDraw * 2; j += 2) {
+                    ctx.lineTo(contour.data32S[j], contour.data32S[j + 1]);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function drawContrastBackgroundOn(ctx) {
+            const canvas = ctx.canvas;
+            const threshold = parseInt(thresholdSlider.value, 10);
+            
+            // Draw the original image, scaled to fit the responsive canvas.
+            ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
+            
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                const brightness = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                const color = brightness <= threshold ? 0 : 255;
+                data[i] = data[i + 1] = data[i + 2] = color;
+                data[i + 3] = 255; // Ensure full opacity
+            }
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        // --- Debounced Slider Handling for Performance ---
+        let debounceTimer;
+        function debouncedProcessImage() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => { if (originalImage) processImage(); }, 16); // ~60fps
+        }
+        [thresholdSlider, pointCountSlider, traceAmountSlider].forEach(slider => {
+            if(slider) {
+                slider.addEventListener('input', (e) => {
+                    const span = e.target.parentElement.querySelector('span');
+                    if (span) span.textContent = e.target.value;
+                    debouncedProcessImage();
+                });
+            }
+        });
+        </script>
 </body>
 </html>
