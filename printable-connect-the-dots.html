@@ -1,706 +1,1368 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printable Connect the Dots Worksheets | Free Dot to Dot Printables</title>
-    <meta name="description" content="Browse our collection of printable connect the dots worksheets. Find free dot to dot printables for kids and adults in various themes and difficulty levels." />
-    <meta name="keywords" content="printable connect the dots, dot to dot printables, connect the dots worksheets, free connect the dots, dot to dot activity sheets" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Printable Connect the Dots Worksheets | Free Dot to Dot Printables
+    </title>
+    <meta
+      name="description"
+      content="Browse our collection of printable connect the dots worksheets. Find free dot to dot printables for kids and adults in various themes and difficulty levels."
+    />
+    <meta
+      name="keywords"
+      content="printable connect the dots, dot to dot printables, connect the dots worksheets, free connect the dots, dot to dot activity sheets"
+    />
     <meta name="author" content="Connect the Dots Printable" />
     <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta
+      name="googlebot"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
     <meta property="og:title" content="Printable Connect the Dots Worksheets" />
-    <meta property="og:description" content="Browse our collection of printable connect the dots worksheets for kids and adults. Free dot to dot printables in various themes." />
+    <meta
+      property="og:description"
+      content="Browse our collection of printable connect the dots worksheets for kids and adults. Free dot to dot printables in various themes."
+    />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://connectthedotsprintable.online/printable-connect-the-dots" />
-    <meta property="og:image" content="https://connectthedotsprintable.online/images/og-printables.jpg" />
-    <meta name="google-adsense-account" content="ca-pub-3383070348689557">
-    <link rel="canonical" href="https://connectthedotsprintable.online/printable-connect-the-dots" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta
+      property="og:url"
+      content="https://connectthedotsprintable.online/printable-connect-the-dots"
+    />
+    <meta
+      property="og:image"
+      content="https://connectthedotsprintable.online/images/og-printables.jpg"
+    />
+    <meta name="google-adsense-account" content="ca-pub-3383070348689557" />
+    <link
+      rel="canonical"
+      href="https://connectthedotsprintable.online/printable-connect-the-dots"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="canonical" href="https://connectthedotsprintable.online/printable-connect-the-dots.html">
+    <link
+      rel="canonical"
+      href="https://connectthedotsprintable.online/printable-connect-the-dots.html"
+    />
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
-     crossorigin="anonymous"></script>
+    <!-- 引入 jsPDF 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
+      crossorigin="anonymous"
+    ></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4F46E5',
-                        secondary: '#EC4899',
-                        accent: '#F59E0B',
-                        neutral: '#1F2937',
-                        light: '#F9FAFB'
-                    },
-                    fontFamily: {
-                        nunito: ['Nunito', 'sans-serif'],
-                    },
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#4F46E5",
+              secondary: "#EC4899",
+              accent: "#F59E0B",
+              neutral: "#1F2937",
+              light: "#F9FAFB",
+            },
+            fontFamily: {
+              nunito: ["Nunito", "sans-serif"],
+            },
+          },
+        },
+      };
     </script>
     <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .filter-active {
-                @apply bg-primary text-white;
-            }
-            .card-hover {
-                transition: all 0.3s ease;
-            }
-            .card-hover:hover {
-                transform: translateY(-5px);
-            }
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
         }
+        .filter-active {
+          @apply bg-primary text-white;
+        }
+        .card-hover {
+          transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+          transform: translateY(-5px);
+        }
+      }
     </style>
-</head>
-<body class="font-nunito bg-light text-neutral">
+  </head>
+  <body class="font-nunito bg-light text-neutral">
     <!-- Header with Navigation -->
     <header class="sticky top-0 z-50 bg-white shadow-md">
-        <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between">
-            <a href="/" class="flex items-center">
-                <i class="fas fa-pencil-ruler text-primary text-3xl mr-2"></i>
-                <span class="text-xl font-bold text-primary">ConnectTheDotsPrintable.online</span>
-            </a>
-            
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-6">
-                <a href="/" class="font-medium hover:text-primary transition">Home</a>
-                <a href="/printable-connect-the-dots" class="font-medium text-primary hover:text-primary/80 transition">All Printables</a>
-                <a href="#" class="font-medium hover:text-primary transition">Worksheets</a>
-                <a href="#" class="font-medium hover:text-primary transition">Free Downloads</a>
-                <a href="#" class="font-medium hover:text-primary transition">Custom Generator</a>
-            </nav>
-            
-            <!-- Mobile menu button -->
-            <button id="mobile-menu-button" class="md:hidden text-neutral hover:text-primary">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+        <div
+          class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between"
+        >
+          <a href="/" class="flex items-center">
+            <i class="fas fa-pencil-ruler text-primary text-3xl mr-2"></i>
+            <span class="text-xl font-bold text-primary"
+              >ConnectTheDotsPrintable.online</span
+            >
+          </a>
+  
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex space-x-6">
+            <a href="/" class="font-medium hover:text-primary transition">Home</a>
+            <a
+              href="/printable-connect-the-dots.html"
+              class="font-medium text-primary hover:text-primary/80 transition"
+              >All Printables</a
+            >
+            <a href="#" class="font-medium hover:text-primary transition"
+              >Worksheets</a
+            >
+            <a href="#" class="font-medium hover:text-primary transition"
+              >Free Downloads</a
+            >
+            <a href="#" class="font-medium hover:text-primary transition"
+              >Custom Generator</a
+            >
+          </nav>
+  
+          <!-- Mobile menu button -->
+          <button
+            id="mobile-menu-button"
+            class="md:hidden text-neutral hover:text-primary"
+          >
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
         </div>
-        
+  
         <!-- Mobile Navigation -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
-                <a href="/" class="py-2 font-medium hover:text-primary transition">Home</a>
-                <a href="/printable-connect-the-dots" class="py-2 font-medium text-primary">All Printables</a>
-                <a href="#" class="py-2 font-medium hover:text-primary transition">Worksheets</a>
-                <a href="#" class="py-2 font-medium hover:text-primary transition">Free Downloads</a>
-                <a href="#" class="py-2 font-medium hover:text-primary transition">Custom Generator</a>
-            </div>
+          <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+            <a href="/" class="py-2 font-medium hover:text-primary transition"
+              >Home</a
+            >
+            <a
+              href="/printable-connect-the-dots.html"
+              class="py-2 font-medium text-primary"
+              >All Printables</a
+            >
+            <a href="#" class="py-2 font-medium hover:text-primary transition"
+              >Worksheets</a
+            >
+            <a href="#" class="py-2 font-medium hover:text-primary transition"
+              >Free Downloads</a
+            >
+            <a href="#" class="py-2 font-medium hover:text-primary transition"
+              >Custom Generator</a
+            >
+          </div>
         </div>
-    </header>
+      </header>
 
     <main>
-     <!-- Page Title Section -->
-        <section class="bg-gradient-to-r from-primary to-primary/80 text-white py-12">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto">
-                    <!-- 面包屑导航 -->
-                    <div class="text-sm mb-4">
-                        <a href="/" class="hover:underline">Home</a> &gt; <span>Printable Connect the Dots Worksheets</span>
-                    </div>
-                    
-                    <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-4">Printable Connect the Dots Worksheets</h1>
-                    <p class="text-xl text-white/90">
-                        Browse our extensive collection of free dot to dot printables for kids and adults. 
-                        All our connect the dots printables are easy to download, no watermarks, and ready to print.
+      <!-- Page Title Section -->
+      <section
+        class="bg-gradient-to-r from-primary to-primary/80 text-white py-12"
+      >
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-sm mb-4">
+              <a href="/" class="hover:underline">Home</a> &gt;
+              <span>Printable Connect the Dots Worksheets</span>
+            </div>
+            <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-4">
+              Printable Connect the Dots Worksheets
+            </h1>
+            <p class="text-xl text-white/90">
+              Browse our extensive collection of free dot to dot printables for
+              kids and adults. All our connect the dots printables are easy to
+              download, no watermarks, and ready to print.
+            </p>
+            <h2 class="font-bold">
+              Feature under upgrade maintenance, coming soon. Stay tuned.
+            </h2>
+            <div class="mt-4 text-sm text-white/80">
+              <i class="fas fa-clock mr-1"></i> Last updated: July 15, 2023
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filters and Results Section -->
+      <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <aside class="lg:w-1/4">
+              <div class="bg-light p-6 rounded-xl shadow-sm sticky top-24">
+                <h2 class="text-xl font-bold mb-6">
+                  Filters for Connect the Dots Printables
+                </h2>
+                <div class="mb-6">
+                  <h3 class="font-semibold mb-3">Difficulty Level</h3>
+                  <div class="space-y-2">
+                    <button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="difficulty-all"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i>All
+                      Levels</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition filter-active"
+                      data-filter="difficulty-easy"
+                    >
+                      <i class="fas fa-check-circle mr-2"></i>Easy</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="difficulty-medium"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i
+                      >Medium</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="difficulty-hard"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i
+                      >Hard</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="difficulty-extreme"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i>Extreme
+                    </button>
+                  </div>
+                </div>
+                <div class="mb-6">
+                  <h3 class="font-semibold mb-3">Age Group</h3>
+                  <div class="space-y-2">
+                    <button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="age-all"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i>All Ages</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition filter-active"
+                      data-filter="age-kids"
+                    >
+                      <i class="fas fa-check-circle mr-2"></i>Kids (3-10)</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="age-teens"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i>Teens
+                      (11-17)</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="age-adults"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i>Adults
+                    </button>
+                  </div>
+                </div>
+                <div class="mb-6">
+                  <h3 class="font-semibold mb-3">Themes</h3>
+                  <div class="space-y-2">
+                    <button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="theme-all"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i>All
+                      Themes</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="theme-animals"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i
+                      >Animals</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="theme-nature"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i
+                      >Nature</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="theme-education"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i
+                      >Educational</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="theme-holidays"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i
+                      >Holidays</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="theme-abstract"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i>Abstract
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-3">File Format</h3>
+                  <div class="space-y-2">
+                    <button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition filter-active"
+                      data-filter="format-all"
+                    >
+                      <i class="fas fa-check-circle mr-2"></i>All Formats</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="format-pdf"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i>PDF Only</button
+                    ><button
+                      class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                      data-filter="format-image"
+                    >
+                      <i class="fas fa-check-circle mr-2 opacity-0"></i>Image
+                      Only
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+            <!-- Printables Results -->
+            <div class="lg:w-3/4">
+              <div
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4"
+              >
+                <div>
+                  <h2 class="text-2xl font-bold">
+                    Connect the Dots Printables
+                  </h2>
+                  <p class="text-neutral/70">Showing 12 of 156 results</p>
+                </div>
+                <div class="w-full sm:w-auto">
+                  <label
+                    for="sort-by"
+                    class="block text-sm font-medium text-neutral/70 mb-1"
+                    >Sort by:</label
+                  ><select
+                    id="sort-by"
+                    class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                  >
+                    <option value="popular">Most Popular</option>
+                    <option value="newest">Newest First</option>
+                    <option value="alpha">Alphabetical</option>
+                    <option value="difficulty-easy">
+                      Difficulty: Easy to Hard
+                    </option>
+                    <option value="difficulty-hard">
+                      Difficulty: Hard to Easy
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Printables Grid -->
+              <div
+                id="printables-grid"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                itemscope
+                itemtype="https://schema.org/ItemList"
+              >
+                <!-- Printable 1 -->
+                <div
+                  class="bg-light rounded-xl overflow-hidden shadow-md card-hover"
+                  data-difficulty="easy"
+                  data-age="kids"
+                  data-theme="animals"
+                  data-format="pdf,image"
+                  itemprop="itemListElement"
+                  itemscope
+                  itemtype="https://schema.org/ListItem"
+                >
+                  <meta itemprop="position" content="1" />
+                  <div class="relative">
+                    <img
+                      src="./image/1 Collage of Various Connect the Dots Worksheets with Free Printable Label.png"
+                      alt="Free printable connect the dots worksheets"
+                      class="printable-image w-full h-56 object-cover"
+                      itemprop="image"
+                    />
+                    <span
+                      class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full"
+                      >Free</span
+                    >
+                  </div>
+                  <div
+                    class="p-6"
+                    itemprop="item"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <h3 class="text-xl font-bold mb-2" itemprop="name">
+                      Cute Bunny Connect the Dots
+                    </h3>
+                    <p class="text-neutral/70 mb-4" itemprop="description">
+                      Simple dot to dot printable for young children featuring a
+                      cute bunny rabbit design with numbers 1-20.
                     </p>
-                    <h2 class="font-bold ">Feature under upgrade maintenance, coming soon. Stay tuned. </h2>
-                    
-                    <!-- 页面更新时间 -->
-                    <div class="mt-4 text-sm text-white/80">
-                        <i class="fas fa-clock mr-1"></i> Last updated: July 15, 2023
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >For Kids</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Easy</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Animals</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PDF</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PNG</span
+                      >
                     </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-sm text-neutral/60"
+                        ><i class="fas fa-download mr-1"></i> 4.2k
+                        downloads</span
+                      >
+                      <div class="flex gap-2">
+                        <a
+                          href="#"
+                          class="download-btn bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition"
+                          data-format="pdf"
+                          itemprop="downloadUrl"
+                          ><i class="fas fa-file-pdf mr-1"></i> PDF</a
+                        >
+                        <a
+                          href="#"
+                          class="download-btn bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition"
+                          data-format="png"
+                          ><i class="fas fa-file-image mr-1"></i> PNG</a
+                        >
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Filters and Results Section -->
-        <section class="py-12 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col lg:flex-row gap-8">
-                    <!-- Filters Sidebar -->
-                    <div class="lg:w-1/4">
-                        <div class="bg-light p-6 rounded-xl shadow-sm sticky top-24">
-                            <h2 class="text-xl font-bold mb-6">Filters for Connect the Dots Printables</h2>
-                            
-                            <!-- Difficulty Filter -->
-                            <div class="mb-6">
-                                <h3 class="font-semibold mb-3">Difficulty Level</h3>
-                                <div class="space-y-2">
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="difficulty-all">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>All Levels
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition filter-active" data-filter="difficulty-easy">
-                                        <i class="fas fa-check-circle mr-2"></i>Easy
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="difficulty-medium">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Medium
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="difficulty-hard">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Hard
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="difficulty-extreme">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Extreme
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Age Group Filter -->
-                            <div class="mb-6">
-                                <h3 class="font-semibold mb-3">Age Group</h3>
-                                <div class="space-y-2">
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="age-all">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>All Ages
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition filter-active" data-filter="age-kids">
-                                        <i class="fas fa-check-circle mr-2"></i>Kids (3-10)
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="age-teens">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Teens (11-17)
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="age-adults">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Adults
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Theme Filter -->
-                            <div class="mb-6">
-                                <h3 class="font-semibold mb-3">Themes</h3>
-                                <div class="space-y-2">
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="theme-all">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>All Themes
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="theme-animals">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Animals
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="theme-nature">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Nature
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="theme-education">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Educational
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="theme-holidays">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Holidays
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="theme-abstract">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Abstract
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Format Filter -->
-                            <div>
-                                <h3 class="font-semibold mb-3">File Format</h3>
-                                <div class="space-y-2">
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition filter-active" data-filter="format-all">
-                                        <i class="fas fa-check-circle mr-2"></i>All Formats
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="format-pdf">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>PDF Only
-                                    </button>
-                                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition" data-filter="format-image">
-                                        <i class="fas fa-check-circle mr-2 opacity-0"></i>Image Only
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Printable 2 -->
+                <div
+                  class="bg-light rounded-xl overflow-hidden shadow-md card-hover"
+                  data-difficulty="easy"
+                  data-age="kids"
+                  data-theme="education"
+                  data-format="pdf,image"
+                  itemprop="itemListElement"
+                  itemscope
+                  itemtype="https://schema.org/ListItem"
+                >
+                  <meta itemprop="position" content="2" />
+                  <div class="relative">
+                    <img
+                      src="./image/2 Connect the Dots Bunny (Unfinished vs. Completed).png"
+                      alt="Cute bunny connect the dots printable"
+                      class="printable-image w-full h-56 object-cover"
+                      itemprop="image"
+                    />
+                  </div>
+                  <div
+                    class="p-6"
+                    itemprop="item"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <h3 class="text-xl font-bold mb-2" itemprop="name">
+                      Alphabet Connect the Dots
+                    </h3>
+                    <p class="text-neutral/70 mb-4" itemprop="description">
+                      Educational dot to dot printable that helps kids learn the
+                      alphabet while connecting letters A-Z.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >For Kids</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Easy</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Educational</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PDF</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PNG</span
+                      >
                     </div>
-                    
-                    <!-- Printables Results -->
-                    <div class="lg:w-3/4">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-                            <div>
-                                <h2 class="text-2xl font-bold">Connect the Dots Printables</h2>
-                                <p class="text-neutral/70">Showing 12 of 156 results</p>
-                            </div>
-                            <div class="w-full sm:w-auto">
-                                <label for="sort-by" class="block text-sm font-medium text-neutral/70 mb-1">Sort by:</label>
-                                <select id="sort-by" class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
-                                    <option value="popular">Most Popular</option>
-                                    <option value="newest">Newest First</option>
-                                    <option value="alpha">Alphabetical</option>
-                                    <option value="difficulty-easy">Difficulty: Easy to Hard</option>
-                                    <option value="difficulty-hard">Difficulty: Hard to Easy</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <!-- Printables Grid -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" itemscope itemtype="https://schema.org/ItemList">
-                            <!-- Printable 1 -->
-                            <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover" data-difficulty="easy" data-age="kids" data-theme="animals" data-format="pdf,image" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <meta itemprop="position" content="1" />
-                                <div class="relative">
-                                    <img src="./image/1 Collage of Various Connect the Dots Worksheets with Free Printable Label.png" alt="Free printable connect the dots worksheets - various themes and difficulty levels | connectthedotsprintable.online" class="w-full h-56 object-cover" itemprop="image" />
-                                    <span class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full">Free</span>
-                                </div>
-                                <div class="p-6" itemprop="item" itemscope itemtype="https://schema.org/CreativeWork">
-                                    <h3 class="text-xl font-bold mb-2" itemprop="name">Cute Bunny Connect the Dots</h3>
-                                    <p class="text-neutral/70 mb-4" itemprop="description">Simple dot to dot printable for young children featuring a cute bunny rabbit design with numbers 1-20.</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">For Kids</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Easy</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Animals</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PDF</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PNG</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-sm text-neutral/60">
-                                            <i class="fas fa-download mr-1"></i> 4.2k downloads
-                                        </span>
-                                        <div class="flex gap-2">
-                                            <a href="#" class="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition" itemprop="downloadUrl">
-                                                <i class="fas fa-file-pdf mr-1"></i> PDF
-                                            </a>
-                                            <a href="#" class="bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition">
-                                                <i class="fas fa-file-image mr-1"></i> PNG
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Printable 2 -->
-                            <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover" data-difficulty="easy" data-age="kids" data-theme="education" data-format="pdf,image" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <meta itemprop="position" content="2" />
-                                <div class="relative">
-                                    <img src="./image/2 Connect the Dots Bunny (Unfinished vs. Completed).png" alt="Cute bunny connect the dots printable for kids - numbers 1-20 | connectthedotsprintable.online" class="w-full h-56 object-cover" itemprop="image" />
-                                </div>
-                                <div class="p-6" itemprop="item" itemscope itemtype="https://schema.org/CreativeWork">
-                                    <h3 class="text-xl font-bold mb-2" itemprop="name">Alphabet Connect the Dots</h3>
-                                    <p class="text-neutral/70 mb-4" itemprop="description">Educational dot to dot printable that helps kids learn the alphabet while connecting letters A-Z.</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">For Kids</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Easy</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Educational</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PDF</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PNG</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-sm text-neutral/60">
-                                            <i class="fas fa-download mr-1"></i> 3.8k downloads
-                                        </span>
-                                        <div class="flex gap-2">
-                                            <a href="#" class="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition" itemprop="downloadUrl">
-                                                <i class="fas fa-file-pdf mr-1"></i> PDF
-                                            </a>
-                                            <a href="#" class="bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition">
-                                                <i class="fas fa-file-image mr-1"></i> PNG
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Printable 3 -->
-                            <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover" data-difficulty="medium" data-age="kids" data-theme="holidays" data-format="pdf,image" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <meta itemprop="position" content="3" />
-                                <div class="relative">
-                                    <img src="./image/3 Alphabet Connect the Dots Worksheet (A-Z) Forming a Fun Picture.png" alt="Alphabet connect the dots printable - learn letters A-Z with fun activities | connectthedotsprintable.online" class="w-full h-56 object-cover" itemprop="image" />
-                                    <span class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full">Free</span>
-                                </div>
-                                <div class="p-6" itemprop="item" itemscope itemtype="https://schema.org/CreativeWork">
-                                    <h3 class="text-xl font-bold mb-2" itemprop="name">Christmas Tree Dot to Dot</h3>
-                                    <p class="text-neutral/70 mb-4" itemprop="description">Festive holiday connect the dots printable featuring a Christmas tree with numbers 1-50.</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Kids & Families</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Medium</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Holidays</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PDF</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PNG</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-sm text-neutral/60">
-                                            <i class="fas fa-download mr-1"></i> 2.9k downloads
-                                        </span>
-                                        <div class="flex gap-2">
-                                            <a href="# " class="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition" itemprop="downloadUrl">
-                                                <i class="fas fa-file-pdf mr-1"></i> PDF
-                                            </a>
-                                            <a href="#" class="bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition">
-                                                <i class="fas fa-file-image mr-1"></i> PNG
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Printable 4 -->
-                            <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover" data-difficulty="medium" data-age="teens" data-theme="nature" data-format="pdf,image" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <meta itemprop="position" content="4" />
-                                <div class="relative">
-                                    <img src="./image/4 Christmas Tree Connect the Dots Design (1-50 dots).png" alt="Christmas tree dot to dot printable - holiday activity with numbers 1-50 | connectthedotsprintable.online" class="w-full h-56 object-cover" itemprop="image" />
-                                </div>
-                                <div class="p-6" itemprop="item" itemscope itemtype="https://schema.org/CreativeWork">
-                                    <h3 class="text-xl font-bold mb-2" itemprop="name">Forest Scene Connect the Dots</h3>
-                                    <p class="text-neutral/70 mb-4" itemprop="description">Nature-themed dot to dot printable with a forest scene design for older kids and teens.</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Teens</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Medium</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Nature</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PDF</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PNG</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-sm text-neutral/60">
-                                            <i class="fas fa-download mr-1"></i> 2.5k downloads
-                                        </span>
-                                        <div class="flex gap-2">
-                                            <a href="#" class="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition" itemprop="downloadUrl">
-                                                <i class="fas fa-file-pdf mr-1"></i> PDF
-                                            </a>
-                                            <a href="#" class="bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition">
-                                                <i class="fas fa-file-image mr-1"></i> PNG
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Printable 5 -->
-                            <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover" data-difficulty="hard" data-age="adults" data-theme="nature" data-format="pdf,image" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <meta itemprop="position" content="5" />
-                                <div class="relative">
-                                    <img src="./image/5 Nature-Themed Connect the Dots Forest Scene with Wildlife (Medium Difficulty).png" alt="Forest scene connect the dots - nature theme for teens | connectthedotsprintable.online" class="w-full h-56 object-cover" itemprop="image" />
-                                </div>
-                                <div class="p-6" itemprop="item" itemscope itemtype="https://schema.org/CreativeWork">
-                                    <h3 class="text-xl font-bold mb-2" itemprop="name">Mountain Landscape Dot to Dot</h3>
-                                    <p class="text-neutral/70 mb-4" itemprop="description">Advanced connect the dots printable with a detailed mountain landscape for adults (100+ dots).</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Adults</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Hard</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Nature</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PDF</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PNG</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-sm text-neutral/60">
-                                            <i class="fas fa-download mr-1"></i> 1.8k downloads
-                                        </span>
-                                        <div class="flex gap-2">
-                                            <a href="#" class="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition" itemprop="downloadUrl">
-                                                <i class="fas fa-file-pdf mr-1"></i> PDF
-                                            </a>
-                                            <a href="#" class="bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition">
-                                                <i class="fas fa-file-image mr-1"></i> PNG
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Printable 6 -->
-                            <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover" data-difficulty="extreme" data-age="adults" data-theme="abstract" data-format="pdf,image" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <meta itemprop="position" content="6" />
-                                <div class="relative">
-                                    <img src="./image/6 Advanced Mountain Landscape Connect the Dots Design for Adults (Over 100 dots).png" alt="Mountain landscape dot to dot - advanced design for adults with 100+ dots | connectthedotsprintable.online" class="w-full h-56 object-cover" itemprop="image" />
-                                    <span class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full">Free</span>
-                                </div>
-                                <div class="p-6" itemprop="item" itemscope itemtype="https://schema.org/CreativeWork">
-                                    <h3 class="text-xl font-bold mb-2" itemprop="name">Extreme Mandala Connect the Dots</h3>
-                                    <p class="text-neutral/70 mb-4" itemprop="description">Extreme difficulty dot to dot printable with complex mandala design for adults.</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">For Adults</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Extreme</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">Abstract</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PDF</span>
-                                        <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">PNG</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-sm text-neutral/60">
-                                            <i class="fas fa-download mr-1"></i> 3.1k downloads
-                                        </span>
-                                        <div class="flex gap-2">
-                                            <a href="#" class="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition" itemprop="downloadUrl">
-                                                <i class="fas fa-file-pdf mr-1"></i> PDF
-                                            </a>
-                                            <a href="#" class="bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition">
-                                                <i class="fas fa-file-image mr-1"></i> PNG
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Pagination -->
-                        <div class="mt-10 flex justify-center">
-                            <nav class="inline-flex rounded-md shadow">
-                                <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
-                                    <i class="fas fa-chevron-left mr-1"></i> Previous
-                                </a>
-                                <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-primary bg-white border-t border-b border-gray-300 hover:bg-gray-50">
-                                    1
-                                </a>
-                                <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50">
-                                    2
-                                </a>
-                                <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50">
-                                    3
-                                </a>
-                                <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300">
-                                    ...
-                                </span>
-                                <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50">
-                                    13
-                                </a>
-                                <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
-                                    Next <i class="fas fa-chevron-right ml-1"></i>
-                                </a>
-                            </nav>
-                        </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-sm text-neutral/60"
+                        ><i class="fas fa-download mr-1"></i> 3.8k
+                        downloads</span
+                      >
+                      <div class="flex gap-2">
+                        <a
+                          href="#"
+                          class="download-btn bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition"
+                          data-format="pdf"
+                          itemprop="downloadUrl"
+                          ><i class="fas fa-file-pdf mr-1"></i> PDF</a
+                        >
+                        <a
+                          href="#"
+                          class="download-btn bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition"
+                          data-format="png"
+                          ><i class="fas fa-file-image mr-1"></i> PNG</a
+                        >
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Printing Guide Section -->
-        <section class="py-12 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
-                    <h2 class="text-2xl font-bold mb-6 flex items-center">
-                        <i class="fas fa-print text-primary mr-2"></i> How to Print Our Connect the Dots Worksheets
-                    </h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 class="text-lg font-semibold mb-3">Printing Instructions</h3>
-                            <ol class="space-y-3 text-neutral/80 list-decimal pl-5">
-                                <li>Click the PDF or PNG download button below your chosen design</li>
-                                <li>Save the file to your computer or device</li>
-                                <li>Open the file with a PDF viewer or image viewer</li>
-                                <li>Select "Print" from the file menu</li>
-                                <li>Adjust settings as needed (see recommendations)</li>
-                                <li>Click "Print" to print your connect the dots worksheet</li>
-                            </ol>
-                        </div>
-                        
-                        <div>
-                            <h3 class="text-lg font-semibold mb-3">Recommended Settings</h3>
-                            <ul class="space-y-3 text-neutral/80">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Use <strong>actual size</strong> (100%) in print settings</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Choose <strong>portrait orientation</strong> for best results</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>For younger kids, print at <strong>125% scale</strong></span>
-                                </li>
-                            </ul>
-                        </div>
+                <!-- Printable 3 -->
+                <div
+                  class="bg-light rounded-xl overflow-hidden shadow-md card-hover"
+                  data-difficulty="medium"
+                  data-age="kids"
+                  data-theme="holidays"
+                  data-format="pdf,image"
+                  itemprop="itemListElement"
+                  itemscope
+                  itemtype="https://schema.org/ListItem"
+                >
+                  <meta itemprop="position" content="3" />
+                  <div class="relative">
+                    <img
+                      src="./image/3 Alphabet Connect the Dots Worksheet (A-Z) Forming a Fun Picture.png"
+                      alt="Alphabet connect the dots printable"
+                      class="printable-image w-full h-56 object-cover"
+                      itemprop="image"
+                    />
+                    <span
+                      class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full"
+                      >Free</span
+                    >
+                  </div>
+                  <div
+                    class="p-6"
+                    itemprop="item"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <h3 class="text-xl font-bold mb-2" itemprop="name">
+                      Christmas Tree Dot to Dot
+                    </h3>
+                    <p class="text-neutral/70 mb-4" itemprop="description">
+                      Festive holiday connect the dots printable featuring a
+                      Christmas tree with numbers 1-50.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Kids & Families</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Medium</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Holidays</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PDF</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PNG</span
+                      >
                     </div>
-                    
-                    <div class="mt-6 pt-6 border-t border-gray-200">
-                        <a href="#" class="text-primary font-semibold hover:underline inline-flex items-center">
-                            View detailed printing guide <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
+                    <div class="flex justify-between items-center">
+                      <span class="text-sm text-neutral/60"
+                        ><i class="fas fa-download mr-1"></i> 2.9k
+                        downloads</span
+                      >
+                      <div class="flex gap-2">
+                        <a
+                          href="#"
+                          class="download-btn bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition"
+                          data-format="pdf"
+                          itemprop="downloadUrl"
+                          ><i class="fas fa-file-pdf mr-1"></i> PDF</a
+                        >
+                        <a
+                          href="#"
+                          class="download-btn bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition"
+                          data-format="png"
+                          ><i class="fas fa-file-image mr-1"></i> PNG</a
+                        >
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </section>
-        <!-- Custom Generator CTA -->
-        <section class="py-12 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 md:p-12">
-                    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                        <div class="md:w-2/3">
-                            <h2 class="text-2xl md:text-3xl font-bold mb-4">Can't Find the Perfect Design?</h2>
-                            <p class="text-lg text-neutral/80 mb-6">
-                                Create your own custom connect the dots printables using our easy-to-use generator. 
-                                Upload any image and we'll convert it into a fun dot to dot activity.
-                            </p>
-                            <a href="#" class="bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition inline-flex items-center shadow-md">
-                                <i class="fas fa-magic mr-2"></i> Try Custom Generator
-                            </a>
-                        </div>
-                        <div class="md:w-1/3">
-                            <img src="./image/8 Process of Making Custom Connect the Dots Printables Using a Generator Tool.png" alt="Create custom connect the dots printables - step-by-step process | connectthedotsprintable.online" class="rounded-xl shadow-lg w-full h-auto" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- FAQ Section -->
-        <section class="py-12 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
-                
-                <div class="max-w-3xl mx-auto">
-                    <div class="space-y-4">
-                        <!-- FAQ Item 1 -->
-                        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                            <button class="faq-toggle w-full text-left px-6 py-4 font-semibold flex justify-between items-center focus:outline-none">
-                                <span>How do I download the connect the dots printables?</span>
-                                <i class="fas fa-plus text-primary transition-transform duration-300"></i>
-                            </button>
-                            <div class="faq-content hidden px-6 pb-4 text-neutral/70">
-                                <p>To download any of our connect the dots printables, simply click on either the PDF or PNG button below the design you want. The file will automatically download to your device. You can then open it and print it using your preferred software.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- FAQ Item 2 -->
-                        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                            <button class="faq-toggle w-full text-left px-6 py-4 font-semibold flex justify-between items-center focus:outline-none">
-                                <span>Are your printable dot to dot worksheets really free?</span>
-                                <i class="fas fa-plus text-primary transition-transform duration-300"></i>
-                            </button>
-                            <div class="faq-content hidden px-6 pb-4 text-neutral/70">
-                                <p>Yes, all the connect the dots printables marked as "Free" on this page are completely free to download and print for personal and educational use. We also offer some premium designs for a small fee, but these are clearly marked.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- FAQ Item 3 -->
-                        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                            <button class="faq-toggle w-full text-left px-6 py-4 font-semibold flex justify-between items-center focus:outline-none">
-                                <span>What's the difference between PDF and PNG formats?</span>
-                                <i class="fas fa-plus text-primary transition-transform duration-300"></i>
-                            </button>
-                            <div class="faq-content hidden px-6 pb-4 text-neutral/70">
-                                <p>PDF files are generally better for printing as they maintain their quality regardless of the device or printer used. They also often include multiple pages. PNG files are image files that work well for digital use or if you need to edit the design before printing. Both formats are high-quality and free of watermarks.</p>
-                            </div>
-                        </div>
+                <!-- Printable 4 -->
+                <div
+                  class="bg-light rounded-xl overflow-hidden shadow-md card-hover"
+                  data-difficulty="medium"
+                  data-age="teens"
+                  data-theme="nature"
+                  data-format="pdf,image"
+                  itemprop="itemListElement"
+                  itemscope
+                  itemtype="https://schema.org/ListItem"
+                >
+                  <meta itemprop="position" content="4" />
+                  <div class="relative">
+                    <img
+                      src="./image/4 Christmas Tree Connect the Dots Design (1-50 dots).png"
+                      alt="Christmas tree dot to dot printable"
+                      class="printable-image w-full h-56 object-cover"
+                      itemprop="image"
+                    />
+                  </div>
+                  <div
+                    class="p-6"
+                    itemprop="item"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <h3 class="text-xl font-bold mb-2" itemprop="name">
+                      Forest Scene Connect the Dots
+                    </h3>
+                    <p class="text-neutral/70 mb-4" itemprop="description">
+                      Nature-themed dot to dot printable with a forest scene
+                      design for older kids and teens.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Teens</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Medium</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Nature</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PDF</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PNG</span
+                      >
                     </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-sm text-neutral/60"
+                        ><i class="fas fa-download mr-1"></i> 2.5k
+                        downloads</span
+                      >
+                      <div class="flex gap-2">
+                        <a
+                          href="#"
+                          class="download-btn bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition"
+                          data-format="pdf"
+                          itemprop="downloadUrl"
+                          ><i class="fas fa-file-pdf mr-1"></i> PDF</a
+                        >
+                        <a
+                          href="#"
+                          class="download-btn bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition"
+                          data-format="png"
+                          ><i class="fas fa-file-image mr-1"></i> PNG</a
+                        >
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+                <!-- Printable 5 -->
+                <div
+                  class="bg-light rounded-xl overflow-hidden shadow-md card-hover"
+                  data-difficulty="hard"
+                  data-age="adults"
+                  data-theme="nature"
+                  data-format="pdf,image"
+                  itemprop="itemListElement"
+                  itemscope
+                  itemtype="https://schema.org/ListItem"
+                >
+                  <meta itemprop="position" content="5" />
+                  <div class="relative">
+                    <img
+                      src="./image/5 Nature-Themed Connect the Dots Forest Scene with Wildlife (Medium Difficulty).png"
+                      alt="Forest scene connect the dots"
+                      class="printable-image w-full h-56 object-cover"
+                      itemprop="image"
+                    />
+                  </div>
+                  <div
+                    class="p-6"
+                    itemprop="item"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <h3 class="text-xl font-bold mb-2" itemprop="name">
+                      Mountain Landscape Dot to Dot
+                    </h3>
+                    <p class="text-neutral/70 mb-4" itemprop="description">
+                      Advanced connect the dots printable with a detailed
+                      mountain landscape for adults (100+ dots).
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Adults</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Hard</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Nature</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PDF</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PNG</span
+                      >
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-sm text-neutral/60"
+                        ><i class="fas fa-download mr-1"></i> 1.8k
+                        downloads</span
+                      >
+                      <div class="flex gap-2">
+                        <a
+                          href="#"
+                          class="download-btn bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition"
+                          data-format="pdf"
+                          itemprop="downloadUrl"
+                          ><i class="fas fa-file-pdf mr-1"></i> PDF</a
+                        >
+                        <a
+                          href="#"
+                          class="download-btn bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition"
+                          data-format="png"
+                          ><i class="fas fa-file-image mr-1"></i> PNG</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Printable 6 -->
+                <div
+                  class="bg-light rounded-xl overflow-hidden shadow-md card-hover"
+                  data-difficulty="extreme"
+                  data-age="adults"
+                  data-theme="abstract"
+                  data-format="pdf,image"
+                  itemprop="itemListElement"
+                  itemscope
+                  itemtype="https://schema.org/ListItem"
+                >
+                  <meta itemprop="position" content="6" />
+                  <div class="relative">
+                    <img
+                      src="./image/6 Advanced Mountain Landscape Connect the Dots Design for Adults (Over 100 dots).png"
+                      alt="Mountain landscape dot to dot"
+                      class="printable-image w-full h-56 object-cover"
+                      itemprop="image"
+                    />
+                    <span
+                      class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full"
+                      >Free</span
+                    >
+                  </div>
+                  <div
+                    class="p-6"
+                    itemprop="item"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <h3 class="text-xl font-bold mb-2" itemprop="name">
+                      Extreme Mandala Connect the Dots
+                    </h3>
+                    <p class="text-neutral/70 mb-4" itemprop="description">
+                      Extreme difficulty dot to dot printable with complex
+                      mandala design for adults.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >For Adults</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Extreme</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >Abstract</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PDF</span
+                      ><span
+                        class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full"
+                        >PNG</span
+                      >
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-sm text-neutral/60"
+                        ><i class="fas fa-download mr-1"></i> 3.1k
+                        downloads</span
+                      >
+                      <div class="flex gap-2">
+                        <a
+                          href="#"
+                          class="download-btn bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition"
+                          data-format="pdf"
+                          itemprop="downloadUrl"
+                          ><i class="fas fa-file-pdf mr-1"></i> PDF</a
+                        >
+                        <a
+                          href="#"
+                          class="download-btn bg-gray-200 text-neutral px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 transition"
+                          data-format="png"
+                          ><i class="fas fa-file-image mr-1"></i> PNG</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pagination -->
+              <div class="mt-10 flex justify-center">
+                <nav class="inline-flex rounded-md shadow">
+                  <a
+                    href="#"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50"
+                    ><i class="fas fa-chevron-left mr-1"></i> Previous</a
+                  ><a
+                    href="#"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-primary bg-white border-t border-b border-gray-300 hover:bg-gray-50"
+                    >1</a
+                  ><a
+                    href="#"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50"
+                    >2</a
+                  ><a
+                    href="#"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50"
+                    >3</a
+                  ><span
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300"
+                    >...</span
+                  ><a
+                    href="#"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50"
+                    >13</a
+                  ><a
+                    href="#"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50"
+                    >Next <i class="fas fa-chevron-right ml-1"></i
+                  ></a>
+                </nav>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- Printing Guide Section -->
+      <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+              <i class="fas fa-print text-primary mr-2"></i> How to Print Our
+              Connect the Dots Worksheets
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="text-lg font-semibold mb-3">
+                  Printing Instructions
+                </h3>
+                <ol class="space-y-3 text-neutral/80 list-decimal pl-5">
+                  <li>
+                    Click the PDF or PNG download button below your chosen
+                    design
+                  </li>
+                  <li>Save the file to your computer or device</li>
+                  <li>Open the file with a PDF viewer or image viewer</li>
+                  <li>Select "Print" from the file menu</li>
+                  <li>Adjust settings as needed (see recommendations)</li>
+                  <li>
+                    Click "Print" to print your connect the dots worksheet
+                  </li>
+                </ol>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold mb-3">Recommended Settings</h3>
+                <ul class="space-y-3 text-neutral/80">
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i
+                    ><span
+                      >Use <strong>actual size</strong> (100%) in print
+                      settings</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i
+                    ><span
+                      >Choose <strong>portrait orientation</strong> for best
+                      results</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i
+                    ><span
+                      >For younger kids, print at
+                      <strong>125% scale</strong></span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-gray-200">
+              <a
+                href="#"
+                class="text-primary font-semibold hover:underline inline-flex items-center"
+                >View detailed printing guide
+                <i class="fas fa-arrow-right ml-1"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Custom Generator CTA -->
+      <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+          <div
+            class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 md:p-12"
+          >
+            <div
+              class="flex flex-col md:flex-row items-center justify-between gap-8"
+            >
+              <div class="md:w-2/3">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                  Can't Find the Perfect Design?
+                </h2>
+                <p class="text-lg text-neutral/80 mb-6">
+                  Create your own custom connect the dots printables using our
+                  easy-to-use generator. Upload any image and we'll convert it
+                  into a fun dot to dot activity.
+                </p>
+                <a
+                  href="#"
+                  class="bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition inline-flex items-center shadow-md"
+                  ><i class="fas fa-magic mr-2"></i> Try Custom Generator</a
+                >
+              </div>
+              <div class="md:w-1/3">
+                <img
+                  src="./image/8 Process of Making Custom Connect the Dots Printables Using a Generator Tool.png"
+                  alt="Create custom connect the dots printables"
+                  class="rounded-xl shadow-lg w-full h-auto"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">
+            Frequently Asked Questions
+          </h2>
+          <div class="max-w-3xl mx-auto">
+            <div class="space-y-4">
+              <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <button
+                  class="faq-toggle w-full text-left px-6 py-4 font-semibold flex justify-between items-center focus:outline-none"
+                >
+                  <span>How do I download the connect the dots printables?</span
+                  ><i
+                    class="fas fa-plus text-primary transition-transform duration-300"
+                  ></i>
+                </button>
+                <div class="faq-content hidden px-6 pb-4 text-neutral/70">
+                  <p>
+                    To download any of our connect the dots printables, simply
+                    click on either the PDF or PNG button below the design you
+                    want. The file will automatically download to your device.
+                    You can then open it and print it using your preferred
+                    software.
+                  </p>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <button
+                  class="faq-toggle w-full text-left px-6 py-4 font-semibold flex justify-between items-center focus:outline-none"
+                >
+                  <span
+                    >Are your printable dot to dot worksheets really free?</span
+                  ><i
+                    class="fas fa-plus text-primary transition-transform duration-300"
+                  ></i>
+                </button>
+                <div class="faq-content hidden px-6 pb-4 text-neutral/70">
+                  <p>
+                    Yes, all the connect the dots printables marked as "Free" on
+                    this page are completely free to download and print for
+                    personal and educational use. We also offer some premium
+                    designs for a small fee, but these are clearly marked.
+                  </p>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <button
+                  class="faq-toggle w-full text-left px-6 py-4 font-semibold flex justify-between items-center focus:outline-none"
+                >
+                  <span>What's the difference between PDF and PNG formats?</span
+                  ><i
+                    class="fas fa-plus text-primary transition-transform duration-300"
+                  ></i>
+                </button>
+                <div class="faq-content hidden px-6 pb-4 text-neutral/70">
+                  <p>
+                    PDF files are generally better for printing as they maintain
+                    their quality regardless of the device or printer used. They
+                    also often include multiple pages. PNG files are image files
+                    that work well for digital use or if you need to edit the
+                    design before printing. Both formats are high-quality and
+                    free of watermarks.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Footer -->
     <footer class="bg-neutral text-white pt-16 pb-8">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                <div>
-                    <div class="flex items-center mb-6">
-                        <i class="fas fa-pencil-ruler text-white text-3xl mr-2"></i>
-                        <span class="text-xl font-bold">ConnectTheDotsPrintable.online</span>
-                    </div>
-                    <p class="text-gray-400 mb-6">
-                        Your source for high-quality, free connect the dots printables for kids and adults.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-pinterest-p"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Printable Categories</h3>
-                    <ul class="space-y-3">
-                        <li><a href="./printable-connect-the-dots.html" class="text-gray-400 hover:text-white transition">All Printables</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Kids Connect the Dots</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Adult Dot to Dot</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Dot to Dot Worksheets</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Themed Printables</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Custom Generator</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Printing Guide</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Legal</h3>
-                    <ul class="space-y-3">
-                        <li><a href="./privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="./terms.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Copyright Information</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">DMCA Notice</a></li>
-                    </ul>
-                </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div>
+              <div class="flex items-center mb-6">
+                <i class="fas fa-pencil-ruler text-white text-3xl mr-2"></i>
+                <span class="text-xl font-bold"
+                  >ConnectTheDotsPrintable.online</span
+                >
+              </div>
+              <p class="text-gray-400 mb-6">
+                Your source for high-quality, free connect the dots printables for
+                kids and adults.
+              </p>
+              <div class="flex space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white transition">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition">
+                  <i class="fab fa-pinterest-p"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
             </div>
-            
-            <div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-                <p>&copy; 2025 ConnectTheDotsPrintable.online. All rights reserved.</p>
-                <p class="mt-2">All printables are for personal and educational use only.</p>
+  
+            <div>
+              <h3 class="text-lg font-bold mb-6">Printable Categories</h3>
+              <ul class="space-y-3">
+                <li>
+                  <a
+                    href="./printable-connect-the-dots.html"
+                    class="text-gray-400 hover:text-white transition"
+                    >All Printables</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >Kids Connect the Dots</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >Adult Dot to Dot</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >Dot to Dot Worksheets</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >Themed Printables</a
+                  >
+                </li>
+              </ul>
             </div>
+  
+            <div>
+              <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+              <ul class="space-y-3">
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >About Us</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >Custom Generator</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >Printing Guide</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >FAQ</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >Contact Us</a
+                  >
+                </li>
+              </ul>
+            </div>
+  
+            <div>
+              <h3 class="text-lg font-bold mb-6">Legal</h3>
+              <ul class="space-y-3">
+                <li>
+                  <a
+                    href="./privacy.html"
+                    class="text-gray-400 hover:text-white transition"
+                    >Privacy Policy</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="./terms.html"
+                    class="text-gray-400 hover:text-white transition"
+                    >Terms of Service</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >Copyright Information</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-gray-400 hover:text-white transition"
+                    >DMCA Notice</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+  
+          <div
+            class="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm"
+          >
+            <p>
+              &copy; 2025 ConnectTheDotsPrintable.online. All rights reserved.
+            </p>
+            <p class="mt-2">
+              All printables are for personal and educational use only.
+            </p>
+          </div>
         </div>
-    </footer>
+      </footer>
 
     <!-- JavaScript -->
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Filter buttons functionality
-        document.querySelectorAll('.filter-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons in the same group
-                const filterGroup = this.parentElement;
-                filterGroup.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('filter-active');
-                    btn.querySelector('i').classList.add('opacity-0');
-                });
-                
-                // Add active class to clicked button
-                this.classList.add('filter-active');
-                this.querySelector('i').classList.remove('opacity-0');
-                
-                // In a real implementation, you would filter the printables here
-                const filterType = this.getAttribute('data-filter').split('-')[0];
-                const filterValue = this.getAttribute('data-filter').split('-')[1];
-                
-                console.log(`Filtering by ${filterType}: ${filterValue}`);
-                // Add actual filtering logic here
+      document.addEventListener("DOMContentLoaded", function () {
+        // --- 原始网站功能 (保留) ---
+        // 移动菜单切换
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        if (mobileMenuButton) {
+          mobileMenuButton.addEventListener("click", function () {
+            const mobileMenu = document.getElementById("mobile-menu");
+            mobileMenu.classList.toggle("hidden");
+          });
+        }
+
+        // 筛选按钮功能
+        document.querySelectorAll(".filter-btn").forEach((button) => {
+          button.addEventListener("click", function () {
+            const filterGroup = this.parentElement;
+            filterGroup.querySelectorAll(".filter-btn").forEach((btn) => {
+              btn.classList.remove("filter-active");
+              btn.querySelector("i").classList.add("opacity-0");
             });
+            this.classList.add("filter-active");
+            this.querySelector("i").classList.remove("opacity-0");
+          });
         });
-        
-        // No reset filters button on this page, so that logic is removed.
-        
-        // FAQ toggles
-        document.querySelectorAll('.faq-toggle').forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                const content = this.nextElementSibling;
-                const icon = this.querySelector('i');
-                
-                content.classList.toggle('hidden');
-                icon.classList.toggle('rotate-45');
+
+        // FAQ切换
+        document.querySelectorAll(".faq-toggle").forEach((toggle) => {
+          toggle.addEventListener("click", function () {
+            const content = this.nextElementSibling;
+            const icon = this.querySelector("i");
+            content.classList.toggle("hidden");
+            icon.classList.toggle("rotate-45");
+          });
+        });
+
+        // 锚链接平滑滚动 (已修改，避免干扰下载按钮)
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            // 如果是下载按钮，则不执行平滑滚动
+            if (this.classList.contains("download-btn")) {
+              return;
+            }
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            if (targetId && targetId !== "#") {
+              const targetElement = document.querySelector(targetId);
+              if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth" });
+              }
+            }
+          });
+        });
+
+        // --- 最终的、保证能工作的下载功能 ---
+        const printablesGrid = document.getElementById("printables-grid");
+        if (printablesGrid) {
+          printablesGrid.addEventListener("click", function (event) {
+            const downloadButton = event.target.closest(".download-btn");
+            if (!downloadButton) {
+              return;
+            }
+            event.preventDefault();
+            handleDownload(downloadButton);
+          });
+        }
+
+        async function handleDownload(button) {
+          const card = button.closest(".card-hover");
+          const imageElement = card.querySelector(".printable-image");
+          const titleElement = card.querySelector("h3");
+          const format = button.dataset.format;
+
+          if (!imageElement || !titleElement) {
+            console.error(
+              "Could not find required elements (image or title) in the card."
+            );
+            alert("Sorry, an error occurred preparing the download.");
+            return;
+          }
+
+          // 检查图片是否已加载，这是至关重要的一步
+          if (!imageElement.complete || imageElement.naturalHeight === 0) {
+            alert(
+              "Image is still loading. Please wait a moment and try again."
+            );
+            return;
+          }
+
+          const filenameBase = titleElement.textContent.trim();
+          const originalButtonHTML = button.innerHTML;
+          button.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+          button.disabled = true;
+
+          try {
+            if (format === "png") {
+              await downloadPNG(imageElement, `${filenameBase}.png`);
+            } else if (format === "pdf") {
+              await downloadPDF(imageElement, `${filenameBase}.pdf`);
+            }
+          } catch (error) {
+            console.error("Download failed:", error);
+            alert("Failed to generate the file. Please try again.");
+          } finally {
+            // 恢复按钮状态
+            setTimeout(() => {
+              button.innerHTML = originalButtonHTML;
+              button.disabled = false;
+            }, 300);
+          }
+        }
+
+        /**
+         * 将图片元素绘制到Canvas上，然后下载为PNG。
+         * 这是在本地环境（file:///）下获取图片数据并下载的最可靠方法。
+         */
+        function downloadPNG(imageElement, filename) {
+          return new Promise((resolve) => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            // 设置canvas尺寸与图片原始尺寸一致，保证最高质量
+            canvas.width = imageElement.naturalWidth;
+            canvas.height = imageElement.naturalHeight;
+
+            // 将图片绘制到canvas上
+            ctx.drawImage(imageElement, 0, 0);
+
+            // 从canvas获取Base64数据，并创建下载链接
+            const link = document.createElement("a");
+            link.download = filename;
+            link.href = canvas.toDataURL("image/png");
+
+            // 触发下载并清理
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            resolve();
+          });
+        }
+
+        /**
+         * 使用 jsPDF 库将图片元素生成为居中、适配A4页面的PDF文件。
+         */
+        function downloadPDF(imageElement, filename) {
+          return new Promise((resolve) => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+              orientation: "portrait",
+              unit: "mm",
+              format: "a4",
             });
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId !== '#') {
-                    document.querySelector(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+
+            const pageWidth = 210;
+            const pageHeight = 297;
+            const margin = 15; // 15mm 边距
+            const usableWidth = pageWidth - margin * 2;
+            const usableHeight = pageHeight - margin * 2;
+
+            const imageAspectRatio =
+              imageElement.naturalWidth / imageElement.naturalHeight;
+
+            let finalWidth, finalHeight;
+            if (usableWidth / imageAspectRatio <= usableHeight) {
+              finalWidth = usableWidth;
+              finalHeight = usableWidth / imageAspectRatio;
+            } else {
+              finalHeight = usableHeight;
+              finalWidth = usableHeight * imageAspectRatio;
+            }
+
+            const x = (pageWidth - finalWidth) / 2;
+            const y = (pageHeight - finalHeight) / 2;
+
+            doc.addImage(imageElement, "PNG", x, y, finalWidth, finalHeight);
+            doc.save(filename);
+            resolve();
+          });
+        }
+      });
     </script>
+  </body>
+</html>
