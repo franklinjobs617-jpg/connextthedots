@@ -27,6 +27,14 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="canonical" href="https://connectthedotsprintable.online/" />
   <meta name="google-adsense-account" content="ca-pub-3383070348689557" />
+  
+  <!-- Performance optimizations -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM76E2ZP8E"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -35,7 +43,80 @@
 
   gtag('config', 'G-CM76E2ZP8E');
 </script>
-  <script src="./js/opencv.js"></script>
+
+  <!-- Performance monitoring -->
+  <script>
+    // Monitor Core Web Vitals
+    function measurePerformance() {
+      // Measure LCP (Largest Contentful Paint)
+      new PerformanceObserver((entryList) => {
+        for (const entry of entryList.getEntries()) {
+          console.log('LCP candidate:', entry.startTime, entry);
+          // Send to analytics if needed
+          if (window.gtag) {
+            gtag('event', 'LCP', {
+              value: Math.round(entry.startTime),
+              event_category: 'Web Vitals'
+            });
+          }
+        }
+      }).observe({ entryTypes: ['largest-contentful-paint'] });
+
+      // Measure FID (First Input Delay)
+      new PerformanceObserver((entryList) => {
+        for (const entry of entryList.getEntries()) {
+          console.log('FID:', entry.processingStart - entry.startTime, entry);
+          if (window.gtag) {
+            gtag('event', 'FID', {
+              value: Math.round(entry.processingStart - entry.startTime),
+              event_category: 'Web Vitals'
+            });
+          }
+        }
+      }).observe({ entryTypes: ['first-input'] });
+
+      // Measure CLS (Cumulative Layout Shift)
+      let clsValue = 0;
+      new PerformanceObserver((entryList) => {
+        for (const entry of entryList.getEntries()) {
+          if (!entry.hadRecentInput) {
+            clsValue += entry.value;
+            console.log('CLS:', clsValue, entry);
+            if (window.gtag) {
+              gtag('event', 'CLS', {
+                value: Math.round(clsValue * 1000) / 1000,
+                event_category: 'Web Vitals'
+              });
+            }
+          }
+        }
+      }).observe({ entryTypes: ['layout-shift'] });
+
+      // Measure page load time
+      window.addEventListener('load', () => {
+        const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+        console.log('Page load time:', loadTime + 'ms');
+        if (window.gtag) {
+          gtag('event', 'page_load_time', {
+            value: loadTime,
+            event_category: 'Performance'
+          });
+        }
+      });
+    }
+
+    // Start measuring when page loads
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', measurePerformance);
+    } else {
+      measurePerformance();
+    }
+  </script>
+  <script src="./js/opencv.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
   <script>
     tailwind.config = {
       theme: {
@@ -184,7 +265,7 @@
           <div class="md:w-1/2">
             <img src="./image/1 Family Enjoying Connect the Dots Activities1.png"
               alt="Family enjoying connect the dots activities - free printable worksheets for kids and adults | connectthedotsprintable.online"
-              class="rounded-xl shadow-2xl w-full h-auto" />
+              class="rounded-xl shadow-2xl w-full h-auto" loading="lazy" width="600" height="400" />
           </div>
         </div>
       </div>
@@ -361,10 +442,9 @@
           <!-- Category 1 -->
           <div class="block group" target="_blank" download>
             <div class="relative rounded-xl overflow-hidden shadow-md h-64 mb-3">
-              <img
-                src="./image/2 Colorful Connect the Dots for Kids Simple Animal and Cartoon Characters (1-20 dots).png"
+              <img src="./image/2 Colorful Connect the Dots for Kids Simple Animal and Cartoon Characters (1-20 dots).png"
                 alt="Kids connect the dots printables - easy animal designs for children | connectthedotsprintable.online"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" width="400" height="256" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               <div class="absolute bottom-0 left-0 p-4 text-white">
                 <h3 class="font-bold text-xl">Kids Connect the Dots</h3>
@@ -392,7 +472,7 @@
             <div class="relative rounded-xl overflow-hidden shadow-md h-64 mb-3">
               <img src="./image/3 Intricate Connect the Dots Mandala for Adults (Over 100 dots).png"
                 alt="Adult connect the dots printables - complex mandala designs for relaxation | connectthedotsprintable.online"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" width="400" height="256" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               <div class="absolute bottom-0 left-0 p-4 text-white">
                 <h3 class="font-bold text-xl">Adult Dot to Dot</h3>
