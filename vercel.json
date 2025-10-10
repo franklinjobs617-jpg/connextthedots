@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "http://connectthedotsprintable.online/:path*",
+      "destination": "https://connectthedotsprintable.online/:path*",
+      "permanent": true
+    },
+    {
+      "source": "http://www.connectthedotsprintable.online/:path*",
+      "destination": "https://connectthedotsprintable.online/:path*",
+      "permanent": true
+    },
+    {
+      "source": "https://www.connectthedotsprintable.online/:path*",
+      "destination": "https://connectthedotsprintable.online/:path*",
+      "permanent": true
+    }
+  ]
+}
