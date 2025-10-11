@@ -53,7 +53,7 @@
     gtag('config', 'G-CM76E2ZP8E');
   </script>
 
-  <!-- <script src="./js/opencv.js" async></script> -->
+
 
 
 
@@ -75,6 +75,18 @@
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
       font-feature-settings: normal;
       font-variation-settings: normal;
+    }
+
+    .header-title {
+      font-size: 1rem;
+      line-height: 1.2rem;
+    }
+
+    @media screen and (min-width: 640px) {
+      .header-title {
+        font-size: 1.5rem;
+        line-height: 2rem;
+      }
     }
 
     body {
@@ -404,6 +416,9 @@
       position: relative;
       border: 1px solid #ccc;
       background-color: white;
+      /* Prevent layout shift */
+      contain: layout style paint;
+      transition: none;
     }
 
     .preview-container canvas {
@@ -411,6 +426,9 @@
       top: 0;
       left: 0;
       display: none;
+      /* Ensure canvas doesn't cause layout shift */
+      contain: layout style paint;
+      transition: none;
     }
 
     .control-group {
@@ -426,6 +444,82 @@
     #loader {
       font-style: italic;
       color: #555;
+      /* Prevent layout shift when content changes */
+      min-height: 2rem;
+      contain: layout style paint;
+    }
+
+    /* Prevent layout shift for dynamic content */
+    .aspect-video {
+      aspect-ratio: 16 / 9;
+    }
+
+    /* Ensure images don't cause layout shift */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Prevent font loading layout shift */
+    * {
+      font-display: swap;
+    }
+
+    /* Stabilize main element layout */
+    main {
+      contain: layout style paint;
+    }
+
+    /* Prevent layout shift on responsive breakpoints */
+    .flex-col.md\:flex-row {
+      transition: none;
+    }
+
+    .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-4 {
+      contain: layout style paint;
+    }
+
+    .grid.grid-cols-1.md\:grid-cols-3 {
+      contain: layout style paint;
+    }
+
+    .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
+      contain: layout style paint;
+    }
+
+    .flex.flex-col.lg\:flex-row {
+      contain: layout style paint;
+    }
+
+    /* Stabilize responsive containers */
+    .container {
+      contain: layout style paint;
+    }
+
+    /* Prevent layout shift in hero section */
+    .md\:w-1\/2 {
+      contain: layout style paint;
+    }
+
+    /* Stabilize grid items */
+    .grid>* {
+      contain: layout style paint;
+    }
+
+    /* Prevent layout shift in cards */
+    .card-hover {
+      contain: layout style paint;
+    }
+
+    /* Stabilize image containers */
+    .relative.rounded-xl.overflow-hidden {
+      contain: layout style paint;
+    }
+
+    /* Prevent layout shift in buttons */
+    .flex.items-center.gap-3 {
+      contain: layout style paint;
     }
   </style>
 
@@ -457,7 +551,7 @@
           <path
             d="M404 0c19.2 0 37.6 7.6 51.1 21.2l35.7 35.7C504.4 70.4 512 88.8 512 108s-7.6 37.6-21.2 51.1L445.9 204 308 66.1 352.9 21.2C366.4 7.6 384.8 0 404 0zM58.9 315.1L274.1 100 412 237.9 196.9 453.1c-10.7 10.7-24.1 18.5-38.7 22.6L30.4 511.1c-8.3 2.3-17.3 0-23.4-6.2s-8.5-15.1-6.2-23.4L36.4 353.8c4.1-14.6 11.8-27.9 22.6-38.7zM225.4 80.8L80.8 225.4 11.7 156.3c-15.6-15.6-15.6-40.9 0-56.6l88-88c15.6-15.6 40.9-15.6 56.6 0l5.9 5.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 34.9 34.9zM431.2 286.6l34.9 34.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 5.9 5.9c15.6 15.6 15.6 40.9 0 56.6l-88 88c-15.6 15.6-40.9 15.6-56.6 0l-69.1-69.1 144.6-144.6z" />
         </svg>
-        <span class="text-xl font-bold text-primary">ConnectTheDotsPrintable.online</span>
+        <span class="font-bold text-primary header-title">ConnectTheDotsPrintable.online</span>
       </a>
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex space-x-6">
@@ -498,7 +592,7 @@
     <!-- Hero Section (Optimized) -->
     <section class="bg-gradient-to-r from-primary to-primary/80 text-white py-16 md:py-24">
       <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center">
+        <div class="flex flex-col md:flex-row items-center" style="contain: layout style paint;">
           <div class="md:w-1/2 mb-10 md:mb-0">
             <!-- 左侧文本和按钮部分保持不变 -->
             <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-shadow mb-4">
@@ -539,7 +633,8 @@
         </div>
       </div>
     </section>
-    <section class="py-16 bg-white max-w-7xl mx-auto w-full flex flex-col lg:flex-row gap-8" id="controlsPanelsuser">
+    <section class="py-16 bg-white max-w-7xl mx-auto w-full flex flex-col lg:flex-row gap-8" id="controlsPanelsuser"
+      style="contain: layout style paint;">
       <!-- ===== Controls Panel ===== -->
       <!-- ===== Controls Panel ===== -->
       <div class="controls lg:w-96 flex-shrink-0 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg space-y-6">
@@ -634,13 +729,16 @@
           </button>
         </div>
         <div id="previewContainer"
-          class="preview-container w-full aspect-video bg-white dark:bg-gray-800 rounded-2xl shadow-inner border border-gray-200 dark:border-gray-700 relative flex items-center justify-center">
+          class="preview-container w-full aspect-video bg-white dark:bg-gray-800 rounded-2xl shadow-inner border border-gray-200 dark:border-gray-700 relative flex items-center justify-center min-h-[400px]">
           <div id="placeholder" class="text-gray-500 dark:text-gray-200">
             Select an image on the left to get started
           </div>
-          <canvas id="contrastCanvas" class="rounded-2xl"></canvas>
-          <canvas id="traceCanvas" class="rounded-2xl"></canvas>
-          <canvas id="dotsCanvas" class="rounded-2xl"></canvas>
+          <canvas id="contrastCanvas" class="rounded-2xl" width="400" height="300"
+            style="display: none; max-width: 100%; height: auto;"></canvas>
+          <canvas id="traceCanvas" class="rounded-2xl" width="400" height="300"
+            style="display: none; max-width: 100%; height: auto;"></canvas>
+          <canvas id="dotsCanvas" class="rounded-2xl" width="400" height="300"
+            style="display: none; max-width: 100%; height: auto;"></canvas>
         </div>
         <div id="loader" class="text-center mt-4 text-sm text-gray-500 dark:text-gray-400">
 
@@ -722,7 +820,7 @@
           </a> -->
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" style="contain: layout style paint;">
           <!-- Category 1 -->
           <div class="block group" target="_blank" download>
             <div class="relative rounded-xl overflow-hidden shadow-md h-64 mb-3">
@@ -900,7 +998,7 @@
           Featured Connect the Dots Printables
         </h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" style="contain: layout style paint;">
           <!-- Printable 1 -->
           <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover">
             <div class="relative">
@@ -1776,9 +1874,25 @@
       }
 
       // 2. Set the container and the main canvas to this responsive size.
-      previewContainer.style.aspectRatio = displayW / displayH;
+      // Prevent layout shift by maintaining stable container dimensions
+      const containerAspectRatio = displayW / displayH;
+      if (containerAspectRatio > 1.5) {
+        // Wide images: maintain aspect ratio but limit height
+        previewContainer.style.aspectRatio = containerAspectRatio;
+        previewContainer.style.maxHeight = '500px';
+      } else {
+        // Tall images: maintain aspect ratio but limit width
+        previewContainer.style.aspectRatio = containerAspectRatio;
+        previewContainer.style.maxWidth = '100%';
+      }
+
+      // Set canvas dimensions without causing layout shift
       dotsCanvas.width = displayW;
       dotsCanvas.height = displayH;
+      dotsCanvas.style.width = '100%';
+      dotsCanvas.style.height = 'auto';
+      dotsCanvas.style.maxWidth = '100%';
+      dotsCanvas.style.maxHeight = '500px';
 
       // 3. Create a resized image in memory (Mat object) for processing.
       // All subsequent OpenCV operations use this resized version.
@@ -1907,7 +2021,10 @@
       mainCtx.fillStyle = "white";
       mainCtx.fillRect(0, 0, dotsCanvas.width, dotsCanvas.height);
 
+      // Show canvas without causing layout shift
       dotsCanvas.style.display = "block";
+      dotsCanvas.style.position = "relative";
+      dotsCanvas.style.zIndex = "1";
 
       if (selectedHint === "contrast") {
         drawContrastBackgroundOn(mainCtx);
@@ -1993,6 +2110,43 @@
         }
       }
     );
+  </script>
+
+  <!-- Layout stabilization script -->
+  <script>
+    // Prevent layout shift by stabilizing responsive elements
+    document.addEventListener('DOMContentLoaded', function () {
+      // Stabilize main element layout
+      const main = document.querySelector('main');
+      if (main) {
+        main.style.contain = 'layout style paint';
+      }
+
+      // Stabilize responsive grids
+      const grids = document.querySelectorAll('.grid');
+      grids.forEach(grid => {
+        grid.style.contain = 'layout style paint';
+      });
+
+      // Stabilize flex containers
+      const flexContainers = document.querySelectorAll('.flex');
+      flexContainers.forEach(container => {
+        container.style.contain = 'layout style paint';
+      });
+
+      // Prevent layout shift on resize
+      let resizeTimeout;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function () {
+          // Force layout recalculation without causing shift
+          document.body.style.contain = 'layout style paint';
+          setTimeout(() => {
+            document.body.style.contain = '';
+          }, 100);
+        }, 150);
+      });
+    });
   </script>
 
   <!-- Load ad scripts after page load for better performance -->
