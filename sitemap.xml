@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://www.connectthedotsprintable.online</loc>
+        <loc>https://connectthedotsprintable.online</loc>
         <lastmod>2025-07-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.connectthedotsprintable.online/adults.html</loc>
+        <loc>https://connectthedotsprintable.online/adults.html</loc>
         <lastmod>2025-07-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
      <url>
-        <loc>https://www.connectthedotsprintable.online/printable-connect-the-dots.html</loc>
+        <loc>https://connectthedotsprintable.online/printable-connect-the-dots.html</loc>   
         <lastmod>2025-07-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.connectthedotsprintable.online/privacy.html</loc>
+        <loc>https://connectthedotsprintable.online/privacy.html</loc>   
         <lastmod>2025-07-15</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://www.connectthedotsprintable.online/terms.html</loc>
+        <loc>https://connectthedotsprintable.online/terms.html</loc>   
         <lastmod>2025-07-15</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
