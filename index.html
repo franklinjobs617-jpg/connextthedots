@@ -43,16 +43,6 @@
     <link rel="stylesheet" href="./dist/output.css">
   </noscript>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM76E2ZP8E"></script>
-
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-CM76E2ZP8E');
-  </script>
-
 
 
 
@@ -2155,26 +2145,53 @@
 
   <!-- Load ad scripts after page load for better performance -->
   <script>
-    // Load Google AdSense after page load
-    window.addEventListener('load', function () {
-      // Load Google AdSense script
+    // 标志，确保脚本只加载一次
+    let thirdPartyScriptsLoaded = false;
+
+    // 创建一个函数来加载所有第三方脚本
+    function loadThirdPartyScripts() {
+      // 如果已经加载过，则直接返回，防止重复加载
+      if (thirdPartyScriptsLoaded) {
+        return;
+      }
+      thirdPartyScriptsLoaded = true;
+      console.log("User interaction detected, loading third-party scripts...");
+
+      // 1. 加载 Google Tag Manager (GTAG)
+      const gtagScript = document.createElement('script');
+      gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CM76E2ZP8E';
+      gtagScript.async = true;
+      // GTAG 脚本加载完成后，再执行初始化代码
+      gtagScript.onload = function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-CM76E2ZP8E');
+        console.log('Google Tag Manager loaded and configured.');
+      };
+      document.head.appendChild(gtagScript);
+
+      // 2. 加载 Google AdSense
       const adScript = document.createElement('script');
-      adScript.async = true;
       adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557';
+      adScript.async = true;
       adScript.crossOrigin = 'anonymous';
       document.head.appendChild(adScript);
+      console.log('Google AdSense script loading...');
+    }
 
-      // Initialize ads after a short delay to ensure script is loaded
-      setTimeout(function () {
-        if (typeof (adsbygoogle) !== 'undefined') {
-          try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-          } catch (e) {
-            console.log('AdSense initialization delayed');
-          }
-        }
-      }, 1000);
+    // 定义用户交互事件列表
+    const userInteractionEvents = [
+      "mousemove", "scroll", "keydown", "touchstart", "click"
+    ];
+
+    // 为每个事件添加监听器，一旦触发就加载脚本，并且只触发一次
+    userInteractionEvents.forEach(function (event) {
+      window.addEventListener(event, loadThirdPartyScripts, { once: true, passive: true });
     });
+
+    // 作为备用方案：如果用户5秒内没有任何交互，也加载脚本
+    setTimeout(loadThirdPartyScripts, 5000);
   </script>
 
 </body>
