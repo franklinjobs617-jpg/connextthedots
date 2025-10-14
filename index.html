@@ -544,35 +544,67 @@
 
 
     <section class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
-
-
-
       <!-- STEP 1: UPLOAD YOUR IMAGE -->
       <div id="step1-upload-area">
         <div class="mx-auto max-w-2xl text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create Your Custom
-            Worksheet
-          </h2>
-          <p class="mt-2 text-lg leading-8 text-gray-600">Turn any picture into a fun connect-the-dots
-            activity.</p>
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create Your Custom Connect-the-Dots
+            Worksheet</h2>
+          <p class="mt-2 text-lg leading-8 text-gray-600">Turn any picture into a fun connect-the-dots activity.</p>
         </div>
         <div id="drop-zone"
           class="mt-10 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 transition-colors duration-300">
           <div class="text-center">
-            <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <svg class="mx-auto h-16 w-16 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd"
                 d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
                 clip-rule="evenodd" />
             </svg>
-            <div class="mt-4 flex text-sm leading-6 text-gray-600">
+            <div class="mt-4 flex justify-center text-lg leading-6 text-gray-600">
               <label for="image-loader"
-                class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-700 focus-within:ring-offset-2 hover:text-blue-500">
+                class="relative cursor-pointer rounded-md bg-white text-center font-semibold text-blue-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-700 focus-within:ring-offset-2 hover:text-blue-500">
                 <span>Browse Files</span>
                 <input id="image-loader" name="image-loader" type="file" class="sr-only" accept="image/*">
               </label>
               <p class="pl-1">or drag and drop</p>
             </div>
             <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+            <p class="text-xs leading-5 text-gray-500 mt-1">
+              <strong class="font-semibold text-blue-700">Note:</strong>
+              For best results, please upload <strong class="font-semibold text-blue-700">simple line drawings or
+                outlines</strong>
+              with a <strong class="font-semibold text-blue-700">plain white background</strong>.
+              Complex backgrounds or overly realistic images may affect the generated output.
+            </p>
+
+            <!-- Example Images List -->
+            <div class="mt-6">
+              <h4 class="text-sm font-semibold text-gray-900 mb-3">Example Images for Best Results:</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl mx-auto">
+                <div class="aspect-w-1 aspect-h-1">
+                  <img src="./images/connect-the-dots-baby-elephant-outline.webp"
+                    alt="Adorable baby elephant outline for connect-the-dots worksheet, cartoon style, on a clean white background, suitable for preschool activities."
+                    class="object-cover rounded-md shadow-sm border border-gray-200" width="200" />
+                </div>
+                <div class="aspect-w-1 aspect-h-1">
+                  <img src="./images/connect-the-dots-halloween-pumpkin.webp"
+                    alt="Simple connect-the-dots outline of two Halloween pumpkins with a witch hat, on a white background, perfect for kids' activity worksheets."
+                    class="object-cover rounded-md shadow-sm border border-gray-200" width="200" />
+                </div>
+                <div class="aspect-w-1 aspect-h-1">
+                  <img src="./images/connect-the-dots-cute-princess-drawing.webp"
+                    alt="Cute winking princess drawing for connect-the-dots activity, with a crown and dress, on a plain white background, ideal for children's learning."
+                    class="object-cover rounded-md shadow-sm border border-gray-200" width="200" />
+                </div>
+                <div class="aspect-w-1 aspect-h-1">
+                  <img src="./images/connect-the-dots-christmas-tree-gifts.webp"
+                    alt="Colorful cartoon Christmas tree with a star, red ornaments, string lights, and several wrapped presents underneath, on a white background, suitable for connect-the-dots coloring activity."
+                    class="object-cover rounded-md shadow-sm border border-gray-200" width="200" />
+                </div>
+
+              </div>
+            </div>
+            <!-- End Example Images List -->
+
           </div>
         </div>
         <p id="opencv-status" class="text-center text-sm text-gray-400 mt-4">Initializing generator...</p>
@@ -580,12 +612,10 @@
 
       <!-- STEP 2 & 3 CONTAINER (Initially hidden) -->
       <div id="generator-main-area" class="hidden">
-
         <!-- STEP 2: ADJUST & PREVIEW -->
         <div class="mt-16 grid grid-cols-1 gap-y-12 gap-x-16 md:grid-cols-3">
           <!-- Left Column: Controls -->
           <div class="md:col-span-1 space-y-8">
-
             <div id="source-image-info" class="hidden pb-4 border-b border-gray-200">
               <div class="flex justify-between items-center">
                 <p class="text-sm font-medium text-gray-500 truncate">Source:</p>
@@ -641,14 +671,14 @@
                   </div>
                 </div>
                 <!-- <div>
-										<label for="type-select"
-											class="block text-sm font-medium leading-6 text-gray-900">Numbering</label>
-										<select id="type-select"
-											class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-700 sm:text-sm sm:leading-6">
-											<option value="123">1, 2, 3, ...</option>
-											<option value="ABC">A, B, C, ...</option>
-										</select>
-									</div> -->
+                <label for="type-select"
+                  class="block text-sm font-medium leading-6 text-gray-900">Numbering</label>
+                <select id="type-select"
+                  class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-700 sm:text-sm sm:leading-6">
+                  <option value="123">1, 2, 3, ...</option>
+                  <option value="ABC">A, B, C, ...</option>
+                </select>
+              </div> -->
                 <div>
                   <label for="font-size-slider" class="block text-sm font-medium leading-6 text-gray-900">Font Size:
                     <span id="font-size-value" class="font-bold text-blue-700">16</span></label>
@@ -736,8 +766,6 @@
         </div>
 
       </div>
-
-
     </section>
 
 
