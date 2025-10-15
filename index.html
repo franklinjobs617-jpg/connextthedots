@@ -553,12 +553,11 @@
             activity.</p>
         </div>
 
-        <!-- ==================== UNIFIED INSPIRATION & EXAMPLES SECTION ==================== -->
         <div class="mx-auto max-w-3xl mt-12 bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
           <div class="border-b border-gray-200">
             <nav id="inspiration-tabs" class="-mb-px flex justify-center sm:justify-start" aria-label="Tabs">
 
-              <!-- Tab 2: Good Examples (Active by default) -->
+              <!-- Tab 1: Good Examples (Active by default) -->
               <button data-tab="examples"
                 class="inspiration-tab group sm:w-1/2 w-full flex items-center justify-center whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium border-primary text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
@@ -568,7 +567,8 @@
                     d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
                 Good Examples
-              </button><!-- Tab 1: AI Prompts (Inactive by default) -->
+              </button>
+              <!-- Tab 2: AI Prompts (Inactive by default) -->
               <button data-tab="prompts"
                 class="inspiration-tab group sm:w-1/2 w-full flex items-center justify-center whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
@@ -581,7 +581,6 @@
           </div>
 
           <div class="p-6">
-            <!-- Prompts Content Panel (Hidden by default) -->
             <div id="prompts-content" class="inspiration-content hidden">
               <p class="text-sm text-gray-600 mb-4">Use these prompts with AI art tools (like Midjourney)
                 to create the perfect outline image for your worksheet.</p>
@@ -608,7 +607,6 @@
                 Get Another Prompt
               </button>
             </div>
-            <!-- Examples Content Panel (Visible by default) -->
             <div id="examples-content" class="inspiration-content">
               <p class="text-sm text-gray-600 mb-4">Simple line drawings with clear outlines and plain
                 backgrounds work best for auto-detection.</p>
@@ -633,7 +631,6 @@
             </div>
           </div>
         </div>
-        <!-- ================= END OF UNIFIED SECTION ================= -->
         <div id="drop-zone"
           class="mt-10 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 transition-all duration-300 opacity-50 pointer-events-none cursor-not-allowed">
           <div class="text-center">
@@ -657,11 +654,8 @@
       </div>
 
 
-      <!-- STEP 2 & 3 CONTAINER (Initially hidden) -->
       <div id="generator-main-area" class="hidden">
-        <!-- STEP 2: ADJUST & PREVIEW -->
         <div class="mt-16 grid grid-cols-1 gap-y-12 gap-x-16 md:grid-cols-3">
-          <!-- Left Column: Controls -->
           <div class="md:col-span-1 space-y-8">
             <div id="source-image-info" class="hidden pb-4 border-b border-gray-200">
               <div class="flex justify-between items-center">
@@ -672,7 +666,6 @@
               <p id="current-filename" class="text-sm text-gray-900 font-semibold mt-1 truncate"></p>
             </div>
 
-            <!-- Group 1: Points -->
             <div>
               <h3 class="text-lg font-semibold text-gray-900">Points & Dots</h3>
               <div class="mt-4 space-y-4">
@@ -690,7 +683,6 @@
                       class="w-20 rounded-md border-gray-300 text-center">
                   </div>
                 </div>
-                <!-- NEW Location for Clear Dots Button -->
                 <button id="clear-btn" disabled
                   class="w-full rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">Clear
                   All Dots</button>
@@ -699,7 +691,6 @@
 
             <hr class="border-gray-200">
 
-            <!-- Group 2: Style -->
             <div>
               <h3 class="text-lg font-semibold text-gray-900">Style</h3>
               <div class="mt-4 space-y-4">
@@ -771,12 +762,10 @@
 
           </div>
 
-          <!-- Right Column: Preview -->
           <div class="md:col-span-2">
             <div class="flex flex-col lg:flex-row items-center justify-between mb-4">
               <p class="text-sm text-gray-500 mb-3 lg:m-0">Points on canvas: <span id="points-counter"
                   class="font-semibold">0</span></p>
-              <!-- STEP 3: DOWNLOAD -->
               <div id="step3-download-area" class="text-center">
                 <div class="flex items-center justify-center gap-x-6">
                   <button id="download-png-btn" disabled
@@ -787,7 +776,6 @@
                     PDF</button>
                 </div>
               </div>
-              <!-- Buttons are now removed from here -->
             </div>
             <div
               class="relative aspect-[4/3] w-full rounded-lg border border-dashed border-gray-900/25 flex items-center justify-center p-2 bg-gray-50">
@@ -860,7 +848,6 @@
         if (copyPromptBtn) copyPromptBtn.addEventListener('click', copyPrompt);
         if (promptDisplay) promptDisplay.textContent = prompts[0];
 
-        // --- Inspiration Tabs Logic ---
         const inspirationTabs = document.querySelectorAll('.inspiration-tab');
         const inspirationContents = document.querySelectorAll('.inspiration-content');
 
@@ -868,7 +855,6 @@
           tab.addEventListener('click', () => {
             const target = tab.dataset.tab;
 
-            // Update tab styles
             inspirationTabs.forEach(t => {
               t.classList.remove('border-primary', 'text-primary');
               t.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
@@ -878,7 +864,6 @@
             tab.classList.add('border-primary', 'text-primary');
             tab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
 
-            // Update content visibility
             inspirationContents.forEach(content => {
               if (content.id === `${target}-content`) {
                 content.classList.remove('hidden');
@@ -892,15 +877,9 @@
 
 
       // ---  OpenCV Loader ---
-      // =================== FINAL SCRIPT ===================
 
       window.onload = () => {
-        // The drop-zone is already disabled in the HTML.
-        // This function now only handles the script loading process.
-
         const opencvStatus = document.getElementById('opencv-status');
-
-        // Create and configure the script tag
         const script = document.createElement('script');
         script.src = 'https://docs.opencv.org/4.9.0/opencv.js';
         script.async = true;
@@ -910,10 +889,8 @@
             opencvStatus.textContent = 'Error: Failed to load the vision library.';
             opencvStatus.classList.add('text-red-500');
           }
-          // The drop-zone will remain disabled as defined in the HTML.
         };
 
-        // Append to the body to start the async download
         document.body.appendChild(script);
       };
 
@@ -922,7 +899,6 @@
         const dropZone = document.getElementById('drop-zone');
         const imageLoaderLabel = document.querySelector('label[for="image-loader"]');
 
-        // --- Re-enable the drop-zone by removing the classes ---
         if (dropZone) {
           dropZone.classList.remove('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
         }
@@ -930,10 +906,9 @@
           imageLoaderLabel.classList.remove('cursor-not-allowed');
         }
 
-        // --- Update status message and fade it out ---
         if (opencvStatus) {
           opencvStatus.textContent = 'Generator Ready!';
-          opencvStatus.classList.add('text-green-500'); // Optional: Add a success color
+          opencvStatus.classList.add('text-green-500');
 
           setTimeout(() => {
             if (opencvStatus) {
@@ -1007,7 +982,6 @@
           return { x: total.x / dots.length, y: total.y / dots.length };
         };
 
-        // KEY CHANGE 2: Reworked drawNumbers function for outward positioning
         const drawNumbers = (context, dots, centroid) => {
           context.fillStyle = 'black';
           context.font = `${state.config.fontSize}px Arial`;
@@ -1037,7 +1011,6 @@
           else if (state.config.hint === 'trace' && state.originalImage) { context.globalAlpha = 0.3; context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); context.globalAlpha = 1.0; }
           else if (state.config.hint === 'internal' && state.internalHintImage) { context.drawImage(state.internalHintImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); }
 
-          // KEY CHANGE 3: Calculate centroid and pass it to drawNumbers
           const centroid = calculateCentroid(state.dots);
           drawDots(context, state.dots, { color: state.config.dotColor, radius: state.config.dotRadius });
           drawNumbers(context, state.dots, centroid);
@@ -1253,7 +1226,6 @@
       });
     </script>
 
-    <!-- ======================== DEMO SECTION (Tailwind CSS Version) ======================== -->
     <section class="py-16 sm:py-24 bg-gray-50">
       <div class="container mx-auto px-4">
         <div class="mx-auto max-w-3xl text-center mb-12">
@@ -1264,7 +1236,6 @@
           </p>
         </div>
 
-        <!-- Tab Buttons for PC and Mobile -->
         <div class="flex justify-center mb-8">
           <div id="demo-tabs" class="inline-flex rounded-lg shadow-sm" role="group">
             <button type="button" data-tab="pc"
@@ -1292,7 +1263,6 @@
         <div>
           <!-- PC Demo Video Panel -->
           <div id="pc-content" class="tab-content-tailwind">
-            <!-- Using aspect-w-16 and aspect-h-9 for 16:9 ratio -->
             <div class="w-full max-w-3xl mx-auto rounded-lg shadow-xl overflow-hidden aspect-w-16 aspect-h-9">
               <video class="w-full h-full object-cover" src="./images/demopc.mp4" poster="./images/poster-pc.jpg"
                 autoplay muted loop playsinline controls title="PC Connect the Dots Generator Demo">
@@ -1304,13 +1274,10 @@
             </p>
           </div>
 
-          <!-- Mobile Demo Video Panel -->
           <div id="mobile-content" class="tab-content-tailwind hidden">
-            <!-- Tailwind CSS Phone Mockup -->
             <div
               class="relative mx-auto w-full max-w-[280px] bg-gray-900 border-[10px] border-gray-900 rounded-[40px] shadow-2xl">
 
-              <!-- Screen with 9:16 Aspect Ratio -->
               <div class="w-full rounded-[30px] overflow-hidden aspect-[9/16]">
                 <video class="w-full h-full object-cover" src="./images/demomobile.mp4"
                   poster="./images/poster-mobile.jpg" autoplay muted loop playsinline controls
@@ -1319,7 +1286,6 @@
                 </video>
               </div>
 
-              <!-- Home Indicator -->
               <div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-[35%] h-1 bg-white/40 rounded-full z-10">
               </div>
             </div>
@@ -1335,30 +1301,25 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const tabsContainer = document.getElementById('demo-tabs');
-        if (!tabsContainer) return; // Exit if the tabs are not on the page
+        if (!tabsContainer) return;
 
         const tabButtons = tabsContainer.querySelectorAll('.tab-button-tailwind');
         const tabContents = document.querySelectorAll('.tab-content-tailwind');
 
-        // Function to handle tab activation
         const activateTab = (activeButton) => {
           const targetTab = activeButton.dataset.tab;
 
-          // Update button styles
           tabButtons.forEach(button => {
-            // Reset styles for all buttons
             button.classList.remove('bg-primary', 'text-white', 'border-primary', 'z-10');
             button.classList.add('bg-white', 'text-gray-600', 'border-gray-300', 'hover:bg-gray-50');
 
             const video = document.querySelector(`#${button.dataset.tab}-content video`);
-            if (video) video.pause(); // Pause all videos
+            if (video) video.pause();
           });
 
-          // Apply active styles to the clicked button
           activeButton.classList.add('bg-primary', 'text-white', 'border-primary', 'z-10');
           activeButton.classList.remove('bg-white', 'text-gray-600', 'border-gray-300', 'hover:bg-gray-50');
 
-          // Show/hide content and play the active video
           tabContents.forEach(content => {
             if (content.id === `${targetTab}-content`) {
               content.classList.remove('hidden');
@@ -1372,12 +1333,10 @@
           });
         };
 
-        // Add click event listeners
         tabButtons.forEach(button => {
           button.addEventListener('click', () => activateTab(button));
         });
 
-        // Optional: Activate the first tab by default
         if (tabButtons.length > 0) {
           activateTab(tabButtons[0]);
         }
@@ -2349,15 +2308,12 @@
     });
   </script>
 
-
-  <!-- Load ad scripts after page load for better performance -->
   <script>
     // 标志，确保脚本只加载一次
     let thirdPartyScriptsLoaded = false;
 
     // 创建一个函数来加载所有第三方脚本
     function loadThirdPartyScripts() {
-      // 如果已经加载过，则直接返回，防止重复加载
       if (thirdPartyScriptsLoaded) {
         return;
       }
@@ -2387,17 +2343,14 @@
       console.log('Google AdSense script loading...');
     }
 
-    // 定义用户交互事件列表
     const userInteractionEvents = [
       "mousemove", "scroll", "keydown", "touchstart", "click"
     ];
 
-    // 为每个事件添加监听器，一旦触发就加载脚本，并且只触发一次
     userInteractionEvents.forEach(function (event) {
       window.addEventListener(event, loadThirdPartyScripts, { once: true, passive: true });
     });
 
-    // 作为备用方案：如果用户5秒内没有任何交互，也加载脚本
     setTimeout(loadThirdPartyScripts, 5000);
   </script>
 
