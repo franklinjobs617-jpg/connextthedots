@@ -1567,25 +1567,24 @@
         });
 
 
-        setTimeout(() => {
-          const opencvStatus = document.getElementById('opencv-status');
-          const script = document.createElement('script');
-          script.src = './js/opencv.js';
-          script.async = true;
-          script.onload = () => onOpenCvReady();
-          script.onerror = () => {
-            if (opencvStatus) {
-              opencvStatus.textContent = 'Error: Failed to load the vision library.';
-              opencvStatus.classList.add('text-red-500');
-            }
-          };
-
-          document.body.appendChild(script);
-        }, 1000)
-
 
 
       });
+
+      window.onload = () => {
+        const opencvStatus = document.getElementById('opencv-status');
+        const script = document.createElement('script');
+        script.src = 'https://docs.opencv.org/4.9.0/opencv.js';
+        script.async = true;
+        script.onload = () => onOpenCvReady();
+        script.onerror = () => {
+          if (opencvStatus) {
+            opencvStatus.textContent = 'Error: Failed to load the vision library.';
+            opencvStatus.classList.add('text-red-500');
+          }
+        };
+        document.body.appendChild(script);
+      };
 
 
       function onOpenCvReady() {
