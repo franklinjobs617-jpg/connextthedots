@@ -637,10 +637,6 @@
       /* p-6 */
     }
 
-    #prompts-content {
-      display: none;
-      /* hidden */
-    }
 
     #prompts-content .mb-4 {
       margin-bottom: 1rem;
@@ -763,15 +759,10 @@
       display: flex;
       justify-content: center;
       border-radius: 0.5rem;
-      /* rounded-lg */
       border: 1px dashed rgba(17, 24, 39, 0.25);
-      /* border border-dashed border-gray-900/25 */
       padding: 2.5rem 1.5rem;
-      /* px-6 py-10 */
       opacity: 0.5;
-      /* opacity-50 */
       pointer-events: none;
-      /* pointer-events-none */
       cursor: not-allowed;
     }
 
@@ -1576,7 +1567,6 @@
         });
 
 
-
         setTimeout(() => {
           const opencvStatus = document.getElementById('opencv-status');
           const script = document.createElement('script');
@@ -1605,6 +1595,9 @@
 
         if (dropZone) {
           dropZone.classList.remove('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
+          dropZone.style.opacity = '1';
+          dropZone.style.pointerEvents = 'auto';
+          dropZone.style.cursor = 'pointer';
         }
         if (imageLoaderLabel) {
           imageLoaderLabel.classList.remove('cursor-not-allowed');
