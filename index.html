@@ -757,9 +757,9 @@
       border-radius: 0.5rem;
       border: 1px dashed rgba(17, 24, 39, 0.25);
       padding: 2.5rem 1.5rem;
-      opacity: 0.5;
+      /* opacity: 0.5;
       pointer-events: none;
-      cursor: not-allowed;
+      cursor: not-allowed; */
     }
 
     #drop-zone .text-center {
@@ -1559,55 +1559,8 @@
           });
         });
 
-
-
-
-      });
-
-      window.onload = () => {
-        const opencvStatus = document.getElementById('opencv-status');
-        const script = document.createElement('script');
-        script.src = 'https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js';
-        script.async = true;
-        script.onload = () => onOpenCvReady();
-        script.onerror = () => {
-          if (opencvStatus) {
-            opencvStatus.textContent = 'Error: Failed to load the vision library.';
-            opencvStatus.classList.add('text-red-500');
-          }
-        };
-        document.body.appendChild(script);
-      };
-
-
-      function onOpenCvReady() {
-        const opencvStatus = document.getElementById('opencv-status');
-        const dropZone = document.getElementById('drop-zone');
-        const imageLoaderLabel = document.querySelector('label[for="image-loader"]');
-
-        if (dropZone) {
-          dropZone.classList.remove('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
-          dropZone.style.opacity = '1';
-          dropZone.style.pointerEvents = 'auto';
-          dropZone.style.cursor = 'pointer';
-        }
-        if (imageLoaderLabel) {
-          imageLoaderLabel.classList.remove('cursor-not-allowed');
-        }
-
-        if (opencvStatus) {
-          opencvStatus.textContent = 'Generator Ready!';
-          opencvStatus.classList.add('text-green-500');
-
-
-        }
-      }
-
-
-      document.addEventListener('DOMContentLoaded', () => {
         // === State and Constants ===
         const MAX_WIDTH = 800, MAX_HEIGHT = 600;
-        // Fix: Changed default dotRadius and dotColor to match HTML input values
         const DEFAULT_CONFIG = { type: '123', fontSize: 16, hint: 'original', eraseThickness: 5, dotRadius: 5, dotColor: '#000000' };
         let state = {
           originalImage: null, canvasDimensions: { width: MAX_WIDTH, height: MAX_HEIGHT },
@@ -1624,9 +1577,8 @@
           canvasLoader = document.getElementById('canvas-loader');
         const imageLoader = document.getElementById('image-loader'),
           pointsCounter = document.getElementById('points-counter'),
-          clearBtn = document.getElementById('clear-btn'),
-          // typeSelect = document.getElementById('type-select'),
-          hintTypeRadios = document.getElementById('hint-type-radios');
+          clearBtn = document.getElementById('clear-btn');
+        const hintTypeRadios = document.getElementById('hint-type-radios');
         const dotCountSlider = document.getElementById('dot-count-slider'), pointsNumberInput = document.getElementById('points-number-input'),
           pointsMinusBtn = document.getElementById('points-minus-btn'), pointsPlusBtn = document.getElementById('points-plus-btn');
         const fontSizeSlider = document.getElementById('font-size-slider'), fontSizeValue = document.getElementById('font-size-value');
@@ -1634,6 +1586,10 @@
         const dotSizeSlider = document.getElementById('dot-size-slider'), dotSizeValue = document.getElementById('dot-size-value');
         const dotColorPicker = document.getElementById('dot-color-picker');
         const downloadPngBtn = document.getElementById('download-png-btn'), downloadPdfBtn = document.getElementById('download-pdf-btn');
+
+        // New/Moved DOM references for OpenCV status and related elements
+        const opencvStatus = document.getElementById('opencv-status');
+        const imageLoaderLabel = document.querySelector('label[for="image-loader"]');
 
         [downloadPngBtn, downloadPdfBtn].forEach(btn => btn.disabled = true);
 
@@ -1647,7 +1603,7 @@
           };
         };
 
-        // === Core Functions ===
+        // Helper to get event position, same as before
         const getEventPos = (canvas, evt) => {
           const rect = canvas.getBoundingClientRect();
           const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
@@ -1705,7 +1661,6 @@
         };
 
         const updateConfigAndRedraw = () => {
-          // state.config.type = typeSelect.value;
           state.config.fontSize = parseInt(fontSizeSlider.value, 10);
           state.config.dotRadius = parseInt(dotSizeSlider.value, 10);
           state.config.dotColor = dotColorPicker.value;
@@ -1714,9 +1669,9 @@
           fontSizeValue.textContent = fontSizeSlider.value;
           dotSizeValue.textContent = dotSizeSlider.value;
           thicknessValue.textContent = thicknessSlider.value;
-          // Bug Fix 2: Invert the condition for thickness-container visibility
           thicknessContainer.classList.toggle('hidden', state.config.hint !== 'internal');
-          state.internalHintImage = (state.config.hint === 'internal') ? generateInternalHintImage(state.config.eraseThickness) : null;
+          // Only generate internal hint image if cv is loaded
+          state.internalHintImage = (state.config.hint === 'internal' && typeof cv !== 'undefined') ? generateInternalHintImage(state.config.eraseThickness) : null;
           redrawDrawCanvas();
         };
 
@@ -1738,7 +1693,6 @@
           } catch (error) {
             console.error("Hint image generation error:", error); return null;
           } finally {
-            // Ensure all Mat objects are deleted to prevent memory leaks
             if (src) src.delete();
             if (gray) gray.delete();
             if (binary) binary.delete();
@@ -1752,11 +1706,9 @@
           state.originalImage = null; state.dots = []; state.draggedDotIndex = -1;
           state.config = { ...DEFAULT_CONFIG };
           updatePointsValue(25, false);
-          // Consistency Fixes:
           dotSizeSlider.value = DEFAULT_CONFIG.dotRadius;
           dotSizeValue.textContent = DEFAULT_CONFIG.dotRadius.toString();
           dotColorPicker.value = DEFAULT_CONFIG.dotColor;
-          //  typeSelect.value = '123';
           fontSizeSlider.value = DEFAULT_CONFIG.fontSize;
           fontSizeValue.textContent = DEFAULT_CONFIG.fontSize.toString();
           document.querySelector('input[name="hint-type"][value="original"]').checked = true;
@@ -1765,7 +1717,6 @@
           sourceImageInfo.classList.add('hidden');
           clearBtn.disabled = true;
           downloadPngBtn.disabled = true; downloadPdfBtn.disabled = true;
-          // Ensure thickness container is hidden on reset
           thicknessContainer.classList.add('hidden');
           redrawDrawCanvas();
         };
@@ -1788,7 +1739,7 @@
               step1Area.classList.add('hidden'); generatorMainArea.classList.remove('hidden');
               currentFilename.textContent = file.name; sourceImageInfo.classList.remove('hidden');
               downloadPngBtn.disabled = false; downloadPdfBtn.disabled = false;
-              runAutoDetect(); // Run initial auto-detect
+              runAutoDetect(); // Run initial auto-detect, will only work if OpenCV is loaded
             };
             img.src = event.target.result;
           };
@@ -1797,11 +1748,11 @@
 
         // --- Auto-Detect Logic ---
         const runAutoDetect = () => {
-          if (!state.originalImage || typeof cv === 'undefined') return;
-          // Bug Fix 1: Simplified loader class toggling
-          canvasLoader.classList.remove('hidden'); // Show loader
-          // canvasLoader.classList.add('flex'); // 'flex-col' already sets display:flex due to Tailwind
-
+          if (!state.originalImage || typeof cv === 'undefined') {
+            console.log("OpenCV not ready or no image, skipping auto-detect.");
+            return;
+          }
+          canvasLoader.classList.remove('hidden');
           setTimeout(() => {
             const tempCanvas = document.createElement('canvas'); tempCanvas.width = state.canvasDimensions.width; tempCanvas.height = state.canvasDimensions.height;
             tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
@@ -1848,20 +1799,94 @@
             } catch (error) {
               console.error(error); alert(`Contour detection failed: ${error.message}`);
             } finally {
-              // Ensure all Mat objects are deleted to prevent memory leaks
               if (src) src.delete();
               if (gray) gray.delete();
               if (binary) binary.delete();
               if (contours) contours.delete();
               if (hierarchy) hierarchy.delete();
-
-              // Bug Fix 1: Simplified loader class toggling
-              canvasLoader.classList.add('hidden'); // Hide loader
-              // canvasLoader.classList.remove('flex'); // 'flex-col' already sets display:flex
+              canvasLoader.classList.add('hidden');
             }
           }, 50);
         };
         const debouncedAutoDetect = debounce(runAutoDetect, 400);
+
+        // --- OpenCV Deferred Loading Logic ---
+        let opencvScriptLoaded = false;
+        const interactionEvents = ['scroll', 'click', 'touchstart', 'keydown'];
+
+        function onOpenCvReady() {
+          if (dropZone) {
+            dropZone.classList.remove('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
+          }
+          if (imageLoaderLabel) {
+            imageLoaderLabel.classList.remove('cursor-not-allowed');
+          }
+
+          if (opencvStatus) {
+            opencvStatus.textContent = 'Generator Ready!';
+            opencvStatus.classList.remove('text-gray-500', 'text-red-500');
+            opencvStatus.classList.add('text-green-500');
+          }
+
+          // If an image was already loaded when OpenCV became ready, run auto-detect
+          if (state.originalImage) {
+            runAutoDetect();
+          }
+        }
+
+        function removeInteractionListeners() {
+          interactionEvents.forEach(event => {
+            document.removeEventListener(event, loadOpenCv);
+          });
+        }
+
+        function loadOpenCv() {
+          if (opencvScriptLoaded) {
+            return; // Already loaded or loading
+          }
+          opencvScriptLoaded = true; // Set flag immediately to prevent multiple loads
+
+          if (opencvStatus) {
+            opencvStatus.textContent = 'Loading connect the dots generator...';
+            opencvStatus.classList.remove('text-green-500', 'text-red-500');
+            opencvStatus.classList.add('text-gray-500'); // Neutral loading color
+          }
+
+          const script = document.createElement('script');
+          script.src = 'https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js';
+          script.async = true;
+          script.onload = onOpenCvReady;
+          script.onerror = () => {
+            if (opencvStatus) {
+              opencvStatus.textContent = 'Error: Failed to load the connect the dots generator.';
+              opencvStatus.classList.remove('text-green-500', 'text-gray-500');
+              opencvStatus.classList.add('text-red-500');
+            }
+            // Keep opencvScriptLoaded as true to avoid trying to load again if it failed once.
+          };
+          document.body.appendChild(script);
+
+          removeInteractionListeners(); // Remove listeners once loading starts
+        }
+
+        function setupInteractionListeners() {
+          interactionEvents.forEach(event => {
+            document.addEventListener(event, loadOpenCv, { once: true, passive: true });
+          });
+        }
+
+        // --- Initial setup for OpenCV state (before interaction) ---
+        if (opencvStatus) {
+          opencvStatus.textContent = 'Connect the dots generator loading on first interaction...';
+          opencvStatus.classList.add('text-gray-500');
+        }
+        if (dropZone) {
+          dropZone.classList.add('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
+        }
+        if (imageLoaderLabel) {
+          imageLoaderLabel.classList.add('cursor-not-allowed');
+        }
+        setupInteractionListeners(); // Attach the listeners
 
         // === Event Listeners ===
         changeImageBtn.addEventListener('click', resetGeneratorState);
@@ -1937,6 +1962,8 @@
         resetGeneratorState();
       });
     </script>
+
+
     <section class="py-16 sm:py-24 bg-gray-50 container mx-auto max-w-7xl lg:px-8">
       <div class="container mx-auto px-4">
         <div class="mx-auto max-w-3xl text-center mb-12">
