@@ -39,8 +39,8 @@
   <script async src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
-
   <style>
+    /* START OF PROVIDED INLINE CSS */
     *,
     ::before,
     ::after {
@@ -424,14 +424,14 @@
 
 
     /*
- * 此CSS旨在尽可能精确地还原原始HTML中由Tailwind CSS类定义的布局和空间关系。
- * 重点是确保元素的位置、大小和相互间距与Tailwind渲染结果一致，
- * 而不强调颜色、字体、阴影等视觉细节，除非它们直接影响布局（例如border宽度）。
- *
- * 注意: Tailwind CSS包含一个“preflight”基础样式重置。
- * 此纯CSS转换不包括完整的基线重置，因此某些默认浏览器样式可能与
- * 真实的Tailwind页面略有不同，除非提供更全面的基础样式。
- */
+    * 此CSS旨在尽可能精确地还原原始HTML中由Tailwind CSS类定义的布局和空间关系。
+    * 重点是确保元素的位置、大小和相互间距与Tailwind渲染结果一致，
+    * 而不强调颜色、字体、阴影等视觉细节，除非它们直接影响布局（例如border宽度）。
+    *
+    * 注意: Tailwind CSS包含一个“preflight”基础样式重置。
+    * 此纯CSS转换不包括完整的基线重置，因此某些默认浏览器样式可能与
+    * 真实的Tailwind页面略有不同，除非提供更全面的基础样式。
+    */
 
     /* --- 基础布局和响应式 --- */
     .mx-auto {
@@ -512,10 +512,6 @@
 
     .gap-y-12 {
       row-gap: 3rem;
-    }
-
-    .hidden {
-      display: none !important;
     }
 
     .sr-only {
@@ -790,10 +786,8 @@
     #drop-zone label {
       position: relative;
       border-radius: 0.375rem;
-      /* rounded-md */
       text-align: center;
-      cursor: not-allowed;
-      /* cursor-not-allowed */
+      cursor: pointer;
     }
 
     #drop-zone p.pl-1 {
@@ -809,9 +803,8 @@
 
     /* --- Generator Main Area --- */
     #generator-main-area {
-      display: none;
       /* hidden */
-      margin-top: 4rem;
+      margin-top: 2rem;
       /* mt-16 */
       grid-template-columns: repeat(1, minmax(0, 1fr));
       /* grid-cols-1 */
@@ -822,14 +815,6 @@
     }
 
     @media (min-width: 768px) {
-
-      /* md */
-      #generator-main-area {
-        display: grid;
-        /* override hidden if needed, or remove 'hidden' class with JS */
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        /* md:grid-cols-3 */
-      }
 
       #generator-main-area>div:first-child {
         /* md:col-span-1 */
@@ -988,9 +973,9 @@
       cursor: pointer;
     }
 
+    /* FIX: Removed explicit 'display: none;' here. Its visibility will now be controlled by JS adding/removing the 'hidden' class. */
     #thickness-container {
-      display: none;
-      /* hidden */
+      /* display: none; */
       margin-top: 1rem;
       /* mt-4 */
     }
@@ -1084,18 +1069,18 @@
       /* p-2 */
     }
 
+    /* FIX: Removed conflicting 'display' declarations.
+             #canvas-loader starts with 'hidden' class, meaning display: none.
+             When 'hidden' is removed by JS, 'flex-col' will make it display: flex. */
     #canvas-loader {
-      display: none;
-      /* hidden */
+      /* display: none; */
       position: absolute;
       inset: 0;
-      /* inset-0 */
-      display: flex;
+      /* display: flex; */
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 10;
-      /* z-10 */
     }
 
     #canvas-loader svg {
@@ -1124,6 +1109,8 @@
       margin-top: 0.5rem;
       /* mt-2 */
     }
+
+    /* END OF PROVIDED INLINE CSS */
   </style>
 
   <!-- Ad scripts will be loaded after page load -->
@@ -1157,13 +1144,12 @@
         <span class="font-bold text-primary header-title">ConnectTheDotsPrintable.online</span>
       </a>
       <nav class="hidden md:flex space-x-6">
-        <a href="/" class="font-bold text-primary hover:text-primary/80 transition ">Home</a>
-        <a href="/printable-connect-the-dots.html" class="font-medium  hover:text-primary">All Printables</a>
+        <a href="/" class="font-bold text-primary hover:text-primary/80 transition">Home</a>
+        <a href="/printable-connect-the-dots.html" class="font-medium  hover:text-primary transition">All Printables</a>
         <a href="/how-to-make.html" class="font-medium hover:text-primary transition">How to Make</a>
         <a href="#generate-setion" class="font-medium hover:text-primary transition"> custom generator</a>
         <a href="/privacy.html" class="font-medium hover:text-primary transition">Privacy</a>
         <a href="/terms.html" class="font-medium hover:text-primary transition">Terms</a>
-
       </nav>
 
       <button id="mobile-menu-button" class="md:hidden text-neutral hover:text-primary">
@@ -1238,13 +1224,14 @@
 
 
     <section class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8" id="generate-setion">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create Your Custom
+          Connect-the-Dots</h2>
+        <p class="mt-2 text-lg leading-8 text-gray-600">Turn any picture into a fun connect-the-dots
+          activity.</p>
+      </div>
       <div id="step1-upload-area">
-        <div class="mx-auto max-w-3xl text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create Your Custom
-            Connect-the-Dots</h2>
-          <p class="mt-2 text-lg leading-8 text-gray-600">Turn any picture into a fun connect-the-dots
-            activity.</p>
-        </div>
+
 
         <div class="mx-auto max-w-3xl mt-12 bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
           <div class="border-b border-gray-200">
@@ -1304,19 +1291,23 @@
               <p class="text-sm text-gray-600 mb-4">Simple line drawings with clear outlines and plain
                 backgrounds work best for auto-detection.</p>
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <img src="./images/connect-the-dots-baby-elephant-outline.webp"
+                <img
+                  src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-baby-elephant-outline.webp"
                   alt="Example: Adorable baby elephant outline" loading="lazy" decoding="async"
                   class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105"
                   width="200" />
-                <img src="./images/connect-the-dots-halloween-pumpkin.webp"
+                <img
+                  src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-halloween-pumpkin.webp"
                   alt="Example: Simple Halloween pumpkins outline" loading="lazy" decoding="async"
                   class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105"
                   width="200" />
-                <img src="./images/connect-the-dots-cute-princess-drawing.webp"
+                <img
+                  src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-cute-princess-drawing.webp"
                   alt="Example: Cute princess drawing outline" loading="lazy" decoding="async"
                   class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105"
                   width="200" />
-                <img src="./images/connect-the-dots-christmas-tree-gifts.webp"
+                <img
+                  src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-christmas-tree-gifts.webp"
                   alt="Example: Christmas tree with gifts outline" loading="lazy" decoding="async"
                   class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105"
                   width="200" />
@@ -1343,12 +1334,13 @@
             <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
           </div>
         </div>
-        <p id="opencv-status" class="text-center text-sm text-gray-400 mt-4">Initializing generator, please wait...</p>
+        <p id="opencv-status" class="text-center text-sm text-gray-400 mt-4">Initializing generator, please wait...
+        </p>
       </div>
 
 
       <div id="generator-main-area" class="hidden">
-        <div class="mt-16 grid grid-cols-1 gap-y-12 gap-x-16 md:grid-cols-3">
+        <div class="mt-8 grid grid-cols-1 gap-y-12 gap-x-16 md:grid-cols-3">
           <div class="md:col-span-1 space-y-8">
             <div id="source-image-info" class="hidden pb-4 border-b border-gray-200">
               <div class="flex justify-between items-center">
@@ -1445,7 +1437,8 @@
                 </label>
               </div>
               <div id="thickness-container" class="hidden mt-4">
-                <label for="thicknessSlider" class="block text-sm font-medium leading-6 text-gray-900">Erase Width:
+                <label for="thicknessSlider" class="block text-sm font-medium leading-6 text-gray-900">Erase
+                  Width:
                   <span id="thicknessValue" class="font-bold text-blue-700">5</span></label>
                 <input type="range" id="thicknessSlider" min="1" max="50" value="5"
                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-700 mt-2">
@@ -1574,7 +1567,7 @@
       window.onload = () => {
         const opencvStatus = document.getElementById('opencv-status');
         const script = document.createElement('script');
-        script.src = './js/opencv.js';
+        script.src = 'https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js';
         script.async = true;
         script.onload = () => onOpenCvReady();
         script.onerror = () => {
@@ -1614,7 +1607,8 @@
       document.addEventListener('DOMContentLoaded', () => {
         // === State and Constants ===
         const MAX_WIDTH = 800, MAX_HEIGHT = 600;
-        const DEFAULT_CONFIG = { type: '123', fontSize: 16, hint: 'original', eraseThickness: 5, dotRadius: 8, dotColor: '#EC4899' };
+        // Fix: Changed default dotRadius and dotColor to match HTML input values
+        const DEFAULT_CONFIG = { type: '123', fontSize: 16, hint: 'original', eraseThickness: 5, dotRadius: 5, dotColor: '#000000' };
         let state = {
           originalImage: null, canvasDimensions: { width: MAX_WIDTH, height: MAX_HEIGHT },
           dots: [], draggedDotIndex: -1,
@@ -1665,7 +1659,6 @@
         const updateClearButton = () => { clearBtn.disabled = state.dots.length === 0; };
         const drawDots = (context, dots, config = {}) => dots.forEach(dot => { context.beginPath(); context.arc(dot.x, dot.y, config.radius, 0, 2 * Math.PI); context.fillStyle = config.color; context.strokeStyle = 'black'; context.lineWidth = 1.5; context.fill(); context.stroke(); });
 
-        // KEY CHANGE 1: New function to calculate the center of all dots
         const calculateCentroid = (dots) => {
           if (dots.length === 0) {
             return { x: state.canvasDimensions.width / 2, y: state.canvasDimensions.height / 2 };
@@ -1721,6 +1714,7 @@
           fontSizeValue.textContent = fontSizeSlider.value;
           dotSizeValue.textContent = dotSizeSlider.value;
           thicknessValue.textContent = thicknessSlider.value;
+          // Bug Fix 2: Invert the condition for thickness-container visibility
           thicknessContainer.classList.toggle('hidden', state.config.hint !== 'internal');
           state.internalHintImage = (state.config.hint === 'internal') ? generateInternalHintImage(state.config.eraseThickness) : null;
           redrawDrawCanvas();
@@ -1743,21 +1737,36 @@
             return offscreenCanvas;
           } catch (error) {
             console.error("Hint image generation error:", error); return null;
-          } finally { [src, gray, binary, contours, hierarchy, resultMat].forEach(mat => mat && mat.delete()); }
+          } finally {
+            // Ensure all Mat objects are deleted to prevent memory leaks
+            if (src) src.delete();
+            if (gray) gray.delete();
+            if (binary) binary.delete();
+            if (contours) contours.delete();
+            if (hierarchy) hierarchy.delete();
+            if (resultMat) resultMat.delete();
+          }
         };
 
         const resetGeneratorState = () => {
           state.originalImage = null; state.dots = []; state.draggedDotIndex = -1;
           state.config = { ...DEFAULT_CONFIG };
-          updatePointsValue(25, false); dotSizeSlider.value = 5; dotSizeValue.textContent = '8';
-          dotColorPicker.value = '#000000';
+          updatePointsValue(25, false);
+          // Consistency Fixes:
+          dotSizeSlider.value = DEFAULT_CONFIG.dotRadius;
+          dotSizeValue.textContent = DEFAULT_CONFIG.dotRadius.toString();
+          dotColorPicker.value = DEFAULT_CONFIG.dotColor;
           //  typeSelect.value = '123';
-          fontSizeSlider.value = 16; fontSizeValue.textContent = '16';
+          fontSizeSlider.value = DEFAULT_CONFIG.fontSize;
+          fontSizeValue.textContent = DEFAULT_CONFIG.fontSize.toString();
           document.querySelector('input[name="hint-type"][value="original"]').checked = true;
-          generatorMainArea.classList.add('hidden'); step1Area.classList.remove('hidden');
+          generatorMainArea.classList.add('hidden');
+          step1Area.classList.remove('hidden');
           sourceImageInfo.classList.add('hidden');
           clearBtn.disabled = true;
           downloadPngBtn.disabled = true; downloadPdfBtn.disabled = true;
+          // Ensure thickness container is hidden on reset
+          thicknessContainer.classList.add('hidden');
           redrawDrawCanvas();
         };
 
@@ -1789,7 +1798,10 @@
         // --- Auto-Detect Logic ---
         const runAutoDetect = () => {
           if (!state.originalImage || typeof cv === 'undefined') return;
-          canvasLoader.classList.remove('hidden'); canvasLoader.classList.add('flex');
+          // Bug Fix 1: Simplified loader class toggling
+          canvasLoader.classList.remove('hidden'); // Show loader
+          // canvasLoader.classList.add('flex'); // 'flex-col' already sets display:flex due to Tailwind
+
           setTimeout(() => {
             const tempCanvas = document.createElement('canvas'); tempCanvas.width = state.canvasDimensions.width; tempCanvas.height = state.canvasDimensions.height;
             tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
@@ -1836,8 +1848,16 @@
             } catch (error) {
               console.error(error); alert(`Contour detection failed: ${error.message}`);
             } finally {
-              [src, gray, binary, contours, hierarchy].forEach(mat => mat && mat.delete());
-              canvasLoader.classList.add('hidden'); canvasLoader.classList.remove('flex');
+              // Ensure all Mat objects are deleted to prevent memory leaks
+              if (src) src.delete();
+              if (gray) gray.delete();
+              if (binary) binary.delete();
+              if (contours) contours.delete();
+              if (hierarchy) hierarchy.delete();
+
+              // Bug Fix 1: Simplified loader class toggling
+              canvasLoader.classList.add('hidden'); // Hide loader
+              // canvasLoader.classList.remove('flex'); // 'flex-col' already sets display:flex
             }
           }, 50);
         };
@@ -1917,7 +1937,6 @@
         resetGeneratorState();
       });
     </script>
-
     <section class="py-16 sm:py-24 bg-gray-50 container mx-auto max-w-7xl lg:px-8">
       <div class="container mx-auto px-4">
         <div class="mx-auto max-w-3xl text-center mb-12">
@@ -1957,13 +1976,13 @@
           <div id="pc-content" class="tab-content-tailwind">
             <div class="w-full max-w-3xl mx-auto rounded-lg shadow-xl overflow-hidden aspect-w-16 aspect-h-9">
               <video class="w-full h-full object-cover" src="./images/demopc.mp4" poster="./images/poster-pc.jpg"
-                autoplay muted loop playsinline controls title="PC Connect the Dots Generator Demo">
+                width="1280" height="720" muted loop playsinline preload="metadata" loading="lazy"
+                title="PC Connect the Dots Generator Demo">
+                <source src="./images/demopc.webm" type="video/webm">
+                <source src="./images/demopc.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
-            <p class="text-sm text-center text-gray-600 mt-4 max-w-lg mx-auto">
-              Experience the full-featured desktop version with drag-and-drop and precise controls.
-            </p>
           </div>
 
           <div id="mobile-content" class="tab-content-tailwind hidden">
@@ -1972,7 +1991,7 @@
 
               <div class="w-full rounded-[30px] overflow-hidden aspect-[9/16]">
                 <video class="w-full h-full object-cover" src="./images/demomobile.mp4"
-                  poster="./images/poster-mobile.jpg" autoplay muted loop playsinline controls
+                  poster="./images/poster-mobile.jpg" muted playsinline controls loading="lazy"
                   title="Mobile Connect the Dots Generator Demo">
                   Your browser does not support the video tag.
                 </video>
