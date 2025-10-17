@@ -20,52 +20,30 @@
   <meta property="og:image" content="https://connectthedotsprintable.online/images/og-printables.jpg" />
   <link rel="canonical" href="https://connectthedotsprintable.online/printable-connect-the-dots.html" />
 
-  <!-- Common Meta Tags (Synced with index.html) -->
-  <meta name="author" content="Connect the Dots Printable" />
-  <meta name="robots" content="index, follow" />
-  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="google-adsense-account" content="ca-pub-3383070348689557" />
-
-  <!-- ======================================================= -->
-  <!--               PERFORMANCE OPTIMIZATIONS                 -->
-  <!-- ======================================================= -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
   <link rel="preconnect" href="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev">
   <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
 
-  <!-- Stylesheet (Synced with index.html - Using compiled CSS) -->
-  <link href="./dist/output.css" rel="stylesheet">
+  <link rel="stylesheet" href="./dist/output.css">
 
-  <!-- Async Scripts (Synced with index.html) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM76E2ZP8E"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-CM76E2ZP8E');
-  </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
-    crossorigin="anonymous"></script>
   <script type="text/javascript">
     (function (c, l, a, r, i, t, y) {
-      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+      c[a] =
+        c[a] ||
+        function () {
+          (c[a].q = c[a].q || []).push(arguments);
+        };
+      t = l.createElement(r);
+      t.async = 1;
+      t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0];
+      y.parentNode.insertBefore(t, y);
     })(window, document, "clarity", "script", "tf6ljm5fsf");
   </script>
-  <style>
-    .header-title {
-      font-size: 1rem;
-      line-height: 1.2rem;
-    }
 
-    @media screen and (min-width: 640px) {
-      .header-title {
-        font-size: 1.5rem;
-        line-height: 2rem;
-      }
-    }
-  </style>
+
 </head>
 
 <body class="bg-light text-neutral">
@@ -479,7 +457,6 @@
     </div>
   </footer>
 
-  <!-- JavaScript -->
 
   <script>
     // Mobile menu toggle
@@ -518,6 +495,53 @@
       });
     });
   </script>
+
+  <script>
+    // 标志，确保脚本只加载一次
+    let thirdPartyScriptsLoaded = false;
+
+    // 创建一个函数来加载所有第三方脚本
+    function loadThirdPartyScripts() {
+      if (thirdPartyScriptsLoaded) {
+        return;
+      }
+      thirdPartyScriptsLoaded = true;
+      console.log("User interaction detected, loading third-party scripts...");
+
+      // 1. 加载 Google Tag Manager (GTAG)
+      const gtagScript = document.createElement('script');
+      gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CM76E2ZP8E';
+      gtagScript.async = true;
+      // GTAG 脚本加载完成后，再执行初始化代码
+      gtagScript.onload = function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-CM76E2ZP8E');
+        console.log('Google Tag Manager loaded and configured.');
+      };
+      document.head.appendChild(gtagScript);
+
+      // 2. 加载 Google AdSense
+      const adScript = document.createElement('script');
+      adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557';
+      adScript.async = true;
+      adScript.crossOrigin = 'anonymous';
+      document.head.appendChild(adScript);
+      console.log('Google AdSense script loading...');
+    }
+
+    const userInteractionEvents = [
+      "mousemove", "scroll", "keydown", "touchstart", "click"
+    ];
+
+    userInteractionEvents.forEach(function (event) {
+      window.addEventListener(event, loadThirdPartyScripts, { once: true, passive: true });
+    });
+
+    setTimeout(loadThirdPartyScripts, 5000);
+  </script>
+
 </body>
 
 </html>
