@@ -1226,10 +1226,8 @@
 
     <section class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8" id="generate-setion">
       <div class="mx-auto max-w-3xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create Your Custom
-          Connect-the-Dots</h2>
-        <p class="mt-2 text-lg leading-8 text-gray-600">Turn any picture into a fun connect-the-dots
-          activity.</p>
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create Your Custom Connect-the-Dots</h2>
+        <p class="mt-2 text-lg leading-8 text-gray-600">Turn any picture into a fun connect-the-dots activity.</p>
       </div>
       <div id="step1-upload-area">
 
@@ -1343,9 +1341,14 @@
       <div id="generator-main-area" class="hidden">
         <div class="mt-8 grid grid-cols-1 gap-y-12 gap-x-16 md:grid-cols-3">
           <div class="md:col-span-1 space-y-8">
+            <button id="retake-image-btn"
+              class="rounded-full bg-blue-700 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-primary/20 hover:bg-blue-500 transition-colors">
+              Retake Image
+            </button>
             <div id="source-image-info" class="hidden pb-4 border-b border-gray-200">
               <div class="flex justify-between items-center">
                 <p class="text-sm font-medium text-gray-500 truncate">Source:</p>
+                <!-- This 'Change Image' button already performs resetGeneratorState -->
                 <button id="change-image-btn" class="text-sm font-semibold text-blue-700 hover:text-blue-500">Change
                   Image</button>
               </div>
@@ -1452,8 +1455,9 @@
             <div class="flex flex-col lg:flex-row items-center justify-between mb-4">
               <p class="text-sm text-gray-500 mb-3 lg:m-0">Points on canvas: <span id="points-counter"
                   class="font-semibold">0</span></p>
-              <div id="step3-download-area" class="text-center">
-                <div class="flex items-center justify-center gap-x-6">
+              <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+
+                <div id="step3-download-area" class="flex items-center justify-center gap-x-6">
                   <button id="download-png-btn" disabled
                     class="rounded-md bg-blue-700 px-4 py-3 text-base font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">Download
                     PNG</button>
@@ -1573,7 +1577,9 @@
         // === DOM Element References ===
         const step1Area = document.getElementById('step1-upload-area'), generatorMainArea = document.getElementById('generator-main-area'),
           dropZone = document.getElementById('drop-zone'), sourceImageInfo = document.getElementById('source-image-info'),
-          currentFilename = document.getElementById('current-filename'), changeImageBtn = document.getElementById('change-image-btn');
+          currentFilename = document.getElementById('current-filename'),
+          // Retain changeImageBtn for its original purpose (smaller button in source info)
+          changeImageBtn = document.getElementById('change-image-btn');
         const drawCanvas = document.getElementById('draw-canvas'), drawCtx = drawCanvas.getContext('2d'),
           canvasLoader = document.getElementById('canvas-loader');
         const imageLoader = document.getElementById('image-loader'),
@@ -1587,6 +1593,9 @@
         const dotSizeSlider = document.getElementById('dot-size-slider'), dotSizeValue = document.getElementById('dot-size-value');
         const dotColorPicker = document.getElementById('dot-color-picker');
         const downloadPngBtn = document.getElementById('download-png-btn'), downloadPdfBtn = document.getElementById('download-pdf-btn');
+        // New button reference
+        const retakeImageBtn = document.getElementById('retake-image-btn');
+
 
         // New/Moved DOM references for OpenCV status and related elements
         const opencvStatus = document.getElementById('opencv-status');
@@ -1706,7 +1715,7 @@
         const resetGeneratorState = () => {
           state.originalImage = null; state.dots = []; state.draggedDotIndex = -1;
           state.config = { ...DEFAULT_CONFIG };
-          updatePointsValue(25, false);
+          updatePointsValue(25, false); // Reset point count slider/input
           dotSizeSlider.value = DEFAULT_CONFIG.dotRadius;
           dotSizeValue.textContent = DEFAULT_CONFIG.dotRadius.toString();
           dotColorPicker.value = DEFAULT_CONFIG.dotColor;
@@ -1894,7 +1903,10 @@
         setupInteractionListeners(); // Attach the listeners
 
         // === Event Listeners ===
-        changeImageBtn.addEventListener('click', resetGeneratorState);
+        // The smaller 'Change Image' button in the source info area
+        if (changeImageBtn) {
+          changeImageBtn.addEventListener('click', resetGeneratorState);
+        }
 
         const updatePointsValue = (value, triggerDetect = true) => {
           let numValue = parseInt(value, 10);
@@ -1964,10 +1976,17 @@
         downloadPngBtn.addEventListener('click', () => handleDownload('png'));
         downloadPdfBtn.addEventListener('click', () => handleDownload('pdf'));
 
+        // New event listener for the retake button
+        if (retakeImageBtn) {
+          retakeImageBtn.addEventListener('click', () => {
+            // Call the existing reset function
+            resetGeneratorState();
+          });
+        }
+
         resetGeneratorState();
       });
     </script>
-
 
     <section class="py-16 sm:py-24 bg-gray-50 container mx-auto max-w-7xl lg:px-8">
       <div class="container mx-auto px-4">
