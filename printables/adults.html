@@ -140,38 +140,68 @@
                 </li>
             </ul>
 
-            <!-- PDF 文件下载模块 (放置在核心信息下方，高优先级) -->
-            <div id="pdf-download-module-adults"
-                class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-6 rounded-lg mb-8 shadow-md">
-                <div
-                    class="flex flex-col justify-between items-center text-center space-y-4 lg:flex-row lg:items-center lg:text-left lg:space-x-4 lg:space-y-0">
-                    <div class="flex items-center lg:items-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
 
-                        <div class="flex flex-col items-start text-left space-y-1 pl-1">
-                            <p class="text-xl font-bold">Ready to Challenge Yourself?</p>
-                            <p class="text-sm">Click below to download our exclusive, highest-rated Adult Connect the
-                                Dots Printables.</p>
-                        </div>
+            <!-- PDF 文件下载模块 (带图片预览的新设计) -->
+            <div id="pdf-download-module-animal"
+                class="bg-purple-50 rounded-2xl overflow-hidden shadow-md border border-purple-100 mb-8">
+                <div class="md:flex">
+                    <!-- 图片预览区域 -->
+                    <div class="md:w-1/3 lg:w-1/4 relative min-h-[200px] md:min-h-full">
+                        <img src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/3-Intricate-Connect-the-Dots-Mandala-for-Adults-Over-100-dots.avif"
+                            srcset="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/3-Intricate-Connect-the-Dots-Mandala-for-Adults-Over-100-dots.avif 400w,
+                        https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/3-Intricate-Connect-the-Dots-Mandala-for-Adults-Over-100-dots.webp 800w,
+                        https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/3-Intricate-Connect-the-Dots-Mandala-for-Adults-Over-100-dots.avif 1024w"
+                            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 100vw"
+                            sizes="(min-width: 768px) 33vw, 100vw"
+                            alt="Preview of the printable animal connect the dots worksheets featuring a cute bunny."
+                            class="w-full h-full object-cover absolute inset-0" loading="lazy" decoding="async"
+                            width="1024" height="1024">
+                        <!-- 可选：添加一个标签说明这是预览 -->
+                        <span
+                            class="absolute top-3 left-3 bg-purple-600/90 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">
+                            Inside the Pack
+                        </span>
                     </div>
 
-                    <a href="../AdultDottoDot.pdf" download
-                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition duration-300 shadow-lg max-w-xs sm:max-w-sm md:max-w-md lg:w-auto">
-                        FREE PDF DOWNLOAD
-                    </a>
+                    <!-- 内容区域 -->
+                    <div class="p-6 md:p-8 flex flex-col justify-center md:w-2/3 lg:w-3/4">
+                        <div class="flex items-center mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600 mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span class="text-purple-700 font-bold tracking-wide text-sm uppercase">Free Resource</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">
+                            Download Your Free Adults Printable Pack
+                        </h3>
+                        <p class="text-gray-700 mb-6 text-md">
+                            Get instant access to our diverse collection of high-quality dot-to-dot puzzles. Perfect for
+                            adults needing digital detox, high-level puzzle enthusiasts,
+                            and students enhancing visual-spatial reasoning.
+                        </p>
+
+                        <div>
+                            <a href="../AnimalConnecttheDots.pdf" download
+                                class="inline-flex items-center justify-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-full transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                DOWNLOAD PDF NOW
+                            </a>
+                            <p class="text-xs text-gray-500 mt-3 ml-2">
+                                * Instant digital download, no email required.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <!-- If you use an image for the button, use this alt text: alt="Free Download: High-Resolution Adult Connect the Dots PDF" -->
             </div>
+            <!-- PDF 下载模块结束 -->
 
-
-            <!-- H2: 建立 E-E-A-T -->
-            <h2 class="section-title">
-                Building E-E-A-T: The Cognitive Value of Advanced Dot-to-Dot Puzzles
-            </h2>
 
             <p class="mb-4">
                 This activity transcends simple entertainment.<br class="sm:hidden"> The focused mental load required to
