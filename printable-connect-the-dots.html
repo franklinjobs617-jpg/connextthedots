@@ -6,16 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <!-- Page-specific Meta Tags (Kept from your original file) -->
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-x-icon">
   <title>Printable Connect the Dots Worksheets | Free Dot to Dot Printables</title>
   <meta name="description"
-    content="Browse our collection of printable connect the dots worksheets. Find free dot to dot printables for kids and adults in various themes and difficulty levels." />
+    content="Browse our extensive collection of free dot to dot printables for kids and adults. All our connect the dots printables are easy to download, no watermarks, and ready to print." />
   <meta name="keywords"
     content="printable connect the dots, dot to dot printables, connect the dots worksheets, free connect the dots, dot to dot activity sheets" />
   <meta property="og:title" content="Printable Connect the Dots Worksheets" />
   <meta property="og:description"
-    content="Browse our collection of printable connect the dots worksheets for kids and adults. Free dot to dot printables in various themes." />
+    content="Browse our extensive collection of printable connect the dots worksheets for kids and adults. Free dot to dot printables in various themes." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://connectthedotsprintable.online/printable-connect-the-dots.html" />
   <meta property="og:image" content="https://connectthedotsprintable.online/images/og-printables.jpg" />
@@ -44,11 +43,12 @@
     })(window, document, "clarity", "script", "tf6ljm5fsf");
   </script>
 
+  <!-- IMPORTANT: Load shared data.js - must be before other scripts that use printablesData -->
+  <script src="./data.js"></script>
 
 </head>
 
 <body class="bg-light text-neutral">
-  <!-- Header (Synced with index.html) -->
   <header class="sticky top-0 z-50 bg-white shadow-md">
     <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between">
       <a href="/" class="flex items-center">
@@ -95,7 +95,6 @@
   </header>
 
   <main>
-    <!-- Page Title Section -->
     <section class="bg-gradient-to-r from-primary to-primary/80 text-white py-12">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
@@ -112,11 +111,10 @@
             download, no watermarks, and ready to print.
           </p>
           <div class="mt-4 text-sm text-white/80">
-            <!-- Updated icon to SVG for consistency -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"
               class="inline-block mr-1">
               <path
-                d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.3-208-208S141.3 48 256 48s208 93.3 208 208S370.7 464 256 464zM342.6 302.6l-89.4-89.4V112c0-13.3-10.7-24-24-24s-24 10.7-24 24v112c0 6.6 2.7 13 7 17.7l96 96c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9z" />
+                d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.3-208-208S141.3 48 256 48s208 93.3 208 208S370.7 464 256 464zM342.6 302.6l-89.4-89.4V112c0-13.3-10.7-24-24-24s-24 10.7-24 24v112c0 6.6 2.7 13 7 17.7l96 96c9.4 陈 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9z" />
             </svg>
             Last updated: October 10, 2025
           </div>
@@ -124,17 +122,14 @@
       </div>
     </section>
 
-    <!-- Filters and Results Section -->
     <section class="py-12 bg-white">
       <div class="container mx-auto px-4">
         <div class="flex flex-col lg:flex-row gap-8">
-          <!-- Filters Sidebar -->
           <aside class="lg:w-1/4">
             <div class="bg-light p-6 rounded-xl shadow-sm sticky top-24">
               <h2 class="text-xl font-bold mb-6">
                 Filters
               </h2>
-              <!-- Difficulty Filter -->
               <div class="mb-6">
                 <h3 class="font-semibold mb-3">Difficulty Level</h3>
                 <div class="space-y-2">
@@ -155,197 +150,29 @@
                     data-filter="difficulty-extreme">Extreme</button>
                 </div>
               </div>
-              <!-- Other filters... -->
             </div>
           </aside>
 
-          <!-- Printables Results -->
           <div class="lg:w-3/4">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
               <div>
                 <h2 class="text-2xl font-bold">
                   All Printables
                 </h2>
-                <p class="text-neutral/70">Showing 6 of 156 results</p>
+                <p class="text-neutral/70" id="results-count">Showing 0 of 0 results</p>
               </div>
 
             </div>
-            <!-- Printables Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-              <!-- Printable 1: Cute Bunny -->
-              <a href="./printables/animals.html"
-                class="block bg-light rounded-xl overflow-hidden shadow-md card-hover group">
-                <div class="relative">
-                  <img
-                    src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/6-Cute-Bunny-Rabbit-Connect-the-Dots-for-Young-Children-1-20-dots.avif"
-                    srcset="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/6-Cute-Bunny-Rabbit-Connect-the-Dots-for-Young-Children-1-20-dots.avif 400w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/6-Cute-Bunny-Rabbit-Connect-the-Dots-for-Young-Children-1-20-dots.avif 800w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/6-Cute-Bunny-Rabbit-Connect-the-Dots-for-Young-Children-1-20-dots.avif 1024w"
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 100vw"
-                    alt="An easy connect the dots printable of a cute bunny rabbit, designed for young children."
-                    class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy" decoding="async" width="1024" height="1024">
-                  <span
-                    class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full">Free</span>
-                  <!-- Difficulty Tag: Easy (Green) -->
-                  <span
-                    class="absolute top-3 left-3 bg-green-600 text-white text-sm font-semibold px-3 py-1 rounded-full">Easy</span>
-                </div>
-                <div class="p-6">
-                  <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">Cute Bunny
-                    Connect the Dots</h3>
-                  <p class="text-neutral/70 mb-4">Simple dot to dot for young children featuring a cute bunny rabbit
-                    (1-20 dots).</p>
-                </div>
-              </a>
-
-              <!-- Printable 2: Alphabet -->
-              <a href="./printables/general.html"
-                class="block bg-light rounded-xl overflow-hidden shadow-md card-hover group">
-                <div class="relative">
-                  <img
-                    src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/4-educational-connect-the-dots-worksheet-featuring-letters-and-numbers.avif"
-                    srcset="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/4-educational-connect-the-dots-worksheet-featuring-letters-and-numbers.avif 400w,
-                        https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/4-educational-connect-the-dots-worksheet-featuring-letters-and-numbers.avif 800w,
-                        https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/4-educational-connect-the-dots-worksheet-featuring-letters-and-numbers.avif 1024w"
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 100vw"
-                    alt="Educational alphabet connect the dots worksheet where letters A to Z form a picture."
-                    class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy" decoding="async" width="1024" height="1024">
-                  <span
-                    class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full">Free</span>
-                  <!-- Difficulty Tag: Easy (Green) -->
-                  <span
-                    class="absolute top-3 left-3 bg-green-600 text-white text-sm font-semibold px-3 py-1 rounded-full">Easy</span>
-                </div>
-                <div class="p-6">
-                  <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">
-                    Educational Connect the Dots</h3>
-                  <p class="text-neutral/70 mb-4">Educational printable that helps kids learn the numbers from 1 to 10.
-                  </p>
-                </div>
-              </a>
-
-              <!-- Printable 3: Christmas Tree -->
-              <a href="./printables/christmas.html"
-                class="block bg-light rounded-xl overflow-hidden shadow-md card-hover group">
-                <div class="relative">
-                  <img
-                    src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/4-Christmas-Tree-Connect-the-Dots-Design-1-50-dots.avif"
-                    srcset="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/4-Christmas-Tree-Connect-the-Dots-Design-1-50-dots.avif 400w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/4-Christmas-Tree-Connect-the-Dots-Design-1-50-dots.avif 800w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/4-Christmas-Tree-Connect-the-Dots-Design-1-50-dots.avif 1024w"
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 100vw"
-                    alt="Festive Christmas tree dot to dot printable with numbers from 1 to 50."
-                    class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy" decoding="async" width="1024" height="1024">
-                  <span
-                    class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full">Free</span>
-                  <!-- Difficulty Tag: Medium (Yellow) -->
-                  <span
-                    class="absolute top-3 left-3 bg-yellow-600 text-white text-sm font-semibold px-3 py-1 rounded-full">Medium</span>
-                </div>
-                <div class="p-6">
-                  <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">Christmas
-                    Tree Dot to Dot</h3>
-                  <p class="text-neutral/70 mb-4">Holiday connect the dots printable featuring a Christmas tree (1-50
-                    dots).</p>
-                </div>
-              </a>
-
-              <!-- Printable 4: Forest Scene -->
-              <a href="./printables/animals.html"
-                class="block bg-light rounded-xl overflow-hidden shadow-md card-hover group">
-                <div class="relative">
-                  <img
-                    src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/5-Nature-Themed-Connect-the-Dots-Forest-Scene-with-Wildlife-Medium-Difficulty.avif"
-                    srcset="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/5-Nature-Themed-Connect-the-Dots-Forest-Scene-with-Wildlife-Medium-Difficulty.avif 400w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/5-Nature-Themed-Connect-the-Dots-Forest-Scene-with-Wildlife-Medium-Difficulty.avif 800w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/5-Nature-Themed-Connect-the-Dots-Forest-Scene-with-Wildlife-Medium-Difficulty.avif 1024w"
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 100vw"
-                    alt="A medium difficulty connect the dots printable of a nature-themed forest scene with wildlife."
-                    class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy" decoding="async" width="1024" height="1024">
-                  <span
-                    class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full">Free</span>
-                  <!-- Difficulty Tag: Medium (Yellow) -->
-                  <span
-                    class="absolute top-3 left-3 bg-yellow-600 text-white text-sm font-semibold px-3 py-1 rounded-full">Medium</span>
-                </div>
-                <div class="p-6">
-                  <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">Forest
-                    Scene Connect the Dots</h3>
-                  <p class="text-neutral/70 mb-4">Nature-themed dot to dot with a forest scene for older kids and teens.
-                  </p>
-                </div>
-              </a>
-
-              <!-- Printable 5: Mountain Landscape -->
-              <a href="./printables/adults.html"
-                class="block bg-light rounded-xl overflow-hidden shadow-md card-hover group">
-                <div class="relative">
-                  <img
-                    src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.avif"
-                    srcset="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.avif 400w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.avif 800w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.avif 1024w"
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 100vw"
-                    alt="Advanced connect the dots for adults featuring a detailed mountain landscape with over 100 dots."
-                    class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy" decoding="async" width="1024" height="1024">
-                  <span
-                    class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full">Free</span>
-                  <!-- Difficulty Tag: Hard (Orange) -->
-                  <span
-                    class="absolute top-3 left-3 bg-orange-600 text-white text-sm font-semibold px-3 py-1 rounded-full">Hard</span>
-                </div>
-                <div class="p-6">
-                  <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">Mountain
-                    Landscape Dot to Dot</h3>
-                  <p class="text-neutral/70 mb-4">Advanced printable with a detailed mountain landscape for adults (100+
-                    dots).</p>
-                </div>
-              </a>
-
-              <!-- Printable 6: Extreme Mandala -->
-              <a href="./printables/hard.html"
-                class="block bg-light rounded-xl overflow-hidden shadow-md card-hover group">
-                <div class="relative">
-                  <img
-                    src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.avif"
-                    srcset="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.avif 400w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.avif 800w,
-                               https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.avif 1024w"
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 100vw"
-                    alt="Extreme difficulty mandala connect the dots for adults with over 200 dots."
-                    class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy" decoding="async" width="1024" height="1024">
-                  <span
-                    class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full">Free</span>
-                  <!-- Difficulty Tag: Extreme (Red) -->
-                  <span
-                    class="absolute top-3 left-3 bg-red-700 text-white text-sm font-semibold px-3 py-1 rounded-full">Extreme</span>
-                </div>
-                <div class="p-6">
-                  <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">Extreme
-                    Mandala Connect the Dots</h3>
-                  <p class="text-neutral/70 mb-4">Extreme difficulty printable with complex mandala design for adults.
-                  </p>
-                </div>
-              </a>
+            <div id="printables-grid"
+              class="flex flex-row overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
             </div>
-
-            <!-- Pagination -->
             <div class="mt-10 flex justify-center">
-              <!-- Pagination code is fine -->
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Custom Generator CTA Section -->
     <section class="py-12 bg-white">
       <div class="container mx-auto px-4">
         <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 md:p-12">
@@ -374,7 +201,6 @@
       </div>
     </section>
   </main>
-
 
 
   <footer class="bg-neutral text-white pt-16 pb-8" aria-label="web footer">
@@ -488,7 +314,6 @@
 
 
   <script>
-    // Mobile menu toggle
     document
       .getElementById("mobile-menu-button")
       .addEventListener("click", function () {
@@ -496,19 +321,16 @@
         mobileMenu.classList.toggle("hidden");
       });
 
-    // FAQ toggles
     document.querySelectorAll(".faq-toggle").forEach((toggle) => {
       toggle.addEventListener("click", function () {
         const content = this.nextElementSibling;
-        const icon = this.querySelector("svg"); // Changed to select svg
+        const icon = this.querySelector("svg");
 
         content.classList.toggle("hidden");
-        // Simple rotation for the icon as an example
         icon.classList.toggle("rotate-45");
       });
     });
 
-    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         e.preventDefault();
@@ -526,10 +348,8 @@
   </script>
 
   <script>
-    // 标志，确保脚本只加载一次
     let thirdPartyScriptsLoaded = false;
 
-    // 创建一个函数来加载所有第三方脚本
     function loadThirdPartyScripts() {
       if (thirdPartyScriptsLoaded) {
         return;
@@ -537,11 +357,9 @@
       thirdPartyScriptsLoaded = true;
       console.log("User interaction detected, loading third-party scripts...");
 
-      // 1. 加载 Google Tag Manager (GTAG)
       const gtagScript = document.createElement('script');
       gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CM76E2ZP8E';
       gtagScript.async = true;
-      // GTAG 脚本加载完成后，再执行初始化代码
       gtagScript.onload = function () {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -551,7 +369,6 @@
       };
       document.head.appendChild(gtagScript);
 
-      // 2. 加载 Google AdSense
       const adScript = document.createElement('script');
       adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557';
       adScript.async = true;
@@ -569,6 +386,111 @@
     });
 
     setTimeout(loadThirdPartyScripts, 5000);
+  </script>
+
+  <script>
+    // This script block contains the logic for the list page.
+    // It assumes data.js is loaded BEFORE this script.
+
+    const printablesGrid = document.getElementById('printables-grid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const resultsCountElement = document.getElementById('results-count');
+
+    // totalPrintablesCount is now derived from printablesData (from data.js)
+    const totalPrintablesCount = Object.values(printablesData).flat().length;
+
+    function renderPrintables(difficulty) {
+      printablesGrid.innerHTML = '';
+
+      let itemsToDisplay = [];
+      if (difficulty === 'all') {
+        const itemsPerDifficulty = 2;
+        for (const level in printablesData) {
+          if (printablesData.hasOwnProperty(level)) {
+            const items = printablesData[level].slice(0, itemsPerDifficulty);
+            itemsToDisplay = itemsToDisplay.concat(items);
+          }
+        }
+        itemsToDisplay = itemsToDisplay.sort(() => 0.5 - Math.random()).slice(0, 12);
+      } else {
+        itemsToDisplay = printablesData[difficulty].slice(0, 10);
+      }
+
+      itemsToDisplay.forEach((item, index) => {
+        const loadingAttr = index < 3 ? 'eager' : 'lazy';
+
+        const displayDotRange = Array.isArray(item.dotRange) ?
+          (item.dotRange[0] === item.dotRange[1] ? item.dotRange[0] : `${item.dotRange[0]}-${item.dotRange[1]}`) :
+          item.dotRange;
+
+        const displayCategories = Array.isArray(item.category) ?
+          item.category.map(cat => `<span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full">${cat}</span>`).join('') :
+          `<span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full">${item.category}</span>`;
+
+
+        const cardHtml = `
+          <a href="${item.detailPage}" class="relative block bg-light rounded-xl overflow-hidden shadow-md group transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div class="relative w-full pb-[100%] overflow-hidden">
+              <img src="${item.imageUrl}"
+                   srcset="${item.imageUrl} ${IMAGE_DEFAULT_WIDTH}w"
+                   sizes="(min-width: 1024px) 33.3vw, (min-width: 640px) 50vw, 50vw"
+                   alt="${item.altText}"
+                   class="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                   loading="${loadingAttr}" decoding="async"
+                   width="${IMAGE_DEFAULT_WIDTH}" height="${IMAGE_DEFAULT_HEIGHT}">
+              
+              <span class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full z-10">Free</span>
+              <span class="absolute top-3 left-3 ${item.tagColor} text-white text-sm font-semibold px-3 py-1 rounded-full z-10">${item.difficulty}</span>
+              
+              <div class="absolute inset-0 bg-primary/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-12 h-12 text-white mb-2 transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 ease-out">
+                  <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h80c13.3 0 24 10.7 24 24v48c0 13.3-10.7 24-24 24H216c-13.3 0-24-10.7-24-24V360c0-13.3 10.7-24 24-24zm-40-80c0-17.7 14.3-32 32-32h16c17.7 0 32 14.3 32 32v16c0 17.7-14.3 32-32 32H208c-17.7 0-32-14.3-32-32V256zm72-200c0-13.3-10.7-24-24-24s-24 10.7-24 24V200h48V56zM256 80c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V112c0-17.7-14.3-32-32-32H256zM184 120a24 24 0 1 0 0 48 24 24 0 1 0 0-48zm144 0a24 24 0 1 0 0 48 24 24 0 1 0 0-48zM152 256v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V256c0-17.7-14.3-32-32-32H184c-17.7 0-32 14.3-32 32zm80 80h80c13.3 0 24 10.7 24 24v48c0 13.3-10.7 24-24 24H216c-13.3 0-24-10.7-24-24V360c0-13.3 10.7-24 24-24zM240 176c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V208c0-17.7-14.3-32-32-32H240zM152 208a24 24 0 1 0 0 48 24 24 0 1 0 0-48zm208 0a24 24 0 1 0 0 48 24 24 0 1 0 0-48zM240 288c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V320c0-17.7-14.3-32-32-32H240zM152 320a24 24 0 1 0 0 48 24 24 0 1 0 0-48zm208 0a24 24 0 1 0 0 48 24 24 0 1 0 0-48zM240 376c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V408c0-17.7-14.3-32-32-32H240zM184 376a24 24 1 0 0 0 48 24 24 0 1 0 0-48zm144 0a24 24 1 0 0 0 48 24 24 0 1 0 0-48zM216 256c-13.3 0-24-10.7-24-24V112c0-13.3 10.7-24 24-24h80c13.3 0 24 10.7 24 24V232c0 13.3-10.7 24-24 24H216zm-40 80v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V336c0-17.7-14.3-32-32-32H208c-17.7 0-32 14.3-32 32zM256 160c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32H256zm-16 160c-13.3 0-24-10.7-24-24V112c0-13.3 10.7-24 24-24h16c13.3 0 24 10.7 24 24V336c0 13.3-10.7 24-24 24H240z"/>
+                </svg>
+                <span class="text-white font-semibold text-lg transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 ease-out">View Details</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">${item.title}</h3>
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span class="bg-gray-200 text-gray-700 text-xs font-medium px-2 py-0.5 rounded-full">Dots: ${displayDotRange}</span>
+                ${displayCategories}
+              </div>
+              <p class="text-neutral/70 mb-2">${item.description}</p>
+              <div class="flex items-center gap-2 text-sm text-neutral/60">
+                <span><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block align-text-bottom" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${item.ageRecommendation}</span>
+                <span class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block align-text-bottom text-red-500 mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> ${item.popularity} Popularity</span>
+              </div>
+            </div>
+          </a>
+        `;
+        printablesGrid.insertAdjacentHTML('beforeend', cardHtml);
+      });
+
+      resultsCountElement.textContent = `Showing ${itemsToDisplay.length} of ${totalPrintablesCount} results`;
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-white', 'hover:bg-primary/90');
+          btn.classList.add('bg-gray-200', 'hover:bg-gray-300');
+        });
+
+        this.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+        this.classList.add('bg-primary', 'text-white', 'hover:bg-primary/90');
+
+        const filterType = this.dataset.filter.replace('difficulty-', '');
+        renderPrintables(filterType);
+      });
+    });
+
+    const initialFilterButton = document.querySelector('[data-filter="difficulty-all"]');
+    if (initialFilterButton) {
+      initialFilterButton.click();
+    } else {
+      renderPrintables('easy');
+    }
+
   </script>
 
 </body>
