@@ -8,15 +8,17 @@
   <link rel="icon" href="../favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="../favicon.ico" type="image/x-x-icon">
   <!-- Dynamic Meta Tags - Will be updated by JavaScript -->
-  <title>Loading...</title>
-  <meta name="description" content="" />
-  <meta name="keywords" content="" />
-  <meta property="og:title" content="" />
-  <meta property="og:description" content="" />
+  <title>Connect the Dots Printable Detail | Free Worksheets</title>
+  <meta name="description"
+    content="View details of a specific connect the dots printable puzzle for kids and adults. Download free, high-quality worksheets instantly." />
+  <meta name="keywords"
+    content="connect the dots, printable, puzzle, kids, adults, free, worksheets, high-quality, instantly" />
+  <meta property="og:title" content="Connect the Dots Printable Detail | Free Worksheets" />
+  <meta property="og:description"
+    content="View details of a specific connect the dots printable puzzle for kids and adults. Download free, high-quality worksheets instantly." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="" />
-  <meta property="og:image" content="" />
-  <link rel="canonical" href="" />
+  <meta property="og:url" content="https://connectthedotsprintable.online/printables/detail.html" />
+  <link rel="canonical" href="https://connectthedotsprintable.online/printables/detail.html" />
 
   <meta name="google-adsense-account" content="ca-pub-3383070348689557" />
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -62,7 +64,7 @@
         <a href="../printable-connect-the-dots.html" class="font-bold text-primary hover:text-primary/80 transition">All
           Printables</a>
         <a href="../how-to-make.html" class="font-medium hover:text-primary transition">How to Make</a>
-        <a href="../index.html#generate-setion" class="font-medium hover:text-primary transition"> Custom Generator</a>
+        <a href="/#generate-setion" class="font-medium hover:text-primary transition"> Custom Generator</a>
         <a href="../privacy.html" class="font-medium hover:text-primary transition">Privacy</a>
         <a href="../terms.html" class="font-medium hover:text-primary transition">Terms</a>
 
@@ -84,7 +86,7 @@
         <a href="../printable-connect-the-dots.html" class="py-2 font-bold text-primary transition">All
           Printables</a>
         <a href="../how-to-make.html" class="py-2 font-medium hover:text-primary transition">How to Make</a>
-        <a href="../index.html#generate-setion" class="py-2 font-medium hover:text-primary transition"> custom
+        <a href="/#generate-setion" class="py-2 font-medium hover:text-primary transition"> custom
           generator</a>
         <a href="../privacy.html" class="py-2 font-medium hover:text-primary transition">Privacy</a>
         <a href="../terms.html" class="py-2 font-medium hover:text-primary transition">Terms</a>
@@ -322,7 +324,7 @@
                 Make</a>
             </li>
             <li>
-              <a href="/index.html#generate-setion" class="text-gray-300 hover:text-white transition">
+              <a href="/#generate-setion" class="text-gray-300 hover:text-white transition">
                 Custom
                 Generator</a>
             </li>
@@ -451,23 +453,17 @@
     setTimeout(loadThirdPartyScripts, 5000);
   </script>
 
-  <!-- Detail Page Specific JavaScript -->
   <script>
-    // Make sure data.js is loaded BEFORE this script block.
-    // CDN_BASE_URL, IMAGE_DEFAULT_WIDTH, IMAGE_DEFAULT_HEIGHT, createPrintableItem, printablesData are available globally from data.js
-
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Get the 'id' parameter from the URL
       const urlParams = new URLSearchParams(window.location.search);
-      const printableId = urlParams.get('id'); // This is "easy-dinosaur-02-connect-the-dots-puzzle-1-25-numbers"
+      const printableId = urlParams.get('id');
 
       let currentPrintable = null;
       if (printableId) {
-        // 2. Search through printablesData to find the matching item by its 'id'
         for (const level in printablesData) {
           if (printablesData.hasOwnProperty(level)) {
             currentPrintable = printablesData[level].find(item => item.id === printableId);
-            if (currentPrintable) break; // Found the item, stop searching
+            if (currentPrintable) break;
           }
         }
       }
@@ -478,16 +474,14 @@
         setupDownloadButtons(currentPrintable);
         setupImageModal(currentPrintable);
       } else {
-        // Handle case where printableId is missing or not found
         document.title = 'Printable Not Found - ConnectTheDotsPrintable.online';
         document.getElementById('detail-page-title').textContent = 'Printable Not Found';
         document.getElementById('detail-page-description').textContent = 'The connect the dots printable you are looking for does not exist or the link is broken.';
         document.getElementById('breadcrumb-title').textContent = 'Not Found';
-        // Hide/replace content areas to indicate error
         document.querySelector('.bg-light.p-6.rounded-xl.shadow-sm.mb-8').innerHTML = `
           <h2 class="text-2xl font-bold mb-4">Printable Not Found</h2>
           <p class="text-neutral/70">We apologize, but the connect the dots printable you are looking for could not be found. It might have been moved or deleted.</p>
-          <p class="text-neutral/70 mt-4">Please return to our <a href="../printable-connect-the-dots.html" class="text-primary hover:underline">All Printables page</a> to browse our collection, or try our <a href="../../index.html#generate-setion" class="text-primary hover:underline">Custom Generator</a> to create your own.</p>
+          <p class="text-neutral/70 mt-4">Please return to our <a href="../printable-connect-the-dots.html" class="text-primary hover:underline">All Printables page</a> to browse our collection, or try our <a href="..//#generate-setion" class="text-primary hover:underline">Custom Generator</a> to create your own.</p>
         `;
       }
     });
@@ -500,8 +494,6 @@
       document.querySelector('meta[property="og:title"]').setAttribute('content', item.title);
       document.querySelector('meta[property="og:description"]').setAttribute('content', item.description);
       document.querySelector('meta[property="og:url"]').setAttribute('content', window.location.href);
-      document.querySelector('meta[property="og:image"]').setAttribute('content', item.imageUrl);
-      document.querySelector('link[rel="canonical"]').setAttribute('href', window.location.href);
 
       // Update Breadcrumb
       document.getElementById('breadcrumb-title').textContent = item.title;
