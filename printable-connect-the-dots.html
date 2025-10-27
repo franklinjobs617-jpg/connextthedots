@@ -183,10 +183,9 @@
                 </h2>
                 <p class="text-neutral/70" id="results-count">Showing 0 of 0 results</p>
               </div>
-
             </div>
             <div id="printables-grid"
-              class="flex flex-row overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+              class="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-6 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
             </div>
             <div class="mt-10 flex justify-center">
             </div>
@@ -476,14 +475,14 @@
                 <span class="text-white font-semibold text-lg transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 ease-out">View Details</span>
               </div>
             </div>
-            <div class="p-6">
+            <div class="p-2 md:p-6">
               <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">${item.title}</h3>
               <div class="flex flex-wrap items-center gap-2 mb-2">
                 <span class="bg-gray-200 text-gray-700 text-xs font-medium px-2 py-0.5 rounded-full">Dots: ${displayDotRange}</span>
                 ${displayCategories}
               </div>
-              <p class="text-neutral/70 mb-2">${item.description}</p>
-              <div class="flex items-center gap-2 text-sm text-neutral/60">
+              <p class="text-neutral/70 mb-2 line-clamp-3">${item.description}</p>
+              <div class="flex flex-col md:flex-row gap-2 md:text-sm text-neutral/60">
                 <span><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block align-text-bottom" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${item.ageRecommendation}</span>
                 <span class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block align-text-bottom text-red-500 mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> ${item.popularity} Popularity</span>
               </div>
