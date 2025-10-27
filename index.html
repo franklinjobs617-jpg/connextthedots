@@ -1895,6 +1895,50 @@
         }
         setupInteractionListeners(); // Attach the listeners
 
+
+
+
+
+        // === 处理示例图片的点击事件 ===
+        const exampleImages = document.querySelectorAll('#examples-content img');
+
+        // 请确认您使用的是这个版本
+        async function handleExampleImageClick(event) {
+          const imgElement = event.currentTarget;
+          const imageUrl = imgElement.src;
+          const filename = imageUrl.split('/').pop() || 'example-image.webp';
+
+          step1Area.classList.add('hidden');
+          generatorMainArea.classList.remove('hidden');
+          canvasLoader.classList.remove('hidden');
+          const loaderText = canvasLoader.querySelector('p');
+          if (loaderText) loaderText.textContent = '正在加载示例...';
+
+          try {
+            // 使用 fetch 发起请求
+            const response = await fetch(imageUrl, { cache: 'no-store' }); // 增加 cache: 'no-store' 来对抗缓存
+            if (!response.ok) {
+              throw new Error(`HTTP 错误! 状态: ${response.status}`);
+            }
+            const blob = await response.blob();
+            const file = new File([blob], filename, { type: blob.type });
+            handleFile(file);
+          } catch (error) {
+            console.error('获取示例图片时出错:', error);
+            alert('无法加载示例图片。请禁用广告拦截插件并重试，或检查您的网络连接。');
+            resetGeneratorState();
+          } finally {
+            if (loaderText) loaderText.textContent = '正在自动识别...';
+          }
+        }
+        exampleImages.forEach(img => {
+          img.addEventListener('click', handleExampleImageClick);
+          // 同时，修改鼠标样式为手型，提示用户这是可以点击的
+          img.style.cursor = 'pointer';
+        });
+
+
+
         // === Event Listeners ===
         // The smaller 'Change Image' button in the source info area
         if (changeImageBtn) {
@@ -2018,11 +2062,10 @@
         <div>
           <!-- PC Demo Video Panel -->
           <div id="pc-content" class="tab-content-tailwind">
-            <div class="w-full max-w-3xl mx-auto rounded-lg shadow-xl overflow-hidden aspect-w-16 aspect-h-9">
+            <div class="w-full mx-auto rounded-lg shadow-xl overflow-hidden aspect-w-16 aspect-h-9">
               <video class="w-full h-full object-cover" src="./images/demopc.mp4" poster="./images/poster-pc.jpg"
                 width="1280" height="720" muted loop playsinline preload="metadata" loading="lazy"
                 title="PC Connect the Dots Generator Demo">
-                <source src="./images/demopc.webm" type="video/webm">
                 <source src="./images/demopc.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
