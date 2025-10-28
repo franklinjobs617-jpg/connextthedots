@@ -17,33 +17,33 @@ const totalPrintablesCount = Object.values(printablesData).flat().length;
  * @param {string} difficulty - 'all', 'easy', 'medium', 'hard', or 'extreme'
  */
 function renderPrintables(difficulty) {
-    printablesGrid.innerHTML = ''; // 清空现有内容
+  printablesGrid.innerHTML = ''; // 清空现有内容
 
-    let itemsToDisplay = [];
-    if (difficulty === 'all') {
-        // 如果是 'all'，则从每个难度级别中随机抽取一些来展示，总数不超过12个
-        const allItems = Object.values(printablesData).flat();
-        itemsToDisplay = allItems.sort(() => 0.5 - Math.random()).slice(0, 12);
-    } else {
-        // 否则，显示特定难度的所有项目
-        itemsToDisplay = printablesData[difficulty] || [];
-    }
+  let itemsToDisplay = [];
+  if (difficulty === 'all') {
+    // 如果是 'all'，则从每个难度级别中随机抽取一些来展示，总数不超过12个
+    const allItems = Object.values(printablesData).flat();
+    itemsToDisplay = allItems.sort(() => 0.5 - Math.random()).slice(0, 12);
+  } else {
+    // 否则，显示特定难度的所有项目
+    itemsToDisplay = printablesData[difficulty] || [];
+  }
 
-    const itemListElements = []; // 用于存储Schema.org的列表项
+  const itemListElements = []; // 用于存储Schema.org的列表项
 
-    itemsToDisplay.forEach((item, index) => {
-        // 优先生加载前3张图片，其余的懒加载
-        const loadingAttr = index < 3 ? 'eager' : 'lazy';
+  itemsToDisplay.forEach((item, index) => {
+    // 优先生加载前3张图片，其余的懒加载
+    const loadingAttr = index < 3 ? 'eager' : 'lazy';
 
-        const displayDotRange = Array.isArray(item.dotRange) ?
-            (item.dotRange[0] === item.dotRange[1] ? item.dotRange[0] : `${item.dotRange[0]}-${item.dotRange[1]}`) :
-            item.dotRange;
+    const displayDotRange = Array.isArray(item.dotRange) ?
+      (item.dotRange[0] === item.dotRange[1] ? item.dotRange[0] : `${item.dotRange[0]}-${item.dotRange[1]}`) :
+      item.dotRange;
 
-        const displayCategories = Array.isArray(item.category) ?
-            item.category.map(cat => `<span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full">${cat}</span>`).join('') :
-            `<span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full">${item.category}</span>`;
+    const displayCategories = Array.isArray(item.category) ?
+      item.category.map(cat => `<span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full">${cat}</span>`).join('') :
+      `<span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full">${item.category}</span>`;
 
-        const cardHtml = `
+    const cardHtml = `
       <a href="${item.detailPage}" class="relative block bg-light rounded-xl overflow-hidden shadow-md group transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
         <div class="relative w-full pb-[100%] overflow-hidden">
           <img src="${item.imageUrl}"
@@ -58,9 +58,10 @@ function renderPrintables(difficulty) {
           <span class="absolute top-3 left-3 ${item.tagColor} text-white text-sm font-semibold px-3 py-1 rounded-full z-10">${item.difficulty}</span>
           
           <div class="absolute inset-0 bg-primary/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-12 h-12 text-white mb-2 transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 ease-out">
-              <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h80c13.3 0 24 10.7 24 24v48c0 13.3-10.7 24-24 24H216c-13.3 0-24-10.7-24-24V360c0-13.3 10.7-24 24-24zm-40-80c0-17.7 14.3-32 32-32h16c17.7 0 32 14.3 32 32v16c0 17.7-14.3 32-32 32H208c-17.7 0-32-14.3-32-32V256zm72-200c0-13.3-10.7-24-24-24s-24 10.7-24 24V200h48V56zM256 80c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V112c0-17.7-14.3-32-32-32H256zM184 120a24 24 0 1 0 0 48 24 24 0 1 0 0-48zm144 0a24 24 0 1 0 0 48 24 24 0 1 0 0-48zM152 256v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V256c0-17.7-14.3-32-32-32H184c-17.7 0-32 14.3-32 32zm80 80h80c13.3 0 24 10.7 24 24v48c0 13.3-10.7 24-24 24H216c-13.3 0-24-10.7-24-24V360c0-13.3 10.7-24 24-24zM240 176c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V208c0-17.7-14.3-32-32-32H240zM152 208a24 24 0 1 0 0 48 24 24 0 1 0 0-48zm208 0a24 24 0 1 0 0 48 24 24 0 1 0 0-48zM240 288c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V320c0-17.7-14.3-32-32-32H240zM152 320a24 24 0 1 0 0 48 24 24 0 1 0 0-48zm208 0a24 24 0 1 0 0 48 24 24 0 1 0 0-48zM240 376c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V408c0-17.7-14.3-32-32-32H240zM184 376a24 24 1 0 0 0 48 24 24 0 1 0 0-48zm144 0a24 24 1 0 0 0 48 24 24 0 1 0 0-48zM216 256c-13.3 0-24-10.7-24-24V112c0-13.3 10.7-24 24-24h80c13.3 0 24 10.7 24 24V232c0 13.3-10.7 24-24 24H216zm-40 80v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V336c0-17.7-14.3-32-32-32H208c-17.7 0-32 14.3-32 32zM256 160c-17.7 0-32 14.3-32 32v16c0 17.7 14.3 32 32 32h16c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32H256zm-16 160c-13.3 0-24-10.7-24-24V112c0-13.3 10.7-24 24-24h16c13.3 0 24 10.7 24 24V336c0 13.3-10.7 24-24 24H240z"/>
-            </svg>
+             
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="w-12 h-12 text-white mb-2 transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 ease-out"> 
+              <path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM288 224C288 206.3 302.3 192 320 192C337.7 192 352 206.3 352 224C352 241.7 337.7 256 320 256C302.3 256 288 241.7 288 224zM280 288L328 288C341.3 288 352 298.7 352 312L352 400L360 400C373.3 400 384 410.7 384 424C384 437.3 373.3 448 360 448L280 448C266.7 448 256 437.3 256 424C256 410.7 266.7 400 280 400L304 400L304 336L280 336C266.7 336 256 325.3 256 312C256 298.7 266.7 288 280 288z"/>
+              </svg>
             <span class="text-white font-semibold text-lg transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 ease-out">View Details</span>
           </div>
         </div>
@@ -78,55 +79,53 @@ function renderPrintables(difficulty) {
         </div>
       </a>
     `;
-        printablesGrid.insertAdjacentHTML('beforeend', cardHtml);
+    printablesGrid.insertAdjacentHTML('beforeend', cardHtml);
 
-        // 为 Schema.org JSON-LD 准备数据
-        itemListElements.push({
-            "@type": "ListItem",
-            "position": index + 1,
-            "url": window.location.origin + item.detailPage, // 必须是绝对URL
-            "name": item.title,
-            "image": item.imageUrl,
-            "description": item.description
-        });
+    // 为 Schema.org JSON-LD 准备数据
+    itemListElements.push({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": window.location.origin + item.detailPage, // 必须是绝对URL
+      "name": item.title,
+      "image": item.imageUrl,
+      "description": item.description
     });
+  });
 
-    resultsCountElement.textContent = `Showing ${itemsToDisplay.length} of ${totalPrintablesCount} results`;
+  resultsCountElement.textContent = `Showing ${itemsToDisplay.length} of ${totalPrintablesCount} results`;
 
-    // 更新 Schema Markup
-    if (schemaScriptElement) {
-        const schemaData = JSON.parse(schemaScriptElement.textContent);
-        schemaData.mainEntity.numberOfItems = itemsToDisplay.length;
-        schemaData.mainEntity.itemListElement = itemListElements;
-        schemaScriptElement.textContent = JSON.stringify(schemaData, null, 2);
-    }
+  // 更新 Schema Markup
+  if (schemaScriptElement) {
+    const schemaData = JSON.parse(schemaScriptElement.textContent);
+    schemaData.mainEntity.numberOfItems = itemsToDisplay.length;
+    schemaData.mainEntity.itemListElement = itemListElements;
+    schemaScriptElement.textContent = JSON.stringify(schemaData, null, 2);
+  }
 }
 
 // 4. 为过滤按钮添加事件监听器
 filterButtons.forEach(button => {
-    button.addEventListener('click', function () {
-        // 重置所有按钮的样式
-        filterButtons.forEach(btn => {
-            btn.classList.remove('bg-primary', 'text-white', 'hover:bg-primary/90');
-            btn.classList.add('bg-gray-200', 'hover:bg-gray-300');
-        });
-
-        // 为当前点击的按钮设置激活样式
-        this.classList.remove('bg-gray-200', 'hover:bg-gray-300');
-        this.classList.add('bg-primary', 'text-white', 'hover:bg-primary/90');
-
-        const filterType = this.dataset.filter.replace('difficulty-', '');
-        renderPrintables(filterType);
+  button.addEventListener('click', function () {
+    // 重置所有按钮的样式
+    filterButtons.forEach(btn => {
+      btn.classList.remove('bg-primary', 'text-white', 'hover:bg-primary/90');
+      btn.classList.add('bg-gray-200', 'hover:bg-gray-300');
     });
+
+    // 为当前点击的按钮设置激活样式
+    this.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+    this.classList.add('bg-primary', 'text-white', 'hover:bg-primary/90');
+
+    const filterType = this.dataset.filter.replace('difficulty-', '');
+    renderPrintables(filterType);
+  });
 });
 
-// 5. 页面加载后，默认触发 "All" 过滤
-document.addEventListener('DOMContentLoaded', () => {
-    const initialFilterButton = document.querySelector('[data-filter="difficulty-all"]');
-    if (initialFilterButton) {
-        initialFilterButton.click();
-    } else {
-        // 如果找不到 "All" 按钮，则默认加载 easy
-        renderPrintables('easy');
-    }
-});
+
+const initialFilterButton = document.querySelector('[data-filter="difficulty-all"]');
+if (initialFilterButton) {
+  initialFilterButton.click();
+} else {
+  // 如果找不到 "All" 按钮，则默认加载 easy
+  renderPrintables('easy');
+}
