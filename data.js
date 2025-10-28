@@ -1,12 +1,12 @@
 // data.js
-const CDN_BASE_URL = "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/printable/"; // This is the base for all files.
-const IMAGE_DEFAULT_WIDTH = 600;
-const IMAGE_DEFAULT_HEIGHT = 600; // Assuming square images
+export const CDN_BASE_URL = "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/printable/"; // This is the base for all files.
+export const IMAGE_DEFAULT_WIDTH = 600;
+export const IMAGE_DEFAULT_HEIGHT = 600; // Assuming square images
 
-function createPrintableItem(id, title, puzzleFilename, solutionFilename, customDetails = {}) {
+export function createPrintableItem(id, title, puzzleFilename, solutionFilename, customDetails = {}) {
     // 提取不带扩展名的文件名作为图片的唯一标识符 (ID)
     const detailPageId = puzzleFilename.replace(/\.(webp|avif|png|jpg)$/, '');
-    const detailPage = customDetails.detailPage || `/printables/detail.html?id=${detailPageId}`;
+    const detailPage = customDetails.detailPage || `/printables/${detailPageId}.html`;
 
     const difficulty = customDetails.difficulty || 'Easy';
     const dotRange = customDetails.dotRange || [1, 50];
@@ -41,7 +41,7 @@ function createPrintableItem(id, title, puzzleFilename, solutionFilename, custom
     };
 }
 
-const printablesData = {
+export const printablesData = {
     easy: [
         createPrintableItem(
             'happy-sun-03', 'Happy Sun 3',
@@ -227,3 +227,12 @@ const printablesData = {
 
     ]
 };
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        printablesData,
+        CDN_BASE_URL,
+        IMAGE_DEFAULT_WIDTH,
+        IMAGE_DEFAULT_HEIGHT,
+        createPrintableItem
+    };
+}
