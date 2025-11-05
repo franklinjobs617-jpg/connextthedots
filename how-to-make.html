@@ -975,6 +975,7 @@
                     Generator</a>
                 <a href="/privacy.html" class="font-medium hover:text-primary transition">Privacy</a>
                 <a href="/terms.html" class="font-medium hover:text-primary transition">Terms</a>
+                <a href="/feedback.html" class="font-medium hover:text-primary transition">Feedback</a>
 
             </nav>
 
@@ -998,6 +999,8 @@
                     Generator</a>
                 <a href="/privacy.html" class="py-2 font-medium hover:text-primary transition">Privacy</a>
                 <a href="/terms.html" class="py-2 font-medium hover:text-primary transition">Terms</a>
+                <a href="/feedback.html" class="py-2 font-medium hover:text-primary transition">Feedback</a>
+
             </div>
         </div>
     </header>
@@ -1239,6 +1242,8 @@
                             <a href="/terms.html" class="text-gray-300 hover:text-white transition">Terms of
                                 Service</a>
                         </li>
+                        <li><a href="/feedback.html" class="text-gray-300 hover:text-white transition">Feedback</a></li>
+
 
                     </ul>
                 </div>
@@ -1253,7 +1258,92 @@
                 </p>
             </div>
         </div>
-    </footer>
+    </footer><button id="feedback-toggle-button"
+        class="fixed bottom-6 right-6  bg-primary  text-white font-semibold flex items-center justify-center rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out z-[10000] p-4 md:w-auto md:px-5 md:py-3"
+        aria-label="Open Feedback Form">
+
+
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+            </path>
+        </svg>
+
+
+        <span class="hidden md:inline ml-2">Feedback</span>
+    </button>
+
+    <div id="feedback-modal"
+        class="fixed inset-0 bg-black bg-opacity-70 z-[10001] p-0 md:p-4 hidden flex justify-center items-center">
+
+
+        <div id="feedback-panel" class="bg-white w-full border-t md:border border-gray-700 shadow-2xl flex flex-col text-gray-800 
+    fixed bottom-0 left-0 right-0 rounded-t-2xl max-h-[85vh] p-4 transform translate-y-full transition-transform
+    duration-300 ease-in-out
+    md:relative md:max-w-xl md:rounded-2xl md:p-6 md:transform-none">
+
+
+            <header class="flex-shrink-0 text-center relative pb-4">
+
+                <div class="w-12 h-1.5 bg-gray-600 rounded-full mx-auto mb-4 md:hidden" id="cursor-pointer"></div>
+
+                <h2 class="text-xl lg:text-2xl font-bold text-gray-800">Community Feedback</h2>
+                <button id="close-button"
+                    class="absolute -top-1 right-0 text-gray-600 hover:text-gray-800 text-3xl leading-none transition duration-150"
+                    aria-label="Close">
+                    &times;
+                </button>
+            </header>
+
+            <div class="overflow-y-auto">
+                <div id="cusdis_thread" data-host="https://cusdis.com"
+                    data-app-id="4535a28e-08e9-411e-9c74-0f118e22c1af" data-page-id=“connectthedotsprintable”
+                    data-page-url="https://www.ambigramgenerator.me/" data-page-title=“connectthedotsprintable”
+                    data-theme="light"></div>
+            </div>
+        </div>
+    </div>
+
+    <script async defer src="/js/cusdis.es.js"></script>
+    <script>
+        const modal = document.getElementById('feedback-modal');
+        const panel = document.getElementById('feedback-panel');
+        const toggleButton = document.getElementById('feedback-toggle-button');
+        const closeButton = document.getElementById('close-button');
+
+        const openModal = () => {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                panel.classList.remove('translate-y-full');
+            }, 10);
+        };
+
+        const closeModal = () => {
+            panel.classList.add('translate-y-full');
+            document.body.style.overflow = '';
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        };
+
+        toggleButton.addEventListener('click', openModal);
+        closeButton.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    </script>
 
     <!-- JavaScript -->
 
