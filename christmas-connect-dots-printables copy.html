@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO: 页面标题 -->
+    <title>The Christmas Dot-to-Dot Workshop | Free Festive Printables</title>
+    <meta property="og:site_name" content="ConnectTheDotsPrintable.online" />
+    <meta property="og:url" content="https://connectthedotsprintable.online/" />
+    <meta property="og:title" content="Free Connect the Dots Generator & Printable Worksheets" />
+    <meta property="og:description"
+        content="Get free watermark-free connect the dots printables for kids & adults. Create custom dot-to-dot activities with our generator, instant download in PDF/HD image." />
+    <meta property="og:image" content="https://connectthedotsprintable.online/og-image.jpg" />
+    <meta property="og:image:alt" content="Connect the Dots Generator & Printable Worksheets Preview" />
+    <meta property="og:type" content="website" />
+
+    <!-- SEO: 页面描述 -->
+    <meta name="description"
+        content="Welcome to the Christmas Workshop! Create magical, handcrafted dot-to-dot puzzles for the holiday season. 100% free, high-quality, and ready to print.">
+
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: 引入复古标题字体和清晰的正文字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Lato:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 自定义 Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'], // 定义衬线字体为标题
+                        'sans': ['Lato', 'sans-serif'],          // 定义无衬线字体为正文
+                    },
+                    colors: {
+                        'christmas-red': '#d90429',       // 圣诞红
+                        'christmas-green': '#004b23',     // 森林绿
+                        'cream': '#fdfbf7',               // 奶油白
+                        'dark-text': '#2a2a2a',           // 深色文字
+                    },
+                    backgroundImage: {
+                        // 使用一张高质量的牛皮纸纹理图片作为背景
+                        'kraft-paper': "url('https://www.toptal.com/designers/subtlepatterns/uploads/kraft.png')",
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-kraft-paper font-sans text-dark-text antialiased">
+
+    <!-- ======================================================= -->
+    <!-- 顶部导航栏 (Header Navigation) - 极简风格 -->
+    <!-- ======================================================= -->
+    <header class="border-b-2 border-christmas-red/20">
+        <nav class="container mx-auto flex justify-between items-center py-5 px-6">
+            <!-- 网站 Logo -->
+            <div class="font-serif text-2xl font-bold text-christmas-green">
+                The Workshop
+            </div>
+            <!-- 返回主站的链接 -->
+            <a href="/" class="text-sm font-bold text-christmas-red hover:underline transition-all">
+                ← Back to Main Site
+            </a>
+        </nav>
+    </header>
+
+    <!-- ======================================================= -->
+    <!-- 英雄区域 (Hero Section) - 故事书开篇的感觉 -->
+    <!-- ======================================================= -->
+    <main class="relative flex items-center justify-center text-white text-center overflow-hidden py-40 md:py-56">
+        <!-- 
+            主要改动在这里:
+            1. 移除了 'h-screen' 和 'min-h-[600px]'。
+            2. 添加了 'py-40 md:py-56' (上下内边距)。
+               - 'py-40' 在小屏幕上提供 10rem (160px) 的上下内边距。
+               - 'md:py-56' 在中等及以上尺寸屏幕上提供 14rem (224px) 的上下内边距。
+            这使得模块高度由内容和内边距决定，而不是屏幕高度。
+        -->
+
+        <!-- 1. 背景图片层 (最底层) -->
+        <div class="absolute inset-0 z-0">
+            <img src="/images/未命名的设计.png" alt="Santa and elves in a cozy workshop creating connect-the-dots puzzles."
+                class="w-full h-full object-cover">
+        </div>
+
+        <!-- 2. 半透明遮罩层 (在背景图之上) -->
+        <div class="absolute inset-0 z-10 bg-black/60"></div>
+
+        <!-- 3. 内容层 (在遮罩层之上，最高层) -->
+        <div class="relative z-20 container mx-auto px-6">
+            <h1 class="font-serif text-5xl md:text-7xl font-extrabold text-shadow-lg">
+                The Official Puzzle Workshop
+            </h1>
+            <p class="mt-6 text-lg md:text-xl max-w-2xl mx-auto text-gray-200 text-shadow-md">
+                Step into Santa's magical workshop. Create and download delightful dot-to-dot puzzles for a truly
+                special holiday season.
+            </p>
+            <div class="mt-10">
+                <a href="#templates"
+                    class="bg-christmas-red text-white font-bold py-3 px-8 rounded-md shadow-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
+                    Explore Elves' Creations
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- ======================================================= -->
+    <!-- 模板展示区 (Templates Gallery Section) - 手工卡片风格 -->
+    <!-- ======================================================= -->
+    <section id="templates" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="font-serif text-4xl lg:text-5xl font-bold text-christmas-green">Ready-to-Print Designs</h2>
+                <p class="mt-4 text-lg text-gray-700">
+                    Handpicked for maximum holiday cheer. Just click, download, and print!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- 模板卡片 - 使用奶油白背景和阴影，营造实体卡片感 -->
+                <div
+                    class="bg-cream rounded-lg shadow-xl overflow-hidden group transform hover:-translate-y-2 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1512133281432-613a070aa34e?q=80&w=2070"
+                        alt="A gingerbread man dot-to-dot puzzle" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-serif font-bold text-2xl text-christmas-red">Gingerbread Friend</h3>
+                        <p class="text-gray-600 mt-1 mb-4">A sweet and simple puzzle for all ages.</p>
+                        <a href="#"
+                            class="w-full block text-center bg-christmas-green text-white font-bold py-2.5 rounded-md hover:bg-green-800 transition-colors">Download
+                            PDF</a>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-cream rounded-lg shadow-xl overflow-hidden group transform hover:-translate-y-2 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1544642826-b8f27889398f?q=80&w=1964"
+                        alt="A magical snowflake dot-to-dot puzzle" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-serif font-bold text-2xl text-christmas-red">Magical Snowflake</h3>
+                        <p class="text-gray-600 mt-1 mb-4">A more challenging design for detailed fun.</p>
+                        <a href="#"
+                            class="w-full block text-center bg-christmas-green text-white font-bold py-2.5 rounded-md hover:bg-green-800 transition-colors">Download
+                            PDF</a>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-cream rounded-lg shadow-xl overflow-hidden group transform hover:-translate-y-2 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1545129443-6a5b5a2608a0?q=80&w=1974"
+                        alt="A festive ornament dot-to-dot puzzle" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-serif font-bold text-2xl text-christmas-red">Festive Ornament</h3>
+                        <p class="text-gray-600 mt-1 mb-4">Perfect for coloring after connecting the dots.</p>
+                        <a href="#"
+                            class="w-full block text-center bg-christmas-green text-white font-bold py-2.5 rounded-md hover:bg-green-800 transition-colors">Download
+                            PDF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- "为何选择我们" 或 特色区域 (Features Section) -->
+    <!-- ======================================================= -->
+    <section class="bg-christmas-green/10 py-24">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <!-- 左侧图片 -->
+            <div>
+                <img src="https://images.unsplash.com/photo-1511267433895-1c7ba1428a16?q=80&w=2070"
+                    alt="A family enjoying a creative Christmas activity together." class="rounded-lg shadow-2xl">
+            </div>
+            <!-- 右侧文案 -->
+            <div>
+                <h2 class="font-serif text-4xl font-bold text-christmas-green">Perfect for Holiday Gatherings</h2>
+                <p class="mt-4 text-lg text-gray-700">Our puzzles are more than just an activity; they are a way to
+                    create lasting memories.</p>
+                <ul class="mt-8 space-y-4">
+                    <li class="flex items-start">
+                        <span class="text-christmas-red font-bold text-2xl mr-3">✓</span>
+                        <span><strong>Screen-Free Fun:</strong> A wonderful break from digital devices for kids and
+                            adults alike.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-christmas-red font-bold text-2xl mr-3">✓</span>
+                        <span><strong>Completely Free:</strong> No sign-ups, no watermarks. Just pure, festive
+                            enjoyment.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-christmas-red font-bold text-2xl mr-3">✓</span>
+                        <span><strong>Create Your Own:</strong> Turn a family photo or your child's drawing into a
+                            unique dot-to-dot puzzle!</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- 最终行动号召 (Final CTA Section) -->
+    <!-- ======================================================= -->
+    <section class="py-24">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-serif text-4xl lg:text-5xl font-bold text-christmas-red">Make Your Own Magic!</h2>
+            <p class="mt-4 text-lg text-gray-700 max-w-xl mx-auto">
+                Have a special photo? Use our custom generator to create a one-of-a-kind Christmas puzzle in seconds.
+            </p>
+            <div class="mt-8">
+                <a href="/custom-generator"
+                    class="bg-christmas-green text-white font-bold py-4 px-12 rounded-md shadow-lg hover:bg-green-800 transition-all duration-300 transform hover:scale-105 inline-block">
+                    Start Customizing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- 页脚 (Footer) - 简洁明了 -->
+    <!-- ======================================================= -->
+    <footer class="bg-christmas-green text-cream/80 py-8">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>Happy Holidays from ConnectTheDotsPrintable.online</p>
+            <div class="mt-4 space-x-6">
+                <a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="/terms" class="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer><button id="feedback-toggle-button"
+        class="fixed bottom-6 right-6  bg-primary  text-white font-semibold flex items-center justify-center rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out z-[10000] p-4 md:w-auto md:px-5 md:py-3"
+        aria-label="Open Feedback Form">
+
+
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+            </path>
+        </svg>
+
+
+        <span class="hidden md:inline ml-2">Feedback</span>
+    </button>
+
+    <div id="feedback-modal"
+        class="fixed inset-0 bg-black bg-opacity-70 z-[10001] p-0 md:p-4 hidden flex justify-center items-center">
+
+
+        <div id="feedback-panel" class="bg-white w-full border-t md:border border-gray-700 shadow-2xl flex flex-col text-gray-800 
+    fixed bottom-0 left-0 right-0 rounded-t-2xl max-h-[85vh] p-4 transform translate-y-full transition-transform
+    duration-300 ease-in-out
+    md:relative md:max-w-xl md:rounded-2xl md:p-6 md:transform-none">
+
+
+            <header class="flex-shrink-0 text-center relative pb-4">
+
+                <div class="w-12 h-1.5 bg-gray-600 rounded-full mx-auto mb-4 md:hidden" id="cursor-pointer"></div>
+
+                <h2 class="text-xl lg:text-2xl font-bold text-gray-800">Community Feedback</h2>
+                <button id="close-button"
+                    class="absolute -top-1 right-0 text-gray-600 hover:text-gray-800 text-3xl leading-none transition duration-150"
+                    aria-label="Close">
+                    &times;
+                </button>
+            </header>
+
+            <div class="overflow-y-auto">
+                <div id="cusdis_thread" data-host="https://cusdis.com"
+                    data-app-id="4535a28e-08e9-411e-9c74-0f118e22c1af" data-page-id=“connectthedotsprintable”
+                    data-page-url="https://www.ambigramgenerator.me/" data-page-title=“connectthedotsprintable”
+                    data-theme="light"></div>
+            </div>
+        </div>
+    </div>
+
+    <script async defer src="/js/cusdis.es.js"></script>
+    <script>
+        // Simple script to make share links dynamic
+        document.addEventListener('DOMContentLoaded', function () {
+            const shareLinksContainer = document.getElementById('social-share-links');
+            if (shareLinksContainer) {
+                const pageUrl = encodeURIComponent(window.location.href);
+
+                const links = {
+                    facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
+                    twitter: `https://twitter.com/intent/tweet?url=${pageUrl}`,
+                    reddit: `https://www.reddit.com/submit?url=${pageUrl}`,
+                    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}`,
+                };
+                console.log(shareLinksContainer.querySelector('a[aria-label="Share on Facebook"]'));
+
+                shareLinksContainer.querySelector('a[aria-label="Share on Facebook"]').href = links.facebook;
+                shareLinksContainer.querySelector('a[aria-label="Share on Twitter"]').href = links.twitter;
+                shareLinksContainer.querySelector('a[aria-label="Share on Reddit"]').href = links.reddit;
+                shareLinksContainer.querySelector('a[aria-label="Share on LinkedIn"]').href = links.linkedin;
+            }
+        });
+    </script>
+    <script>
+        const modal = document.getElementById('feedback-modal');
+        const panel = document.getElementById('feedback-panel');
+        const toggleButton = document.getElementById('feedback-toggle-button');
+        const closeButton = document.getElementById('close-button');
+
+        const openModal = () => {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                panel.classList.remove('translate-y-full');
+            }, 10);
+        };
+
+        const closeModal = () => {
+            panel.classList.add('translate-y-full');
+            document.body.style.overflow = '';
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        };
+
+        toggleButton.addEventListener('click', openModal);
+        closeButton.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
