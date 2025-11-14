@@ -1,0 +1,11 @@
+.history/
+node_modules/
+image/
+opencv_build/
+images/
+src/input.css
+printables/detail.template.html
+generate.js
+ads.txt
+.vercel
+.env*.local

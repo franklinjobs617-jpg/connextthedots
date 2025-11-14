@@ -397,10 +397,11 @@
                 const pageUrl = encodeURIComponent(window.location.href);
 
                 const links = {
-                    facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
-                    twitter: `https://twitter.com/intent/tweet?url=${pageUrl}`,
-                    reddit: `https://www.reddit.com/submit?url=${pageUrl}`,
-                    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}`,
+                    facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=Free Connect the Dots Generator & Printable Worksheets`,
+                    twitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=Free Connect the Dots Generator & Printable Worksheets`,
+                    reddit: `https://www.reddit.com/submit?url=${pageUrl}&title=Free Connect the Dots Generator & Printable Worksheets`,
+                    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=Free Connect the Dots Generator & Printable Worksheets`,
+
                 };
                 console.log(shareLinksContainer.querySelector('a[aria-label="Share on Facebook"]'));
 

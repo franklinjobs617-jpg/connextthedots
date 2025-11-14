@@ -1235,93 +1235,117 @@
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create Your Custom Connect-the-Dots</h2>
         <p class="mt-2 text-lg leading-8 text-gray-600">Turn any picture into a fun connect-the-dots activity.</p>
       </div>
-      <div id="step1-upload-area">
 
-
-        <div class="mx-auto max-w-3xl mt-12 bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-          <div class="border-b border-gray-200">
-            <nav id="inspiration-tabs" class="-mb-px flex justify-center sm:justify-start" aria-label="Tabs">
-
-              <!-- Tab 1: Good Examples (Active by default) -->
-              <button data-tab="examples"
-                class="inspiration-tab group sm:w-1/2 w-full flex items-center justify-center whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium border-primary text-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                Good Examples
-              </button>
-              <!-- Tab 2: AI Prompts (Inactive by default) -->
-              <button data-tab="prompts"
-                class="inspiration-tab group sm:w-1/2 w-full flex items-center justify-center whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                AI Art Prompts
-              </button>
-            </nav>
+      <!-- [新] 步骤一：选择图片来源的卡片 -->
+      <div id="step1-choice-area">
+        <div class="mt-8 text-center">
+          <p class="text-lg font-semibold text-gray-700">Step 1: Choose your image source</p>
+        </div>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <!-- 选项 A: 上传图片 -->
+          <div id="upload-choice-card"
+            class="bg-white p-6 rounded-xl border-2 border-gray-300 shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-primary">
+            <div class="flex items-center mb-3">
+              <svg class="h-8 w-8 text-primary mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M7 16a4 4 0 01-4-4V6a4 4 0 014-4h10a4 4 0 014 4v6a4 4 0 01-4 4H7z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 16v1a2 2 0 01-2 2H7a2 2 0 01-2-2v-1m14-4h-3l-2-2m-2 2l-2 2m5-2v4"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-gray-800">Upload Your Image</h3>
+            </div>
+            <p class="text-gray-600">Choose your own photo or line drawing to convert into a dot-to-dot puzzle.</p>
           </div>
-
-          <div class="p-6">
-            <div id="prompts-content" class="inspiration-content hidden">
-              <p class="text-sm text-gray-600 mb-4">Use these prompts with AI art tools (like Midjourney)
-                to create the perfect outline image for your worksheet.</p>
-              <div class="relative p-4 bg-gray-50 border rounded-lg">
-                <p id="prompt-display" class="text-gray-700 pr-10">cute cat, simple line art, coloring
-                  book page, white background, clean lines</p>
-                <button id="copy-prompt-btn" title="Copy to clipboard"
-                  class="absolute top-3 right-3 p-2 text-gray-400 hover:text-primary hover:bg-gray-200 rounded-md transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                  <span id="copy-feedback"
-                    class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-gray-800 text-white px-2 py-1 rounded-md opacity-0 transition-opacity">Copied!</span>
-                </button>
-              </div>
-              <button id="new-prompt-btn"
-                class="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 bg-white text-gray-700 font-semibold text-sm border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 20h5v-5M20 4h-5v5" />
-                </svg>
-                Get Another Prompt
-              </button>
+          <!-- 选项 B: 用 AI 生成 -->
+          <div id="ai-choice-card"
+            class="bg-white p-6 rounded-xl border-2 border-gray-300 shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-primary">
+            <div class="flex items-center mb-3">
+              <svg class="h-8 w-8 text-primary mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <h3 class="text-xl font-bold text-gray-800">Generate with AI</h3>
             </div>
-            <div id="examples-content" class="inspiration-content">
-              <p class="text-sm text-gray-600 mb-4">Simple line drawings with clear outlines and plain
-                backgrounds work best for auto-detection.</p>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <img
-                  src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-baby-elephant-outline.webp"
-                  alt="Example: Adorable baby elephant outline" loading="lazy" decoding="async"
-                  class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105"
-                  width="200" />
-                <img
-                  src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-halloween-pumpkin.webp"
-                  alt="Example: Simple Halloween pumpkins outline" loading="lazy" decoding="async"
-                  class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105"
-                  width="200" />
-                <img
-                  src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-cute-princess-drawing.webp"
-                  alt="Example: Cute princess drawing outline" loading="lazy" decoding="async"
-                  class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105"
-                  width="200" />
-                <img
-                  src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-christmas-tree-gifts.webp"
-                  alt="Example: Christmas tree with gifts outline" loading="lazy" decoding="async"
-                  class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105"
-                  width="200" />
-              </div>
-            </div>
+            <p class="text-gray-600">No image? Describe what you want, and let AI create the perfect line art for you.
+            </p>
           </div>
         </div>
+
+        <!-- [新] 用于显示具体操作UI的容器 -->
+        <div id="action-ui-container" class="mt-6 max-w-3xl mx-auto">
+          <!-- 此处将动态加载上传或AI生成UI -->
+        </div>
+
+        <p id="opencv-status" class="text-center text-sm text-gray-400 mt-4">Initializing generator, please wait...</p>
+      </div>
+
+      <!-- [新] 灵感区域（示例图片） -->
+      <div id="inspiration-area" class="mt-12">
+        <div class="text-center">
+          <h3 class="text-2xl font-bold text-gray-800">Need Inspiration?</h3>
+          <p class="text-gray-600 mt-2">Simple line drawings with clear outlines work best. Click an example to try it!
+          </p>
+        </div>
+        <div id="examples-content" class="mt-6">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <img
+              src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-baby-elephant-outline.webp"
+              alt="Example: Adorable baby elephant outline" loading="lazy" decoding="async"
+              class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105 cursor-pointer"
+              width="200" />
+            <img src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-halloween-pumpkin.webp"
+              alt="Example: Simple Halloween pumpkins outline" loading="lazy" decoding="async"
+              class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105 cursor-pointer"
+              width="200" />
+            <img
+              src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-cute-princess-drawing.webp"
+              alt="Example: Cute princess drawing outline" loading="lazy" decoding="async"
+              class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105 cursor-pointer"
+              width="200" />
+            <img
+              src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-christmas-tree-gifts.webp"
+              alt="Example: Christmas tree with gifts outline" loading="lazy" decoding="async"
+              class="object-cover w-full h-full rounded-md shadow-sm border border-gray-200 transition-transform duration-200 hover:scale-105 cursor-pointer"
+              width="200" />
+          </div>
+        </div>
+      </div>
+
+      <!-- [模板] AI 生成UI模板 (默认隐藏) -->
+      <div id="ai-generate-template" class="hidden">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <p class="text-sm text-gray-600 mb-4">Describe the simple line drawing you want to create (e.g., "a happy
+            cartoon puppy"). We will optimize the prompt for the best results.</p>
+          <div class="space-y-4">
+            <textarea id="ai-prompt-input" rows="3" placeholder="e.g., A funny little elephant wearing a hat"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-3"></textarea>
+            <button id="generate-ai-image-btn"
+              class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white font-semibold text-base rounded-md shadow-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+              <svg id="generate-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L15 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span id="generate-button-text">Generate Image</span>
+            </button>
+          </div>
+          <div id="ai-status-area" class="mt-4 text-center hidden">
+            <svg id="ai-loader" class="animate-spin h-5 w-5 text-primary mx-auto" xmlns="http://www.w3.org/2000/svg"
+              fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+              </path>
+            </svg>
+            <p id="ai-status-message" class="text-sm text-gray-600 mt-2">AI Generator is warming up...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- [模板] 上传UI模板 (默认隐藏) -->
+      <div id="upload-template" class="hidden">
         <div id="drop-zone"
-          class="mt-10 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 transition-all duration-300 opacity-50 pointer-events-none cursor-not-allowed">
+          class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 transition-all duration-300">
           <div class="text-center">
             <svg class="mx-auto h-16 w-16 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd"
@@ -1330,7 +1354,7 @@
             </svg>
             <div class="mt-4 flex flex-col justify-center text-lg leading-6 text-gray-600">
               <label for="image-loader"
-                class="relative cursor-not-allowed rounded-md bg-white text-center font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-primary/80 transition-colors">
+                class="relative rounded-md bg-white text-center font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-primary/80 transition-colors">
                 <span>Upload an image</span>
                 <input id="image-loader" name="image-loader" type="file" class="sr-only" accept="image/*">
               </label>
@@ -1339,25 +1363,22 @@
             <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
           </div>
         </div>
-        <p id="opencv-status" class="text-center text-sm text-gray-400 mt-4">Initializing generator, please wait...
-        </p>
       </div>
 
-
+      <!-- 主编辑器区域 (画布和控制面板)，默认隐藏 -->
       <div id="generator-main-area" class="hidden">
         <div class="mt-8 grid grid-cols-1 gap-y-12 gap-x-16 md:grid-cols-3">
           <div class="md:col-span-1 space-y-8">
-            <button id="retake-image-btn"
-              class="rounded-full bg-blue-700 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-primary/20 hover:bg-blue-500 transition-colors">
-              Retake Image
+            <button id="change-image-btn"
+              class="w-full flex items-center justify-center gap-2 rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 20h5v-5M20 4h-5v5" />
+              </svg>
+              Start Over / Change Image
             </button>
             <div id="source-image-info" class="hidden pb-4 border-b border-gray-200">
-              <div class="flex justify-between items-center">
-                <p class="text-sm font-medium text-gray-500 truncate">Source:</p>
-                <!-- This 'Change Image' button already performs resetGeneratorState -->
-                <button id="change-image-btn" class="text-sm font-semibold text-blue-700 hover:text-blue-500">Change
-                  Image</button>
-              </div>
+              <p class="text-sm font-medium text-gray-500 truncate">Source Image:</p>
               <p id="current-filename" class="text-sm text-gray-900 font-semibold mt-1 truncate"></p>
             </div>
 
@@ -1371,7 +1392,7 @@
                     <button id="points-minus-btn" type="button"
                       class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 flex items-center justify-center">-</button>
                     <input type="range" id="dot-count-slider" min="10" max="100" value="25"
-                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-700">
+                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary">
                     <button id="points-plus-btn" type="button"
                       class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 flex items-center justify-center">+</button>
                     <input type="number" id="points-number-input" min="10" max="100" value="25"
@@ -1392,9 +1413,9 @@
                 <div class="grid grid-cols-2 gap-4 items-end">
                   <div>
                     <label for="dot-size-slider" class="block text-sm font-medium leading-6 text-gray-900">Dot Size:
-                      <span id="dot-size-value" class="font-bold text-blue-700">5</span></label>
+                      <span id="dot-size-value" class="font-bold text-primary">5</span></label>
                     <input type="range" id="dot-size-slider" min="3" max="10" value="5"
-                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-700 mt-2">
+                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary mt-2">
                   </div>
                   <div>
                     <label for="dot-color-picker" class="block text-sm font-medium leading-6 text-gray-900">Dot
@@ -1403,20 +1424,11 @@
                       class="mt-2 w-full h-10 p-1 border border-gray-300 rounded-lg cursor-pointer">
                   </div>
                 </div>
-                <!-- <div>
-                <label for="type-select"
-                  class="block text-sm font-medium leading-6 text-gray-900">Numbering</label>
-                <select id="type-select"
-                  class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-700 sm:text-sm sm:leading-6">
-                  <option value="123">1, 2, 3, ...</option>
-                  <option value="ABC">A, B, C, ...</option>
-                </select>
-              </div> -->
                 <div>
                   <label for="font-size-slider" class="block text-sm font-medium leading-6 text-gray-900">Font Size:
-                    <span id="font-size-value" class="font-bold text-blue-700">16</span></label>
+                    <span id="font-size-value" class="font-bold text-primary">16</span></label>
                   <input type="range" id="font-size-slider" min="8" max="40" value="16"
-                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-700 mt-2">
+                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary mt-2">
                 </div>
               </div>
             </div>
@@ -1428,33 +1440,31 @@
               <div id="hint-type-radios" class="mt-4 space-y-2">
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input type="radio" name="hint-type" value="original"
-                    class="form-radio text-blue-700 focus:ring-blue-700" checked>
+                    class="form-radio text-primary focus:ring-primary" checked>
                   <span class="text-sm text-gray-700">Original Image (Default)</span>
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
-                  <input type="radio" name="hint-type" value="no" class="form-radio text-blue-700 focus:ring-blue-700">
+                  <input type="radio" name="hint-type" value="no" class="form-radio text-primary focus:ring-primary">
                   <span class="text-sm text-gray-700">No Hint (Dots Only)</span>
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
-                  <input type="radio" name="hint-type" value="trace"
-                    class="form-radio text-blue-700 focus:ring-blue-700">
+                  <input type="radio" name="hint-type" value="trace" class="form-radio text-primary focus:ring-primary">
                   <span class="text-sm text-gray-700">Trace (Transparent Outline)</span>
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input type="radio" name="hint-type" value="internal"
-                    class="form-radio text-blue-700 focus:ring-blue-700">
+                    class="form-radio text-primary focus:ring-primary">
                   <span class="text-sm text-gray-700">Internal Lines</span>
                 </label>
               </div>
               <div id="thickness-container" class="hidden mt-4">
                 <label for="thicknessSlider" class="block text-sm font-medium leading-6 text-gray-900">Erase
                   Width:
-                  <span id="thicknessValue" class="font-bold text-blue-700">5</span></label>
+                  <span id="thicknessValue" class="font-bold text-primary">5</span></label>
                 <input type="range" id="thicknessSlider" min="1" max="50" value="5"
-                  class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-700 mt-2">
+                  class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary mt-2">
               </div>
             </div>
-
           </div>
 
           <div class="md:col-span-2">
@@ -1465,7 +1475,7 @@
 
                 <div id="step3-download-area" class="flex items-center justify-center gap-x-6">
                   <button id="download-png-btn" disabled
-                    class="rounded-md bg-blue-700 px-4 py-3 text-base font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">Download
+                    class="rounded-md bg-primary px-4 py-3 text-base font-semibold text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">Download
                     PNG</button>
                   <button id="download-pdf-btn" disabled
                     class="rounded-md bg-white px-4 py-3 text-base font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">Download
@@ -1477,7 +1487,7 @@
               class="relative aspect-[4/3] w-full rounded-lg border border-dashed border-gray-900/25 flex items-center justify-center p-2 bg-gray-50">
               <div id="canvas-loader"
                 class="hidden absolute inset-0 bg-white/70 flex-col items-center justify-center z-10">
-                <svg class="animate-spin h-8 w-8 text-blue-700" xmlns="http://www.w3.org/2000/svg" fill="none"
+                <svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
                   viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor"
@@ -1494,82 +1504,13 @@
             </p>
           </div>
         </div>
-
-
-
       </div>
     </section>
 
+    <!-- 剩余部分保持不变 -->
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        // --- Prompt Generator Logic ---
-        const promptDisplay = document.getElementById('prompt-display');
-        const newPromptBtn = document.getElementById('new-prompt-btn');
-        const copyPromptBtn = document.getElementById('copy-prompt-btn');
-        const copyFeedback = document.getElementById('copy-feedback');
-
-        const prompts = [
-          "a happy cartoon sun, simple line art, coloring book page, white background, clean lines",
-          "cute robot waving, simple drawing for kids, white background, bold outlines",
-          "a friendly dinosaur, minimalist line art, coloring page style, vector, clean",
-          "whimsical mushroom house in a forest, simple outlines, white background, for coloring",
-          "a rocket ship flying through stars, simple cartoon style, black and white line art",
-          "playful puppy with a ball, clean vector lines, white background, coloring book page",
-          "a beautiful butterfly with simple patterns, line art, white background, for kids",
-          "ice cream cone with a cherry on top, simple drawing, bold clean lines, white background"
-        ];
-        let currentPromptIndex = 0;
-
-        function getNewPrompt() {
-          currentPromptIndex = (currentPromptIndex + 1) % prompts.length;
-          if (promptDisplay) promptDisplay.textContent = prompts[currentPromptIndex];
-        }
-
-        function copyPrompt() {
-          if (!promptDisplay) return;
-          navigator.clipboard.writeText(promptDisplay.textContent).then(() => {
-            if (copyFeedback) {
-              copyFeedback.classList.remove('opacity-0');
-              copyFeedback.classList.add('opacity-100');
-              setTimeout(() => {
-                copyFeedback.classList.remove('opacity-100');
-                copyFeedback.classList.add('opacity-0');
-              }, 2000);
-            }
-          }).catch(err => console.error('Failed to copy: ', err));
-        }
-
-        if (newPromptBtn) newPromptBtn.addEventListener('click', getNewPrompt);
-        if (copyPromptBtn) copyPromptBtn.addEventListener('click', copyPrompt);
-        if (promptDisplay) promptDisplay.textContent = prompts[0];
-
-        const inspirationTabs = document.querySelectorAll('.inspiration-tab');
-        const inspirationContents = document.querySelectorAll('.inspiration-content');
-
-        inspirationTabs.forEach(tab => {
-          tab.addEventListener('click', () => {
-            const target = tab.dataset.tab;
-
-            inspirationTabs.forEach(t => {
-              t.classList.remove('border-primary', 'text-primary');
-              t.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
-
-
-            });
-            tab.classList.add('border-primary', 'text-primary');
-            tab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
-
-            inspirationContents.forEach(content => {
-              if (content.id === `${target}-content`) {
-                content.classList.remove('hidden');
-              } else {
-                content.classList.add('hidden');
-              }
-            });
-          });
-        });
-
         // === State and Constants ===
         const MAX_WIDTH = 800, MAX_HEIGHT = 600;
         const DEFAULT_CONFIG = { type: '123', fontSize: 16, hint: 'original', eraseThickness: 5, dotRadius: 5, dotColor: '#000000' };
@@ -1581,157 +1522,73 @@
         };
 
         // === DOM Element References ===
-        const step1Area = document.getElementById('step1-upload-area'), generatorMainArea = document.getElementById('generator-main-area'),
-          dropZone = document.getElementById('drop-zone'), sourceImageInfo = document.getElementById('source-image-info'),
-          currentFilename = document.getElementById('current-filename'),
-          // Retain changeImageBtn for its original purpose (smaller button in source info)
-          changeImageBtn = document.getElementById('change-image-btn');
-        const drawCanvas = document.getElementById('draw-canvas'), drawCtx = drawCanvas.getContext('2d'),
-          canvasLoader = document.getElementById('canvas-loader');
-        const imageLoader = document.getElementById('image-loader'),
-          pointsCounter = document.getElementById('points-counter'),
-          clearBtn = document.getElementById('clear-btn');
+        // [新] 新的UI元素引用
+        const step1ChoiceArea = document.getElementById('step1-choice-area');
+        const uploadChoiceCard = document.getElementById('upload-choice-card');
+        const aiChoiceCard = document.getElementById('ai-choice-card');
+        const actionUiContainer = document.getElementById('action-ui-container');
+        const uploadTemplate = document.getElementById('upload-template');
+        const aiGenerateTemplate = document.getElementById('ai-generate-template');
+        const inspirationArea = document.getElementById('inspiration-area');
+
+        // [旧] 保留大部分旧的引用
+        const generatorMainArea = document.getElementById('generator-main-area');
+        const sourceImageInfo = document.getElementById('source-image-info');
+        const currentFilename = document.getElementById('current-filename');
+        const changeImageBtn = document.getElementById('change-image-btn');
+        const drawCanvas = document.getElementById('draw-canvas'), drawCtx = drawCanvas.getContext('2d');
+        const canvasLoader = document.getElementById('canvas-loader');
+        const pointsCounter = document.getElementById('points-counter');
+        const clearBtn = document.getElementById('clear-btn');
         const hintTypeRadios = document.getElementById('hint-type-radios');
-        const dotCountSlider = document.getElementById('dot-count-slider'), pointsNumberInput = document.getElementById('points-number-input'),
-          pointsMinusBtn = document.getElementById('points-minus-btn'), pointsPlusBtn = document.getElementById('points-plus-btn');
+        const dotCountSlider = document.getElementById('dot-count-slider'), pointsNumberInput = document.getElementById('points-number-input');
+        const pointsMinusBtn = document.getElementById('points-minus-btn'), pointsPlusBtn = document.getElementById('points-plus-btn');
         const fontSizeSlider = document.getElementById('font-size-slider'), fontSizeValue = document.getElementById('font-size-value');
         const thicknessContainer = document.getElementById('thickness-container'), thicknessSlider = document.getElementById('thicknessSlider'), thicknessValue = document.getElementById('thicknessValue');
         const dotSizeSlider = document.getElementById('dot-size-slider'), dotSizeValue = document.getElementById('dot-size-value');
         const dotColorPicker = document.getElementById('dot-color-picker');
         const downloadPngBtn = document.getElementById('download-png-btn'), downloadPdfBtn = document.getElementById('download-pdf-btn');
-        // New button reference
-        const retakeImageBtn = document.getElementById('retake-image-btn');
-
-
-        // New/Moved DOM references for OpenCV status and related elements
         const opencvStatus = document.getElementById('opencv-status');
-        const imageLoaderLabel = document.querySelector('label[for="image-loader"]');
 
-        [downloadPngBtn, downloadPdfBtn].forEach(btn => btn.disabled = true);
+        // AI 和上传相关的元素现在从模板中获取
+        let imageLoader, dropZone, aiPromptInput, generateAiImageBtn, aiStatusArea, aiStatusMessage;
 
-        // === Utility Functions ===
-        const debounce = (func, delay) => {
-          let timeout;
-          return function (...args) {
-            const context = this;
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(context, args), delay);
-          };
-        };
-
-        // Helper to get event position, same as before
-        const getEventPos = (canvas, evt) => {
-          const rect = canvas.getBoundingClientRect();
-          const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-          const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-          return { x: (clientX - rect.left) * (canvas.width / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) };
-        };
+        // --- Utility Functions (无变化) ---
+        const debounce = (func, delay) => { let timeout; return function (...args) { const context = this; clearTimeout(timeout); timeout = setTimeout(() => func.apply(context, args), delay); }; };
+        const getEventPos = (canvas, evt) => { const rect = canvas.getBoundingClientRect(); const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX; const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY; return { x: (clientX - rect.left) * (canvas.width / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) }; };
         const distance = (p1, p2) => Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
         const getLabel = (index) => state.config.type === 'ABC' ? String.fromCharCode(65 + index) : (index + 1).toString();
-        const updateClearButton = () => { clearBtn.disabled = state.dots.length === 0; };
+        const updateClearButton = () => { if (clearBtn) clearBtn.disabled = state.dots.length === 0; };
         const drawDots = (context, dots, config = {}) => dots.forEach(dot => { context.beginPath(); context.arc(dot.x, dot.y, config.radius, 0, 2 * Math.PI); context.fillStyle = config.color; context.strokeStyle = 'black'; context.lineWidth = 1.5; context.fill(); context.stroke(); });
+        const calculateCentroid = (dots) => { if (dots.length === 0) { return { x: state.canvasDimensions.width / 2, y: state.canvasDimensions.height / 2 }; } const total = dots.reduce((acc, dot) => ({ x: acc.x + dot.x, y: acc.y + dot.y }), { x: 0, y: 0 }); return { x: total.x / dots.length, y: total.y / dots.length }; };
+        const drawNumbers = (context, dots, centroid) => { context.fillStyle = 'black'; context.font = `${state.config.fontSize}px Arial`; context.textAlign = 'center'; context.textBaseline = 'middle'; dots.forEach((dot, index) => { const dx = dot.x - centroid.x; const dy = dot.y - centroid.y; const magnitude = Math.sqrt(dx * dx + dy * dy); let nx = 0; let ny = -1; if (magnitude > 0) { nx = dx / magnitude; ny = dy / magnitude; } const offset = state.config.dotRadius + state.config.fontSize * 0.75; const labelX = dot.x + nx * offset; const labelY = dot.y + ny * offset; context.fillText(getLabel(index), labelX, labelY); }); };
 
-        const calculateCentroid = (dots) => {
-          if (dots.length === 0) {
-            return { x: state.canvasDimensions.width / 2, y: state.canvasDimensions.height / 2 };
-          }
-          const total = dots.reduce((acc, dot) => ({ x: acc.x + dot.x, y: acc.y + dot.y }), { x: 0, y: 0 });
-          return { x: total.x / dots.length, y: total.y / dots.length };
-        };
+        // --- Core Drawing and State Functions (微调) ---
+        const redrawDrawCanvas = () => { const context = drawCtx, canvas = drawCanvas; context.clearRect(0, 0, canvas.width, canvas.height); if (state.config.hint === 'original' && state.originalImage) { context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); } else if (state.config.hint === 'trace' && state.originalImage) { context.globalAlpha = 0.3; context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); context.globalAlpha = 1.0; } else if (state.config.hint === 'internal' && state.internalHintImage) { context.drawImage(state.internalHintImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); } const centroid = calculateCentroid(state.dots); drawDots(context, state.dots, { color: state.config.dotColor, radius: state.config.dotRadius }); drawNumbers(context, state.dots, centroid); pointsCounter.textContent = state.dots.length; updateClearButton(); };
+        const updateConfigAndRedraw = () => { state.config.fontSize = parseInt(fontSizeSlider.value, 10); state.config.dotRadius = parseInt(dotSizeSlider.value, 10); state.config.dotColor = dotColorPicker.value; state.config.hint = document.querySelector('input[name="hint-type"]:checked').value; state.config.eraseThickness = parseInt(thicknessSlider.value, 10); fontSizeValue.textContent = fontSizeSlider.value; dotSizeValue.textContent = dotSizeSlider.value; thicknessValue.textContent = thicknessSlider.value; thicknessContainer.classList.toggle('hidden', state.config.hint !== 'internal'); state.internalHintImage = (state.config.hint === 'internal' && typeof cv !== 'undefined') ? generateInternalHintImage(state.config.eraseThickness) : null; redrawDrawCanvas(); };
+        const generateInternalHintImage = (thickness) => { if (!state.originalImage || typeof cv === 'undefined') return null; const tempCanvas = document.createElement('canvas'); tempCanvas.width = state.canvasDimensions.width; tempCanvas.height = state.canvasDimensions.height; tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height); let src, gray, binary, contours, hierarchy, resultMat = null; try { src = cv.imread(tempCanvas); resultMat = src.clone(); gray = new cv.Mat(); binary = new cv.Mat(); cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0); cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU); contours = new cv.MatVector(); hierarchy = new cv.Mat(); cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE); cv.drawContours(resultMat, contours, -1, new cv.Scalar(255, 255, 255, 255), thickness); const offscreenCanvas = document.createElement('canvas'); offscreenCanvas.width = state.canvasDimensions.width; offscreenCanvas.height = state.canvasDimensions.height; cv.imshow(offscreenCanvas, resultMat); return offscreenCanvas; } catch (error) { console.error("Hint image generation error:", error); return null; } finally { if (src) src.delete(); if (gray) gray.delete(); if (binary) binary.delete(); if (contours) contours.delete(); if (hierarchy) hierarchy.delete(); if (resultMat) resultMat.delete(); } };
 
-        const drawNumbers = (context, dots, centroid) => {
-          context.fillStyle = 'black';
-          context.font = `${state.config.fontSize}px Arial`;
-          context.textAlign = 'center';
-          context.textBaseline = 'middle';
-          dots.forEach((dot, index) => {
-            const dx = dot.x - centroid.x;
-            const dy = dot.y - centroid.y;
-            const magnitude = Math.sqrt(dx * dx + dy * dy);
-            let nx = 0;
-            let ny = -1; // Default to straight up if dot is at the centroid
-            if (magnitude > 0) {
-              nx = dx / magnitude;
-              ny = dy / magnitude;
-            }
-            const offset = state.config.dotRadius + state.config.fontSize * 0.75;
-            const labelX = dot.x + nx * offset;
-            const labelY = dot.y + ny * offset;
-            context.fillText(getLabel(index), labelX, labelY);
-          });
-        };
-
-        const redrawDrawCanvas = () => {
-          const context = drawCtx, canvas = drawCanvas;
-          context.clearRect(0, 0, canvas.width, canvas.height);
-          if (state.config.hint === 'original' && state.originalImage) { context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); }
-          else if (state.config.hint === 'trace' && state.originalImage) { context.globalAlpha = 0.3; context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); context.globalAlpha = 1.0; }
-          else if (state.config.hint === 'internal' && state.internalHintImage) { context.drawImage(state.internalHintImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); }
-
-          const centroid = calculateCentroid(state.dots);
-          drawDots(context, state.dots, { color: state.config.dotColor, radius: state.config.dotRadius });
-          drawNumbers(context, state.dots, centroid);
-
-          pointsCounter.textContent = state.dots.length;
-          updateClearButton();
-        };
-
-        const updateConfigAndRedraw = () => {
-          state.config.fontSize = parseInt(fontSizeSlider.value, 10);
-          state.config.dotRadius = parseInt(dotSizeSlider.value, 10);
-          state.config.dotColor = dotColorPicker.value;
-          state.config.hint = document.querySelector('input[name="hint-type"]:checked').value;
-          state.config.eraseThickness = parseInt(thicknessSlider.value, 10);
-          fontSizeValue.textContent = fontSizeSlider.value;
-          dotSizeValue.textContent = dotSizeSlider.value;
-          thicknessValue.textContent = thicknessSlider.value;
-          thicknessContainer.classList.toggle('hidden', state.config.hint !== 'internal');
-          // Only generate internal hint image if cv is loaded
-          state.internalHintImage = (state.config.hint === 'internal' && typeof cv !== 'undefined') ? generateInternalHintImage(state.config.eraseThickness) : null;
-          redrawDrawCanvas();
-        };
-
-        const generateInternalHintImage = (thickness) => {
-          if (!state.originalImage || typeof cv === 'undefined') return null;
-          const tempCanvas = document.createElement('canvas'); tempCanvas.width = state.canvasDimensions.width; tempCanvas.height = state.canvasDimensions.height;
-          tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
-          let src, gray, binary, contours, hierarchy, resultMat = null;
-          try {
-            src = cv.imread(tempCanvas); resultMat = src.clone(); gray = new cv.Mat(); binary = new cv.Mat();
-            cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-            cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU);
-            contours = new cv.MatVector(); hierarchy = new cv.Mat();
-            cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
-            cv.drawContours(resultMat, contours, -1, new cv.Scalar(255, 255, 255, 255), thickness);
-            const offscreenCanvas = document.createElement('canvas'); offscreenCanvas.width = state.canvasDimensions.width; offscreenCanvas.height = state.canvasDimensions.height;
-            cv.imshow(offscreenCanvas, resultMat);
-            return offscreenCanvas;
-          } catch (error) {
-            console.error("Hint image generation error:", error); return null;
-          } finally {
-            if (src) src.delete();
-            if (gray) gray.delete();
-            if (binary) binary.delete();
-            if (contours) contours.delete();
-            if (hierarchy) hierarchy.delete();
-            if (resultMat) resultMat.delete();
-          }
-        };
-
+        // [新] 全局状态重置函数
         const resetGeneratorState = () => {
           state.originalImage = null; state.dots = []; state.draggedDotIndex = -1;
           state.config = { ...DEFAULT_CONFIG };
-          updatePointsValue(25, false); // Reset point count slider/input
-          dotSizeSlider.value = DEFAULT_CONFIG.dotRadius;
-          dotSizeValue.textContent = DEFAULT_CONFIG.dotRadius.toString();
+
+          updatePointsValue(25, false);
+          dotSizeSlider.value = DEFAULT_CONFIG.dotRadius; dotSizeValue.textContent = DEFAULT_CONFIG.dotRadius.toString();
           dotColorPicker.value = DEFAULT_CONFIG.dotColor;
-          fontSizeSlider.value = DEFAULT_CONFIG.fontSize;
-          fontSizeValue.textContent = DEFAULT_CONFIG.fontSize.toString();
+          fontSizeSlider.value = DEFAULT_CONFIG.fontSize; fontSizeValue.textContent = DEFAULT_CONFIG.fontSize.toString();
           document.querySelector('input[name="hint-type"][value="original"]').checked = true;
+
           generatorMainArea.classList.add('hidden');
-          step1Area.classList.remove('hidden');
+          step1ChoiceArea.classList.remove('hidden');
+          inspirationArea.classList.remove('hidden');
+
+          actionUiContainer.innerHTML = ''; // 清空操作区
+          uploadChoiceCard.classList.remove('border-primary'); aiChoiceCard.classList.remove('border-primary');
+          uploadChoiceCard.classList.add('border-gray-300'); aiChoiceCard.classList.add('border-gray-300');
+
           sourceImageInfo.classList.add('hidden');
-          clearBtn.disabled = true;
+          if (clearBtn) clearBtn.disabled = true;
           downloadPngBtn.disabled = true; downloadPdfBtn.disabled = true;
           thicknessContainer.classList.add('hidden');
           redrawDrawCanvas();
@@ -1746,297 +1603,239 @@
             img.onerror = () => alert('Cannot load image file.');
             img.onload = () => {
               state.originalImage = img;
-              drawCanvas.dataset.hasImage = 'true';
               const scale = Math.min(MAX_WIDTH / img.naturalWidth, MAX_HEIGHT / img.naturalHeight);
               state.canvasDimensions = { width: img.naturalWidth * scale, height: img.naturalHeight * scale };
               drawCanvas.width = state.canvasDimensions.width; drawCanvas.height = state.canvasDimensions.height;
               state.dots = [];
+
+              // [修复点 1] 切换视图并准备下载按钮
+              step1ChoiceArea.classList.add('hidden');
+              inspirationArea.classList.add('hidden');
+              generatorMainArea.classList.remove('hidden');
+              currentFilename.textContent = file.name;
+              sourceImageInfo.classList.remove('hidden');
+              downloadPngBtn.disabled = false;
+              downloadPdfBtn.disabled = false;
+
+              // [修复点 2] 检查OpenCV状态再决定行为
+              if (opencvScriptLoaded) {
+                // 如果已加载，立即开始检测
+                canvasLoader.querySelector('p').textContent = 'Auto-detecting...';
+                runAutoDetect();
+              } else {
+                // 如果未加载，显示等待信息
+                canvasLoader.classList.remove('hidden');
+                canvasLoader.querySelector('p').textContent = 'Waiting for generator to load...';
+                // 尝试触发加载（如果还没开始的话）
+                loadOpenCv();
+              }
+
+              // 不管OpenCV是否加载，都先绘制原始图像
               updateConfigAndRedraw();
-              step1Area.classList.add('hidden'); generatorMainArea.classList.remove('hidden');
-              currentFilename.textContent = file.name; sourceImageInfo.classList.remove('hidden');
-              downloadPngBtn.disabled = false; downloadPdfBtn.disabled = false;
-              runAutoDetect(); // Run initial auto-detect, will only work if OpenCV is loaded
             };
             img.src = event.target.result;
           };
           reader.readAsDataURL(file);
         };
-
-        // --- Auto-Detect Logic ---
-        const runAutoDetect = () => {
-          if (!state.originalImage || typeof cv === 'undefined') {
-            console.log("OpenCV not ready or no image, skipping auto-detect.");
-            return;
-          }
-          canvasLoader.classList.remove('hidden');
-          setTimeout(() => {
-            const tempCanvas = document.createElement('canvas'); tempCanvas.width = state.canvasDimensions.width; tempCanvas.height = state.canvasDimensions.height;
-            tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
-            let src, gray, binary, contours, hierarchy, allDots = [];
-            try {
-              src = cv.imread(tempCanvas);
-              gray = new cv.Mat(); binary = new cv.Mat(); contours = new cv.MatVector(); hierarchy = new cv.Mat();
-              cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-              cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU);
-              cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
-              if (contours.size() === 0) throw new Error("No contours found.");
-              let significantContours = [], totalPerimeter = 0;
-              for (let i = 0; i < contours.size(); i++) {
-                const contour = contours.get(i);
-                if (cv.contourArea(contour) > 100) { significantContours.push(contour); totalPerimeter += cv.arcLength(contour, true); }
-                else { contour.delete(); }
-              }
-              if (significantContours.length === 0) throw new Error("No significant contours found after filtering.");
-              significantContours.sort((a, b) => cv.boundingRect(a).x - cv.boundingRect(b).x);
-              for (const contour of significantContours) {
-                const simplifiedContour = new cv.Mat();
-                const perimeter = cv.arcLength(contour, true);
-                if (perimeter === 0) continue;
-                const targetPointCount = Math.max(3, Math.round(parseInt(pointsNumberInput.value, 10) * (perimeter / totalPerimeter)));
-                let minEpsilon = 0, maxEpsilon = perimeter * 0.1, currentEpsilon = maxEpsilon / 2;
-                for (let i = 0; i < 20; i++) {
-                  cv.approxPolyDP(contour, simplifiedContour, currentEpsilon, true);
-                  const count = simplifiedContour.rows;
-                  if (count > targetPointCount) minEpsilon = currentEpsilon; else if (count < targetPointCount) maxEpsilon = currentEpsilon; else break;
-                  currentEpsilon = (minEpsilon + maxEpsilon) / 2;
-                }
-                let contourDots = [];
-                for (let i = 0; i < simplifiedContour.data32S.length; i += 2) contourDots.push({ x: simplifiedContour.data32S[i], y: simplifiedContour.data32S[i + 1] });
-                if (contourDots.length > 0) {
-                  let topPointIndex = 0;
-                  for (let i = 1; i < contourDots.length; i++) { if (contourDots[i].y < contourDots[topPointIndex].y) topPointIndex = i; }
-                  contourDots = contourDots.slice(topPointIndex).concat(contourDots.slice(0, topPointIndex));
-                }
-                allDots = allDots.concat(contourDots);
-                simplifiedContour.delete();
-              }
-              state.dots = allDots;
-              redrawDrawCanvas();
-            } catch (error) {
-              console.error(error); alert(`Contour detection failed: ${error.message}`);
-            } finally {
-              if (src) src.delete();
-              if (gray) gray.delete();
-              if (binary) binary.delete();
-              if (contours) contours.delete();
-              if (hierarchy) hierarchy.delete();
-              canvasLoader.classList.add('hidden');
-            }
-          }, 50);
-        };
+        // --- Auto-Detect Logic (无变化) ---
+        const runAutoDetect = () => { if (!state.originalImage || typeof cv === 'undefined') { console.log("OpenCV not ready or no image, skipping auto-detect."); return; } canvasLoader.classList.remove('hidden'); setTimeout(() => { const tempCanvas = document.createElement('canvas'); tempCanvas.width = state.canvasDimensions.width; tempCanvas.height = state.canvasDimensions.height; tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height); let src, gray, binary, contours, hierarchy, allDots = []; try { src = cv.imread(tempCanvas); gray = new cv.Mat(); binary = new cv.Mat(); contours = new cv.MatVector(); hierarchy = new cv.Mat(); cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0); cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU); cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE); if (contours.size() === 0) throw new Error("No contours found."); let significantContours = [], totalPerimeter = 0; for (let i = 0; i < contours.size(); i++) { const contour = contours.get(i); if (cv.contourArea(contour) > 100) { significantContours.push(contour); totalPerimeter += cv.arcLength(contour, true); } else { contour.delete(); } } if (significantContours.length === 0) throw new Error("No significant contours found after filtering."); significantContours.sort((a, b) => cv.boundingRect(a).x - cv.boundingRect(b).x); for (const contour of significantContours) { const simplifiedContour = new cv.Mat(); const perimeter = cv.arcLength(contour, true); if (perimeter === 0) continue; const targetPointCount = Math.max(3, Math.round(parseInt(pointsNumberInput.value, 10) * (perimeter / totalPerimeter))); let minEpsilon = 0, maxEpsilon = perimeter * 0.1, currentEpsilon = maxEpsilon / 2; for (let i = 0; i < 20; i++) { cv.approxPolyDP(contour, simplifiedContour, currentEpsilon, true); const count = simplifiedContour.rows; if (count > targetPointCount) minEpsilon = currentEpsilon; else if (count < targetPointCount) maxEpsilon = currentEpsilon; else break; currentEpsilon = (minEpsilon + maxEpsilon) / 2; } let contourDots = []; for (let i = 0; i < simplifiedContour.data32S.length; i += 2) contourDots.push({ x: simplifiedContour.data32S[i], y: simplifiedContour.data32S[i + 1] }); if (contourDots.length > 0) { let topPointIndex = 0; for (let i = 1; i < contourDots.length; i++) { if (contourDots[i].y < contourDots[topPointIndex].y) topPointIndex = i; } contourDots = contourDots.slice(topPointIndex).concat(contourDots.slice(0, topPointIndex)); } allDots = allDots.concat(contourDots); simplifiedContour.delete(); } state.dots = allDots; redrawDrawCanvas(); } catch (error) { console.error(error); alert(`Contour detection failed: ${error.message}`); } finally { if (src) src.delete(); if (gray) gray.delete(); if (binary) binary.delete(); if (contours) contours.delete(); if (hierarchy) hierarchy.delete(); canvasLoader.classList.add('hidden'); } }, 50); };
         const debouncedAutoDetect = debounce(runAutoDetect, 400);
 
-        // --- OpenCV Deferred Loading Logic ---
+        // --- OpenCV Deferred Loading Logic (微调) ---
         let opencvScriptLoaded = false;
         const interactionEvents = ['scroll', 'click', 'touchstart', 'keydown'];
-
         function onOpenCvReady() {
+          if (opencvStatus) {
+            opencvStatus.textContent = 'Generator Ready!';
+            opencvStatus.classList.remove('text-gray-400', 'text-red-500');
+            opencvStatus.classList.add('text-green-500');
+          }
           if (dropZone) {
             dropZone.classList.remove('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
             dropZone.style.cursor = 'pointer';
             dropZone.style.opacity = '1';
             dropZone.style.pointerEvents = 'auto';
-
-          }
-          if (imageLoaderLabel) {
-            imageLoaderLabel.classList.remove('cursor-not-allowed');
+            const label = dropZone.querySelector('label[for="image-loader"]');
+            if (label) label.classList.remove('cursor-not-allowed');
           }
 
-          if (opencvStatus) {
-            opencvStatus.textContent = 'Generator Ready!';
-            opencvStatus.classList.remove('text-gray-500', 'text-red-500');
-            opencvStatus.classList.add('text-green-500');
-          }
+          opencvScriptLoaded = true; // 设定标志位
 
-          // If an image was already loaded when OpenCV became ready, run auto-detect
-          if (state.originalImage) {
+          // [修复点 3] 检查是否有待处理的图片
+          if (state.originalImage && generatorMainArea.classList.contains('hidden') === false) {
+            // 如果图片已加载并且编辑器已显示，说明它正在等待检测
+            console.log('OpenCV is ready. Starting auto-detection for the pending image.');
+            canvasLoader.querySelector('p').textContent = 'Auto-detecting...';
             runAutoDetect();
           }
-        }
-
-        function removeInteractionListeners() {
-          interactionEvents.forEach(event => {
-            document.removeEventListener(event, loadOpenCv);
-          });
-        }
-
+        } function removeInteractionListeners() { interactionEvents.forEach(event => { document.removeEventListener(event, loadOpenCv); }); }
         function loadOpenCv() {
-          if (opencvScriptLoaded) {
-            return; // Already loaded or loading
-          }
-          opencvScriptLoaded = true; // Set flag immediately to prevent multiple loads
-
-          if (opencvStatus) {
-            opencvStatus.textContent = 'Loading connect the dots generator...';
-            opencvStatus.classList.remove('text-green-500', 'text-red-500');
-            opencvStatus.classList.add('text-gray-500'); // Neutral loading color
-          }
-
+          if (opencvScriptLoaded || document.querySelector('script[src*="opencv.js"]')) return;
+          if (opencvStatus) { opencvStatus.textContent = 'Loading generator...'; opencvStatus.classList.add('text-gray-500'); }
           const script = document.createElement('script');
           script.src = 'https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js';
-          script.async = true;
-          script.onload = onOpenCvReady;
-          script.onerror = () => {
-            if (opencvStatus) {
-              opencvStatus.textContent = 'Error: Failed to load the connect the dots generator.';
-              opencvStatus.classList.remove('text-green-500', 'text-gray-500');
-              opencvStatus.classList.add('text-red-500');
-            }
-            // Keep opencvScriptLoaded as true to avoid trying to load again if it failed once.
-          };
+          script.async = true; script.onload = onOpenCvReady;
+          script.onerror = () => { if (opencvStatus) { opencvStatus.textContent = 'Error: Failed to load generator.'; opencvStatus.classList.add('text-red-500'); } if (aiStatusMessage) { aiStatusMessage.textContent = 'Error loading components. Please refresh.' } };
           document.body.appendChild(script);
+          removeInteractionListeners();
+        }
+        function setupInteractionListeners() { interactionEvents.forEach(event => { document.addEventListener(event, loadOpenCv, { once: true, passive: true }); }); }
 
-          removeInteractionListeners(); // Remove listeners once loading starts
+        if (opencvStatus) { opencvStatus.textContent = 'Generator will load on first interaction...'; }
+        setupInteractionListeners();
+
+        // --- AI Generation Logic (已更新) ---
+        // === AI Generation Logic (已更新以处理代理) ===
+        async function generateAiImageFromLocalBackend(userPrompt) {
+          if (!aiStatusArea || !generateAiImageBtn || !aiStatusMessage) return;
+          aiStatusArea.classList.remove('hidden');
+          aiStatusArea.querySelector('#ai-loader').classList.remove('hidden');
+          generateAiImageBtn.disabled = true;
+          generateAiImageBtn.querySelector('#generate-button-text').textContent = 'Generating...';
+          aiStatusMessage.textContent = `Generating image for "${userPrompt}"... This may take a moment.`;
+
+          const apiEndpoint = 'https://connectthedotsprintable.online/api/doubao';
+          const finalPrompt = `${userPrompt}, bold outline, simple line art, for coloring book, black and white, minimal shading, white background`;
+
+          try {
+            // [关键修改] 现在这次 fetch 直接返回图片数据，而不是 URL
+            const imageResponse = await fetch(apiEndpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ prompt: finalPrompt, size: "1024x1024" })
+            });
+
+            if (!imageResponse.ok) {
+              // 尝试解析错误信息
+              let errorText = "An unknown API error occurred.";
+              try {
+                const errorJson = await imageResponse.json();
+                errorText = errorJson.error || errorJson.message || JSON.stringify(errorJson);
+              } catch (e) {
+                // 如果响应不是JSON，则使用状态文本
+                errorText = imageResponse.statusText;
+              }
+              throw new Error(`API Error: ${imageResponse.status} - ${errorText}`);
+            }
+
+            // 直接将响应转换为 Blob，因为响应体就是图片
+            aiStatusMessage.textContent = 'Processing image...';
+            const blob = await imageResponse.blob();
+
+            if (!blob.type.startsWith('image/')) {
+              throw new Error('Received data is not a valid image.');
+            }
+
+            const filename = `AI_${userPrompt.substring(0, 15).replace(/\W/g, '_')}.${blob.type.split('/')[1] || 'png'}`;
+            const file = new File([blob], filename, { type: blob.type });
+
+            handleFile(file); // 将文件交给现有的处理函数
+
+          } catch (error) {
+            console.error("AI Generation Error:", error);
+            aiStatusMessage.textContent = `Error: ${error.message}`;
+          } finally {
+            if (generateAiImageBtn) {
+              generateAiImageBtn.disabled = false;
+              generateAiImageBtn.querySelector('#generate-button-text').textContent = 'Generate Image';
+            }
+            if (aiStatusArea) {
+              aiStatusArea.querySelector('#ai-loader').classList.add('hidden');
+            }
+          }
+        }
+        // --- Event Listeners (已重构) ---
+        function setupActionUI(type) {
+          actionUiContainer.innerHTML = ''; // 清空
+          if (type === 'upload') {
+            actionUiContainer.appendChild(uploadTemplate.firstElementChild.cloneNode(true));
+            // 获取新创建的元素并绑定事件
+            imageLoader = document.getElementById('image-loader');
+            dropZone = document.getElementById('drop-zone');
+            imageLoader.addEventListener('change', (e) => handleFile(e.target.files[0]));
+            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('bg-gray-100', 'border-primary'); });
+            dropZone.addEventListener('dragleave', (e) => { e.preventDefault(); dropZone.classList.remove('bg-gray-100', 'border-primary'); });
+            dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('bg-gray-100', 'border-primary'); handleFile(e.dataTransfer.files[0]); });
+            // 如果opencv已加载，则立即使上传区可用
+            if (opencvScriptLoaded) {
+              dropZone.classList.remove('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
+              dropZone.style.cursor = 'pointer'; dropZone.style.opacity = '1'; dropZone.style.pointerEvents = 'auto';
+              dropZone.querySelector('label[for="image-loader"]').classList.remove('cursor-not-allowed');
+            }
+          } else if (type === 'ai') {
+            actionUiContainer.appendChild(aiGenerateTemplate.firstElementChild.cloneNode(true));
+            // 获取新创建的元素并绑定事件
+            aiPromptInput = document.getElementById('ai-prompt-input');
+            generateAiImageBtn = document.getElementById('generate-ai-image-btn');
+            aiStatusArea = document.getElementById('ai-status-area');
+            aiStatusMessage = document.getElementById('ai-status-message');
+            generateAiImageBtn.addEventListener('click', () => {
+              const prompt = aiPromptInput.value.trim();
+              if (prompt.length < 5) { alert("Please enter a longer, descriptive prompt."); return; }
+              if (!opencvScriptLoaded) { alert("Generator is still loading. Please wait for the 'Generator Ready!' message."); loadOpenCv(); return; }
+              generateAiImageFromLocalBackend(prompt);
+            });
+          }
         }
 
-        function setupInteractionListeners() {
-          interactionEvents.forEach(event => {
-            document.addEventListener(event, loadOpenCv, { once: true, passive: true });
-          });
-        }
+        uploadChoiceCard.addEventListener('click', () => {
+          uploadChoiceCard.classList.remove('border-gray-300');
+          uploadChoiceCard.classList.add('border-primary');
+          aiChoiceCard.classList.remove('border-primary');
+          aiChoiceCard.classList.add('border-gray-300');
+          setupActionUI('upload');
+        });
 
-        // --- Initial setup for OpenCV state (before interaction) ---
-        if (opencvStatus) {
-          opencvStatus.textContent = 'Connect the dots generator loading on first interaction...';
-          opencvStatus.classList.add('text-gray-500');
-        }
-        if (dropZone) {
-          dropZone.classList.add('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
-        }
-        if (imageLoaderLabel) {
-          imageLoaderLabel.classList.add('cursor-not-allowed');
-        }
-        setupInteractionListeners(); // Attach the listeners
+        aiChoiceCard.addEventListener('click', () => {
+          aiChoiceCard.classList.remove('border-gray-300');
+          aiChoiceCard.classList.add('border-primary');
+          uploadChoiceCard.classList.remove('border-primary');
+          uploadChoiceCard.classList.add('border-gray-300');
+          setupActionUI('ai');
+        });
 
-
-
-
-
-        // === 处理示例图片的点击事件 ===
+        // 示例图片点击事件
         const exampleImages = document.querySelectorAll('#examples-content img');
-
-        // 请确认您使用的是这个版本
         async function handleExampleImageClick(event) {
-          const imgElement = event.currentTarget;
-          const imageUrl = imgElement.src;
-          const filename = imageUrl.split('/').pop() || 'example-image.webp';
-
-          step1Area.classList.add('hidden');
+          const imgElement = event.currentTarget; const imageUrl = imgElement.src; const filename = imageUrl.split('/').pop() || 'example-image.webp';
+          step1ChoiceArea.classList.add('hidden'); inspirationArea.classList.add('hidden');
           generatorMainArea.classList.remove('hidden');
           canvasLoader.classList.remove('hidden');
           const loaderText = canvasLoader.querySelector('p');
-          if (loaderText) loaderText.textContent = '正在加载示例...';
-
-          try {
-            // 使用 fetch 发起请求
-            const response = await fetch(imageUrl, { cache: 'no-store' }); // 增加 cache: 'no-store' 来对抗缓存
-            if (!response.ok) {
-              throw new Error(`HTTP 错误! 状态: ${response.status}`);
-            }
-            const blob = await response.blob();
-            const file = new File([blob], filename, { type: blob.type });
-            handleFile(file);
-          } catch (error) {
-            console.error('获取示例图片时出错:', error);
-            alert('无法加载示例图片。请禁用广告拦截插件并重试，或检查您的网络连接。');
-            resetGeneratorState();
-          } finally {
-            if (loaderText) loaderText.textContent = '正在自动识别...';
-          }
+          if (loaderText) loaderText.textContent = 'Loading example...';
+          try { const response = await fetch(imageUrl, { cache: 'no-store' }); if (!response.ok) { throw new Error(`HTTP Error: ${response.status}`); } const blob = await response.blob(); const file = new File([blob], filename, { type: blob.type }); handleFile(file); } catch (error) { console.error('Error fetching example image:', error); alert('Could not load the example image. Please check your connection or disable ad-blockers and try again.'); resetGeneratorState(); } finally { if (loaderText) loaderText.textContent = 'Auto-detecting...'; }
         }
-        exampleImages.forEach(img => {
-          img.addEventListener('click', handleExampleImageClick);
-          // 同时，修改鼠标样式为手型，提示用户这是可以点击的
-          img.style.cursor = 'pointer';
-        });
+        exampleImages.forEach(img => img.addEventListener('click', handleExampleImageClick));
 
-
-
-        // === Event Listeners ===
-        // The smaller 'Change Image' button in the source info area
-        if (changeImageBtn) {
-          changeImageBtn.addEventListener('click', resetGeneratorState);
-        }
-
-        const updatePointsValue = (value, triggerDetect = true) => {
-          let numValue = parseInt(value, 10);
-          if (isNaN(numValue)) numValue = 25;
-          const min = parseInt(dotCountSlider.min, 10);
-          const max = parseInt(dotCountSlider.max, 10);
-          numValue = Math.max(min, Math.min(max, numValue));
-          dotCountSlider.value = numValue; pointsNumberInput.value = numValue;
-          if (state.originalImage && triggerDetect) debouncedAutoDetect();
-        };
+        // 编辑器控制面板事件
+        if (changeImageBtn) changeImageBtn.addEventListener('click', resetGeneratorState);
+        const updatePointsValue = (value, triggerDetect = true) => { let numValue = parseInt(value, 10); if (isNaN(numValue)) numValue = 25; const min = parseInt(dotCountSlider.min, 10); const max = parseInt(dotCountSlider.max, 10); numValue = Math.max(min, Math.min(max, numValue)); dotCountSlider.value = numValue; pointsNumberInput.value = numValue; if (state.originalImage && triggerDetect) debouncedAutoDetect(); };
         pointsMinusBtn.addEventListener('click', () => updatePointsValue(parseInt(pointsNumberInput.value, 10) - 1));
         pointsPlusBtn.addEventListener('click', () => updatePointsValue(parseInt(pointsNumberInput.value, 10) + 1));
         dotCountSlider.addEventListener('input', (e) => updatePointsValue(e.target.value));
-        pointsNumberInput.addEventListener('input', (e) => updatePointsValue(e.target.value));
+        pointsNumberInput.addEventListener('input', (e) => updatePointsValue(e.target.value, false));
         pointsNumberInput.addEventListener('blur', (e) => { if (e.target.value === '') updatePointsValue(25); else updatePointsValue(e.target.value); });
-
         [fontSizeSlider, dotSizeSlider, dotColorPicker, hintTypeRadios, thicknessSlider].forEach(el => el.addEventListener('input', updateConfigAndRedraw));
-        imageLoader.addEventListener('change', (e) => handleFile(e.target.files[0]));
-        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('bg-pink-50', 'border-blue-500'); });
-        dropZone.addEventListener('dragleave', (e) => { e.preventDefault(); dropZone.classList.remove('bg-pink-50', 'border-blue-500'); });
-        dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('bg-pink-50', 'border-blue-500'); handleFile(e.dataTransfer.files[0]); });
-
         clearBtn.addEventListener('click', () => { if (state.originalImage) { state.dots = []; updateConfigAndRedraw(); } });
 
+        // 画布交互事件
         let lastTapTime = 0, aDotWasJustDeleted = false;
-        const handleDrawStart = (e) => {
-          if (!state.originalImage) return; e.preventDefault(); aDotWasJustDeleted = false;
-          const currentTime = new Date().getTime();
-          if (currentTime - lastTapTime < 300) {
-            const pos = getEventPos(drawCanvas, e);
-            const dotIndexToDelete = state.dots.findIndex(dot => distance(dot, pos) < state.config.dotRadius + 10);
-            if (dotIndexToDelete !== -1) { state.dots.splice(dotIndexToDelete, 1); redrawDrawCanvas(); aDotWasJustDeleted = true; }
-            lastTapTime = 0; return;
-          }
-          lastTapTime = currentTime;
-          const pos = getEventPos(drawCanvas, e);
-          state.draggedDotIndex = state.dots.findIndex(dot => distance(dot, pos) < state.config.dotRadius + 10);
-          if (state.draggedDotIndex !== -1) drawCanvas.style.cursor = 'grabbing';
-        };
+        const handleDrawStart = (e) => { if (!state.originalImage) return; e.preventDefault(); aDotWasJustDeleted = false; const currentTime = new Date().getTime(); if (currentTime - lastTapTime < 300) { const pos = getEventPos(drawCanvas, e); const dotIndexToDelete = state.dots.findIndex(dot => distance(dot, pos) < state.config.dotRadius + 10); if (dotIndexToDelete !== -1) { state.dots.splice(dotIndexToDelete, 1); redrawDrawCanvas(); aDotWasJustDeleted = true; } lastTapTime = 0; return; } lastTapTime = currentTime; const pos = getEventPos(drawCanvas, e); state.draggedDotIndex = state.dots.findIndex(dot => distance(dot, pos) < state.config.dotRadius + 10); if (state.draggedDotIndex !== -1) drawCanvas.style.cursor = 'grabbing'; };
         const handleDrawMove = (e) => { if (state.draggedDotIndex === -1) return; e.preventDefault(); state.dots[state.draggedDotIndex] = getEventPos(drawCanvas, e); redrawDrawCanvas(); };
-        const handleDrawEnd = (e) => {
-          if (state.draggedDotIndex === -1 && state.originalImage && !aDotWasJustDeleted) {
-            const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-            const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-            const rect = drawCanvas.getBoundingClientRect();
-            state.dots.push({ x: (clientX - rect.left) * (drawCanvas.width / rect.width), y: (clientY - rect.top) * (drawCanvas.height / rect.height) });
-          }
-          state.draggedDotIndex = -1; drawCanvas.style.cursor = 'crosshair'; redrawDrawCanvas();
-        };
+        const handleDrawEnd = (e) => { if (state.draggedDotIndex === -1 && state.originalImage && !aDotWasJustDeleted) { const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX; const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY; const rect = drawCanvas.getBoundingClientRect(); state.dots.push({ x: (clientX - rect.left) * (drawCanvas.width / rect.width), y: (clientY - rect.top) * (drawCanvas.height / rect.height) }); } state.draggedDotIndex = -1; drawCanvas.style.cursor = 'crosshair'; redrawDrawCanvas(); };
         drawCanvas.addEventListener('mousedown', handleDrawStart); drawCanvas.addEventListener('mousemove', handleDrawMove); drawCanvas.addEventListener('mouseup', handleDrawEnd);
         drawCanvas.addEventListener('touchstart', handleDrawStart, { passive: false }); drawCanvas.addEventListener('touchmove', handleDrawMove, { passive: false }); drawCanvas.addEventListener('touchend', handleDrawEnd);
 
-        const handleDownload = (format) => {
-          const canvas = drawCanvas, filename = `connect-the-dots.${format}`;
-          if (format === 'png') {
-            const link = document.createElement('a'); link.download = filename; link.href = canvas.toDataURL('image/png'); link.click();
-          } else if (format === 'pdf') {
-            if (typeof window.jspdf === 'undefined') { alert('PDF library is not loaded yet.'); return; }
-            const { jsPDF } = window.jspdf;
-            const imgData = canvas.toDataURL('image/png'), canvasWidth = canvas.width, canvasHeight = canvas.height;
-            const orientation = canvasWidth > canvasHeight ? 'l' : 'p';
-            const doc = new jsPDF({ orientation, unit: 'px', format: [canvasWidth, canvasHeight] });
-            doc.addImage(imgData, 'PNG', 0, 0, canvasWidth, canvasHeight);
-            doc.save(filename);
-          }
-        };
+        // 下载事件
+        const handleDownload = (format) => { const canvas = drawCanvas, filename = `connect-the-dots.${format}`; if (format === 'png') { const link = document.createElement('a'); link.download = filename; link.href = canvas.toDataURL('image/png'); link.click(); } else if (format === 'pdf') { if (typeof window.jspdf === 'undefined') { alert('PDF library is not loaded yet.'); return; } const { jsPDF } = window.jspdf; const imgData = canvas.toDataURL('image/png'), canvasWidth = canvas.width, canvasHeight = canvas.height; const orientation = canvasWidth > canvasHeight ? 'l' : 'p'; const doc = new jsPDF({ orientation, unit: 'px', format: [canvasWidth, canvasHeight] }); doc.addImage(imgData, 'PNG', 0, 0, canvasWidth, canvasHeight); doc.save(filename); } };
         downloadPngBtn.addEventListener('click', () => handleDownload('png'));
         downloadPdfBtn.addEventListener('click', () => handleDownload('pdf'));
 
-        // New event listener for the retake button
-        if (retakeImageBtn) {
-          retakeImageBtn.addEventListener('click', () => {
-            // Call the existing reset function
-            resetGeneratorState();
-          });
-        }
-
+        // 初始化页面
         resetGeneratorState();
       });
     </script>
+
 
     <section class="py-16 sm:py-24 bg-gray-50 container mx-auto max-w-7xl lg:px-8">
       <div class="container mx-auto px-4">
@@ -3126,13 +2925,11 @@
         const pageUrl = encodeURIComponent(window.location.href);
 
         const links = {
-          facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
-          twitter: `https://twitter.com/intent/tweet?url=${pageUrl}`,
-          reddit: `https://www.reddit.com/submit?url=${pageUrl}`,
-          linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}`,
+          facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=Free Connect the Dots Generator & Printable Worksheets`,
+          twitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=Free Connect the Dots Generator & Printable Worksheets`,
+          reddit: `https://www.reddit.com/submit?url=${pageUrl}&title=Free Connect the Dots Generator & Printable Worksheets`,
+          linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=Free Connect the Dots Generator & Printable Worksheets`,
         };
-        console.log(shareLinksContainer.querySelector('a[aria-label="Share on Facebook"]'));
-
         shareLinksContainer.querySelector('a[aria-label="Share on Facebook"]').href = links.facebook;
         shareLinksContainer.querySelector('a[aria-label="Share on Twitter"]').href = links.twitter;
         shareLinksContainer.querySelector('a[aria-label="Share on Reddit"]').href = links.reddit;
