@@ -9,3 +9,5 @@ generate.js
 ads.txt
 .vercel
 .env*.local
+.htaccess
+adults.html
