@@ -1426,8 +1426,8 @@
                 </div>
                 <div>
                   <label for="font-size-slider" class="block text-sm font-medium leading-6 text-gray-900">Font Size:
-                    <span id="font-size-value" class="font-bold text-primary">16</span></label>
-                  <input type="range" id="font-size-slider" min="8" max="40" value="16"
+                    <span id="font-size-value" class="font-bold text-primary">20</span></label>
+                  <input type="range" id="font-size-slider" min="8" max="40" value="20"
                     class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary mt-2">
                 </div>
               </div>
@@ -1512,15 +1512,19 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         // === State and Constants ===
-        const MAX_WIDTH = 800, MAX_HEIGHT = 600;
-        const DEFAULT_CONFIG = { type: '123', fontSize: 16, hint: 'original', eraseThickness: 5, dotRadius: 5, dotColor: '#000000' };
+        const MAX_WIDTH = 2480, MAX_HEIGHT = 3508;
+        const DEFAULT_CONFIG = { type: '123', fontSize: 20, hint: 'original', eraseThickness: 5, dotRadius: 5, dotColor: '#000000' };
         let state = {
           originalImage: null, canvasDimensions: { width: MAX_WIDTH, height: MAX_HEIGHT },
           dots: [], draggedDotIndex: -1,
           config: { ...DEFAULT_CONFIG },
           internalHintImage: null,
         };
-
+        const getRenderScale = () => {
+          if (!state.canvasDimensions || state.canvasDimensions.width === 0) return 1;
+          // 如果画布宽度是 2400，scale 就是 3。这样 5px 的点就会画成 15px，视觉比例保持一致
+          return Math.max(1, state.canvasDimensions.width / 800);
+        };
         // === DOM Element References ===
         // [新] 新的UI元素引用
         const step1ChoiceArea = document.getElementById('step1-choice-area');
@@ -1559,14 +1563,76 @@
         const distance = (p1, p2) => Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
         const getLabel = (index) => state.config.type === 'ABC' ? String.fromCharCode(65 + index) : (index + 1).toString();
         const updateClearButton = () => { if (clearBtn) clearBtn.disabled = state.dots.length === 0; };
-        const drawDots = (context, dots, config = {}) => dots.forEach(dot => { context.beginPath(); context.arc(dot.x, dot.y, config.radius, 0, 2 * Math.PI); context.fillStyle = config.color; context.strokeStyle = 'black'; context.lineWidth = 1.5; context.fill(); context.stroke(); });
+        const drawDots = (context, dots, config = {}) => {
+          const scale = getRenderScale(); // 获取比例
+          const scaledRadius = config.radius * scale; // 调整点大小
+          const scaledLineWidth = 1.5 * scale; // 调整线宽
+
+          dots.forEach(dot => {
+            context.beginPath();
+            context.arc(dot.x, dot.y, config.radius * scale, 0, 2 * Math.PI);
+            context.fillStyle = config.color;
+            context.strokeStyle = 'black';
+            context.lineWidth = scaledLineWidth;
+            context.fill();
+            context.stroke();
+          });
+        };
         const calculateCentroid = (dots) => { if (dots.length === 0) { return { x: state.canvasDimensions.width / 2, y: state.canvasDimensions.height / 2 }; } const total = dots.reduce((acc, dot) => ({ x: acc.x + dot.x, y: acc.y + dot.y }), { x: 0, y: 0 }); return { x: total.x / dots.length, y: total.y / dots.length }; };
-        const drawNumbers = (context, dots, centroid) => { context.fillStyle = 'black'; context.font = `${state.config.fontSize}px Arial`; context.textAlign = 'center'; context.textBaseline = 'middle'; dots.forEach((dot, index) => { const dx = dot.x - centroid.x; const dy = dot.y - centroid.y; const magnitude = Math.sqrt(dx * dx + dy * dy); let nx = 0; let ny = -1; if (magnitude > 0) { nx = dx / magnitude; ny = dy / magnitude; } const offset = state.config.dotRadius + state.config.fontSize * 0.75; const labelX = dot.x + nx * offset; const labelY = dot.y + ny * offset; context.fillText(getLabel(index), labelX, labelY); }); };
+        const drawNumbers = (context, dots, centroid) => {
+          const scale = getRenderScale(); // 获取比例
+          // 调整字体大小和偏移量
+          const scaledFontSize = state.config.fontSize * scale;
+          const scaledDotRadius = state.config.dotRadius * scale;
+
+          context.fillStyle = 'black';
+          context.font = `${scaledFontSize}px Arial`; // 应用字体大小
+          context.textAlign = 'center';
+          context.textBaseline = 'middle';
+
+          dots.forEach((dot, index) => {
+            const dx = dot.x - centroid.x;
+            const dy = dot.y - centroid.y;
+            const magnitude = Math.sqrt(dx * dx + dy * dy);
+            let nx = 0;
+            let ny = -1;
+            if (magnitude > 0) {
+              nx = dx / magnitude;
+              ny = dy / magnitude;
+            }
+            // 调整文字与点的距离
+            const offset = scaledDotRadius + scaledFontSize * 0.75;
+            const labelX = dot.x + nx * offset;
+            const labelY = dot.y + ny * offset;
+            context.fillText(getLabel(index), labelX, labelY);
+          });
+        };
 
         // --- Core Drawing and State Functions (微调) ---
-        const redrawDrawCanvas = () => { const context = drawCtx, canvas = drawCanvas; context.clearRect(0, 0, canvas.width, canvas.height); if (state.config.hint === 'original' && state.originalImage) { context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); } else if (state.config.hint === 'trace' && state.originalImage) { context.globalAlpha = 0.3; context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); context.globalAlpha = 1.0; } else if (state.config.hint === 'internal' && state.internalHintImage) { context.drawImage(state.internalHintImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); } const centroid = calculateCentroid(state.dots); drawDots(context, state.dots, { color: state.config.dotColor, radius: state.config.dotRadius }); drawNumbers(context, state.dots, centroid); pointsCounter.textContent = state.dots.length; updateClearButton(); };
+        const redrawDrawCanvas = () => {
+          const context = drawCtx, canvas = drawCanvas; context.clearRect(0, 0, canvas.width, canvas.height); if (state.config.hint === 'original' && state.originalImage) { context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); } else if (state.config.hint === 'trace' && state.originalImage) { context.globalAlpha = 0.3; context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); context.globalAlpha = 1.0; } else if (state.config.hint === 'internal' && state.internalHintImage) { context.drawImage(state.internalHintImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); } const centroid = calculateCentroid(state.dots);
+          drawDots(context, state.dots, { color: state.config.dotColor, radius: state.config.dotRadius }); drawNumbers(context, state.dots, centroid); pointsCounter.textContent = state.dots.length; updateClearButton();
+        };
         const updateConfigAndRedraw = () => { state.config.fontSize = parseInt(fontSizeSlider.value, 10); state.config.dotRadius = parseInt(dotSizeSlider.value, 10); state.config.dotColor = dotColorPicker.value; state.config.hint = document.querySelector('input[name="hint-type"]:checked').value; state.config.eraseThickness = parseInt(thicknessSlider.value, 10); fontSizeValue.textContent = fontSizeSlider.value; dotSizeValue.textContent = dotSizeSlider.value; thicknessValue.textContent = thicknessSlider.value; thicknessContainer.classList.toggle('hidden', state.config.hint !== 'internal'); state.internalHintImage = (state.config.hint === 'internal' && typeof cv !== 'undefined') ? generateInternalHintImage(state.config.eraseThickness) : null; redrawDrawCanvas(); };
-        const generateInternalHintImage = (thickness) => { if (!state.originalImage || typeof cv === 'undefined') return null; const tempCanvas = document.createElement('canvas'); tempCanvas.width = state.canvasDimensions.width; tempCanvas.height = state.canvasDimensions.height; tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height); let src, gray, binary, contours, hierarchy, resultMat = null; try { src = cv.imread(tempCanvas); resultMat = src.clone(); gray = new cv.Mat(); binary = new cv.Mat(); cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0); cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU); contours = new cv.MatVector(); hierarchy = new cv.Mat(); cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE); cv.drawContours(resultMat, contours, -1, new cv.Scalar(255, 255, 255, 255), thickness); const offscreenCanvas = document.createElement('canvas'); offscreenCanvas.width = state.canvasDimensions.width; offscreenCanvas.height = state.canvasDimensions.height; cv.imshow(offscreenCanvas, resultMat); return offscreenCanvas; } catch (error) { console.error("Hint image generation error:", error); return null; } finally { if (src) src.delete(); if (gray) gray.delete(); if (binary) binary.delete(); if (contours) contours.delete(); if (hierarchy) hierarchy.delete(); if (resultMat) resultMat.delete(); } };
+        const generateInternalHintImage = (thickness) => {
+          if (!state.originalImage || typeof cv === 'undefined') return null;
+          const tempCanvas = document.createElement('canvas');
+          tempCanvas.width = state.canvasDimensions.width;
+          tempCanvas.height = state.canvasDimensions.height; tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
+          let src, gray, binary, contours, hierarchy, resultMat = null;
+          try {
+            src = cv.imread(tempCanvas); resultMat = src.clone(); gray = new cv.Mat();
+            binary = new cv.Mat(); cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
+            cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU);
+            contours = new cv.MatVector(); hierarchy = new cv.Mat();
+            cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+            const scale = getRenderScale();
+            cv.drawContours(resultMat, contours, -1, new cv.Scalar(255, 255, 255, 255), thickness * scale);
+            const offscreenCanvas = document.createElement('canvas');
+            offscreenCanvas.width = state.canvasDimensions.width; offscreenCanvas.height = state.canvasDimensions.height;
+            cv.imshow(offscreenCanvas, resultMat); return offscreenCanvas;
+          } catch (error) { console.error("Hint image generation error:", error); return null; } finally { if (src) src.delete(); if (gray) gray.delete(); if (binary) binary.delete(); if (contours) contours.delete(); if (hierarchy) hierarchy.delete(); if (resultMat) resultMat.delete(); }
+        };
 
         // [新] 全局状态重置函数
         const resetGeneratorState = () => {
@@ -1827,7 +1893,44 @@
         drawCanvas.addEventListener('touchstart', handleDrawStart, { passive: false }); drawCanvas.addEventListener('touchmove', handleDrawMove, { passive: false }); drawCanvas.addEventListener('touchend', handleDrawEnd);
 
         // 下载事件
-        const handleDownload = (format) => { const canvas = drawCanvas, filename = `connect-the-dots.${format}`; if (format === 'png') { const link = document.createElement('a'); link.download = filename; link.href = canvas.toDataURL('image/png'); link.click(); } else if (format === 'pdf') { if (typeof window.jspdf === 'undefined') { alert('PDF library is not loaded yet.'); return; } const { jsPDF } = window.jspdf; const imgData = canvas.toDataURL('image/png'), canvasWidth = canvas.width, canvasHeight = canvas.height; const orientation = canvasWidth > canvasHeight ? 'l' : 'p'; const doc = new jsPDF({ orientation, unit: 'px', format: [canvasWidth, canvasHeight] }); doc.addImage(imgData, 'PNG', 0, 0, canvasWidth, canvasHeight); doc.save(filename); } };
+        const handleDownload = (format) => {
+          const canvas = drawCanvas, filename = `connect-the-dots.${format}`; if (format === 'png') { const link = document.createElement('a'); link.download = filename; link.href = canvas.toDataURL('image/png'); link.click(); }
+          else if (format === 'pdf') {
+
+            if (typeof window.jspdf === 'undefined') {
+              alert('PDF library is not loaded yet.');
+              return;
+            }
+            const { jsPDF } = window.jspdf;
+            const imgData = canvas.toDataURL('image/png'); // PNG 是无损的，质量最好
+
+            // 使用 A4 纸尺寸 (单位 mm)
+            // A4 尺寸: 210mm x 297mm
+            const orientation = canvas.width > canvas.height ? 'l' : 'p';
+            const doc = new jsPDF({
+              orientation,
+              unit: 'mm',
+              format: 'a4'
+            });
+
+            // 计算图片在 PDF 中的宽高，以适应 A4 纸
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const widthRatio = pageWidth / canvas.width;
+            const heightRatio = pageHeight / canvas.height;
+            const ratio = widthRatio < heightRatio ? widthRatio : heightRatio;
+
+            const imgWidth = canvas.width * ratio;
+            const imgHeight = canvas.height * ratio;
+
+            // 居中图片
+            const x = (pageWidth - imgWidth) / 2;
+            const y = (pageHeight - imgHeight) / 2;
+
+            doc.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+            doc.save(filename);
+          }
+        };
         downloadPngBtn.addEventListener('click', () => handleDownload('png'));
         downloadPdfBtn.addEventListener('click', () => handleDownload('pdf'));
 
