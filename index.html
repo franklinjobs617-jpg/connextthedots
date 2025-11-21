@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en-US">
 
 <head>
@@ -36,1079 +35,6 @@
 
 
   <script async src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    /* START OF PROVIDED INLINE CSS */
-    *,
-    ::before,
-    ::after {
-      box-sizing: border-box;
-      border-width: 0;
-      border-style: solid;
-      border-color: #e5e7eb;
-    }
-
-    html {
-      line-height: 1.5;
-      -webkit-text-size-adjust: 100%;
-      -moz-tab-size: 4;
-      tab-size: 4;
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      font-feature-settings: normal;
-      font-variation-settings: normal;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    .header-title {
-      font-size: 1rem;
-      line-height: 1.2rem;
-    }
-
-    @media screen and (min-width: 640px) {
-      .header-title {
-        font-size: 1.5rem;
-        line-height: 2rem;
-      }
-    }
-
-    body {
-      margin: 0;
-      line-height: inherit;
-    }
-
-    .flex {
-      display: flex;
-    }
-
-    /* Critical layout styles */
-    .sticky {
-      position: sticky;
-    }
-
-    .top-0 {
-      top: 0px;
-    }
-
-    .z-50 {
-      z-index: 50;
-    }
-
-    .bg-white {
-      background-color: rgb(255 255 255 / 1);
-    }
-
-    .shadow-md {
-      --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-      --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    }
-
-    .container {
-      width: 100%;
-    }
-
-    .mx-auto {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .px-4 {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-
-    .py-3 {
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-    }
-
-    .flex {
-      display: flex;
-    }
-
-    .flex-wrap {
-      flex-wrap: wrap;
-    }
-
-    .items-center {
-      align-items: center;
-    }
-
-    .justify-between {
-      justify-content: space-between;
-    }
-
-    .text-primary {
-      color: rgb(79 70 229 / 1);
-    }
-
-    .text-xl {
-      font-size: 1.25rem;
-      line-height: 1.75rem;
-    }
-
-    .font-bold {
-      font-weight: 700;
-    }
-
-    .h-\[30px\] {
-      height: 30px;
-    }
-
-    .flex-col {
-      flex-direction: column;
-    }
-
-    .w-\[30px\] {
-      width: 30px;
-    }
-
-    .mr-2 {
-      margin-right: 0.5rem;
-    }
-
-    /* Hero section styles */
-    .bg-gradient-to-r {
-      background-image: linear-gradient(to right, var(--tw-gradient-stops));
-    }
-
-    .from-primary {
-      --tw-gradient-from: #4F46E5 var(--tw-gradient-from-position);
-      --tw-gradient-to: rgb(79 70 229 / 0) var(--tw-gradient-to-position);
-      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-    }
-
-    .to-primary\/80 {
-      --tw-gradient-to: rgb(79 70 229 / 0.8) var(--tw-gradient-to-position);
-    }
-
-    .text-white {
-      color: rgb(255 255 255 / 1);
-    }
-
-    .py-16 {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-    }
-
-    .md\:py-24 {
-      @media (min-width: 768px) {
-        padding-top: 6rem;
-        padding-bottom: 6rem;
-      }
-    }
-
-    .md\:flex-row {
-      @media (min-width: 768px) {
-        flex-direction: row;
-      }
-    }
-
-    .md\:w-1\/2 {
-      @media (min-width: 768px) {
-        width: 50%;
-      }
-    }
-
-    .mb-10 {
-      margin-bottom: 2.5rem;
-    }
-
-    .md\:mb-0 {
-      @media (min-width: 768px) {
-        margin-bottom: 0px;
-      }
-    }
-
-    .text-\[clamp\(2rem\,5vw\,2\.5rem\)\] {
-      font-size: clamp(2rem, 5vw, 2.5rem);
-    }
-
-    .leading-tight {
-      line-height: 1.25;
-    }
-
-    .mb-4 {
-      margin-bottom: 1rem;
-    }
-
-    .mb-8 {
-      margin-bottom: 2rem;
-    }
-
-    .text-white\/90 {
-      color: rgb(255 255 255 / 0.9);
-    }
-
-    .flex-wrap {
-      flex-wrap: wrap;
-    }
-
-    .gap-4 {
-      gap: 1rem;
-    }
-
-    .bg-white {
-      background-color: rgb(255 255 255 / 1);
-    }
-
-    .px-6 {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-
-    .py-3 {
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-    }
-
-    .rounded-lg {
-      border-radius: 0.5rem;
-    }
-
-    .font-semibold {
-      font-weight: 600;
-    }
-
-    .hover\:bg-opacity-90:hover {
-      background-color: rgb(255 255 255 / 0.9);
-    }
-
-    .transition {
-      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      transition-duration: 150ms;
-    }
-
-    .shadow-lg {
-      --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    }
-
-    .bg-secondary {
-      background-color: #C70076;
-    }
-
-    .hover\:bg-secondary\/90:hover {
-      background-color: rgb(199 0 118 / 0.9);
-    }
-
-    .rounded-lg {
-      border-radius: 0.5rem;
-    }
-
-    .shadow-xl {
-      --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-      --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    }
-
-    /* Mobile navigation */
-    .hidden {
-      display: none;
-    }
-
-    .md\:flex {
-      @media (min-width: 768px) {
-        display: flex;
-      }
-    }
-
-    .md\:hidden {
-      @media (min-width: 768px) {
-        display: none;
-      }
-    }
-
-    .space-x-6> :not([hidden])~ :not([hidden]) {
-      margin-left: 1.5rem;
-    }
-
-    .font-medium {
-      font-weight: 500;
-    }
-
-    .hover\:text-primary:hover {
-      color: rgb(79 70 229 / 1);
-    }
-
-    .text-neutral {
-      color: #1F2937;
-    }
-
-    .hover\:text-primary:hover {
-      color: rgb(79 70 229 / 1);
-    }
-
-    .border-t {
-      border-top-width: 1px;
-    }
-
-    .py-2 {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .space-y-3> :not([hidden])~ :not([hidden]) {
-      margin-top: 0.75rem;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-
-    /* Responsive container */
-    @media (min-width: 640px) {
-      .container {
-        max-width: 640px;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .container {
-        max-width: 768px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .container {
-        max-width: 1024px;
-      }
-    }
-
-    @media (min-width: 1280px) {
-      .container {
-        max-width: 1280px;
-      }
-    }
-
-    @media (min-width: 1536px) {
-      .container {
-        max-width: 1536px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .lg\:flex-row {
-        flex-direction: row;
-      }
-    }
-
-    .aspect-video {
-      aspect-ratio: 16 / 9;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .flex-col.md\:flex-row {
-      transition: none;
-    }
-
-
-    /*
-    * 此CSS旨在尽可能精确地还原原始HTML中由Tailwind CSS类定义的布局和空间关系。
-    * 重点是确保元素的位置、大小和相互间距与Tailwind渲染结果一致，
-    * 而不强调颜色、字体、阴影等视觉细节，除非它们直接影响布局（例如border宽度）。
-    *
-    * 注意: Tailwind CSS包含一个“preflight”基础样式重置。
-    * 此纯CSS转换不包括完整的基线重置，因此某些默认浏览器样式可能与
-    * 真实的Tailwind页面略有不同，除非提供更全面的基础样式。
-    */
-
-    /* --- 基础布局和响应式 --- */
-    .mx-auto {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .max-w-7xl {
-      max-width: 80rem;
-      /* 1280px */
-    }
-
-    .max-w-3xl {
-      max-width: 48rem;
-      /* 768px */
-    }
-
-    .px-6 {
-      padding-left: 1.5rem;
-      /* 24px */
-      padding-right: 1.5rem;
-      /* 24px */
-    }
-
-    .py-16 {
-      padding-top: 4rem;
-      /* 64px */
-      padding-bottom: 4rem;
-      /* 64px */
-    }
-
-    @media (min-width: 640px) {
-
-      /* sm */
-      .sm\:py-24 {
-        padding-top: 6rem;
-        /* 96px */
-        padding-bottom: 6rem;
-        /* 96px */
-      }
-    }
-
-    @media (min-width: 1024px) {
-
-      /* lg */
-      .lg\:px-8 {
-        padding-left: 2rem;
-        /* 32px */
-        padding-right: 2rem;
-        /* 32px */
-      }
-    }
-
-    /* 模拟 space-y-* 和 gap-* 的间隔 */
-    .space-y-2> :not([hidden])~ :not([hidden]) {
-      margin-top: 0.5rem;
-    }
-
-    .space-y-4> :not([hidden])~ :not([hidden]) {
-      margin-top: 1rem;
-    }
-
-    .space-y-8> :not([hidden])~ :not([hidden]) {
-      margin-top: 2rem;
-    }
-
-    .gap-2 {
-      gap: 0.5rem;
-    }
-
-    .gap-4 {
-      gap: 1rem;
-    }
-
-    .gap-x-6 {
-      column-gap: 1.5rem;
-    }
-
-    .gap-y-12 {
-      row-gap: 3rem;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-
-    /* --- Section: generate-setion --- */
-    #generate-setion {
-      /* 直接应用 max-w-7xl, px-6, py-16 的效果 */
-      max-width: 80rem;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-    }
-
-    @media (min-width: 640px) {
-
-      /* sm */
-      #generate-setion {
-        padding-top: 6rem;
-        padding-bottom: 6rem;
-      }
-    }
-
-    @media (min-width: 1024px) {
-
-      /* lg */
-      #generate-setion {
-        padding-left: 2rem;
-        padding-right: 2rem;
-      }
-    }
-
-    /* --- Step 1: Upload Area --- */
-    #step1-upload-area>.mx-auto.max-w-3xl.text-center {
-      max-width: 48rem;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-
-    #step1-upload-area .mx-auto.max-w-3xl.mt-12 {
-      max-width: 48rem;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 3rem;
-      /* mt-12 */
-      border: 1px solid #e5e7eb;
-      /* border border-gray-200 */
-      border-radius: 0.75rem;
-      /* rounded-xl */
-      overflow: hidden;
-    }
-
-    /* Inspiration Tabs Navigation */
-    #inspiration-tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: -1px;
-      /* -mb-px */
-      border-bottom: 1px solid #e5e7eb;
-      /* border-b border-gray-200 (applied to parent for layout) */
-    }
-
-    @media (min-width: 640px) {
-
-      /* sm */
-      #inspiration-tabs {
-        justify-content: flex-start;
-        /* sm:justify-start */
-      }
-    }
-
-    .inspiration-tab {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      border-bottom: 2px solid transparent;
-      /* border-b-2 */
-      padding: 1rem 0.25rem;
-      /* py-4 px-1 */
-      width: 100%;
-      /* w-full */
-    }
-
-    @media (min-width: 640px) {
-
-      /* sm */
-      .inspiration-tab {
-        width: 50%;
-        /* sm:w-1/2 */
-      }
-    }
-
-    .inspiration-tab svg {
-      height: 1.25rem;
-      /* h-5 */
-      width: 1.25rem;
-      /* w-5 */
-      margin-right: 0.5rem;
-      /* mr-2 */
-    }
-
-    /* Inspiration Content Area */
-    #step1-upload-area .p-6 {
-      padding: 1.5rem;
-      /* p-6 */
-    }
-
-
-    #prompts-content .mb-4 {
-      margin-bottom: 1rem;
-      /* mb-4 */
-    }
-
-    #prompts-content .relative {
-      position: relative;
-      padding: 1rem;
-      /* p-4 */
-      border: 1px solid #e5e7eb;
-      /* border */
-      border-radius: 0.5rem;
-      /* rounded-lg */
-    }
-
-    #prompt-display {
-      padding-right: 2.5rem;
-      /* pr-10, enough space for copy button */
-    }
-
-    #copy-prompt-btn {
-      position: absolute;
-      top: 0.75rem;
-      /* top-3 */
-      right: 0.75rem;
-      /* right-3 */
-      padding: 0.5rem;
-      /* p-2 */
-      border-radius: 0.375rem;
-      /* rounded-md */
-    }
-
-    #copy-prompt-btn svg {
-      height: 1.25rem;
-      /* h-5 */
-      width: 1.25rem;
-      /* w-5 */
-    }
-
-    #copy-feedback {
-      position: absolute;
-      top: -2rem;
-      /* -top-8 */
-      left: 50%;
-      /* left-1/2 */
-      transform: translateX(-50%);
-      /* -translate-x-1/2 */
-      padding: 0.25rem 0.5rem;
-      /* px-2 py-1 */
-      border-radius: 0.375rem;
-      /* rounded-md */
-      opacity: 0;
-      /* hidden visually */
-      white-space: nowrap;
-    }
-
-    #new-prompt-btn {
-      margin-top: 1rem;
-      /* mt-4 */
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.5rem 1rem;
-      /* px-4 py-2 */
-      gap: 0.5rem;
-      /* gap-2 */
-      border: 1px solid #d1d5db;
-      /* border border-gray-300 */
-      border-radius: 0.375rem;
-      /* rounded-md */
-    }
-
-    #new-prompt-btn svg {
-      height: 1.25rem;
-      /* h-5 */
-      width: 1.25rem;
-      /* w-5 */
-    }
-
-    #examples-content .mb-4 {
-      margin-bottom: 1rem;
-      /* mb-4 */
-    }
-
-    #examples-content .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      /* grid-cols-2 */
-      gap: 1rem;
-      /* gap-4 */
-    }
-
-    @media (min-width: 640px) {
-
-      /* sm */
-      #examples-content .grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        /* sm:grid-cols-4 */
-      }
-    }
-
-    #examples-content img {
-      object-fit: cover;
-      /* object-cover */
-      width: 100%;
-      /* w-full */
-      height: 100%;
-      /* h-full */
-      border-radius: 0.375rem;
-      /* rounded-md */
-      border: 1px solid #e5e7eb;
-      /* border border-gray-200 */
-    }
-
-    /* Drop Zone */
-    #drop-zone {
-      margin-top: 2.5rem;
-      /* mt-10 */
-      display: flex;
-      justify-content: center;
-      border-radius: 0.5rem;
-      border: 1px dashed rgba(17, 24, 39, 0.25);
-      padding: 2.5rem 1.5rem;
-      opacity: 0.5;
-      pointer-events: none;
-      cursor: not-allowed;
-    }
-
-    #drop-zone .text-center {
-      text-align: center;
-    }
-
-    #drop-zone svg.mx-auto {
-      margin-left: auto;
-      margin-right: auto;
-      height: 4rem;
-      /* h-16 */
-      width: 4rem;
-      /* w-16 */
-    }
-
-    #drop-zone .mt-4 {
-      margin-top: 1rem;
-      /* mt-4 */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    #drop-zone label {
-      position: relative;
-      border-radius: 0.375rem;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    #drop-zone p.pl-1 {
-      padding-left: 0.25rem;
-      /* pl-1 */
-    }
-
-    #opencv-status {
-      text-align: center;
-      margin-top: 1rem;
-      /* mt-4 */
-    }
-
-    /* --- Generator Main Area --- */
-    #generator-main-area {
-      /* hidden */
-      margin-top: 2rem;
-      /* mt-16 */
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-      /* grid-cols-1 */
-      row-gap: 3rem;
-      /* gap-y-12 */
-      column-gap: 4rem;
-      /* gap-x-16 */
-    }
-
-    @media (min-width: 768px) {
-
-      #generator-main-area>div:first-child {
-        /* md:col-span-1 */
-        grid-column: span 1 / span 1;
-      }
-
-      #generator-main-area>div:last-child {
-        /* md:col-span-2 */
-        grid-column: span 2 / span 2;
-      }
-    }
-
-
-    /* Left Sidebar */
-    #source-image-info {
-      display: none;
-      /* hidden */
-      padding-bottom: 1rem;
-      /* pb-4 */
-      border-bottom: 1px solid #e5e7eb;
-      /* border-b border-gray-200 */
-    }
-
-    #source-image-info .flex {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    #source-image-info p#current-filename {
-      margin-top: 0.25rem;
-      /* mt-1 */
-    }
-
-    /* Points & Dots / Style / Hint Sections */
-    .space-y-8>div:not([hidden])~div:not([hidden]) {
-      margin-top: 2rem;
-      /* space-y-8 applies to direct children div */
-    }
-
-    hr.border-gray-200 {
-      border-top: 1px solid #e5e7eb;
-      /* border-gray-200 */
-      margin: 0;
-      /* Remove default margins */
-    }
-
-    .mt-4 {
-      margin-top: 1rem;
-      /* mt-4 */
-    }
-
-    .flex.items-center.gap-2 {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      /* gap-2 */
-      margin-top: 0.5rem;
-      /* mt-2 */
-    }
-
-    button.flex-shrink-0 {
-      flex-shrink: 0;
-      width: 2rem;
-      /* w-8 */
-      height: 2rem;
-      /* h-8 */
-      border-radius: 9999px;
-      /* rounded-full */
-      border: none;
-      /* To ensure button size is exact */
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      /* w-full */
-      height: 0.5rem;
-      /* h-2 */
-      border-radius: 0.5rem;
-      /* rounded-lg */
-      -webkit-appearance: none;
-      /* appearance-none */
-      appearance: none;
-      cursor: pointer;
-    }
-
-    input[type="number"] {
-      width: 5rem;
-      /* w-20 */
-      border-radius: 0.375rem;
-      /* rounded-md */
-      border: 1px solid #d1d5db;
-      /* border-gray-300 */
-      text-align: center;
-      padding: 0.375rem 0.25rem;
-      /* approximate py-1.5 */
-    }
-
-    button#clear-btn {
-      width: 100%;
-      /* w-full */
-      border-radius: 0.375rem;
-      /* rounded-md */
-      padding: 0.625rem 0.875rem;
-      /* px-3.5 py-2.5 */
-      border: 1px solid #d1d5db;
-      /* ring-1 ring-inset ring-gray-300 */
-    }
-
-    button#clear-btn:disabled {
-      opacity: 0.5;
-      /* disabled:opacity-50 */
-      cursor: not-allowed;
-      /* disabled:cursor-not-allowed */
-    }
-
-    .grid.grid-cols-2.gap-4.items-end {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      /* grid-cols-2 */
-      gap: 1rem;
-      /* gap-4 */
-      align-items: flex-end;
-      /* items-end */
-    }
-
-    input#dot-color-picker {
-      margin-top: 0.5rem;
-      /* mt-2 */
-      width: 100%;
-      /* w-full */
-      height: 2.5rem;
-      /* h-10 */
-      padding: 0.25rem;
-      /* p-1 */
-      border: 1px solid #d1d5db;
-      /* border border-gray-300 */
-      border-radius: 0.5rem;
-      /* rounded-lg */
-    }
-
-    #hint-type-radios .space-y-2>label:not([hidden])~label:not([hidden]) {
-      margin-top: 0.5rem;
-      /* space-y-2 */
-    }
-
-    #hint-type-radios label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      /* gap-2 */
-      cursor: pointer;
-    }
-
-    /* FIX: Removed explicit 'display: none;' here. Its visibility will now be controlled by JS adding/removing the 'hidden' class. */
-    #thickness-container {
-      /* display: none; */
-      margin-top: 1rem;
-      /* mt-4 */
-    }
-
-
-    /* Right Canvas Area */
-    .md\:col-span-2 {
-      /* Layout already handled by parent grid */
-    }
-
-    .flex.flex-col.lg\:flex-row.items-center.justify-between.mb-4 {
-      display: flex;
-      flex-direction: column;
-      /* flex-col */
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-      /* mb-4 */
-    }
-
-    @media (min-width: 1024px) {
-
-      /* lg */
-      .flex.flex-col.lg\:flex-row.items-center.justify-between.mb-4 {
-        flex-direction: row;
-        /* lg:flex-row */
-      }
-    }
-
-    .text-sm.text-gray-500.mb-3.lg\:m-0 {
-      margin-bottom: 0.75rem;
-      /* mb-3 */
-    }
-
-    @media (min-width: 1024px) {
-
-      /* lg */
-      .text-sm.text-gray-500.mb-3.lg\:m-0 {
-        margin: 0;
-        /* lg:m-0 */
-      }
-    }
-
-    #step3-download-area {
-      text-align: center;
-    }
-
-    #step3-download-area .flex.items-center.justify-center.gap-x-6 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      column-gap: 1.5rem;
-      /* gap-x-6 */
-    }
-
-    #download-png-btn,
-    #download-pdf-btn {
-      border-radius: 0.375rem;
-      /* rounded-md */
-      padding: 0.75rem 1rem;
-      /* px-4 py-3 */
-      border: 1px solid #d1d5db;
-      /* ring-1 ring-inset ring-gray-300 on pdf, png has no ring */
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      /* shadow-sm */
-    }
-
-    #download-png-btn:disabled,
-    #download-pdf-btn:disabled {
-      opacity: 0.5;
-      /* disabled:opacity-50 */
-      cursor: not-allowed;
-      /* disabled:cursor-not-allowed */
-    }
-
-    /* Canvas Container */
-    .relative.aspect-\[4\/3\].w-full {
-      position: relative;
-      aspect-ratio: 4 / 3;
-      /* aspect-[4/3] */
-      width: 100%;
-      /* w-full */
-      border-radius: 0.5rem;
-      /* rounded-lg */
-      border: 1px dashed rgba(17, 24, 39, 0.25);
-      /* border border-dashed border-gray-900/25 */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.5rem;
-      /* p-2 */
-    }
-
-    /* FIX: Removed conflicting 'display' declarations.
-             #canvas-loader starts with 'hidden' class, meaning display: none.
-             When 'hidden' is removed by JS, 'flex-col' will make it display: flex. */
-    #canvas-loader {
-      /* display: none; */
-      position: absolute;
-      inset: 0;
-      /* display: flex; */
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-    }
-
-    #canvas-loader svg {
-      height: 2rem;
-      /* h-8 */
-      width: 2rem;
-      /* w-8 */
-    }
-
-    #canvas-loader p {
-      margin-top: 0.5rem;
-      /* mt-2 */
-    }
-
-    #draw-canvas {
-      max-width: 100%;
-      /* max-w-full */
-      max-height: 100%;
-      /* max-h-full */
-      border-radius: 0.5rem;
-      /* rounded-lg */
-      cursor: crosshair;
-    }
-
-    .text-lg.text-gray-500.leading-tight.mt-2 {
-      margin-top: 0.5rem;
-      /* mt-2 */
-    }
-
-    /* END OF PROVIDED INLINE CSS */
-  </style>
 
   <link rel="preload" href="./dist/output.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
@@ -1130,7 +56,6 @@
       y.parentNode.insertBefore(t, y);
     })(window, document, "clarity", "script", "tf6ljm5fsf");
   </script>
-
 </head>
 
 <body>
@@ -1146,9 +71,11 @@
       </a>
       <nav class="hidden md:flex space-x-6">
         <a href="/" class="font-bold text-primary hover:text-primary/80 transition">Home</a>
-        <a href="/printable-connect-the-dots.html" class="font-medium  hover:text-primary transition">All Printables</a>
+        <a href="/printable-connect-the-dots.html" class="font-medium  hover:text-primary transition">All
+          Printables</a>
         <a href="/how-to-make.html" class="font-medium hover:text-primary transition">How to Make</a><a
-          href="/christmas-printables.html" class="font-medium hover:text-primary transition">Christmas Printables</a>
+          href="/christmas-printables.html" class="font-medium hover:text-primary transition">Christmas
+          Printables</a>
         <a href="#generate-setion" class="font-medium hover:text-primary transition"> Custom Generator</a>
 
         <a href="/privacy.html" class="font-medium hover:text-primary transition">Privacy</a>
@@ -1173,7 +100,8 @@
           Printables</a>
         <a href="/how-to-make.html" class="py-2 font-medium hover:text-primary transition">How to Make</a><a
           href="/christmas-printables.html" class="py-2 font-medium hover:text-primary transition">Christmas
-          <a href="#generate-setion" class="py-2 font-medium hover:text-primary transition"> Custom Generator</a>
+          <a href="#generate-setion" class="py-2 font-medium hover:text-primary transition"> Custom
+            Generator</a>
 
           Printables</a>
         <a href="/privacy.html" class="py-2 font-medium hover:text-primary transition">Privacy</a>
@@ -1232,8 +160,10 @@
 
     <section class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8" id="generate-setion">
       <div class="mx-auto max-w-3xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create Your Custom Connect-the-Dots</h2>
-        <p class="mt-2 text-lg leading-8 text-gray-600">Turn any picture into a fun connect-the-dots activity.</p>
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create Your Custom
+          Connect-the-Dots</h2>
+        <p class="mt-2 text-lg leading-8 text-gray-600">Turn any picture into a fun connect-the-dots activity.
+        </p>
       </div>
 
       <!-- [新] 步骤一：选择图片来源的卡片 -->
@@ -1254,7 +184,8 @@
               </svg>
               <h3 class="text-xl font-bold text-gray-800">Upload Your Image</h3>
             </div>
-            <p class="text-gray-600">Choose your own photo or line drawing to convert into a dot-to-dot puzzle.</p>
+            <p class="text-gray-600">Choose your own photo or line drawing to convert into a dot-to-dot
+              puzzle.</p>
           </div>
           <!-- 选项 B: 用 AI 生成 -->
           <div id="ai-choice-card"
@@ -1266,7 +197,8 @@
               </svg>
               <h3 class="text-xl font-bold text-gray-800">Generate with AI</h3>
             </div>
-            <p class="text-gray-600">No image? Describe what you want, and let AI create the perfect line art for you.
+            <p class="text-gray-600">No image? Describe what you want, and let AI create the perfect line
+              art for you.
             </p>
           </div>
         </div>
@@ -1276,14 +208,16 @@
           <!-- 此处将动态加载上传或AI生成UI -->
         </div>
 
-        <p id="opencv-status" class="text-center text-sm text-gray-400 mt-4">Initializing generator, please wait...</p>
+        <p id="opencv-status" class="text-center text-sm text-gray-400 mt-4">Initializing generator, please
+          wait...</p>
       </div>
 
       <!-- [新] 灵感区域（示例图片） -->
       <div id="inspiration-area" class="mt-12">
         <div class="text-center">
           <h3 class="text-2xl font-bold text-gray-800">Need Inspiration?</h3>
-          <p class="text-gray-600 mt-2">Simple line drawings with clear outlines work best. Click an example to try it!
+          <p class="text-gray-600 mt-2">Simple line drawings with clear outlines work best. Click an example
+            to try it!
           </p>
         </div>
         <div id="examples-content" class="mt-6">
@@ -1314,7 +248,8 @@
       <!-- [模板] AI 生成UI模板 (默认隐藏) -->
       <div id="ai-generate-template" class="hidden">
         <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <p class="text-sm text-gray-600 mb-4">Describe the simple line drawing you want to create (e.g., "a happy
+          <p class="text-sm text-gray-600 mb-4">Describe the simple line drawing you want to create (e.g., "a
+            happy
             cartoon puppy"). We will optimize the prompt for the best results.</p>
           <div class="space-y-4">
             <textarea id="ai-prompt-input" rows="3" placeholder="e.g., A funny little elephant wearing a hat"
@@ -1332,7 +267,8 @@
           <div id="ai-status-area" class="mt-4 text-center hidden">
             <svg id="ai-loader" class="animate-spin h-5 w-5 text-primary mx-auto" xmlns="http://www.w3.org/2000/svg"
               fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+              </circle>
               <path class="opacity-75" fill="currentColor"
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
               </path>
@@ -1354,7 +290,7 @@
             </svg>
             <div class="mt-4 flex flex-col justify-center text-lg leading-6 text-gray-600">
               <label for="image-loader"
-                class="relative rounded-md bg-white text-center font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-primary/80 transition-colors">
+                class="relative rounded-md cursor-pointer bg-white text-center font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-primary/80 transition-colors">
                 <span>Upload an image</span>
                 <input id="image-loader" name="image-loader" type="file" class="sr-only" accept="image/*">
               </label>
@@ -1507,437 +443,63 @@
       </div>
     </section>
 
-    <!-- 剩余部分保持不变 -->
+    <!-- Image Type Selection Modal -->
+    <div id="image-type-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title"
+      role="dialog" aria-modal="true">
+      <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div
+                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
+                <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L15 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Select Image
+                  Type</h3>
+                <div class="mt-2">
+                  <p class="text-sm text-gray-500">Is your uploaded image a photo (complex background)
+                    or a simple line drawing/sketch?</p>
+                </div>
+              </div>
+            </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // === State and Constants ===
-        const MAX_WIDTH = 2480, MAX_HEIGHT = 3508;
-        const DEFAULT_CONFIG = { type: '123', fontSize: 20, hint: 'original', eraseThickness: 5, dotRadius: 5, dotColor: '#000000' };
-        let state = {
-          originalImage: null, canvasDimensions: { width: MAX_WIDTH, height: MAX_HEIGHT },
-          dots: [], draggedDotIndex: -1,
-          config: { ...DEFAULT_CONFIG },
-          internalHintImage: null,
-        };
-        const getRenderScale = () => {
-          if (!state.canvasDimensions || state.canvasDimensions.width === 0) return 1;
-          // 如果画布宽度是 2400，scale 就是 3。这样 5px 的点就会画成 15px，视觉比例保持一致
-          return Math.max(1, state.canvasDimensions.width / 800);
-        };
-        // === DOM Element References ===
-        // [新] 新的UI元素引用
-        const step1ChoiceArea = document.getElementById('step1-choice-area');
-        const uploadChoiceCard = document.getElementById('upload-choice-card');
-        const aiChoiceCard = document.getElementById('ai-choice-card');
-        const actionUiContainer = document.getElementById('action-ui-container');
-        const uploadTemplate = document.getElementById('upload-template');
-        const aiGenerateTemplate = document.getElementById('ai-generate-template');
-        const inspirationArea = document.getElementById('inspiration-area');
+            <!-- Loader for background removal -->
+            <div id="rmbg-loader" class="hidden mt-4 text-center">
+              <svg class="animate-spin h-8 w-8 text-primary mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
+              </svg>
+              <p class="mt-2 text-sm text-gray-600">Removing background...</p>
+            </div>
 
-        // [旧] 保留大部分旧的引用
-        const generatorMainArea = document.getElementById('generator-main-area');
-        const sourceImageInfo = document.getElementById('source-image-info');
-        const currentFilename = document.getElementById('current-filename');
-        const changeImageBtn = document.getElementById('change-image-btn');
-        const drawCanvas = document.getElementById('draw-canvas'), drawCtx = drawCanvas.getContext('2d');
-        const canvasLoader = document.getElementById('canvas-loader');
-        const pointsCounter = document.getElementById('points-counter');
-        const clearBtn = document.getElementById('clear-btn');
-        const hintTypeRadios = document.getElementById('hint-type-radios');
-        const dotCountSlider = document.getElementById('dot-count-slider'), pointsNumberInput = document.getElementById('points-number-input');
-        const pointsMinusBtn = document.getElementById('points-minus-btn'), pointsPlusBtn = document.getElementById('points-plus-btn');
-        const fontSizeSlider = document.getElementById('font-size-slider'), fontSizeValue = document.getElementById('font-size-value');
-        const thicknessContainer = document.getElementById('thickness-container'), thicknessSlider = document.getElementById('thicknessSlider'), thicknessValue = document.getElementById('thicknessValue');
-        const dotSizeSlider = document.getElementById('dot-size-slider'), dotSizeValue = document.getElementById('dot-size-value');
-        const dotColorPicker = document.getElementById('dot-color-picker');
-        const downloadPngBtn = document.getElementById('download-png-btn'), downloadPdfBtn = document.getElementById('download-pdf-btn');
-        const opencvStatus = document.getElementById('opencv-status');
+          </div>
+          <div id="modal-actions" class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button id="btn-select-photo" type="button"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary/90 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+              It's a Photo
+            </button>
+            <button id="btn-select-drawing" type="button"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+              Line Drawing / Sketch
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        // AI 和上传相关的元素现在从模板中获取
-        let imageLoader, dropZone, aiPromptInput, generateAiImageBtn, aiStatusArea, aiStatusMessage;
-
-        // --- Utility Functions (无变化) ---
-        const debounce = (func, delay) => { let timeout; return function (...args) { const context = this; clearTimeout(timeout); timeout = setTimeout(() => func.apply(context, args), delay); }; };
-        const getEventPos = (canvas, evt) => { const rect = canvas.getBoundingClientRect(); const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX; const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY; return { x: (clientX - rect.left) * (canvas.width / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) }; };
-        const distance = (p1, p2) => Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
-        const getLabel = (index) => state.config.type === 'ABC' ? String.fromCharCode(65 + index) : (index + 1).toString();
-        const updateClearButton = () => { if (clearBtn) clearBtn.disabled = state.dots.length === 0; };
-        const drawDots = (context, dots, config = {}) => {
-          const scale = getRenderScale(); // 获取比例
-          const scaledRadius = config.radius * scale; // 调整点大小
-          const scaledLineWidth = 1.5 * scale; // 调整线宽
-
-          dots.forEach(dot => {
-            context.beginPath();
-            context.arc(dot.x, dot.y, config.radius * scale, 0, 2 * Math.PI);
-            context.fillStyle = config.color;
-            context.strokeStyle = 'black';
-            context.lineWidth = scaledLineWidth;
-            context.fill();
-            context.stroke();
-          });
-        };
-        const calculateCentroid = (dots) => { if (dots.length === 0) { return { x: state.canvasDimensions.width / 2, y: state.canvasDimensions.height / 2 }; } const total = dots.reduce((acc, dot) => ({ x: acc.x + dot.x, y: acc.y + dot.y }), { x: 0, y: 0 }); return { x: total.x / dots.length, y: total.y / dots.length }; };
-        const drawNumbers = (context, dots, centroid) => {
-          const scale = getRenderScale(); // 获取比例
-          // 调整字体大小和偏移量
-          const scaledFontSize = state.config.fontSize * scale;
-          const scaledDotRadius = state.config.dotRadius * scale;
-
-          context.fillStyle = 'black';
-          context.font = `${scaledFontSize}px Arial`; // 应用字体大小
-          context.textAlign = 'center';
-          context.textBaseline = 'middle';
-
-          dots.forEach((dot, index) => {
-            const dx = dot.x - centroid.x;
-            const dy = dot.y - centroid.y;
-            const magnitude = Math.sqrt(dx * dx + dy * dy);
-            let nx = 0;
-            let ny = -1;
-            if (magnitude > 0) {
-              nx = dx / magnitude;
-              ny = dy / magnitude;
-            }
-            // 调整文字与点的距离
-            const offset = scaledDotRadius + scaledFontSize * 0.75;
-            const labelX = dot.x + nx * offset;
-            const labelY = dot.y + ny * offset;
-            context.fillText(getLabel(index), labelX, labelY);
-          });
-        };
-
-        // --- Core Drawing and State Functions (微调) ---
-        const redrawDrawCanvas = () => {
-          const context = drawCtx, canvas = drawCanvas; context.clearRect(0, 0, canvas.width, canvas.height); if (state.config.hint === 'original' && state.originalImage) { context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); } else if (state.config.hint === 'trace' && state.originalImage) { context.globalAlpha = 0.3; context.drawImage(state.originalImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); context.globalAlpha = 1.0; } else if (state.config.hint === 'internal' && state.internalHintImage) { context.drawImage(state.internalHintImage, 0, 0, state.canvasDimensions.width, state.canvasDimensions.height); } const centroid = calculateCentroid(state.dots);
-          drawDots(context, state.dots, { color: state.config.dotColor, radius: state.config.dotRadius }); drawNumbers(context, state.dots, centroid); pointsCounter.textContent = state.dots.length; updateClearButton();
-        };
-        const updateConfigAndRedraw = () => { state.config.fontSize = parseInt(fontSizeSlider.value, 10); state.config.dotRadius = parseInt(dotSizeSlider.value, 10); state.config.dotColor = dotColorPicker.value; state.config.hint = document.querySelector('input[name="hint-type"]:checked').value; state.config.eraseThickness = parseInt(thicknessSlider.value, 10); fontSizeValue.textContent = fontSizeSlider.value; dotSizeValue.textContent = dotSizeSlider.value; thicknessValue.textContent = thicknessSlider.value; thicknessContainer.classList.toggle('hidden', state.config.hint !== 'internal'); state.internalHintImage = (state.config.hint === 'internal' && typeof cv !== 'undefined') ? generateInternalHintImage(state.config.eraseThickness) : null; redrawDrawCanvas(); };
-        const generateInternalHintImage = (thickness) => {
-          if (!state.originalImage || typeof cv === 'undefined') return null;
-          const tempCanvas = document.createElement('canvas');
-          tempCanvas.width = state.canvasDimensions.width;
-          tempCanvas.height = state.canvasDimensions.height; tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
-          let src, gray, binary, contours, hierarchy, resultMat = null;
-          try {
-            src = cv.imread(tempCanvas); resultMat = src.clone(); gray = new cv.Mat();
-            binary = new cv.Mat(); cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-            cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU);
-            contours = new cv.MatVector(); hierarchy = new cv.Mat();
-            cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
-            const scale = getRenderScale();
-            cv.drawContours(resultMat, contours, -1, new cv.Scalar(255, 255, 255, 255), thickness * scale);
-            const offscreenCanvas = document.createElement('canvas');
-            offscreenCanvas.width = state.canvasDimensions.width; offscreenCanvas.height = state.canvasDimensions.height;
-            cv.imshow(offscreenCanvas, resultMat); return offscreenCanvas;
-          } catch (error) { console.error("Hint image generation error:", error); return null; } finally { if (src) src.delete(); if (gray) gray.delete(); if (binary) binary.delete(); if (contours) contours.delete(); if (hierarchy) hierarchy.delete(); if (resultMat) resultMat.delete(); }
-        };
-
-        // [新] 全局状态重置函数
-        const resetGeneratorState = () => {
-          state.originalImage = null; state.dots = []; state.draggedDotIndex = -1;
-          state.config = { ...DEFAULT_CONFIG };
-
-          updatePointsValue(25, false);
-          dotSizeSlider.value = DEFAULT_CONFIG.dotRadius; dotSizeValue.textContent = DEFAULT_CONFIG.dotRadius.toString();
-          dotColorPicker.value = DEFAULT_CONFIG.dotColor;
-          fontSizeSlider.value = DEFAULT_CONFIG.fontSize; fontSizeValue.textContent = DEFAULT_CONFIG.fontSize.toString();
-          document.querySelector('input[name="hint-type"][value="original"]').checked = true;
-
-          generatorMainArea.classList.add('hidden');
-          step1ChoiceArea.classList.remove('hidden');
-          inspirationArea.classList.remove('hidden');
-
-          actionUiContainer.innerHTML = ''; // 清空操作区
-          uploadChoiceCard.classList.remove('border-primary'); aiChoiceCard.classList.remove('border-primary');
-          uploadChoiceCard.classList.add('border-gray-300'); aiChoiceCard.classList.add('border-gray-300');
-
-          sourceImageInfo.classList.add('hidden');
-          if (clearBtn) clearBtn.disabled = true;
-          downloadPngBtn.disabled = true; downloadPdfBtn.disabled = true;
-          thicknessContainer.classList.add('hidden');
-          redrawDrawCanvas();
-        };
-
-        const handleFile = (file) => {
-          if (!file || !file.type.startsWith('image/')) return;
-          const reader = new FileReader();
-          reader.onerror = () => alert('Error reading file.');
-          reader.onload = (event) => {
-            const img = new Image();
-            img.onerror = () => alert('Cannot load image file.');
-            img.onload = () => {
-              state.originalImage = img;
-              const scale = Math.min(MAX_WIDTH / img.naturalWidth, MAX_HEIGHT / img.naturalHeight);
-              state.canvasDimensions = { width: img.naturalWidth * scale, height: img.naturalHeight * scale };
-              drawCanvas.width = state.canvasDimensions.width; drawCanvas.height = state.canvasDimensions.height;
-              state.dots = [];
-
-              // [修复点 1] 切换视图并准备下载按钮
-              step1ChoiceArea.classList.add('hidden');
-              inspirationArea.classList.add('hidden');
-              generatorMainArea.classList.remove('hidden');
-              currentFilename.textContent = file.name;
-              sourceImageInfo.classList.remove('hidden');
-              downloadPngBtn.disabled = false;
-              downloadPdfBtn.disabled = false;
-
-              // [修复点 2] 检查OpenCV状态再决定行为
-              if (opencvScriptLoaded) {
-                // 如果已加载，立即开始检测
-                canvasLoader.querySelector('p').textContent = 'Auto-detecting...';
-                runAutoDetect();
-              } else {
-                // 如果未加载，显示等待信息
-                canvasLoader.classList.remove('hidden');
-                canvasLoader.querySelector('p').textContent = 'Waiting for generator to load...';
-                // 尝试触发加载（如果还没开始的话）
-                loadOpenCv();
-              }
-
-              // 不管OpenCV是否加载，都先绘制原始图像
-              updateConfigAndRedraw();
-            };
-            img.src = event.target.result;
-          };
-          reader.readAsDataURL(file);
-        };
-        // --- Auto-Detect Logic (无变化) ---
-        const runAutoDetect = () => { if (!state.originalImage || typeof cv === 'undefined') { console.log("OpenCV not ready or no image, skipping auto-detect."); return; } canvasLoader.classList.remove('hidden'); setTimeout(() => { const tempCanvas = document.createElement('canvas'); tempCanvas.width = state.canvasDimensions.width; tempCanvas.height = state.canvasDimensions.height; tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height); let src, gray, binary, contours, hierarchy, allDots = []; try { src = cv.imread(tempCanvas); gray = new cv.Mat(); binary = new cv.Mat(); contours = new cv.MatVector(); hierarchy = new cv.Mat(); cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0); cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU); cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE); if (contours.size() === 0) throw new Error("No contours found."); let significantContours = [], totalPerimeter = 0; for (let i = 0; i < contours.size(); i++) { const contour = contours.get(i); if (cv.contourArea(contour) > 100) { significantContours.push(contour); totalPerimeter += cv.arcLength(contour, true); } else { contour.delete(); } } if (significantContours.length === 0) throw new Error("No significant contours found after filtering."); significantContours.sort((a, b) => cv.boundingRect(a).x - cv.boundingRect(b).x); for (const contour of significantContours) { const simplifiedContour = new cv.Mat(); const perimeter = cv.arcLength(contour, true); if (perimeter === 0) continue; const targetPointCount = Math.max(3, Math.round(parseInt(pointsNumberInput.value, 10) * (perimeter / totalPerimeter))); let minEpsilon = 0, maxEpsilon = perimeter * 0.1, currentEpsilon = maxEpsilon / 2; for (let i = 0; i < 20; i++) { cv.approxPolyDP(contour, simplifiedContour, currentEpsilon, true); const count = simplifiedContour.rows; if (count > targetPointCount) minEpsilon = currentEpsilon; else if (count < targetPointCount) maxEpsilon = currentEpsilon; else break; currentEpsilon = (minEpsilon + maxEpsilon) / 2; } let contourDots = []; for (let i = 0; i < simplifiedContour.data32S.length; i += 2) contourDots.push({ x: simplifiedContour.data32S[i], y: simplifiedContour.data32S[i + 1] }); if (contourDots.length > 0) { let topPointIndex = 0; for (let i = 1; i < contourDots.length; i++) { if (contourDots[i].y < contourDots[topPointIndex].y) topPointIndex = i; } contourDots = contourDots.slice(topPointIndex).concat(contourDots.slice(0, topPointIndex)); } allDots = allDots.concat(contourDots); simplifiedContour.delete(); } state.dots = allDots; redrawDrawCanvas(); } catch (error) { console.error(error); alert(`Contour detection failed: ${error.message}`); } finally { if (src) src.delete(); if (gray) gray.delete(); if (binary) binary.delete(); if (contours) contours.delete(); if (hierarchy) hierarchy.delete(); canvasLoader.classList.add('hidden'); } }, 50); };
-        const debouncedAutoDetect = debounce(runAutoDetect, 400);
-
-        // --- OpenCV Deferred Loading Logic (微调) ---
-        let opencvScriptLoaded = false;
-        const interactionEvents = ['scroll', 'click', 'touchstart', 'keydown'];
-        function onOpenCvReady() {
-          if (opencvStatus) {
-            opencvStatus.textContent = 'Generator Ready!';
-            opencvStatus.classList.remove('text-gray-400', 'text-red-500');
-            opencvStatus.classList.add('text-green-500');
-          }
-          if (dropZone) {
-            dropZone.classList.remove('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
-            dropZone.style.cursor = 'pointer';
-            dropZone.style.opacity = '1';
-            dropZone.style.pointerEvents = 'auto';
-            const label = dropZone.querySelector('label[for="image-loader"]');
-            if (label) label.classList.remove('cursor-not-allowed');
-          }
-
-          opencvScriptLoaded = true; // 设定标志位
-
-          // [修复点 3] 检查是否有待处理的图片
-          if (state.originalImage && generatorMainArea.classList.contains('hidden') === false) {
-            // 如果图片已加载并且编辑器已显示，说明它正在等待检测
-            console.log('OpenCV is ready. Starting auto-detection for the pending image.');
-            canvasLoader.querySelector('p').textContent = 'Auto-detecting...';
-            runAutoDetect();
-          }
-        } function removeInteractionListeners() { interactionEvents.forEach(event => { document.removeEventListener(event, loadOpenCv); }); }
-        function loadOpenCv() {
-          if (opencvScriptLoaded || document.querySelector('script[src*="opencv.js"]')) return;
-          if (opencvStatus) { opencvStatus.textContent = 'Loading generator...'; opencvStatus.classList.add('text-gray-500'); }
-          const script = document.createElement('script');
-          script.src = 'https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js';
-          script.async = true; script.onload = onOpenCvReady;
-          script.onerror = () => { if (opencvStatus) { opencvStatus.textContent = 'Error: Failed to load generator.'; opencvStatus.classList.add('text-red-500'); } if (aiStatusMessage) { aiStatusMessage.textContent = 'Error loading components. Please refresh.' } };
-          document.body.appendChild(script);
-          removeInteractionListeners();
-        }
-        function setupInteractionListeners() { interactionEvents.forEach(event => { document.addEventListener(event, loadOpenCv, { once: true, passive: true }); }); }
-
-        if (opencvStatus) { opencvStatus.textContent = 'Generator will load on first interaction...'; }
-        setupInteractionListeners();
-
-        // --- AI Generation Logic (已更新) ---
-        // === AI Generation Logic (已更新以处理代理) ===
-        async function generateAiImageFromLocalBackend(userPrompt) {
-          if (!aiStatusArea || !generateAiImageBtn || !aiStatusMessage) return;
-          aiStatusArea.classList.remove('hidden');
-          aiStatusArea.querySelector('#ai-loader').classList.remove('hidden');
-          generateAiImageBtn.disabled = true;
-          generateAiImageBtn.querySelector('#generate-button-text').textContent = 'Generating...';
-          aiStatusMessage.textContent = `Generating image for "${userPrompt}"... This may take a moment.`;
-
-          const apiEndpoint = 'https://connectthedotsprintable.online/api/doubao';
-          const finalPrompt = `${userPrompt}, bold outline, simple line art, for coloring book, black and white, minimal shading, white background`;
-
-          try {
-            // [关键修改] 现在这次 fetch 直接返回图片数据，而不是 URL
-            const imageResponse = await fetch(apiEndpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ prompt: finalPrompt, size: "1024x1024" })
-            });
-
-            if (!imageResponse.ok) {
-              // 尝试解析错误信息
-              let errorText = "An unknown API error occurred.";
-              try {
-                const errorJson = await imageResponse.json();
-                errorText = errorJson.error || errorJson.message || JSON.stringify(errorJson);
-              } catch (e) {
-                // 如果响应不是JSON，则使用状态文本
-                errorText = imageResponse.statusText;
-              }
-              throw new Error(`API Error: ${imageResponse.status} - ${errorText}`);
-            }
-
-            // 直接将响应转换为 Blob，因为响应体就是图片
-            aiStatusMessage.textContent = 'Processing image...';
-            const blob = await imageResponse.blob();
-
-            if (!blob.type.startsWith('image/')) {
-              throw new Error('Received data is not a valid image.');
-            }
-
-            const filename = `AI_${userPrompt.substring(0, 15).replace(/\W/g, '_')}.${blob.type.split('/')[1] || 'png'}`;
-            const file = new File([blob], filename, { type: blob.type });
-
-            handleFile(file); // 将文件交给现有的处理函数
-
-          } catch (error) {
-            console.error("AI Generation Error:", error);
-            aiStatusMessage.textContent = `Error: ${error.message}`;
-          } finally {
-            if (generateAiImageBtn) {
-              generateAiImageBtn.disabled = false;
-              generateAiImageBtn.querySelector('#generate-button-text').textContent = 'Generate Image';
-            }
-            if (aiStatusArea) {
-              aiStatusArea.querySelector('#ai-loader').classList.add('hidden');
-            }
-          }
-        }
-        // --- Event Listeners (已重构) ---
-        function setupActionUI(type) {
-          actionUiContainer.innerHTML = ''; // 清空
-          if (type === 'upload') {
-            actionUiContainer.appendChild(uploadTemplate.firstElementChild.cloneNode(true));
-            // 获取新创建的元素并绑定事件
-            imageLoader = document.getElementById('image-loader');
-            dropZone = document.getElementById('drop-zone');
-            imageLoader.addEventListener('change', (e) => handleFile(e.target.files[0]));
-            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('bg-gray-100', 'border-primary'); });
-            dropZone.addEventListener('dragleave', (e) => { e.preventDefault(); dropZone.classList.remove('bg-gray-100', 'border-primary'); });
-            dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('bg-gray-100', 'border-primary'); handleFile(e.dataTransfer.files[0]); });
-            // 如果opencv已加载，则立即使上传区可用
-            if (opencvScriptLoaded) {
-              dropZone.classList.remove('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
-              dropZone.style.cursor = 'pointer'; dropZone.style.opacity = '1'; dropZone.style.pointerEvents = 'auto';
-              dropZone.querySelector('label[for="image-loader"]').classList.remove('cursor-not-allowed');
-            }
-          } else if (type === 'ai') {
-            actionUiContainer.appendChild(aiGenerateTemplate.firstElementChild.cloneNode(true));
-            // 获取新创建的元素并绑定事件
-            aiPromptInput = document.getElementById('ai-prompt-input');
-            generateAiImageBtn = document.getElementById('generate-ai-image-btn');
-            aiStatusArea = document.getElementById('ai-status-area');
-            aiStatusMessage = document.getElementById('ai-status-message');
-            generateAiImageBtn.addEventListener('click', () => {
-              const prompt = aiPromptInput.value.trim();
-              if (prompt.length < 5) { alert("Please enter a longer, descriptive prompt."); return; }
-              if (!opencvScriptLoaded) { alert("Generator is still loading. Please wait for the 'Generator Ready!' message."); loadOpenCv(); return; }
-              generateAiImageFromLocalBackend(prompt);
-            });
-          }
-        }
-
-        uploadChoiceCard.addEventListener('click', () => {
-          uploadChoiceCard.classList.remove('border-gray-300');
-          uploadChoiceCard.classList.add('border-primary');
-          aiChoiceCard.classList.remove('border-primary');
-          aiChoiceCard.classList.add('border-gray-300');
-          setupActionUI('upload');
-        });
-
-        aiChoiceCard.addEventListener('click', () => {
-          aiChoiceCard.classList.remove('border-gray-300');
-          aiChoiceCard.classList.add('border-primary');
-          uploadChoiceCard.classList.remove('border-primary');
-          uploadChoiceCard.classList.add('border-gray-300');
-          setupActionUI('ai');
-        });
-
-        // 示例图片点击事件
-        const exampleImages = document.querySelectorAll('#examples-content img');
-        async function handleExampleImageClick(event) {
-          const imgElement = event.currentTarget; const imageUrl = imgElement.src; const filename = imageUrl.split('/').pop() || 'example-image.webp';
-          step1ChoiceArea.classList.add('hidden'); inspirationArea.classList.add('hidden');
-          generatorMainArea.classList.remove('hidden');
-          canvasLoader.classList.remove('hidden');
-          const loaderText = canvasLoader.querySelector('p');
-          if (loaderText) loaderText.textContent = 'Loading example...';
-          try { const response = await fetch(imageUrl, { cache: 'no-store' }); if (!response.ok) { throw new Error(`HTTP Error: ${response.status}`); } const blob = await response.blob(); const file = new File([blob], filename, { type: blob.type }); handleFile(file); } catch (error) { console.error('Error fetching example image:', error); alert('Could not load the example image. Please check your connection or disable ad-blockers and try again.'); resetGeneratorState(); } finally { if (loaderText) loaderText.textContent = 'Auto-detecting...'; }
-        }
-        exampleImages.forEach(img => img.addEventListener('click', handleExampleImageClick));
-
-        // 编辑器控制面板事件
-        if (changeImageBtn) changeImageBtn.addEventListener('click', resetGeneratorState);
-        const updatePointsValue = (value, triggerDetect = true) => { let numValue = parseInt(value, 10); if (isNaN(numValue)) numValue = 25; const min = parseInt(dotCountSlider.min, 10); const max = parseInt(dotCountSlider.max, 10); numValue = Math.max(min, Math.min(max, numValue)); dotCountSlider.value = numValue; pointsNumberInput.value = numValue; if (state.originalImage && triggerDetect) debouncedAutoDetect(); };
-        pointsMinusBtn.addEventListener('click', () => updatePointsValue(parseInt(pointsNumberInput.value, 10) - 1));
-        pointsPlusBtn.addEventListener('click', () => updatePointsValue(parseInt(pointsNumberInput.value, 10) + 1));
-        dotCountSlider.addEventListener('input', (e) => updatePointsValue(e.target.value));
-        pointsNumberInput.addEventListener('input', (e) => updatePointsValue(e.target.value, false));
-        pointsNumberInput.addEventListener('blur', (e) => { if (e.target.value === '') updatePointsValue(25); else updatePointsValue(e.target.value); });
-        [fontSizeSlider, dotSizeSlider, dotColorPicker, hintTypeRadios, thicknessSlider].forEach(el => el.addEventListener('input', updateConfigAndRedraw));
-        clearBtn.addEventListener('click', () => { if (state.originalImage) { state.dots = []; updateConfigAndRedraw(); } });
-
-        // 画布交互事件
-        let lastTapTime = 0, aDotWasJustDeleted = false;
-        const handleDrawStart = (e) => { if (!state.originalImage) return; e.preventDefault(); aDotWasJustDeleted = false; const currentTime = new Date().getTime(); if (currentTime - lastTapTime < 300) { const pos = getEventPos(drawCanvas, e); const dotIndexToDelete = state.dots.findIndex(dot => distance(dot, pos) < state.config.dotRadius + 10); if (dotIndexToDelete !== -1) { state.dots.splice(dotIndexToDelete, 1); redrawDrawCanvas(); aDotWasJustDeleted = true; } lastTapTime = 0; return; } lastTapTime = currentTime; const pos = getEventPos(drawCanvas, e); state.draggedDotIndex = state.dots.findIndex(dot => distance(dot, pos) < state.config.dotRadius + 10); if (state.draggedDotIndex !== -1) drawCanvas.style.cursor = 'grabbing'; };
-        const handleDrawMove = (e) => { if (state.draggedDotIndex === -1) return; e.preventDefault(); state.dots[state.draggedDotIndex] = getEventPos(drawCanvas, e); redrawDrawCanvas(); };
-        const handleDrawEnd = (e) => { if (state.draggedDotIndex === -1 && state.originalImage && !aDotWasJustDeleted) { const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX; const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY; const rect = drawCanvas.getBoundingClientRect(); state.dots.push({ x: (clientX - rect.left) * (drawCanvas.width / rect.width), y: (clientY - rect.top) * (drawCanvas.height / rect.height) }); } state.draggedDotIndex = -1; drawCanvas.style.cursor = 'crosshair'; redrawDrawCanvas(); };
-        drawCanvas.addEventListener('mousedown', handleDrawStart); drawCanvas.addEventListener('mousemove', handleDrawMove); drawCanvas.addEventListener('mouseup', handleDrawEnd);
-        drawCanvas.addEventListener('touchstart', handleDrawStart, { passive: false }); drawCanvas.addEventListener('touchmove', handleDrawMove, { passive: false }); drawCanvas.addEventListener('touchend', handleDrawEnd);
-
-        // 下载事件
-        const handleDownload = (format) => {
-          const canvas = drawCanvas, filename = `connect-the-dots.${format}`; if (format === 'png') { const link = document.createElement('a'); link.download = filename; link.href = canvas.toDataURL('image/png'); link.click(); }
-          else if (format === 'pdf') {
-
-            if (typeof window.jspdf === 'undefined') {
-              alert('PDF library is not loaded yet.');
-              return;
-            }
-            const { jsPDF } = window.jspdf;
-            const imgData = canvas.toDataURL('image/png'); // PNG 是无损的，质量最好
-
-            // 使用 A4 纸尺寸 (单位 mm)
-            // A4 尺寸: 210mm x 297mm
-            const orientation = canvas.width > canvas.height ? 'l' : 'p';
-            const doc = new jsPDF({
-              orientation,
-              unit: 'mm',
-              format: 'a4'
-            });
-
-            // 计算图片在 PDF 中的宽高，以适应 A4 纸
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const pageHeight = doc.internal.pageSize.getHeight();
-            const widthRatio = pageWidth / canvas.width;
-            const heightRatio = pageHeight / canvas.height;
-            const ratio = widthRatio < heightRatio ? widthRatio : heightRatio;
-
-            const imgWidth = canvas.width * ratio;
-            const imgHeight = canvas.height * ratio;
-
-            // 居中图片
-            const x = (pageWidth - imgWidth) / 2;
-            const y = (pageHeight - imgHeight) / 2;
-
-            doc.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
-            doc.save(filename);
-          }
-        };
-        downloadPngBtn.addEventListener('click', () => handleDownload('png'));
-        downloadPdfBtn.addEventListener('click', () => handleDownload('pdf'));
-
-        // 初始化页面
-        resetGeneratorState();
-      });
-    </script>
+    <!-- Load extracted generator logic -->
+    <script src="js/generator.js"></script>
 
 
     <section class="py-16 sm:py-24 bg-gray-50 container mx-auto max-w-7xl lg:px-8">
@@ -2422,9 +984,8 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- <div class="text-center mt-10">
+          <!-- <div class="text-center mt-10">
           <a href="/printable-connect-the-dots.html"
             class="inline-flex items-center bg-white border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition">
             View All Connect the Dots Printables
@@ -2435,7 +996,7 @@
             </svg>
           </a>
         </div> -->
-      </div>
+        </div>
     </section>
 
     <!-- Custom Generator Section -->
@@ -2867,7 +1428,8 @@
                 Printables</a>
             </li>
             <li>
-              <a href="/how-to-make.html" class="text-gray-300 hover:text-white transition">How to Make</a>
+              <a href="/how-to-make.html" class="text-gray-300 hover:text-white transition">How to
+                Make</a>
             </li>
             <li>
               <a href="/christmas-printables.html" class="text-gray-300 hover:text-white transition">Christmas
