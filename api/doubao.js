@@ -36,7 +36,6 @@ export default async function handler(request, response) {
         const requestBody = {
             ...userInput,
             model: userInput.model || "doubao-seedream-3-0-t2i-250415",
-            stream: false,
             watermark: false
         };
 
