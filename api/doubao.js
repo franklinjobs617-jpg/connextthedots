@@ -35,7 +35,7 @@ export default async function handler(request, response) {
         const userInput = request.body;
         const requestBody = {
             ...userInput,
-            model: userInput.model || "doubao-seedream-4-0-250828",
+            model: userInput.model || "doubao-seedream-3-0-t2i-250415",
             stream: false,
             watermark: false
         };
