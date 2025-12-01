@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Background Removal API Logic
     const removeBackgroundWithApi = async (file) => {
-        const API_ENDPOINT = 'http://localhost:8000/remove-bg';
+        const API_ENDPOINT = 'https://ytdlp.vistaflyer.com/remove-bg';
 
 
         // Actual Implementation structure assuming a standard multipart form endpoint
@@ -263,17 +263,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- Auto-Detect Logic ---
+    // --- Auto-Detect Logic --- 
     const runAutoDetect = () => {
-        if (!state.originalImage || typeof cv === 'undefined') { console.log("OpenCV not ready or no image, skipping auto-detect."); return; }
+        if (!state.originalImage || typeof cv === 'undefined') {
+            console.log("OpenCV not ready or no image, skipping auto-detect.");
+            return;
+        }
         canvasLoader.classList.remove('hidden');
+
+        // 使用 requestAnimationFrame 或 setTimeout 给 UI 线程喘息时间，防止卡顿
         setTimeout(() => {
             const tempCanvas = document.createElement('canvas');
             tempCanvas.width = state.canvasDimensions.width;
             tempCanvas.height = state.canvasDimensions.height;
-            tempCanvas.getContext('2d').drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
+            const ctx = tempCanvas.getContext('2d');
+            ctx.drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
 
-            let src, gray, binary, contours, hierarchy, channels, alpha, allDots = [];
+            let src, gray, binary, contours, hierarchy, channels, alpha, kernel;
             try {
                 src = cv.imread(tempCanvas);
                 gray = new cv.Mat();
@@ -281,75 +287,120 @@ document.addEventListener('DOMContentLoaded', () => {
                 contours = new cv.MatVector();
                 hierarchy = new cv.Mat();
 
-                // --- New Logic: Handle Transparent Images (Result of remove-bg) ---
+                // 1. 处理透明通道或灰度 (保持你原有的逻辑，但增加了膨胀预处理)
                 channels = new cv.MatVector();
                 cv.split(src, channels);
                 alpha = channels.get(3);
-
-                // Check if image has transparency (min alpha < 250 to allow for some noise)
                 let minMax = cv.minMaxLoc(alpha);
 
                 if (minMax.minVal < 250) {
-                    // Use Alpha channel for contours: Transparent pixels have low alpha.
-                    // Threshold: Any pixel with alpha > 10 is considered part of the object (White/255)
-                    // This allows correct contour detection on transparent backgrounds.
+                    // 透明图片：提取 Alpha 通道
                     cv.threshold(alpha, binary, 10, 255, cv.THRESH_BINARY);
                 } else {
-                    // Original Logic for Opaque Images: Grayscale + Otsu + Invert
+                    // 不透明图片：灰度化 + Otsu 阈值 + 反转
                     cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
                     cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU);
                 }
-                // -----------------------------------------------------------------
 
+                // --- 关键修复 1: 膨胀 (Dilation) ---
+                // 这有助于连接断裂的线条，使非封闭轮廓更容易被识别为整体
+                kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(3, 3));
+                cv.dilate(binary, binary, kernel); // 膨胀操作
+
+                // 2. 查找轮廓
                 cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+
                 if (contours.size() === 0) throw new Error("No contours found.");
 
-                let significantContours = [], totalPerimeter = 0;
+                // 3. 收集所有轮廓上的原始点
+                let allRawPoints = [];
                 for (let i = 0; i < contours.size(); i++) {
                     const contour = contours.get(i);
-                    if (cv.contourArea(contour) > 100) {
-                        significantContours.push(contour);
-                        totalPerimeter += cv.arcLength(contour, true);
-                    } else {
-                        contour.delete();
-                    }
-                }
+                    // 过滤掉太小的噪点
+                    if (cv.contourArea(contour) > 50 || cv.arcLength(contour, false) > 50) {
+                        // 使用极小的 epsilon 做一次多边形逼近，目的是平滑一下，但保留绝大多数形状细节
+                        const simplified = new cv.Mat();
+                        const perimeter = cv.arcLength(contour, true);
+                        cv.approxPolyDP(contour, simplified, perimeter * 0.005, true); // 0.005 意味着保留很高精度
 
-                if (significantContours.length === 0) throw new Error("No significant contours found after filtering.");
-                significantContours.sort((a, b) => cv.boundingRect(a).x - cv.boundingRect(b).x);
-
-                for (const contour of significantContours) {
-                    const simplifiedContour = new cv.Mat();
-                    const perimeter = cv.arcLength(contour, true);
-                    if (perimeter === 0) continue;
-                    const targetPointCount = Math.max(3, Math.round(parseInt(pointsNumberInput.value, 10) * (perimeter / totalPerimeter)));
-                    let minEpsilon = 0, maxEpsilon = perimeter * 0.1, currentEpsilon = maxEpsilon / 2;
-                    for (let i = 0; i < 20; i++) {
-                        cv.approxPolyDP(contour, simplifiedContour, currentEpsilon, true);
-                        const count = simplifiedContour.rows;
-                        if (count > targetPointCount) minEpsilon = currentEpsilon;
-                        else if (count < targetPointCount) maxEpsilon = currentEpsilon;
-                        else break;
-                        currentEpsilon = (minEpsilon + maxEpsilon) / 2;
-                    }
-                    let contourDots = [];
-                    for (let i = 0; i < simplifiedContour.data32S.length; i += 2) contourDots.push({ x: simplifiedContour.data32S[i], y: simplifiedContour.data32S[i + 1] });
-                    if (contourDots.length > 0) {
-                        let topPointIndex = 0;
-                        for (let i = 1; i < contourDots.length; i++) {
-                            if (contourDots[i].y < contourDots[topPointIndex].y) topPointIndex = i;
+                        for (let j = 0; j < simplified.data32S.length; j += 2) {
+                            allRawPoints.push({
+                                x: simplified.data32S[j],
+                                y: simplified.data32S[j + 1]
+                            });
                         }
-                        contourDots = contourDots.slice(topPointIndex).concat(contourDots.slice(0, topPointIndex));
+                        simplified.delete();
                     }
-                    allDots = allDots.concat(contourDots);
-                    simplifiedContour.delete();
                 }
-                state.dots = allDots;
+
+                if (allRawPoints.length === 0) throw new Error("No points found after filtering.");
+
+                // --- 关键修复 2: 最近邻排序 (Nearest Neighbor Sorting) ---
+                // 解决点乱跳的问题。从最上方的点开始，依次找最近的点。
+                let sortedPoints = [];
+
+                // 找到起始点（Y轴最小的点，即最上面的点）
+                let startIndex = 0;
+                let minY = Infinity;
+                for (let i = 0; i < allRawPoints.length; i++) {
+                    if (allRawPoints[i].y < minY) {
+                        minY = allRawPoints[i].y;
+                        startIndex = i;
+                    }
+                }
+
+                // 开始排序
+                let currentPoint = allRawPoints[startIndex];
+                sortedPoints.push(currentPoint);
+                allRawPoints.splice(startIndex, 1); // 移除已处理的点
+
+                while (allRawPoints.length > 0) {
+                    let nearestIndex = -1;
+                    let minDist = Infinity;
+
+                    // 在剩余点中找最近的
+                    // 优化：为了性能，如果点非常多，这里可以用空间索引，但对于几千个点，暴力循环通常也没问题
+                    for (let i = 0; i < allRawPoints.length; i++) {
+                        const d = (currentPoint.x - allRawPoints[i].x) ** 2 + (currentPoint.y - allRawPoints[i].y) ** 2;
+                        if (d < minDist) {
+                            minDist = d;
+                            nearestIndex = i;
+                        }
+                    }
+
+                    // 如果最近的点距离太远（说明可能跳到了另一个不相关的断裂线条），可以做特殊处理
+                    // 这里为了简单，我们强制连接，这通常能解决大部分问题
+                    currentPoint = allRawPoints[nearestIndex];
+                    sortedPoints.push(currentPoint);
+                    allRawPoints.splice(nearestIndex, 1);
+                }
+
+                // --- 关键修复 3: 均匀采样 (Uniform Resampling) ---
+                // 严格控制点数等于用户输入的值 (例如 25)
+                const targetCount = parseInt(pointsNumberInput.value, 10) || 25;
+                const finalDots = [];
+
+                if (sortedPoints.length <= targetCount) {
+                    // 如果原始点比目标还少，就全部保留
+                    state.dots = sortedPoints;
+                } else {
+                    // 如果原始点很多，按比例均匀抽取
+                    // 例如：总共 1000 个点，要 25 个，则每隔 40 个取一个
+                    const step = sortedPoints.length / targetCount;
+                    for (let i = 0; i < targetCount; i++) {
+                        const index = Math.min(Math.floor(i * step), sortedPoints.length - 1);
+                        finalDots.push(sortedPoints[index]);
+                    }
+                    state.dots = finalDots;
+                }
+
                 redrawDrawCanvas();
+
             } catch (error) {
-                console.error(error);
-                alert(`Contour detection failed: ${error.message}`);
+                console.error("Processing error:", error);
+                // 失败时不要弹窗打扰用户，通常是因为图片太复杂或完全空白
             } finally {
+                // 内存清理 (非常重要，防止 OpenCV 内存泄漏)
                 if (src) src.delete();
                 if (gray) gray.delete();
                 if (binary) binary.delete();
@@ -357,6 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (hierarchy) hierarchy.delete();
                 if (channels) channels.delete();
                 if (alpha) alpha.delete();
+                if (kernel) kernel.delete();
+
                 canvasLoader.classList.add('hidden');
             }
         }, 50);
