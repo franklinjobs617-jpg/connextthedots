@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Background Removal API Logic
     const removeBackgroundWithApi = async (file) => {
-        const API_ENDPOINT = 'https://ytdlp.vistaflyer.com/remove-bg';
+        const API_ENDPOINT = 'https://ytdlp.vistaflyer.com/api/remove-background';
 
 
         // Actual Implementation structure assuming a standard multipart form endpoint
