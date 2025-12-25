@@ -45,25 +45,19 @@ function renderPrintables(difficulty) {
 
     const cardHtml = `
       <a href="${item.detailPage}" class="relative block bg-light rounded-xl overflow-hidden shadow-md group transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-        <div class="relative w-full pb-[100%] overflow-hidden">
+        <div class=" relative w-full overflow-hidden">
           <img src="${item.imageUrl}"
                srcset="${item.imageSrcset || `${item.imageUrl} ${IMAGE_DEFAULT_WIDTH}w`}"
                sizes="(min-width: 1024px) 33.3vw, (min-width: 640px) 50vw, 50vw"
                alt="${item.altText}"
-               class="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                loading="${loadingAttr}" decoding="async"
                width="${IMAGE_DEFAULT_WIDTH}" height="${IMAGE_DEFAULT_HEIGHT}">
           
           <span class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full z-10">Free</span>
           <span class="absolute top-3 left-3 ${item.tagColor} text-white text-sm font-semibold px-3 py-1 rounded-full z-10">${item.difficulty}</span>
           
-          <div class="absolute inset-0 bg-primary/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
-             
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="w-12 h-12 text-white mb-2 transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 ease-out"> 
-              <path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM288 224C288 206.3 302.3 192 320 192C337.7 192 352 206.3 352 224C352 241.7 337.7 256 320 256C302.3 256 288 241.7 288 224zM280 288L328 288C341.3 288 352 298.7 352 312L352 400L360 400C373.3 400 384 410.7 384 424C384 437.3 373.3 448 360 448L280 448C266.7 448 256 437.3 256 424C256 410.7 266.7 400 280 400L304 400L304 336L280 336C266.7 336 256 325.3 256 312C256 298.7 266.7 288 280 288z"/>
-              </svg>
-            <span class="text-white font-semibold text-lg transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 ease-out">View Details</span>
-          </div>
+           
         </div>
         <div class="p-2 md:p-6">
           <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">${item.title}</h3>
