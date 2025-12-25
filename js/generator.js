@@ -377,6 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
     downloadPdfBtn.disabled = true;
     thicknessContainer.classList.add("hidden");
     redrawDrawCanvas();
+    updateLimitUI(); 
   };
 
   // ============================================

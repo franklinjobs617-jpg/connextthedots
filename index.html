@@ -42,8 +42,12 @@
   </noscript>
   <!-- Ad scripts will be loaded after page load -->
   <style>
-
-@keyframes heartbeat {
+    :root {
+      --tw-gradient-from-position:  ;
+      --tw-gradient-via-position:  ;
+      --tw-gradient-to-position: 100%; /* 你原本保留的值 */
+    }
+    @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.15); }
     }
@@ -85,6 +89,14 @@
     .header-title {
       font-size: 1rem;
       line-height: 1.2rem;
+    } 
+
+    .h-8{
+      height: 2rem;
+    }
+
+   .w-8{
+      width: 2rem;
     }
 
     @media screen and (min-width: 640px) {
