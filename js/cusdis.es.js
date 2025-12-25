@@ -3,8 +3,7 @@
 // 修复了回复评论的缩进样式和 Email 隐私提示的显示问题
 //
 
-window.CUSDIS = {};
-
+window.CUSDIS = {}; 
 const makeIframeContent = (target) => {
   const host = target.dataset.host || "https://cusdis.com";
   const iframeJsPath = target.dataset.iframe || `${host}/js/iframe.umd.js`;
@@ -13,7 +12,7 @@ const makeIframeContent = (target) => {
   return `<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="${cssPath}">
+    <link rel="stylesheet" href="${cssPath}" >
     <base target="_parent" />
     <script>
       window.CUSDIS_LOCALE = ${JSON.stringify(window.CUSDIS_LOCALE)}
@@ -355,7 +354,7 @@ function initial() {
 }
 
 window.CUSDIS.initial = initial;
-initial();
+
 
 
 
