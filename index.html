@@ -1255,7 +1255,7 @@
         </p>
       </div>
 
-      <!-- [新] 步骤一：选择图片来源的卡片 -->
+      <!--  步骤一：选择图片来源的卡片 -->
       <div id="step1-choice-area">
         <div class="mt-8 text-center">
           <p class="text-lg font-semibold text-gray-700">Step 1: Choose your image source</p>
@@ -1276,33 +1276,41 @@
             <p class="text-gray-600">Choose your own photo or line drawing to convert into a dot-to-dot
               puzzle.</p>
           </div>
-          <!-- 选项 B: 用 AI 生成 --> 
+          <!-- 选项 B: 用 AI 生成 -->  
           <div id="ai-choice-card"
             class="bg-white p-6 rounded-xl border-2 border-gray-300 shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-primary relative overflow-hidden group">
-            
-            <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10">
+             
+            <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-50">
               <span id="ai-credits-count">3</span>/3 Daily Free
+            </div> 
+            <div class="relative z-0">
+                <div class="flex items-center mb-3">
+                  <svg class="h-8 w-8 text-primary mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  <h3 class="text-xl font-bold text-gray-800">AI Generation</h3>
+                </div>
+                <p class="text-gray-600">
+                  Describe a simple image and let AI create the outline for you.
+                </p>
             </div>
-
-            <div class="flex items-center mb-3">
-              <svg class="h-8 w-8 text-primary mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-              <h3 class="text-xl font-bold text-gray-800">AI Generation</h3>
-            </div>
-            <p class="text-gray-600">
-              Describe a simple image and let AI create the outline for you.
-            </p>
             
-            <div id="ai-limit-mask" class="hidden absolute inset-0 bg-gray-100/90 flex-col items-center justify-center text-center p-4">
-              <p class="text-gray-500 font-bold mb-1">Daily Limit Reached</p>
-              <p class="text-xs text-gray-400">Come back tomorrow!</p>
+        
+            <div id="ai-limit-mask" class="hidden absolute inset-0 bg-white/95 backdrop-blur-sm z-20 flex-col items-center justify-center text-center p-4 transition-opacity duration-300">
+              <!-- 锁图标 -->
+              <div class="mb-2 bg-gray-100 p-3 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+              </div>
+              <p class="text-gray-800 font-bold text-lg mb-1">Daily Limit Reached</p>
+              <p class="text-sm text-gray-500">Come back tomorrow for more!</p>
             </div>
           </div>
         </div>
 
-        <!-- [新] 用于显示具体操作UI的容器 -->
+        <!--  用于显示具体操作UI的容器 -->
         <div id="action-ui-container" class="mt-6 max-w-3xl mx-auto">
           <!-- 此处将动态加载上传或AI生成UI -->
         </div>
@@ -1311,7 +1319,7 @@
           wait...</p>
       </div>
 
-      <!-- [新] 灵感区域（示例图片） -->
+      <!--  灵感区域（示例图片） -->
       <div id="inspiration-area" class="mt-12">
         <div class="text-center">
           <h3 class="text-2xl font-bold text-gray-800">Need Inspiration?</h3>
@@ -2872,111 +2880,7 @@
       }
     }, 3000); 
   });
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // 配置
-    const MAX_DAILY_LIMIT = 3;
-    const STORAGE_KEY = 'ai_gen_daily_usage';
-    
-    // DOM 元素
-    const aiCard = document.getElementById('ai-choice-card');
-    const creditsLabel = document.getElementById('ai-credits-count');
-    const limitMask = document.getElementById('ai-limit-mask');
-    const generateBtn = document.getElementById('generate-ai-image-btn');
-    const generateBtnText = document.getElementById('generate-button-text');
-
-    // 1. 获取当前用户的使用情况
-    function getUsageData() {
-      const today = new Date().toLocaleDateString(); // 获取今天的日期字符串 (e.g., "12/25/2025")
-      let data = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-      // 如果没有数据，或者数据不是今天的，重置为0
-      if (!data || data.date !== today) {
-        data = {
-          date: today,
-          count: 0
-        };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      }
-      return data;
-    }
-
-    // 2. 更新界面 UI
-    function updateLimitUI() {
-      const data = getUsageData();
-      const remaining = Math.max(0, MAX_DAILY_LIMIT - data.count);
-      
-      // 更新卡片上的数字
-      if(creditsLabel) creditsLabel.textContent = remaining;
-
-      // 如果次数用完，显示遮罩并禁用卡片
-      if (remaining === 0) {
-        if(aiCard) {
-            aiCard.classList.add('cursor-not-allowed', 'opacity-70');
-            aiCard.classList.remove('hover:shadow-lg', 'hover:border-primary', 'cursor-pointer');
-            // 如果你使用了 step 切换逻辑，这里可能需要防止点击
-            aiCard.onclick = (e) => { e.stopPropagation(); e.preventDefault(); return false; };
-        }
-        if(limitMask) limitMask.classList.remove('hidden');
-        if(limitMask) limitMask.classList.add('flex');
-        
-        // 禁用生成按钮（以防万一用户已经进到了生成界面）
-        if(generateBtn) {
-            generateBtn.disabled = true;
-            generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            if(generateBtnText) generateBtnText.textContent = "Daily Limit Reached";
-        }
-      } else {
-        // 恢复正常状态
-        if(limitMask) limitMask.classList.add('hidden');
-        if(limitMask) limitMask.classList.remove('flex');
-        if(generateBtn) {
-            generateBtn.disabled = false;
-            generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-            if(generateBtnText) generateBtnText.textContent = "Generate Image";
-        }
-      }
-    }
-
-    // 3. 增加使用次数 (当点击生成按钮时调用)
-    function incrementUsage() {
-      const data = getUsageData();
-      if (data.count < MAX_DAILY_LIMIT) {
-        data.count++;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        updateLimitUI();
-        return true; // 允许继续
-      }
-      return false; // 阻止继续
-    }
-
-    // 初始化 UI
-    updateLimitUI();
-
-    // 4. 拦截生成按钮点击
-    // 使用 capture 阶段 (第三个参数 true) 确保我们在其他逻辑之前拦截点击
-    if (generateBtn) {
-      generateBtn.addEventListener('click', (e) => {
-        const data = getUsageData();
-        
-        if (data.count >= MAX_DAILY_LIMIT) {
-          // 如果次数已满，阻止一切操作
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-          alert('You have reached your daily limit of 3 AI generations. Please come back tomorrow!');
-          return false;
-        }
-
-        // 可以在这里立即扣除次数，或者等待生成成功后扣除。
-        // 简单起见，点击即扣除：
-        incrementUsage();
-        
-      }, true);
-    }
-  });
-</script>
+</script> 
 </body>
 
 </html>

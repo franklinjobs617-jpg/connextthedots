@@ -20,6 +20,67 @@ document.addEventListener("DOMContentLoaded", () => {
     pendingFile: null, // [New] Store file temporarily while user selects type
   };
 
+  //  AI 每日限制逻辑
+  const MAX_DAILY_LIMIT = 3;
+  const STORAGE_KEY = 'ai_gen_daily_usage'; 
+
+  const getUsageData = () => {
+    const today = new Date().toLocaleDateString();
+    let data = null;
+    try { data = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (e) {}
+    
+    // 如果没有数据或日期不是今天，重置为0
+    if (!data || data.date !== today) {
+      data = { date: today, count: 0 };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+    return data;
+  };
+
+  const updateLimitUI = () => {
+    const data = getUsageData();
+    const remaining = Math.max(0, MAX_DAILY_LIMIT - data.count);
+    
+    // 1. 更新卡片右上角的数字
+    const creditsLabel = document.getElementById('ai-credits-count');
+    if (creditsLabel) creditsLabel.textContent = remaining;
+
+    // 2. 处理卡片本身的状态 (遮罩和点击)
+    const limitMask = document.getElementById('ai-limit-mask');
+    const aiCard = document.getElementById('ai-choice-card');
+    
+    if (remaining === 0) {
+      if (aiCard) {
+        aiCard.classList.add('cursor-not-allowed', 'opacity-70');
+        // 移除 hover 效果
+        aiCard.classList.remove('hover:shadow-lg', 'hover:border-primary');
+      }
+      if (limitMask) {
+        limitMask.classList.remove('hidden');
+        limitMask.classList.add('flex');
+      }
+    } else {
+      if (aiCard) {
+        aiCard.classList.remove('cursor-not-allowed', 'opacity-70');
+        aiCard.classList.add('hover:shadow-lg', 'hover:border-primary');
+      }
+      if (limitMask) {
+        limitMask.classList.add('hidden');
+        limitMask.classList.remove('flex');
+      }
+    }
+  };
+
+  const incrementUsage = () => {
+    const data = getUsageData();
+    if (data.count < MAX_DAILY_LIMIT) {
+      data.count++;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      updateLimitUI(); // 立即更新 UI
+    }
+  };
+
+
   const getRenderScale = () => {
     if (!state.canvasDimensions || state.canvasDimensions.width === 0) return 1;
     return Math.max(1, state.canvasDimensions.width / 800);
@@ -811,22 +872,35 @@ document.addEventListener("DOMContentLoaded", () => {
       generateAiImageBtn = document.getElementById("generate-ai-image-btn");
       aiStatusArea = document.getElementById("ai-status-area");
       aiStatusMessage = document.getElementById("ai-status-message");
+        // 生成按钮点击事件
       generateAiImageBtn.addEventListener("click", () => {
         const prompt = aiPromptInput.value.trim();
+        
         if (prompt.length < 5) {
           alert("Please enter a longer, descriptive prompt.");
           return;
         }
+
+        // 2.检查 OpenCV 是否加载
         if (!opencvScriptLoaded) {
-          alert(
-            "Generator is still loading. Please wait for the 'Generator Ready!' message."
-          );
+          alert("Generator is still loading. Please wait for the 'Generator Ready!' message.");
           loadOpenCv();
           return;
         }
+
+        // 3.检查每日限制
+        const usage = getUsageData();
+        if (usage.count >= MAX_DAILY_LIMIT) {
+          alert("Daily limit reached (3/3). Please come back tomorrow!");
+          updateLimitUI(); // 再次确保 UI 同步
+          return;
+        }
+
+        // 4.扣除次数并开始生成
+        incrementUsage(); 
         generateAiImageFromLocalBackend(prompt);
       });
-    }
+    } 
   }
 
   uploadChoiceCard.addEventListener("click", () => {
@@ -837,6 +911,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setupActionUI("upload");
   });
   aiChoiceCard.addEventListener("click", () => {
+     if (getUsageData().count >= MAX_DAILY_LIMIT) {
+      return; 
+    }
     aiChoiceCard.classList.remove("border-gray-300");
     aiChoiceCard.classList.add("border-primary");
     uploadChoiceCard.classList.remove("border-primary");
@@ -1006,6 +1083,7 @@ document.addEventListener("DOMContentLoaded", () => {
   downloadPdfBtn.addEventListener("click", () => handleDownload("pdf"));
 
   resetGeneratorState();
+   updateLimitUI();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
