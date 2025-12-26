@@ -1542,6 +1542,13 @@
     const openModal = () => {
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
+      // 只有在第一次打开时才渲染，避免重复加载
+      if (window.CUSDIS && window.CUSDIS.initial && !document.querySelector('#cusdis_thread iframe')) {
+        // 使用 requestAnimationFrame 避免在动画开始的一瞬间卡顿
+        requestAnimationFrame(() => {
+           window.CUSDIS.initial();
+        });
+      }
 
       setTimeout(() => {
         panel.classList.remove('translate-y-full');
@@ -1608,6 +1615,13 @@
         modalImageContent.alt = solutionImage.alt;
         imageModal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
+      // 只有在第一次打开时才渲染，避免重复加载
+      if (window.CUSDIS && window.CUSDIS.initial && !document.querySelector('#cusdis_thread iframe')) {
+        // 使用 requestAnimationFrame 避免在动画开始的一瞬间卡顿
+        requestAnimationFrame(() => {
+           window.CUSDIS.initial();
+        });
+      }
       });
 
       closeModalBtn.addEventListener('click', () => {
