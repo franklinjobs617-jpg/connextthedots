@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
             iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
         }
 
-        tip.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[9999] ${bgClass} text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-0`;
+        tip.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[9999] ${bgClass} text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-0 bg-brand-blue`;
         tip.innerHTML = `${iconSvg} <span class="font-medium text-sm">${message}</span>`;
         
         document.body.appendChild(tip);
@@ -933,7 +933,7 @@ document.addEventListener("DOMContentLoaded", () => {
             link.download = "connect-dots.png";
             link.href = drawCanvas.toDataURL("image/png");
             link.click();
-            showTip("Download started!", "success");
+            // showTip("Download started!", "success");
         } else if (fmt === "pdf" && window.jspdf) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ orientation: drawCanvas.width > drawCanvas.height ? 'l' : 'p', unit: 'mm', format: 'a4' });
@@ -944,7 +944,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const h = drawCanvas.height * ratio;
             doc.addImage(drawCanvas.toDataURL("image/png"), 'PNG', (pdfW - w)/2, (pdfH - h)/2, w, h);
             doc.save("connect-dots.pdf");
-            showTip("Download started!", "success");
+            // showTip("Download started!", "success");
         }
     };
     if (downloadPngBtn) downloadPngBtn.addEventListener('click', () => dl("png"));

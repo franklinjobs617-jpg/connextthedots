@@ -1399,7 +1399,7 @@
             // Re-init Cusdis if needed
             if (window.CUSDIS && window.CUSDIS.initial) window.CUSDIS.initial();
         });
-        document.getElementById('close-fb').addEventListener('click', () => fbModal.classList.add('hidden'));
+        // document.getElementById('close-fb').addEventListener('click', () => fbModal.classList.add('hidden'));
 
         // Paste Image Support
         document.addEventListener('paste', (e) => {
@@ -1535,6 +1535,7 @@
 
             // 监听下载按钮点击，增加延迟
             const handleDownloadWithDelay = () => {
+                debugger
                 // 延迟 2000 毫秒 (2秒) 后显示提示，给浏览器一点时间处理下载
                 setTimeout(showDonationTip, 2000);
             };
