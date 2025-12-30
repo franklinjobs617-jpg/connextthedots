@@ -27,7 +27,8 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
     <!-- === TECH STACK (New Design System) === -->
-    <link rel="stylesheet" href="./dist/outputnew.css">
+     <link rel="preconnect" href="/dist/outputnew.css" />   
+    <link rel="stylesheet" href="/dist/outputnew.css" />
 
     <!-- PDF Library -->
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -149,8 +150,8 @@
         <!-- Logo Area -->
         <a href="/" class="flex items-center gap-2 group" aria-label="Home">
             <div
-                class="w-9 h-9 bg-brand-blue rounded-xl flex items-center justify-center text-white text-lg shadow-md group-hover:rotate-12 transition-transform duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-5 h-5 p-0.5">
+                class="w-9 h-9 rounded-xl flex items-center justify-center text-brand-blue ">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-8 h-8 p-0.5">
                     <path
                         d="M404 0c19.2 0 37.6 7.6 51.1 21.2l35.7 35.7C504.4 70.4 512 88.8 512 108s-7.6 37.6-21.2 51.1L445.9 204 308 66.1 352.9 21.2C366.4 7.6 384.8 0 404 0zM58.9 315.1L274.1 100 412 237.9 196.9 453.1c-10.7 10.7-24.1 18.5-38.7 22.6L30.4 511.1c-8.3 2.3-17.3 0-23.4-6.2s-8.5-15.1-6.2-23.4L36.4 353.8c4.1-14.6 11.8-27.9 22.6-38.7zM225.4 80.8L80.8 225.4 11.7 156.3c-15.6-15.6-15.6-40.9 0-56.6l88-88c15.6-15.6 40.9-15.6 56.6 0l5.9 5.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 34.9 34.9zM431.2 286.6l34.9 34.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 5.9 5.9c15.6 15.6 15.6 40.9 0 56.6l-88 88c-15.6 15.6-40.9 15.6-56.6 0l-69.1-69.1 144.6-144.6z" />
                 </svg>
@@ -164,6 +165,8 @@
             <a href="/printable-connect-the-dots.html" class="hover:text-brand-blue transition-colors duration-200">All
                 Printables</a>
             <a href="/how-to-make.html" class="hover:text-brand-blue transition-colors duration-200">How to Make</a>
+            <a href="/privacy.html" class="hover:text-brand-blue transition-colors duration-200" >Privacy</a>
+            <a href="/terms.html" class="hover:text-brand-blue transition-colors duration-200" >Terms</a>
             <a href="/feedback.html" class="hover:text-brand-blue transition-colors duration-200">Feedback</a>
 
             <!-- Optimized Donate Button (Refined Style) -->
@@ -199,6 +202,9 @@
             <a href="/printable-connect-the-dots.html" class="hover:text-brand-blue">All Printables</a>
             <a href="/how-to-make.html" class="hover:text-brand-blue">How to Make</a>
             <a href="/christmas-printables.html" class="hover:text-brand-blue">Christmas</a>
+            
+            <a href="/privacy.html" class="hover:text-brand-blue" >Privacy</a>
+            <a href="/terms.html" class="hover:text-brand-blue" >Terms</a>
             <a href="https://ko-fi.com/connectthedotsprintable" target="_blank"
                 class="group flex items-center justify-center gap-2 px-4 py-2 ml-2 rounded-full border border-transparent border-red-100 bg-red-50 transition-all duration-300">
                 <!-- Icon with Heartbeat Animation on Hover -->
@@ -521,10 +527,10 @@
                         <div id="pc-content"
                             class="tab-content-tailwind relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-900 aspect-video group">
                             <video class="w-full h-full object-cover"
-                                poster="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-desktop-demo.webp"
+                                poster="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-dot-to-dot-desktop-demo.webp"
                                 controls preload="none" title="Desktop Demo">
                                 <source
-                                    src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-desktop-demo.mp4"
+                                    src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-dot-to-dot-desktop-demo.mp4"
                                     type="video/mp4">
                             </video>
                             <!-- Play Overlay (Optional visual cue) -->
@@ -1056,7 +1062,7 @@
                         <span>Donate</span>
                     </a>
 
-                    <button id="download-png-btn"
+                    <button id="download-png-btn" type="button" 
                         class="w-full md:w-auto justify-center px-4 py-2.5 md:px-6 bg-brand-blue text-white font-bold rounded-full shadow-lg hover:bg-indigo-600 transition flex items-center gap-2 text-xs md:text-sm">
                         <svg width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512">
@@ -1068,7 +1074,7 @@
                     </button>
 
                     <!-- PDF Button -->
-                    <button id="download-pdf-btn"
+                    <button id="download-pdf-btn" type="button" 
                         class="w-full md:w-auto justify-center px-4 py-2.5 md:px-6 bg-white text-slate-700 border border-gray-200 font-bold rounded-full shadow-sm hover:bg-gray-50 transition flex items-center gap-2 text-xs md:text-sm">
                         <svg width="16" height="16" fill="currentColor" class="text-red-500"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -1481,8 +1487,7 @@
 
         });
 
-    </script>
-    <script async defer src="/js/cusdis.es.js"></script>
+    </script> 
 
     <script>
         // --- UI Interactions ---
@@ -1644,8 +1649,11 @@
             };
 
             // 监听下载按钮点击，增加延迟
-            const handleDownloadWithDelay = () => {
-                debugger
+            const handleDownloadWithDelay = (e) => {
+                 if(e) {
+                    e.preventDefault(); 
+                    e.stopPropagation();
+                }
                 // 延迟 2000 毫秒 (2秒) 后显示提示，给浏览器一点时间处理下载
                 setTimeout(showDonationTip, 2000);
             };

@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
         dotRadius: 6,
         dotColor: "#000000",
         // --- 修改点：默认选中 Internal Lines，橡皮擦大小 11 ---
-        hint: "internal", 
-        eraseThickness: 11 
+        hint: "internal",
+        eraseThickness: 11
     };
 
     let state = {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         config: { ...DEFAULT_CONFIG },
         pendingFile: null
     };
-
+    let cvReady = false; // 全局标志位
     const MAX_DAILY_LIMIT = 3;
     const STORAGE_KEY = 'ai_gen_daily_usage';
 
@@ -92,14 +92,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const showTip = (message, type = 'info') => {
         const oldTip = document.getElementById('custom-tip');
-        if(oldTip) oldTip.remove();
+        if (oldTip) oldTip.remove();
 
         const tip = document.createElement('div');
         tip.id = 'custom-tip';
-        
+
         let bgClass = 'bg-slate-800';
         let iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
-        
+
         if (type === 'error') {
             bgClass = 'bg-red-500';
             iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         tip.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[9999] ${bgClass} text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-0 bg-brand-blue`;
         tip.innerHTML = `${iconSvg} <span class="font-medium text-sm">${message}</span>`;
-        
+
         document.body.appendChild(tip);
 
         requestAnimationFrame(() => {
@@ -138,11 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const url = encodeURIComponent(window.location.href);
         const title = encodeURIComponent("Check out this Free Connect the Dots Generator!");
         window.open(`https://www.reddit.com/submit?url=${url}&title=${title}`, '_blank');
-        
+
         data.extra = (data.extra || 0) + 3;
-        data.shareDate = today; 
+        data.shareDate = today;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        
+
         updateAiCreditsUI();
         showTip("Success! 3 credits added.", 'success');
     };
@@ -156,15 +156,15 @@ document.addEventListener("DOMContentLoaded", () => {
         setupHeroTabs();
         setupToolbar();
         loadOpenCv();
-        
-        if(drawCanvas && drawCanvas.parentElement) {
+
+        if (drawCanvas && drawCanvas.parentElement) {
             const parent = drawCanvas.parentElement;
             parent.style.display = "flex";
             parent.style.justifyContent = "center";
             parent.style.alignItems = "center";
             parent.style.width = "100%";
             parent.style.height = "100%";
-            parent.style.overflow = "hidden"; 
+            parent.style.overflow = "hidden";
 
             drawCanvas.style.maxWidth = "100%";
             drawCanvas.style.maxHeight = "100%";
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
             drawCanvas.style.display = "block";
         }
 
-        if(dotCountSlider) {
+        if (dotCountSlider) {
             dotCountSlider.max = 200;
             dotCountSlider.min = 5;
             dotCountSlider.value = 25;
@@ -219,10 +219,10 @@ document.addEventListener("DOMContentLoaded", () => {
             landingView.classList.add('hidden');
             editorView.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else { 
-                editorView.classList.add('hidden');
-                landingView.classList.remove('hidden');
-                resetState(); 
+        } else {
+            editorView.classList.add('hidden');
+            landingView.classList.remove('hidden');
+            resetState();
         }
     };
     if (backToHomeBtn) backToHomeBtn.addEventListener("click", () => switchView('landing'));
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
         state.internalHintImage = null;
         state.dots = [];
         state.history = [];
-        if(heroFileInput) heroFileInput.value = "";
+        if (heroFileInput) heroFileInput.value = "";
     };
 
     // ==========================================
@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const handleFile = (file, isProcessed = false) => {
         if (!file || !file.type.startsWith('image/')) return showTip("Please upload a valid image file.", "error");
-        
+
         // --- 逻辑保持：直接进入画布，不弹窗 ---
         loadFileToCanvas(file);
     };
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 state.internalHintImage = null;
 
                 switchView('editor');
-                
+
                 // --- 修改点：如果默认是 Internal Lines，加载时立即生成 ---
                 if (state.config.hint === 'internal' && typeof cv !== 'undefined') {
                     // 使用 setTimeout 避免阻塞主线程渲染
@@ -270,10 +270,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     redraw();
                 }
-                
+
                 canvasLoader.classList.remove('hidden');
                 const startDetect = () => setTimeout(runAutoDetect, 200);
-                
+
                 if (typeof cv !== 'undefined') startDetect();
                 else loadOpenCv(startDetect);
             };
@@ -283,15 +283,15 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (heroFileInput) heroFileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
-    
+
     document.querySelectorAll('.preset-btn').forEach(btn => {
         btn.addEventListener('click', async () => {
-            try { 
+            try {
                 const res = await fetch(btn.dataset.src, { cache: "no-store" });
 
                 const blob = await res.blob();
                 handleFile(new File([blob], "preset.webp", { type: blob.type }), true);
-            } catch(e) {
+            } catch (e) {
                 showTip("Failed to load preset.", "error");
             }
         });
@@ -309,10 +309,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const formData = new FormData();
             formData.append("file", state.pendingFile);
             const res = await fetch("https://ytdlp.vistaflyer.com/api/remove-background", { method: "POST", body: formData });
-            if(!res.ok) throw new Error();
+            if (!res.ok) throw new Error();
             const blob = await res.blob();
             loadFileToCanvas(new File([blob], "nobg.png", { type: "image/png" }));
-        } catch(e) {
+        } catch (e) {
             showTip("Background removal failed, using original.", "error");
             loadFileToCanvas(state.pendingFile);
         } finally {
@@ -325,12 +325,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // AI Generation
     if (heroAiGoBtn) heroAiGoBtn.addEventListener('click', async () => {
         const prompt = heroAiInput.value.trim();
-        
+
         if (prompt.length < 3) return showTip("Please enter a description.", "error");
-        
+
         const usage = getAiUsage();
         const currentLimit = MAX_DAILY_LIMIT + (usage.extra || 0);
-        
+
         if (usage.count >= currentLimit) {
             // 这里不再弹窗，而是因为 UI 已经引导用户点击下方链接
             showTip("Daily limit reached. Share below to unlock!", "info");
@@ -341,21 +341,21 @@ document.addEventListener("DOMContentLoaded", () => {
         heroAiGoBtn.disabled = true;
         heroAiGoBtn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
-        switchView('editor'); 
+        switchView('editor');
         if (canvasLoader) {
             canvasLoader.classList.remove('hidden');
             const loaderText = canvasLoader.querySelector('p');
-            if(loaderText) loaderText.textContent = "AI is creating your puzzle...";
+            if (loaderText) loaderText.textContent = "AI is creating your puzzle...";
         }
-        if(ctx && drawCanvas) ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+        if (ctx && drawCanvas) ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 
         try {
             const res = await fetch("https://connectthedotsprintable.online/api/doubao", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    prompt: prompt + ", simple black and white line art, coloring book style, white background", 
-                    size: "1024x1024" 
+                body: JSON.stringify({
+                    prompt: prompt + ", simple black and white line art, coloring book style, white background",
+                    size: "1024x1024"
                 })
             });
 
@@ -366,13 +366,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const blob = await res.blob();
             incrementAiUsage();
-            
+
             const loaderText = canvasLoader.querySelector('p');
-            if(loaderText) loaderText.textContent = "Creating magic...";
+            if (loaderText) loaderText.textContent = "Creating magic...";
 
             loadFileToCanvas(new File([blob], "ai.png", { type: blob.type }));
 
-        } catch(e) {
+        } catch (e) {
             console.error("AI Gen Error:", e);
             showTip("AI Generation failed. Please try again.", "error");
             switchView('landing');
@@ -388,26 +388,88 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
 
     const loadOpenCv = (cb) => {
-        if (typeof cv !== 'undefined') { if (cb) cb(); return; }
+        // 1. 如果已经准备好，直接回调
+        if (cvReady) {
+            if (cb) cb();
+            return;
+        }
+
+        // 2. 检查是否已经有 script 标签但还没 ready
+        if (document.querySelector('script[src*="opencv.js"]')) {
+            // 如果脚本已存在，我们只需监听 ready
+            if (typeof cv !== 'undefined' && !cvReady) {
+                cv['onRuntimeInitialized'] = () => {
+                    cvReady = true;
+                    console.log("OpenCV Ready (Late Bind)");
+                    if (cb) cb();
+                };
+            }
+            return;
+        }
+
+        // 3. 首次加载
         const script = document.createElement('script');
         script.src = "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js";
         script.async = true;
-        script.onload = () => { cv['onRuntimeInitialized'] = () => { if (cb) cb(); }; };
+
+        // 关键：在全局 cv 对象被创建前定义配置
+        window.Module = {
+            onRuntimeInitialized: function () {
+                cvReady = true;
+                console.log("OpenCV Ready!");
+                if (cb) cb();
+                // 如果当前有等待处理的图片，重新触发检测
+                if (state.originalImage) {
+                    canvasLoader.classList.remove('hidden');
+                    runAutoDetect();
+                }
+            }
+        };
+
         document.body.appendChild(script);
     };
 
-    const runAutoDetect = () => {
-        if (!state.originalImage || typeof cv === 'undefined') return;
+   const runAutoDetect = () => {
+        // 安全检查 1: 图片是否加载
+        if (!state.originalImage) return;
+
+        // 安全检查 2: OpenCV 是否完全就绪
+        // 如果 cv 没准备好，显示 loading 并等待，而不是报错
+        if (typeof cv === 'undefined' || !cvReady) {
+            console.log("OpenCV not ready yet, waiting...");
+            canvasLoader.classList.remove('hidden');
+            const loaderText = canvasLoader.querySelector('p');
+            if(loaderText) loaderText.textContent = "Loading Engine...";
+            
+            // 500ms 后重试
+            setTimeout(runAutoDetect, 500);
+            return;
+        }
 
         try {
-            const tempCanvas = document.createElement("canvas");
-            const processScale = Math.min(1, 1000 / Math.max(state.originalImage.naturalWidth, state.originalImage.naturalHeight));
-            tempCanvas.width = state.originalImage.naturalWidth * processScale;
-            tempCanvas.height = state.originalImage.naturalHeight * processScale;
-            const tCtx = tempCanvas.getContext("2d");
-            tCtx.drawImage(state.originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
+            // 恢复 Loading 文字
+            const loaderText = canvasLoader.querySelector('p');
+            if(loaderText) loaderText.textContent = "Processing lines...";
 
-            let src = cv.imread(tempCanvas);
+            const tempCanvas = document.createElement("canvas");
+            
+            // 安全检查 3: 确保尺寸是整数 (Math.floor)
+            const processScale = Math.min(1, 1000 / Math.max(state.originalImage.naturalWidth, state.originalImage.naturalHeight));
+            const w = Math.floor(state.originalImage.naturalWidth * processScale);
+            const h = Math.floor(state.originalImage.naturalHeight * processScale);
+            
+            if (w === 0 || h === 0) return; // 防止空图片
+
+            tempCanvas.width = w;
+            tempCanvas.height = h;
+            
+            const tCtx = tempCanvas.getContext("2d");
+            tCtx.drawImage(state.originalImage, 0, 0, w, h);
+
+            // 安全检查 4: 使用 try-catch 包裹具体的 OpenCV 调用
+            let imgData = tCtx.getImageData(0, 0, w, h);
+            let src = cv.matFromImageData(imgData);
+            
             let gray = new cv.Mat();
             let binary = new cv.Mat();
             let contours = new cv.MatVector();
@@ -415,6 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
             cv.adaptiveThreshold(gray, binary, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 11, 2);
+            
             let M = cv.Mat.ones(3, 3, cv.CV_8U);
             cv.dilate(binary, binary, M);
 
@@ -448,6 +511,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 approx.delete();
             }
 
+            // Memory Cleanup
             src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete(); M.delete();
 
             const targetCount = parseInt(dotCountSlider.value) || 25;
@@ -463,45 +527,47 @@ document.addEventListener("DOMContentLoaded", () => {
             dotCountDisplay.textContent = `${state.dots.length} Dots`;
 
         } catch (e) {
-            console.error("Auto detect error", e);
+            console.error("Auto detect runtime error:", e);
+            // 这里不抛出 alert，以免打断用户，只是停止 loading
         } finally {
             canvasLoader.classList.add('hidden');
         }
     };
 
+
     const resampleDots = (points, targetCount) => {
         if (points.length < 2) return points;
         if (points.length < targetCount * 2) {
-            points = interpolatePoints(points, targetCount * 3); 
+            points = interpolatePoints(points, targetCount * 3);
         }
 
         const closedPoints = [...points, points[0]];
         let totalLength = 0;
-        const cumLengths = [0]; 
-        
+        const cumLengths = [0];
+
         for (let i = 0; i < closedPoints.length - 1; i++) {
-            const dist = Math.hypot(closedPoints[i+1].x - closedPoints[i].x, closedPoints[i+1].y - closedPoints[i].y);
+            const dist = Math.hypot(closedPoints[i + 1].x - closedPoints[i].x, closedPoints[i + 1].y - closedPoints[i].y);
             totalLength += dist;
             cumLengths.push(totalLength);
         }
 
         const step = totalLength / targetCount;
         const newPoints = [];
-        
+
         for (let i = 0; i < targetCount; i++) {
             const targetDist = i * step;
             let j = 0;
-            while (j < cumLengths.length - 1 && cumLengths[j+1] < targetDist) {
+            while (j < cumLengths.length - 1 && cumLengths[j + 1] < targetDist) {
                 j++;
             }
-            
+
             const segmentStartDist = cumLengths[j];
-            const segmentLength = cumLengths[j+1] - cumLengths[j];
+            const segmentLength = cumLengths[j + 1] - cumLengths[j];
             const t = (segmentLength === 0) ? 0 : (targetDist - segmentStartDist) / segmentLength;
-            
+
             const p1 = closedPoints[j];
-            const p2 = closedPoints[j+1];
-            
+            const p2 = closedPoints[j + 1];
+
             newPoints.push({
                 x: p1.x + (p2.x - p1.x) * t,
                 y: p1.y + (p2.y - p1.y) * t
@@ -515,7 +581,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < points.length - 1; i++) {
             result.push(points[i]);
             const p1 = points[i];
-            const p2 = points[i+1];
+            const p2 = points[i + 1];
             result.push({
                 x: (p1.x + p2.x) / 2,
                 y: (p1.y + p2.y) / 2
@@ -529,15 +595,25 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const generateInternalHintImage = () => {
-        if (!state.originalImage || typeof cv === "undefined") return null;
+        // 增加 !cvReady 检查
+        if (!state.originalImage || typeof cv === "undefined" || !cvReady) return null;
+        
         try {
             const tempCanvas = document.createElement("canvas");
-            tempCanvas.width = state.originalImage.naturalWidth;
-            tempCanvas.height = state.originalImage.naturalHeight;
+            // 确保整数
+            const w = Math.floor(state.originalImage.naturalWidth);
+            const h = Math.floor(state.originalImage.naturalHeight);
+            
+            tempCanvas.width = w;
+            tempCanvas.height = h;
+            
             const tCtx = tempCanvas.getContext("2d");
             tCtx.drawImage(state.originalImage, 0, 0);
 
-            let src = cv.imread(tempCanvas);
+            // 同样使用 getImageData + matFromImageData
+            let imgData = tCtx.getImageData(0, 0, w, h);
+            let src = cv.matFromImageData(imgData);
+            
             let gray = new cv.Mat();
             let binary = new cv.Mat();
             let contours = new cv.MatVector();
@@ -555,15 +631,15 @@ document.addEventListener("DOMContentLoaded", () => {
             cv.drawContours(src, contours, -1, whiteColor, thickness);
 
             const outputCanvas = document.createElement("canvas");
-            outputCanvas.width = tempCanvas.width;
-            outputCanvas.height = tempCanvas.height;
+            outputCanvas.width = w;
+            outputCanvas.height = h;
             cv.imshow(outputCanvas, src); 
 
             src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete(); M.delete();
 
             return outputCanvas;
         } catch (e) { 
-            console.error(e); 
+            console.error("Internal Lines Error:", e); 
             return null; 
         }
     };
@@ -582,7 +658,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     btn.classList.remove('bg-brand-blue', 'text-white');
                     btn.classList.add('bg-slate-700');
-                    if(btn.id==='tool-add') btn.classList.add('text-brand-blue');
+                    if (btn.id === 'tool-add') btn.classList.add('text-brand-blue');
                 }
             });
             drawCanvas.style.cursor = tool === 'move' ? 'grab' : (tool === 'del' ? 'crosshair' : 'crosshair');
@@ -598,9 +674,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const rect = drawCanvas.getBoundingClientRect();
         const canvasRatio = drawCanvas.width / drawCanvas.height;
         const rectRatio = rect.width / rect.height;
-        
+
         let displayWidth, displayHeight, offsetX, offsetY;
-        
+
         if (canvasRatio > rectRatio) {
             displayWidth = rect.width;
             displayHeight = rect.width / canvasRatio;
@@ -612,7 +688,7 @@ document.addEventListener("DOMContentLoaded", () => {
             offsetX = (rect.width - displayWidth) / 2;
             offsetY = 0;
         }
-        
+
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
@@ -631,7 +707,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const pos = getEventPos(e);
         const scale = Math.max(1, drawCanvas.width / 1000);
-        const hitRadius = (state.config.dotRadius * scale) + (20 * scale); 
+        const hitRadius = (state.config.dotRadius * scale) + (20 * scale);
 
         const idx = state.dots.findIndex(d => Math.hypot(d.x - pos.x, d.y - pos.y) < hitRadius);
 
@@ -693,11 +769,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx.globalAlpha = 0.3;
                 ctx.drawImage(state.originalImage, 0, 0);
             } else if (state.config.hint === 'internal') {
-                 if (state.internalHintImage) {
-                     ctx.drawImage(state.internalHintImage, 0, 0);
-                 } else {
-                     ctx.drawImage(state.originalImage, 0, 0);
-                 }
+                if (state.internalHintImage) {
+                    ctx.drawImage(state.internalHintImage, 0, 0);
+                } else {
+                    ctx.drawImage(state.originalImage, 0, 0);
+                }
             } else {
                 ctx.drawImage(state.originalImage, 0, 0);
             }
@@ -758,19 +834,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateConfig = (key, val) => {
         state.config[key] = val;
         if ((key === 'hint' && val === 'internal') || (key === 'eraseThickness' && state.config.hint === 'internal')) {
-             if(state.config.hint === 'internal') {
-                 if(this.debounceTimer) clearTimeout(this.debounceTimer);
-                 this.debounceTimer = setTimeout(() => {
-                     state.internalHintImage = generateInternalHintImage();
-                     redraw();
-                 }, 50);
-             }
+            if (state.config.hint === 'internal') {
+                if (this.debounceTimer) clearTimeout(this.debounceTimer);
+                this.debounceTimer = setTimeout(() => {
+                    state.internalHintImage = generateInternalHintImage();
+                    redraw();
+                }, 50);
+            }
         } else {
             redraw();
         }
-        
-        if(key === 'hint' && val !== 'internal') {
-            state.internalHintImage = null; 
+
+        if (key === 'hint' && val !== 'internal') {
+            state.internalHintImage = null;
         }
     };
 
@@ -788,10 +864,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     dotColorPicker.addEventListener('input', (e) => updateConfig('dotColor', e.target.value));
-    
+
     hintRadios.forEach(r => r.addEventListener('change', (e) => {
         updateConfig('hint', e.target.value);
-        if(e.target.value === 'internal') thicknessContainer.classList.remove('hidden');
+        if (e.target.value === 'internal') thicknessContainer.classList.remove('hidden');
         else thicknessContainer.classList.add('hidden');
     }));
 
@@ -800,9 +876,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     dotCountSlider.addEventListener('change', (e) => {
-        if(typeof cv !== 'undefined' && state.originalImage) {
-             canvasLoader.classList.remove('hidden');
-             setTimeout(runAutoDetect, 50);
+        if (typeof cv !== 'undefined' && state.originalImage) {
+            canvasLoader.classList.remove('hidden');
+            setTimeout(runAutoDetect, 50);
         }
     });
 
@@ -830,7 +906,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     clearBtn.addEventListener('click', () => {
-        if(confirm("Clear dots?")) {
+        if (confirm("Clear dots?")) {
             saveHistory();
             state.dots = [];
             redraw();
@@ -865,14 +941,14 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         updateAiCreditsUI();
     };
-    
+
     // === 更新 AI 额度 UI 及分享逻辑 ===
     const updateAiCreditsUI = () => {
         const data = getAiUsage();
         const limit = MAX_DAILY_LIMIT + (data.extra || 0);
         const remaining = Math.max(0, limit - data.count);
-        
-        if(heroAiCredits) heroAiCredits.textContent = remaining;
+
+        if (heroAiCredits) heroAiCredits.textContent = remaining;
 
         let msgContainer = document.getElementById('ai-limit-msg');
 
@@ -883,7 +959,7 @@ document.addEventListener("DOMContentLoaded", () => {
             heroAiGoBtn.style.color = '#fff';
             heroAiGoBtn.style.cursor = 'default';
             heroAiGoBtn.disabled = true; // 真正禁用
-            
+
             const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
             heroAiGoBtn.innerHTML = `<span>Limit Reached</span> ${lockSvg}`;
 
@@ -893,22 +969,22 @@ document.addEventListener("DOMContentLoaded", () => {
                     msgContainer = document.createElement('div');
                     msgContainer.id = 'ai-limit-msg';
                     msgContainer.className = "text-center mt-4 text-sm text-slate-500 animate-in fade-in slide-in-from-top-1";
-                    
+
                     const shareSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>';
-                    
+
                     msgContainer.innerHTML = `
                         <span>Daily limit used. </span>
                         <button id="inline-share-btn" class="inline-flex items-center gap-1 text-[#FF4500] hover:text-[#cc3700] font-bold hover:underline cursor-pointer transition-colors relative z-20" style="background:none; border:none; padding:0;">
                             ${shareSvg} Share to unlock +3
                         </button>
                     `;
-                    
+
                     // 插入到 "0 free daily" 的外面 (父元素下方)
                     const creditsEl = heroAiCredits.closest('p'); // 找到 "3 free daily" 所在的 p 标签
-                    if(creditsEl && creditsEl.parentNode) {
+                    if (creditsEl && creditsEl.parentNode) {
                         creditsEl.parentNode.insertBefore(msgContainer, creditsEl.nextSibling);
                     }
-                    
+
                     document.getElementById('inline-share-btn').addEventListener('click', handleShareUnlock);
                 }
             } else {
@@ -931,7 +1007,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!state.originalImage) return;
         if (fmt === "png") {
             const link = document.createElement("a");
-            link.target ="_blank";
+            link.target = "_blank";
             link.download = "connect-dots.png";
             link.href = drawCanvas.toDataURL("image/png");
             link.click();
@@ -944,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const ratio = Math.min(pdfW / drawCanvas.width, pdfH / drawCanvas.height);
             const w = drawCanvas.width * ratio;
             const h = drawCanvas.height * ratio;
-            doc.addImage(drawCanvas.toDataURL("image/png"), 'PNG', (pdfW - w)/2, (pdfH - h)/2, w, h);
+            doc.addImage(drawCanvas.toDataURL("image/png"), 'PNG', (pdfW - w) / 2, (pdfH - h) / 2, w, h);
             doc.save("connect-dots.pdf");
             // showTip("Download started!", "success");
         }
