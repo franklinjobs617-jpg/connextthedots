@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
         config: { ...DEFAULT_CONFIG },
         pendingFile: null
     };
-    let cvReady = false; // 全局标志位
+
+    let cvReady = false; // 全局 OpenCV 就绪标志
+    let debounceTimer = null; // 用于防抖的计时器
     const MAX_DAILY_LIMIT = 3;
     const STORAGE_KEY = 'ai_gen_daily_usage';
 
@@ -69,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const dotCountDisplay = getEl("dot-count-display");
     const pointsMinusBtn = getEl("points-minus-btn");
     const pointsPlusBtn = getEl("points-plus-btn");
-    const pointsNumberInput = getEl("points-number-input");
+    const pointsNumberInput = getEl("points-number-input"); // 虽然隐藏，但逻辑中会用到
 
     const fontSizeSlider = getEl("font-size-slider");
     const fontSizeValue = getEl("font-size-value");
@@ -90,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. UI UTILS (TOAST & INLINE TIPS)
     // ==========================================
 
+    // 显示顶部提示框
     const showTip = (message, type = 'info') => {
         const oldTip = document.getElementById('custom-tip');
         if (oldTip) oldTip.remove();
@@ -108,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
             iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
         }
 
-        tip.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[9999] ${bgClass} text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-0 bg-brand-blue`;
+        tip.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[9999] ${bgClass} text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-0`;
         tip.innerHTML = `${iconSvg} <span class="font-medium text-sm">${message}</span>`;
 
         document.body.appendChild(tip);
@@ -125,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3000);
     };
 
+    // 处理分享解锁逻辑
     const handleShareUnlock = () => {
         const data = getAiUsage();
         const today = new Date().toLocaleDateString();
@@ -137,8 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const url = encodeURIComponent(window.location.href);
         const title = encodeURIComponent("Check out this Free Connect the Dots Generator!");
+        // 在新窗口打开 Reddit 分享
         window.open(`https://www.reddit.com/submit?url=${url}&title=${title}`, '_blank');
 
+        // 增加额度
         data.extra = (data.extra || 0) + 3;
         data.shareDate = today;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -148,15 +154,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ==========================================
-    // 4. INITIALIZATION
+    // 4. INITIALIZATION / 初始化
     // ==========================================
 
     const init = () => {
         updateAiCreditsUI();
         setupHeroTabs();
         setupToolbar();
+        // 尝试预加载 OpenCV，但不阻塞
         loadOpenCv();
 
+        // 强制设置 Canvas 父容器样式，确保居中
         if (drawCanvas && drawCanvas.parentElement) {
             const parent = drawCanvas.parentElement;
             parent.style.display = "flex";
@@ -174,29 +182,30 @@ document.addEventListener("DOMContentLoaded", () => {
             drawCanvas.style.display = "block";
         }
 
+        // 初始化滑块范围
         if (dotCountSlider) {
             dotCountSlider.max = 200;
             dotCountSlider.min = 5;
             dotCountSlider.value = 25;
         }
 
-        // --- 修改点：初始化 UI 状态以匹配默认配置 ---
-        // 1. 设置橡皮擦滑块默认值
+        // --- 初始化 UI 状态以匹配默认配置 ---
         if (thicknessSlider) {
             thicknessSlider.value = DEFAULT_CONFIG.eraseThickness;
             if (thicknessValue) thicknessValue.textContent = DEFAULT_CONFIG.eraseThickness;
         }
-        // 2. 显示 Internal Lines 对应的控制容器
+        
         if (thicknessContainer && DEFAULT_CONFIG.hint === 'internal') {
             thicknessContainer.classList.remove('hidden');
         }
-        // 3. 选中对应的 Radio
+        
         const defaultRadio = document.querySelector(`input[name="hint-type"][value="${DEFAULT_CONFIG.hint}"]`);
         if (defaultRadio) defaultRadio.checked = true;
     };
 
     const setupHeroTabs = () => {
         if (!tabUpload || !tabAi) return;
+        
         tabUpload.addEventListener("click", () => {
             tabBg.style.transform = 'translateX(0)';
             tabUpload.classList.replace('text-slate-500', 'text-white');
@@ -204,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
             panelAi.classList.replace('active', 'inactive');
             panelUpload.classList.replace('inactive', 'active');
         });
+        
         tabAi.addEventListener("click", () => {
             tabBg.style.transform = 'translateX(100%)';
             tabUpload.classList.replace('text-white', 'text-slate-500');
@@ -225,6 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
             resetState();
         }
     };
+
     if (backToHomeBtn) backToHomeBtn.addEventListener("click", () => switchView('landing'));
 
     const resetState = () => {
@@ -236,13 +247,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ==========================================
-    // 5. FILE HANDLING
+    // 5. FILE HANDLING / 文件处理
     // ==========================================
 
     const handleFile = (file, isProcessed = false) => {
         if (!file || !file.type.startsWith('image/')) return showTip("Please upload a valid image file.", "error");
-
-        // --- 逻辑保持：直接进入画布，不弹窗 ---
+        
+        // --- 逻辑：直接进入画布，不弹窗 ---
         loadFileToCanvas(file);
     };
 
@@ -260,9 +271,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 switchView('editor');
 
-                // --- 修改点：如果默认是 Internal Lines，加载时立即生成 ---
+                // --- 预生成内部线条提示 ---
                 if (state.config.hint === 'internal' && typeof cv !== 'undefined') {
-                    // 使用 setTimeout 避免阻塞主线程渲染
                     setTimeout(() => {
                         state.internalHintImage = generateInternalHintImage();
                         redraw();
@@ -271,6 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     redraw();
                 }
 
+                // --- 开始自动检测 ---
                 canvasLoader.classList.remove('hidden');
                 const startDetect = () => setTimeout(runAutoDetect, 200);
 
@@ -284,11 +295,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (heroFileInput) heroFileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
 
+    // 示例图片点击
     document.querySelectorAll('.preset-btn').forEach(btn => {
         btn.addEventListener('click', async () => {
             try {
                 const res = await fetch(btn.dataset.src, { cache: "no-store" });
-
                 const blob = await res.blob();
                 handleFile(new File([blob], "preset.webp", { type: blob.type }), true);
             } catch (e) {
@@ -297,6 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // 模态框按钮逻辑（虽然 handleFile 跳过了模态框，但保留逻辑以备不时之需）
     if (btnSelectDrawing) btnSelectDrawing.addEventListener('click', () => {
         imageTypeModal.classList.add('hidden');
         if (state.pendingFile) loadFileToCanvas(state.pendingFile);
@@ -322,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // AI Generation
+    // AI 生成逻辑
     if (heroAiGoBtn) heroAiGoBtn.addEventListener('click', async () => {
         const prompt = heroAiInput.value.trim();
 
@@ -332,7 +344,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentLimit = MAX_DAILY_LIMIT + (usage.extra || 0);
 
         if (usage.count >= currentLimit) {
-            // 这里不再弹窗，而是因为 UI 已经引导用户点击下方链接
             showTip("Daily limit reached. Share below to unlock!", "info");
             return;
         }
@@ -384,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================
-    // 6. OPENCV LOGIC
+    // 6. OPENCV LOGIC / OpenCV 逻辑
     // ==========================================
 
     const loadOpenCv = (cb) => {
@@ -396,7 +407,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 2. 检查是否已经有 script 标签但还没 ready
         if (document.querySelector('script[src*="opencv.js"]')) {
-            // 如果脚本已存在，我们只需监听 ready
             if (typeof cv !== 'undefined' && !cvReady) {
                 cv['onRuntimeInitialized'] = () => {
                     cvReady = true;
@@ -434,7 +444,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!state.originalImage) return;
 
         // 安全检查 2: OpenCV 是否完全就绪
-        // 如果 cv 没准备好，显示 loading 并等待，而不是报错
         if (typeof cv === 'undefined' || !cvReady) {
             console.log("OpenCV not ready yet, waiting...");
             canvasLoader.classList.remove('hidden');
@@ -453,12 +462,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const tempCanvas = document.createElement("canvas");
             
-            // 安全检查 3: 确保尺寸是整数 (Math.floor)
+            // 安全检查 3: 确保尺寸是整数
             const processScale = Math.min(1, 1000 / Math.max(state.originalImage.naturalWidth, state.originalImage.naturalHeight));
             const w = Math.floor(state.originalImage.naturalWidth * processScale);
             const h = Math.floor(state.originalImage.naturalHeight * processScale);
             
-            if (w === 0 || h === 0) return; // 防止空图片
+            if (w === 0 || h === 0) return;
 
             tempCanvas.width = w;
             tempCanvas.height = h;
@@ -466,7 +475,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const tCtx = tempCanvas.getContext("2d");
             tCtx.drawImage(state.originalImage, 0, 0, w, h);
 
-            // 安全检查 4: 使用 try-catch 包裹具体的 OpenCV 调用
             let imgData = tCtx.getImageData(0, 0, w, h);
             let src = cv.matFromImageData(imgData);
             
@@ -528,7 +536,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (e) {
             console.error("Auto detect runtime error:", e);
-            // 这里不抛出 alert，以免打断用户，只是停止 loading
         } finally {
             canvasLoader.classList.add('hidden');
         }
@@ -595,12 +602,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const generateInternalHintImage = () => {
-        // 增加 !cvReady 检查
         if (!state.originalImage || typeof cv === "undefined" || !cvReady) return null;
         
         try {
             const tempCanvas = document.createElement("canvas");
-            // 确保整数
             const w = Math.floor(state.originalImage.naturalWidth);
             const h = Math.floor(state.originalImage.naturalHeight);
             
@@ -610,7 +615,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const tCtx = tempCanvas.getContext("2d");
             tCtx.drawImage(state.originalImage, 0, 0);
 
-            // 同样使用 getImageData + matFromImageData
             let imgData = tCtx.getImageData(0, 0, w, h);
             let src = cv.matFromImageData(imgData);
             
@@ -645,28 +649,31 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ==========================================
-    // 7. DRAWING & INTERACTION
+    // 7. DRAWING & INTERACTION / 绘图与交互
     // ==========================================
 
     const setupToolbar = () => {
         const setActive = (tool) => {
             state.activeTool = tool;
             [toolAdd, toolMove, toolDel].forEach(btn => {
-                if (btn.id === `tool-${tool}`) {
+                if (btn && btn.id === `tool-${tool}`) {
                     btn.classList.add('bg-brand-blue', 'text-white');
                     btn.classList.remove('bg-slate-700', 'text-brand-blue');
-                } else {
+                } else if (btn) {
                     btn.classList.remove('bg-brand-blue', 'text-white');
                     btn.classList.add('bg-slate-700');
                     if (btn.id === 'tool-add') btn.classList.add('text-brand-blue');
                 }
             });
-            drawCanvas.style.cursor = tool === 'move' ? 'grab' : (tool === 'del' ? 'crosshair' : 'crosshair');
+            if(drawCanvas) {
+                drawCanvas.style.cursor = tool === 'move' ? 'grab' : (tool === 'del' ? 'crosshair' : 'crosshair');
+            }
         };
-        toolAdd.addEventListener('click', () => setActive('add'));
-        toolMove.addEventListener('click', () => setActive('move'));
-        toolDel.addEventListener('click', () => setActive('del'));
-        undoBtn.addEventListener('click', performUndo);
+        
+        if(toolAdd) toolAdd.addEventListener('click', () => setActive('add'));
+        if(toolMove) toolMove.addEventListener('click', () => setActive('move'));
+        if(toolDel) toolDel.addEventListener('click', () => setActive('del'));
+        if(undoBtn) undoBtn.addEventListener('click', performUndo);
         setActive('add');
     };
 
@@ -828,15 +835,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ==========================================
-    // 8. CONTROLS
+    // 8. CONTROLS / 控制面板
     // ==========================================
 
     const updateConfig = (key, val) => {
         state.config[key] = val;
+        
+        // 防抖处理内部线条生成
         if ((key === 'hint' && val === 'internal') || (key === 'eraseThickness' && state.config.hint === 'internal')) {
             if (state.config.hint === 'internal') {
-                if (this.debounceTimer) clearTimeout(this.debounceTimer);
-                this.debounceTimer = setTimeout(() => {
+                if (debounceTimer) clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
                     state.internalHintImage = generateInternalHintImage();
                     redraw();
                 }, 50);
@@ -850,20 +859,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    fontSizeSlider.addEventListener('input', (e) => {
+    if(fontSizeSlider) fontSizeSlider.addEventListener('input', (e) => {
         fontSizeValue.textContent = e.target.value;
         updateConfig('fontSize', parseInt(e.target.value));
     });
-    dotSizeSlider.addEventListener('input', (e) => {
+    if(dotSizeSlider) dotSizeSlider.addEventListener('input', (e) => {
         dotSizeValue.textContent = e.target.value;
         updateConfig('dotRadius', parseInt(e.target.value));
     });
-    thicknessSlider.addEventListener('input', (e) => {
+    if(thicknessSlider) thicknessSlider.addEventListener('input', (e) => {
         thicknessValue.textContent = e.target.value;
         updateConfig('eraseThickness', parseInt(e.target.value));
     });
 
-    dotColorPicker.addEventListener('input', (e) => updateConfig('dotColor', e.target.value));
+    if(dotColorPicker) dotColorPicker.addEventListener('input', (e) => updateConfig('dotColor', e.target.value));
 
     hintRadios.forEach(r => r.addEventListener('change', (e) => {
         updateConfig('hint', e.target.value);
@@ -871,22 +880,24 @@ document.addEventListener("DOMContentLoaded", () => {
         else thicknessContainer.classList.add('hidden');
     }));
 
-    dotCountSlider.addEventListener('input', (e) => {
-        dotCountDisplay.textContent = `${e.target.value} Dots`;
-    });
+    if(dotCountSlider) {
+        dotCountSlider.addEventListener('input', (e) => {
+            dotCountDisplay.textContent = `${e.target.value} Dots`;
+        });
 
-    dotCountSlider.addEventListener('change', (e) => {
-        if (typeof cv !== 'undefined' && state.originalImage) {
-            canvasLoader.classList.remove('hidden');
-            setTimeout(runAutoDetect, 50);
-        }
-    });
+        dotCountSlider.addEventListener('change', (e) => {
+            if (typeof cv !== 'undefined' && state.originalImage) {
+                canvasLoader.classList.remove('hidden');
+                setTimeout(runAutoDetect, 50);
+            }
+        });
+    }
 
     const updateDotCountUI = () => {
-        dotCountDisplay.textContent = `${state.dots.length} Dots`;
+        if(dotCountDisplay) dotCountDisplay.textContent = `${state.dots.length} Dots`;
     };
 
-    pointsPlusBtn.addEventListener('click', () => {
+    if(pointsPlusBtn) pointsPlusBtn.addEventListener('click', () => {
         let val = parseInt(dotCountSlider.value);
         if (val < 200) {
             val++;
@@ -895,7 +906,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dotCountSlider.dispatchEvent(new Event('change'));
         }
     });
-    pointsMinusBtn.addEventListener('click', () => {
+    if(pointsMinusBtn) pointsMinusBtn.addEventListener('click', () => {
         let val = parseInt(dotCountSlider.value);
         if (val > 5) {
             val--;
@@ -905,12 +916,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    clearBtn.addEventListener('click', () => {
+    if(clearBtn) clearBtn.addEventListener('click', () => {
         if (confirm("Clear dots?")) {
             saveHistory();
             state.dots = [];
             redraw();
-            dotCountDisplay.textContent = `0 Dots`;
+            updateDotCountUI();
         }
     });
 
@@ -953,12 +964,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let msgContainer = document.getElementById('ai-limit-msg');
 
         if (remaining <= 0) {
-            // 1. 禁用按钮 (视觉变灰)
+            // 禁用按钮
             heroAiGoBtn.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'hover:shadow-lg', 'hover:scale-105');
             heroAiGoBtn.style.backgroundColor = '#94a3b8'; // Slate 400
             heroAiGoBtn.style.color = '#fff';
             heroAiGoBtn.style.cursor = 'default';
-            heroAiGoBtn.disabled = true; // 真正禁用
+            heroAiGoBtn.disabled = true;
 
             const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
             heroAiGoBtn.innerHTML = `<span>Limit Reached</span> ${lockSvg}`;
@@ -979,8 +990,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </button>
                     `;
 
-                    // 插入到 "0 free daily" 的外面 (父元素下方)
-                    const creditsEl = heroAiCredits.closest('p'); // 找到 "3 free daily" 所在的 p 标签
+                    const creditsEl = heroAiCredits.closest('p');
                     if (creditsEl && creditsEl.parentNode) {
                         creditsEl.parentNode.insertBefore(msgContainer, creditsEl.nextSibling);
                     }
@@ -1011,7 +1021,6 @@ document.addEventListener("DOMContentLoaded", () => {
             link.download = "connect-dots.png";
             link.href = drawCanvas.toDataURL("image/png");
             link.click();
-            // showTip("Download started!", "success");
         } else if (fmt === "pdf" && window.jspdf) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ orientation: drawCanvas.width > drawCanvas.height ? 'l' : 'p', unit: 'mm', format: 'a4' });
@@ -1022,7 +1031,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const h = drawCanvas.height * ratio;
             doc.addImage(drawCanvas.toDataURL("image/png"), 'PNG', (pdfW - w) / 2, (pdfH - h) / 2, w, h);
             doc.save("connect-dots.pdf");
-            // showTip("Download started!", "success");
         }
     };
     if (downloadPngBtn) downloadPngBtn.addEventListener('click', (e) => dl("png"));

@@ -26,9 +26,8 @@
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    <!-- === TECH STACK (New Design System) === -->
-     <link rel="preconnect" href="/dist/outputnew.css" />   
-    <link rel="stylesheet" href="/dist/outputnew.css" />
+    <!-- === TECH STACK (New Design System) === --> 
+    <link rel="stylesheet" href="/dist/indexStyle.css" />
 
     <!-- PDF Library -->
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -149,9 +148,8 @@
 
         <!-- Logo Area -->
         <a href="/" class="flex items-center gap-2 group" aria-label="Home">
-            <div
-                class="w-9 h-9 rounded-xl flex items-center justify-center text-brand-blue ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-8 h-8 p-0.5">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center text-brand-blue ">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-8 h-8 p-0.5" width="32" height="32">
                     <path
                         d="M404 0c19.2 0 37.6 7.6 51.1 21.2l35.7 35.7C504.4 70.4 512 88.8 512 108s-7.6 37.6-21.2 51.1L445.9 204 308 66.1 352.9 21.2C366.4 7.6 384.8 0 404 0zM58.9 315.1L274.1 100 412 237.9 196.9 453.1c-10.7 10.7-24.1 18.5-38.7 22.6L30.4 511.1c-8.3 2.3-17.3 0-23.4-6.2s-8.5-15.1-6.2-23.4L36.4 353.8c4.1-14.6 11.8-27.9 22.6-38.7zM225.4 80.8L80.8 225.4 11.7 156.3c-15.6-15.6-15.6-40.9 0-56.6l88-88c15.6-15.6 40.9-15.6 56.6 0l5.9 5.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 34.9 34.9zM431.2 286.6l34.9 34.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 5.9 5.9c15.6 15.6 15.6 40.9 0 56.6l-88 88c-15.6 15.6-40.9 15.6-56.6 0l-69.1-69.1 144.6-144.6z" />
                 </svg>
@@ -165,8 +163,8 @@
             <a href="/printable-connect-the-dots.html" class="hover:text-brand-blue transition-colors duration-200">All
                 Printables</a>
             <a href="/how-to-make.html" class="hover:text-brand-blue transition-colors duration-200">How to Make</a>
-            <a href="/privacy.html" class="hover:text-brand-blue transition-colors duration-200" >Privacy</a>
-            <a href="/terms.html" class="hover:text-brand-blue transition-colors duration-200" >Terms</a>
+            <a href="/privacy.html" class="hover:text-brand-blue transition-colors duration-200">Privacy</a>
+            <a href="/terms.html" class="hover:text-brand-blue transition-colors duration-200">Terms</a>
             <a href="/feedback.html" class="hover:text-brand-blue transition-colors duration-200">Feedback</a>
 
             <!-- Optimized Donate Button (Refined Style) -->
@@ -202,9 +200,9 @@
             <a href="/printable-connect-the-dots.html" class="hover:text-brand-blue">All Printables</a>
             <a href="/how-to-make.html" class="hover:text-brand-blue">How to Make</a>
             <a href="/christmas-printables.html" class="hover:text-brand-blue">Christmas</a>
-            
-            <a href="/privacy.html" class="hover:text-brand-blue" >Privacy</a>
-            <a href="/terms.html" class="hover:text-brand-blue" >Terms</a>
+
+            <a href="/privacy.html" class="hover:text-brand-blue">Privacy</a>
+            <a href="/terms.html" class="hover:text-brand-blue">Terms</a>
             <a href="https://ko-fi.com/connectthedotsprintable" target="_blank"
                 class="group flex items-center justify-center gap-2 px-4 py-2 ml-2 rounded-full border border-transparent border-red-100 bg-red-50 transition-all duration-300">
                 <!-- Icon with Heartbeat Animation on Hover -->
@@ -526,20 +524,26 @@
                         <!-- PC Content -->
                         <div id="pc-content"
                             class="tab-content-tailwind relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-900 aspect-video group">
-                            <video class="w-full h-full object-cover"
+
+                            <!-- Video Element -->
+                            <video id="demo-video-pc" class="w-full h-full object-cover"
                                 poster="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-dot-to-dot-desktop-demo.webp"
                                 controls preload="none" title="Desktop Demo">
                                 <source
                                     src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-dot-to-dot-desktop-demo.mp4"
                                     type="video/mp4">
                             </video>
-                            <!-- Play Overlay (Optional visual cue) -->
-                            <div
-                                class="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity duration-300 bg-black/20">
+
+                            <!-- Optimized Play Overlay -->
+                            <!-- 点击遮罩层也能播放视频 -->
+                            <div id="video-overlay" onclick="document.getElementById('demo-video-pc').play()"
+                                class="absolute inset-0 flex items-center justify-center transition-opacity duration-500 bg-black/20 cursor-pointer z-10">
+
+                                <!-- Play Button Icon -->
                                 <div
-                                    class="w-16 h-16 bg-white/90 backdrop-blur rounded-full flex items-center justify-center pl-1 shadow-lg text-brand-blue text-2xl">
-                                    <svg width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                    class="w-20 h-20 bg-white/90 backdrop-blur rounded-full flex items-center justify-center pl-1 shadow-[0_0_30px_rgba(255,255,255,0.3)] text-brand-blue text-3xl transform transition-transform duration-300 hover:scale-110">
+                                    <svg width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512">
                                         <path
                                             d="M91.2 36.9c-12.4-6.8-27.4-6.5-39.6 .7S32 57.9 32 72l0 368c0 14.1 7.5 27.2 19.6 34.4s27.2 7.5 39.6 .7l336-184c12.8-7 20.8-20.5 20.8-35.1s-8-28.1-20.8-35.1l-336-184z" />
                                     </svg>
@@ -547,23 +551,49 @@
                             </div>
                         </div>
 
-                        <!-- Mobile Content (Hidden) -->
-                        <div id="mobile-content" class="tab-content-tailwind hidden flex justify-center">
+                        <!-- Mobile Content -->
+                        <div id="mobile-content"
+                            class="tab-content-tailwind hidden flex flex-col items-center justify-center pt-2">
+                            <!-- Phone Frame -->
                             <div
-                                class="relative mx-auto w-[300px] border-[8px] border-slate-900 rounded-[3rem] shadow-2xl overflow-hidden bg-slate-800">
+                                class="relative mx-auto w-[300px] border-[8px] border-slate-900 rounded-[3rem] shadow-2xl overflow-hidden bg-slate-800 ring-1 ring-slate-900/50">
+
+                                <!-- Notch (刘海) - Z-Index 30 确保在最顶层 -->
                                 <div
-                                    class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-xl z-20">
+                                    class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-slate-900 rounded-b-xl z-30 flex justify-center items-center">
+                                    <!-- 可选：加个微小的听筒细节 -->
+                                    <div class="w-16 h-1 bg-slate-800 rounded-full"></div>
                                 </div>
-                                <video class="w-full h-full object-cover aspect-[9/19]"
-                                    poster="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-mobile-demo.webp"
-                                    controls preload="none" title="Mobile Demo">
+
+                                <!-- Video Element -->
+                                <!-- 添加 playsinline 保持在框内播放 -->
+                                <video id="demo-video-mobile"
+                                    class="w-full h-full object-cover aspect-[9/19] bg-slate-900"
+                                    poster="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-dot-to-dot-mobile-demo.webp"
+                                    controls playsinline preload="none" title="Mobile Demo">
                                     <source
-                                        src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-mobile-demo.mp4"
+                                        src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/how-to-create-custom-printable-dot-to-dot-mobile-demo.mp4"
                                         type="video/mp4">
                                 </video>
+
+                                <!-- Optimized Play Overlay -->
+                                <div id="mobile-video-overlay"
+                                    onclick="document.getElementById('demo-video-mobile').play()"
+                                    class="absolute inset-0 flex items-center justify-center transition-opacity duration-300 bg-black/30 cursor-pointer z-20 backdrop-blur-[2px]">
+
+                                    <!-- Play Button -->
+                                    <div
+                                        class="w-16 h-16 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center pl-1 shadow-[0_0_20px_rgba(255,255,255,0.4)] text-brand-blue text-2xl transform transition-transform duration-300 hover:scale-110 active:scale-95">
+                                        <svg width="20" height="20" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                            <path
+                                                d="M91.2 36.9c-12.4-6.8-27.4-6.5-39.6 .7S32 57.9 32 72l0 368c0 14.1 7.5 27.2 19.6 34.4s27.2 7.5 39.6 .7l336-184c12.8-7 20.8-20.5 20.8-35.1s-8-28.1-20.8-35.1l-336-184z" />
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="text-sm text-slate-400 mt-6 absolute -bottom-10 w-full">Optimized for touch &
-                                swipe.</p>
+
+                            <p class="text-sm text-slate-400 mt-8 font-medium">Optimized for touch & swipe.</p>
                         </div>
                     </div>
                 </div>
@@ -1062,7 +1092,7 @@
                         <span>Donate</span>
                     </a>
 
-                    <button id="download-png-btn" type="button" 
+                    <button id="download-png-btn" type="button"
                         class="w-full md:w-auto justify-center px-4 py-2.5 md:px-6 bg-brand-blue text-white font-bold rounded-full shadow-lg hover:bg-indigo-600 transition flex items-center gap-2 text-xs md:text-sm">
                         <svg width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512">
@@ -1074,7 +1104,7 @@
                     </button>
 
                     <!-- PDF Button -->
-                    <button id="download-pdf-btn" type="button" 
+                    <button id="download-pdf-btn" type="button"
                         class="w-full md:w-auto justify-center px-4 py-2.5 md:px-6 bg-white text-slate-700 border border-gray-200 font-bold rounded-full shadow-sm hover:bg-gray-50 transition flex items-center gap-2 text-xs md:text-sm">
                         <svg width="16" height="16" fill="currentColor" class="text-red-500"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -1487,7 +1517,7 @@
 
         });
 
-    </script> 
+    </script>
 
     <script>
         // --- UI Interactions ---
@@ -1507,14 +1537,6 @@
             });
         });
 
-        // Feedback Modal Logic
-        const fbModal = document.getElementById('feedback-modal');
-        document.getElementById('feedback-toggle-button').addEventListener('click', () => {
-            fbModal.classList.remove('hidden');
-            // Re-init Cusdis if needed
-            if (window.CUSDIS && window.CUSDIS.initial) window.CUSDIS.initial();
-        });
-        // document.getElementById('close-fb').addEventListener('click', () => fbModal.classList.add('hidden'));
 
         // Paste Image Support
         document.addEventListener('paste', (e) => {
@@ -1571,12 +1593,7 @@
             }
 
 
-
-
-
-
-            // buy me coffe
-            // 定义提示弹窗函数
+            // buy me coffe  提示弹窗函数
             const showDonationTip = () => {
                 // 1. 如果已存在，先移除（防止堆叠）
                 const existingTip = document.getElementById('donation-toast');
@@ -1650,8 +1667,8 @@
 
             // 监听下载按钮点击，增加延迟
             const handleDownloadWithDelay = (e) => {
-                 if(e) {
-                    e.preventDefault(); 
+                if (e) {
+                    e.preventDefault();
                     e.stopPropagation();
                 }
                 // 延迟 2000 毫秒 (2秒) 后显示提示，给浏览器一点时间处理下载
@@ -1664,9 +1681,38 @@
             if (pngBtn) pngBtn.addEventListener('click', handleDownloadWithDelay);
             if (pdfBtn) pdfBtn.addEventListener('click', handleDownloadWithDelay);
 
+
+            // --- 通用视频处理函数 ---
+            const setupVideoBehavior = (videoId, overlayId) => {
+                const video = document.getElementById(videoId);
+                const overlay = document.getElementById(overlayId);
+
+                if (video && overlay) {
+                    // 播放时：隐藏遮罩，允许点击穿透
+                    video.addEventListener('play', () => {
+                        overlay.classList.add('opacity-0', 'pointer-events-none');
+                    });
+
+                    // 暂停或结束时：显示遮罩，恢复点击
+                    const showOverlay = () => {
+                        overlay.classList.remove('opacity-0', 'pointer-events-none');
+                    };
+
+                    video.addEventListener('pause', showOverlay);
+                    video.addEventListener('ended', showOverlay);
+                }
+            };
+
+            // 1. 设置 PC 端视频
+            setupVideoBehavior('demo-video-pc', 'video-overlay');
+
+            // 2. 设置 Mobile 端视频
+            setupVideoBehavior('demo-video-mobile', 'mobile-video-overlay');
+
         });
     </script>
 
+    <!-- feedback模态框 -->
     <script>
         const modal = document.getElementById('feedback-modal');
         const panel = document.getElementById('feedback-panel');
@@ -1713,6 +1759,7 @@
         });
     </script>
 
+    <!-- 第三方代码 -->
     <script>
         // 标志，确保脚本只加载一次
         let thirdPartyScriptsLoaded = false;
