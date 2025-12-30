@@ -286,8 +286,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     document.querySelectorAll('.preset-btn').forEach(btn => {
         btn.addEventListener('click', async () => {
-            try {
-                const res = await fetch(btn.dataset.src);
+            try { 
+                const res = await fetch(btn.dataset.src, { cache: "no-store" });
+
                 const blob = await res.blob();
                 handleFile(new File([blob], "preset.webp", { type: blob.type }), true);
             } catch(e) {
@@ -930,6 +931,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!state.originalImage) return;
         if (fmt === "png") {
             const link = document.createElement("a");
+            link.target ="_blank";
             link.download = "connect-dots.png";
             link.href = drawCanvas.toDataURL("image/png");
             link.click();
@@ -947,8 +949,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // showTip("Download started!", "success");
         }
     };
-    if (downloadPngBtn) downloadPngBtn.addEventListener('click', () => dl("png"));
-    if (downloadPdfBtn) downloadPdfBtn.addEventListener('click', () => dl("pdf"));
+    if (downloadPngBtn) downloadPngBtn.addEventListener('click', (e) => dl("png"));
+    if (downloadPdfBtn) downloadPdfBtn.addEventListener('click', (e) => dl("pdf"));
 
     init();
 });
