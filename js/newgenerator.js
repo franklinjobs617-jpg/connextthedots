@@ -194,18 +194,18 @@ document.addEventListener("DOMContentLoaded", () => {
             thicknessSlider.value = DEFAULT_CONFIG.eraseThickness;
             if (thicknessValue) thicknessValue.textContent = DEFAULT_CONFIG.eraseThickness;
         }
-        
+
         if (thicknessContainer && DEFAULT_CONFIG.hint === 'internal') {
             thicknessContainer.classList.remove('hidden');
         }
-        
+
         const defaultRadio = document.querySelector(`input[name="hint-type"][value="${DEFAULT_CONFIG.hint}"]`);
         if (defaultRadio) defaultRadio.checked = true;
     };
 
     const setupHeroTabs = () => {
         if (!tabUpload || !tabAi) return;
-        
+
         tabUpload.addEventListener("click", () => {
             tabBg.style.transform = 'translateX(0)';
             tabUpload.classList.replace('text-slate-500', 'text-white');
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
             panelAi.classList.replace('active', 'inactive');
             panelUpload.classList.replace('inactive', 'active');
         });
-        
+
         tabAi.addEventListener("click", () => {
             tabBg.style.transform = 'translateX(100%)';
             tabUpload.classList.replace('text-white', 'text-slate-500');
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const handleFile = (file, isProcessed = false) => {
         if (!file || !file.type.startsWith('image/')) return showTip("Please upload a valid image file.", "error");
-        
+
         // --- 逻辑：直接进入画布，不弹窗 ---
         loadFileToCanvas(file);
     };
@@ -439,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(script);
     };
 
-   const runAutoDetect = () => {
+    const runAutoDetect = () => {
         // 安全检查 1: 图片是否加载
         if (!state.originalImage) return;
 
@@ -448,8 +448,8 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("OpenCV not ready yet, waiting...");
             canvasLoader.classList.remove('hidden');
             const loaderText = canvasLoader.querySelector('p');
-            if(loaderText) loaderText.textContent = "Loading Engine...";
-            
+            if (loaderText) loaderText.textContent = "Loading Engine...";
+
             // 500ms 后重试
             setTimeout(runAutoDetect, 500);
             return;
@@ -458,26 +458,26 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             // 恢复 Loading 文字
             const loaderText = canvasLoader.querySelector('p');
-            if(loaderText) loaderText.textContent = "Processing lines...";
+            if (loaderText) loaderText.textContent = "Processing lines...";
 
             const tempCanvas = document.createElement("canvas");
-            
+
             // 安全检查 3: 确保尺寸是整数
             const processScale = Math.min(1, 1000 / Math.max(state.originalImage.naturalWidth, state.originalImage.naturalHeight));
             const w = Math.floor(state.originalImage.naturalWidth * processScale);
             const h = Math.floor(state.originalImage.naturalHeight * processScale);
-            
+
             if (w === 0 || h === 0) return;
 
             tempCanvas.width = w;
             tempCanvas.height = h;
-            
+
             const tCtx = tempCanvas.getContext("2d");
             tCtx.drawImage(state.originalImage, 0, 0, w, h);
 
             let imgData = tCtx.getImageData(0, 0, w, h);
             let src = cv.matFromImageData(imgData);
-            
+
             let gray = new cv.Mat();
             let binary = new cv.Mat();
             let contours = new cv.MatVector();
@@ -485,7 +485,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
             cv.adaptiveThreshold(gray, binary, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 11, 2);
-            
+
             let M = cv.Mat.ones(3, 3, cv.CV_8U);
             cv.dilate(binary, binary, M);
 
@@ -494,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let allPoints = [];
             let maxArea = 0;
             let maxContourIndex = -1;
-            
+
             for (let i = 0; i < contours.size(); i++) {
                 let cnt = contours.get(i);
                 if (cv.contourArea(cnt) > 100) {
@@ -509,7 +509,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let mainContour = contours.get(maxContourIndex);
                 let approx = new cv.Mat();
                 cv.approxPolyDP(mainContour, approx, cv.arcLength(mainContour, true) * 0.001, true);
-                
+
                 for (let j = 0; j < approx.rows; j++) {
                     allPoints.push({
                         x: approx.data32S[j * 2] / processScale,
@@ -529,7 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 state.dots = [];
             }
-            
+
             saveHistory();
             redraw();
             dotCountDisplay.textContent = `${state.dots.length} Dots`;
@@ -602,49 +602,65 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const generateInternalHintImage = () => {
+        // 1. 基础检查
         if (!state.originalImage || typeof cv === "undefined" || !cvReady) return null;
-        
+
         try {
             const tempCanvas = document.createElement("canvas");
             const w = Math.floor(state.originalImage.naturalWidth);
             const h = Math.floor(state.originalImage.naturalHeight);
-            
+
             tempCanvas.width = w;
             tempCanvas.height = h;
-            
+
             const tCtx = tempCanvas.getContext("2d");
-            tCtx.drawImage(state.originalImage, 0, 0);
+
+            // --- 步骤 A: 强制白底 (防止 AI 图片透明通道问题) ---
+            tCtx.fillStyle = "#FFFFFF";
+            tCtx.fillRect(0, 0, w, h);
+            tCtx.drawImage(state.originalImage, 0, 0, w, h);
 
             let imgData = tCtx.getImageData(0, 0, w, h);
             let src = cv.matFromImageData(imgData);
-            
+
             let gray = new cv.Mat();
             let binary = new cv.Mat();
             let contours = new cv.MatVector();
             let hierarchy = new cv.Mat();
 
+            // --- 步骤 B: 灰度化 ---
             cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-            cv.adaptiveThreshold(gray, binary, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 11, 2);
-            let M = cv.Mat.ones(3, 3, cv.CV_8U);
-            cv.dilate(binary, binary, M);
+
+            // --- 步骤 C: 阈值处理 (使用 Otsu 算法以适应 AI 线稿) ---
+            // 这一步确保线条被清晰地提取出来
+            cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU);
+
+            // --- 步骤 D: 关键修改 - 只提取最外层轮廓 ---
+            // 使用 cv.RETR_EXTERNAL 而不是 cv.RETR_LIST
+            // 这样内部的眼睛、细节会被忽略，不会被擦除
             cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
 
-            const thickness = Math.max(2, state.config.eraseThickness * (tempCanvas.width / 1000));
+            // --- 步骤 E: 绘制遮罩 (擦除效果) ---
+            // 计算擦除笔触的粗细
+            const thickness = Math.max(2, state.config.eraseThickness * (w / 1000));
             const whiteColor = new cv.Scalar(255, 255, 255, 255);
-            
+
+            // 在原图上，沿着最外层轮廓画白线，达到"擦除/变淡"外轮廓的效果
+            // 内部线条因为没被选中，所以保持原样
             cv.drawContours(src, contours, -1, whiteColor, thickness);
 
             const outputCanvas = document.createElement("canvas");
             outputCanvas.width = w;
             outputCanvas.height = h;
-            cv.imshow(outputCanvas, src); 
+            cv.imshow(outputCanvas, src);
 
-            src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete(); M.delete();
+            // 内存清理
+            src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete();
 
             return outputCanvas;
-        } catch (e) { 
-            console.error("Internal Lines Error:", e); 
-            return null; 
+        } catch (e) {
+            console.error("Internal Lines Error:", e);
+            return null;
         }
     };
 
@@ -665,15 +681,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (btn.id === 'tool-add') btn.classList.add('text-brand-blue');
                 }
             });
-            if(drawCanvas) {
+            if (drawCanvas) {
                 drawCanvas.style.cursor = tool === 'move' ? 'grab' : (tool === 'del' ? 'crosshair' : 'crosshair');
             }
         };
-        
-        if(toolAdd) toolAdd.addEventListener('click', () => setActive('add'));
-        if(toolMove) toolMove.addEventListener('click', () => setActive('move'));
-        if(toolDel) toolDel.addEventListener('click', () => setActive('del'));
-        if(undoBtn) undoBtn.addEventListener('click', performUndo);
+
+        if (toolAdd) toolAdd.addEventListener('click', () => setActive('add'));
+        if (toolMove) toolMove.addEventListener('click', () => setActive('move'));
+        if (toolDel) toolDel.addEventListener('click', () => setActive('del'));
+        if (undoBtn) undoBtn.addEventListener('click', performUndo);
         setActive('add');
     };
 
@@ -840,7 +856,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateConfig = (key, val) => {
         state.config[key] = val;
-        
+
         // 防抖处理内部线条生成
         if ((key === 'hint' && val === 'internal') || (key === 'eraseThickness' && state.config.hint === 'internal')) {
             if (state.config.hint === 'internal') {
@@ -859,20 +875,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    if(fontSizeSlider) fontSizeSlider.addEventListener('input', (e) => {
+    if (fontSizeSlider) fontSizeSlider.addEventListener('input', (e) => {
         fontSizeValue.textContent = e.target.value;
         updateConfig('fontSize', parseInt(e.target.value));
     });
-    if(dotSizeSlider) dotSizeSlider.addEventListener('input', (e) => {
+    if (dotSizeSlider) dotSizeSlider.addEventListener('input', (e) => {
         dotSizeValue.textContent = e.target.value;
         updateConfig('dotRadius', parseInt(e.target.value));
     });
-    if(thicknessSlider) thicknessSlider.addEventListener('input', (e) => {
+    if (thicknessSlider) thicknessSlider.addEventListener('input', (e) => {
         thicknessValue.textContent = e.target.value;
         updateConfig('eraseThickness', parseInt(e.target.value));
     });
 
-    if(dotColorPicker) dotColorPicker.addEventListener('input', (e) => updateConfig('dotColor', e.target.value));
+    if (dotColorPicker) dotColorPicker.addEventListener('input', (e) => updateConfig('dotColor', e.target.value));
 
     hintRadios.forEach(r => r.addEventListener('change', (e) => {
         updateConfig('hint', e.target.value);
@@ -880,7 +896,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else thicknessContainer.classList.add('hidden');
     }));
 
-    if(dotCountSlider) {
+    if (dotCountSlider) {
         dotCountSlider.addEventListener('input', (e) => {
             dotCountDisplay.textContent = `${e.target.value} Dots`;
         });
@@ -894,10 +910,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const updateDotCountUI = () => {
-        if(dotCountDisplay) dotCountDisplay.textContent = `${state.dots.length} Dots`;
+        if (dotCountDisplay) dotCountDisplay.textContent = `${state.dots.length} Dots`;
     };
 
-    if(pointsPlusBtn) pointsPlusBtn.addEventListener('click', () => {
+    if (pointsPlusBtn) pointsPlusBtn.addEventListener('click', () => {
         let val = parseInt(dotCountSlider.value);
         if (val < 200) {
             val++;
@@ -906,7 +922,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dotCountSlider.dispatchEvent(new Event('change'));
         }
     });
-    if(pointsMinusBtn) pointsMinusBtn.addEventListener('click', () => {
+    if (pointsMinusBtn) pointsMinusBtn.addEventListener('click', () => {
         let val = parseInt(dotCountSlider.value);
         if (val > 5) {
             val--;
@@ -916,7 +932,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    if(clearBtn) clearBtn.addEventListener('click', () => {
+    if (clearBtn) clearBtn.addEventListener('click', () => {
         if (confirm("Clear dots?")) {
             saveHistory();
             state.dots = [];
