@@ -136,7 +136,11 @@
         })(window, document, "clarity", "script", "tf6ljm5fsf");
     </script>
 
-
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        // 此时不加载 js 文件，只定义函数，防止后续 JS 调用报错
+    </script>
 
 </head>
 
@@ -226,7 +230,7 @@
         <div id="landing-view" class="transition-opacity duration-300">
 
             <!-- 1. Hero Section (New Design) -->
-            <section class="hero-bg max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
+            <section class="hero-bg max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-24">
                 <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
                     <!-- LEFT: Action Area -->

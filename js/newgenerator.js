@@ -27,6 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const MAX_DAILY_LIMIT = 3;
     const STORAGE_KEY = 'ai_gen_daily_usage';
 
+    // GA4 埋点辅助函数
+    const trackEvent = (eventName, params = {}) => {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', eventName, params);
+        }
+    };
+
     // ==========================================
     // 2. DOM ELEMENTS
     // ==========================================
@@ -156,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 4. INITIALIZATION / 初始化
     // ==========================================
- 
+
     const init = () => {
         updateAiCreditsUI();
         setupHeroTabs();
@@ -181,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
             drawCanvas.style.height = "100%";
             drawCanvas.style.objectFit = "contain";
             drawCanvas.style.display = "block";
-            
+
             // 移除原本可能限制尺寸的 max-width/height (因为 width:100% 已经控制了)
             drawCanvas.style.maxWidth = "none";
             drawCanvas.style.maxHeight = "none";
@@ -199,11 +206,11 @@ document.addEventListener("DOMContentLoaded", () => {
             thicknessSlider.value = DEFAULT_CONFIG.eraseThickness;
             if (thicknessValue) thicknessValue.textContent = DEFAULT_CONFIG.eraseThickness;
         }
-        
+
         if (thicknessContainer && DEFAULT_CONFIG.hint === 'internal') {
             thicknessContainer.classList.remove('hidden');
         }
-        
+
         const defaultRadio = document.querySelector(`input[name="hint-type"][value="${DEFAULT_CONFIG.hint}"]`);
         if (defaultRadio) defaultRadio.checked = true;
     };
@@ -219,9 +226,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 辅助函数：设置激活状态
         const setActive = (isAiMode) => {
+
             if (isAiMode) {
                 // === 切换到 AI 模式 ===
-                
+                trackEvent('select_mode', { mode: 'ai_gen' });
+
                 // 1. 滑块向右移动
                 tabBg.style.transform = 'translateX(100%)';
 
@@ -229,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // AI 变深色 (Active)
                 tabAi.classList.remove('text-slate-500');
                 tabAi.classList.add('text-slate-800');
-                
+
                 // Upload 变浅色 (Inactive)
                 tabUpload.classList.remove('text-slate-800');
                 tabUpload.classList.add('text-slate-500');
@@ -237,19 +246,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 // 3. 面板内容切换
                 panelUpload.classList.remove('active');
                 panelUpload.classList.add('inactive'); // 隐藏 Upload 面板
-                
+
                 panelAi.classList.remove('inactive');
                 panelAi.classList.add('active'); // 显示 AI 面板
-                
+
                 // 自动聚焦输入框
                 setTimeout(() => {
                     const input = document.getElementById('hero-ai-input');
-                    if(input) input.focus();
+                    if (input) input.focus();
                 }, 100);
 
             } else {
                 // === 切换到 Upload 模式 ===
-                
+                trackEvent('select_mode', { mode: 'upload' })
                 // 1. 滑块归位
                 tabBg.style.transform = 'translateX(0)';
 
@@ -257,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Upload 变深色 (Active)
                 tabUpload.classList.remove('text-slate-500');
                 tabUpload.classList.add('text-slate-800');
-                
+
                 // AI 变浅色 (Inactive)
                 tabAi.classList.remove('text-slate-800');
                 tabAi.classList.add('text-slate-500');
@@ -265,12 +274,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 // 3. 面板内容切换
                 panelAi.classList.remove('active');
                 panelAi.classList.add('inactive');
-                
+
                 panelUpload.classList.remove('inactive');
                 panelUpload.classList.add('active');
             }
         };
-        
+
         tabUpload.addEventListener("click", () => setActive(false));
         tabAi.addEventListener("click", () => setActive(true));
     };
@@ -303,7 +312,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const handleFile = (file, isProcessed = false) => {
         if (!file || !file.type.startsWith('image/')) return showTip("Please upload a valid image file.", "error");
-
+        if (!isProcessed) { // 只有用户主动上传才记录，AI生成后调用的不记录
+            trackEvent('user_upload_image', {
+                file_type: file.type,
+                file_size: Math.round(file.size / 1024) + 'KB'
+            });
+        }
         // --- 逻辑：直接进入画布，不弹窗 ---
         loadFileToCanvas(file);
     };
@@ -314,17 +328,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const img = new Image();
             img.onload = () => {
                 state.originalImage = img;
-                
+
                 // --- 核心修复：强制使用高清分辨率 (High-Res) ---
                 // 设定最小宽度为 2000px (接近 A4 打印质量)
                 // 如果原图小于这个尺寸，计算放大倍数
                 const TARGET_MIN_WIDTH = 2000;
                 const scale = Math.max(1, TARGET_MIN_WIDTH / Math.max(img.naturalWidth, img.naturalHeight));
-                
+
                 // 设置 Canvas 物理像素为高清尺寸
                 drawCanvas.width = Math.floor(img.naturalWidth * scale);
                 drawCanvas.height = Math.floor(img.naturalHeight * scale);
-                
+
                 state.dots = [];
                 state.history = [];
                 state.internalHintImage = null;
@@ -400,6 +414,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (prompt.length < 3) return showTip("Please enter a description.", "error");
 
+        trackEvent('ai_generate_start', {
+            prompt_length: prompt.length // 记录长度分析用户行为，尽量不记录具体 prompt 以免隐私合规麻烦
+        });
+
         const usage = getAiUsage();
         const currentLimit = MAX_DAILY_LIMIT + (usage.extra || 0);
 
@@ -436,6 +454,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const blob = await res.blob();
+            
+            // 添加这行：记录 AI 生成成功
+            trackEvent('ai_generate_success');
+
             incrementAiUsage();
 
             const loaderText = canvasLoader.querySelector('p');
@@ -445,6 +467,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (e) {
             console.error("AI Gen Error:", e);
+            // <--- 添加这行：记录 AI 生成失败
+            trackEvent('ai_generate_fail', { error: e.message });
+
             showTip("AI Generation failed. Please try again.", "error");
             switchView('landing');
             if (canvasLoader) canvasLoader.classList.add('hidden');
@@ -508,30 +533,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             const loaderText = canvasLoader.querySelector('p');
-            if(loaderText) loaderText.textContent = "Processing lines...";
+            if (loaderText) loaderText.textContent = "Processing lines...";
 
             const tempCanvas = document.createElement("canvas");
-            
+
             // 计算处理缩放比：为了速度，检测还是在小图上做 (比如 1000px 宽)
             // 关键点：这里的基准必须是 drawCanvas 的尺寸，而不是 originalImage 的尺寸
             const processWidth = 1000;
             const processScale = Math.min(1, processWidth / Math.max(drawCanvas.width, drawCanvas.height));
-            
+
             const w = Math.floor(drawCanvas.width * processScale);
             const h = Math.floor(drawCanvas.height * processScale);
-            
+
             if (w === 0 || h === 0) return;
 
             tempCanvas.width = w;
             tempCanvas.height = h;
-            
+
             const tCtx = tempCanvas.getContext("2d");
             // 绘制时拉伸原图以匹配处理尺寸
             tCtx.drawImage(state.originalImage, 0, 0, w, h);
 
             let imgData = tCtx.getImageData(0, 0, w, h);
             let src = cv.matFromImageData(imgData);
-            
+
             let gray = new cv.Mat();
             let binary = new cv.Mat();
             let contours = new cv.MatVector();
@@ -539,7 +564,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
             cv.adaptiveThreshold(gray, binary, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 11, 2);
-            
+
             let M = cv.Mat.ones(3, 3, cv.CV_8U);
             cv.dilate(binary, binary, M);
 
@@ -548,7 +573,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let allPoints = [];
             let maxArea = 0;
             let maxContourIndex = -1;
-            
+
             for (let i = 0; i < contours.size(); i++) {
                 let cnt = contours.get(i);
                 if (cv.contourArea(cnt) > 100) {
@@ -563,7 +588,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let mainContour = contours.get(maxContourIndex);
                 let approx = new cv.Mat();
                 cv.approxPolyDP(mainContour, approx, cv.arcLength(mainContour, true) * 0.001, true);
-                
+
                 for (let j = 0; j < approx.rows; j++) {
                     // 坐标映射回高清画布：除以 processScale 即可
                     allPoints.push({
@@ -583,7 +608,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 state.dots = [];
             }
-            
+
             saveHistory();
             redraw();
             updateDotCountUI();
@@ -657,16 +682,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const generateInternalHintImage = () => {
         if (!state.originalImage || typeof cv === "undefined" || !cvReady) return null;
-        
+
         try {
             const tempCanvas = document.createElement("canvas");
             // 使用当前主画布的高清尺寸
             const w = drawCanvas.width;
             const h = drawCanvas.height;
-            
+
             tempCanvas.width = w;
             tempCanvas.height = h;
-            
+
             const tCtx = tempCanvas.getContext("2d");
 
             // 1. 强制白底并绘制拉伸后的原图
@@ -676,7 +701,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let imgData = tCtx.getImageData(0, 0, w, h);
             let src = cv.matFromImageData(imgData);
-            
+
             let gray = new cv.Mat();
             let binary = new cv.Mat();
             let contours = new cv.MatVector();
@@ -693,21 +718,21 @@ document.addEventListener("DOMContentLoaded", () => {
             // 4. 计算擦除粗细 (自适应高清尺寸)
             const thickness = Math.max(2, state.config.eraseThickness * (w / 1000));
             const whiteColor = new cv.Scalar(255, 255, 255, 255);
-            
+
             // 5. 在高清图上绘制遮罩
             cv.drawContours(src, contours, -1, whiteColor, thickness);
 
             const outputCanvas = document.createElement("canvas");
             outputCanvas.width = w;
             outputCanvas.height = h;
-            cv.imshow(outputCanvas, src); 
+            cv.imshow(outputCanvas, src);
 
-            src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete(); 
+            src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete();
 
             return outputCanvas;
-        } catch (e) { 
-            console.error("Internal Lines Error:", e); 
-            return null; 
+        } catch (e) {
+            console.error("Internal Lines Error:", e);
+            return null;
         }
     };
 
@@ -1083,6 +1108,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const dl = (fmt) => {
         if (!state.originalImage) return;
+
+        //  记录下载事件
+        trackEvent('download_result', { 
+            file_format: fmt, // 'png' 或 'pdf'
+            dots_count: state.dots.length, // 记录点数，分析用户喜欢的难度
+            hint_mode: state.config.hint // 记录用户使用的提示模式
+        });
+
         if (fmt === "png") {
             const link = document.createElement("a");
             link.target = "_blank";
