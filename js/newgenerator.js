@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 4. INITIALIZATION / 初始化
     // ==========================================
-
+ 
     const init = () => {
         updateAiCreditsUI();
         setupHeroTabs();
@@ -164,9 +164,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // 尝试预加载 OpenCV，但不阻塞
         loadOpenCv();
 
-        // 强制设置 Canvas 父容器样式，确保居中
+        // --- 修复：强制 Canvas 占满父容器 ---
         if (drawCanvas && drawCanvas.parentElement) {
             const parent = drawCanvas.parentElement;
+            // 父容器设为 Flex 居中，确保 Canvas 处于正中间
             parent.style.display = "flex";
             parent.style.justifyContent = "center";
             parent.style.alignItems = "center";
@@ -174,12 +175,16 @@ document.addEventListener("DOMContentLoaded", () => {
             parent.style.height = "100%";
             parent.style.overflow = "hidden";
 
-            drawCanvas.style.maxWidth = "100%";
-            drawCanvas.style.maxHeight = "100%";
-            drawCanvas.style.width = "auto";
-            drawCanvas.style.height = "auto";
+            // Canvas 样式强制设为 100% 并使用 contain 保持比例
+            // 这样小图会自动放大，大图会自动缩小，始终填满最大可用空间
+            drawCanvas.style.width = "100%";
+            drawCanvas.style.height = "100%";
             drawCanvas.style.objectFit = "contain";
             drawCanvas.style.display = "block";
+            
+            // 移除原本可能限制尺寸的 max-width/height (因为 width:100% 已经控制了)
+            drawCanvas.style.maxWidth = "none";
+            drawCanvas.style.maxHeight = "none";
         }
 
         // 初始化滑块范围
@@ -194,34 +199,80 @@ document.addEventListener("DOMContentLoaded", () => {
             thicknessSlider.value = DEFAULT_CONFIG.eraseThickness;
             if (thicknessValue) thicknessValue.textContent = DEFAULT_CONFIG.eraseThickness;
         }
-
+        
         if (thicknessContainer && DEFAULT_CONFIG.hint === 'internal') {
             thicknessContainer.classList.remove('hidden');
         }
-
+        
         const defaultRadio = document.querySelector(`input[name="hint-type"][value="${DEFAULT_CONFIG.hint}"]`);
         if (defaultRadio) defaultRadio.checked = true;
     };
 
     const setupHeroTabs = () => {
+        const tabUpload = document.getElementById("tab-upload");
+        const tabAi = document.getElementById("tab-ai");
+        const tabBg = document.getElementById("tab-bg");
+        const panelUpload = document.getElementById("panel-upload");
+        const panelAi = document.getElementById("panel-ai");
+
         if (!tabUpload || !tabAi) return;
 
-        tabUpload.addEventListener("click", () => {
-            tabBg.style.transform = 'translateX(0)';
-            tabUpload.classList.replace('text-slate-500', 'text-white');
-            tabAi.classList.replace('text-white', 'text-slate-500');
-            panelAi.classList.replace('active', 'inactive');
-            panelUpload.classList.replace('inactive', 'active');
-        });
+        // 辅助函数：设置激活状态
+        const setActive = (isAiMode) => {
+            if (isAiMode) {
+                // === 切换到 AI 模式 ===
+                
+                // 1. 滑块向右移动
+                tabBg.style.transform = 'translateX(100%)';
 
-        tabAi.addEventListener("click", () => {
-            tabBg.style.transform = 'translateX(100%)';
-            tabUpload.classList.replace('text-white', 'text-slate-500');
-            tabAi.classList.replace('text-slate-500', 'text-white');
-            panelUpload.classList.replace('active', 'inactive');
-            panelAi.classList.replace('inactive', 'active');
-            setTimeout(() => heroAiInput?.focus(), 100);
-        });
+                // 2. 文字颜色调整 (关键修复点)
+                // AI 变深色 (Active)
+                tabAi.classList.remove('text-slate-500');
+                tabAi.classList.add('text-slate-800');
+                
+                // Upload 变浅色 (Inactive)
+                tabUpload.classList.remove('text-slate-800');
+                tabUpload.classList.add('text-slate-500');
+
+                // 3. 面板内容切换
+                panelUpload.classList.remove('active');
+                panelUpload.classList.add('inactive'); // 隐藏 Upload 面板
+                
+                panelAi.classList.remove('inactive');
+                panelAi.classList.add('active'); // 显示 AI 面板
+                
+                // 自动聚焦输入框
+                setTimeout(() => {
+                    const input = document.getElementById('hero-ai-input');
+                    if(input) input.focus();
+                }, 100);
+
+            } else {
+                // === 切换到 Upload 模式 ===
+                
+                // 1. 滑块归位
+                tabBg.style.transform = 'translateX(0)';
+
+                // 2. 文字颜色调整
+                // Upload 变深色 (Active)
+                tabUpload.classList.remove('text-slate-500');
+                tabUpload.classList.add('text-slate-800');
+                
+                // AI 变浅色 (Inactive)
+                tabAi.classList.remove('text-slate-800');
+                tabAi.classList.add('text-slate-500');
+
+                // 3. 面板内容切换
+                panelAi.classList.remove('active');
+                panelAi.classList.add('inactive');
+                
+                panelUpload.classList.remove('inactive');
+                panelUpload.classList.add('active');
+            }
+        };
+        
+        tabUpload.addEventListener("click", () => setActive(false));
+        tabAi.addEventListener("click", () => setActive(true));
     };
 
     const switchView = (view) => {
@@ -263,8 +314,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const img = new Image();
             img.onload = () => {
                 state.originalImage = img;
-                drawCanvas.width = img.naturalWidth;
-                drawCanvas.height = img.naturalHeight;
+                
+                // --- 核心修复：强制使用高清分辨率 (High-Res) ---
+                // 设定最小宽度为 2000px (接近 A4 打印质量)
+                // 如果原图小于这个尺寸，计算放大倍数
+                const TARGET_MIN_WIDTH = 2000;
+                const scale = Math.max(1, TARGET_MIN_WIDTH / Math.max(img.naturalWidth, img.naturalHeight));
+                
+                // 设置 Canvas 物理像素为高清尺寸
+                drawCanvas.width = Math.floor(img.naturalWidth * scale);
+                drawCanvas.height = Math.floor(img.naturalHeight * scale);
+                
                 state.dots = [];
                 state.history = [];
                 state.internalHintImage = null;
@@ -440,44 +500,38 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const runAutoDetect = () => {
-        // 安全检查 1: 图片是否加载
         if (!state.originalImage) return;
-
-        // 安全检查 2: OpenCV 是否完全就绪
         if (typeof cv === 'undefined' || !cvReady) {
-            console.log("OpenCV not ready yet, waiting...");
-            canvasLoader.classList.remove('hidden');
-            const loaderText = canvasLoader.querySelector('p');
-            if (loaderText) loaderText.textContent = "Loading Engine...";
-
-            // 500ms 后重试
             setTimeout(runAutoDetect, 500);
             return;
         }
 
         try {
-            // 恢复 Loading 文字
             const loaderText = canvasLoader.querySelector('p');
-            if (loaderText) loaderText.textContent = "Processing lines...";
+            if(loaderText) loaderText.textContent = "Processing lines...";
 
             const tempCanvas = document.createElement("canvas");
-
-            // 安全检查 3: 确保尺寸是整数
-            const processScale = Math.min(1, 1000 / Math.max(state.originalImage.naturalWidth, state.originalImage.naturalHeight));
-            const w = Math.floor(state.originalImage.naturalWidth * processScale);
-            const h = Math.floor(state.originalImage.naturalHeight * processScale);
-
+            
+            // 计算处理缩放比：为了速度，检测还是在小图上做 (比如 1000px 宽)
+            // 关键点：这里的基准必须是 drawCanvas 的尺寸，而不是 originalImage 的尺寸
+            const processWidth = 1000;
+            const processScale = Math.min(1, processWidth / Math.max(drawCanvas.width, drawCanvas.height));
+            
+            const w = Math.floor(drawCanvas.width * processScale);
+            const h = Math.floor(drawCanvas.height * processScale);
+            
             if (w === 0 || h === 0) return;
 
             tempCanvas.width = w;
             tempCanvas.height = h;
-
+            
             const tCtx = tempCanvas.getContext("2d");
+            // 绘制时拉伸原图以匹配处理尺寸
             tCtx.drawImage(state.originalImage, 0, 0, w, h);
 
             let imgData = tCtx.getImageData(0, 0, w, h);
             let src = cv.matFromImageData(imgData);
-
+            
             let gray = new cv.Mat();
             let binary = new cv.Mat();
             let contours = new cv.MatVector();
@@ -485,7 +539,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
             cv.adaptiveThreshold(gray, binary, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 11, 2);
-
+            
             let M = cv.Mat.ones(3, 3, cv.CV_8U);
             cv.dilate(binary, binary, M);
 
@@ -494,7 +548,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let allPoints = [];
             let maxArea = 0;
             let maxContourIndex = -1;
-
+            
             for (let i = 0; i < contours.size(); i++) {
                 let cnt = contours.get(i);
                 if (cv.contourArea(cnt) > 100) {
@@ -509,8 +563,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 let mainContour = contours.get(maxContourIndex);
                 let approx = new cv.Mat();
                 cv.approxPolyDP(mainContour, approx, cv.arcLength(mainContour, true) * 0.001, true);
-
+                
                 for (let j = 0; j < approx.rows; j++) {
+                    // 坐标映射回高清画布：除以 processScale 即可
                     allPoints.push({
                         x: approx.data32S[j * 2] / processScale,
                         y: approx.data32S[j * 2 + 1] / processScale
@@ -519,7 +574,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 approx.delete();
             }
 
-            // Memory Cleanup
             src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete(); M.delete();
 
             const targetCount = parseInt(dotCountSlider.value) || 25;
@@ -529,10 +583,10 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 state.dots = [];
             }
-
+            
             saveHistory();
             redraw();
-            dotCountDisplay.textContent = `${state.dots.length} Dots`;
+            updateDotCountUI();
 
         } catch (e) {
             console.error("Auto detect runtime error:", e);
@@ -602,65 +656,58 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const generateInternalHintImage = () => {
-        // 1. 基础检查
         if (!state.originalImage || typeof cv === "undefined" || !cvReady) return null;
-
+        
         try {
             const tempCanvas = document.createElement("canvas");
-            const w = Math.floor(state.originalImage.naturalWidth);
-            const h = Math.floor(state.originalImage.naturalHeight);
-
+            // 使用当前主画布的高清尺寸
+            const w = drawCanvas.width;
+            const h = drawCanvas.height;
+            
             tempCanvas.width = w;
             tempCanvas.height = h;
-
+            
             const tCtx = tempCanvas.getContext("2d");
 
-            // --- 步骤 A: 强制白底 (防止 AI 图片透明通道问题) ---
+            // 1. 强制白底并绘制拉伸后的原图
             tCtx.fillStyle = "#FFFFFF";
             tCtx.fillRect(0, 0, w, h);
             tCtx.drawImage(state.originalImage, 0, 0, w, h);
 
             let imgData = tCtx.getImageData(0, 0, w, h);
             let src = cv.matFromImageData(imgData);
-
+            
             let gray = new cv.Mat();
             let binary = new cv.Mat();
             let contours = new cv.MatVector();
             let hierarchy = new cv.Mat();
 
-            // --- 步骤 B: 灰度化 ---
+            // 2. 图像处理
             cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-
-            // --- 步骤 C: 阈值处理 (使用 Otsu 算法以适应 AI 线稿) ---
-            // 这一步确保线条被清晰地提取出来
+            // 使用 Otsu 确保 AI 线稿清晰提取
             cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU);
 
-            // --- 步骤 D: 关键修改 - 只提取最外层轮廓 ---
-            // 使用 cv.RETR_EXTERNAL 而不是 cv.RETR_LIST
-            // 这样内部的眼睛、细节会被忽略，不会被擦除
+            // 3. 提取轮廓 (只提取外轮廓 RETR_EXTERNAL)
             cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
 
-            // --- 步骤 E: 绘制遮罩 (擦除效果) ---
-            // 计算擦除笔触的粗细
+            // 4. 计算擦除粗细 (自适应高清尺寸)
             const thickness = Math.max(2, state.config.eraseThickness * (w / 1000));
             const whiteColor = new cv.Scalar(255, 255, 255, 255);
-
-            // 在原图上，沿着最外层轮廓画白线，达到"擦除/变淡"外轮廓的效果
-            // 内部线条因为没被选中，所以保持原样
+            
+            // 5. 在高清图上绘制遮罩
             cv.drawContours(src, contours, -1, whiteColor, thickness);
 
             const outputCanvas = document.createElement("canvas");
             outputCanvas.width = w;
             outputCanvas.height = h;
-            cv.imshow(outputCanvas, src);
+            cv.imshow(outputCanvas, src); 
 
-            // 内存清理
-            src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete();
+            src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete(); 
 
             return outputCanvas;
-        } catch (e) {
-            console.error("Internal Lines Error:", e);
-            return null;
+        } catch (e) { 
+            console.error("Internal Lines Error:", e); 
+            return null; 
         }
     };
 
@@ -785,25 +832,30 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!ctx) return;
         ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 
-        // 1. Draw Background
+        // 1. Draw Background (必须指定宽高，确保拉伸铺满高清画布)
         if (state.config.hint !== 'no' && state.originalImage) {
             ctx.save();
+            const w = drawCanvas.width;
+            const h = drawCanvas.height;
+
             if (state.config.hint === 'trace') {
                 ctx.globalAlpha = 0.3;
-                ctx.drawImage(state.originalImage, 0, 0);
+                ctx.drawImage(state.originalImage, 0, 0, w, h);
             } else if (state.config.hint === 'internal') {
                 if (state.internalHintImage) {
+                    // HintImage 已经是高清的了，直接画
                     ctx.drawImage(state.internalHintImage, 0, 0);
                 } else {
-                    ctx.drawImage(state.originalImage, 0, 0);
+                    ctx.drawImage(state.originalImage, 0, 0, w, h);
                 }
             } else {
-                ctx.drawImage(state.originalImage, 0, 0);
+                ctx.drawImage(state.originalImage, 0, 0, w, h);
             }
             ctx.restore();
         }
 
         // 2. Draw Dots & Numbers
+        // 这里的 scale 逻辑不用动，它已经基于 drawCanvas.width 计算了，会自动适配高清版
         const scale = Math.max(0.5, drawCanvas.width / 1000);
         const r = state.config.dotRadius * scale;
         const fontSize = state.config.fontSize * scale;

@@ -26,7 +26,7 @@
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    <!-- === TECH STACK (New Design System) === --> 
+    <!-- === TECH STACK (New Design System) === -->
     <link rel="stylesheet" href="/dist/indexStyle.css" />
 
     <!-- PDF Library -->
@@ -149,7 +149,8 @@
         <!-- Logo Area -->
         <a href="/" class="flex items-center gap-2 group" aria-label="Home">
             <div class="w-9 h-9 rounded-xl flex items-center justify-center text-brand-blue ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-8 h-8 p-0.5" width="32" height="32">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-8 h-8 p-0.5"
+                    width="32" height="32">
                     <path
                         d="M404 0c19.2 0 37.6 7.6 51.1 21.2l35.7 35.7C504.4 70.4 512 88.8 512 108s-7.6 37.6-21.2 51.1L445.9 204 308 66.1 352.9 21.2C366.4 7.6 384.8 0 404 0zM58.9 315.1L274.1 100 412 237.9 196.9 453.1c-10.7 10.7-24.1 18.5-38.7 22.6L30.4 511.1c-8.3 2.3-17.3 0-23.4-6.2s-8.5-15.1-6.2-23.4L36.4 353.8c4.1-14.6 11.8-27.9 22.6-38.7zM225.4 80.8L80.8 225.4 11.7 156.3c-15.6-15.6-15.6-40.9 0-56.6l88-88c15.6-15.6 40.9-15.6 56.6 0l5.9 5.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 34.9 34.9zM431.2 286.6l34.9 34.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 5.9 5.9c15.6 15.6 15.6 40.9 0 56.6l-88 88c-15.6 15.6-40.9 15.6-56.6 0l-69.1-69.1 144.6-144.6z" />
                 </svg>
@@ -235,7 +236,7 @@
                             ✨ Free Dot to Dot Generator
                         </div>
                         <h1 class="text-3xl md:text-5xl font-extrabold text-brand-dark leading-[1.1] mb-6">
-                            Free Connect the Dots Generator,Maker &<br class="hidden md:block">
+                            Free Connect the Dots Generator, Maker &<br class="hidden md:block">
                             <span
                                 class="text-4xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple">
                                 Printable Worksheets </span>
@@ -245,103 +246,118 @@
                             connect the dots activities with no watermarks.
                         </h2>
 
-                        <!-- TAB SWITCHER -->
-                        <div class="w-full max-w-md">
-                            <!-- Tabs -->
-                            <div
-                                class="inline-flex bg-white p-1 rounded-full relative mb-6 border border-gray-200 shadow-sm">
-                                <div id="tab-bg"
-                                    class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-brand-blue rounded-full shadow-md transition-all duration-300 ease-out">
+                        <!-- TAB SWITCHER / CARD CONTAINER -->
+                        <div
+                            class="w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden relative z-20">
+
+                            <!-- 1. Segmented Control Tabs (iOS Style) -->
+                            <div class="p-2 bg-slate-50 border-b border-slate-100">
+                                <div class="relative flex w-full bg-slate-200/60 p-1 rounded-xl">
+                                    <!-- Sliding Background -->
+                                    <div id="tab-bg"
+                                        class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
+                                    </div>
+
+                                    <!-- Upload Tab -->
+                                    <button id="tab-upload"
+                                        class="relative z-10 w-1/2 py-2.5 text-sm font-bold text-slate-800 transition-colors flex justify-center items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" viewBox="0 0 576 512">
+                                            <path
+                                                d="M144 480c-79.5 0-144-64.5-144-144 0-63.4 41-117.2 97.9-136.5-1.3-7.7-1.9-15.5-1.9-23.5 0-79.5 64.5-144 144-144 55.4 0 103.5 31.3 127.6 77.1 14.2-8.3 30.8-13.1 48.4-13.1 53 0 96 43 96 96 0 15.7-3.8 30.6-10.5 43.7 44 20.3 74.5 64.7 74.5 116.3 0 70.7-57.3 128-128 128l-304 0zM305 191c-9.4-9.4-24.6-9.4-33.9 0l-72 72c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l31-31 0 102.1c0 13.3 10.7 24 24 24s24-10.7 24-24l0-102.1 31 31c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-72-72z" />
+                                        </svg>
+                                        Upload
+                                    </button>
+
+                                    <!-- AI Gen Tab -->
+                                    <button id="tab-ai"
+                                        class="relative z-10 w-1/2 py-2.5 text-sm font-bold text-slate-500 transition-colors flex justify-center items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" viewBox="0 0 576 512">
+                                            <path
+                                                d="M263.4-27L278.2 9.8 315 24.6c3 1.2 5 4.2 5 7.4s-2 6.2-5 7.4L278.2 54.2 263.4 91c-1.2 3-4.2 5-7.4 5s-6.2-2-7.4-5L233.8 54.2 197 39.4c-3-1.2-5-4.2-5-7.4s2-6.2 5-7.4L233.8 9.8 248.6-27c1.2-3 4.2-5 7.4-5s6.2 2 7.4 5zM110.7 41.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7L59.8 164.2 9.7 142.7C3.8 140.2 0 134.4 0 128s3.8-12.2 9.7-14.7L59.8 91.8 81.3 41.7C83.8 35.8 89.6 32 96 32s12.2 3.8 14.7 9.7zM464 304c6.4 0 12.2 3.8 14.7 9.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7l-21.5-50.1-50.1-21.5c-5.9-2.5-9.7-8.3-9.7-14.7s3.8-12.2 9.7-14.7l50.1-21.5 21.5-50.1c2.5-5.9 8.3-9.7 14.7-9.7zM460 0c11 0 21.6 4.4 29.5 12.2l42.3 42.3C539.6 62.4 544 73 544 84s-4.4 21.6-12.2 29.5l-88.2 88.2-101.3-101.3 88.2-88.2C438.4 4.4 449 0 460 0zM44.2 398.5L308.4 134.3 409.7 235.6 145.5 499.8C137.6 507.6 127 512 116 512s-21.6-4.4-29.5-12.2L44.2 457.5C36.4 449.6 32 439 32 428s4.4-21.6 12.2-29.5z" />
+                                        </svg>
+                                        AI Gen
+                                    </button>
                                 </div>
-                                <button id="tab-upload"
-                                    class="relative z-10 px-6 py-2 text-sm font-bold text-white transition-colors w-32 flex justify-center items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16"
-                                        fill="currentColor"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                        <path
-                                            d="M256 109.3L256 320c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-210.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 109.3zM224 400c44.2 0 80-35.8 80-80l80 0c35.3 0 64 28.7 64 64l0 32c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64l0-32c0-35.3 28.7-64 64-64l80 0c0 44.2 35.8 80 80 80zm144 24a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
-                                    </svg>
-                                    Upload</button>
-                                <button id="tab-ai"
-                                    class="relative z-10 px-6 py-2 text-sm font-bold text-slate-500 transition-colors w-32 flex justify-center items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16"
-                                        fill="currentColor"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                        <path
-                                            d="M263.4-27L278.2 9.8 315 24.6c3 1.2 5 4.2 5 7.4s-2 6.2-5 7.4L278.2 54.2 263.4 91c-1.2 3-4.2 5-7.4 5s-6.2-2-7.4-5L233.8 54.2 197 39.4c-3-1.2-5-4.2-5-7.4s2-6.2 5-7.4L233.8 9.8 248.6-27c1.2-3 4.2-5 7.4-5s6.2 2 7.4 5zM110.7 41.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7L59.8 164.2 9.7 142.7C3.8 140.2 0 134.4 0 128s3.8-12.2 9.7-14.7L59.8 91.8 81.3 41.7C83.8 35.8 89.6 32 96 32s12.2 3.8 14.7 9.7zM464 304c6.4 0 12.2 3.8 14.7 9.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7l-21.5-50.1-50.1-21.5c-5.9-2.5-9.7-8.3-9.7-14.7s3.8-12.2 9.7-14.7l50.1-21.5 21.5-50.1c2.5-5.9 8.3-9.7 14.7-9.7zM460 0c11 0 21.6 4.4 29.5 12.2l42.3 42.3C539.6 62.4 544 73 544 84s-4.4 21.6-12.2 29.5l-88.2 88.2-101.3-101.3 88.2-88.2C438.4 4.4 449 0 460 0zM44.2 398.5L308.4 134.3 409.7 235.6 145.5 499.8C137.6 507.6 127 512 116 512s-21.6-4.4-29.5-12.2L44.2 457.5C36.4 449.6 32 439 32 428s4.4-21.6 12.2-29.5z" />
-                                    </svg>
-                                    AI Gen</button>
                             </div>
 
-                            <!-- Panel Container -->
-                            <div class="relative w-full min-h-[100px]">
-                                <!-- MODE A: UPLOAD -->
-                                <div id="panel-upload" class="tab-panel active w-full">
+                            <!-- Dynamic Content Area -->
+                            <div class="p-6 min-h-[160px] flex flex-col justify-center">
+
+                                <!-- MODE A: UPLOAD DROP ZONE -->
+                                <div id="panel-upload" class="tab-panel active w-full h-full">
                                     <button id="hero-upload-btn"
-                                        class="relative group w-full px-8 py-5 bg-brand-blue text-white rounded-[2rem] font-bold text-xl shadow-floating hover:shadow-xl hover:bg-indigo-700 transition-all transform hover:-translate-y-1 overflow-hidden">
-                                        <div class="flex items-center justify-center gap-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="24"
-                                                height="24"
-                                                fill="currentColor"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                        class="relative group w-full h-32 border-2 border-dashed border-indigo-200 bg-indigo-50/50 rounded-2xl hover:bg-indigo-50 hover:border-indigo-400 transition-all flex flex-col items-center justify-center gap-2 cursor-pointer">
+                                        <div
+                                            class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-blue shadow-sm group-hover:scale-110 transition-transform">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                fill="currentColor" viewBox="0 0 576 512">
                                                 <path
                                                     d="M144 480c-79.5 0-144-64.5-144-144 0-63.4 41-117.2 97.9-136.5-1.3-7.7-1.9-15.5-1.9-23.5 0-79.5 64.5-144 144-144 55.4 0 103.5 31.3 127.6 77.1 14.2-8.3 30.8-13.1 48.4-13.1 53 0 96 43 96 96 0 15.7-3.8 30.6-10.5 43.7 44 20.3 74.5 64.7 74.5 116.3 0 70.7-57.3 128-128 128l-304 0zM305 191c-9.4-9.4-24.6-9.4-33.9 0l-72 72c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l31-31 0 102.1c0 13.3 10.7 24 24 24s24-10.7 24-24l0-102.1 31 31c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-72-72z" />
                                             </svg>
-                                            <span>Upload Image</span>
                                         </div>
-                                        <!-- FIX: Added aria-label -->
+                                        <div class="text-center">
+                                            <span class="block text-brand-blue font-bold text-lg">Click to Upload
+                                                Image</span>
+                                            <span class="text-slate-400 text-sm">or drag and drop (JPG, PNG)</span>
+                                        </div>
                                         <input type="file" id="hero-file-input"
                                             class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*"
                                             aria-label="Upload Image File">
                                     </button>
-                                    <p class="text-sm text-slate-400 font-medium mt-3 text-center lg:text-left pl-4">
-                                        Supports JPG, PNG (Max 10MB)</p>
                                 </div>
 
                                 <!-- MODE B: AI INPUT -->
                                 <div id="panel-ai" class="tab-panel inactive w-full">
-                                    <div class="relative group w-full">
-                                        <!-- 背景光晕 -->
-                                        <div
-                                            class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-[2rem] opacity-70 group-hover:opacity-100 blur transition duration-1000 animate-pulse">
+                                    <div class="flex flex-col gap-3">
+                                        <!-- Prompt Input -->
+                                        <div class="relative w-full">
+                                            <div
+                                                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                                <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                                                </svg>
+                                            </div>
+                                            <input type="text" id="hero-ai-input"
+                                                class="block w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all"
+                                                placeholder="Describe your drawing (e.g., A cute cat)...">
                                         </div>
 
-                                        <!-- 输入框容器 -->
-                                        <div class="relative flex items-center bg-white rounded-[2rem] p-1.5 shadow-xl">
+                                        <!-- Button Row -->
+                                        <div class="flex items-center justify-between mt-1">
+                                            <!-- Credits / Limit Message -->
+                                            <div class="text-sm text-slate-500 font-medium pl-1">
+                                                <span id="hero-ai-credits" class="font-bold text-brand-blue">3</span>
+                                                free daily
+                                            </div>
 
-                                            <!-- 修复点 1: 添加 min-w-0 防止溢出，调整移动端 padding 和字体大小 -->
-                                            <input type="text" id="hero-ai-input"
-                                                class="flex-grow min-w-0 bg-transparent pl-4 pr-2 py-3 md:px-5 md:py-4 text-slate-800 placeholder-slate-400 font-medium text-sm md:text-base outline-none rounded-l-[1.5rem]"
-                                                placeholder="Try: A cute dinosaur..."
-                                                aria-label="AI Image Generation Prompt">
-
-                                            <!-- 修复点 2: 调整按钮移动端 padding (px-4 py-2) 使其更紧凑 -->
+                                            <!-- Generate Button -->
                                             <button id="hero-ai-go-btn"
-                                                class="px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm md:text-base font-bold rounded-full hover:shadow-lg hover:scale-105 transition-transform flex items-center gap-2 flex-shrink-0">
+                                                class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2">
                                                 <span>Generate</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16"
-                                                    height="16" fill="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" viewBox="0 0 512 512">
                                                     <path
                                                         d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
                                                 </svg>
                                             </button>
                                         </div>
                                     </div>
-                                    <p class="text-xs text-purple-600 font-bold mt-3 ml-4 flex items-center gap-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16"
-                                            height="16" fill="currentColor">
-                                            <path
-                                                d="M338.8-9.9c11.9 8.6 16.3 24.2 10.9 37.8L271.3 224 416 224c13.5 0 25.5 8.4 30.1 21.1s.7 26.9-9.6 35.5l-288 240c-11.3 9.4-27.4 9.9-39.3 1.3s-16.3-24.2-10.9-37.8L176.7 288 32 288c-13.5 0-25.5-8.4-30.1-21.1s-.7-26.9 9.6-35.5l288-240c11.3-9.4 27.4-9.9 39.3-1.3z" />
-                                        </svg> <span id="hero-ai-credits">3</span> free daily
-                                    </p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Presets -->
-                        <div class="mt-12 text-center lg:text-left w-full">
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">No image? Try
+                        <div class="mt-8 text-center lg:text-left w-full">
+                            <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">No image? Try
                                 these:</p>
                             <div class="flex justify-center lg:justify-start gap-4" id="examples-content">
                                 <button
-                                    class="preset-btn w-16 h-16 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
+                                    class="preset-btn w-auto h-auto md:w-24 md:h-24 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
                                     data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-baby-elephant-outline.webp"
                                     aria-label="Use Baby Elephant Example">
                                     <img src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-baby-elephant-outline.webp"
@@ -349,7 +365,7 @@
                                         alt="Example: Adorable baby elephant outline">
                                 </button>
                                 <button
-                                    class="preset-btn w-16 h-16 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
+                                    class="preset-btn w-auto h-auto md:w-24 md:h-24 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
                                     data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-halloween-pumpkin.webp"
                                     aria-label="Use Pumpkin Example">
                                     <img src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-halloween-pumpkin.webp"
@@ -357,7 +373,7 @@
                                         class="w-full h-full object-cover">
                                 </button>
                                 <button
-                                    class="preset-btn w-16 h-16 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
+                                    class="preset-btn w-auto h-auto md:w-24 md:h-24 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
                                     data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-cute-princess-drawing.webp"
                                     aria-label="Use Princess Example">
                                     <img src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-cute-princess-drawing.webp"
@@ -365,7 +381,7 @@
                                 </button>
 
                                 <button
-                                    class="preset-btn w-16 h-16 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
+                                    class="preset-btn w-auto h-auto md:w-24 md:h-24 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
                                     data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-christmas-tree-gifts.webp"
                                     aria-label="Use Christmas Tree Example">
                                     <img src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/connect-the-dots-christmas-tree-gifts.webp"
@@ -1082,37 +1098,28 @@
 
                 <div class="grid grid-cols-2 md:flex md:items-center gap-3 w-full md:w-auto">
 
-                    <a href="https://ko-fi.com/connectthedotsprintable" target="_blank"
-                        class="hidden md:flex items-center gap-2 px-4 py-2.5 bg-[#FF5E5B] text-white font-bold rounded-full shadow-md hover:bg-[#FF413D] transition hover:-translate-y-0.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="14" height="14"
-                            fill="currentColor">
-                            <path
-                                d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-                        </svg>
-                        <span>Donate</span>
-                    </a>
-
+                    <!-- PNG: Blue -->
                     <button id="download-png-btn" type="button"
-                        class="w-full md:w-auto justify-center px-4 py-2.5 md:px-6 bg-brand-blue text-white font-bold rounded-full shadow-lg hover:bg-indigo-600 transition flex items-center gap-2 text-xs md:text-sm">
-                        <svg width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 448 512">
+                        class="w-full md:w-auto inline-flex justify-center items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-blue text-white font-bold text-sm shadow-md hover:bg-indigo-700 transition-all">
+                        <!-- SVG same as above -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20" height="20"
+                            fill="currentColor"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                             <path
-                                d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm64 80a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM272 224c8.4 0 16.1 4.4 20.5 11.5l88 144c4.5 7.4 4.7 16.7 .5 24.3S368.7 416 360 416L88 416c-8.9 0-17.2-5-21.3-12.9s-3.5-17.5 1.6-24.8l56-80c4.5-6.4 11.8-10.2 19.7-10.2s15.2 3.8 19.7 10.2l26.4 37.8 61.4-100.5c4.4-7.1 12.1-11.5 20.5-11.5z">
-                            </path>
+                                d="M176 48L64 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16l0-240-88 0c-39.8 0-72-32.2-72-72l0-88zM316.1 160L224 67.9 224 136c0 13.3 10.7 24 24 24l68.1 0zM0 64C0 28.7 28.7 0 64 0L197.5 0c17 0 33.3 6.7 45.3 18.7L365.3 141.3c12 12 18.7 28.3 18.7 45.3L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zM259.4 432l-134.8 0c-15.8 0-28.6-12.8-28.6-28.6 0-6.4 2.1-12.5 6-17.6l67.6-86.9C175 292 183.3 288 192 288s17 4 22.4 10.9L282 385.9c3.9 5 6 11.2 6 17.6 0 15.8-12.8 28.6-28.6 28.6zM112 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
                         </svg>
-                        <span class="whitespace-nowrap">PNG</span>
+                        <span class="whitespace-nowrap">Download PNG</span>
                     </button>
 
-                    <!-- PDF Button -->
+                    <!-- PDF: Red (Classic PDF Color) -->
                     <button id="download-pdf-btn" type="button"
-                        class="w-full md:w-auto justify-center px-4 py-2.5 md:px-6 bg-white text-slate-700 border border-gray-200 font-bold rounded-full shadow-sm hover:bg-gray-50 transition flex items-center gap-2 text-xs md:text-sm">
-                        <svg width="16" height="16" fill="currentColor" class="text-red-500"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                        class="w-full md:w-auto inline-flex justify-center items-center gap-2 px-5 py-2.5 rounded-xl bg-red-50 text-red-600 border border-red-100 font-bold text-sm hover:bg-red-600 hover:text-white transition-all">
+                        <!-- SVG same as above -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20" height="20"
+                            fill="currentColor"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                             <path
-                                d="M96 0C60.7 0 32 28.7 32 64l0 384c0 35.3 28.7 64 64 64l80 0 0-112c0-35.3 28.7-64 64-64l176 0 0-165.5c0-17-6.7-33.3-18.7-45.3L290.7 18.7C278.7 6.7 262.5 0 245.5 0L96 0zM357.5 176L264 176c-13.3 0-24-10.7-24-24L240 58.5 357.5 176zM240 380c-11 0-20 9-20 20l0 128c0 11 9 20 20 20s20-9 20-20l0-28 12 0c33.1 0 60-26.9 60-60s-26.9-60-60-60l-32 0zm32 80l-12 0 0-40 12 0c11 0 20 9 20 20s-9 20-20 20zm96-80c-11 0-20 9-20 20l0 128c0 11 9 20 20 20l32 0c28.7 0 52-23.3 52-52l0-64c0-28.7-23.3-52-52-52l-32 0zm20 128l0-88 12 0c6.6 0 12 5.4 12 12l0 64c0 6.6-5.4 12-12 12l-12 0zm88-108l0 128c0 11 9 20 20 20s20-9 20-20l0-44 28 0c11 0 20-9 20-20s-9-20-20-20l-28 0 0-24 28 0c11 0 20-9 20-20s-9-20-20-20l-48 0c-11 0-20 9-20 20z">
-                            </path>
+                                d="M96 0C60.7 0 32 28.7 32 64l0 384c0 35.3 28.7 64 64 64l80 0 0-112c0-35.3 28.7-64 64-64l176 0 0-165.5c0-17-6.7-33.3-18.7-45.3L290.7 18.7C278.7 6.7 262.5 0 245.5 0L96 0zM357.5 176L264 176c-13.3 0-24-10.7-24-24L240 58.5 357.5 176zM240 380c-11 0-20 9-20 20l0 128c0 11 9 20 20 20s20-9 20-20l0-28 12 0c33.1 0 60-26.9 60-60s-26.9-60-60-60l-32 0zm32 80l-12 0 0-40 12 0c11 0 20 9 20 20s-9 20-20 20zm96-80c-11 0-20 9-20 20l0 128c0 11 9 20 20 20l32 0c28.7 0 52-23.3 52-52l0-64c0-28.7-23.3-52-52-52l-32 0zm20 128l0-88 12 0c6.6 0 12 5.4 12 12l0 64c0 6.6-5.4 12-12 12l-12 0zm88-108l0 128c0 11 9 20 20 20s20-9 20-20l0-44 28 0c11 0 20-9 20-20s-9-20-20-20l-28 0 0-24 28 0c11 0 20-9 20-20s-9-20-20-20l-48 0c-11 0-20 9-20 20z" />
                         </svg>
-                        <span class="whitespace-nowrap">PDF</span>
+                        <span class="whitespace-nowrap">Download PDF</span>
                     </button>
                 </div>
             </div>
