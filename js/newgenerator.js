@@ -1,12 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // ==========================================
-    // 1. CONFIG & STATE / 配置与状态
-    // ==========================================
+    // 1. CONFIG & STATE
     const DEFAULT_CONFIG = {
         fontSize: 20,
         dotRadius: 6,
         dotColor: "#000000",
-        // --- 修改点：默认选中 Internal Lines，橡皮擦大小 11 ---
         hint: "internal",
         eraseThickness: 11
     };
@@ -22,21 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
         pendingFile: null
     };
 
-    let cvReady = false; // 全局 OpenCV 就绪标志
-    let debounceTimer = null; // 用于防抖的计时器
+    let cvReady = false;
+    let debounceTimer = null;
     const MAX_DAILY_LIMIT = 3;
     const STORAGE_KEY = 'ai_gen_daily_usage';
 
-    // GA4 埋点辅助函数
+    // --- GA4 埋点辅助函数 (新增) ---
     const trackEvent = (eventName, params = {}) => {
         if (typeof window.gtag === 'function') {
             window.gtag('event', eventName, params);
         }
     };
 
-    // ==========================================
     // 2. DOM ELEMENTS
-    // ==========================================
     const getEl = (id) => document.getElementById(id);
 
     // Views
@@ -62,12 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const rmbgLoader = getEl("rmbg-loader");
     const modalActions = getEl("modal-actions");
 
-    // Editor
+    // Editor Canvas
     const drawCanvas = getEl("draw-canvas");
     const ctx = drawCanvas ? drawCanvas.getContext("2d") : null;
     const canvasLoader = getEl("canvas-loader");
 
-    // Toolbar
+    // Tools
     const toolAdd = getEl("tool-add");
     const toolMove = getEl("tool-move");
     const toolDel = getEl("tool-del");
@@ -78,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const dotCountDisplay = getEl("dot-count-display");
     const pointsMinusBtn = getEl("points-minus-btn");
     const pointsPlusBtn = getEl("points-plus-btn");
-    const pointsNumberInput = getEl("points-number-input"); // 虽然隐藏，但逻辑中会用到
 
     const fontSizeSlider = getEl("font-size-slider");
     const fontSizeValue = getEl("font-size-value");
@@ -91,43 +85,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const thicknessSlider = getEl("thicknessSlider");
     const thicknessValue = getEl("thicknessValue");
 
+    // Actions
     const clearBtn = getEl("clear-btn");
-    const downloadPngBtn = getEl("download-png-btn");
-    const downloadPdfBtn = getEl("download-pdf-btn");
 
-    // ==========================================
-    // 3. UI UTILS (TOAST & INLINE TIPS)
-    // ==========================================
+    // Download Buttons (Fixed IDs)
+    const sidebarPngBtn = getEl("sidebar-download-png-btn");
+    const sidebarPdfBtn = getEl("sidebar-download-pdf-btn");
+    const mobilePdfBtn = getEl("mobile-download-pdf-btn");
 
-    // 显示顶部提示框
+    // Presets & Advanced
+    const presetButtons = document.querySelectorAll('.preset-btn-js');
+    const presetDesc = getEl('preset-desc');
+    const toggleAdvBtn = getEl('toggle-advanced-btn');
+    const advancedContent = getEl('advanced-content');
+    const advArrow = getEl('advanced-arrow');
+
+    // 3. UI UTILS & DONATION TOAST
     const showTip = (message, type = 'info') => {
         const oldTip = document.getElementById('custom-tip');
         if (oldTip) oldTip.remove();
 
         const tip = document.createElement('div');
         tip.id = 'custom-tip';
-
-        let bgClass = 'bg-slate-800';
-        let iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
-
-        if (type === 'error') {
-            bgClass = 'bg-red-500';
-            iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
-        } else if (type === 'success') {
-            bgClass = 'bg-green-500';
-            iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
-        }
+        let bgClass = type === 'error' ? 'bg-red-500' : (type === 'success' ? 'bg-green-500' : 'bg-slate-800');
 
         tip.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[9999] ${bgClass} text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-0`;
-        tip.innerHTML = `${iconSvg} <span class="font-medium text-sm">${message}</span>`;
-
+        tip.innerHTML = `<span class="font-medium text-sm">${message}</span>`;
         document.body.appendChild(tip);
 
         requestAnimationFrame(() => {
             tip.classList.remove('opacity-0');
             tip.classList.add('opacity-100', 'translate-y-2');
         });
-
         setTimeout(() => {
             tip.classList.remove('opacity-100', 'translate-y-2');
             tip.classList.add('opacity-0');
@@ -135,46 +124,98 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3000);
     };
 
-    // 处理分享解锁逻辑
+    // Buy Me a Coffee Toast Logic
+    const showDonationTip = () => {
+        const existingTip = document.getElementById('donation-toast');
+        if (existingTip) existingTip.remove();
+
+        const toast = document.createElement('div');
+        toast.id = 'donation-toast';
+        toast.className = `
+            fixed top-24 right-4 z-[100] max-w-sm w-auto 
+            bg-white border-l-4 border-[#FF5E5B] rounded-lg shadow-2xl 
+            flex items-center gap-4 p-4 pr-10 cursor-pointer 
+            transform transition-all duration-500 translate-x-[120%]
+            hover:scale-102 group
+        `;
+
+        toast.innerHTML = `
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-[#FF5E5B]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-5 h-5 animate-pulse">
+                    <path d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/>
+                </svg>
+            </div>
+            <div>
+                <h4 class="font-bold text-gray-800 text-sm">Download Complete! 🎉</h4>
+                <p class="text-xs text-slate-500 mt-1 group-hover:text-[#FF5E5B] transition-colors">
+                    Happy with the result? <br>
+                    <span class="underline decoration-[#FF5E5B] decoration-2">Buy me a coffee ($5)</span>
+                </p>
+            </div>
+            <button id="close-toast" class="absolute top-2 right-2 text-gray-300 hover:text-gray-500 p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        `;
+
+        document.body.appendChild(toast);
+
+        requestAnimationFrame(() => {
+            toast.classList.remove('translate-x-[120%]');
+            toast.classList.add('translate-x-0');
+        });
+
+        toast.addEventListener('click', (e) => {
+            if (e.target.closest('#close-toast')) {
+                removeToast();
+                return;
+            }
+            window.open('https://ko-fi.com/connectthedotsprintable', '_blank');
+        });
+
+        const removeToast = () => {
+            toast.classList.remove('translate-x-0');
+            toast.classList.add('translate-x-[120%]');
+            setTimeout(() => {
+                if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
+            }, 500);
+        };
+
+        setTimeout(removeToast, 8000);
+    };
+
     const handleShareUnlock = () => {
         const data = getAiUsage();
         const today = new Date().toLocaleDateString();
 
         if (data.shareDate === today) {
             showTip("You have already claimed today's bonus!", "info");
-            updateAiCreditsUI();
             return;
         }
 
         const url = encodeURIComponent(window.location.href);
         const title = encodeURIComponent("Check out this Free Connect the Dots Generator!");
-        // 在新窗口打开 Reddit 分享
         window.open(`https://www.reddit.com/submit?url=${url}&title=${title}`, '_blank');
 
-        // 增加额度
         data.extra = (data.extra || 0) + 3;
         data.shareDate = today;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-
         updateAiCreditsUI();
         showTip("Success! 3 credits added.", 'success');
     };
 
-    // ==========================================
-    // 4. INITIALIZATION / 初始化
-    // ==========================================
-
+    // 4. INITIALIZATION
     const init = () => {
         updateAiCreditsUI();
         setupHeroTabs();
         setupToolbar();
-        // 尝试预加载 OpenCV，但不阻塞
         loadOpenCv();
+        setupPresets();
+        setupAdvancedToggle();
 
-        // --- 修复：强制 Canvas 占满父容器 ---
         if (drawCanvas && drawCanvas.parentElement) {
             const parent = drawCanvas.parentElement;
-            // 父容器设为 Flex 居中，确保 Canvas 处于正中间
             parent.style.display = "flex";
             parent.style.justifyContent = "center";
             parent.style.alignItems = "center";
@@ -182,104 +223,48 @@ document.addEventListener("DOMContentLoaded", () => {
             parent.style.height = "100%";
             parent.style.overflow = "hidden";
 
-            // Canvas 样式强制设为 100% 并使用 contain 保持比例
-            // 这样小图会自动放大，大图会自动缩小，始终填满最大可用空间
             drawCanvas.style.width = "100%";
             drawCanvas.style.height = "100%";
             drawCanvas.style.objectFit = "contain";
-            drawCanvas.style.display = "block";
-
-            // 移除原本可能限制尺寸的 max-width/height (因为 width:100% 已经控制了)
-            drawCanvas.style.maxWidth = "none";
-            drawCanvas.style.maxHeight = "none";
         }
 
-        // 初始化滑块范围
         if (dotCountSlider) {
             dotCountSlider.max = 200;
             dotCountSlider.min = 5;
             dotCountSlider.value = 25;
         }
 
-        // --- 初始化 UI 状态以匹配默认配置 ---
         if (thicknessSlider) {
             thicknessSlider.value = DEFAULT_CONFIG.eraseThickness;
             if (thicknessValue) thicknessValue.textContent = DEFAULT_CONFIG.eraseThickness;
         }
 
-        if (thicknessContainer && DEFAULT_CONFIG.hint === 'internal') {
-            thicknessContainer.classList.remove('hidden');
-        }
-
-        const defaultRadio = document.querySelector(`input[name="hint-type"][value="${DEFAULT_CONFIG.hint}"]`);
-        if (defaultRadio) defaultRadio.checked = true;
+        const defaultPresetBtn = document.querySelector('.preset-btn-js[data-preset="easy"]');
+        if (defaultPresetBtn) defaultPresetBtn.click();
     };
 
     const setupHeroTabs = () => {
-        const tabUpload = document.getElementById("tab-upload");
-        const tabAi = document.getElementById("tab-ai");
-        const tabBg = document.getElementById("tab-bg");
-        const panelUpload = document.getElementById("panel-upload");
-        const panelAi = document.getElementById("panel-ai");
-
         if (!tabUpload || !tabAi) return;
-
-        // 辅助函数：设置激活状态
         const setActive = (isAiMode) => {
-
             if (isAiMode) {
-                // === 切换到 AI 模式 ===
+                // GA: 切换模式事件
                 trackEvent('select_mode', { mode: 'ai_gen' });
-
-                // 1. 滑块向右移动
                 tabBg.style.transform = 'translateX(100%)';
-
-                // 2. 文字颜色调整 (关键修复点)
-                // AI 变深色 (Active)
-                tabAi.classList.remove('text-slate-500');
-                tabAi.classList.add('text-slate-800');
-
-                // Upload 变浅色 (Inactive)
-                tabUpload.classList.remove('text-slate-800');
-                tabUpload.classList.add('text-slate-500');
-
-                // 3. 面板内容切换
-                panelUpload.classList.remove('active');
-                panelUpload.classList.add('inactive'); // 隐藏 Upload 面板
-
-                panelAi.classList.remove('inactive');
-                panelAi.classList.add('active'); // 显示 AI 面板
-
-                // 自动聚焦输入框
-                setTimeout(() => {
-                    const input = document.getElementById('hero-ai-input');
-                    if (input) input.focus();
-                }, 100);
-
+                tabAi.classList.replace('text-slate-500', 'text-slate-800');
+                tabUpload.classList.replace('text-slate-800', 'text-slate-500');
+                panelUpload.classList.replace('active', 'inactive');
+                panelAi.classList.replace('inactive', 'active');
+                setTimeout(() => heroAiInput?.focus(), 100);
             } else {
-                // === 切换到 Upload 模式 ===
+                // GA: 切换模式事件
                 trackEvent('select_mode', { mode: 'upload' })
-                // 1. 滑块归位
                 tabBg.style.transform = 'translateX(0)';
-
-                // 2. 文字颜色调整
-                // Upload 变深色 (Active)
-                tabUpload.classList.remove('text-slate-500');
-                tabUpload.classList.add('text-slate-800');
-
-                // AI 变浅色 (Inactive)
-                tabAi.classList.remove('text-slate-800');
-                tabAi.classList.add('text-slate-500');
-
-                // 3. 面板内容切换
-                panelAi.classList.remove('active');
-                panelAi.classList.add('inactive');
-
-                panelUpload.classList.remove('inactive');
-                panelUpload.classList.add('active');
+                tabUpload.classList.replace('text-slate-500', 'text-slate-800');
+                tabAi.classList.replace('text-slate-800', 'text-slate-500');
+                panelAi.classList.replace('active', 'inactive');
+                panelUpload.classList.replace('inactive', 'active');
             }
         };
-
         tabUpload.addEventListener("click", () => setActive(false));
         tabAi.addEventListener("click", () => setActive(true));
     };
@@ -306,19 +291,89 @@ document.addEventListener("DOMContentLoaded", () => {
         if (heroFileInput) heroFileInput.value = "";
     };
 
-    // ==========================================
-    // 5. FILE HANDLING / 文件处理
-    // ==========================================
+    // 5. PRESETS & ADVANCED
+    const setupPresets = () => {
+        const presetConfigs = {
+            easy: { count: 25, font: 28, dotRadius: 8, hint: 'internal', desc: "Perfect for kids (20-30 dots, large font)" },
+            medium: { count: 55, font: 20, dotRadius: 6, hint: 'internal', desc: "Standard difficulty (50-60 dots)" },
+            hard: { count: 90, font: 14, dotRadius: 4, hint: 'no', desc: "Expert challenge (80+ dots, no hints)" }
+        };
 
+        presetButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                presetButtons.forEach(b => {
+                    b.classList.remove('active', 'border-brand-blue', 'bg-indigo-50', 'bg-indigo-50/50');
+                    b.classList.add('border-transparent', 'bg-slate-50');
+                    b.querySelector('span:last-child').classList.replace('text-brand-blue', 'text-slate-600');
+                });
+
+                btn.classList.add('active', 'border-brand-blue', 'bg-indigo-50');
+                btn.classList.remove('border-transparent', 'bg-slate-50');
+                btn.querySelector('span:last-child').classList.replace('text-slate-600', 'text-brand-blue');
+
+                const config = presetConfigs[btn.dataset.preset];
+                if (presetDesc) presetDesc.textContent = config.desc;
+
+                if (dotCountSlider) {
+                    dotCountSlider.value = config.count;
+                    if (dotCountDisplay) dotCountDisplay.textContent = `${config.count} Dots`;
+                }
+                if (fontSizeSlider) {
+                    fontSizeSlider.value = config.font;
+                    if (fontSizeValue) fontSizeValue.textContent = config.font;
+                }
+                if (dotSizeSlider) {
+                    dotSizeSlider.value = config.dotRadius;
+                    if (dotSizeValue) dotSizeValue.textContent = config.dotRadius;
+                }
+
+                state.config.fontSize = config.font;
+                state.config.dotRadius = config.dotRadius;
+
+                const radios = document.getElementsByName('hint-type');
+                for (let radio of radios) {
+                    if (radio.value === config.hint) {
+                        radio.checked = true;
+                        updateConfig('hint', config.hint);
+                        if (thicknessContainer) {
+                            config.hint === 'internal' ? thicknessContainer.classList.remove('hidden') : thicknessContainer.classList.add('hidden');
+                        }
+                        break;
+                    }
+                }
+
+                if (state.originalImage && typeof cv !== 'undefined') {
+                    if (canvasLoader) canvasLoader.classList.remove('hidden');
+                    setTimeout(runAutoDetect, 50);
+                } else {
+                    redraw();
+                }
+            });
+        });
+    };
+
+    const setupAdvancedToggle = () => {
+        if (toggleAdvBtn && advancedContent) {
+            toggleAdvBtn.addEventListener('click', () => {
+                const isHidden = advancedContent.classList.contains('hidden');
+                isHidden ? advancedContent.classList.remove('hidden') : advancedContent.classList.add('hidden');
+                if (advArrow) advArrow.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        }
+    };
+
+    // 6. FILE HANDLING
     const handleFile = (file, isProcessed = false) => {
         if (!file || !file.type.startsWith('image/')) return showTip("Please upload a valid image file.", "error");
-        if (!isProcessed) { // 只有用户主动上传才记录，AI生成后调用的不记录
+
+        // GA: 用户主动上传图片
+        if (!isProcessed) {
             trackEvent('user_upload_image', {
                 file_type: file.type,
                 file_size: Math.round(file.size / 1024) + 'KB'
             });
         }
-        // --- 逻辑：直接进入画布，不弹窗 ---
+
         loadFileToCanvas(file);
     };
 
@@ -328,14 +383,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const img = new Image();
             img.onload = () => {
                 state.originalImage = img;
-
-                // --- 核心修复：强制使用高清分辨率 (High-Res) ---
-                // 设定最小宽度为 2000px (接近 A4 打印质量)
-                // 如果原图小于这个尺寸，计算放大倍数
                 const TARGET_MIN_WIDTH = 2000;
                 const scale = Math.max(1, TARGET_MIN_WIDTH / Math.max(img.naturalWidth, img.naturalHeight));
 
-                // 设置 Canvas 物理像素为高清尺寸
                 drawCanvas.width = Math.floor(img.naturalWidth * scale);
                 drawCanvas.height = Math.floor(img.naturalHeight * scale);
 
@@ -345,7 +395,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 switchView('editor');
 
-                // --- 预生成内部线条提示 ---
                 if (state.config.hint === 'internal' && typeof cv !== 'undefined') {
                     setTimeout(() => {
                         state.internalHintImage = generateInternalHintImage();
@@ -355,12 +404,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     redraw();
                 }
 
-                // --- 开始自动检测 ---
                 canvasLoader.classList.remove('hidden');
                 const startDetect = () => setTimeout(runAutoDetect, 200);
-
-                if (typeof cv !== 'undefined') startDetect();
-                else loadOpenCv(startDetect);
+                typeof cv !== 'undefined' ? startDetect() : loadOpenCv(startDetect);
             };
             img.src = e.target.result;
         };
@@ -369,7 +415,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (heroFileInput) heroFileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
 
-    // 示例图片点击
     document.querySelectorAll('.preset-btn').forEach(btn => {
         btn.addEventListener('click', async () => {
             try {
@@ -382,7 +427,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 模态框按钮逻辑（虽然 handleFile 跳过了模态框，但保留逻辑以备不时之需）
     if (btnSelectDrawing) btnSelectDrawing.addEventListener('click', () => {
         imageTypeModal.classList.add('hidden');
         if (state.pendingFile) loadFileToCanvas(state.pendingFile);
@@ -408,20 +452,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // AI 生成逻辑
     if (heroAiGoBtn) heroAiGoBtn.addEventListener('click', async () => {
         const prompt = heroAiInput.value.trim();
-
         if (prompt.length < 3) return showTip("Please enter a description.", "error");
 
+        // GA: AI 生成开始
         trackEvent('ai_generate_start', {
-            prompt_length: prompt.length // 记录长度分析用户行为，尽量不记录具体 prompt 以免隐私合规麻烦
+            prompt_length: prompt.length
         });
 
         const usage = getAiUsage();
-        const currentLimit = MAX_DAILY_LIMIT + (usage.extra || 0);
-
-        if (usage.count >= currentLimit) {
+        if (usage.count >= (MAX_DAILY_LIMIT + (usage.extra || 0))) {
             showTip("Daily limit reached. Share below to unlock!", "info");
             return;
         }
@@ -436,7 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const loaderText = canvasLoader.querySelector('p');
             if (loaderText) loaderText.textContent = "AI is creating your puzzle...";
         }
-        if (ctx && drawCanvas) ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+        if (ctx) ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 
         try {
             const res = await fetch("https://connectthedotsprintable.online/api/doubao", {
@@ -448,26 +489,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
             });
 
-            if (!res.ok) {
-                const errText = await res.text();
-                throw new Error(errText || res.statusText);
-            }
-
+            if (!res.ok) throw new Error(await res.text());
             const blob = await res.blob();
-            
-            // 添加这行：记录 AI 生成成功
+
+            // GA: AI 生成成功
             trackEvent('ai_generate_success');
 
             incrementAiUsage();
 
             const loaderText = canvasLoader.querySelector('p');
             if (loaderText) loaderText.textContent = "Creating magic...";
-
             loadFileToCanvas(new File([blob], "ai.png", { type: blob.type }));
 
         } catch (e) {
             console.error("AI Gen Error:", e);
-            // <--- 添加这行：记录 AI 生成失败
+            // GA: AI 生成失败
             trackEvent('ai_generate_fail', { error: e.message });
 
             showTip("AI Generation failed. Please try again.", "error");
@@ -479,48 +515,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ==========================================
-    // 6. OPENCV LOGIC / OpenCV 逻辑
-    // ==========================================
-
+    // 7. OPENCV LOGIC
     const loadOpenCv = (cb) => {
-        // 1. 如果已经准备好，直接回调
         if (cvReady) {
             if (cb) cb();
             return;
         }
-
-        // 2. 检查是否已经有 script 标签但还没 ready
         if (document.querySelector('script[src*="opencv.js"]')) {
             if (typeof cv !== 'undefined' && !cvReady) {
                 cv['onRuntimeInitialized'] = () => {
                     cvReady = true;
-                    console.log("OpenCV Ready (Late Bind)");
                     if (cb) cb();
                 };
             }
             return;
         }
-
-        // 3. 首次加载
         const script = document.createElement('script');
         script.src = "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js";
         script.async = true;
-
-        // 关键：在全局 cv 对象被创建前定义配置
         window.Module = {
             onRuntimeInitialized: function () {
                 cvReady = true;
-                console.log("OpenCV Ready!");
                 if (cb) cb();
-                // 如果当前有等待处理的图片，重新触发检测
                 if (state.originalImage) {
                     canvasLoader.classList.remove('hidden');
                     runAutoDetect();
                 }
             }
         };
-
         document.body.appendChild(script);
     };
 
@@ -536,9 +558,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (loaderText) loaderText.textContent = "Processing lines...";
 
             const tempCanvas = document.createElement("canvas");
-
-            // 计算处理缩放比：为了速度，检测还是在小图上做 (比如 1000px 宽)
-            // 关键点：这里的基准必须是 drawCanvas 的尺寸，而不是 originalImage 的尺寸
             const processWidth = 1000;
             const processScale = Math.min(1, processWidth / Math.max(drawCanvas.width, drawCanvas.height));
 
@@ -551,7 +570,6 @@ document.addEventListener("DOMContentLoaded", () => {
             tempCanvas.height = h;
 
             const tCtx = tempCanvas.getContext("2d");
-            // 绘制时拉伸原图以匹配处理尺寸
             tCtx.drawImage(state.originalImage, 0, 0, w, h);
 
             let imgData = tCtx.getImageData(0, 0, w, h);
@@ -576,11 +594,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for (let i = 0; i < contours.size(); i++) {
                 let cnt = contours.get(i);
-                if (cv.contourArea(cnt) > 100) {
-                    if (cv.contourArea(cnt) > maxArea) {
-                        maxArea = cv.contourArea(cnt);
-                        maxContourIndex = i;
-                    }
+                if (cv.contourArea(cnt) > 100 && cv.contourArea(cnt) > maxArea) {
+                    maxArea = cv.contourArea(cnt);
+                    maxContourIndex = i;
                 }
             }
 
@@ -590,7 +606,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 cv.approxPolyDP(mainContour, approx, cv.arcLength(mainContour, true) * 0.001, true);
 
                 for (let j = 0; j < approx.rows; j++) {
-                    // 坐标映射回高清画布：除以 processScale 即可
                     allPoints.push({
                         x: approx.data32S[j * 2] / processScale,
                         y: approx.data32S[j * 2 + 1] / processScale
@@ -602,12 +617,7 @@ document.addEventListener("DOMContentLoaded", () => {
             src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete(); M.delete();
 
             const targetCount = parseInt(dotCountSlider.value) || 25;
-
-            if (allPoints.length > 0) {
-                state.dots = resampleDots(allPoints, targetCount);
-            } else {
-                state.dots = [];
-            }
+            state.dots = allPoints.length > 0 ? resampleDots(allPoints, targetCount) : [];
 
             saveHistory();
             redraw();
@@ -620,20 +630,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-
     const resampleDots = (points, targetCount) => {
         if (points.length < 2) return points;
-        if (points.length < targetCount * 2) {
-            points = interpolatePoints(points, targetCount * 3);
-        }
+        if (points.length < targetCount * 2) points = interpolatePoints(points, targetCount * 3);
 
         const closedPoints = [...points, points[0]];
         let totalLength = 0;
         const cumLengths = [0];
 
         for (let i = 0; i < closedPoints.length - 1; i++) {
-            const dist = Math.hypot(closedPoints[i + 1].x - closedPoints[i].x, closedPoints[i + 1].y - closedPoints[i].y);
-            totalLength += dist;
+            totalLength += Math.hypot(closedPoints[i + 1].x - closedPoints[i].x, closedPoints[i + 1].y - closedPoints[i].y);
             cumLengths.push(totalLength);
         }
 
@@ -643,20 +649,15 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < targetCount; i++) {
             const targetDist = i * step;
             let j = 0;
-            while (j < cumLengths.length - 1 && cumLengths[j + 1] < targetDist) {
-                j++;
-            }
+            while (j < cumLengths.length - 1 && cumLengths[j + 1] < targetDist) j++;
 
             const segmentStartDist = cumLengths[j];
             const segmentLength = cumLengths[j + 1] - cumLengths[j];
-            const t = (segmentLength === 0) ? 0 : (targetDist - segmentStartDist) / segmentLength;
-
-            const p1 = closedPoints[j];
-            const p2 = closedPoints[j + 1];
+            const t = segmentLength === 0 ? 0 : (targetDist - segmentStartDist) / segmentLength;
 
             newPoints.push({
-                x: p1.x + (p2.x - p1.x) * t,
-                y: p1.y + (p2.y - p1.y) * t
+                x: closedPoints[j].x + (closedPoints[j + 1].x - closedPoints[j].x) * t,
+                y: closedPoints[j].y + (closedPoints[j + 1].y - closedPoints[j].y) * t
             });
         }
         return newPoints;
@@ -666,69 +667,39 @@ document.addEventListener("DOMContentLoaded", () => {
         let result = [];
         for (let i = 0; i < points.length - 1; i++) {
             result.push(points[i]);
-            const p1 = points[i];
-            const p2 = points[i + 1];
-            result.push({
-                x: (p1.x + p2.x) / 2,
-                y: (p1.y + p2.y) / 2
-            });
+            result.push({ x: (points[i].x + points[i + 1].x) / 2, y: (points[i].y + points[i + 1].y) / 2 });
         }
         result.push(points[points.length - 1]);
-        if (result.length < minCount) {
-            return interpolatePoints(result, minCount);
-        }
-        return result;
+        return result.length < minCount ? interpolatePoints(result, minCount) : result;
     };
 
     const generateInternalHintImage = () => {
         if (!state.originalImage || typeof cv === "undefined" || !cvReady) return null;
-
         try {
             const tempCanvas = document.createElement("canvas");
-            // 使用当前主画布的高清尺寸
-            const w = drawCanvas.width;
-            const h = drawCanvas.height;
-
-            tempCanvas.width = w;
-            tempCanvas.height = h;
+            const w = drawCanvas.width, h = drawCanvas.height;
+            tempCanvas.width = w; tempCanvas.height = h;
 
             const tCtx = tempCanvas.getContext("2d");
-
-            // 1. 强制白底并绘制拉伸后的原图
             tCtx.fillStyle = "#FFFFFF";
             tCtx.fillRect(0, 0, w, h);
             tCtx.drawImage(state.originalImage, 0, 0, w, h);
 
-            let imgData = tCtx.getImageData(0, 0, w, h);
-            let src = cv.matFromImageData(imgData);
+            let src = cv.matFromImageData(tCtx.getImageData(0, 0, w, h));
+            let gray = new cv.Mat(), binary = new cv.Mat(), contours = new cv.MatVector(), hierarchy = new cv.Mat();
 
-            let gray = new cv.Mat();
-            let binary = new cv.Mat();
-            let contours = new cv.MatVector();
-            let hierarchy = new cv.Mat();
-
-            // 2. 图像处理
             cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-            // 使用 Otsu 确保 AI 线稿清晰提取
             cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU);
-
-            // 3. 提取轮廓 (只提取外轮廓 RETR_EXTERNAL)
             cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
 
-            // 4. 计算擦除粗细 (自适应高清尺寸)
             const thickness = Math.max(2, state.config.eraseThickness * (w / 1000));
-            const whiteColor = new cv.Scalar(255, 255, 255, 255);
-
-            // 5. 在高清图上绘制遮罩
-            cv.drawContours(src, contours, -1, whiteColor, thickness);
+            cv.drawContours(src, contours, -1, new cv.Scalar(255, 255, 255, 255), thickness);
 
             const outputCanvas = document.createElement("canvas");
-            outputCanvas.width = w;
-            outputCanvas.height = h;
+            outputCanvas.width = w; outputCanvas.height = h;
             cv.imshow(outputCanvas, src);
 
             src.delete(); gray.delete(); binary.delete(); contours.delete(); hierarchy.delete();
-
             return outputCanvas;
         } catch (e) {
             console.error("Internal Lines Error:", e);
@@ -736,26 +707,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // ==========================================
-    // 7. DRAWING & INTERACTION / 绘图与交互
-    // ==========================================
-
+    // 8. DRAWING & INTERACTION
     const setupToolbar = () => {
         const setActive = (tool) => {
             state.activeTool = tool;
             [toolAdd, toolMove, toolDel].forEach(btn => {
-                if (btn && btn.id === `tool-${tool}`) {
-                    btn.classList.add('bg-brand-blue', 'text-white');
-                    btn.classList.remove('bg-slate-700', 'text-brand-blue');
-                } else if (btn) {
-                    btn.classList.remove('bg-brand-blue', 'text-white');
-                    btn.classList.add('bg-slate-700');
-                    if (btn.id === 'tool-add') btn.classList.add('text-brand-blue');
-                }
+                const isActive = btn.id === `tool-${tool}`;
+                btn.classList.toggle('bg-brand-blue', isActive);
+                btn.classList.toggle('text-white', isActive);
+                btn.classList.toggle('bg-slate-700', !isActive);
+                if (btn.id === 'tool-add' && !isActive) btn.classList.add('text-brand-blue');
             });
-            if (drawCanvas) {
-                drawCanvas.style.cursor = tool === 'move' ? 'grab' : (tool === 'del' ? 'crosshair' : 'crosshair');
-            }
+            if (drawCanvas) drawCanvas.style.cursor = tool === 'move' ? 'grab' : 'crosshair';
         };
 
         if (toolAdd) toolAdd.addEventListener('click', () => setActive('add'));
@@ -769,7 +732,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const rect = drawCanvas.getBoundingClientRect();
         const canvasRatio = drawCanvas.width / drawCanvas.height;
         const rectRatio = rect.width / rect.height;
-
         let displayWidth, displayHeight, offsetX, offsetY;
 
         if (canvasRatio > rectRatio) {
@@ -787,44 +749,29 @@ document.addEventListener("DOMContentLoaded", () => {
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-        const relX = clientX - rect.left;
-        const relY = clientY - rect.top;
-
         return {
-            x: (relX - offsetX) * (drawCanvas.width / displayWidth),
-            y: (relY - offsetY) * (drawCanvas.height / displayHeight)
+            x: (clientX - rect.left - offsetX) * (drawCanvas.width / displayWidth),
+            y: (clientY - rect.top - offsetY) * (drawCanvas.height / displayHeight)
         };
     };
 
     const handleInputStart = (e) => {
         if (!state.originalImage) return;
         if (e.type === 'touchstart') e.preventDefault();
-
         const pos = getEventPos(e);
         const scale = Math.max(1, drawCanvas.width / 1000);
         const hitRadius = (state.config.dotRadius * scale) + (20 * scale);
-
         const idx = state.dots.findIndex(d => Math.hypot(d.x - pos.x, d.y - pos.y) < hitRadius);
 
-        if (state.activeTool === 'del') {
-            if (idx !== -1) {
-                state.dots.splice(idx, 1);
-                saveHistory();
-                redraw();
-                updateDotCountUI();
-            }
-        } else if (state.activeTool === 'move') {
-            if (idx !== -1) {
-                state.draggedDotIndex = idx;
-                drawCanvas.style.cursor = 'grabbing';
-            }
-        } else if (state.activeTool === 'add') {
-            if (idx === -1) {
-                state.dots.push(pos);
-                saveHistory();
-                redraw();
-                updateDotCountUI();
-            }
+        if (state.activeTool === 'del' && idx !== -1) {
+            state.dots.splice(idx, 1);
+            saveHistory(); redraw(); updateDotCountUI();
+        } else if (state.activeTool === 'move' && idx !== -1) {
+            state.draggedDotIndex = idx;
+            drawCanvas.style.cursor = 'grabbing';
+        } else if (state.activeTool === 'add' && idx === -1) {
+            state.dots.push(pos);
+            saveHistory(); redraw(); updateDotCountUI();
         }
     };
 
@@ -857,30 +804,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!ctx) return;
         ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 
-        // 1. Draw Background (必须指定宽高，确保拉伸铺满高清画布)
         if (state.config.hint !== 'no' && state.originalImage) {
             ctx.save();
-            const w = drawCanvas.width;
-            const h = drawCanvas.height;
-
             if (state.config.hint === 'trace') {
                 ctx.globalAlpha = 0.3;
-                ctx.drawImage(state.originalImage, 0, 0, w, h);
+                ctx.drawImage(state.originalImage, 0, 0, drawCanvas.width, drawCanvas.height);
             } else if (state.config.hint === 'internal') {
-                if (state.internalHintImage) {
-                    // HintImage 已经是高清的了，直接画
-                    ctx.drawImage(state.internalHintImage, 0, 0);
-                } else {
-                    ctx.drawImage(state.originalImage, 0, 0, w, h);
-                }
+                ctx.drawImage(state.internalHintImage || state.originalImage, 0, 0, drawCanvas.width, drawCanvas.height);
             } else {
-                ctx.drawImage(state.originalImage, 0, 0, w, h);
+                ctx.drawImage(state.originalImage, 0, 0, drawCanvas.width, drawCanvas.height);
             }
             ctx.restore();
         }
 
-        // 2. Draw Dots & Numbers
-        // 这里的 scale 逻辑不用动，它已经基于 drawCanvas.width 计算了，会自动适配高清版
         const scale = Math.max(0.5, drawCanvas.width / 1000);
         const r = state.config.dotRadius * scale;
         const fontSize = state.config.fontSize * scale;
@@ -895,8 +831,7 @@ document.addEventListener("DOMContentLoaded", () => {
             centerX /= state.dots.length;
             centerY /= state.dots.length;
         } else {
-            centerX = drawCanvas.width / 2;
-            centerY = drawCanvas.height / 2;
+            centerX = drawCanvas.width / 2; centerY = drawCanvas.height / 2;
         }
 
         state.dots.forEach((dot, i) => {
@@ -908,16 +843,10 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.lineWidth = 2 * scale;
             ctx.stroke();
 
-            let dx = dot.x - centerX;
-            let dy = dot.y - centerY;
-            if (dx === 0 && dy === 0) { dx = 1; dy = 1; }
-            const len = Math.sqrt(dx * dx + dy * dy);
-            const dirX = dx / len;
-            const dirY = dy / len;
-
+            const dx = dot.x - centerX || 1, dy = dot.y - centerY || 1;
+            const len = Math.hypot(dx, dy);
             const offset = r + (fontSize * 0.8);
-            const labelX = dot.x + (dirX * offset);
-            const labelY = dot.y + (dirY * offset);
+            const labelX = dot.x + (dx / len * offset), labelY = dot.y + (dy / len * offset);
 
             ctx.fillStyle = "#000";
             ctx.strokeStyle = "white";
@@ -927,94 +856,66 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // ==========================================
-    // 8. CONTROLS / 控制面板
-    // ==========================================
-
+    // 9. CONTROLS
     const updateConfig = (key, val) => {
         state.config[key] = val;
-
-        // 防抖处理内部线条生成
         if ((key === 'hint' && val === 'internal') || (key === 'eraseThickness' && state.config.hint === 'internal')) {
-            if (state.config.hint === 'internal') {
-                if (debounceTimer) clearTimeout(debounceTimer);
-                debounceTimer = setTimeout(() => {
-                    state.internalHintImage = generateInternalHintImage();
-                    redraw();
-                }, 50);
-            }
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                state.internalHintImage = generateInternalHintImage();
+                redraw();
+            }, 50);
         } else {
             redraw();
         }
-
-        if (key === 'hint' && val !== 'internal') {
-            state.internalHintImage = null;
-        }
+        if (key === 'hint' && val !== 'internal') state.internalHintImage = null;
     };
 
-    if (fontSizeSlider) fontSizeSlider.addEventListener('input', (e) => {
-        fontSizeValue.textContent = e.target.value;
+    fontSizeSlider?.addEventListener('input', (e) => {
+        if (fontSizeValue) fontSizeValue.textContent = e.target.value;
         updateConfig('fontSize', parseInt(e.target.value));
     });
-    if (dotSizeSlider) dotSizeSlider.addEventListener('input', (e) => {
-        dotSizeValue.textContent = e.target.value;
+    dotSizeSlider?.addEventListener('input', (e) => {
+        if (dotSizeValue) dotSizeValue.textContent = e.target.value;
         updateConfig('dotRadius', parseInt(e.target.value));
     });
-    if (thicknessSlider) thicknessSlider.addEventListener('input', (e) => {
-        thicknessValue.textContent = e.target.value;
+    thicknessSlider?.addEventListener('input', (e) => {
+        if (thicknessValue) thicknessValue.textContent = e.target.value;
         updateConfig('eraseThickness', parseInt(e.target.value));
     });
-
-    if (dotColorPicker) dotColorPicker.addEventListener('input', (e) => updateConfig('dotColor', e.target.value));
+    dotColorPicker?.addEventListener('input', (e) => updateConfig('dotColor', e.target.value));
 
     hintRadios.forEach(r => r.addEventListener('change', (e) => {
         updateConfig('hint', e.target.value);
-        if (e.target.value === 'internal') thicknessContainer.classList.remove('hidden');
-        else thicknessContainer.classList.add('hidden');
+        if (thicknessContainer) thicknessContainer.classList.toggle('hidden', e.target.value !== 'internal');
     }));
 
-    if (dotCountSlider) {
-        dotCountSlider.addEventListener('input', (e) => {
-            dotCountDisplay.textContent = `${e.target.value} Dots`;
-        });
-
-        dotCountSlider.addEventListener('change', (e) => {
-            if (typeof cv !== 'undefined' && state.originalImage) {
-                canvasLoader.classList.remove('hidden');
-                setTimeout(runAutoDetect, 50);
-            }
-        });
-    }
+    dotCountSlider?.addEventListener('input', (e) => {
+        if (dotCountDisplay) dotCountDisplay.textContent = `${e.target.value} Dots`;
+    });
+    dotCountSlider?.addEventListener('change', () => {
+        if (typeof cv !== 'undefined' && state.originalImage) {
+            canvasLoader.classList.remove('hidden');
+            setTimeout(runAutoDetect, 50);
+        }
+    });
 
     const updateDotCountUI = () => {
         if (dotCountDisplay) dotCountDisplay.textContent = `${state.dots.length} Dots`;
     };
 
-    if (pointsPlusBtn) pointsPlusBtn.addEventListener('click', () => {
+    pointsPlusBtn?.addEventListener('click', () => {
         let val = parseInt(dotCountSlider.value);
-        if (val < 200) {
-            val++;
-            dotCountSlider.value = val;
-            dotCountDisplay.textContent = `${val} Dots`;
-            dotCountSlider.dispatchEvent(new Event('change'));
-        }
+        if (val < 200) { dotCountSlider.value = ++val; dotCountDisplay.textContent = `${val} Dots`; dotCountSlider.dispatchEvent(new Event('change')); }
     });
-    if (pointsMinusBtn) pointsMinusBtn.addEventListener('click', () => {
+    pointsMinusBtn?.addEventListener('click', () => {
         let val = parseInt(dotCountSlider.value);
-        if (val > 5) {
-            val--;
-            dotCountSlider.value = val;
-            dotCountDisplay.textContent = `${val} Dots`;
-            dotCountSlider.dispatchEvent(new Event('change'));
-        }
+        if (val > 5) { dotCountSlider.value = --val; dotCountDisplay.textContent = `${val} Dots`; dotCountSlider.dispatchEvent(new Event('change')); }
     });
 
-    if (clearBtn) clearBtn.addEventListener('click', () => {
+    clearBtn?.addEventListener('click', () => {
         if (confirm("Clear dots?")) {
-            saveHistory();
-            state.dots = [];
-            redraw();
-            updateDotCountUI();
+            saveHistory(); state.dots = []; redraw(); updateDotCountUI();
         }
     });
 
@@ -1025,8 +926,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const performUndo = () => {
         if (state.history.length > 0) {
             state.dots = state.history.pop();
-            redraw();
-            updateDotCountUI();
+            redraw(); updateDotCountUI();
         }
     };
 
@@ -1046,7 +946,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateAiCreditsUI();
     };
 
-    // === 更新 AI 额度 UI 及分享逻辑 ===
+    // === 修复后的 updateAiCreditsUI 函数 ===
     const updateAiCreditsUI = () => {
         const data = getAiUsage();
         const limit = MAX_DAILY_LIMIT + (data.extra || 0);
@@ -1057,7 +957,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let msgContainer = document.getElementById('ai-limit-msg');
 
         if (remaining <= 0) {
-            // 禁用按钮
+            // 1. 禁用按钮样式
             heroAiGoBtn.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'hover:shadow-lg', 'hover:scale-105');
             heroAiGoBtn.style.backgroundColor = '#94a3b8'; // Slate 400
             heroAiGoBtn.style.color = '#fff';
@@ -1067,6 +967,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
             heroAiGoBtn.innerHTML = `<span>Limit Reached</span> ${lockSvg}`;
 
+            // 2. 显示分享解锁链接
             const today = new Date().toLocaleDateString();
             if (data.shareDate !== today) {
                 if (!msgContainer) {
@@ -1083,17 +984,28 @@ document.addEventListener("DOMContentLoaded", () => {
                         </button>
                     `;
 
-                    const creditsEl = heroAiCredits.closest('p');
-                    if (creditsEl && creditsEl.parentNode) {
-                        creditsEl.parentNode.insertBefore(msgContainer, creditsEl.nextSibling);
+                    // --- 修复开始：使用 parentElement 替代 closest('p') ---
+                    // 获取显示剩余次数的父级容器 (div)
+                    const creditsParent = heroAiCredits.parentElement; 
+                    
+                    if (creditsParent && creditsParent.parentNode) {
+                        // 将提示插入到 creditsParent 的后面
+                        creditsParent.parentNode.insertBefore(msgContainer, creditsParent.nextSibling);
+                        
+                        // --- 修复：添加空值检查，确保元素存在再绑定事件 ---
+                        const shareBtn = document.getElementById('inline-share-btn');
+                        if (shareBtn) {
+                            shareBtn.addEventListener('click', handleShareUnlock);
+                        }
                     }
-
-                    document.getElementById('inline-share-btn').addEventListener('click', handleShareUnlock);
+                    // --- 修复结束 ---
                 }
             } else {
+                // 如果今天已经分享过，隐藏提示
                 if (msgContainer) msgContainer.remove();
             }
         } else {
+            // 恢复按钮状态
             heroAiGoBtn.style.backgroundColor = '';
             heroAiGoBtn.style.color = '';
             heroAiGoBtn.style.cursor = '';
@@ -1109,11 +1021,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const dl = (fmt) => {
         if (!state.originalImage) return;
 
-        //  记录下载事件
-        trackEvent('download_result', { 
-            file_format: fmt, // 'png' 或 'pdf'
-            dots_count: state.dots.length, // 记录点数，分析用户喜欢的难度
-            hint_mode: state.config.hint // 记录用户使用的提示模式
+        // GA: 记录下载事件
+        trackEvent('download_result', {
+            file_format: fmt,
+            dots_count: state.dots.length,
+            hint_mode: state.config.hint
         });
 
         if (fmt === "png") {
@@ -1133,9 +1045,17 @@ document.addEventListener("DOMContentLoaded", () => {
             doc.addImage(drawCanvas.toDataURL("image/png"), 'PNG', (pdfW - w) / 2, (pdfH - h) / 2, w, h);
             doc.save("connect-dots.pdf");
         }
+
+        // Trigger Donation Toast after download
+        setTimeout(showDonationTip, 2000);
     };
-    if (downloadPngBtn) downloadPngBtn.addEventListener('click', (e) => dl("png"));
-    if (downloadPdfBtn) downloadPdfBtn.addEventListener('click', (e) => dl("pdf"));
+
+    if (sidebarPngBtn) sidebarPngBtn.addEventListener('click', () => dl("png"));
+    if (sidebarPdfBtn) sidebarPdfBtn.addEventListener('click', () => dl("pdf"));
+    if (mobilePdfBtn) mobilePdfBtn.addEventListener('click', () => dl("pdf"));
+    // 新增：监听移动端图片下载按钮
+    const mobilePngBtn = getEl("mobile-download-png-btn");
+    if (mobilePngBtn) mobilePngBtn.addEventListener('click', () => dl("png"));
 
     init();
 });
