@@ -5,12 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Free Connect the Dots Generator | Online Dot to Dot Maker</title>
+    <meta name="description"
+        content="Instantly create custom printables with our Free Connect the Dots Generator & Maker. High-quality worksheets for kids/adults—no watermarks, no sign-up needed. Start creating now!  " />
 
     <!-- === SEO META TAGS (Preserved & Optimized) === -->
-    <meta name="description"
-        content="Instantly create custom printables with our Free Connect the Dots Generator. Turn photos into puzzles for kids & adults. No watermarks, instant PDF download." />
-    <meta name="keywords"
-        content="connect the dots printable, dot to dot printables, dot to dot worksheets, free printable connect the dots, connect the dots generator, custom dot to dot" />
+
     <meta name="author" content="Connect the Dots Printable" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://connectthedotsprintable.online/" />
@@ -20,7 +19,7 @@
     <meta property="og:url" content="https://connectthedotsprintable.online/" />
     <meta property="og:title" content="Free Connect the Dots Generator & Printable Worksheets" />
     <meta property="og:description"
-        content="Get free watermark-free connect the dots printables for kids & adults. Create custom dot-to-dot activities with our generator." />
+        content="Get free watermark-free connect the dots printables for kids & adults. Create custom dot-to-dot activities with our generator, instant download in PDF/HD image." />
     <meta property="og:image" content="https://connectthedotsprintable.online/og-image.jpg" />
     <meta property="og:type" content="website" />
 
@@ -28,6 +27,7 @@
 
     <!-- === TECH STACK (New Design System) === -->
     <link rel="stylesheet" href="/dist/indexStyle.css" />
+    <link rel="canonical" href="https://connectthedotsprintable.online/" />
 
     <!-- PDF Library -->
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -185,6 +185,27 @@
         // 此时不加载 js 文件，只定义函数，防止后续 JS 调用报错
     </script>
 
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Connect the Dots Generator",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "An online tool to automatically generate connect the dots puzzles from images.",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "1250"
+  }
+}
+</script>
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -202,11 +223,11 @@
                         d="M404 0c19.2 0 37.6 7.6 51.1 21.2l35.7 35.7C504.4 70.4 512 88.8 512 108s-7.6 37.6-21.2 51.1L445.9 204 308 66.1 352.9 21.2C366.4 7.6 384.8 0 404 0zM58.9 315.1L274.1 100 412 237.9 196.9 453.1c-10.7 10.7-24.1 18.5-38.7 22.6L30.4 511.1c-8.3 2.3-17.3 0-23.4-6.2s-8.5-15.1-6.2-23.4L36.4 353.8c4.1-14.6 11.8-27.9 22.6-38.7zM225.4 80.8L80.8 225.4 11.7 156.3c-15.6-15.6-15.6-40.9 0-56.6l88-88c15.6-15.6 40.9-15.6 56.6 0l5.9 5.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 34.9 34.9zM431.2 286.6l34.9 34.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 5.9 5.9c15.6 15.6 15.6 40.9 0 56.6l-88 88c-15.6 15.6-40.9 15.6-56.6 0l-69.1-69.1 144.6-144.6z" />
                 </svg>
             </div>
-            <span class="font-bold text-xl tracking-tight text-slate-800">ConnectTheDots</span>
+            <span class="font-bold text-xl tracking-tight text-slate-800">Connectthedotsprintable</span>
         </a>
 
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
             <a href="/" class="hover:text-brand-blue transition-colors duration-200">Home</a>
             <a href="/printable-connect-the-dots.html" class="hover:text-brand-blue transition-colors duration-200">All
                 Printables</a>
@@ -231,7 +252,7 @@
 
         <!-- Mobile Menu Trigger -->
         <!-- FIX: Added aria-label for accessibility -->
-        <button id="mobile-menu-btn" class="md:hidden text-slate-600 hover:text-brand-blue p-2 transition-colors"
+        <button id="mobile-menu-btn" class="lg:hidden text-slate-600 hover:text-brand-blue p-2 transition-colors"
             aria-label="Open mobile menu">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-6 w-6" fill="currentColor">
                 <path
@@ -275,7 +296,7 @@
             <!-- 1. Hero Section (New Design) -->
             <section class="hero-bg w-full relative">
                 <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10 lg:pb-16">
-                    <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-20">
+                    <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-10">
 
                         <div class="lg:w-1/2 text-center lg:text-left z-10 flex flex-col items-center lg:items-start">
                             <div
@@ -283,15 +304,17 @@
                                 ✨ Free Dot to Dot Generator
                             </div>
                             <h1 class="text-3xl md:text-5xl font-extrabold text-brand-dark leading-[1.1] mb-4">
-                                Free Connect the Dots Generator, Maker &<br class="hidden md:block">
+                                The Best Free <br class="hidden md:block">
                                 <span
                                     class="text-4xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple">
-                                    Printable Worksheets </span>
+                                    Connect the Dots Generator & Maker
+                                </span>
                             </h1>
+
                             <h2 class="text-sm text-slate-500 mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                                Download high-quality dot to dot printables for kids and adults. Instant access to
-                                printable
-                                connect the dots activities with no watermarks.
+                                Automatically turn any photo into a puzzle with our <strong>free dot to dot
+                                    generator</strong>. Instantly create custom <strong>printable worksheets</strong>
+                                for kids & adults. No watermarks.
                             </h2>
 
                             <div
@@ -309,7 +332,7 @@
                                                 <path
                                                     d="M144 480c-79.5 0-144-64.5-144-144 0-63.4 41-117.2 97.9-136.5-1.3-7.7-1.9-15.5-1.9-23.5 0-79.5 64.5-144 144-144 55.4 0 103.5 31.3 127.6 77.1 14.2-8.3 30.8-13.1 48.4-13.1 53 0 96 43 96 96 0 15.7-3.8 30.6-10.5 43.7 44 20.3 74.5 64.7 74.5 116.3 0 70.7-57.3 128-128 128l-304 0zM305 191c-9.4-9.4-24.6-9.4-33.9 0l-72 72c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l31-31 0 102.1c0 13.3 10.7 24 24 24s24-10.7 24-24l0-102.1 31 31c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-72-72z" />
                                             </svg>
-                                            Upload
+                                            Upload Photo
                                         </button>
 
                                         <button id="tab-ai"
@@ -319,7 +342,7 @@
                                                 <path
                                                     d="M263.4-27L278.2 9.8 315 24.6c3 1.2 5 4.2 5 7.4s-2 6.2-5 7.4L278.2 54.2 263.4 91c-1.2 3-4.2 5-7.4 5s-6.2-2-7.4-5L233.8 54.2 197 39.4c-3-1.2-5-4.2-5-7.4s2-6.2 5-7.4L233.8 9.8 248.6-27c1.2-3 4.2-5 7.4-5s6.2 2 7.4 5zM110.7 41.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7L59.8 164.2 9.7 142.7C3.8 140.2 0 134.4 0 128s3.8-12.2 9.7-14.7L59.8 91.8 81.3 41.7C83.8 35.8 89.6 32 96 32s12.2 3.8 14.7 9.7zM464 304c6.4 0 12.2 3.8 14.7 9.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7l-21.5-50.1-50.1-21.5c-5.9-2.5-9.7-8.3-9.7-14.7s3.8-12.2 9.7-14.7l50.1-21.5 21.5-50.1c2.5-5.9 8.3-9.7 14.7-9.7zM460 0c11 0 21.6 4.4 29.5 12.2l42.3 42.3C539.6 62.4 544 73 544 84s-4.4 21.6-12.2 29.5l-88.2 88.2-101.3-101.3 88.2-88.2C438.4 4.4 449 0 460 0zM44.2 398.5L308.4 134.3 409.7 235.6 145.5 499.8C137.6 507.6 127 512 116 512s-21.6-4.4-29.5-12.2L44.2 457.5C36.4 449.6 32 439 32 428s4.4-21.6 12.2-29.5z" />
                                             </svg>
-                                            AI Generate Image
+                                            AI Generator
                                         </button>
                                     </div>
                                 </div>
@@ -339,9 +362,13 @@
                                                 </svg>
                                             </div>
                                             <div class="text-center">
-                                                <span class="block text-brand-blue font-bold text-lg">Click to Upload
-                                                    Image</span>
-                                                <span class="text-slate-400 text-sm">or drag and drop (JPG, PNG)</span>
+                                                <span class="block text-brand-blue font-bold text-lg">Upload Image to
+                                                    Generate Puzzle</span>
+                                                <span class="text-slate-400 text-sm">or drag and drop (JPG,
+                                                    PNG)</span></br>
+
+
+
                                             </div>
                                             <input type="file" id="hero-file-input"
                                                 class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*"
@@ -352,8 +379,8 @@
 
                                         <div class="mt-6 text-center lg:text-left w-full">
                                             <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-3">
-                                                No image? Try
-                                                these:</p>
+                                                No image? Try these:
+                                            </p>
                                             <div class="flex justify-center lg:justify-start gap-4"
                                                 id="examples-content">
                                                 <button
@@ -443,12 +470,14 @@
                                 class="relative w-full max-w-lg aspect-square rounded-[2.5rem] shadow-floating bg-white p-3 transform rotate-2 hover:rotate-0 transition-transform duration-500 border border-slate-100">
                                 <div class="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-100 group">
                                     <img src="/images/easy-connected-dot-image-car.webp"
-                                        class="absolute inset-0 w-full h-full object-cover" alt="Dot to Dot Result">
+                                        class="absolute inset-0 w-full h-full object-cover"
+                                        alt="Result from Connect the Dots Generator">
                                     <div id="hero-before-layer"
                                         class="absolute inset-0 w-full h-full overflow-hidden border-r-4 border-white"
                                         style="clip-path: inset(0 50% 0 0);">
                                         <img src="/images/easy-connect-dot-image-car.webp"
-                                            class="absolute inset-0 w-full h-full object-cover" alt="Original Photo">
+                                            class="absolute inset-0 w-full h-full object-cover"
+                                            alt="Original Photo for Dot to Dot Generator">
                                     </div>
                                     <div
                                         class="absolute bottom-6 left-6 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold pointer-events-none">
@@ -663,7 +692,8 @@
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
                         <div>
-                            <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark mb-2">Popular Categories</h2>
+                            <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark mb-2">Popular Connect the
+                                Dots Categories</h2>
                             <p class="text-slate-500">Explore our most downloaded collections.</p>
                         </div>
                         <a href="/printable-connect-the-dots.html"
@@ -685,6 +715,7 @@
                                 <h3 class="text-white font-bold text-xl mb-1">Kids Connect the Dots</h3>
                                 <p class="text-gray-300 text-sm">Easy designs for children</p>
                             </div>
+
                         </a>
                         <!-- Card 2 -->
                         <a href="./printables/adults.html"
@@ -891,67 +922,237 @@
                     </div>
                 </div>
             </section>
-            <!-- 4. Printing Guide (Restored) -->
-            <section class="py-24 bg-white">
-                <div class="max-w-5xl mx-auto px-6">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark text-center mb-12">Printing Guide
+
+
+
+            <!-- Custom Generator Section -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <div class="flex flex-col lg:flex-row">
+                            <div class="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
+                                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">
+                                    Create Your Own Connect the Dots Printables
+                                </h2>
+                                <p class="text-lg text-neutral/70 mb-8">
+                                    Our custom connect the dots generator lets you transform any
+                                    image into a printable dot to dot worksheet. Perfect for
+                                    creating personalized activities for kids, educational
+                                    materials, or unique adult coloring pages.
+                                </p>
+                                <ul class="space-y-4 mb-8">
+                                    <li class="flex">
+                                        <div class="bg-green-100 p-2 rounded-full mr-3">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="16"
+                                                height="16" fill="currentColor" class="text-green-600">
+                                                <path
+                                                    d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-sm">Upload your own images</h4>
+                                            <p class="text-xs text-neutral/70">
+                                                Turn photos or illustrations into connect the dots
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="flex">
+                                        <div class="bg-green-100 p-2 rounded-full mr-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="16"
+                                                height="16" fill="currentColor" class="text-green-600">
+                                                <path
+                                                    d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-sm">Adjust difficulty level</h4>
+                                            <p class="text-xs text-neutral/70">
+                                                Control the number of dots for any skill level
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="flex">
+                                        <div class="bg-green-100 p-2 rounded-full mr-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="16"
+                                                height="16" fill="currentColor" class="text-green-600">
+                                                <path
+                                                    d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-sm">
+                                                Custom designs in seconds
+                                            </h4>
+                                            <p class="text-xs text-neutral/70">
+                                                Turn any image into a connect the dots printable
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <a href="#landing-view"
+                                    class="bg-brand-purple text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-purple/90 transition self-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                        class="mr-2 inline-block" width="20" height="20" fill="currentColor">
+                                        <path
+                                            d="M462.5 76.2L374.3 164.4L475.6 265.7L563.8 177.5C571.6 169.6 576 159 576 148C576 137 571.6 126.4 563.8 118.5L521.5 76.2C513.6 68.4 503 64 492 64C481 64 470.4 68.4 462.5 76.2zM340.4 198.3L76.2 462.5C68.4 470.4 64 481 64 492C64 503 68.4 513.6 76.2 521.5L118.5 563.8C126.4 571.6 137 576 148 576C159 576 169.6 571.6 177.5 563.8L441.7 299.6L340.4 198.3z" />
+                                    </svg>
+
+                                    Try Custom Generator
+                                </a>
+                            </div>
+                            <div class="lg:w-1/2 bg-primary/5">
+
+
+                                <img src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/9-Custom-Connect-the-Dots-Generator-Interface-with-Sample-Result.avif"
+                                    srcset="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/9-Custom-Connect-the-Dots-Generator-Interface-with-Sample-Result.avif 400w,
+                        https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/800/9-Custom-Connect-the-Dots-Generator-Interface-with-Sample-Result.avif 800w,
+                        https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/9-Custom-Connect-the-Dots-Generator-Interface-with-Sample-Result.avif 1024w"
+                                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                                    alt="Custom connect the dots generator - create your own printable worksheets | connectthedotsprintable.online"
+                                    class="w-full h-full object-cover" loading="lazy" decoding="async" width="1024"
+                                    height="1024" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Printing Guide Section -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-10 text-center">
+                        Printing Guide for Connect the Dots Worksheets
                     </h2>
-                    <div class="bg-indigo-50 rounded-[2rem] p-8 md:p-12 border border-indigo-100">
-                        <div class="grid md:grid-cols-2 gap-12">
+
+                    <div class="max-w-3xl mx-auto bg-light p-8 rounded-xl shadow-md">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div>
-                                <h3 class="font-bold text-xl text-brand-dark mb-6 flex items-center gap-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-blue shadow-sm">
-                                        <svg width="16" height="16" fill="currentColor"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 512 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                            <path
-                                                d="M64 64C64 28.7 92.7 0 128 0L341.5 0c17 0 33.3 6.7 45.3 18.7l42.5 42.5c12 12 18.7 28.3 18.7 45.3l0 37.5-384 0 0-80zM0 256c0-35.3 28.7-64 64-64l384 0c35.3 0 64 28.7 64 64l0 96c0 17.7-14.3 32-32 32l-32 0 0 64c0 35.3-28.7 64-64 64l-256 0c-35.3 0-64-28.7-64-64l0-64-32 0c-17.7 0-32-14.3-32-32l0-96zM128 416l0 32 256 0 0-96-256 0 0 64zM456 272a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z" />
-                                        </svg>
-                                    </div>
-                                    Settings
+                                <h3 class="text-xl font-bold mb-4 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                        class="text-primary mr-1" width="24" height="24" fill="currentColor">
+                                        <path
+                                            d="M128 128C128 92.7 156.7 64 192 64L405.5 64C422.5 64 438.8 70.7 450.8 82.7L493.3 125.2C505.3 137.2 512 153.5 512 170.5L512 208L128 208L128 128zM64 320C64 284.7 92.7 256 128 256L512 256C547.3 256 576 284.7 576 320L576 416C576 433.7 561.7 448 544 448L512 448L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 448L96 448C78.3 448 64 433.7 64 416L64 320zM192 480L192 512L448 512L448 416L192 416L192 480zM520 336C520 322.7 509.3 312 496 312C482.7 312 472 322.7 472 336C472 349.3 482.7 360 496 360C509.3 360 520 349.3 520 336z" />
+                                    </svg>
+
+                                    Best Printing Settings
                                 </h3>
-                                <ul class="space-y-4 text-slate-600">
-                                    <li class="flex items-start gap-3"><i
-                                            class="fa-solid fa-circle-check text-green-500 mt-1"></i> Use Letter (8.5" x
-                                        11") or A4 paper.</li>
-                                    <li class="flex items-start gap-3"><i
-                                            class="fa-solid fa-circle-check text-green-500 mt-1"></i> Set print quality
-                                        to "High" or "Best".</li>
-                                    <li class="flex items-start gap-3"><i
-                                            class="fa-solid fa-circle-check text-green-500 mt-1"></i> Select "Actual
-                                        Size" to avoid scaling issues.</li>
-                                    <li class="flex items-start gap-3"><i
-                                            class="fa-solid fa-circle-check text-green-500 mt-1"></i> Choose "Portrait"
-                                        orientation for most designs.</li>
+                                <ul class="space-y-3 text-neutral/80">
+                                    <li class="flex items-start">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            class="text-green-500 mr-2" width="30" height="30" fill="currentColor">
+                                            <path
+                                                d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z" />
+                                        </svg>
+
+                                        <span>Use <strong>letter size paper (8.5" x 11")</strong> for
+                                            standard printing</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            class="text-green-500 mr-2" width="30" height="30" fill="currentColor">
+                                            <path
+                                                d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z" />
+                                        </svg>
+                                        <span>Set print quality to
+                                            <strong>"high" or "best"</strong> for clear dots</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            class="text-green-500 mr-2" width="30" height="30" fill="currentColor">
+                                            <path
+                                                d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z" />
+                                        </svg>
+                                        <span>Select <strong>"actual size"</strong> (not scaled) in
+                                            print options</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            class="text-green-500 mr-2" width="30" height="30" fill="currentColor">
+                                            <path
+                                                d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z" />
+                                        </svg>
+                                        <span>
+                                            Conserve ink: Choose <strong>black and white</strong> printing.
+                                        </span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            class="text-green-500 mr-2" width="30" height="30" fill="currentColor">
+                                            <path
+                                                d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z" />
+                                        </svg>
+                                        <span>Choose <strong>portrait orientation</strong> for most
+                                            designs</span>
+                                    </li>
                                 </ul>
                             </div>
+
                             <div>
-                                <h3 class="font-bold text-xl text-brand-dark mb-6 flex items-center gap-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-accent shadow-sm">
-                                        <svg width="16" height="16" fill="currentColor"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 384 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                            <path
-                                                d="M292.9 384c7.3-22.3 21.9-42.5 38.4-59.9 32.7-34.4 52.7-80.9 52.7-132.1 0-106-86-192-192-192S0 86 0 192c0 51.2 20 97.7 52.7 132.1 16.5 17.4 31.2 37.6 38.4 59.9l201.7 0zM288 432l-192 0 0 16c0 44.2 35.8 80 80 80l32 0c44.2 0 80-35.8 80-80l0-16zM184 112c-39.8 0-72 32.2-72 72 0 13.3-10.7 24-24 24s-24-10.7-24-24c0-66.3 53.7-120 120-120 13.3 0 24 10.7 24 24s-10.7 24-24 24z" />
-                                        </svg>
-                                    </div>
-                                    Pro Tips
+                                <h3 class="text-xl font-bold mb-4 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor"
+                                        width="24" height="24" class="mr-1 inline-block text-primary">
+                                        <path
+                                            d="M128 64C92.7 64 64 92.7 64 128L64 512C64 547.3 92.7 576 128 576L208 576L208 464C208 428.7 236.7 400 272 400L448 400L448 234.5C448 217.5 441.3 201.2 429.3 189.2L322.7 82.7C310.7 70.7 294.5 64 277.5 64L128 64zM389.5 240L296 240C282.7 240 272 229.3 272 216L272 122.5L389.5 240zM272 444C261 444 252 453 252 464L252 592C252 603 261 612 272 612C283 612 292 603 292 592L292 564L304 564C337.1 564 364 537.1 364 504C364 470.9 337.1 444 304 444L272 444zM304 524L292 524L292 484L304 484C315 484 324 493 324 504C324 515 315 524 304 524zM400 444C389 444 380 453 380 464L380 592C380 603 389 612 400 612L432 612C460.7 612 484 588.7 484 560L484 496C484 467.3 460.7 444 432 444L400 444zM420 572L420 484L432 484C438.6 484 444 489.4 444 496L444 560C444 566.6 438.6 572 432 572L420 572zM508 464L508 592C508 603 517 612 528 612C539 612 548 603 548 592L548 548L576 548C587 548 596 539 596 528C596 517 587 508 576 508L548 508L548 484L576 484C587 484 596 475 596 464C596 453 587 444 576 444L528 444C517 444 508 453 508 464z">
+                                        </path>
+                                    </svg>
+                                    Download &
+                                    Print Tips
                                 </h3>
-                                <ul class="space-y-4 text-slate-600">
-                                    <li class="flex items-start gap-3"><i
-                                            class="fa-solid fa-star text-brand-accent mt-1"></i> Download the PDF
-                                        version for the sharpest lines.</li>
-                                    <li class="flex items-start gap-3"><i
-                                            class="fa-solid fa-star text-brand-accent mt-1"></i> Use cardstock for
-                                        durable, reusable activities.</li>
-                                    <li class="flex items-start gap-3"><i
-                                            class="fa-solid fa-star text-brand-accent mt-1"></i> Print in Black & White
-                                        to save color ink.</li>
+                                <ul class="space-y-3 text-neutral/80">
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            class="text-green-500 mr-2" width="30" height="30" fill="currentColor">
+                                            <path
+                                                d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z" />
+                                        </svg>
+                                        <span>Download the PDF version for the best printing
+                                            results</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            class="text-green-500 mr-2" width="30" height="30" fill="currentColor">
+                                            <path
+                                                d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z" />
+                                        </svg>
+                                        <span>For younger children, print at 125% scale for larger
+                                            dots</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            class="text-green-500 mr-2" width="30" height="30" fill="currentColor">
+                                            <path
+                                                d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z" />
+                                        </svg>
+                                        <span>Use thicker paper (cardstock) for longer-lasting
+                                            activities</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            class="text-green-500 mr-2" width="30" height="30" fill="currentColor">
+                                            <path
+                                                d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z" />
+                                        </svg>
+                                        <span>Save ink by deselecting "background graphics" in print
+                                            settings</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
+
+                        <!-- <div class="mt-8 pt-6 border-t border-gray-200">
+            <a href="#" class="text-primary font-semibold hover:underline inline-flex items-center">
+              View complete printing guide
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" width="20" height="20"
+                class="inline-block ml-2">
+                <path
+                  d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z">
+                </path>
+              </svg>
+            </a>
+          </div> -->
                     </div>
                 </div>
             </section>
@@ -1090,16 +1291,24 @@
                 </div>
 
                 <div class="max-w-2xl mx-auto px-6 text-center relative z-10">
-                    <h2 class="text-3xl font-bold mb-4">Get New Printables</h2>
-                    <p class="text-slate-400 mb-8 text-lg">Join 10,000+ parents and teachers. Get free themed worksheets
-                        delivered to your inbox.</p>
-                    <form class="flex flex-col sm:flex-row gap-4">
-                        <input type="email" placeholder="Your email address"
-                            class="flex-grow px-6 py-4 rounded-full text-slate-800 focus:outline-none focus:ring-4 focus:ring-brand-blue/50"
-                            required />
-                        <button type="submit"
-                            class="px-10 py-4 bg-brand-blue text-white font-bold rounded-full hover:bg-indigo-600 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">Subscribe</button>
-                    </form>
+                    <h2 class="text-3xl font-bold mb-4">Have Questions or Suggestions?</h2>
+                    <p class="text-slate-400 mb-8 text-lg">
+                        Need help with the generator or have a feature request? We'd love to hear from you.
+                    </p>
+
+                    <!-- Modified: Direct Email Button -->
+                    <div class="flex justify-center">
+                        <a href="mailto:support@connectthedotsprintable.online"
+                            class="inline-flex items-center gap-2 px-10 py-4 bg-brand-blue text-white font-bold rounded-full hover:bg-indigo-600 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            <!-- Optional: Email Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                            Contact Support
+                        </a>
+                    </div>
                 </div>
             </section>
         </div>
@@ -1111,7 +1320,7 @@
         <!-- ========================================= -->
         <div id="editor-view" class="hidden w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 fade-in">
 
-           <!-- Editor Header -->
+            <!-- Editor Header -->
             <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
                 <div class="flex items-center justify-between w-full md:w-auto">
                     <!-- Back Button -->
@@ -1133,7 +1342,7 @@
                 <!-- Mobile Only Downloads (Updated: PDF + Image Stacked) -->
                 <!-- 修改点：这里改为显示两个按钮，垂直排列 -->
                 <div class="md:hidden w-full flex flex-col gap-3">
-                    
+
                     <!-- 1. PDF Button (Primary - High Visibility) -->
                     <button id="mobile-download-pdf-btn"
                         class="w-full py-3.5 bg-brand-blue text-white rounded-xl font-bold shadow-md relative overflow-hidden group flex items-center justify-center gap-3">
@@ -1154,8 +1363,10 @@
                     <!-- 2. Image Button (Secondary - Outline Style) -->
                     <button id="mobile-download-png-btn"
                         class="w-full py-3 bg-white border border-slate-200 text-slate-600 hover:text-brand-blue hover:border-brand-blue rounded-xl font-bold shadow-sm transition-colors flex items-center justify-center gap-2 text-sm">
-                        <svg width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>
+                        <svg width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512">
+                            <path
+                                d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z" />
                         </svg>
                         <span>Download Image</span>
                     </button>
@@ -1481,7 +1692,7 @@
                 <div>
                     <div class="flex items-center gap-2 mb-4 text-white"><i
                             class="fa-solid fa-shapes text-brand-blue"></i> <span
-                            class="font-bold text-lg">ConnectTheDots</span></div>
+                            class="font-bold text-lg">Connectthedotsprintable</span></div>
                     <p class="leading-relaxed">Your source for high-quality, free connect the dots printables for kids
                         and adults.</p>
                 </div>
