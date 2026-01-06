@@ -421,9 +421,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 toggleLoader(true, "Loading preset...");
                 const res = await fetch(btn.dataset.src, { cache: "no-store" });
                 const blob = await res.blob();
-                // 预设图默认为线稿，不需要走检测流程，直接加载
-                switchView('editor');
-                loadFileToCanvas(new File([blob], "preset.webp", { type: blob.type }));
+                
+                switchView('editor'); 
+                handleFile(new File([blob], "preset.webp", { type: blob.type }), true); 
             } catch (e) {
                 showTip("Failed to load preset.", "error");
                 toggleLoader(false);
