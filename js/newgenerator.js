@@ -8,6 +8,16 @@ document.addEventListener("DOMContentLoaded", () => {
         eraseThickness: 11
     };
 
+    // 新增：高清线稿生成的黄金参数 (来自您的参考代码)
+    const SKETCH_CONFIG = {
+        C: 7,            // 细节度
+        BlockSize: 13,   // 线条厚度
+        Padding: 10,     // 10% 自动留白
+        SuperScale: 3    // 3倍超采样抗锯齿
+    };
+
+    const RMBG_API_URL = "https://ytdlp.vistaflyer.com/api/remove-background";
+
     let state = {
         originalImage: null,
         internalHintImage: null,
@@ -50,13 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const heroAiGoBtn = getEl("hero-ai-go-btn");
     const heroAiCredits = getEl("hero-ai-credits");
 
-    // Modals
-    const imageTypeModal = getEl("image-type-modal");
-    const btnSelectPhoto = getEl("btn-select-photo");
-    const btnSelectDrawing = getEl("btn-select-drawing");
-    const rmbgLoader = getEl("rmbg-loader");
-    const modalActions = getEl("modal-actions");
-
     // Editor Canvas
     const drawCanvas = getEl("draw-canvas");
     const ctx = drawCanvas ? drawCanvas.getContext("2d") : null;
@@ -88,10 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Actions
     const clearBtn = getEl("clear-btn");
 
-    // Download Buttons (Fixed IDs)
+    // Download Buttons
     const sidebarPngBtn = getEl("sidebar-download-png-btn");
     const sidebarPdfBtn = getEl("sidebar-download-pdf-btn");
     const mobilePdfBtn = getEl("mobile-download-pdf-btn");
+    const mobilePngBtn = getEl("mobile-download-png-btn");
 
     // Presets & Advanced
     const presetButtons = document.querySelectorAll('.preset-btn-js');
@@ -100,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const advancedContent = getEl('advanced-content');
     const advArrow = getEl('advanced-arrow');
 
-    // 3. UI UTILS & DONATION TOAST
+    // 3. UI UTILS & HELPER FUNCTIONS
     const showTip = (message, type = 'info') => {
         const oldTip = document.getElementById('custom-tip');
         if (oldTip) oldTip.remove();
@@ -124,88 +128,311 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3000);
     };
 
-    // Buy Me a Coffee Toast Logic
-    const showDonationTip = () => {
-        const existingTip = document.getElementById('donation-toast');
-        if (existingTip) existingTip.remove();
-
-        const toast = document.createElement('div');
-        toast.id = 'donation-toast';
-        toast.className = `
-            fixed top-24 right-4 z-[100] max-w-sm w-auto 
-            bg-white border-l-4 border-[#FF5E5B] rounded-lg shadow-2xl 
-            flex items-center gap-4 p-4 pr-10 cursor-pointer 
-            transform transition-all duration-500 translate-x-[120%]
-            hover:scale-102 group
-        `;
-
-        toast.innerHTML = `
-            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-[#FF5E5B]">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-5 h-5 animate-pulse">
-                    <path d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/>
-                </svg>
-            </div>
-            <div>
-                <h4 class="font-bold text-gray-800 text-sm">Download Complete! 🎉</h4>
-                <p class="text-xs text-slate-500 mt-1 group-hover:text-[#FF5E5B] transition-colors">
-                    Happy with the result? <br>
-                    <span class="underline decoration-[#FF5E5B] decoration-2">Buy me a coffee ($5)</span>
-                </p>
-            </div>
-            <button id="close-toast" class="absolute top-2 right-2 text-gray-300 hover:text-gray-500 p-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        `;
-
-        document.body.appendChild(toast);
-
-        requestAnimationFrame(() => {
-            toast.classList.remove('translate-x-[120%]');
-            toast.classList.add('translate-x-0');
-        });
-
-        toast.addEventListener('click', (e) => {
-            if (e.target.closest('#close-toast')) {
-                removeToast();
-                return;
-            }
-            window.open('https://ko-fi.com/connectthedotsprintable', '_blank');
-        });
-
-        const removeToast = () => {
-            toast.classList.remove('translate-x-0');
-            toast.classList.add('translate-x-[120%]');
-            setTimeout(() => {
-                if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
-            }, 500);
-        };
-
-        setTimeout(removeToast, 8000);
-    };
-
-    const handleShareUnlock = () => {
-        const data = getAiUsage();
-        const today = new Date().toLocaleDateString();
-
-        if (data.shareDate === today) {
-            showTip("You have already claimed today's bonus!", "info");
-            return;
+    const toggleLoader = (show, text = "Processing...") => {
+        if (!canvasLoader) return;
+        if (show) {
+            canvasLoader.classList.remove('hidden');
+            const p = canvasLoader.querySelector('p');
+            if (p) p.textContent = text;
+        } else {
+            canvasLoader.classList.add('hidden');
         }
-
-        const url = encodeURIComponent(window.location.href);
-        const title = encodeURIComponent("Check out this Free Connect the Dots Generator!");
-        window.open(`https://www.reddit.com/submit?url=${url}&title=${title}`, '_blank');
-
-        data.extra = (data.extra || 0) + 3;
-        data.shareDate = today;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        updateAiCreditsUI();
-        showTip("Success! 3 credits added.", 'success');
     };
 
-    // 4. INITIALIZATION
+    // 4. AUTOMATIC DETECTION & PROCESSING LOGIC (NEW)
+
+    // 检测是否为真实照片 (根据饱和度判断)
+    const detectIsPhoto = (imgElement) => {
+        if (typeof cv === 'undefined' || !cvReady) return false; // 降级处理
+
+        try {
+            let src = cv.imread(imgElement);
+            let hsv = new cv.Mat();
+            cv.cvtColor(src, hsv, cv.COLOR_RGBA2RGB);
+            cv.cvtColor(hsv, hsv, cv.COLOR_RGB2HSV);
+
+            // 计算平均饱和度 (S channel is index 1)
+            let planes = new cv.MatVector();
+            cv.split(hsv, planes);
+            let s = planes.get(1);
+            let mean = cv.mean(s);
+            let avgSaturation = mean[0];
+
+            src.delete(); hsv.delete(); planes.delete(); s.delete();
+
+            console.log("Image Saturation:", avgSaturation);
+            // 阈值判断：如果平均饱和度 > 15，认为是彩色照片，需要处理
+            // 如果是纯黑白线稿，饱和度通常接近 0
+            return avgSaturation > 15;
+        } catch (e) {
+            console.error("Detection failed:", e);
+            return false;
+        }
+    };
+
+    // 调用去背 API
+    const removeBackgroundApi = async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        try {
+            const res = await fetch(RMBG_API_URL, { method: 'POST', body: formData });
+            if (!res.ok) throw new Error("API Error");
+            return await res.blob();
+        } catch (e) {
+            console.error("BG Removal Failed:", e);
+            throw e;
+        }
+    };
+
+    // 应用高清线稿生成算法 
+    const applyHighDefSketchLogic = async (imgEl) => {
+        // 1. 初始检查：如果图片过大，先压缩，防止 3x 超采样导致内存溢出
+        const MAX_PROC_SIZE = 1500;
+        let scaleToFit = Math.min(1.0, MAX_PROC_SIZE / Math.max(imgEl.width, imgEl.height));
+
+        let canvas = document.createElement('canvas');
+        canvas.width = imgEl.width * scaleToFit;
+        canvas.height = imgEl.height * scaleToFit;
+        let ctx = canvas.getContext('2d');
+        ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
+
+        let src = cv.imread(canvas);
+        let origW = src.cols;
+        let origH = src.rows;
+
+        // 定义需要清理的 Mat 列表，确保最后一定能释放内存
+        let mats = [src];
+
+        try {
+            // 2. 确保 RGBA 格式
+            if (src.type() !== cv.CV_8UC4) {
+                let tmp = new cv.Mat();
+                cv.cvtColor(src, tmp, cv.COLOR_RGB2RGBA);
+                src.delete();
+                src = tmp;
+                mats[0] = src;
+            }
+
+            // 3. 计算 Padding (防止边缘线条被切断)
+            let padPercent = SKETCH_CONFIG.Padding / 100;
+            let targetW = Math.floor(origW * (1 - padPercent));
+            let targetH = Math.floor(origH * (1 - padPercent));
+            let offsetX = Math.floor((origW - targetW) / 2);
+            let offsetY = Math.floor((origH - targetH) / 2);
+
+            let paddedSrc = new cv.Mat(origH, origW, cv.CV_8UC4, new cv.Scalar(255, 255, 255, 0));
+            mats.push(paddedSrc);
+
+            let resizedInner = new cv.Mat();
+            mats.push(resizedInner);
+            cv.resize(src, resizedInner, new cv.Size(targetW, targetH), 0, 0, cv.INTER_AREA);
+
+            let rect = new cv.Rect(offsetX, offsetY, targetW, targetH);
+            let roi = paddedSrc.roi(rect);
+            mats.push(roi);
+            resizedInner.copyTo(roi);
+
+            // 4. 超采样 (Super-sampling) - 提高线稿清晰度
+            let bigW = origW * SKETCH_CONFIG.SuperScale;
+            let bigH = origH * SKETCH_CONFIG.SuperScale;
+            let bigSrc = new cv.Mat();
+            mats.push(bigSrc);
+            cv.resize(paddedSrc, bigSrc, new cv.Size(bigW, bigH), 0, 0, cv.INTER_CUBIC);
+
+            // 5. 提取线稿
+            let bigGray = new cv.Mat();
+            mats.push(bigGray);
+            cv.cvtColor(bigSrc, bigGray, cv.COLOR_RGBA2GRAY);
+
+            let bigSketch = new cv.Mat();
+            mats.push(bigSketch);
+            let bigB = SKETCH_CONFIG.BlockSize * SKETCH_CONFIG.SuperScale;
+            if (bigB % 2 === 0) bigB++;
+            cv.adaptiveThreshold(bigGray, bigSketch, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, bigB, SKETCH_CONFIG.C);
+
+            // 6. 使用 Alpha 通道清理杂质
+            let rgbaPlanes = new cv.MatVector();
+            cv.split(bigSrc, rgbaPlanes);
+            let alpha = rgbaPlanes.get(3);
+
+            let mask = new cv.Mat();
+            mats.push(mask);
+            cv.threshold(alpha, mask, 10, 255, cv.THRESH_BINARY);
+
+            let maskInv = new cv.Mat();
+            mats.push(maskInv);
+            cv.bitwise_not(mask, maskInv);
+            bigSketch.setTo(new cv.Scalar(255, 255, 255, 255), maskInv);
+
+            // 7. 绘制平滑的外轮廓
+            let contours = new cv.MatVector();
+            let hierarchy = new cv.Mat();
+            // 改用更通用的 CHAIN_APPROX_SIMPLE
+            cv.findContours(mask, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+            for (let i = 0; i < contours.size(); ++i) {
+                cv.drawContours(bigSketch, contours, i, new cv.Scalar(0, 0, 0, 255), SKETCH_CONFIG.SuperScale, cv.LINE_AA);
+            }
+
+            // 8. 降采样回原大小 (自带抗锯齿效果)
+            let finalSketch = new cv.Mat();
+            mats.push(finalSketch);
+            cv.resize(bigSketch, finalSketch, new cv.Size(origW, origH), 0, 0, cv.INTER_AREA);
+
+            // 输出到临时 Canvas
+            const outputCanvas = document.createElement('canvas');
+            cv.imshow(outputCanvas, finalSketch);
+
+            // 释放所有 Mat 和 Vector 内存
+            mats.forEach(m => m.delete());
+            rgbaPlanes.delete(); alpha.delete(); contours.delete(); hierarchy.delete();
+
+            return new Promise(resolve => {
+                outputCanvas.toBlob(blob => {
+                    resolve(new File([blob], "processed_sketch.png", { type: "image/png" }));
+                }, "image/png");
+            });
+
+        } catch (e) {
+            // 尝试获取 OpenCV 的具体报错文本
+            let msg = e;
+            if (typeof e === 'number') {
+                msg = cv.exceptionFromPtr(e).msg;
+            }
+            console.error("Critical OpenCV Error:", msg);
+
+            // 发生错误时尝试清理所有内存，防止页面卡死
+            mats.forEach(m => { try { m.delete(); } catch (i) { } });
+            throw new Error(msg);
+        }
+    };
+    const loadImageEl = (f) => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            const url = URL.createObjectURL(f);
+            img.onload = () => {
+                // 注意：不要在这里立即 revoke，因为 OpenCV 还需要读取它
+                resolve(img);
+            };
+            img.onerror = (e) => {
+                URL.revokeObjectURL(url);
+                reject(new Error("Image load failed"));
+            };
+            img.src = url;
+        });
+    };
+
+    // 5. FILE HANDLING & WORKFLOW ORCHESTRATOR
+    const handleFile = async (file) => {
+        if (!file || !file.type.startsWith('image/')) return showTip("Please upload a valid image file.", "error");
+
+        // GA: 用户主动上传图片 
+        trackEvent('user_upload_image', {
+            file_type: file.type,
+            file_size: Math.round(file.size / 1024) + 'KB'
+        });
+
+
+
+        switchView('editor');
+        toggleLoader(true, "Analyzing image...");
+
+        try {
+            if (typeof cv === 'undefined' || !cvReady) {
+                await new Promise(resolve => loadOpenCv(resolve));
+            }
+
+            const tempImg = await loadImageEl(file);
+            const isPhoto = detectIsPhoto(tempImg);
+            let fileToProcess = file;
+
+            if (isPhoto) {
+                toggleLoader(true, "Removing background...");
+                try {
+                    const noBgBlob = await removeBackgroundApi(file);
+
+                    toggleLoader(true, "Refining sketch...");
+                    // ！！！ 注意这里：必须等待图片完全加载
+                    const noBgImg = await loadImageEl(noBgBlob);
+
+                    fileToProcess = await applyHighDefSketchLogic(noBgImg);
+
+                    // 清理 URL
+                    URL.revokeObjectURL(noBgImg.src);
+                } catch (err) {
+                    // 重点：在这里打印错误，看看是 API 挂了还是 OpenCV 挂了
+                    console.error("DEBUG - Photo Process Failed:", err);
+                    showTip("Sketch conversion failed, using original.", "info");
+                    fileToProcess = file;
+                }
+            }
+
+            toggleLoader(true, "Creating dots...");
+            loadFileToCanvas(fileToProcess);
+            URL.revokeObjectURL(tempImg.src);
+
+        } catch (e) {
+            console.error("DEBUG - Global Workflow Error:", e);
+            showTip("An error occurred.", "error");
+            toggleLoader(false);
+        }
+    };
+
+    // 加载最终文件并开始计算连点
+    const loadFileToCanvas = (file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                state.originalImage = img;
+                const TARGET_MIN_WIDTH = 2000;
+                const scale = Math.max(1, TARGET_MIN_WIDTH / Math.max(img.naturalWidth, img.naturalHeight));
+
+                drawCanvas.width = Math.floor(img.naturalWidth * scale);
+                drawCanvas.height = Math.floor(img.naturalHeight * scale);
+
+                state.dots = [];
+                state.history = [];
+                state.internalHintImage = null;
+
+                // 生成内部提示图 (如果配置需要)
+                if (state.config.hint === 'internal' && typeof cv !== 'undefined') {
+                    state.internalHintImage = generateInternalHintImage();
+                }
+
+                // 首次绘制
+                redraw();
+
+                // 开始自动检测连点
+                canvasLoader.classList.remove('hidden');
+                setTimeout(runAutoDetect, 200);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // 监听上传事件
+    if (heroFileInput) heroFileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+
+    // 处理预设图片的逻辑 (保持不变)
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            try {
+                toggleLoader(true, "Loading preset...");
+                const res = await fetch(btn.dataset.src, { cache: "no-store" });
+                const blob = await res.blob();
+                // 预设图默认为线稿，不需要走检测流程，直接加载
+                switchView('editor');
+                loadFileToCanvas(new File([blob], "preset.webp", { type: blob.type }));
+            } catch (e) {
+                showTip("Failed to load preset.", "error");
+                toggleLoader(false);
+            }
+        });
+    });
+
+
+    // 6. INITIALIZATION & OTHER FUNCTIONS (Keep existing logic)
     const init = () => {
         updateAiCreditsUI();
         setupHeroTabs();
@@ -291,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (heroFileInput) heroFileInput.value = "";
     };
 
-    // 5. PRESETS & ADVANCED
+    // 7. PRESETS & ADVANCED
     const setupPresets = () => {
         const presetConfigs = {
             easy: { count: 25, font: 28, dotRadius: 8, hint: 'internal', desc: "Perfect for kids (20-30 dots, large font)" },
@@ -343,7 +570,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 if (state.originalImage && typeof cv !== 'undefined') {
-                    if (canvasLoader) canvasLoader.classList.remove('hidden');
+                    toggleLoader(true, "Updating...");
                     setTimeout(runAutoDetect, 50);
                 } else {
                     redraw();
@@ -362,96 +589,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // 6. FILE HANDLING
-    const handleFile = (file, isProcessed = false) => {
-        if (!file || !file.type.startsWith('image/')) return showTip("Please upload a valid image file.", "error");
-
-        // GA: 用户主动上传图片
-        if (!isProcessed) {
-            trackEvent('user_upload_image', {
-                file_type: file.type,
-                file_size: Math.round(file.size / 1024) + 'KB'
-            });
-        }
-
-        loadFileToCanvas(file);
-    };
-
-    const loadFileToCanvas = (file) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const img = new Image();
-            img.onload = () => {
-                state.originalImage = img;
-                const TARGET_MIN_WIDTH = 2000;
-                const scale = Math.max(1, TARGET_MIN_WIDTH / Math.max(img.naturalWidth, img.naturalHeight));
-
-                drawCanvas.width = Math.floor(img.naturalWidth * scale);
-                drawCanvas.height = Math.floor(img.naturalHeight * scale);
-
-                state.dots = [];
-                state.history = [];
-                state.internalHintImage = null;
-
-                switchView('editor');
-
-                if (state.config.hint === 'internal' && typeof cv !== 'undefined') {
-                    setTimeout(() => {
-                        state.internalHintImage = generateInternalHintImage();
-                        redraw();
-                    }, 50);
-                } else {
-                    redraw();
-                }
-
-                canvasLoader.classList.remove('hidden');
-                const startDetect = () => setTimeout(runAutoDetect, 200);
-                typeof cv !== 'undefined' ? startDetect() : loadOpenCv(startDetect);
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    };
-
-    if (heroFileInput) heroFileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
-
-    document.querySelectorAll('.preset-btn').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            try {
-                const res = await fetch(btn.dataset.src, { cache: "no-store" });
-                const blob = await res.blob();
-                handleFile(new File([blob], "preset.webp", { type: blob.type }), true);
-            } catch (e) {
-                showTip("Failed to load preset.", "error");
-            }
-        });
-    });
-
-    if (btnSelectDrawing) btnSelectDrawing.addEventListener('click', () => {
-        imageTypeModal.classList.add('hidden');
-        if (state.pendingFile) loadFileToCanvas(state.pendingFile);
-    });
-
-    if (btnSelectPhoto) btnSelectPhoto.addEventListener('click', async () => {
-        modalActions.classList.add('hidden');
-        rmbgLoader.classList.remove('hidden');
-        try {
-            const formData = new FormData();
-            formData.append("file", state.pendingFile);
-            const res = await fetch("https://ytdlp.vistaflyer.com/api/remove-background", { method: "POST", body: formData });
-            if (!res.ok) throw new Error();
-            const blob = await res.blob();
-            loadFileToCanvas(new File([blob], "nobg.png", { type: "image/png" }));
-        } catch (e) {
-            showTip("Background removal failed, using original.", "error");
-            loadFileToCanvas(state.pendingFile);
-        } finally {
-            imageTypeModal.classList.add('hidden');
-            modalActions.classList.remove('hidden');
-            rmbgLoader.classList.add('hidden');
-        }
-    });
-
+    // AI Generation (Doubao) Logic - Kept roughly same but unified loader
     if (heroAiGoBtn) heroAiGoBtn.addEventListener('click', async () => {
         const prompt = heroAiInput.value.trim();
         if (prompt.length < 3) return showTip("Please enter a description.", "error");
@@ -472,11 +610,7 @@ document.addEventListener("DOMContentLoaded", () => {
         heroAiGoBtn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
         switchView('editor');
-        if (canvasLoader) {
-            canvasLoader.classList.remove('hidden');
-            const loaderText = canvasLoader.querySelector('p');
-            if (loaderText) loaderText.textContent = "AI is creating your puzzle...";
-        }
+        toggleLoader(true, "AI is creating your puzzle...");
         if (ctx) ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 
         try {
@@ -497,8 +631,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             incrementAiUsage();
 
-            const loaderText = canvasLoader.querySelector('p');
-            if (loaderText) loaderText.textContent = "Creating magic...";
+            // AI 生成的通常直接就是线稿，直接加载
             loadFileToCanvas(new File([blob], "ai.png", { type: blob.type }));
 
         } catch (e) {
@@ -508,38 +641,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
             showTip("AI Generation failed. Please try again.", "error");
             switchView('landing');
-            if (canvasLoader) canvasLoader.classList.add('hidden');
+            toggleLoader(false);
         } finally {
             heroAiGoBtn.innerHTML = originalHtml;
             heroAiGoBtn.disabled = false;
         }
     });
 
-    // 7. OPENCV LOGIC
+    // 8. OPENCV LOGIC (EXISTING)
+    // 在全局或作用域顶部定义一个队列
+    let cvCallbacks = [];
+
     const loadOpenCv = (cb) => {
         if (cvReady) {
             if (cb) cb();
             return;
         }
+
+        // 将回调加入等待队列
+        if (cb) cvCallbacks.push(cb);
+
+        // 检查脚本是否已经在加载
         if (document.querySelector('script[src*="opencv.js"]')) {
-            if (typeof cv !== 'undefined' && !cvReady) {
-                cv['onRuntimeInitialized'] = () => {
-                    cvReady = true;
-                    if (cb) cb();
-                };
-            }
+            // 如果脚本已经在加载，但 cv 还没初始化，我们只需要等待
+            // 因为我们在 init 的时候已经定义了 Module.onRuntimeInitialized
             return;
         }
+
+        // 如果脚本不存在，则创建
         const script = document.createElement('script');
         script.src = "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js";
         script.async = true;
+
+        // 统一定义初始化钩子
         window.Module = {
             onRuntimeInitialized: function () {
                 cvReady = true;
-                if (cb) cb();
-                if (state.originalImage) {
-                    canvasLoader.classList.remove('hidden');
-                    runAutoDetect();
+                console.log("OpenCV Ready");
+                // 执行队列中所有的回调
+                while (cvCallbacks.length > 0) {
+                    const callback = cvCallbacks.shift();
+                    callback();
                 }
             }
         };
@@ -554,8 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const loaderText = canvasLoader.querySelector('p');
-            if (loaderText) loaderText.textContent = "Processing lines...";
+            toggleLoader(true, "Detecting lines...");
 
             const tempCanvas = document.createElement("canvas");
             const processWidth = 1000;
@@ -626,7 +767,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (e) {
             console.error("Auto detect runtime error:", e);
         } finally {
-            canvasLoader.classList.add('hidden');
+            toggleLoader(false);
         }
     };
 
@@ -707,7 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // 8. DRAWING & INTERACTION
+    // 9. DRAWING & INTERACTION
     const setupToolbar = () => {
         const setActive = (tool) => {
             state.activeTool = tool;
@@ -856,7 +997,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // 9. CONTROLS
+    // 10. CONTROLS
     const updateConfig = (key, val) => {
         state.config[key] = val;
         if ((key === 'hint' && val === 'internal') || (key === 'eraseThickness' && state.config.hint === 'internal')) {
@@ -895,7 +1036,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     dotCountSlider?.addEventListener('change', () => {
         if (typeof cv !== 'undefined' && state.originalImage) {
-            canvasLoader.classList.remove('hidden');
+            toggleLoader(true, "Updating dots...");
             setTimeout(runAutoDetect, 50);
         }
     });
@@ -946,7 +1087,6 @@ document.addEventListener("DOMContentLoaded", () => {
         updateAiCreditsUI();
     };
 
-    // === 修复后的 updateAiCreditsUI 函数 ===
     const updateAiCreditsUI = () => {
         const data = getAiUsage();
         const limit = MAX_DAILY_LIMIT + (data.extra || 0);
@@ -957,9 +1097,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let msgContainer = document.getElementById('ai-limit-msg');
 
         if (remaining <= 0) {
-            // 1. 禁用按钮样式
             heroAiGoBtn.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'hover:shadow-lg', 'hover:scale-105');
-            heroAiGoBtn.style.backgroundColor = '#94a3b8'; // Slate 400
+            heroAiGoBtn.style.backgroundColor = '#94a3b8';
             heroAiGoBtn.style.color = '#fff';
             heroAiGoBtn.style.cursor = 'default';
             heroAiGoBtn.disabled = true;
@@ -967,7 +1106,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
             heroAiGoBtn.innerHTML = `<span>Limit Reached</span> ${lockSvg}`;
 
-            // 2. 显示分享解锁链接
             const today = new Date().toLocaleDateString();
             if (data.shareDate !== today) {
                 if (!msgContainer) {
@@ -984,28 +1122,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         </button>
                     `;
 
-                    // --- 修复开始：使用 parentElement 替代 closest('p') ---
-                    // 获取显示剩余次数的父级容器 (div)
-                    const creditsParent = heroAiCredits.parentElement; 
-                    
+                    const creditsParent = heroAiCredits.parentElement;
                     if (creditsParent && creditsParent.parentNode) {
-                        // 将提示插入到 creditsParent 的后面
                         creditsParent.parentNode.insertBefore(msgContainer, creditsParent.nextSibling);
-                        
-                        // --- 修复：添加空值检查，确保元素存在再绑定事件 ---
                         const shareBtn = document.getElementById('inline-share-btn');
-                        if (shareBtn) {
-                            shareBtn.addEventListener('click', handleShareUnlock);
-                        }
+                        if (shareBtn) shareBtn.addEventListener('click', handleShareUnlock);
                     }
-                    // --- 修复结束 ---
                 }
             } else {
-                // 如果今天已经分享过，隐藏提示
                 if (msgContainer) msgContainer.remove();
             }
         } else {
-            // 恢复按钮状态
             heroAiGoBtn.style.backgroundColor = '';
             heroAiGoBtn.style.color = '';
             heroAiGoBtn.style.cursor = '';
@@ -1013,48 +1140,143 @@ document.addEventListener("DOMContentLoaded", () => {
             heroAiGoBtn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'hover:shadow-lg', 'hover:scale-105');
             const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
             heroAiGoBtn.innerHTML = `<span>Generate</span> ${arrowSvg}`;
-
             if (msgContainer) msgContainer.remove();
         }
     };
 
-    const dl = (fmt) => {
-        if (!state.originalImage) return;
+    const handleShareUnlock = () => {
+        const data = getAiUsage();
+        const today = new Date().toLocaleDateString();
 
+        if (data.shareDate === today) {
+            showTip("You have already claimed today's bonus!", "info");
+            return;
+        }
+
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent("Check out this Free Connect the Dots Generator!");
+        window.open(`https://www.reddit.com/submit?url=${url}&title=${title}`, '_blank');
+
+        data.extra = (data.extra || 0) + 3;
+        data.shareDate = today;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        updateAiCreditsUI();
+        showTip("Success! 3 credits added.", 'success');
+    };
+
+    const showDonationTip = () => {
+        const existingTip = document.getElementById('donation-toast');
+        if (existingTip) existingTip.remove();
+
+        const toast = document.createElement('div');
+        toast.id = 'donation-toast';
+        toast.className = `
+            fixed top-24 right-4 z-[100] max-w-sm w-auto 
+            bg-white border-l-4 border-[#FF5E5B] rounded-lg shadow-2xl 
+            flex items-center gap-4 p-4 pr-10 cursor-pointer 
+            transform transition-all duration-500 translate-x-[120%]
+            hover:scale-102 group
+        `;
+
+        toast.innerHTML = `
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-[#FF5E5B]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-5 h-5 animate-pulse">
+                    <path d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/>
+                </svg>
+            </div>
+            <div>
+                <h4 class="font-bold text-gray-800 text-sm">Download Complete! 🎉</h4>
+                <p class="text-xs text-slate-500 mt-1 group-hover:text-[#FF5E5B] transition-colors">
+                    Happy with the result? <br>
+                    <span class="underline decoration-[#FF5E5B] decoration-2">Buy me a coffee ($5)</span>
+                </p>
+            </div>
+            <button id="close-toast" class="absolute top-2 right-2 text-gray-300 hover:text-gray-500 p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        `;
+
+        document.body.appendChild(toast);
+        requestAnimationFrame(() => {
+            toast.classList.remove('translate-x-[120%]');
+            toast.classList.add('translate-x-0');
+        });
+        toast.addEventListener('click', (e) => {
+            if (e.target.closest('#close-toast')) {
+                removeToast(); return;
+            }
+            window.open('https://ko-fi.com/connectthedotsprintable', '_blank');
+        });
+        const removeToast = () => {
+            toast.classList.remove('translate-x-0');
+            toast.classList.add('translate-x-[120%]');
+            setTimeout(() => { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 500);
+        };
+        setTimeout(removeToast, 8000);
+    };
+
+    const dl = async (fmt) => {
+        if (!state.originalImage) return showTip("Please create a puzzle first!", "error");
+
+        const activeBtn = event?.currentTarget;
+        const originalText = activeBtn ? activeBtn.innerHTML : "";
+
+        if (activeBtn) {
+            activeBtn.disabled = true;
+            activeBtn.innerHTML = `<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">...</svg> Processing...</span>`;
+        }
         // GA: 记录下载事件
         trackEvent('download_result', {
             file_format: fmt,
             dots_count: state.dots.length,
             hint_mode: state.config.hint
         });
-
-        if (fmt === "png") {
-            const link = document.createElement("a");
-            link.target = "_blank";
-            link.download = "connect-dots.png";
-            link.href = drawCanvas.toDataURL("image/png");
-            link.click();
-        } else if (fmt === "pdf" && window.jspdf) {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({ orientation: drawCanvas.width > drawCanvas.height ? 'l' : 'p', unit: 'mm', format: 'a4' });
-            const pdfW = doc.internal.pageSize.getWidth();
-            const pdfH = doc.internal.pageSize.getHeight();
-            const ratio = Math.min(pdfW / drawCanvas.width, pdfH / drawCanvas.height);
-            const w = drawCanvas.width * ratio;
-            const h = drawCanvas.height * ratio;
-            doc.addImage(drawCanvas.toDataURL("image/png"), 'PNG', (pdfW - w) / 2, (pdfH - h) / 2, w, h);
-            doc.save("connect-dots.pdf");
+        try {
+            if (fmt === "png") {
+                drawCanvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.download = `connect-dots-${Date.now()}.png`;
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                }, 'image/png');
+            } else if (fmt === "pdf") {
+                if (!window.jspdf) throw new Error("jsPDF not loaded");
+                const { jsPDF } = window.jspdf;
+                await new Promise((resolve) => {
+                    setTimeout(() => {
+                        const isLandscape = drawCanvas.width > drawCanvas.height;
+                        const doc = new jsPDF({ orientation: isLandscape ? 'l' : 'p', unit: 'mm', format: 'a4' });
+                        const pdfW = doc.internal.pageSize.getWidth();
+                        const pdfH = doc.internal.pageSize.getHeight();
+                        const ratio = Math.min(pdfW / drawCanvas.width, pdfH / drawCanvas.height);
+                        const w = drawCanvas.width * ratio;
+                        const h = drawCanvas.height * ratio;
+                        doc.addImage(drawCanvas.toDataURL("image/png"), 'PNG', (pdfW - w) / 2, (pdfH - h) / 2, w, h);
+                        doc.save("connect-dots.pdf");
+                        resolve();
+                    }, 100);
+                });
+            }
+            setTimeout(showDonationTip, 2000);
+        } catch (err) {
+            console.error("Download failed:", err);
+        } finally {
+            if (activeBtn) {
+                activeBtn.disabled = false;
+                activeBtn.innerHTML = originalText;
+            }
         }
-
-        // Trigger Donation Toast after download
-        setTimeout(showDonationTip, 2000);
     };
 
     if (sidebarPngBtn) sidebarPngBtn.addEventListener('click', () => dl("png"));
     if (sidebarPdfBtn) sidebarPdfBtn.addEventListener('click', () => dl("pdf"));
     if (mobilePdfBtn) mobilePdfBtn.addEventListener('click', () => dl("pdf"));
-    // 新增：监听移动端图片下载按钮
-    const mobilePngBtn = getEl("mobile-download-png-btn");
     if (mobilePngBtn) mobilePngBtn.addEventListener('click', () => dl("png"));
 
     init();
