@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const landingView = getEl("landing-view");
     const editorView = getEl("editor-view");
     const backToHomeBtn = getEl("back-to-home");
+    const feedbackbtn = getEl("feedback-toggle-button");
 
     // Landing UI
     const tabUpload = getEl("tab-upload");
@@ -421,9 +422,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 toggleLoader(true, "Loading preset...");
                 const res = await fetch(btn.dataset.src, { cache: "no-store" });
                 const blob = await res.blob();
-                
-                switchView('editor'); 
-                handleFile(new File([blob], "preset.webp", { type: blob.type }), true); 
+
+                switchView('editor');
+                handleFile(new File([blob], "preset.webp", { type: blob.type }), true);
             } catch (e) {
                 showTip("Failed to load preset.", "error");
                 toggleLoader(false);
@@ -439,7 +440,6 @@ document.addEventListener("DOMContentLoaded", () => {
         setupToolbar();
         loadOpenCv();
         setupPresets();
-        setupAdvancedToggle();
 
         if (drawCanvas && drawCanvas.parentElement) {
             const parent = drawCanvas.parentElement;
@@ -500,10 +500,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (view === 'editor') {
             landingView.classList.add('hidden');
             editorView.classList.remove('hidden');
+            feedbackbtn.classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
             editorView.classList.add('hidden');
             landingView.classList.remove('hidden');
+            feedbackbtn.classList.remove('hidden');
             resetState();
         }
     };
@@ -578,17 +580,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     };
-
-    const setupAdvancedToggle = () => {
-        if (toggleAdvBtn && advancedContent) {
-            toggleAdvBtn.addEventListener('click', () => {
-                const isHidden = advancedContent.classList.contains('hidden');
-                isHidden ? advancedContent.classList.remove('hidden') : advancedContent.classList.add('hidden');
-                if (advArrow) advArrow.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
-        }
-    };
-
     // AI Generation (Doubao) Logic - Kept roughly same but unified loader
     if (heroAiGoBtn) heroAiGoBtn.addEventListener('click', async () => {
         const prompt = heroAiInput.value.trim();
@@ -627,7 +618,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const blob = await res.blob();
 
             // GA: AI 生成成功
-            trackEvent('ai_generate_success');
+            // trackEvent('ai_generate_success');
 
             incrementAiUsage();
 
@@ -637,7 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (e) {
             console.error("AI Gen Error:", e);
             // GA: AI 生成失败
-            trackEvent('ai_generate_fail', { error: e.message });
+            // trackEvent('ai_generate_fail', { error: e.message });
 
             showTip("AI Generation failed. Please try again.", "error");
             switchView('landing');
@@ -1054,9 +1045,34 @@ document.addEventListener("DOMContentLoaded", () => {
         if (val > 5) { dotCountSlider.value = --val; dotCountDisplay.textContent = `${val} Dots`; dotCountSlider.dispatchEvent(new Event('change')); }
     });
 
-    clearBtn?.addEventListener('click', () => {
-        if (confirm("Clear dots?")) {
-            saveHistory(); state.dots = []; redraw(); updateDotCountUI();
+    // --- 修改后的 Reset Canvas 逻辑 ---
+    clearBtn?.addEventListener('click', (e) => {
+        // 阻止事件冒泡，防止触发父元素的点击逻辑
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (confirm("Are you sure you want to clear all dots? This cannot be undone.")) {
+            // GA: 记录清空画布事件 (保持注释)
+            // trackEvent('clear_canvas', { dots_before: state.dots.length });
+
+            // 1. 保存当前状态到历史记录（以便撤销）
+            saveHistory();
+
+            // 2. 清空点数组
+            state.dots = [];
+
+            // 3. 重绘画布
+            redraw();
+
+            // 4. 更新UI显示的数字
+            updateDotCountUI();
+
+            // 5. 将进度条滑块重置为最小值（可选，根据你的逻辑调整）
+            if (dotCountSlider) {
+                dotCountSlider.value = 0;
+            }
+
+            showTip("Canvas cleared. You can Undo if needed.", "success");
         }
     });
 
@@ -1228,11 +1244,11 @@ document.addEventListener("DOMContentLoaded", () => {
             activeBtn.innerHTML = `<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">...</svg> Processing...</span>`;
         }
         // GA: 记录下载事件
-        trackEvent('download_result', {
-            file_format: fmt,
-            dots_count: state.dots.length,
-            hint_mode: state.config.hint
-        });
+        // trackEvent('download_result', {
+        //     file_format: fmt,
+        //     dots_count: state.dots.length,
+        //     hint_mode: state.config.hint
+        // });
         try {
             if (fmt === "png") {
                 drawCanvas.toBlob((blob) => {
