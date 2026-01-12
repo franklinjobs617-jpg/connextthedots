@@ -618,7 +618,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const blob = await res.blob();
 
             // GA: AI 生成成功
-            // trackEvent('ai_generate_success');
+            trackEvent('ai_generate_success');
 
             incrementAiUsage();
 
@@ -628,7 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (e) {
             console.error("AI Gen Error:", e);
             // GA: AI 生成失败
-            // trackEvent('ai_generate_fail', { error: e.message });
+            trackEvent('ai_generate_fail', { error: e.message });
 
             showTip("AI Generation failed. Please try again.", "error");
             switchView('landing');
@@ -1053,7 +1053,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (confirm("Are you sure you want to clear all dots? This cannot be undone.")) {
             // GA: 记录清空画布事件 (保持注释)
-            // trackEvent('clear_canvas', { dots_before: state.dots.length });
+            trackEvent('clear_canvas', { dots_before: state.dots.length });
 
             // 1. 保存当前状态到历史记录（以便撤销）
             saveHistory();
@@ -1244,11 +1244,11 @@ document.addEventListener("DOMContentLoaded", () => {
             activeBtn.innerHTML = `<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">...</svg> Processing...</span>`;
         }
         // GA: 记录下载事件
-        // trackEvent('download_result', {
-        //     file_format: fmt,
-        //     dots_count: state.dots.length,
-        //     hint_mode: state.config.hint
-        // });
+        trackEvent('download_result', {
+            file_format: fmt,
+            dots_count: state.dots.length,
+            hint_mode: state.config.hint
+        });
         try {
             if (fmt === "png") {
                 drawCanvas.toBlob((blob) => {
