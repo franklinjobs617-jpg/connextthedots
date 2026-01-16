@@ -582,6 +582,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     // AI Generation (Doubao) Logic - Kept roughly same but unified loader
     if (heroAiGoBtn) heroAiGoBtn.addEventListener('click', async () => {
+        return
         const prompt = heroAiInput.value.trim();
         if (prompt.length < 3) return showTip("Please enter a description.", "error");
 
