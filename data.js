@@ -44,6 +44,22 @@ export function createPrintableItem(id, title, puzzleFilename, solutionFilename,
 export const printablesData = {
     easy: [
         createPrintableItem(
+            'bluey-playful-01', 'Playful Bluey',
+            'easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp',
+            'easy-bluey-01-connect-the-dots-solution.webp',
+            {
+                difficulty: 'Easy',
+                tagColor: 'bg-green-600',
+                dotRange: [1, 25],
+                category: ['Cartoons', 'Animals'],
+                ageRecommendation: '3-6 Years',
+                popularity: 98,
+                description: 'Help Bluey come to life by connecting the dots! A simple puzzle perfect for little fans of the show.'
+            }
+        ),
+
+
+        createPrintableItem(
             'happy-sun-03', 'Happy Sun 3',
             'easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.webp',
             'easy-happy-sun-03-connect-the-dots-solution.webp',
@@ -117,6 +133,20 @@ export const printablesData = {
         ),
     ],
     medium: [
+        createPrintableItem(
+            'spongebob-classic-01', 'Classic SpongeBob',
+            'medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp',
+            'medium-spongebob-01-connect-the-dots-solution.webp',
+            {
+                difficulty: 'Medium',
+                tagColor: 'bg-yellow-600',
+                dotRange: [1, 50],
+                category: ['Cartoons', 'Under the Sea'],
+                ageRecommendation: '5-8 Years',
+                popularity: 95,
+                description: 'Connect 50 dots to reveal everyone’s favorite sponge from Bikini Bottom! Great for practicing larger numbers.'
+            }
+        ),
         createPrintableItem(
             'castle-01', 'Majestic Castle',
             'medium-castle-01-connect-the-dots-puzzle-1-80-numbers.webp',
