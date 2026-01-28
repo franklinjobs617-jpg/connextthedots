@@ -32,6 +32,20 @@
     <!-- PDF Library -->
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+    <script type="text/javascript" async>
+        (function (c, l, a, r, i, t, y) {
+            c[a] =
+                c[a] ||
+                function () {
+                    (c[a].q = c[a].q || []).push(arguments);
+                };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "tf6ljm5fsf");
+    </script>
 
     <style>
         body {
@@ -2080,6 +2094,53 @@
                 closeModal();
             }
         }); 
+    </script>
+
+    <!-- 第三方代码 -->
+    <script>
+        // 标志，确保脚本只加载一次
+        let thirdPartyScriptsLoaded = false;
+
+        // 创建一个函数来加载所有第三方脚本
+        function loadThirdPartyScripts() {
+            if (thirdPartyScriptsLoaded) {
+                return;
+            }
+            thirdPartyScriptsLoaded = true;
+            console.log("User interaction detected, loading third-party scripts...");
+
+            // 1. 加载 Google Tag Manager (GTAG)
+            const gtagScript = document.createElement('script');
+            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CM76E2ZP8E';
+            gtagScript.async = true;
+            // GTAG 脚本加载完成后，再执行初始化代码
+            gtagScript.onload = function () {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-CM76E2ZP8E');
+                console.log('Google Tag Manager loaded and configured.');
+            };
+            document.head.appendChild(gtagScript);
+
+            // 2. 加载 Google AdSense
+            const adScript = document.createElement('script');
+            adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557';
+            adScript.async = true;
+            adScript.crossOrigin = 'anonymous';
+            document.head.appendChild(adScript);
+            console.log('Google AdSense script loading...');
+        }
+
+        const userInteractionEvents = [
+            "mousemove", "scroll", "keydown", "touchstart", "click"
+        ];
+
+        userInteractionEvents.forEach(function (event) {
+            window.addEventListener(event, loadThirdPartyScripts, { once: true, passive: true });
+        });
+
+        setTimeout(loadThirdPartyScripts, 5000);
     </script>
 </body>
 
