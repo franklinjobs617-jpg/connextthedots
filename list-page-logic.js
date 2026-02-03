@@ -56,8 +56,6 @@ function renderPrintables(difficulty) {
           
           <span class="absolute top-3 right-3 bg-accent text-white text-sm font-semibold px-3 py-1 rounded-full z-10">Free</span>
           <span class="absolute top-3 left-3 ${item.tagColor} text-white text-sm font-semibold px-3 py-1 rounded-full z-10">${item.difficulty}</span>
-          
-           
         </div>
         <div class="p-2 md:p-6">
           <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">${item.title}</h3>
@@ -97,29 +95,26 @@ function renderPrintables(difficulty) {
   }
 }
 
-// 4. 为过滤按钮添加事件监听器
+// 4. 为过滤按钮添加事件监听器 (已修复)
 filterButtons.forEach(button => {
   button.addEventListener('click', function () {
-    // 重置所有按钮的样式
+    // 移除所有按钮的 active 类 (CSS会处理样式重置)
     filterButtons.forEach(btn => {
-      btn.classList.remove('bg-primary', 'text-white', 'hover:bg-primary/90');
-      btn.classList.add('bg-gray-200', 'hover:bg-gray-300');
+      btn.classList.remove('active');
     });
 
-    // 为当前点击的按钮设置激活样式
-    this.classList.remove('bg-gray-200', 'hover:bg-gray-300');
-    this.classList.add('bg-primary', 'text-white', 'hover:bg-primary/90');
+    // 为当前点击的按钮添加 active 类 (CSS会处理高亮样式)
+    this.classList.add('active');
 
     const filterType = this.dataset.filter.replace('difficulty-', '');
     renderPrintables(filterType);
   });
 });
 
-
+// 初始化：默认点击第一个按钮或加载 easy
 const initialFilterButton = document.querySelector('[data-filter="difficulty-all"]');
 if (initialFilterButton) {
   initialFilterButton.click();
 } else {
-  // 如果找不到 "All" 按钮，则默认加载 easy
   renderPrintables('easy');
 }

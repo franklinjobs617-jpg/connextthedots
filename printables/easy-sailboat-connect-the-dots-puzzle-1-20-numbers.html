@@ -97,55 +97,63 @@
 
 <body class="bg-light text-neutral">
   <!-- === NAVBAR === -->
-  <nav
-    class="w-full py-4 px-6 md:px-12 flex justify-between items-center z-50 bg-white/90 backdrop-blur-md sticky top-0 border-b border-gray-100 transition-all duration-300">
+  <nav class="w-full py-4 px-6 md:px-12 flex justify-between items-center z-50 bg-white/90 backdrop-blur-md sticky top-0 border-b border-gray-100 transition-all duration-300">
+        
+<style>
+    .lang-dropdown { position: relative;  }
+    .lang-btn { display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 99px; background: #f1f5f9; cursor: pointer; font-weight: 600; color: #475569; }
+    .lang-content { display: none; position: absolute; right: 0; top: 100%; background: white; min-width: 120px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 12px; border: 1px solid #f1f5f9; z-index: 100; overflow: hidden; }
+    .lang-content a { display: block; padding: 10px 16px; text-decoration: none; color: #475569; font-size: 14px; }
+    .lang-content a:hover { background: #eef2ff; color: #4f46e5; }
+    .lang-dropdown:hover .lang-content { display: block; }
+</style>
 
-    <!-- Logo Area -->
-    <a href="/" class="flex items-center gap-2 group" aria-label="Home">
-      <div class="w-9 h-9 rounded-xl flex items-center justify-center text-brand-blue ">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32" fill="currentColor"
-          class="w-8 h-8 p-0.5">
-          <path
-            d="M404 0c19.2 0 37.6 7.6 51.1 21.2l35.7 35.7C504.4 70.4 512 88.8 512 108s-7.6 37.6-21.2 51.1L445.9 204 308 66.1 352.9 21.2C366.4 7.6 384.8 0 404 0zM58.9 315.1L274.1 100 412 237.9 196.9 453.1c-10.7 10.7-24.1 18.5-38.7 22.6L30.4 511.1c-8.3 2.3-17.3 0-23.4-6.2s-8.5-15.1-6.2-23.4L36.4 353.8c4.1-14.6 11.8-27.9 22.6-38.7zM225.4 80.8L80.8 225.4 11.7 156.3c-15.6-15.6-15.6-40.9 0-56.6l88-88c15.6-15.6 40.9-15.6 56.6 0l5.9 5.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 34.9 34.9zM431.2 286.6l34.9 34.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 5.9 5.9c15.6 15.6 15.6 40.9 0 56.6l-88 88c-15.6 15.6-40.9 15.6-56.6 0l-69.1-69.1 144.6-144.6z" />
-        </svg>
-      </div>
-      <span class="font-bold text-xl tracking-tight text-slate-800">Connectthedotsprintable</span>
-    </a>
+        <a href="/" class="flex items-center gap-2 group">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center text-brand-blue ">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32" fill="currentColor" class="w-8 h-8 p-0.5"><path d="M404 0c19.2 0 37.6 7.6 51.1 21.2l35.7 35.7C504.4 70.4 512 88.8 512 108s-7.6 37.6-21.2 51.1L445.9 204 308 66.1 352.9 21.2C366.4 7.6 384.8 0 404 0zM58.9 315.1L274.1 100 412 237.9 196.9 453.1c-10.7 10.7-24.1 18.5-38.7 22.6L30.4 511.1c-8.3 2.3-17.3 0-23.4-6.2s-8.5-15.1-6.2-23.4L36.4 353.8c4.1-14.6 11.8-27.9 22.6-38.7zM225.4 80.8L80.8 225.4 11.7 156.3c-15.6-15.6-15.6-40.9 0-56.6l88-88c15.6-15.6 40.9-15.6 56.6 0l5.9 5.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 34.9 34.9zM431.2 286.6l34.9 34.9-56.3 56.3c-7.8 7.8-7.8 20.5 0 28.3s20.5 7.8 28.3 0l56.3-56.3 5.9 5.9c15.6 15.6 15.6 40.9 0 56.6l-88 88c-15.6 15.6-40.9 15.6-56.6 0l-69.1-69.1 144.6-144.6z" /></svg>
+            </div>
+            <span class="font-bold text-xl tracking-tight text-slate-800">ConnectTheDots</span>
+        </a>
+        <div class="lang-dropdown lg:hidden">
+            <div class="lang-btn"> 
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"width="24"  height="24"
+                    class="w-4 h-4"> <path d="M256.2 48c114.8 .1 207.8 93.2 207.8 208 0 22.1-3.4 43.4-9.8 63.4-2 .4-4.1 .6-6.2 .6l-2.7 0c-8.5 0-16.6-3.4-22.6-9.4l-29.3-29.3c-6-6-9.4-14.1-9.4-22.6l0-50.7c0-8.8 7.2-16 16-16s16-7.2 16-16-7.2-16-16-16l-24 0c-13.3 0-24 10.7-24 24s-10.7 24-24 24l-56 0c-8.8 0-16 7.2-16 16s-7.2 16-16 16l-25.4 0c-12.5 0-22.6-10.1-22.6-22.6 0-6 2.4-11.8 6.6-16l70.1-70.1c2.1-2.1 3.3-5 3.3-8 0-6.2-5.1-11.3-11.3-11.3l-14.1 0c-12.5 0-22.6-10.1-22.6-22.6 0-6 2.4-11.8 6.6-16l23.1-23.1c.8-.8 1.6-1.5 2.5-2.2zM438.4 356.1c-32.8 59.6-93.9 101.4-165.2 107.2-.7-2.3-1.1-4.8-1.1-7.3 0-13.3-10.7-24-24-24l-26.7 0c-8.5 0-16.6-3.4-22.6-9.4l-29.3-29.3c-6-6-9.4-14.1-9.4-22.6l0-66.7c0-17.7 14.3-32 32-32l98.7 0c8.5 0 16.6 3.4 22.6 9.4l29.3 29.3c6 6 14.1 9.4 22.6 9.4l5.5 0c8.5 0 16.6 3.4 22.6 9.4l16 16c4.2 4.2 10 6.6 16 6.6 4.8 0 9.3 1.5 13 4.1zM256 512l26.2-1.3c-8.6 .9-17.3 1.3-26.2 1.3zm26.2-1.3C411.3 497.6 512 388.6 512 256 512 114.6 397.4 0 256 0l0 0C114.6 0 0 114.6 0 256 0 383.5 93.2 489.3 215.3 508.8 228.5 510.9 242.1 512 256 512zM187.3 123.3l-32 32c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l32-32c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"/></svg>
+                EN
+            </div>
+            <div class="lang-content">
+                <a href="/es/printables/easy-sailboat-connect-the-dots-puzzle-1-20-numbers.html">Español (ES)</a>
+            </div>
+        </div>
+        <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+            <a href="/" class="hover:text-brand-blue transition-colors">Home</a><a href="/printable-connect-the-dots.html" class="hover:text-brand-blue transition-colors">All Printables</a><a href="/how-to-make.html" class="hover:text-brand-blue transition-colors">How to Make</a><a href="/privacy.html" class="hover:text-brand-blue transition-colors">Privacy</a><a href="/terms.html" class="hover:text-brand-blue transition-colors">Terms</a><a href="/feedback.html" class="hover:text-brand-blue transition-colors">Feedback</a>
+            
+            <div class="lang-dropdown">
+                <div class="lang-btn">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"width="24"  height="24"
+                    class="w-4 h-4"> <path d="M256.2 48c114.8 .1 207.8 93.2 207.8 208 0 22.1-3.4 43.4-9.8 63.4-2 .4-4.1 .6-6.2 .6l-2.7 0c-8.5 0-16.6-3.4-22.6-9.4l-29.3-29.3c-6-6-9.4-14.1-9.4-22.6l0-50.7c0-8.8 7.2-16 16-16s16-7.2 16-16-7.2-16-16-16l-24 0c-13.3 0-24 10.7-24 24s-10.7 24-24 24l-56 0c-8.8 0-16 7.2-16 16s-7.2 16-16 16l-25.4 0c-12.5 0-22.6-10.1-22.6-22.6 0-6 2.4-11.8 6.6-16l70.1-70.1c2.1-2.1 3.3-5 3.3-8 0-6.2-5.1-11.3-11.3-11.3l-14.1 0c-12.5 0-22.6-10.1-22.6-22.6 0-6 2.4-11.8 6.6-16l23.1-23.1c.8-.8 1.6-1.5 2.5-2.2zM438.4 356.1c-32.8 59.6-93.9 101.4-165.2 107.2-.7-2.3-1.1-4.8-1.1-7.3 0-13.3-10.7-24-24-24l-26.7 0c-8.5 0-16.6-3.4-22.6-9.4l-29.3-29.3c-6-6-9.4-14.1-9.4-22.6l0-66.7c0-17.7 14.3-32 32-32l98.7 0c8.5 0 16.6 3.4 22.6 9.4l29.3 29.3c6 6 14.1 9.4 22.6 9.4l5.5 0c8.5 0 16.6 3.4 22.6 9.4l16 16c4.2 4.2 10 6.6 16 6.6 4.8 0 9.3 1.5 13 4.1zM256 512l26.2-1.3c-8.6 .9-17.3 1.3-26.2 1.3zm26.2-1.3C411.3 497.6 512 388.6 512 256 512 114.6 397.4 0 256 0l0 0C114.6 0 0 114.6 0 256 0 383.5 93.2 489.3 215.3 508.8 228.5 510.9 242.1 512 256 512zM187.3 123.3l-32 32c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l32-32c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"/></svg>
+                    
+                    EN
+                </div>
+                <div class="lang-content">
+                    <a href="/es/printables/easy-sailboat-connect-the-dots-puzzle-1-20-numbers.html">Español (ES)</a>
+                </div>
+            </div>
 
-    <!-- Desktop Navigation -->
-    <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
-      <a href="/" class="hover:text-brand-blue transition-colors duration-200">Home</a>
-      <a href="/printable-connect-the-dots.html" class="hover:text-brand-blue transition-colors duration-200">All
-        Printables</a>
-      <a href="/how-to-make.html" class="hover:text-brand-blue transition-colors duration-200">How to Make</a>
-      <a href="/privacy.html" class="hover:text-brand-blue transition-colors duration-200">Privacy</a>
-      <a href="/terms.html" class="hover:text-brand-blue transition-colors duration-200">Terms</a>
-      <a href="/feedback.html" class="hover:text-brand-blue transition-colors duration-200">Feedback</a>
+            <a href="https://ko-fi.com/connectthedotsprintable" target="_blank" class="flex items-center gap-2 px-4 py-2 ml-2 rounded-full bg-red-50 text-[#FF5E5B] transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                    class="w-4 h-4 text-[#FF5E5B] group-hover:scale-110 transition-transform duration-300" width="24"
+                    height="24">
+                    <path
+                        d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                </svg>
+                <span class="font-bold">Donate</span>
+            </a>
+        </div>
 
-      <!-- Optimized Donate Button (Refined Style) -->
-      <a href="https://ko-fi.com/connectthedotsprintable" target="_blank"
-        class="group flex items-center gap-2 px-4 py-2 ml-2 rounded-full border border-transparent border-red-100 bg-red-50 transition-all duration-300">
-        <!-- Icon with Heartbeat Animation on Hover -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-          class="w-4 h-4 text-[#FF5E5B] group-hover:scale-110 transition-transform duration-300" width="24" height="24">
-          <path
-            d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-        </svg>
-        <!-- Text changes color on hover -->
-        <span class="text-slate-600 group-hover:text-[#FF5E5B] font-semibold">Donate</span>
-      </a>
-    </div>
-
-    <!-- Mobile Menu Trigger -->
-    <!-- FIX: Added aria-label for accessibility -->
-    <button id="mobile-menu-btn" class="lg:hidden text-slate-600 hover:text-brand-blue p-2 transition-colors"
-      aria-label="Open mobile menu">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-6 w-6" fill="currentColor">
-        <path
-          d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
-      </svg>
-    </button>
-  </nav>
+        <button id="mobile-menu-btn" class="lg:hidden text-slate-600 hover:text-brand-blue p-2 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-6 w-6" fill="currentColor"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" /></svg>
+        </button>
+    </nav>
 
   <!-- Mobile Menu (Hidden by default) -->
   <div id="mobile-menu"
@@ -628,91 +636,77 @@
   </main>
 
   <!-- Footer   -->
-  <footer class="bg-brand-dark text-slate-400 py-16 text-sm border-t border-slate-800">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-slate-800 pb-12 mb-8">
-        <div>
-          <div class="flex items-center gap-2 mb-4 text-white"><i class="fa-solid fa-shapes text-brand-blue"></i> <span
-              class="font-bold text-lg">ConnectTheDots</span></div>
-          <p class="leading-relaxed">Your source for high-quality, free connect the dots printables for kids
-            and adults.</p>
-        </div>
-        <div>
-          <!-- FIX: Changed h4 to h3 for heading hierarchy -->
-          <h3 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Printables</h3>
-          <ul class="space-y-3">
-            <li><a href="/" class="hover:text-white transition">Home</a></li>
-            <li><a href="/printable-connect-the-dots.html" class="hover:text-white transition">All
-                Printables</a></li>
-            <li><a href="/how-to-make.html" class="hover:text-white transition">How to Make</a></li>
-            <li><a href="/christmas-printables.html" class="hover:text-white transition">Christmas
-                Printables</a></li>
-          </ul>
-        </div>
-        <div>
-          <!-- FIX: Changed h4 to h3 for heading hierarchy -->
-          <h3 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Legal</h3>
-          <ul class="space-y-3">
-            <li><a href="/privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
-            <li><a href="/terms.html" class="hover:text-white transition">Terms of Service</a></li>
-            <li><a href="/feedback.html" class="hover:text-white transition">Feedback</a></li>
-            <li><a href="/popular-character-dot-to-dot-printable-worksheets.html"
-                class="hover:text-white transition">Popular Character Dot-to-Dot Printables</a></li>
-            <li><a href="/free-animal-dot-to-dot-printables-pdf.html" class="hover:text-white transition">Free Animal
-                Dot-to-Dot Printables PDF</a></li>
-          </ul>
-        </div>
+  
+    <footer class="bg-brand-dark text-slate-400 py-16 text-sm border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-slate-800 pb-12 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4 text-white">
+                        <i class="fa-solid fa-shapes text-brand-blue"></i> 
+                        <span class="font-bold text-lg">Connectthedotsprintable</span>
+                    </div>
+                    <p class="leading-relaxed">Your source for high-quality, free connect the dots printables for kids and adults.</p>
+                    <div class="mt-4">
+                        <a href="https://dang.ai/" target="_blank">
+                            <img src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png" alt="Dang.ai" style="width: 150px; height: 54px;" width="150" height="54" />
+                        </a>
+                    </div>
+                    <!-- Language Switcher -->
+                    <div class="mt-6 flex items-center gap-3">
+                        <span class="text-white font-bold text-xs uppercase tracking-widest">Language:</span>
+                        <a href="/" class="text-brand-blue font-bold">English</a>
+                        <span class="text-slate-600">|</span>
+                        <a href="/es/" class="hover:text-white transition">Español</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Printables</h3>
+                    <ul class="space-y-3">
+                        <li><a href="/" class="hover:text-white transition">Home</a></li>
+                        <li><a href="/printable-connect-the-dots.html" class="hover:text-white transition">All Printables</a></li>
+                        <li><a href="/how-to-make.html" class="hover:text-white transition">How to Make</a></li>
+                        <li><a href="/christmas-printables.html" class="hover:text-white transition">Christmas Printables</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Legal</h3>
+                    <ul class="space-y-3">
+                        <li><a href="/privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="/feedback.html" class="hover:text-white transition">Feedback</a></li>
+                        <li><a href="/popular-character-dot-to-dot-printable-worksheets.html" class="hover:text-white transition">Popular Character Dot-to-Dot Printables</a></li>
+                        <li><a href="/free-animal-dot-to-dot-printables-pdf.html" class="hover:text-white transition">Free Animal Dot-to-Dot Printables PDF</a></li>
+                    </ul>
+                </div>
+            </div>
 
-      </div>
-      <div class="flex flex-wrap justify-center gap-3 my-4" id="social-share-links">
-        <a href="https://twitter.com" target="_blank"
-          class="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#1DA1F2]"
-          aria-label="Share on Twitter">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="w-6 h-6" width="24"
-            height="24">
-            <path
-              d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z" />
-          </svg>
-          <span class="ml-2">Twitter</span>
-        </a>
-        <a href="https://www.linkedin.com" target="_blank"
-          class="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#0A66C2]"
-          aria-label="Share on LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="w-6 h-6" width="24"
-            height="24">
-            <path
-              d="M512 96L127.9 96C110.3 96 96 110.5 96 128.3L96 511.7C96 529.5 110.3 544 127.9 544L512 544C529.6 544 544 529.5 544 511.7L544 128.3C544 110.5 529.6 96 512 96zM231.4 480L165 480L165 266.2L231.5 266.2L231.5 480L231.4 480zM198.2 160C219.5 160 236.7 177.2 236.7 198.5C236.7 219.8 219.5 237 198.2 237C176.9 237 159.7 219.8 159.7 198.5C159.7 177.2 176.9 160 198.2 160zM480.3 480L413.9 480L413.9 376C413.9 351.2 413.4 319.3 379.4 319.3C344.8 319.3 339.5 346.3 339.5 374.2L339.5 480L273.1 480L273.1 266.2L336.8 266.2L336.8 295.4L337.7 295.4C346.6 278.6 368.3 260.9 400.6 260.9C467.8 260.9 480.3 305.2 480.3 362.8L480.3 480z" />
-          </svg>
-          <span class="ml-2">LinkedIn</span>
-        </a>
-        <a href="https://www.facebook.com" target="_blank"
-          class="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#1877F2]"
-          aria-label="Share on Facebook">
-          <svg fill="currentColor" class="w-6 h-6" viewBox="0 0 24 24" width="24" height="24">
-            <path
-              d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v2.385z">
-            </path>
-          </svg>
-          <span class="ml-2">Facebook</span>
-        </a>
-        <a href="https://www.reddit.com" target="_blank"
-          class="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#FF4500]"
-          aria-label="Share on Reddit">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6" viewBox="0 0 640 640" width="24"
-            height="24">
-            <path
-              d="M64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576L101.1 576C87.4 576 80.6 559.5 90.2 549.8L139 501C92.7 454.7 64 390.7 64 320zM413.6 217.6C437.2 217.6 456.3 198.5 456.3 174.9C456.3 151.3 437.2 132.2 413.6 132.2C393 132.2 375.8 146.8 371.8 166.2C337.3 169.9 310.4 199.2 310.4 234.6L310.4 234.8C272.9 236.4 238.6 247.1 211.4 263.9C201.3 256.1 188.6 251.4 174.9 251.4C141.9 251.4 115.1 278.2 115.1 311.2C115.1 335.2 129.2 355.8 149.5 365.3C151.5 434.7 227.1 490.5 320.1 490.5C413.1 490.5 488.8 434.6 490.7 365.2C510.9 355.6 524.8 335 524.8 311.2C524.8 278.2 498 251.4 465 251.4C451.3 251.4 438.7 256 428.6 263.8C401.2 246.8 366.5 236.1 328.6 234.7L328.6 234.5C328.6 209.1 347.5 188 372 184.6C376.4 203.4 393.3 217.4 413.5 217.4L413.6 217.6zM241.1 310.9C257.8 310.9 270.6 328.5 269.6 350.2C268.6 371.9 256.1 379.8 239.3 379.8C222.5 379.8 207.9 371 208.9 349.3C209.9 327.6 224.3 311 241 311L241.1 310.9zM431.2 349.2C432.2 370.9 417.5 379.7 400.8 379.7C384.1 379.7 371.5 371.8 370.5 350.1C369.5 328.4 382.3 310.8 399 310.8C415.7 310.8 430.2 327.4 431.1 349.1L431.2 349.2zM383.1 405.9C372.8 430.5 348.5 447.8 320.1 447.8C291.7 447.8 267.4 430.5 257.1 405.9C255.9 403 257.9 399.7 261 399.4C279.4 397.5 299.3 396.5 320.1 396.5C340.9 396.5 360.8 397.5 379.2 399.4C382.3 399.7 384.3 403 383.1 405.9z" />
-          </svg>
-          <span class="ml-2">Reddit</span>
-        </a>
+            <!-- Social Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 my-4" id="social-share-links">
+                <a href="https://twitter.com" target="_blank" class="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#1DA1F2]">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="w-6 h-6" width="24" height="24"><path d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z" /></svg>
+                    <span class="ml-2">Twitter</span>
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" class="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#0A66C2]">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="w-6 h-6" width="24" height="24"><path d="M512 96L127.9 96C110.3 96 96 110.5 96 128.3L96 511.7C96 529.5 110.3 544 127.9 544L512 544C529.6 544 544 529.5 544 511.7L544 128.3C544 110.5 529.6 96 512 96zM231.4 480L165 480L165 266.2L231.5 266.2L231.5 480L231.4 480zM198.2 160C219.5 160 236.7 177.2 236.7 198.5C236.7 219.8 219.5 237 198.2 237C176.9 237 159.7 219.8 159.7 198.5C159.7 177.2 176.9 160 198.2 160zM480.3 480L413.9 480L413.9 376C413.9 351.2 413.4 319.3 379.4 319.3C344.8 319.3 339.5 346.3 339.5 374.2L339.5 480L273.1 480L273.1 266.2L336.8 266.2L336.8 295.4L337.7 295.4C346.6 278.6 368.3 260.9 400.6 260.9C467.8 260.9 480.3 305.2 480.3 362.8L480.3 480z" /></svg>
+                    <span class="ml-2">LinkedIn</span>
+                </a>
+                <a href="https://www.facebook.com" target="_blank" class="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#1877F2]">
+                    <svg fill="currentColor" class="w-6 h-6" viewBox="0 0 24 24" width="24" height="24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v2.385z"></path></svg>
+                    <span class="ml-2">Facebook</span>
+                </a>
+                <a href="https://www.reddit.com" target="_blank" class="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#FF4500]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6" viewBox="0 0 640 640" width="24" height="24"><path d="M64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576L101.1 576C87.4 576 80.6 559.5 90.2 549.8L139 501C92.7 454.7 64 390.7 64 320zM413.6 217.6C437.2 217.6 456.3 198.5 456.3 174.9C456.3 151.3 437.2 132.2 413.6 132.2C393 132.2 375.8 146.8 371.8 166.2C337.3 169.9 310.4 199.2 310.4 234.6L310.4 234.8C272.9 236.4 238.6 247.1 211.4 263.9C201.3 256.1 188.6 251.4 174.9 251.4C141.9 251.4 115.1 278.2 115.1 311.2C115.1 335.2 129.2 355.8 149.5 365.3C151.5 434.7 227.1 490.5 320.1 490.5C413.1 490.5 488.8 434.6 490.7 365.2C510.9 355.6 524.8 335 524.8 311.2C524.8 278.2 498 251.4 465 251.4C451.3 251.4 438.7 256 428.6 263.8C401.2 246.8 366.5 236.1 328.6 234.7L328.6 234.5C328.6 209.1 347.5 188 372 184.6C376.4 203.4 393.3 217.4 413.5 217.4L413.6 217.6zM241.1 310.9C257.8 310.9 270.6 328.5 269.6 350.2C268.6 371.9 256.1 379.8 239.3 379.8C222.5 379.8 207.9 371 208.9 349.3C209.9 327.6 224.3 311 241 311L241.1 310.9zM431.2 349.2C432.2 370.9 417.5 379.7 400.8 379.7C384.1 379.7 371.5 371.8 370.5 350.1C369.5 328.4 382.3 310.8 399 310.8C415.7 310.8 430.2 327.4 431.1 349.1L431.2 349.2zM383.1 405.9C372.8 430.5 348.5 447.8 320.1 447.8C291.7 447.8 267.4 430.5 257.1 405.9C255.9 403 257.9 399.7 261 399.4C279.4 397.5 299.3 396.5 320.1 396.5C340.9 396.5 360.8 397.5 379.2 399.4C382.3 399.7 384.3 403 383.1 405.9z" /></svg>
+                    <span class="ml-2">Reddit</span>
+                </a>
+            </div>
 
-      </div>
-      <div class="text-center text-xs">
-        <p>&copy; 2025 ConnectTheDotsPrintable.online. All rights reserved.</p>
-        <p class="mt-2 opacity-50">All printables are for personal and educational use only.</p>
-      </div>
-    </div>
-  </footer>
+            <div class="text-center text-xs">
+                <p>&copy; 2026 ConnectTheDotsPrintable.online. All rights reserved.</p>
+                <p class="mt-2 opacity-50">All printables are for personal and educational use only.</p>
+            </div>
+        </div>
+    </footer>
+
 
   <!-- Fixed Floating Buttons -->
   <button id="feedback-toggle-button"

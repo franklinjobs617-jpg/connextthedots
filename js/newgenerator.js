@@ -1156,7 +1156,7 @@ document.addEventListener("DOMContentLoaded", () => {
             heroAiGoBtn.disabled = false;
             heroAiGoBtn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'hover:shadow-lg', 'hover:scale-105');
             const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
-            heroAiGoBtn.innerHTML = `<span>Generate</span> ${arrowSvg}`;
+            heroAiGoBtn.innerHTML = `<span>Coming Soon</span> ${arrowSvg}`;
             if (msgContainer) msgContainer.remove();
         }
     };
