@@ -1,208 +1,1211 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <!-- Main & Core Pages -->
-    <url>
-        <loc>https://connectthedotsprintable.online</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printable-connect-the-dots.html</loc>   
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    
-    <url>
-        <loc>https://connectthedotsprintable.online/free-animal-dot-to-dot-printables-pdf.html</loc>
-        <lastmod>2026-01-26</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://connectthedotsprintable.online/popular-character-dot-to-dot-printable-worksheets.html</loc>
-        <lastmod>2026-01-26</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/adults.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/privacy.html</loc>   
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/terms.html</loc>   
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <!-- Category & Tool Pages -->
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/adults.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/animals.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/christmas.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/hard.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-     <url>
-        <loc>https://connectthedotsprintable.online/printables/free.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/general.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/connectTheDotsGenerator.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Individual Printable Pages -->
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/6-Advanced-Mountain-Landscape-Connect-the-Dots.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/7-Extreme-Difficulty-Mandala-Connect-the-Dots.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/easy-dinosaur-01-connect-the-dots-puzzle-1-30-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/easy-dinosaur-02-connect-the-dots-puzzle-1-35-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/easy-flower-pot-connect-the-dots-puzzle-1-20-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/easy-happy-sun-01-connect-the-dots-puzzle-1-20-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/easy-happy-sun-03-connect-the-dots-puzzle-1-25-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/easy-rainbow-connect-the-dots-puzzle-1-15-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/easy-robot-01-connect-the-dots-puzzle-1-25-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/easy-sailboat-connect-the-dots-puzzle-1-20-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/medium-castle-01-connect-the-dots-puzzle-1-80-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/medium-halloween-pumpkin-01-connect-the-dots-puzzle-1-65-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/medium-lighthouse-01-connect-the-dots-puzzle-1-75-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/medium-magical-unicorn-01-connect-the-dots-puzzle-1-70-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/medium-mushroom-house-01-connect-the-dots-puzzle-1-70-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/medium-pirate-ship-01-connect-the-dots-puzzle-1-70-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/medium-rocket-ship-01-connect-the-dots-puzzle-1-60-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/medium-sports-car-01-connect-the-dots-puzzle-1-85-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://connectthedotsprintable.online/printables/medium-train-01-connect-the-dots-puzzle-1-60-numbers.html</loc>
-        <lastmod>2025-12-28</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://connectthedotsprintable.online/adults.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/adults.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/adults.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/christmas-printables.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/christmas-printables.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/christmas-printables.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/christmas-printables.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/feedback.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/feedback.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/feedback.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/feedback.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/free-animal-dot-to-dot-printables-pdf.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/free-animal-dot-to-dot-printables-pdf.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/free-animal-dot-to-dot-printables-pdf.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/free-animal-dot-to-dot-printables-pdf.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/how-to-make.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/how-to-make.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/how-to-make.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/how-to-make.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/index.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/origin-printable.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/origin-printable.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/origin-printable.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/originindex.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/originindex.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/originindex.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/popular-character-dot-to-dot-printable-worksheets.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/popular-character-dot-to-dot-printable-worksheets.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/popular-character-dot-to-dot-printable-worksheets.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/popular-character-dot-to-dot-printable-worksheets.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printable-connect-the-dots.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printable-connect-the-dots.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printable-connect-the-dots.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printable-connect-the-dots.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/privacy.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/terms.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/terms.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/api/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/api/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/api/index.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/adults.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/adults.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/adults.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/adults.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/animals.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/animals.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/animals.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/animals.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/christmas.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/christmas.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/christmas.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/christmas.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/connectTheDotsGenerator.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/connectTheDotsGenerator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/connectTheDotsGenerator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/connectTheDotsGenerator.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/core.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/core.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/core.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/core.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/easy-dinosaur-01-connect-the-dots-puzzle-1-20-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/easy-dinosaur-01-connect-the-dots-puzzle-1-20-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/easy-dinosaur-01-connect-the-dots-puzzle-1-20-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/easy-dinosaur-01-connect-the-dots-puzzle-1-20-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/easy-dinosaur-02-connect-the-dots-puzzle-1-25-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/easy-dinosaur-02-connect-the-dots-puzzle-1-25-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/easy-dinosaur-02-connect-the-dots-puzzle-1-25-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/easy-dinosaur-02-connect-the-dots-puzzle-1-25-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/easy-flower-pot-connect-the-dots-puzzle-1-18-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/easy-flower-pot-connect-the-dots-puzzle-1-18-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/easy-flower-pot-connect-the-dots-puzzle-1-18-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/easy-flower-pot-connect-the-dots-puzzle-1-18-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/easy-happy-sun-01-connect-the-dots-puzzle-1-20-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/easy-happy-sun-01-connect-the-dots-puzzle-1-20-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/easy-happy-sun-01-connect-the-dots-puzzle-1-20-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/easy-happy-sun-01-connect-the-dots-puzzle-1-20-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/easy-rainbow-connect-the-dots-puzzle-1-15-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/easy-rainbow-connect-the-dots-puzzle-1-15-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/easy-rainbow-connect-the-dots-puzzle-1-15-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/easy-rainbow-connect-the-dots-puzzle-1-15-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/easy-robot-01-connect-the-dots-puzzle-1-25-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/easy-robot-01-connect-the-dots-puzzle-1-25-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/easy-robot-01-connect-the-dots-puzzle-1-25-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/easy-robot-01-connect-the-dots-puzzle-1-25-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/easy-sailboat-connect-the-dots-puzzle-1-20-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/easy-sailboat-connect-the-dots-puzzle-1-20-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/easy-sailboat-connect-the-dots-puzzle-1-20-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/easy-sailboat-connect-the-dots-puzzle-1-20-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/free.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/free.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/free.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/free.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/general.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/general.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/general.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/general.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/hard.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/hard.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/hard.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/hard.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-castle-01-connect-the-dots-puzzle-1-80-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-castle-01-connect-the-dots-puzzle-1-80-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-castle-01-connect-the-dots-puzzle-1-80-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-castle-01-connect-the-dots-puzzle-1-80-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-halloween-pumpkin-01-connect-the-dots-puzzle-1-65-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-halloween-pumpkin-01-connect-the-dots-puzzle-1-65-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-halloween-pumpkin-01-connect-the-dots-puzzle-1-65-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-halloween-pumpkin-01-connect-the-dots-puzzle-1-65-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-lighthouse-01-connect-the-dots-puzzle-1-75-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-lighthouse-01-connect-the-dots-puzzle-1-75-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-lighthouse-01-connect-the-dots-puzzle-1-75-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-lighthouse-01-connect-the-dots-puzzle-1-75-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-magical-unicorn-01-connect-the-dots-puzzle-1-70-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-magical-unicorn-01-connect-the-dots-puzzle-1-70-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-magical-unicorn-01-connect-the-dots-puzzle-1-70-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-magical-unicorn-01-connect-the-dots-puzzle-1-70-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-mushroom-house-01-connect-the-dots-puzzle-1-70-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-mushroom-house-01-connect-the-dots-puzzle-1-70-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-mushroom-house-01-connect-the-dots-puzzle-1-70-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-mushroom-house-01-connect-the-dots-puzzle-1-70-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-pirate-ship-01-connect-the-dots-puzzle-1-90-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-pirate-ship-01-connect-the-dots-puzzle-1-90-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-pirate-ship-01-connect-the-dots-puzzle-1-90-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-pirate-ship-01-connect-the-dots-puzzle-1-90-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-rocket-ship-01-connect-the-dots-puzzle-1-60-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-rocket-ship-01-connect-the-dots-puzzle-1-60-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-rocket-ship-01-connect-the-dots-puzzle-1-60-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-rocket-ship-01-connect-the-dots-puzzle-1-60-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-sports-car-01-connect-the-dots-puzzle-1-85-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-sports-car-01-connect-the-dots-puzzle-1-85-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-sports-car-01-connect-the-dots-puzzle-1-85-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-sports-car-01-connect-the-dots-puzzle-1-85-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/printables/medium-train-01-connect-the-dots-puzzle-1-60-numbers.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://connectthedotsprintable.online/es/printables/medium-train-01-connect-the-dots-puzzle-1-60-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/printables/medium-train-01-connect-the-dots-puzzle-1-60-numbers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/printables/medium-train-01-connect-the-dots-puzzle-1-60-numbers.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/cuint/examples/uint32.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/cuint/examples/uint32.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/cuint/examples/uint32.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/110-reducedexample.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/110-reducedexample.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/110-reducedexample.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/attributes.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/attributes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/attributes.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/body.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/body.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/body.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/control.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/control.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/control.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/dom-append.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/dom-append.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/dom-append.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/import-head.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/import-head.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/import-head.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/import.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/import.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/import.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/index.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/preload-control.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/preload-control.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/preload-control.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/preload-switch.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/preload-switch.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/preload-switch.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/preload.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/preload.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/preload.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/test-onload.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/test-onload.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/test-onload.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/test.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/test.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/test.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/fg-loadcss/test/qunit/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/qunit/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/fg-loadcss/test/qunit/index.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/htmlparser2/src/__fixtures__/Documents/Attributes.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/htmlparser2/src/__fixtures__/Documents/Attributes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/htmlparser2/src/__fixtures__/Documents/Attributes.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/htmlparser2/src/__fixtures__/Documents/Basic.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/htmlparser2/src/__fixtures__/Documents/Basic.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/htmlparser2/src/__fixtures__/Documents/Basic.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/htmlparser2/src/__fixtures__/Documents/Svg.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/htmlparser2/src/__fixtures__/Documents/Svg.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/htmlparser2/src/__fixtures__/Documents/Svg.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/uglify-js/tools/domprops.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/uglify-js/tools/domprops.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/uglify-js/tools/domprops.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/node_modules/xxhashjs/examples/xxhash.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/node_modules/xxhashjs/examples/xxhash.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/node_modules/xxhashjs/examples/xxhash.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/footer.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/footer.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/footer.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/header.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/header.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/header.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_basic_ops_copymakeborder.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_basic_ops_copymakeborder.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_basic_ops_copymakeborder.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_basic_ops_roi.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_basic_ops_roi.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_basic_ops_roi.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_bg_subtraction.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_bg_subtraction.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_bg_subtraction.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_camshift.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_camshift.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_camshift.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_canny.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_canny.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_canny.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_colorspaces_cvtColor.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_colorspaces_cvtColor.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_colorspaces_cvtColor.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_colorspaces_inRange.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_colorspaces_inRange.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_colorspaces_inRange.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contours_begin_contours.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contours_begin_contours.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contours_begin_contours.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contours_more_functions_convexityDefects.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contours_more_functions_convexityDefects.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contours_more_functions_convexityDefects.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contours_more_functions_shape.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contours_more_functions_shape.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contours_more_functions_shape.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_approxPolyDP.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_approxPolyDP.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_approxPolyDP.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_area.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_area.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_area.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_boundingRect.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_boundingRect.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_boundingRect.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_convexHull.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_convexHull.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_convexHull.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_fitEllipse.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_fitEllipse.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_fitEllipse.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_fitLine.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_fitLine.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_fitLine.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_minAreaRect.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_minAreaRect.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_minAreaRect.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_minEnclosingCircle.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_minEnclosingCircle.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_minEnclosingCircle.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_moments.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_moments.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_moments.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_perimeter.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_perimeter.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_features_perimeter.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_properties_transpose.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_properties_transpose.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_contour_properties_transpose.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_face_detection.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_face_detection.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_face_detection.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_face_detection_camera.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_face_detection_camera.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_face_detection_camera.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_bilateralFilter.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_bilateralFilter.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_bilateralFilter.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_blur.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_blur.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_blur.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_filter.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_filter.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_filter.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_GaussianBlur.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_GaussianBlur.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_GaussianBlur.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_medianBlur.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_medianBlur.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_filtering_medianBlur.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_fourier_transform_dft.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_fourier_transform_dft.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_fourier_transform_dft.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_getAffineTransform.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_getAffineTransform.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_getAffineTransform.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_resize.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_resize.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_resize.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_rotateWarpAffine.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_rotateWarpAffine.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_rotateWarpAffine.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_warpAffine.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_warpAffine.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_warpAffine.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_warpPerspective.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_warpPerspective.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_geometric_transformations_warpPerspective.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_grabcut_grabCut.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_grabcut_grabCut.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_grabcut_grabCut.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_gradients_absSobel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_gradients_absSobel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_gradients_absSobel.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_gradients_Laplacian.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_gradients_Laplacian.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_gradients_Laplacian.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_gradients_Sobel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_gradients_Sobel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_gradients_Sobel.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_backprojection_calcBackProject.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_backprojection_calcBackProject.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_backprojection_calcBackProject.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_begins_calcHist.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_begins_calcHist.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_begins_calcHist.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_equalization_createCLAHE.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_equalization_createCLAHE.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_equalization_createCLAHE.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_equalization_equalizeHist.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_equalization_equalizeHist.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_histogram_equalization_equalizeHist.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_houghcircles_HoughCirclesP.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_houghcircles_HoughCirclesP.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_houghcircles_HoughCirclesP.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_houghlines_HoughLines.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_houghlines_HoughLines.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_houghlines_HoughLines.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_houghlines_HoughLinesP.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_houghlines_HoughLinesP.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_houghlines_HoughLinesP.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_arithmetics_bitwise.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_arithmetics_bitwise.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_arithmetics_bitwise.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_classification.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_classification.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_classification.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_classification_webnn_polyfill.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_classification_webnn_polyfill.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_classification_webnn_polyfill.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_classification_with_camera.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_classification_with_camera.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_classification_with_camera.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_display.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_display.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_image_display.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_imgproc_camera.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_imgproc_camera.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_imgproc_camera.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_intelligent_scissors.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_intelligent_scissors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_intelligent_scissors.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_meanshift.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_meanshift.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_meanshift.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_blackHat.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_blackHat.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_blackHat.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_closing.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_closing.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_closing.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_dilate.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_dilate.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_dilate.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_erode.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_erode.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_erode.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_getStructuringElement.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_getStructuringElement.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_getStructuringElement.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_gradient.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_gradient.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_gradient.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_opening.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_opening.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_opening.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_topHat.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_topHat.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_morphological_ops_topHat.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_object_detection.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_object_detection.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_object_detection.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_object_detection_with_camera.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_object_detection_with_camera.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_object_detection_with_camera.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_optical_flow_dense.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_optical_flow_dense.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_optical_flow_dense.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_optical_flow_lucas_kanade.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_optical_flow_lucas_kanade.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_optical_flow_lucas_kanade.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_pose_estimation.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_pose_estimation.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_pose_estimation.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_pyramids_pyrDown.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_pyramids_pyrDown.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_pyramids_pyrDown.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_pyramids_pyrUp.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_pyramids_pyrUp.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_pyramids_pyrUp.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_semantic_segmentation.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_semantic_segmentation.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_semantic_segmentation.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_setup_usage.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_setup_usage.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_setup_usage.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_style_transfer.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_style_transfer.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_style_transfer.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_template_matching_matchTemplate.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_template_matching_matchTemplate.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_template_matching_matchTemplate.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_thresholding_adaptiveThreshold.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_thresholding_adaptiveThreshold.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_thresholding_adaptiveThreshold.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_thresholding_threshold.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_thresholding_threshold.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_thresholding_threshold.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_trackbar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_trackbar.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_trackbar.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_video_display.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_video_display.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_video_display.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_background.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_background.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_background.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_distanceTransform.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_distanceTransform.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_distanceTransform.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_foreground.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_foreground.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_foreground.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_threshold.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_threshold.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_threshold.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_watershed.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_watershed.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/js_watershed_watershed.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/webnn-electron/js_image_classification_webnn_electron.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/webnn-electron/js_image_classification_webnn_electron.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/doc/js_tutorials/js_assets/webnn-electron/js_image_classification_webnn_electron.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_64bits.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_64bits.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_64bits.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_blur.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_blur.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_blur.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_cvtcolor.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_cvtcolor.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_cvtcolor.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_dilate.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_dilate.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_dilate.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_erode.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_erode.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_erode.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_filter2D.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_filter2D.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_filter2D.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_gaussianBlur.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_gaussianBlur.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_gaussianBlur.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_medianBlur.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_medianBlur.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_medianBlur.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_pyrDown.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_pyrDown.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_pyrDown.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_remap.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_remap.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_remap.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_resize.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_resize.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_resize.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_scharr.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_scharr.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_scharr.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_sobel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_sobel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_sobel.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_threshold.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_threshold.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_threshold.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_warpAffine.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_warpAffine.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_warpAffine.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_warpPerspective.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_warpPerspective.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/perf/perf_imgproc/perf_warpPerspective.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/test/tests.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/test/tests.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/modules/js/test/tests.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/dnn/js_face_recognition.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/dnn/js_face_recognition.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/dnn/js_face_recognition.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/winrt/JavaScript/default.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/winrt/JavaScript/default.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/winrt/JavaScript/default.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/winrt/JavaScript/html/AdvancedCapture.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/winrt/JavaScript/html/AdvancedCapture.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/winrt/JavaScript/html/AdvancedCapture.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/winrt/JavaScript/sample-utils/scenario-select.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/winrt/JavaScript/sample-utils/scenario-select.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://connectthedotsprintable.online/opencv_build/src/opencv-4x/samples/winrt/JavaScript/sample-utils/scenario-select.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <priority>0.7</priority>
+  </url>
 </urlset>
