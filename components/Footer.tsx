@@ -38,10 +38,6 @@ export default function Footer() {
                                     height={54}
                                 />
                             </Link>
-                            <Link href="https://theresanaiforthat.com/ai/connectthedots-generator/?ref=featured&v=7340698" target="_blank" rel="nofollow" >
-                                <Image width="180" height={50} className="mt-2"
-                                    src="https://media.theresanaiforthat.com/featured-on-taaft.png?width=600" alt="theresanaiforthat" />
-                            </Link>
                         </div>
 
                         {/* 语言切换器 */}

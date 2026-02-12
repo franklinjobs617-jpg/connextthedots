@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { getAlternates, getUrl } from "@/lib/metadata";
 import { getTranslations } from "next-intl/server";
 import { useLocale } from "next-intl";
+import Link from "next/link";
 type Props = {
     params: { locale: string };
 };
@@ -1279,6 +1280,14 @@ export default function HomeContent() {
                                 {tContact("button")}
                             </a>
                         </div>
+                    </div>
+
+                    <div className='flex justify-center items-center mt-10'>
+                        {/* 外链 */}
+                        <Link href="https://theresanaiforthat.com/ai/connectthedots-generator/?ref=featured&v=7340698" target="_blank" rel="nofollow" >
+                            <Image width="140" height={50} className="mt-2"
+                                src="https://media.theresanaiforthat.com/featured-on-taaft.png?width=600" alt="theresanaiforthat" />
+                        </Link>
                     </div>
                 </section>
             </div>
