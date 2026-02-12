@@ -43,6 +43,18 @@
     "card4Title": "Feiertage, Tiere & weitere Themen",
     "card4Desc": "Feiertage, Tiere & weitere Themen"
   },
+   "aiFeatures": {
+    "badge": "Spitzentechnologie",
+    "title": "Der weltweit fortschrittlichste KI Punkt-zu-Punkt Generator",
+    "description": "Hören Sie auf, nach statischen Vorlagen zu suchen. Unser ai dot to dot generator versteht Ihre Fantasie und erstellt in Sekunden druckbare Rätsel.",
+    "f1Title": "Vom Text zum Rätsel",
+    "f1Desc": "Beschreiben Sie alles—unser dot to dot generator ai baut daraus ein perfektes Punkt-zu-Punkt-Bild.",
+    "f2Title": "Perfekte Linienklarheit",
+    "f2Desc": "Unsere KI erzeugt saubere Umrisse, die speziell für das Setzen von Verbindungspunkten optimiert sind.",
+    "f3Title": "Grenzenlose Vielfalt",
+    "f3Desc": "Erstellen Sie einzigartige Arbeitsblätter, die es so nirgendwo anders gibt.",
+    "cta": "KI-Generator testen"
+  },
   "editorPicks": {
     "badge": "Empfehlung der Redaktion",
     "title": "von punkt zu punkt Bilder in 3 Schritten erstellen",

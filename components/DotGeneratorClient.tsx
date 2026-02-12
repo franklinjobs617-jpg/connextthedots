@@ -1,7 +1,10 @@
 'use client';
 
 import { useEffect } from "react";
-
+import { useRouter } from "@/i18n/routing";
+interface DotGeneratorProps {
+  locale: string;
+}
 // 全局类型声明
 declare global {
   interface Window {
@@ -36,7 +39,8 @@ interface State {
   pendingFile: File | null;
 }
 
-export default function DotGeneratorClient() {
+export default function DotGeneratorClient({ locale }: DotGeneratorProps) {
+  const router = useRouter();
   useEffect(() => {
     // 逻辑代码保持不变，仅修复类型
     const DEFAULT_CONFIG: Config = {
@@ -908,15 +912,26 @@ export default function DotGeneratorClient() {
     };
     // AI Generation (Doubao) Logic - Kept roughly same but unified loader
     if (heroAiGoBtn) heroAiGoBtn.addEventListener('click', async () => {
-      const prompt = heroAiInput?.value.trim() || "";
-      if (prompt.length < 3) return showTip("Please enter a description.", "error");
+      // --- 关键修改 1: 优先判断次数 ---
+      const usage = getAiUsage();
+      const limit = MAX_DAILY_LIMIT + (usage.extra || 0);
+      console.log("usage", usage);
+      console.log("limit", limit);
+      if (usage.count >= limit) {
 
+        router.push("/pricing");
+        return;
+      }
+
+      const prompt = heroAiInput?.value.trim() || "";
+      if (prompt.length < 3) {
+        return showTip("Please enter a description.", "error");
+      }
       // GA: AI 生成开始
       trackEvent('ai_generate_start', {
         prompt_length: prompt.length
       });
 
-      const usage = getAiUsage();
       if (usage.count >= (MAX_DAILY_LIMIT + (usage.extra || 0))) {
         showTip("Daily limit reached. Share below to unlock!", "info");
         return;
@@ -941,7 +956,7 @@ export default function DotGeneratorClient() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             // 这里的 prompt 已经在外部定义好
-            prompt: prompt + ", simple black and white line art, coloring book style, white background",
+            prompt: prompt + ", simple black and white line art, coloring book style, white background, no shading, clear outlines",
           })
         });
 
@@ -1027,15 +1042,30 @@ export default function DotGeneratorClient() {
       if (!heroAiGoBtn) return;
 
       if (remaining <= 0) {
-        heroAiGoBtn.classList.remove("bg-gradient-to-r", "from-purple-600", "to-pink-600", "hover:shadow-lg", "hover:scale-105");
-        heroAiGoBtn.style.backgroundColor = "#94a3b8";
-        heroAiGoBtn.style.color = "#fff";
         heroAiGoBtn.style.cursor = "default";
         heroAiGoBtn.disabled = true;
 
-        const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
-        heroAiGoBtn.innerHTML = `<span>Limit Reached</span> ${lockSvg}`;
+        const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
 
+
+
+        // 写入纯 HTML 字符串
+        heroAiGoBtn.innerHTML = `<span>Get More Credits</span>${lockSvg}`;
+
+        // 2. 确保按钮处于“可点击”状态
+        heroAiGoBtn.disabled = false;
+        heroAiGoBtn.style.cursor = 'pointer';
+
+        // 3. 覆盖点击事件，点击后跳转到 pricing 页面
+        heroAiGoBtn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // 使用 next-intl 的 router.push
+          // 它会自动识别当前语言并跳转到正确的路径
+          // 比如：在 /es/ 下，它会自动跳到 /es/pricing/
+          router.push("/pricing");
+        };
         const today = new Date().toLocaleDateString();
         if (data.shareDate !== today) {
           if (!msgContainer) {
@@ -1282,9 +1312,9 @@ export default function DotGeneratorClient() {
 
     const setupPresets = () => {
       const presetConfigs: any = {
-        easy: { count: 25, font: 28, dotRadius: 8, hint: "internal", desc: "Perfect for kids (20-30 dots, large font)" },
-        medium: { count: 55, font: 20, dotRadius: 6, hint: "internal", desc: "Standard difficulty (50-60 dots)" },
-        hard: { count: 90, font: 14, dotRadius: 4, hint: "no", desc: "Expert challenge (80+ dots, no hints)" },
+        easy: { count: 25, font: 28, dotRadius: 8, hint: "trace", desc: "Perfect for kids (20-30 dots, large font)" },
+        medium: { count: 55, font: 20, dotRadius: 6, hint: "trace", desc: "Standard difficulty (50-60 dots)" },
+        hard: { count: 90, font: 14, dotRadius: 4, hint: "trace", desc: "Expert challenge (80+ dots, no hints)" },
       };
 
       presetButtons.forEach((btn) => {

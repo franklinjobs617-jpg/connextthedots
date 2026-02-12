@@ -14,8 +14,28 @@ import {
     LogOut,
     Loader2,
 } from "lucide-react";
-
 export default function Header() {
+    const LinkArr = [
+        {
+            labelKey: "home",
+            href: "/",
+        }, {
+            labelKey: "allPrintables",
+            href: "/printable-connect-the-dots",
+        }, {
+            labelKey: "pricing",
+            href: "/pricing",
+        }, {
+            labelKey: "howToMake",
+            href: "/how-to-make",
+        }, {
+            labelKey: "privacy",
+            href: "/privacy",
+        }, {
+            labelKey: "terms",
+            href: "/terms",
+        }
+    ]
     const t = useTranslations("header");
     const pathname = usePathname(); // 获取当前纯净路径（不含语言前缀）
     const { user, isLoggedIn, login, logout, isLoggingIn } = useAuth();
@@ -118,28 +138,18 @@ export default function Header() {
                 </button>
 
                 <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
-                    <Link href="/" className="hover:text-brand-blue transition-colors no-underline">
-                        {t("home")}
-                    </Link>
-                    <Link href="/printable-connect-the-dots" className="hover:text-brand-blue transition-colors no-underline">
-                        {t("allPrintables")}
-                    </Link>
-                    <Link href="/how-to-make" className="hover:text-brand-blue transition-colors no-underline">
-                        {t("howToMake")}
-                    </Link>
-                    <Link href="/privacy" className="hover:text-brand-blue transition-colors no-underline">
-                        {t("privacy")}
-                    </Link>
-                    <Link href="/terms" className="hover:text-brand-blue transition-colors no-underline">
-                        {t("terms")}
-                    </Link>
-                    <Link href="/pricing" className="hover:text-brand-blue transition-colors no-underline">
-                        {t("pricing")}
-                    </Link>
 
+                    {LinkArr.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            className="hover:text-brand-blue transition-colors no-underline"
+                        >
+                            {t(item.labelKey)}
+                        </Link>
+                    ))}
                     <LanguageDropdown />
-
-                    <a
+                    <Link
                         href="https://ko-fi.com/connectthedotsprintable"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -147,7 +157,7 @@ export default function Header() {
                     >
                         <Image src="/images/ko-fi.png" width={20} height={20} alt="Ko-fi icon" />
                         <span className="font-bold text-donate-red">{t("donate")}</span>
-                    </a>
+                    </Link>
 
                     {isLoggedIn ? (
                         <div className="flex items-center gap-3 ml-2">
@@ -178,34 +188,29 @@ export default function Header() {
                             </div>
                         )}
 
-                        <Link href="/" className="hover:text-brand-blue no-underline" onClick={() => setIsMobileMenuOpen(false)}>
-                            {t("home")}
-                        </Link>
-                        <Link href="/printable-connect-the-dots" className="hover:text-brand-blue no-underline" onClick={() => setIsMobileMenuOpen(false)}>
-                            {t("allPrintables")}
-                        </Link>
-                        <Link href="/how-to-make" className="hover:text-brand-blue no-underline" onClick={() => setIsMobileMenuOpen(false)}>
-                            {t("howToMake")}
-                        </Link>
-                        <Link href="/privacy" className="hover:text-brand-blue no-underline" onClick={() => setIsMobileMenuOpen(false)}>
-                            {t("privacy")}
-                        </Link>
-                        <Link href="/terms" className="hover:text-brand-blue no-underline" onClick={() => setIsMobileMenuOpen(false)}>
-                            {t("terms")}
-                        </Link>
+                        {LinkArr.map((item) => (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className="hover:text-brand-blue no-underline"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                {/* @ts-ignore */}
+                                {t(item.labelKey)}
+                            </Link>
+                        ))}
 
                         <div className="flex flex-col gap-3 pt-2">
-                            <a
+                            <Link
                                 href="https://ko-fi.com/connectthedotsprintable"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group flex items-center justify-center gap-2 px-4 py-2 rounded-full border border-transparent border-red-100 bg-red-50 transition-all duration-300 w-fit no-underline"
+                                className="group flex items-center gap-2 px-4 py-2 ml-2 rounded-full bg-red-50 text-donate-red transition-all hover:bg-red-100 no-underline"
                             >
-                                <Heart className="w-4 h-4 text-donate-red group-hover:scale-110 transition-transform duration-300 fill-current" />
-                                <span className="text-slate-600 group-hover:text-donate-red font-semibold">
-                                    {t("donate")}
-                                </span>
-                            </a>
+
+                                <Image src="/images/ko-fi.png" width={20} height={20} alt="Ko-fi icon" />
+                                <span className="font-bold text-donate-red">{t("donate")}</span>
+                            </Link>
 
                             {isLoggedIn ? (
                                 <button

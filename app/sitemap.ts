@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/printables/core",
         "/printables/general",
         "/printables/hard",
+        "/printables/connectTheDotsGenerator",
         '/privacy',
         '/terms',
     ];

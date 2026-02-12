@@ -38,6 +38,18 @@
     "card4Title": "Dibujos Temáticos",
     "card4Desc": "Navidad, animales y más temas"
   },
+   "aiFeatures": {
+    "badge": "Tecnología de Vanguardia",
+    "title": "El Generador de Unir Puntos con IA más Avanzado",
+    "description": "Deja de buscar plantillas estáticas. Nuestro ai dot to dot generator entiende tu imaginación, convirtiendo descripciones en puzzles imprimibles en segundos.",
+    "f1Title": "De Texto a Puzzle",
+    "f1Desc": "Describe cualquier cosa y deja que nuestro dot to dot generator ai lo cree por ti al instante.",
+    "f2Title": "Líneas Ultra Nítidas",
+    "f2Desc": "Nuestra IA genera contornos limpios optimizados específicamente para el mapeo de puntos.",
+    "f3Title": "Variedad Sin Límites",
+    "f3Desc": "Crea fichas únicas para clases o fiestas que simplemente no existen en ningún otro lugar.",
+    "cta": "Probar Generador IA"
+  },
   "editorPicks": {
     "badge": "Elección del Editor",
     "title": "Los mejores Dibujos de Unir Puntos para Imprimir",

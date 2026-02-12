@@ -25,6 +25,18 @@
     "step3Title": "Download & Print Your Activity",
     "step3Desc": "Export your puzzle as a high-resolution PDF or PNG. Ready for instant printing at home or school!"
   },
+  "aiFeatures": {
+    "badge": "Cutting-Edge Technology",
+    "title": "The World's Most Advanced AI Dot to Dot Generator",
+    "description": "Stop searching for static templates. Our ai dot to dot generator understands your imagination, turning text prompts into high-quality, printable puzzles in seconds.",
+    "f1Title": "Prompt to Puzzle",
+    "f1Desc": "Describe anything—from 'a robotic dragon' to 'a Victorian house'—and watch our dot to dot generator ai build it.",
+    "f2Title": "Perfect Line Clarity",
+    "f2Desc": "Unlike standard filters, our AI generates clean vector-like outlines specifically optimized for dot-to-dot mapping.",
+    "f3Title": "Limitless Variety",
+    "f3Desc": "Create unique worksheets for classrooms, parties, or therapy that simply don't exist anywhere else.",
+    "cta": "Try AI Generator"
+  },
   "categories": {
     "title": "Custom Printable Dot to Dot Worksheets for All Ages",
     "subtitle": "Explore our most downloaded collections.",

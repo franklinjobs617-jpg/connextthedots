@@ -94,9 +94,9 @@ export default async function Page({ params }: Props) {
                                     <p className="text-gray-700 mb-6 text-md">Accede inmediatamente a una mezcla diversa de dibujos fáciles, medios y difíciles. ¡Perfecto para todas las edades y niveles de habilidad!</p>
 
                                     <div>
-                                        <a href="/ThemedPrintables.pdf" download className="inline-flex items-center justify-center px-4 py-2 bg-brand-blue text-white font-bold rounded-full transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                        <Link href="/ThemedPrintables.pdf" download className="inline-flex items-center justify-center px-4 py-2 bg-brand-blue text-white font-bold rounded-full transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                             <Download className="h-6 w-6 mr-2" /> DESCARGAR PDF GRATIS AHORA
-                                        </a>
+                                        </Link>
                                         <p className="text-xs text-gray-500 mt-3 ml-2">* Sin registro de correo. Descarga inmediata.</p>
                                     </div>
                                 </div>
@@ -190,9 +190,9 @@ export default async function Page({ params }: Props) {
                                     <p className="text-gray-700 mb-6 text-md">Access a diverse mix of easy, medium, and hard difficulty dot-to-dot printables immediately. Perfect for all ages and skill levels!</p>
 
                                     <div>
-                                        <a href="../ThemedPrintables.pdf" download className="inline-flex items-center justify-center px-4 py-2 bg-brand-blue text-white font-bold rounded-full transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                        <Link href="/ThemedPrintables.pdf" download className="inline-flex items-center justify-center px-4 py-2 bg-brand-blue text-white font-bold rounded-full transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                             <Download className="h-6 w-6 mr-2" /> FREE PDF DOWNLOAD NOW
-                                        </a>
+                                        </Link>
                                         <p className="text-xs text-gray-500 mt-3 ml-2">* No email required. Immediate download.</p>
                                     </div>
                                 </div>

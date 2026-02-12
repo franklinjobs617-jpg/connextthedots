@@ -1,20 +1,21 @@
 "use client";
 import { useState } from 'react';
 import type { Metadata } from "next";
-
+import { Wand2, Brain, Sparkles, Layout, ArrowRight, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import Image from 'next/image';
 import { getAlternates, getUrl } from "@/lib/metadata";
 import { getTranslations } from "next-intl/server";
+import { useLocale } from "next-intl";
 type Props = {
     params: { locale: string };
 };
 
 
 export default function HomeContent() {
-    // Translations based on your provided JSON structure
+    const locale = useLocale();
     const tHero = useTranslations("hero");
     const tHowToGuide = useTranslations("howToGuide");
     const tCategories = useTranslations("categories");
@@ -24,6 +25,7 @@ export default function HomeContent() {
     const tPrintingGuide = useTranslations("printingGuide");
     const tFaq = useTranslations("faq");
     const tContact = useTranslations("contact");
+    const tAiFeatures = useTranslations("aiFeatures");
 
     // NOTE: These namespaces were not in your provided JSON, 
     // but are required for the "Custom Generator" section and "Editor" view found in the HTML.
@@ -73,6 +75,11 @@ export default function HomeContent() {
         if (handle) {
             handle.style.left = `${sliderValue}%`;
         }
+    };
+    const heroAiGoBtn = (index: number) => {
+
+
+        // 函数体暂时为空，待实现具体功能
     };
 
     return (
@@ -274,6 +281,7 @@ export default function HomeContent() {
 
                                                     <button
                                                         id="hero-ai-go-btn"
+
                                                         className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
                                                     >
                                                         <span>{tHero("aiButton")}</span>
@@ -435,7 +443,59 @@ export default function HomeContent() {
                         </div>
                     </div>
                 </section>
+                {/* 3. AI Generator Feature Section - 优化后的适配版本 */}
+                <section className="py-24 bg-white relative overflow-hidden">
+                    {/* 背景装饰：改为更柔和的浅色光晕，不再使用深色块 */}
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-50/50 blur-[100px] rounded-full pointer-events-none"></div>
+                    <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-50/50 blur-[100px] rounded-full pointer-events-none"></div>
 
+                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                        {/* 左侧文字内容 */}
+                        <div className=" text-center lg:text-left">
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-brand-blue text-xs font-bold uppercase tracking-wider mb-6">
+                                <Sparkles className="w-3.5 h-3.5 fill-current" />
+                                {tAiFeatures("badge")}
+                            </div>
+                            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight tracking-tight">
+                                {tAiFeatures("title")}
+                            </h2>
+                            <p className="text-lg text-slate-500 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                                {tAiFeatures("description")}
+                            </p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
+                                <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 transition-colors hover:bg-white hover:shadow-sm">
+                                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-brand-blue mb-4">
+                                        <Wand2 className="w-5 h-5" />
+                                    </div>
+                                    <h4 className="font-bold text-lg text-slate-800 mb-2">{tAiFeatures("f1Title")}</h4>
+                                    <p className="text-sm text-slate-500 leading-relaxed">{tAiFeatures("f1Desc")}</p>
+                                </div>
+                                <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 transition-colors hover:bg-white hover:shadow-sm">
+                                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-brand-purple mb-4">
+                                        <Brain className="w-5 h-5" />
+                                    </div>
+                                    <h4 className="font-bold text-lg text-slate-800 mb-2">{tAiFeatures("f2Title")}</h4>
+                                    <p className="text-sm text-slate-500 leading-relaxed">{tAiFeatures("f2Desc")}</p>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-center lg:justify-start">
+                                <button
+                                    onClick={() => {
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        const aiTab = document.getElementById('tab-ai');
+                                        if (aiTab) aiTab.click();
+                                    }}
+                                    className="mt-10 group flex items-center gap-3 px-8 py-4 bg-brand-blue text-white font-bold rounded-2xl hover:bg-indigo-700 transition-all active:scale-95 shadow-lg shadow-indigo-200"
+                                >
+                                    {tAiFeatures("cta")}
+                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 {/* 3. Categories */}
                 <section id="categories" className="py-24 bg-brand-light">
                     <div className="max-w-7xl mx-auto px-6">
@@ -1708,7 +1768,7 @@ export default function HomeContent() {
             </div>
 
             {/* Logic Component for Client Side Interactivity */}
-            <DotGeneratorClient />
+            <DotGeneratorClient locale={locale} />
         </main>
     );
 }
