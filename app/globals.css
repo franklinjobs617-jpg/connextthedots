@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  /* 1. 定义品牌颜色 */
+  --color-brand-blue: rgb(79 70 229);
+  --color-brand-purple: #9333EA;
+  --color-brand-dark: #0F172A;
+  --color-brand-light: #F8FAFC;
+  --color-brand-accent: #F43F5E;
+
+  /* 2. 映射已有的变量（如果你坚持要用这些变量名） */
+  --color-brand-text: rgb(var(--brand-text));
+  --color-donate-red: rgb(var(--donate-red));
+
+  /* 3. 字体与动画 */
+  --font-sans: "Poppins", ui-sans-serif, system-ui;
+
+  --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+  --shadow-floating: 0 20px 60px -15px rgba(0, 0, 0, 0.15);
+
+  --animate-heartbeat: heartbeat 1.5s infinite ease-in-out;
+
+  @keyframes heartbeat {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.15);
+    }
+  }
+}
+
+/* Tab Transitions */
+.tab-panel {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  width: 100%; /* 确保宽度撑满 */
+}
+
+.tab-panel.inactive {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  /* 只有隐藏的那个才是 absolute，防止占位 */
+  position: absolute; 
+  top: 0;
+  left: 0;
+  visibility: hidden; /* 额外保险 */
+}
+
+.tab-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative; /* 显示的那个是 relative，负责撑开父容器高度 */
+  visibility: visible;
+  pointer-events: auto;
+}

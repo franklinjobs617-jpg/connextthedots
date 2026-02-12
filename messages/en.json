@@ -1,0 +1,257 @@
+{
+  "hero": {
+    "badge": "✨ Free Dot to Dot Generator ✨",
+    "titleMain": "The Best Free Connect the Dots",
+    "titleHighlight": "Generator & Maker",
+    "subtitle": "Instantly create custom printable worksheets for kids & adults. No watermarks.",
+    "tabUpload": "Upload Photo",
+    "tabAi": "AI Generator",
+    "uploadCta": "Upload Image to Generate Puzzle",
+    "uploadHint": "click or drop (JPG, PNG)",
+    "noImageLabel": "No image? Click to Try These:",
+    "aiPlaceholder": "Describe your drawing (e.g., A cute cat)...",
+    "aiCredits": "free daily",
+    "aiButton": "Generate",
+    "sliderOriginal": "Original",
+    "sliderPuzzle": "Puzzle"
+  },
+  "howToGuide": {
+    "title": "Make Your Own Printable Dot to Dot Puzzles in 3 Steps",
+    "subtitle": "Turn any photo or drawing into a professional dot-to-dot worksheet in 3 simple steps. Perfect for parents, teachers, and puzzle enthusiasts.",
+    "step1Title": "Upload Your Image",
+    "step1Desc": "Choose a clear photo or drawing. Our AI works best with high-contrast images or simple line art.",
+    "step2Title": "Adjust Difficulty",
+    "step2Desc": "Select Easy, Medium, or Hard. You can also manually set the dot count to match the skill level.",
+    "step3Title": "Download & Print Your Activity",
+    "step3Desc": "Export your puzzle as a high-resolution PDF or PNG. Ready for instant printing at home or school!"
+  },
+  "categories": {
+    "title": "Custom Printable Dot to Dot Worksheets for All Ages",
+    "subtitle": "Explore our most downloaded collections.",
+    "viewAll": "View All Categories",
+    "card1Title": "Easy Connect the Dots for Kids (Numbers 1-20)",
+    "card1Desc": "Easy designs for children",
+    "card2Title": "Extreme Dot to Dot for Adults (Hard & Intricate)",
+    "card2Desc": "Complex designs for adults",
+    "card3Title": "Educational Alphabet Worksheets for Preschool",
+    "card3Desc": "Learning through play",
+    "card4Title": "Holidays, animals & more Themed Printables",
+    "card4Desc": "Holidays, animals & more Themes"
+  },
+  "editorPicks": {
+    "badge": "Editor's Pick",
+    "title": "Explore Popular Dot to Dot Categories",
+    "subtitle": "Top-rated worksheets created by our community.",
+    "card1Tag1": "Easy",
+    "card1Tag2": "Animals",
+    "card1Title": "Animal Connect the Dots (Dogs, Cats, Bunnies)",
+    "card1Desc": "Simple dot to dot printable for young children with cute animal designs.",
+    "card2Tag1": "Medium",
+    "card2Tag2": "Holiday Dot to Dot",
+    "card2Title": "Holiday & Christmas Dot to Dot Printables",
+    "card2Desc": "Festive Christmas themed connect the dots printable for all ages.",
+    "card3Tag1": "Hard",
+    "card3Tag2": "Advanced Mandala Dots",
+    "card3Title": "Mandala & Geometric Dot to Dot",
+    "card3Desc": "Complex connect the dots printable for adults with mandala design.",
+    "downloads": "k",
+    "getPrintable": "Get Printable",
+    "statusFree": "Free"
+  },
+  "features": {
+    "title": "Professional Features of Our AI Dot to Dot Maker",
+    "subtitle": "We offer the best collection of printable dot to dot worksheets for all ages and skill levels.",
+    "f1Title": "Instant Download",
+    "f1Body": "Get your connect the dots printables immediately. Available in high-res PDF and PNG formats.",
+    "f2Title": "No Watermarks",
+    "f2Body": "All our dot to dot printables are completely free of watermarks for clean, professional printing.",
+    "f3Title": "Custom Designs",
+    "f3Body": "Create your own custom connect the dots printables with our easy-to-use generator tool."
+  },
+  "demo": {
+    "badge": "Demo",
+    "title": "Watch How the Connect the Dots Generator Works",
+    "subtitle": "From upload to download in under 30 seconds. Watch how seamless the experience is on any device.",
+    "tabDesktop": "Desktop",
+    "tabMobile": "Mobile",
+    "mobileHint": "Optimized for touch & swipe."
+  },
+  "printingGuide": {
+    "title": "Printing Guide for Connect the Dots Worksheets",
+    "settingsTitle": "Best Printing Settings",
+    "setting1": "Use letter size paper (8.5\" x 11\") for standard printing",
+    "setting2": "Set print quality to \"high\" or \"best\" for clear dots",
+    "setting3": "Select \"actual size\" (not scaled) in print options",
+    "setting4": "Conserve ink: Choose black and white printing.",
+    "setting5": "Choose portrait orientation for most designs",
+    "tipsTitle": "Download & Print Tips",
+    "tip1": "Download the PDF version for the best printing results",
+    "tip2": "For younger children, print at 125% scale for larger dots",
+    "tip3": "Use thicker paper (cardstock) for longer-lasting activities",
+    "tip4": "Save ink by deselecting \"background graphics\" in print settings"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q1": "Are your connect the dots printables really free?",
+    "a1": "Yes, all our connect the dots printables are completely free to download and print. We don't require any payment or subscription to access our basic printables. Some premium designs may be available for a small fee, but they're clearly marked.",
+    "q2": "What file formats are available for download?",
+    "a2": "All our connect the dots printables are available in PDF format, which is ideal for printing. Many designs also come in high-resolution PNG image format. The PDF format is recommended for the best printing results as it preserves the layout and quality regardless of your device or printer.",
+    "q3": "Can I use these printables for commercial purposes?",
+    "a3": "Our connect the dots printables are for personal and educational use only. They cannot be used for commercial purposes, including selling the printables or using them in products for sale. If you're a teacher, you may use them in your classroom and distribute them to your students.",
+    "q4": "How do I create a custom connect the dots printable?",
+    "a4": "You can create custom connect the dots printables using our generator tool. Simply upload an image, choose the number of dots and difficulty level, and our tool will convert your image into a connect the dots worksheet. You can then download it in PDF or image format for printing.",
+    "q5": "Do you have connect the dots printables for adults?",
+    "a5": "Yes, we have a large collection of connect the dots printables designed specifically for adults. These include more complex designs with hundreds of dots, intricate patterns, and detailed images that provide a relaxing, meditative activity. You can find them in our \"Adult Connect the Dots\" category."
+  },
+  "contact": {
+    "title": "Connect the Dots Maker Help & Support",
+    "subtitle": "Need help with the generator or have a feature request? We'd love to hear from you.",
+    "button": "Contact Support"
+  },
+  "customGenerator": {
+    "title": "Create Your Own Connect the Dots Printables",
+    "subtitle": "Our custom connect the dots generator lets you transform any image into a printable dot to dot worksheet. Perfect for creating personalized activities for kids, educational materials, or unique adult coloring pages.",
+    "f1Title": "Upload your own images",
+    "f1Desc": "Turn photos or illustrations into connect the dots",
+    "f2Title": "Adjust difficulty level",
+    "f2Desc": "Control the number of dots for any skill level. Our generator allows you to create dot-to-dot puzzles from 1 to 20, 1 to 100, or any custom range.",
+    "f3Title": "Custom designs in seconds",
+    "f3Desc": "Turn any image into a connect the dots printable",
+    "button": "Try Custom Generator",
+    "enhanceTitle": "Enhance Image?",
+    "enhanceDesc": "Is this a real photo? We can automatically remove the background for better dot placement.",
+    "btnRemoveBg": "Yes, Remove Background",
+    "btnKeepOriginal": "No, Keep Original",
+    "removingBg": "Removing background..."
+  },
+  "editor": {
+    "uploadNew": "Upload New Image",
+    "downloadImage": "Download Image",
+    "downloadPdf": "Download PDF",
+    "recommended": "RECOMMENDED",
+    "generating": "Generating...",
+    "difficulty": "Adjustable Difficulty for All Skill Levels",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "presetDesc": {
+      "easy": "Perfect for kids (20-30 dots, large font)",
+      "medium": "Standard difficulty (50-60 dots)",
+      "hard": "Expert challenge (80+ dots, no hints)"
+    },
+    "bgHintTitle": "Background Hint",
+    "smartHint": "Smart Hint",
+    "lightTrace": "Light Trace",
+    "noHint": "No Hint",
+    "eraserSize": "Eraser Size",
+    "resetCanvas": "Reset Canvas",
+    "customSettings": "Custom Settings",
+    "dotCount": "Dot Count",
+    "dotsUnit": "Dots",
+    "fontSize": "Font Size",
+    "dotRadius": "Dot Radius",
+    "dotColor": "Dot Color"
+  },
+  "header": {
+    "logo": "ConnectTheDots",
+    "logoAlt": "ConnectTheDots Logo",
+    "home": "Home",
+    "allPrintables": "All Printables",
+    "howToMake": "How to Make",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "feedback": "Feedback",
+    "christmas": "Christmas",
+    "donate": "Donate",
+    "ariaToggle": "Toggle menu",
+    "langName": "EN",
+    "login": "Login",
+    "signOut":"sign Out",
+"pricing": "Pricing"
+  },
+  "footer": {
+    "description": "Your source for high-quality, free connect the dots printables for kids and adults.",
+    "language": "Language",
+    "colPrintables": "Printables",
+    "colLegal": "Legal",
+    "home": "Home",
+    "allPrintables": "All Printables",
+    "howToMake": "How to Make",
+    "christmas": "Christmas Printables",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "feedback": "Feedback",
+    "popularCharacter": "Popular Character Dot-to-Dot Printables",
+    "animalPdf": "Free Animal Dot-to-Dot Printables PDF",
+    "rights": "All rights reserved.",
+    "disclaimer": "All printables are for personal and educational use only."
+  },
+  "pricing": {
+    "heroTitle": "Choose the Perfect Plan for Your Creativity",
+    "heroSubtitle": "Unlock high-definition exports and unlimited AI generations with our transparent pricing.",
+    "title": "Pricing - AI Connect the Dots Generator | Unlimited Custom Puzzles",
+    "description":"Choose the best plan to unlock high-resolution AI dot-to-dot generation. Affordable pricing for teachers, parents, and professional creators. Get watermark-free printables instantly.",
+    "badgePopular": "Most Popular",
+    "saveNote": "Save 54% Compared to Monthly",
+    "usd": "USD",
+    "tiers": {
+      "saver": {
+        "name": "Life-saver Pack",
+        "desc": "Best for one-off custom projects",
+        "price": "4.90",
+        "unit": "once",
+        "button": "Buy Credits Once",
+        "features": [
+          "50 AI Generation Credits",
+          "High-Resolution PDF Export",
+          "Remove Watermarks"
+        ]
+      },
+      "monthly": {
+        "name": "Monthly Creator",
+        "desc": "Unlimited creative possibilities",
+        "price": "8.90",
+        "unit": "/month",
+        "button": "Start Membership",
+        "features": [
+          "200 AI Credits Per Month",
+          "HD PDF & Print-ready Files",
+          "Commercial License",
+          "Priority Credit Refill"
+        ]
+      },
+      "annual": {
+        "name": "Annual Master",
+        "desc": "Serious tools for serious creators",
+        "price": "49.00",
+        "unit": "/year",
+        "button": "Go Pro Yearly",
+        "features": [
+          "Unlimited AI Generations*",
+          "SVG & Vector PDF Export",
+          "Commercial License",
+          "All Premium Features"
+        ]
+      }
+    },
+    "aiTech": {
+      "title": "Our AI \"Dot-to-Dot\" Generation Technology",
+      "body": "We are currently in Beta. Our AI generator works best with clear outlines and medium-complexity subjects. While it may not yet handle ultra-complex 2000-dot scenes perfectly on the first try, your subscription directly funds our server costs and algorithm improvements. If a generation isn't to your liking, your generous credit balance allows for multiple iterations to get the perfect dot-to-dot result."
+    },
+    "faq": {
+      "title": "Everything You Need to Know",
+      "q1": "What qualifies as an \"AI Credit\"?",
+      "a1": "One credit is consumed whenever you generate a new dot-to-dot worksheet using our AI tool. Regular downloads of our pre-made library remain free or ad-supported.",
+      "q2": "Can I sell the generated dot-to-dot worksheets?",
+      "a2": "Yes! With the Monthly Creator and Annual Master plans, you receive a full commercial license. You can include these worksheets in your books for Amazon KDP, sell digital PDFs on Etsy, or use them in your own classroom materials.",
+      "q3": "Why is there a credit system?",
+      "a3": "AI generation requires significant GPU computing power. The credit system allows us to keep the basic tool free for everyone while providing professional-grade power to those who need it.",
+      "q4": "How do I cancel my subscription?",
+      "a4": "No hidden tricks. You can cancel your subscription at any time via your account dashboard. You will continue to have access to premium features until the end of your billing period."
+    }
+  },
+  "metadata": {
+    "homeTitle": "Free Connect the Dots Generator | Online Dot to Dot Maker",
+    "homeDesc": "Instantly create custom printables with our Free Connect the Dots Generator & Maker. High-quality worksheets for kids/adults—no watermarks, no sign-up needed. Start creating now!  "
+  }
+}

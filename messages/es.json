@@ -1,0 +1,246 @@
+{
+  "hero": {
+    "badge": "✨ Generador de Unir Puntos Sin Costo",
+    "titleMain": "Generador de",
+    "titleHighlight": "Dibujos de Unir Puntos para Imprimir",
+    "subtitle": "Convierte automáticamente cualquier foto en un rompecabezas con nuestro generador gratuito de dibujos de unir puntos. Crea al instante ejercicios de unir puntos personalizados y unir puntos para imprimir para niños y adultos. Sin marcas de agua.",
+    "tabUpload": "Subir Foto",
+    "tabAi": "Generador IA",
+    "uploadCta": "Subir Imagen para Generar Puzzle",
+    "uploadHint": "o arrastra y suelta (JPG, PNG)",
+    "noImageLabel": "¿Sin imagen? Prueba estas:",
+    "aiPlaceholder": "Describe tu dibujo (ej. Un gato lindo)...",
+    "aiCredits": "gratis al día",
+    "aiButton": "Próximamente",
+    "sliderOriginal": "Original",
+    "sliderPuzzle": "Ficha"
+  },
+  "howToGuide": {
+    "title": "Crea tus propios Ejercicios de Unir Puntos en 3 Pasos",
+    "subtitle": "Convierte cualquier foto o ilustración en una ficha profesional de unir puntos en 4 simples pasos. Perfecto para crear actividades personalizadas para niños y materiales educativos.",
+    "step1Title": "Sube tu Imagen",
+    "step1Desc": "Elige una foto o dibujo nítido. Nuestra IA funciona mejor con imágenes de alto contraste o arte lineal simple.",
+    "step2Title": "Ajusta la Dificultad",
+    "step2Desc": "Selecciona Fácil, Medio o Difícil. También puedes ajustar manualmente la cantidad de puntos para adaptarlos al nivel de habilidad.",
+    "step3Title": "Descarga e Imprime tu Actividad",
+    "step3Desc": "Exporta tu rompecabezas como un PDF o PNG de alta resolución. ¡Listo para imprimir al instante en casa o en la escuela!"
+  },
+  "categories": {
+    "title": "Explora nuestras Actividades de Unir Puntos",
+    "subtitle": "Explora nuestras colecciones más descargadas.",
+    "viewAll": "Ver Todas las Categorías",
+    "card1Title": "Unir puntos para niños (Números 1-20)",
+    "card1Desc": "Diseños sencillos para los más pequeños",
+    "card2Title": "Dibujos de unir puntos para adultos (Difíciles)",
+    "card2Desc": "Diseños complejos para adultos",
+    "card3Title": "Ejercicios de unir puntos educativos",
+    "card3Desc": "Aprender jugando",
+    "card4Title": "Dibujos Temáticos",
+    "card4Desc": "Navidad, animales y más temas"
+  },
+  "editorPicks": {
+    "badge": "Elección del Editor",
+    "title": "Los mejores Dibujos de Unir Puntos para Imprimir",
+    "subtitle": "Las mejores fichas creadas por nuestra comunidad.",
+    "card1Tag1": "Fácil",
+    "card1Tag2": "Animales",
+    "card1Title": "Dibujos de unir puntos de animales (Perros, Gatos, Conejos)",
+    "card1Desc": "Dibujo sencillo para niños pequeños con diseños de animales adorables.",
+    "card2Tag1": "Medio",
+    "card2Tag2": "Navidad",
+    "card2Title": "Actividades de unir puntos de Navidad",
+    "card2Desc": "Unir puntos temático navideño para todas las edades.",
+    "card3Tag1": "Difícil",
+    "card3Tag2": "Mandala Avanzada",
+    "card3Title": "Ejercicios de unir puntos difíciles",
+    "card3Desc": "Unir puntos complejo para adultos con diseño de mandala.",
+    "downloads": "k",
+    "getPrintable": "Obtener Ficha",
+    "statusFree": "Gratis"
+  },
+  "features": {
+    "title": "Ventajas de nuestro Creador de Unir Puntos con IA",
+    "subtitle": "Ofrecemos la mejor colección de fichas de unir puntos para imprimir para todas las edades y niveles.",
+    "f1Title": "Descarga Instantánea",
+    "f1Body": "Obtén tus dibujos de unir puntos al instante. Disponibles en formatos PDF y PNG de alta resolución.",
+    "f2Title": "Sin Marcas de Agua",
+    "f2Body": "Todas nuestras fichas de unir puntos están totalmente libres de marcas de agua para una impresión limpia y profesional.",
+    "f3Title": "Diseños Personalizados",
+    "f3Body": "Crea tus propios ejercicios de unir puntos personalizados con nuestra herramienta generadora fácil de usar."
+  },
+  "demo": {
+    "badge": "Demo",
+    "title": "Mira Cómo Funciona el Generador de Unir Puntos",
+    "subtitle": "Desde la subida hasta la descarga en menos de 30 segundos. Mira qué fácil es en cualquier dispositivo.",
+    "tabDesktop": "Escritorio",
+    "tabMobile": "Móvil",
+    "mobileHint": "Optimizado para gestos táctiles."
+  },
+  "printingGuide": {
+    "title": "Guía para imprimir tus Actividades de Unir Puntos",
+    "settingsTitle": "Mejores Ajustes de Impresión",
+    "setting1": "Usa papel tamaño carta (8.5\" x 11\") para impresión estándar",
+    "setting2": "Ajusta la calidad a \"alta\" para puntos claros",
+    "setting3": "Selecciona \"tamaño real\" en las opciones de impresión",
+    "setting4": "Ahorra tinta: Elige impresión en blanco y negro.",
+    "setting5": "Usa orientación vertical para la mayoría de diseños",
+    "tipsTitle": "Consejos de Descarga e Impresión",
+    "tip1": "Descarga la versión PDF para obtener los mejores resultados de impresión",
+    "tip2": "Para niños pequeños, imprime a escala 125% para puntos más grandes",
+    "tip3": "Usa papel más grueso (cartulina) para actividades más duraderas",
+    "tip4": "Desactiva \"gráficos de fondo\" en ajustes para ahorrar tinta"
+  },
+  "faq": {
+    "title": "Dudas Frecuentes",
+    "q1": "¿Son realmente gratis vuestros dibujos de unir puntos?",
+    "a1": "Sí, todos nuestros dibujos de unir puntos son completamente gratuitos para descargar e imprimir. No requerimos ningún pago ni suscripción para acceder a nuestras fichas básicas.",
+    "q2": "¿Qué formatos de archivo están disponibles?",
+    "a2": "Todas nuestras fichas están disponibles en formato PDF, ideal para imprimir. Muchos diseños también vienen en formato de imagen PNG de alta resolución.",
+    "q3": "¿Puedo usar estas fichas para fines comerciales?",
+    "a3": "Nuestras fichas de unir puntos son solo para uso personal y educativo. No pueden venderse ni usarse en productos comerciales. Si eres profesor, puedes usarlas en clase.",
+    "q4": "¿Cómo creo una ficha de unir puntos personalizada?",
+    "a4": "Puedes crearlas usando nuestra herramienta generadora. Simplemente sube una imagen, elige el número de puntos y la dificultad, y nuestra herramienta convertirá tu imagen en una ficha lista para imprimir.",
+    "q5": "¿Tenéis fichas de unir puntos para adultos?",
+    "a5": "Sí, tenemos una gran colección para adultos. Incluyen diseños complejos con cientos de puntos e intrincados patrones. Los encontrarás en nuestra categoría \"Unir puntos para adultos\"."
+  },
+  "contact": {
+    "title": "¿Tienes Preguntas o Sugerencias?",
+    "subtitle": "¿Necesitas ayuda con el generador o tienes alguna petición? Nos encantaría escucharte.",
+    "button": "Contactar Soporte"
+  },
+  "customGenerator": {
+    "title": "Personaliza tus Ejercicios de Unir Puntos para Imprimir",
+    "subtitle": "Nuestro generador personalizado te permite transformar cualquier imagen en una ficha de unir puntos para imprimir. Perfecto para crear actividades personalizadas para niños, materiales educativos o páginas de colorear únicas para adultos.",
+    "f1Title": "Sube tus propias imágenes",
+    "f1Desc": "Convierte fotos o ilustraciones en dibujos de unir puntos.",
+    "f2Title": "Ajusta el nivel de dificultad",
+    "f2Desc": "Controla el número de puntos para cualquier nivel de habilidad. Nuestro generador te permite crear dibujos de unir puntos del 1 al 20, del 1 al 100 o cualquier rango personalizado.",
+    "f3Title": "Diseños personalizados en segundos",
+    "f3Desc": "Convierte cualquier imagen en una ficha de unir puntos para imprimir.",
+    "button": "Probar Generador Personalizado",
+    "enhanceTitle": "¿Mejorar Imagen?",
+    "enhanceDesc": "¿Es una foto real? Podemos eliminar el fondo automáticamente para colocar mejor los puntos.",
+    "btnRemoveBg": "Sí, Eliminar Fondo",
+    "btnKeepOriginal": "No, Mantener Original",
+    "removingBg": "Eliminando fondo..."
+  },
+  "editor": {
+    "uploadNew": "Subir Nueva Imagen",
+    "downloadImage": "Descargar Imagen",
+    "downloadPdf": "Descargar PDF",
+    "recommended": "RECOMENDADO",
+    "generating": "Generando...",
+    "difficulty": "Dificultad Ajustable para Todos los Niveles",
+    "easy": "Fácil",
+    "medium": "Medio",
+    "hard": "Difícil",
+    "presetDesc": {
+      "easy": "Perfecto para niños (20-30 puntos, fuente grande)",
+      "medium": "Dificultad estándar (50-60 puntos)",
+      "hard": "Desafío experto (más de 80 puntos, sin pistas)"
+    },
+    "bgHintTitle": "Ayuda de Fondo",
+    "smartHint": "Pista Inteligente",
+    "lightTrace": "Trazado Suave",
+    "noHint": "Sin Ayuda",
+    "eraserSize": "Tamaño Borrador",
+    "resetCanvas": "Reiniciar Lienzo",
+    "customSettings": "Ajustes Personalizados",
+    "dotCount": "Cant. Puntos",
+    "dotsUnit": "Puntos",
+    "fontSize": "Tamaño Fuente",
+    "dotRadius": "Radio Punto",
+    "dotColor": "Color Punto"
+  },
+   "header": {
+    "logo": "ConnectTheDots",
+    "logoAlt": "Logo de Unir Puntos",
+    "home": "Inicio",
+    "allPrintables": "Todas las Fichas",
+    "howToMake": "Cómo Crear",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "feedback": "Feedback",
+    "christmas": "Navidad",
+    "donate": "Donar",
+    "ariaToggle": "Abrir menú",
+    "langName": "ES",
+    "login": "Iniciar Sesión",
+    "signOut":"Cerrar sesión",
+"pricing": "Precios"
+
+
+  },
+  "footer": {
+    "description": "Tu fuente de dibujos de unir puntos de alta calidad, gratis para niños y adultos.",
+    "language": "Idioma",
+    "colPrintables": "Fichas",
+    "colLegal": "Legal",
+    "home": "Inicio",
+    "allPrintables": "Todas las Fichas",
+    "howToMake": "Cómo Crear",
+    "christmas": "Dibujos de Navidad",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "feedback": "Comentarios",
+    "popularCharacter": "Personajes Populares",
+    "animalPdf": "Animales en PDF Gratis",
+    "rights": "Todos los derechos reservados.",
+    "disclaimer": "Los dibujos son solo para uso personal y educativo."
+  },
+   "pricing": {
+  "heroTitle": "Elige el Plan Perfecto para tu Creatividad",
+    "heroSubtitle": "Desbloquea exportaciones en alta definición y generaciones ilimitadas con IA.",
+     "title": "Precios - Generador de Unir Puntos con IA | Crea Fichas Personalizadas",
+    "description":"Elige el plan ideal para crear fichas de unir puntos personalizadas con IA. Exportaciones en alta resolución para niños y adultos. ¡Empieza ahora y descarga sin marcas de agua!", 
+    "badgePopular": "Más Popular",
+    "saveNote": "Ahorra un 54% comparado con el mensual",
+    "usd": "USD",
+    "tiers": {
+      "saver": {
+        "name": "Pack de Ahorro",
+        "desc": "Ideal para proyectos personalizados únicos",
+        "price": "4.90",
+        "unit": "una vez",
+        "button": "Comprar Créditos Una Vez",
+        "features": ["50 Créditos de Generación IA", "Exportación PDF en Alta Resolución", "Eliminar Marcas de Agua"]
+      },
+      "monthly": {
+        "name": "Creador Mensual",
+        "desc": "Posibilidades creativas ilimitadas",
+        "price": "8.90",
+        "unit": "/mes",
+        "button": "Iniciar Suscripción",
+        "features": ["200 Créditos IA al mes", "Archivos HD PDF listos para imprimir", "Licencia Comercial", "Recarga de Créditos Prioritaria"]
+      },
+      "annual": {
+        "name": "Maestro Anual",
+        "desc": "Herramientas serias para creadores serios",
+        "price": "49.00",
+        "unit": "/año",
+        "button": "Hacerse Pro Anual",
+        "features": ["Generaciones IA Ilimitadas*", "Exportación SVG y PDF Vectorial", "Licencia Comercial", "Todas las Funciones Premium"]
+      }
+    },
+    "aiTech": {
+      "title": "Nuestra Tecnología de Generación de \"Unir Puntos\" con IA",
+      "body": "Actualmente estamos en fase Beta. Nuestro generador de IA funciona mejor con contornos claros y temas de complejidad media. Aunque es posible que aún no maneje perfectamente escenas ultra complejas de 2000 puntos al primer intento, tu suscripción financia directamente nuestros costos de servidor y mejoras del algoritmo. Si una generación no es de tu agrado, tu generoso saldo de créditos permite múltiples iteraciones para obtener el resultado perfecto."
+    },
+    "faq": {
+      "title": "Todo lo que necesitas saber",
+      "q1": "¿Qué cuenta como un \"Crédito IA\"?",
+      "a1": "Se consume un crédito cada vez que generas una nueva ficha de unir puntos usando nuestra herramienta de IA. Las descargas regulares de nuestra biblioteca prefabricada siguen siendo gratuitas o con publicidad.",
+      "q2": "¿Puedo vender las fichas generadas?",
+      "a2": "¡Sí! Con los planes Creador Mensual y Maestro Anual, recibes una licencia comercial completa. Puedes incluir estas fichas en tus libros para Amazon KDP, vender PDFs digitales en Etsy o usarlas en tus propios materiales de clase.",
+      "q3": "¿Por qué hay un sistema de créditos?",
+      "a3": "La generación por IA requiere una potencia de cómputo GPU significativa. El sistema de créditos nos permite mantener la herramienta básica gratuita para todos mientras proporcionamos potencia de nivel profesional a quienes la necesitan.",
+      "q4": "¿Cómo cancelo mi suscripción?",
+      "a4": "Sin trucos. Puedes cancelar tu suscripción en cualquier momento a través del panel de tu cuenta. Seguirás teniendo acceso a las funciones premium hasta el final de tu período de facturación."
+    }
+  },
+  "metadata": {
+    "homeTitle": "Dibujos de Unir Puntos para Imprimir Gratis | Generador de Fichas",
+    "homeDesc": "Crea y descarga dibujos de unir puntos para imprimir gratis. El mejor generador automático de fichas, ejercicios de unir puntos y actividades para niños del 1 al 20 y 1 al 100."
+  }
+
+}
