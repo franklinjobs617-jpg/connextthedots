@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import PricingContent from "./PricingContent";
 import { getAlternates, getUrl } from "@/lib/metadata";
-// 1. 修改引入：从 next-intl/server 引入 getTranslations
 import { getTranslations } from "next-intl/server";
 
 // 注意：在 Next.js 15 中，params 是一个 Promise，建议更新类型定义

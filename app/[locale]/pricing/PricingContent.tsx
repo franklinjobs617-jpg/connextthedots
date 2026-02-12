@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Check, X, Star, Zap, Cpu, ArrowRight, Loader2, CheckCircle2, AlertCircle, RefreshCcw } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 
 export default function PricingContent() {
@@ -74,7 +74,7 @@ export default function PricingContent() {
     }
 
     return (
-        <PayPalScriptProvider options={{ clientId: "AQgGwtwMZuLeZGpzyslyWLBa_wC5VRJNkXiMs4mgK-91MoWGuBez4-lvtjJacVftQ_qD1ZdxGN4_yCb6", currency: "USD", intent: "capture", components: "buttons" }}>
+        <>
             <div className="bg-slate-50 min-h-screen text-slate-900 pb-20 pt-10">
                 <div className="max-w-5xl mx-auto text-center px-4">
                     <h1 className="text-5xl font-black mb-4 tracking-tight">
@@ -168,9 +168,7 @@ export default function PricingContent() {
                     </div>
                 </div>
             </section>
-
-
-        </PayPalScriptProvider>
+        </>
     );
 }
 
