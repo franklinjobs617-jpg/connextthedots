@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'cdn.prod.website-files.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'media.theresanaiforthat.com',
+
+            }
 
         ],
         // domains: ['pub-476193f3c5084ebaabd517e2c8788715.r2.dev', "cdn.prod.website-files.com"],

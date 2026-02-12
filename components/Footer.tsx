@@ -9,6 +9,7 @@ import {
     Facebook,
     Share2
 } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
     const t = useTranslations("footer");
@@ -29,21 +30,24 @@ export default function Footer() {
                             {t("description")}
                         </p>
                         <div className="mt-4">
-                            <a href="https://dang.ai/" target="_blank" rel="noopener noreferrer">
-                                <img
+                            <Link href="https://dang.ai/" target="_blank" rel="noopener noreferrer">
+                                <Image
                                     src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png"
                                     alt="Dang.ai"
-                                    className="w-[150px] h-[54px]"
                                     width={150}
                                     height={54}
                                 />
-                            </a>
+                            </Link>
+                            <Link href="https://theresanaiforthat.com/ai/connectthedots-generator/?ref=featured&v=7340698" target="_blank" rel="nofollow" >
+                                <Image width="180" height={50} className="mt-2"
+                                    src="https://media.theresanaiforthat.com/featured-on-taaft.png?width=600" alt="theresanaiforthat" />
+                            </Link>
                         </div>
 
                         {/* 语言切换器 */}
                         <div className="mt-6 flex items-center gap-3">
-                            <span className="text-white font-bold text-xs uppercase tracking-widest">{t("language")}:</span>
-                            <Link href="/" className="hover:text-white transition font-bold">English</Link>
+                            <span className="text-white font-bold text-xs tracking-widest">{t("language")}:</span>
+                            <Link href="/" className="hover:text-white transition">English</Link>
                             <span className="text-slate-600">|</span>
                             <Link href="/es" className="hover:text-white transition">Español</Link>
                             <span className="text-slate-600">|</span>
@@ -77,26 +81,26 @@ export default function Footer() {
 
                 {/* 社交分享按钮区 */}
                 <div className="flex flex-wrap justify-center gap-3 my-4" id="social-share-links">
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                    <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer"
                         className="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#1DA1F2]">
                         <Twitter className="w-5 h-5" />
                         <span className="ml-2">Twitter</span>
-                    </a>
-                    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"
+                    </Link>
+                    <Link href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"
                         className="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#0A66C2]">
                         <Linkedin className="w-5 h-5" />
                         <span className="ml-2">LinkedIn</span>
-                    </a>
-                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+                    </Link>
+                    <Link href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
                         className="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#1877F2]">
                         <Facebook className="w-5 h-5" />
                         <span className="ml-2">Facebook</span>
-                    </a>
-                    <a href="https://www.reddit.com" target="_blank" rel="noopener noreferrer"
+                    </Link>
+                    <Link href="https://www.reddit.com" target="_blank" rel="noopener noreferrer"
                         className="flex items-center text-white font-semibold px-4 py-2 rounded-md transition-opacity duration-200 hover:opacity-90 bg-[#FF4500]">
                         <Share2 className="w-5 h-5" />
                         <span className="ml-2">Reddit</span>
-                    </a>
+                    </Link>
                 </div>
 
                 {/* 版权信息 */}
