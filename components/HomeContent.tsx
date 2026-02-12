@@ -1285,9 +1285,9 @@ export default function HomeContent() {
                     <div className='flex justify-center items-center mt-10'>
                         {/* 外链 */}
                         <Link href="https://theresanaiforthat.com/ai/connectthedots-generator/?ref=featured&v=7340698" target="_blank" rel="nofollow" >
-                            <Image width="140" height={50} className="mt-2"
-                                src="https://media.theresanaiforthat.com/featured-on-taaft.png?width=600" alt="theresanaiforthat" />
+                            <Image width="300" height="50" src="https://media.theresanaiforthat.com/featured-on-taaft.png?width=600" alt="Featured on TAAFT" />
                         </Link>
+
                     </div>
                 </section>
             </div>
