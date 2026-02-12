@@ -8,7 +8,7 @@ export default function PayPalProviderWrapper({
     children: React.ReactNode;
 }) {
     // 💡 Sanitize Client ID: Remove quotes if they exist in the env var
-    let clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test";
+    let clientId = "AQgGwtwMZuLeZGpzyslyWLBa_wC5VRJNkXiMs4mgK-91MoWGuBez4-lvtjJacVftQ_qD1ZdxGN4_yCb6";
     clientId = clientId.replace(/^"|"$/g, '').trim();
 
     const paypalOptions = {
