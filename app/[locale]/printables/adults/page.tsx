@@ -10,7 +10,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const { locale } = await params;
-    const path = "/christmas-printables/";
+    const path = "/printables/adults/";
 
     return {
         title: "Mountain Landscape | Hard Dot to Dot Printable (100-200 Dots)",

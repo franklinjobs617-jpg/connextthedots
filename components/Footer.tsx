@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { Link, usePathname } from "@/i18n/routing";
+
 import { useTranslations } from "next-intl";
 import {
     Shapes,
@@ -14,6 +15,7 @@ import Image from "next/image";
 export default function Footer() {
     const t = useTranslations("footer");
     const pricing = useTranslations("header");
+    const pathname = usePathname(); // 获取当前纯净路径（不含语言前缀）
 
     return (
         <footer className="bg-brand-dark text-slate-400 py-16 text-sm border-t border-slate-800">
@@ -43,11 +45,11 @@ export default function Footer() {
                         {/* 语言切换器 */}
                         <div className="mt-6 flex items-center gap-3">
                             <span className="text-white font-bold text-xs tracking-widest">{t("language")}:</span>
-                            <Link href="/" className="hover:text-white transition">English</Link>
-                            <span className="text-slate-600">|</span>
-                            <Link href="/es" className="hover:text-white transition">Español</Link>
-                            <span className="text-slate-600">|</span>
-                            <Link href="/de" className="hover:text-white transition">Deutsch</Link>
+                            <Link href={pathname}  locale="en" className="hover:text-white transition">English</Link>
+    <span className="text-slate-600">|</span>
+    <Link href={pathname}  locale="es" className="hover:text-white transition">Español</Link>
+    <span className="text-slate-600">|</span>
+    <Link href={pathname}  locale="de" className="hover:text-white transition">Deutsch</Link>
                         </div>
                     </div>
 
