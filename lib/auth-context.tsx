@@ -7,8 +7,8 @@ interface User {
     name: string;
     picture: string;
     googleUserId: string;
-    credits: string; // 对应你 Schema 中的 credits
-    score: string;   // 对应你 Schema 中的 score
+    credits: string;
+    score: string;
 }
 
 interface AuthContextType {
@@ -18,6 +18,7 @@ interface AuthContextType {
     isLoggingIn: boolean;
     login: () => void;
     logout: () => void;
+    refreshUser: () => Promise<void>; // ★ 必须暴露这个方法给 Stripe 页面使用
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -28,7 +29,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [tokenClient, setTokenClient] = useState<any>(null);
 
-    // --- 1. 同步用户到数据库 ---
+    // --- 1. 同步用户到数据库 (登录/SDK回调专用) ---
     const syncUserToDatabase = useCallback(async (accessToken: string) => {
         setIsLoggingIn(true);
         try {
@@ -52,12 +53,69 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
     }, []);
 
-    // --- 2. 初始化逻辑 ---
+    // --- 2. 核心：请求后端获取最新数据 (静默刷新) ---
+    const fetchLatestUser = useCallback(async (token: string) => {
+        try {
+            // 注意：这里假设 /api/auth/login 可以仅通过 token 返回用户信息
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ accessToken: token })
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                const dbUser = data.user;
+
+                // 对比数据，仅在有变化时更新 (避免无限重渲染)
+                setUser(prev => {
+                    if (JSON.stringify(prev) !== JSON.stringify(dbUser)) {
+                        console.log("User data refreshed from DB/API");
+                        localStorage.setItem("app_user", JSON.stringify(dbUser));
+                        return dbUser;
+                    }
+                    return prev;
+                });
+            }
+        } catch (e) {
+            console.error("Silent refresh failed", e);
+        }
+    }, []);
+
+    // --- 3. 封装给外部调用的手动刷新方法 ---
+    const refreshUser = useCallback(async () => {
+        const token = localStorage.getItem("auth_token");
+        if (token) {
+            await fetchLatestUser(token);
+        }
+    }, [fetchLatestUser]);
+
+    // --- 4. 辅助：仅从 LocalStorage 读取数据 (响应本地扣费事件) ---
+    const reloadFromLocalStorage = useCallback(() => {
+        const savedUser = localStorage.getItem("app_user");
+        if (savedUser) {
+            try {
+                const parsed = JSON.parse(savedUser);
+                setUser(prev => {
+                    // 如果本地缓存的积分和当前 State 不一样，更新 State
+                    if (JSON.stringify(prev) !== JSON.stringify(parsed)) {
+                        return parsed;
+                    }
+                    return prev;
+                });
+            } catch (e) {
+                console.error("Parse local user failed");
+            }
+        }
+    }, []);
+
+    // --- 5. 初始化与事件监听 ---
     useEffect(() => {
-        const initialize = () => {
+        const initialize = async () => {
             const savedToken = localStorage.getItem("auth_token");
             const savedUser = localStorage.getItem("app_user");
 
+            // A. 优先显示本地缓存 (速度快，防止闪烁)
             if (savedToken && savedUser) {
                 try {
                     setUser(JSON.parse(savedUser));
@@ -65,6 +123,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     localStorage.removeItem("auth_token");
                 }
             }
+
+            // B. 后台发起网络请求，获取最新积分 (数据准)
+            if (savedToken) {
+                await fetchLatestUser(savedToken);
+            }
+
             setIsLoaded(true);
         };
 
@@ -73,7 +137,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             if (google?.accounts?.oauth2) {
                 const client = google.accounts.oauth2.initTokenClient({
                     client_id: "131343215251-vaqu6k4mrbd3k95uoc9l7419jc2m173v.apps.googleusercontent.com",
-
                     scope: "openid profile email",
                     callback: (tokenResponse: any) => {
                         if (tokenResponse?.access_token) {
@@ -89,7 +152,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         initialize();
         loadGoogleSDK();
-    }, [syncUserToDatabase]);
+
+        // ★★★ 监听全局事件 (DotGeneratorClient 本地扣费时会触发这个) ★★★
+        window.addEventListener('auth-updated', reloadFromLocalStorage);
+
+        return () => {
+            window.removeEventListener('auth-updated', reloadFromLocalStorage);
+        };
+    }, [syncUserToDatabase, fetchLatestUser, reloadFromLocalStorage]);
 
     const login = () => {
         if (tokenClient) tokenClient.requestAccessToken();
@@ -109,6 +179,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             isLoggingIn,
             login,
             logout,
+            refreshUser, // ★ 暴露给 Stripe 支付页面使用
         }}>
             {children}
         </AuthContext.Provider>

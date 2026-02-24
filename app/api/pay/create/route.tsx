@@ -21,28 +21,11 @@ export async function POST(req: NextRequest) {
         const gatewayRes = await fetch('https://api.connectthedotsprintable.online/prod-api/stripe/getPayUrl', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ googleUserId, type, project: "connectthedotsprintable" }),
+            body: JSON.stringify({ googleUserId, type, project: "connectdots" }),
         });
 
         const resData = await gatewayRes.json();
         const checkoutUrl = resData.data || resData.url;
-
-        // 3. 记录到本地数据库
-        await prisma.pay.create({
-            data: {
-                userId,
-                googleUserId,
-                email,
-                orderNo: `STRIPE_${Date.now()}`,
-                checkoutUrl: checkoutUrl || "",
-                status: "1", // 待支付
-                type: type,
-                businessType: "connectthedotsprintable",
-                amount: plan.amount,
-                remark: plan.remark,
-                timestamp: Date.now().toString()
-            }
-        });
 
         return NextResponse.json({ url: checkoutUrl });
     } catch (error: any) {
