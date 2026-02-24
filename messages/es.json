@@ -25,6 +25,19 @@
     "step3Title": "Descarga e Imprime tu Actividad",
     "step3Desc": "Exporta tu rompecabezas como un PDF o PNG de alta resolución. ¡Listo para imprimir al instante en casa o en la escuela!"
   },
+   "instantDownloads": {
+    "badge": "Acceso Inmediato",
+    "titlePrefix": "Impresión Rápida: ",
+    "titleHighlight": "Puzles en PDF Gratis",
+    "description": "Consigue una ficha en PDF de alta resolución ahora mismo. Haz clic en cualquier imagen para descargarla al instante, o pulsa el botón Aleatorio para descubrir nuevas opciones.",
+    "btnShuffle": "Aleatorio",
+    "btnViewLibrary": "Ver Colección",
+    "overlayDownloading": "Generando PDF...",
+    "overlayDownload": "Descargar PDF",
+    "dotsUnit": "Puntos",
+    "btnPdf": "PDF",
+    "btnBrowseAll": "Explorar Todos los Puzles"
+  },
   "categories": {
     "title": "Explora nuestras Actividades de Unir Puntos",
     "subtitle": "Explora nuestras colecciones más descargadas.",

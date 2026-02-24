@@ -1,16 +1,16 @@
 "use client";
-import { useState } from 'react';
-import type { Metadata } from "next";
-import { Wand2, Brain, Sparkles, Layout, ArrowRight, Zap } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { Wand2, Brain, Sparkles, ArrowRight, Download, RefreshCw } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import Image from 'next/image';
-import { getAlternates, getUrl } from "@/lib/metadata";
-import { getTranslations } from "next-intl/server";
 import { useLocale } from "next-intl";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
+import { getAllPrintables, PrintableItem } from "@/lib/printables-data";
+import { jsPDF } from "jspdf";
+
 type Props = {
     params: { locale: string };
 };
@@ -30,7 +30,7 @@ export default function HomeContent() {
     const tFaq = useTranslations("faq");
     const tContact = useTranslations("contact");
     const tAiFeatures = useTranslations("aiFeatures");
-
+    const tInstant = useTranslations("instantDownloads");
     // NOTE: These namespaces were not in your provided JSON, 
     // but are required for the "Custom Generator" section and "Editor" view found in the HTML.
     // Please add these keys to your en.json/es.json/de.json files.
@@ -39,6 +39,7 @@ export default function HomeContent() {
     type PresetType = 'easy' | 'medium' | 'hard';
 
     const [activePreset, setActivePreset] = useState<PresetType>('easy');
+    const [generatingPdfId, setGeneratingPdfId] = useState<string | null>(null);
 
     const presetMapping: Record<PresetType, string> = {
         easy: "presetDesc.easy",
@@ -84,6 +85,122 @@ export default function HomeContent() {
 
 
         // 函数体暂时为空，待实现具体功能
+    };
+
+
+    // 1. 获取所有数据
+    const allPrintables = getAllPrintables();
+
+    // 2. 定义随机获取 4 个的函数
+    const getRandomPuzzles = () => {
+        // 创建副本并打乱顺序 (Fisher-Yates 洗牌算法的简化版)
+        const shuffled = [...allPrintables].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, 4);
+    };
+
+    // 3. 定义状态
+    // 使用 null 初始状态以避免服务端/客户端渲染不一致 (Hydration Error)
+    const [randomPuzzles, setRandomPuzzles] = useState<PrintableItem[]>([]);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+
+    // 4. 初始化加载 (只在客户端执行)
+    useEffect(() => {
+        setRandomPuzzles(getRandomPuzzles());
+        console.log(randomPuzzles)
+    }, []);
+
+    // 5. 处理“换一批”点击
+    const handleRefresh = () => {
+        setIsRefreshing(true);
+        // 加一点人为延迟，让旋转动画转一会儿，提升交互感
+        setTimeout(() => {
+            setRandomPuzzles(getRandomPuzzles());
+            setIsRefreshing(false);
+        }, 600);
+
+    };
+
+
+
+    // 确保你在文件最顶部已经写了： import { jsPDF } from "jspdf";
+
+    const handleDownloadPdf = async (e: React.MouseEvent, item: PrintableItem) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (generatingPdfId) return;
+
+        setGeneratingPdfId(item.id);
+
+        try {
+            // 【修改点 1】：使用 window.Image 避免与 next/image 冲突
+            const img = new window.Image();
+
+            // 关键：允许跨域，需要 Cloudflare R2 配置 CORS
+            img.crossOrigin = "Anonymous";
+            img.src = `${item.imageUrl}${item.imageUrl.includes('?') ? '&' : '?'}t=${new Date().getTime()}`;
+
+            await new Promise((resolve, reject) => {
+                img.onload = resolve;
+                img.onerror = (err) => {
+                    console.error("Image load error:", err);
+                    reject(new Error("Failed to load image"));
+                };
+            });
+
+            // 创建 Canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) throw new Error("Canvas context not found");
+
+            // 绘制白色背景
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+
+            // 转为 JPEG
+            const imgData = canvas.toDataURL('image/jpeg', 0.95);
+
+            // 【修改点 2】：确保使用 new jsPDF()，且头部是静态 import { jsPDF } from "jspdf"
+            const doc = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const margin = 10;
+
+            const imgRatio = img.width / img.height;
+
+            let finalWidth = pageWidth - (margin * 2);
+            let finalHeight = finalWidth / imgRatio;
+
+            if (finalHeight > (pageHeight - margin * 2)) {
+                finalHeight = pageHeight - (margin * 2);
+                finalWidth = finalHeight * imgRatio;
+            }
+
+            const x = (pageWidth - finalWidth) / 2;
+            const y = (pageHeight - finalHeight) / 2;
+
+            doc.addImage(imgData, 'JPEG', x, y, finalWidth, finalHeight);
+
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text("Generated by ConnectTheDotsPrintable.online", pageWidth / 2, pageHeight - 5, { align: "center" });
+
+            doc.save(`${item.title.replace(/[^a-zA-Z0-9]/g, '_')}_Puzzle.pdf`);
+
+        } catch (error) {
+            console.error("PDF Generation Error:", error);
+            alert("Could not generate PDF. Please ensure your network can access the image.");
+        } finally {
+            setGeneratingPdfId(null);
+        }
     };
 
     return (
@@ -447,6 +564,149 @@ export default function HomeContent() {
                         </div>
                     </div>
                 </section>
+
+                <section id="instant-downloads" className="py-20 bg-slate-50 relative border-b border-slate-200 transition-colors duration-500">
+                    <div className="max-w-7xl mx-auto px-6">
+
+                        {/* Header Area */}
+                        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+                            <div className="text-center md:text-left">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 text-red-600 text-xs font-bold uppercase tracking-wider mb-3">
+                                    <Download className="w-3 h-3" />
+                                    {tInstant("badge")}
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                                    {tInstant("titlePrefix")}
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-indigo-500">
+                                        {tInstant("titleHighlight")}
+                                    </span>
+                                </h2>
+                                <p
+                                    className="text-slate-500 text-[15px] sm:text-base leading-relaxed"
+
+                                >
+                                    {tInstant("description")}
+
+                                </p>
+                            </div>
+
+                            {/* Actions: View All & Refresh Button */}
+                            <div className="flex items-center gap-4">
+                                {/* 核心功能：换一批按钮 */}
+                                <button
+                                    onClick={handleRefresh}
+                                    disabled={isRefreshing}
+                                    className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-xl font-bold text-slate-700 hover:text-brand-blue hover:border-brand-blue hover:shadow-md transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                                >
+                                    <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                                    <span className="hidden sm:inline">{tInstant("btnShuffle")}</span>
+                                </button>
+
+                                <Link
+                                    href="/printable-connect-the-dots"
+                                    className="hidden md:flex items-center font-bold text-slate-600 hover:text-brand-blue transition-colors group"
+                                >
+                                    {tInstant("btnViewLibrary")}
+                                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Grid Area */}
+                        <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 transition-opacity duration-300 ${isRefreshing ? 'opacity-50' : 'opacity-100'}`}>
+                            {randomPuzzles.length > 0 ? randomPuzzles.map((item) => (
+                                <div
+                                    key={item.id}
+                                    className="group bg-white rounded-2xl p-3 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                                >
+                                    {/* Image Container */}
+                                    <div className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 mb-4 cursor-pointer">
+                                        <img
+                                            src={item.imageUrl}
+                                            alt={item.altText}
+                                            width={300}
+                                            height={300}
+                                            className="w-full h-full object-cover"
+
+                                        />
+
+                                        {/* Difficulty Tag */}
+                                        <div className={`absolute top-2 left-2 px-2 py-1 rounded text-[10px] font-bold text-white shadow-sm ${item.tagColor || 'bg-slate-500'}`}>
+                                            {item.difficulty}
+                                        </div>
+
+                                        {/* Download Overlay */}
+                                        <div
+
+                                            className="absolute inset-0 bg-brand-blue/80 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white z-10 cursor-pointer"
+                                            onClick={(e) => handleDownloadPdf(e, item)}
+                                        >
+                                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-blue mb-2 shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                                {/* 如果正在生成当前 ID 的 PDF，显示转圈圈，否则显示下载图标 */}
+                                                {generatingPdfId === item.id ? (
+                                                    <RefreshCw className="w-6 h-6 animate-spin" />
+                                                ) : (
+                                                    <Download className="w-6 h-6" />
+                                                )}
+                                            </div>
+                                            <span className="font-bold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                                                {generatingPdfId === item.id ? tInstant("overlayDownloading") : tInstant("overlayDownload")}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* Content */}
+                                    <div className="px-1 pb-1 flex flex-col grow">
+                                        <div className="font-bold text-slate-800 text-sm mb-1 line-clamp-1" title={item.title}>
+                                            {item.title}
+                                        </div>
+                                        <p className="text-xs text-slate-400 mb-3 line-clamp-1">{item.description}</p>
+
+                                        <div className="flex items-center justify-between mt-auto">
+                                            <span className="text-[10px] px-2 py-1 bg-slate-100 text-slate-500 rounded-md font-medium">
+                                                {Array.isArray(item.dotRange) ? `${item.dotRange[0]}-${item.dotRange[1]}` : item.dotRange} Dots
+                                            </span>
+
+                                            {/* Mobile Download Text */}
+                                            <button
+                                                onClick={(e) => handleDownloadPdf(e, item)}
+                                                disabled={generatingPdfId === item.id}
+                                                className="text-xs font-bold text-brand-blue flex items-center gap-1 hover:underline md:hidden disabled:opacity-50"
+                                            >
+                                                {generatingPdfId === item.id ? (
+                                                    <RefreshCw className="w-3 h-3 animate-spin" />
+                                                ) : (
+                                                    <Download className="w-3 h-3" />
+                                                )}
+                                                <span className="ml-0.5">PDF</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )) : (
+                                // 骨架屏 Loading 状态 (当数据还未加载时显示)
+                                Array(4).fill(0).map((_, i) => (
+                                    <div key={i} className="bg-white rounded-2xl p-3 border border-slate-200 h-[320px] animate-pulse">
+                                        <div className="bg-slate-200 w-full aspect-square rounded-xl mb-4"></div>
+                                        <div className="bg-slate-200 h-4 w-3/4 rounded mb-2"></div>
+                                        <div className="bg-slate-200 h-3 w-1/2 rounded"></div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+
+                        {/* Mobile View All Button */}
+                        <div className="mt-8 text-center md:hidden">
+                            <Link
+                                href="/printable-connect-the-dots"
+                                className="w-full inline-flex justify-center items-center px-6 py-3 bg-white border border-slate-200 rounded-xl font-bold text-slate-700 hover:bg-slate-50 transition"
+                            >
+                                {tInstant("btnBrowseAll")}
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
                 {/* 3. AI Generator Feature Section - 优化后的适配版本 */}
                 <section className="py-24 bg-white relative overflow-hidden">
                     {/* 背景装饰：改为更柔和的浅色光晕，不再使用深色块 */}
@@ -500,6 +760,173 @@ export default function HomeContent() {
                         </div>
                     </div>
                 </section>
+
+
+                <section className="py-24 bg-white relative" id="printable-guide">
+                    {/* 柔和的背景装饰 */}
+                    <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-slate-50 to-transparent pointer-events-none"></div>
+
+                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+                        {/* 统一的 Section Header */}
+                        <div className="text-center mb-16">
+                            <span className="text-brand-blue font-bold tracking-wider text-xs mb-2 block uppercase">
+                                {tEditorPicks("badge")}
+                            </span>
+                            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                                {tEditorPicks("title")}
+                            </h2>
+                            <p className="text-slate-500 mt-4 text-lg max-w-2xl mx-auto">
+                                {tEditorPicks("subtitle")}
+                            </p>
+                        </div>
+
+                        <div className="flex flex-col gap-16">
+
+                            {/* --- 第一部分：编辑精选 (3列卡片) --- */}
+                            <div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                    {/* Card 1: Animals */}
+                                    <Link
+                                        href="/printables/animals"
+                                        className="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-floating transition-all duration-300 hover:-translate-y-2 flex flex-col overflow-hidden"
+                                    >
+                                        <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                                            <Image width={400} height={300}
+                                                src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/6-Cute-Bunny-Rabbit-Connect-the-Dots-for-Young-Children-1-20-dots.avif"
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                alt="Bunny Connect the Dots"
+                                            />
+                                            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-blue text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                                                {tEditorPicks("statusFree")}
+                                            </div>
+                                        </div>
+                                        <div className="p-6 flex flex-col flex-grow">
+                                            <div className="flex gap-2 mb-3">
+                                                <span className="px-2 py-1 bg-green-50 text-green-800 text-[10px] font-bold rounded-md">
+                                                    {tEditorPicks("card1Tag1")}
+                                                </span>
+                                                <span className="px-2 py-1 bg-slate-50 text-slate-600 text-[10px] font-bold rounded-md">
+                                                    {tEditorPicks("card1Tag2")}
+                                                </span>
+                                            </div>
+                                            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-blue transition-colors">
+                                                {tEditorPicks("card1Title")}
+                                            </h3>
+                                            <p className="text-slate-500 text-sm mb-6 flex-grow">
+                                                {tEditorPicks("card1Desc")}
+                                            </p>
+
+                                            <div className="flex items-center justify-between pt-4 border-t border-slate-50">
+                                                <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="14" height="14" fill="currentColor">
+                                                        <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 210.7-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7 256 32zM64 320c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-46.9 0-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320 64 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
+                                                    </svg>
+                                                    2.5k {tEditorPicks("downloads")}
+                                                </span>
+                                                <span className="text-sm font-bold text-brand-blue flex items-center gap-1">
+                                                    {tEditorPicks("getPrintable")} <ArrowRight className="w-4 h-4" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </Link>
+
+                                    {/* Card 2: Christmas */}
+                                    <Link
+                                        href="/printables/christmas"
+                                        className="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-floating transition-all duration-300 hover:-translate-y-2 flex flex-col overflow-hidden"
+                                    >
+                                        <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                                            <Image width={400} height={300}
+                                                src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/7-Festive-Christmas-Tree-Connect-the-Dots-Design-1-50-dots.avif"
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                alt="Christmas Tree"
+                                            />
+                                            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-blue text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                                                {tEditorPicks("statusFree")}
+                                            </div>
+                                        </div>
+                                        <div className="p-6 flex flex-col flex-grow">
+                                            <div className="flex gap-2 mb-3">
+                                                <span className="px-2 py-1 bg-yellow-50 text-yellow-800 text-[10px] font-bold rounded-md">
+                                                    {tEditorPicks("card2Tag1")}
+                                                </span>
+                                                <span className="px-2 py-1 bg-red-50 text-red-700 text-[10px] font-bold rounded-md">
+                                                    {tEditorPicks("card2Tag2")}
+                                                </span>
+                                            </div>
+                                            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-blue transition-colors">
+                                                {tEditorPicks("card2Title")}
+                                            </h3>
+                                            <p className="text-slate-500 text-sm mb-6 flex-grow">
+                                                {tEditorPicks("card2Desc")}
+                                            </p>
+
+                                            <div className="flex items-center justify-between pt-4 border-t border-slate-50">
+                                                <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="14" height="14" fill="currentColor">
+                                                        <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 210.7-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7 256 32zM64 320c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-46.9 0-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320 64 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
+                                                    </svg>
+                                                    1.8k {tEditorPicks("downloads")}
+                                                </span>
+                                                <span className="text-sm font-bold text-brand-blue flex items-center gap-1">
+                                                    {tEditorPicks("getPrintable")} <ArrowRight className="w-4 h-4" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </Link>
+
+                                    {/* Card 3: Mandala */}
+                                    <Link
+                                        href="/printables/hard"
+                                        className="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-floating transition-all duration-300 hover:-translate-y-2 flex flex-col overflow-hidden"
+                                    >
+                                        <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                                            <Image width={400} height={300}
+                                                src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/8-Advanced-Mandala-Connect-the-Dots-Design-for-Adults-Over-100-dots.avif"
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                alt="Mandala"
+                                            />
+                                            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-blue text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                                                {tEditorPicks("statusFree")}
+                                            </div>
+                                        </div>
+                                        <div className="p-6 flex flex-col flex-grow">
+                                            <div className="flex gap-2 mb-3">
+                                                <span className="px-2 py-1 bg-purple-50 text-purple-800 text-[10px] font-bold rounded-md">
+                                                    {tEditorPicks("card3Tag1")}
+                                                </span>
+                                                <span className="px-2 py-1 bg-slate-50 text-slate-600 text-[10px] font-bold rounded-md">
+                                                    {tEditorPicks("card3Tag2")}
+                                                </span>
+                                            </div>
+                                            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-blue transition-colors">
+                                                {tEditorPicks("card3Title")}
+                                            </h3>
+                                            <p className="text-slate-500 text-sm mb-6 flex-grow">
+                                                {tEditorPicks("card3Desc")}
+                                            </p>
+
+                                            <div className="flex items-center justify-between pt-4 border-t border-slate-50">
+                                                <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="14" height="14" fill="currentColor">
+                                                        <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 210.7-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7 256 32zM64 320c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-46.9 0-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320 64 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
+                                                    </svg>
+                                                    3.2k {tEditorPicks("downloads")}
+                                                </span>
+                                                <span className="text-sm font-bold text-brand-blue flex items-center gap-1">
+                                                    {tEditorPicks("getPrintable")} <ArrowRight className="w-4 h-4" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
                 {/* 3. Categories */}
                 <section id="categories" className="py-24 bg-brand-light">
                     <div className="max-w-7xl mx-auto px-6">
@@ -510,16 +937,10 @@ export default function HomeContent() {
                                 </h2>
                                 <p className="text-slate-500">{tCategories("subtitle")}</p>
                             </div>
-                            <a
-                                href="/printable-connect-the-dots"
-                                className="group flex items-center font-bold text-brand-blue hover:text-indigo-700 transition"
-                            >
-                                {tCategories("viewAll")}{" "}
-                                <i className="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
+
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <a
+                            <Link
                                 href="./printables/core"
                                 className="group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-md hover:shadow-xl transition-all"
                             >
@@ -538,8 +959,8 @@ export default function HomeContent() {
                                         {tCategories("card1Desc")}
                                     </p>
                                 </div>
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="./printables/adults"
                                 className="group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-md hover:shadow-xl transition-all"
                             >
@@ -558,8 +979,8 @@ export default function HomeContent() {
                                         {tCategories("card2Desc")}
                                     </p>
                                 </div>
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="./printables/general"
                                 className="group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-md hover:shadow-xl transition-all"
                             >
@@ -576,8 +997,8 @@ export default function HomeContent() {
                                         {tCategories("card3Desc")}
                                     </p>
                                 </div>
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="./printables/christmas"
                                 className="group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-md hover:shadow-xl transition-all"
                             >
@@ -594,214 +1015,10 @@ export default function HomeContent() {
                                         {tCategories("card4Desc")}
                                     </p>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </section>
-
-                {/* Featured Printables */}
-                <section className="py-24 bg-white" id="printable-guide">
-                    <div className="max-w-7xl mx-auto px-6">
-                        <div className="text-center mb-16">
-                            <span className="text-brand-blue font-bold tracking-wider text-xs mb-2 block">
-                                {tEditorPicks("badge")}
-                            </span>
-                            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">
-                                {tEditorPicks("title")}
-                            </h2>
-                            <p className="text-slate-500 mt-4">{tEditorPicks("subtitle")}</p>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {/* Card 1: Animals */}
-                            <div
-                                className="group bg-white rounded-3xl border border-slate-100 shadow-soft hover:shadow-floating transition-all duration-300 hover:-translate-y-2 flex flex-col overflow-hidden cursor-pointer"
-                                onClick={() =>
-                                    (window.location.href = "./printables/animals")
-                                }
-                            >
-                                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                                    <Image width="200" height="200"
-                                        src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/6-Cute-Bunny-Rabbit-Connect-the-Dots-for-Young-Children-1-20-dots.avif"
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        alt="Bunny Connect the Dots"
-                                    />
-                                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-blue text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-                                        {tEditorPicks("statusFree")}
-                                    </div>
-                                </div>
-                                <div className="p-6 flex flex-col flex-grow">
-                                    <div className="flex gap-2 mb-3">
-                                        <span className="px-2 py-1 bg-green-50 text-green-800 text-[10px] font-bold rounded-md">
-                                            {tEditorPicks("card1Tag1")}
-                                        </span>
-                                        <span className="px-2 py-1 bg-slate-50 text-slate-600 text-[10px] font-bold rounded-md">
-                                            {tEditorPicks("card1Tag2")}
-                                        </span>
-                                    </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-blue transition-colors">
-                                        {tEditorPicks("card1Title")}
-                                    </h3>
-                                    <p className="text-slate-500 text-sm mb-6 flex-grow">
-                                        {tEditorPicks("card1Desc")}
-                                    </p>
-
-                                    <div className="flex items-center justify-between pt-4 border-t border-slate-50">
-                                        <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512"
-                                                width="16"
-                                                height="16"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 210.7-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7 256 32zM64 320c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-46.9 0-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320 64 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
-                                            </svg>
-                                            2.5{tEditorPicks("downloads")}
-                                        </span>
-                                        <span className="text-sm font-bold text-brand-blue flex items-center gap-1">
-                                            {tEditorPicks("getPrintable")}{" "}
-                                            <svg
-                                                width="16"
-                                                height="16"
-                                                fill="currentColor"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 512 512"
-                                            >
-                                                <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Card 2: Christmas */}
-                            <div
-                                className="group bg-white rounded-3xl border border-slate-100 shadow-soft hover:shadow-floating transition-all duration-300 hover:-translate-y-2 flex flex-col overflow-hidden cursor-pointer"
-                                onClick={() =>
-                                    (window.location.href = "./printables/christmas")
-                                }
-                            >
-                                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                                    <Image width="200" height="200"
-                                        src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/7-Festive-Christmas-Tree-Connect-the-Dots-Design-1-50-dots.avif"
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        alt="Christmas Tree"
-                                    />
-                                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-blue text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-                                        {tEditorPicks("statusFree")}
-                                    </div>
-                                </div>
-                                <div className="p-6 flex flex-col flex-grow">
-                                    <div className="flex gap-2 mb-3">
-                                        <span className="px-2 py-1 bg-yellow-50 text-yellow-800 text-[10px] font-bold rounded-md">
-                                            {tEditorPicks("card2Tag1")}
-                                        </span>
-                                        <span className="px-2 py-1 bg-red-50 text-red-700 text-[10px] font-bold rounded-md">
-                                            {tEditorPicks("card2Tag2")}
-                                        </span>
-                                    </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-blue transition-colors">
-                                        {tEditorPicks("card2Title")}
-                                    </h3>
-                                    <p className="text-slate-500 text-sm mb-6 flex-grow">
-                                        {tEditorPicks("card2Desc")}
-                                    </p>
-
-                                    <div className="flex items-center justify-between pt-4 border-t border-slate-50">
-                                        <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512"
-                                                width="16"
-                                                height="16"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 210.7-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7 256 32zM64 320c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-46.9 0-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320 64 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
-                                            </svg>
-                                            1.8{tEditorPicks("downloads")}
-                                        </span>
-                                        <span className="text-sm font-bold text-brand-blue flex items-center gap-1">
-                                            {tEditorPicks("getPrintable")}{" "}
-                                            <svg
-                                                width="16"
-                                                height="16"
-                                                fill="currentColor"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 512 512"
-                                            >
-                                                <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Card 3: Mandala */}
-                            <div
-                                className="group bg-white rounded-3xl border border-slate-100 shadow-soft hover:shadow-floating transition-all duration-300 hover:-translate-y-2 flex flex-col overflow-hidden cursor-pointer"
-                                onClick={() =>
-                                    (window.location.href = "./printables/hard")
-                                }
-                            >
-                                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                                    <Image width="200" height="200"
-                                        src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/8-Advanced-Mandala-Connect-the-Dots-Design-for-Adults-Over-100-dots.avif"
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        alt="Mandala"
-                                    />
-                                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-blue text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-                                        {tEditorPicks("statusFree")}
-                                    </div>
-                                </div>
-                                <div className="p-6 flex flex-col flex-grow">
-                                    <div className="flex gap-2 mb-3">
-                                        <span className="px-2 py-1 bg-purple-50 text-purple-800 text-[10px] font-bold rounded-md">
-                                            {tEditorPicks("card3Tag1")}
-                                        </span>
-                                        <span className="px-2 py-1 bg-slate-50 text-slate-600 text-[10px] font-bold rounded-md">
-                                            {tEditorPicks("card3Tag2")}
-                                        </span>
-                                    </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-blue transition-colors">
-                                        {tEditorPicks("card3Title")}
-                                    </h3>
-                                    <p className="text-slate-500 text-sm mb-6 flex-grow">
-                                        {tEditorPicks("card3Desc")}
-                                    </p>
-
-                                    <div className="flex items-center justify-between pt-4 border-t border-slate-50">
-                                        <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512"
-                                                width="16"
-                                                height="16"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 210.7-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7 256 32zM64 320c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-46.9 0-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320 64 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
-                                            </svg>
-                                            3.2{tEditorPicks("downloads")}
-                                        </span>
-                                        <span className="text-sm font-bold text-brand-blue flex items-center gap-1">
-                                            {tEditorPicks("getPrintable")}{" "}
-                                            <svg
-                                                width="16"
-                                                height="16"
-                                                fill="currentColor"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 512 512"
-                                            >
-                                                <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
 
                 {/* 2. Features Section (Using the JSON keys) */}
                 <section id="features" className="py-24 bg-white">
@@ -1260,7 +1477,7 @@ export default function HomeContent() {
                         </p>
 
                         <div className="flex justify-center">
-                            <a
+                            <Link
                                 href="mailto:support@connectthedotsprintable.online"
                                 className="inline-flex items-center gap-2 px-10 py-4 bg-brand-blue text-white font-bold rounded-full hover:bg-indigo-600 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                             >
@@ -1281,7 +1498,7 @@ export default function HomeContent() {
                                     />
                                 </svg>
                                 {tContact("button")}
-                            </a>
+                            </Link>
                         </div>
                     </div>
 

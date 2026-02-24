@@ -62,7 +62,7 @@ export default function HowToMakeClient({ locale }: { locale: string }) {
                                         <div className="flex items-center mb-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-600 mr-2" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                <path strokeLinecap="round" stroke-linejoin="round"
                                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                             </svg>
                                             <span className="text-yellow-700 font-bold tracking-wide text-sm uppercase">Recurso
@@ -78,7 +78,7 @@ export default function HowToMakeClient({ locale }: { locale: string }) {
                                                 className="inline-flex items-center justify-center px-4 py-2 bg-brand-blue text-white font-bold rounded-full transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none"
                                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                    <path strokeLinecap="round" stroke-linejoin="round"
                                                         d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                                 </svg>
                                                 DESCARGAR PDF AHORA
@@ -211,7 +211,7 @@ export default function HowToMakeClient({ locale }: { locale: string }) {
                                         <div className="flex items-center mb-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-600 mr-2" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                <path strokeLinecap="round" stroke-linejoin="round"
                                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                             </svg>
                                             <span className="text-yellow-700 font-bold tracking-wide text-sm uppercase">Free Resource</span>
@@ -231,7 +231,7 @@ export default function HowToMakeClient({ locale }: { locale: string }) {
                                                 className="inline-flex items-center justify-center px-4 py-2 bg-brand-blue text-white font-bold rounded-full transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none"
                                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                    <path strokeLinecap="round" stroke-linejoin="round"
                                                         d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                                 </svg>
                                                 DOWNLOAD PDF NOW

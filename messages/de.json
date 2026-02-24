@@ -29,6 +29,19 @@
     "step2Desc": "Wählen Sie Leicht, Mittel oder Schwer. Sie können die Punktzahl manuell anpassen, z.B. für von punkt zu punkt bis 20 oder von punkt zu punkt bis 200.",
     "step3Title": "PDF speichern und von punkt zu punkt zum ausdrucken",
     "step3Desc": "Exportieren Sie Ihr Rätsel als PDF. Ideal für punkt zu punkt zum ausdrucken zu Hause oder in der Schule!"
+  }, 
+   "instantDownloads": {
+    "badge": "Sofortiger Zugriff",
+    "titlePrefix": "Schnelldruck: ",
+    "titleHighlight": "Kostenlose PDF-Rätsel",
+    "description": "Hol dir jetzt ein hochauflösendes PDF-Arbeitsblatt. Klicke auf ein beliebiges Bild, um es sofort herunterzuladen, oder drücke den  Mischen-Button, um zufällige neue Vorlagen zu entdecken!",
+    "btnShuffle": "Mischen",
+    "btnViewLibrary": "Bibliothek ansehen",
+    "overlayDownloading": "PDF wird geladen...",
+    "overlayDownload": "PDF herunterladen",
+    "dotsUnit": "Punkte",
+    "btnPdf": "PDF",
+    "btnBrowseAll": "Alle Rätsel durchsuchen"
   },
   "categories": {
     "title": "punkt zu punkt zum ausdrucken für Kinder & punkt zu punkt erwachsene",

@@ -1110,7 +1110,7 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           heroAiGoBtn.style.cursor = "default";
           heroAiGoBtn.disabled = true;
 
-          const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
+          const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
 
           heroAiGoBtn.innerHTML = `<span>Get More Credits</span>${lockSvg}`;
           heroAiGoBtn.disabled = false;
@@ -1139,7 +1139,7 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           heroAiGoBtn.style.cursor = "";
           heroAiGoBtn.disabled = false;
           heroAiGoBtn.classList.add("bg-gradient-to-r", "from-purple-600", "to-pink-600", "hover:shadow-lg", "hover:scale-105");
-          const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+          const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
           heroAiGoBtn.innerHTML = `<span>Generate</span> ${arrowSvg}`;
           heroAiGoBtn.onclick = null; // 恢复事件流
           if (msgContainer) msgContainer.remove();
@@ -1162,7 +1162,7 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           heroAiGoBtn.style.cursor = "default";
           heroAiGoBtn.disabled = true;
 
-          const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
+          const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
           heroAiGoBtn.innerHTML = `<span>Get More Credits</span>${lockSvg}`;
           heroAiGoBtn.disabled = false;
           heroAiGoBtn.style.cursor = 'pointer';
@@ -1179,7 +1179,7 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
               msgContainer = document.createElement("div");
               msgContainer.id = "ai-limit-msg";
               msgContainer.className = "text-center mt-4 text-sm text-slate-500 animate-in fade-in slide-in-from-top-1";
-              const shareSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>';
+              const shareSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>';
               msgContainer.innerHTML = `<span>Daily limit used. </span><button id="inline-share-btn" class="inline-flex items-center gap-1 text-[#FF4500] hover:text-[#cc3700] font-bold hover:underline cursor-pointer transition-colors relative z-20" style="background:none; border:none; padding:0;">${shareSvg} Share to unlock +1</button>`;
               const creditsParent = heroAiCredits ? heroAiCredits.parentElement : null;
               if (creditsParent && creditsParent.parentNode) {
@@ -1197,7 +1197,7 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           heroAiGoBtn.style.cursor = "";
           heroAiGoBtn.disabled = false;
           heroAiGoBtn.classList.add("bg-gradient-to-r", "from-purple-600", "to-pink-600", "hover:shadow-lg", "hover:scale-105");
-          const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+          const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
           heroAiGoBtn.innerHTML = `<span>Generate</span> ${arrowSvg}`;
           if (msgContainer) msgContainer.remove();
         }
@@ -1230,7 +1230,7 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           </div>
           <button id="close-toast" class="absolute top-2 right-2 text-gray-300 hover:text-gray-500 p-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  <path strokeLinecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
           </button>
       `;

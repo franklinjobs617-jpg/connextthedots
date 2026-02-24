@@ -27,7 +27,7 @@
   },
   "aiFeatures": {
     "badge": "Cutting-Edge Technology",
-    "title": "The World's Most Advanced AI Dot to Dot Generator",
+    "title": "Turn Your Child's Favorite Photo into an AI Dot-to-Dot Puzzle in Seconds.",
     "description": "Stop searching for static templates. Our ai dot to dot generator understands your imagination, turning text prompts into high-quality, printable puzzles in seconds.",
     "f1Title": "Prompt to Puzzle",
     "f1Desc": "Describe anything—from 'a robotic dragon' to 'a Victorian house'—and watch our dot to dot generator ai build it.",
@@ -80,6 +80,19 @@
     "f3Title": "Custom Designs",
     "f3Body": "Create your own custom connect the dots printables with our easy-to-use generator tool."
   },
+  "instantDownloads": {
+    "badge": "Instant Access",
+    "titlePrefix": "Quick Print: ",
+    "titleHighlight": "Free PDF Puzzles",
+    "description": "Grab a high-res PDF worksheet right now. Click any image to download instantly, or hit the  Shuffle  button to discover new random picks!",
+    "btnShuffle": "Shuffle",
+    "btnViewLibrary": "View Library",
+    "overlayDownloading": "Downloading PDF...",
+    "overlayDownload": "Download PDF",
+    "dotsUnit": "Dots",
+    "btnPdf": "PDF",
+    "btnBrowseAll": "Browse All Puzzles"
+  } ,
   "demo": {
     "badge": "Demo",
     "title": "Watch How the Connect the Dots Generator Works",
@@ -168,7 +181,7 @@
     "logo": "ConnectTheDots",
     "logoAlt": "ConnectTheDots Logo",
     "home": "Home",
-    "allPrintables": "All Printables",
+    "allPrintables": "Free Printables",
     "howToMake": "How to Make",
     "privacy": "Privacy",
     "terms": "Terms",
@@ -187,7 +200,7 @@
     "colPrintables": "Printables",
     "colLegal": "Legal",
     "home": "Home",
-    "allPrintables": "All Printables",
+    "allPrintables": "Free Printables",
     "howToMake": "How to Make",
     "christmas": "Christmas Printables",
     "privacy": "Privacy Policy",

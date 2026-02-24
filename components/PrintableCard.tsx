@@ -1,8 +1,6 @@
-// components/PrintableCard.tsx
-import React from 'react';
+// components/PrintableCard.tsx 
 import Link from 'next/link';
 import { IMAGE_DEFAULT_WIDTH, IMAGE_DEFAULT_HEIGHT, PrintableItem } from '@/lib/printables-data';
-import { DownloadCloud, Heart } from 'lucide-react'; // 假设你用 Lucide 图标替代了原来的 SVG
 
 interface PrintableCardProps {
     item: PrintableItem;

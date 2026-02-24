@@ -57,3 +57,7 @@
   visibility: visible;
   pointer-events: auto;
 }
+
+button{
+  cursor: pointer !important;
+}
