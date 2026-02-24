@@ -10,13 +10,16 @@ import { getAlternates, getUrl } from "@/lib/metadata";
 import { getTranslations } from "next-intl/server";
 import { useLocale } from "next-intl";
 import Link from "next/link";
+import { useAuth } from "@/lib/auth-context";
 type Props = {
     params: { locale: string };
 };
 
 
 export default function HomeContent() {
+    const { user } = useAuth();
     const locale = useLocale();
+
     const tHero = useTranslations("hero");
     const tHowToGuide = useTranslations("howToGuide");
     const tCategories = useTranslations("categories");
@@ -275,7 +278,7 @@ export default function HomeContent() {
                                                             id="hero-ai-credits"
                                                             className="font-bold text-brand-blue"
                                                         >
-                                                            1
+                                                            {user ? user.credits : "1"}
                                                         </span>{" "}
                                                         {tHero("aiCredits")}
                                                     </div>
@@ -1777,7 +1780,7 @@ export default function HomeContent() {
             </div>
 
             {/* Logic Component for Client Side Interactivity */}
-            <DotGeneratorClient locale={locale} />
+            <DotGeneratorClient locale={locale} user={user} />
         </main>
     );
 }

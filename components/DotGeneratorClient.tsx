@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/routing";
 interface DotGeneratorProps {
-  locale: string;
+  locale: string; user?: any;
 }
 // 全局类型声明
 declare global {
@@ -39,8 +39,15 @@ interface State {
   pendingFile: File | null;
 }
 
-export default function DotGeneratorClient({ locale }: DotGeneratorProps) {
+export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) {
   const router = useRouter();
+  const userRef = useRef(user);
+
+  useEffect(() => {
+    userRef.current = user;
+    window.dispatchEvent(new CustomEvent('auth-updated'));
+  }, [user]);
+
   useEffect(() => {
     // 逻辑代码保持不变，仅修复类型
     const DEFAULT_CONFIG: Config = {
@@ -911,99 +918,154 @@ export default function DotGeneratorClient({ locale }: DotGeneratorProps) {
       return data;
     };
     // AI Generation (Doubao) Logic - Kept roughly same but unified loader
-    if (heroAiGoBtn) heroAiGoBtn.addEventListener('click', async () => {
-      // --- 关键修改 1: 优先判断次数 ---
-      const usage = getAiUsage();
-      const limit = MAX_DAILY_LIMIT + (usage.extra || 0);
-      console.log("usage", usage);
-      console.log("limit", limit);
-      if (usage.count >= limit) {
+    if (heroAiGoBtn) {
+      heroAiGoBtn.addEventListener('click', async (e) => {
+        // 阻止默认事件
+        e.preventDefault();
 
-        router.push("/pricing");
-        return;
-      }
+        // 如果该按钮被 updateAiCreditsUI 动态绑定了 onclick (例如跳转到 Pricing)，则不再执行生成逻辑
+        if (heroAiGoBtn.onclick) return;
 
-      const prompt = heroAiInput?.value.trim() || "";
-      if (prompt.length < 3) {
-        return showTip("Please enter a description.", "error");
-      }
-      // GA: AI 生成开始
-      trackEvent('ai_generate_start', {
-        prompt_length: prompt.length
-      });
+        const currentUser = userRef.current; // 拿到最新用户状态
 
-      if (usage.count >= (MAX_DAILY_LIMIT + (usage.extra || 0))) {
-        showTip("Daily limit reached. Share below to unlock!", "info");
-        return;
-      }
+        // ==========================================
+        // 1. 优先判断额度 (区分已登录用户和未登录游客)
+        // ==========================================
+        if (currentUser) {
+          // 已登录用户：判断数据库里的 credits
+          const credits = parseInt(currentUser.credits || "0", 10);
+          if (credits <= 0) {
+            router.push("/pricing");
+            return;
+          }
+        } else {
+          // 游客：判断本地 localStorage 的使用次数
+          const usage = getAiUsage();
+          const limit = MAX_DAILY_LIMIT + (usage.extra || 0);
+          if (usage.count >= limit) {
+            showTip("Daily limit reached. Share below to unlock!", "info");
+            return;
+          }
+        }
 
-      const originalHtml = heroAiGoBtn.innerHTML;
-      heroAiGoBtn.disabled = true;
-      heroAiGoBtn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+        // ==========================================
+        // 2. 校验输入提示词
+        // ==========================================
+        const prompt = heroAiInput?.value.trim() || "";
+        if (prompt.length < 3) {
+          return showTip("Please enter a description.", "error");
+        }
 
-      switchView('editor');
-      toggleLoader(true, "AI is creating your puzzle...");
-      if (drawCanvas) {
-        if (ctx) ctx.clearRect(0, 0, drawCanvas.width || 0, drawCanvas.height);
-      }
+        // GA 埋点：AI 生成开始
+        trackEvent('ai_generate_start', { prompt_length: prompt.length });
 
+        // ==========================================
+        // 3. 更新 UI 为加载状态
+        // ==========================================
+        heroAiGoBtn.disabled = true;
+        heroAiGoBtn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
-      try {
+        switchView('editor');
         toggleLoader(true, "AI is creating your puzzle...");
 
-        const res = await fetch("/api/doubao", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            // 这里的 prompt 已经在外部定义好
-            prompt: prompt + ", simple black and white line art, coloring book style, white background, no shading, clear outlines",
-          })
-        });
+        if (drawCanvas && ctx) {
+          ctx.clearRect(0, 0, drawCanvas.width || 0, drawCanvas.height);
+        }
 
-        // 如果返回不是 200，尝试解析错误 JSON
-        if (!res.ok) {
-          const errorText = await res.text();
-          let errorMessage = "AI Generation failed";
-          try {
-            const errorJson = JSON.parse(errorText);
-            errorMessage = errorJson.error || errorJson.message || errorMessage;
-          } catch (e) {
-            errorMessage = errorText || errorMessage;
+        try {
+          // ==========================================
+          // 4. 准备请求头并携带 Token
+          // ==========================================
+          const token = localStorage.getItem("auth_token");
+
+          // 声明 headers，动态添加 Authorization
+          const headers: HeadersInit = {
+            "Content-Type": "application/json"
+          };
+          if (token) {
+            headers["Authorization"] = `Bearer ${token}`;
           }
-          throw new Error(errorMessage);
+
+          // 发送请求到后端
+          const res = await fetch("/api/doubao", {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify({
+              prompt: prompt + ", simple black and white line art, coloring book style, white background, no shading, clear outlines",
+            })
+          });
+
+          // ==========================================
+          // 5. 错误处理
+          // ==========================================
+          if (!res.ok) {
+            const errorText = await res.text();
+            let errorMessage = "AI Generation failed";
+            try {
+              const errorJson = JSON.parse(errorText);
+              errorMessage = errorJson.error || errorJson.message || errorMessage;
+            } catch (err) {
+              errorMessage = errorText || errorMessage;
+            }
+            throw new Error(errorMessage);
+          }
+
+          // 解析图片流
+          const blob = await res.blob();
+          if (blob.size < 100) {
+            throw new Error("Received an invalid image file.");
+          }
+
+          // 埋点：AI 生成成功
+          trackEvent('ai_generate_success');
+
+          // ==========================================
+          // 6. 前端扣除积分并更新 UI (后端此时已经扣除了数据库)
+          // ==========================================
+          if (currentUser) {
+            // 已登录用户：本地修改积分 -1
+            const newCredits = (parseInt(currentUser.credits || "0", 10) - 1).toString();
+            currentUser.credits = newCredits;
+
+            // 同步回 localStorage 避免刷新短暂闪烁旧数据
+            const savedStr = localStorage.getItem("app_user");
+            if (savedStr) {
+              try {
+                const savedUser = JSON.parse(savedStr);
+                savedUser.credits = newCredits;
+                localStorage.setItem("app_user", JSON.stringify(savedUser));
+              } catch (e) {
+                console.error("Failed to update app_user in localStorage", e);
+              }
+            }
+            // 刷新数字和按钮状态
+            updateAiCreditsUI();
+          } else {
+            // 游客：增加本地使用次数
+            incrementAiUsage();
+          }
+
+          // ==========================================
+          // 7. 渲染生成的图片到画布
+          // ==========================================
+          const aiFile = new File([blob], `ai_${Date.now()}.png`, { type: blob.type });
+          loadFileToCanvas(aiFile);
+
+        } catch (e: any) {
+          console.error("AI Gen Error:", e);
+          trackEvent('ai_generate_fail', { error: e.message });
+          showTip(e.message || "AI Generation failed. Please try again.", "error");
+
+          // 失败后退回首页视图
+          switchView('landing');
+
+          // 失败后将按钮恢复为可点击状态
+          updateAiCreditsUI();
+        } finally {
+          toggleLoader(false);
         }
-
-        // 接收图片二进制流
-        const blob = await res.blob();
-
-        // 校验是否真的收到了图片
-        if (blob.size < 100) {
-          throw new Error("Received an invalid image file.");
-        }
-
-        // 埋点：AI 生成成功
-        trackEvent('ai_generate_success');
-
-        // 扣除积分
-        incrementAiUsage();
-
-        // 将 Blob 转换为 File 并加载到画布
-        // 使用当前时间戳命名防止缓存问题
-        const aiFile = new File([blob], `ai_${Date.now()}.png`, { type: blob.type });
-        loadFileToCanvas(aiFile);
-
-      } catch (e: any) {
-        console.error("AI Gen Error:", e);
-        trackEvent('ai_generate_fail', { error: e.message });
-
-        showTip(e.message || "AI Generation failed. Please try again.", "error");
-
-        // 失败后回退视图
-        switchView('landing');
-      } finally {
-        toggleLoader(false);
-      }
-    });
+      });
+    }
     const incrementAiUsage = () => {
       const data = getAiUsage();
       data.count++;
@@ -1031,78 +1093,119 @@ export default function DotGeneratorClient({ locale }: DotGeneratorProps) {
     };
 
     const updateAiCreditsUI = () => {
-      const data = getAiUsage();
-      const limit = MAX_DAILY_LIMIT + (data.extra || 0);
-      const remaining = Math.max(0, limit - data.count);
+      const currentUser = userRef.current; // 获取当前用户
 
-      if (heroAiCredits) heroAiCredits.textContent = remaining.toString();
+      if (currentUser) {
+        // ============================
+        // 1. 已登录用户逻辑
+        // ============================
+        const credits = parseInt(currentUser.credits || "0", 10);
+        if (heroAiCredits) heroAiCredits.textContent = credits.toString();
 
-      let msgContainer = document.getElementById("ai-limit-msg");
+        let msgContainer = document.getElementById("ai-limit-msg");
+        if (!heroAiGoBtn) return;
 
-      if (!heroAiGoBtn) return;
+        if (credits <= 0) {
+          // 积分不足
+          heroAiGoBtn.style.cursor = "default";
+          heroAiGoBtn.disabled = true;
 
-      if (remaining <= 0) {
-        heroAiGoBtn.style.cursor = "default";
-        heroAiGoBtn.disabled = true;
+          const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
 
-        const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
+          heroAiGoBtn.innerHTML = `<span>Get More Credits</span>${lockSvg}`;
+          heroAiGoBtn.disabled = false;
+          heroAiGoBtn.style.cursor = 'pointer';
+          heroAiGoBtn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            router.push("/pricing");
+          };
 
-
-
-        // 写入纯 HTML 字符串
-        heroAiGoBtn.innerHTML = `<span>Get More Credits</span>${lockSvg}`;
-
-        // 2. 确保按钮处于“可点击”状态
-        heroAiGoBtn.disabled = false;
-        heroAiGoBtn.style.cursor = 'pointer';
-
-        // 3. 覆盖点击事件，点击后跳转到 pricing 页面
-        heroAiGoBtn.onclick = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          // 使用 next-intl 的 router.push
-          // 它会自动识别当前语言并跳转到正确的路径
-          // 比如：在 /es/ 下，它会自动跳到 /es/pricing/
-          router.push("/pricing");
-        };
-        const today = new Date().toLocaleDateString();
-        if (data.shareDate !== today) {
+          // 显示提示文字
           if (!msgContainer) {
             msgContainer = document.createElement("div");
             msgContainer.id = "ai-limit-msg";
             msgContainer.className = "text-center mt-4 text-sm text-slate-500 animate-in fade-in slide-in-from-top-1";
-
-            const shareSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>';
-
-            msgContainer.innerHTML = `
-                        <span>Daily limit used. </span>
-                        <button id="inline-share-btn" class="inline-flex items-center gap-1 text-[#FF4500] hover:text-[#cc3700] font-bold hover:underline cursor-pointer transition-colors relative z-20" style="background:none; border:none; padding:0;">
-                            ${shareSvg} Share to unlock +1
-                        </button>
-                    `;
-
+            msgContainer.innerHTML = `<span>Insufficient credits. </span><a href="/pricing" class="text-brand-blue font-bold hover:underline">Upgrade</a>`;
             const creditsParent = heroAiCredits ? heroAiCredits.parentElement : null;
             if (creditsParent && creditsParent.parentNode) {
               creditsParent.parentNode.insertBefore(msgContainer, creditsParent.nextSibling);
-              const shareBtn = document.getElementById("inline-share-btn");
-              if (shareBtn) shareBtn.addEventListener("click", handleShareUnlock);
             }
           }
         } else {
+          // 积分充足
+          heroAiGoBtn.style.backgroundColor = "";
+          heroAiGoBtn.style.color = "";
+          heroAiGoBtn.style.cursor = "";
+          heroAiGoBtn.disabled = false;
+          heroAiGoBtn.classList.add("bg-gradient-to-r", "from-purple-600", "to-pink-600", "hover:shadow-lg", "hover:scale-105");
+          const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+          heroAiGoBtn.innerHTML = `<span>Generate</span> ${arrowSvg}`;
+          heroAiGoBtn.onclick = null; // 恢复事件流
           if (msgContainer) msgContainer.remove();
         }
+
       } else {
-        heroAiGoBtn.style.backgroundColor = "";
-        heroAiGoBtn.style.color = "";
-        heroAiGoBtn.style.cursor = "";
-        heroAiGoBtn.disabled = false;
-        heroAiGoBtn.classList.add("bg-gradient-to-r", "from-purple-600", "to-pink-600", "hover:shadow-lg", "hover:scale-105");
-        const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
-        heroAiGoBtn.innerHTML = `<span>Generate</span> ${arrowSvg}`;
-        if (msgContainer) msgContainer.remove();
+        // ============================
+        // 2. 未登录游客逻辑 (保留你原有的逻辑)
+        // ============================
+        const data = getAiUsage();
+        const limit = MAX_DAILY_LIMIT + (data.extra || 0);
+        const remaining = Math.max(0, limit - data.count);
+
+        if (heroAiCredits) heroAiCredits.textContent = remaining.toString();
+
+        let msgContainer = document.getElementById("ai-limit-msg");
+        if (!heroAiGoBtn) return;
+
+        if (remaining <= 0) {
+          heroAiGoBtn.style.cursor = "default";
+          heroAiGoBtn.disabled = true;
+
+          const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
+          heroAiGoBtn.innerHTML = `<span>Get More Credits</span>${lockSvg}`;
+          heroAiGoBtn.disabled = false;
+          heroAiGoBtn.style.cursor = 'pointer';
+
+          heroAiGoBtn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            router.push("/pricing");
+          };
+
+          const today = new Date().toLocaleDateString();
+          if (data.shareDate !== today) {
+            if (!msgContainer) {
+              msgContainer = document.createElement("div");
+              msgContainer.id = "ai-limit-msg";
+              msgContainer.className = "text-center mt-4 text-sm text-slate-500 animate-in fade-in slide-in-from-top-1";
+              const shareSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>';
+              msgContainer.innerHTML = `<span>Daily limit used. </span><button id="inline-share-btn" class="inline-flex items-center gap-1 text-[#FF4500] hover:text-[#cc3700] font-bold hover:underline cursor-pointer transition-colors relative z-20" style="background:none; border:none; padding:0;">${shareSvg} Share to unlock +1</button>`;
+              const creditsParent = heroAiCredits ? heroAiCredits.parentElement : null;
+              if (creditsParent && creditsParent.parentNode) {
+                creditsParent.parentNode.insertBefore(msgContainer, creditsParent.nextSibling);
+                const shareBtn = document.getElementById("inline-share-btn");
+                if (shareBtn) shareBtn.addEventListener("click", handleShareUnlock);
+              }
+            }
+          } else {
+            if (msgContainer) msgContainer.remove();
+          }
+        } else {
+          heroAiGoBtn.style.backgroundColor = "";
+          heroAiGoBtn.style.color = "";
+          heroAiGoBtn.style.cursor = "";
+          heroAiGoBtn.disabled = false;
+          heroAiGoBtn.classList.add("bg-gradient-to-r", "from-purple-600", "to-pink-600", "hover:shadow-lg", "hover:scale-105");
+          const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+          heroAiGoBtn.innerHTML = `<span>Generate</span> ${arrowSvg}`;
+          if (msgContainer) msgContainer.remove();
+        }
       }
     };
+
+    // ★ 增加一个事件监听，当上面 useEffect 触发 'auth-updated' 时重新刷新UI
+    window.addEventListener('auth-updated', updateAiCreditsUI);
 
     const showDonationTip = () => {
       const existingTip = document.getElementById("donation-toast");

@@ -14,6 +14,8 @@ export async function POST(req: NextRequest) {
 
         const plan = priceMap[type];
         if (!plan) return NextResponse.json({ error: "Invalid Plan" }, { status: 400 });
+        console.log("Error in Stripe Create Pay URL:");
+
 
         // 2. 请求后端 Java/Python 统一支付中转接口
         const gatewayRes = await fetch('https://api.connectthedotsprintable.online/prod-api/stripe/getPayUrl', {
