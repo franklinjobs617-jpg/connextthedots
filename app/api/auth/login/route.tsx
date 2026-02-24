@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
                 accessToken: accessToken,
                 ip: clientIp,
                 score: "3",    // 默认值
-                credits: "5",  // 默认值
+                credits: "1",  // 默认值
                 type: "6",     // 默认类型
             }
         });
