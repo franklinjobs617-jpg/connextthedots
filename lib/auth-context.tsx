@@ -9,6 +9,8 @@ interface User {
     googleUserId: string;
     credits: string;
     score: string;
+    type: string; // 站点 ID (例如 "6")
+    plan: string; // ★ 会员等级 (例如 "free", "premium", "pro")
 }
 
 interface AuthContextType {
@@ -18,7 +20,7 @@ interface AuthContextType {
     isLoggingIn: boolean;
     login: () => void;
     logout: () => void;
-    refreshUser: () => Promise<void>; // ★ 必须暴露这个方法给 Stripe 页面使用
+    refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -56,7 +58,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // --- 2. 核心：请求后端获取最新数据 (静默刷新) ---
     const fetchLatestUser = useCallback(async (token: string) => {
         try {
-            // 注意：这里假设 /api/auth/login 可以仅通过 token 返回用户信息
             const res = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -97,7 +98,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             try {
                 const parsed = JSON.parse(savedUser);
                 setUser(prev => {
-                    // 如果本地缓存的积分和当前 State 不一样，更新 State
                     if (JSON.stringify(prev) !== JSON.stringify(parsed)) {
                         return parsed;
                     }
@@ -115,7 +115,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             const savedToken = localStorage.getItem("auth_token");
             const savedUser = localStorage.getItem("app_user");
 
-            // A. 优先显示本地缓存 (速度快，防止闪烁)
+            // A. 优先显示本地缓存
             if (savedToken && savedUser) {
                 try {
                     setUser(JSON.parse(savedUser));
@@ -124,7 +124,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 }
             }
 
-            // B. 后台发起网络请求，获取最新积分 (数据准)
+            // B. 后台发起网络请求，获取最新状态
             if (savedToken) {
                 await fetchLatestUser(savedToken);
             }
@@ -153,7 +153,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         initialize();
         loadGoogleSDK();
 
-        // ★★★ 监听全局事件 (DotGeneratorClient 本地扣费时会触发这个) ★★★
         window.addEventListener('auth-updated', reloadFromLocalStorage);
 
         return () => {
@@ -179,7 +178,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             isLoggingIn,
             login,
             logout,
-            refreshUser, // ★ 暴露给 Stripe 支付页面使用
+            refreshUser,
         }}>
             {children}
         </AuthContext.Provider>
