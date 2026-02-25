@@ -22,7 +22,7 @@ model User {
   familyName        String?   @map("family_name")
   picture           String?
   score             String?   @default("3") // 对应积分情况
-  credits           String?   @default("5") // 对应剩余点数
+  credits           String?   @default("1") // 对应剩余点数
   accessToken       String?   @map("access_token") @db.Text
   createTime        DateTime? @default(now()) @map("create_time")
   updateTime        DateTime? @updatedAt @map("update_time")
