@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-// --- 修改点：从你的 i18n 配置中导入 Link, 而不是 next/link ---
 import { Link, usePathname } from "@/i18n/routing";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
@@ -13,6 +12,8 @@ import {
     X,
     LogOut,
     Loader2,
+    Zap,
+    Crown
 } from "lucide-react";
 export default function Header() {
     const LinkArr = [
@@ -62,7 +63,7 @@ export default function Header() {
                 </span>
                 <div className="w-8 h-8 rounded-full overflow-hidden border border-white ring-1 ring-slate-100 shadow-sm">
                     {user?.picture ? (
-                        <img src={user?.picture} alt="Avatar" className="w-full h-full object-cover" />
+                        <Image src={user?.picture} alt="Avatar" className="w-full h-full object-cover" width={32} height={32} />
                     ) : (
                         <div className="w-full h-full bg-slate-200 flex items-center justify-center text-xs">U</div>
                     )}
@@ -70,13 +71,69 @@ export default function Header() {
             </button>
 
             {showProfileMenu && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-[60] py-1">
-                    <div className="px-4 py-2 border-b border-slate-50 text-xs text-slate-500 truncate">
-                        {user?.email}
+                <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-[60] flex flex-col transform origin-top-right transition-all animate-in fade-in scale-95 duration-200">
+
+                    {/* 1. 账户基本信息 */}
+                    <div className="px-4 py-3 border-b border-slate-50 bg-slate-50/50">
+                        <div className="font-bold text-slate-800 truncate">
+                            {user?.name}
+                        </div>
+                        <div className=" text-slate-500 truncate mt-0.5">
+                            {user?.email}
+                        </div>
                     </div>
+
+                    {/* 2. 资产与订阅面板 */}
+                    <div className="px-4 py-3 border-b border-slate-50 space-y-3">
+                        {/* 会员等级 */}
+                        <div className="flex items-center justify-between">
+                            <span className="text-slate-500 flex items-center gap-1.5 text-md">
+                                <Crown size={14} className={user?.plan === 'premium' ? 'text-amber-500' : 'text-slate-400'} />
+                                Plan
+                            </span>
+                            {user?.plan === 'premium' ? (
+                                <span className="font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-700 uppercase tracking-wider">
+                                    Premium
+                                </span>
+                            ) : (
+                                <span className="font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 uppercase tracking-wider">
+                                    Free
+                                </span>
+                            )}
+                        </div>
+
+                        {/* 剩余积分 */}
+                        <div className="flex items-center justify-between">
+                            <span className="text-slate-500 flex items-center gap-1.5 text-md">
+                                <Zap size={14} className="text-brand-blue" />
+                                Credits
+                            </span>
+                            <span className="text-sm font-bold text-brand-blue">
+                                {user?.credits || "0"}
+                            </span>
+                        </div>
+
+                        {/* 促单升级按钮 (仅对免费用户显示) */}
+                        {user?.plan !== 'premium' && (
+                            <div className="pt-2">
+                                <Link
+                                    href="/pricing"
+                                    onClick={() => setShowProfileMenu(false)}
+                                    className="flex items-center justify-center w-full py-2 bg-gradient-to-r from-brand-blue to-indigo-600 text-white  font-bold rounded-lg hover:shadow-md hover:scale-[1.02] transition-all"
+                                >
+                                    Upgrade to Premium
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* 3. 退出登录 */}
                     <button
-                        onClick={logout}
-                        className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors text-left"
+                        onClick={() => {
+                            logout();
+                            setShowProfileMenu(false);
+                        }}
+                        className="w-full flex items-center gap-2 px-4 py-4 text-md font-medium text-red-500 hover:bg-red-50 transition-colors text-left"
                     >
                         <LogOut size={16} />
                         <span>{t("signOut")}</span>
@@ -180,15 +237,7 @@ export default function Header() {
                         </Link>
                     ))}
                     <LanguageDropdown />
-                    <Link
-                        href="https://ko-fi.com/connectthedotsprintable"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-2 px-4 py-2 ml-2 rounded-full bg-red-50 text-donate-red transition-all hover:bg-red-100 no-underline"
-                    >
-                        <Image src="/images/ko-fi.png" width={20} height={20} alt="Ko-fi icon" />
-                        <span className="font-bold text-donate-red">{t("donate")}</span>
-                    </Link>
+
 
                     {isLoggedIn ? (
                         <div className="flex items-center gap-3 ml-2">
@@ -209,15 +258,7 @@ export default function Header() {
             {isMobileMenuOpen && (
                 <div className="lg:hidden bg-white border-b border-gray-100 p-4 fixed top-[69px] left-0 w-full z-40 shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto animate-in slide-in-from-top-2 duration-200">
                     <div className="flex flex-col space-y-4 font-medium text-slate-600">
-                        {isLoggedIn && (
-                            <div className="flex items-center gap-3 pb-4 border-b border-slate-50">
-                                <img src={user?.picture} alt="Avatar" className="w-10 h-10 rounded-full" />
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-slate-900">{user?.name}</span>
-                                    <span className="text-xs text-slate-500">{user?.email}</span>
-                                </div>
-                            </div>
-                        )}
+
 
                         {LinkArr.map((item) => (
                             <Link
@@ -230,18 +271,17 @@ export default function Header() {
                                 {t(item.labelKey)}
                             </Link>
                         ))}
-
+                        {isLoggedIn && (
+                            <div className="flex items-center gap-3 pb-4 border-b border-slate-50">
+                                <Image src={user?.picture || ''} alt="Avatar" className="w-10 h-10 rounded-full" width={40} height={40} />
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-bold text-slate-900">{user?.name}</span>
+                                    <span className="text-xs text-slate-500">{user?.email}</span>
+                                </div>
+                            </div>
+                        )}
                         <div className="flex flex-col gap-3 pt-2">
-                            <Link
-                                href="https://ko-fi.com/connectthedotsprintable"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group flex items-center gap-2 px-4 py-2 ml-2 rounded-full bg-red-50 text-donate-red transition-all hover:bg-red-100 no-underline"
-                            >
 
-                                <Image src="/images/ko-fi.png" width={20} height={20} alt="Ko-fi icon" />
-                                <span className="font-bold text-donate-red">{t("donate")}</span>
-                            </Link>
 
                             {isLoggedIn ? (
                                 <button

@@ -83,7 +83,8 @@ export default function PricingContent() {
                     <p className="text-slate-600 font-medium mb-12">{t('heroSubtitle')}</p>
                 </div>
 
-                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+
                     {/* --- 1. Life-saver Pack (一次性) --- */}
                     <PlanCard
                         title={t('tiers.saver.name')}
@@ -95,6 +96,7 @@ export default function PricingContent() {
                         onStripe={() => handleStripePayment("content_lifesaver_once", "Life-saver")}
                         isLoggedIn={isLoggedIn}
                         user={user}
+                        featured
                         login={login}
                     />
 
@@ -107,7 +109,7 @@ export default function PricingContent() {
                         type="content_creator_monthly"
                         loading={loadingPlan === "content_creator_monthly"}
                         onStripe={() => handleStripePayment("content_creator_monthly", "Creator")}
-                        featured
+
                         isLoggedIn={isLoggedIn}
                         user={user}
                         login={login}

@@ -1,5 +1,5 @@
 {
-  "hero": {
+ "hero": {
     "badge": "✨ Free Dot to Dot Generator ✨",
     "titleMain": "The Best Free Connect the Dots",
     "titleHighlight": "Generator & Maker",
@@ -10,11 +10,18 @@
     "uploadHint": "click or drop (JPG, PNG)",
     "noImageLabel": "No image? Click to Try These:",
     "aiPlaceholder": "Describe your drawing (e.g., A cute cat)...",
-    "aiCredits": "free daily",
+    "aiCredits": "Credits left",
     "aiButton": "Generate",
     "sliderOriginal": "Original",
-    "sliderPuzzle": "Puzzle"
-  },
+    "sliderPuzzle": "Puzzle",
+    "loginToGetCredits": "Sign in for <strong class=\"text-brand-blue\">2 Free Credits</strong>",
+    "signInToGenerate": "Sign In to Generate",
+    "getCredits": "Get Credits",
+    "outOfCreditsTitle": "Out of AI Credits ⚡",
+    "outOfCreditsDesc": "Get **more AI credits** & download **watermark-free** PDFs",
+    "btnUpgrade": "Upgrade Plan",
+    "btnFreeLibrary": "Free Library"
+},
   "howToGuide": {
     "title": "Make Your Own Printable Dot to Dot Puzzles in 3 Steps",
     "subtitle": "Turn any photo or drawing into a professional dot-to-dot worksheet in 3 simple steps. Perfect for parents, teachers, and puzzle enthusiasts.",
@@ -153,7 +160,7 @@
     "uploadNew": "Upload New Image",
     "downloadImage": "Download Image",
     "downloadPdf": "Download PDF",
-    "recommended": "RECOMMENDED",
+    "recommended": "Recommend",
     "generating": "Generating...",
     "difficulty": "Adjustable Difficulty for All Skill Levels",
     "easy": "Easy",

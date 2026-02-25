@@ -2,9 +2,17 @@
 
 import { useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/routing";
+import { jsPDF } from "jspdf";
+
 interface DotGeneratorProps {
   locale: string; user?: any;
 }
+
+interface DotGeneratorProps {
+  locale: string;
+  user?: any;
+}
+
 // 全局类型声明
 declare global {
   interface Window {
@@ -45,7 +53,6 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
   useEffect(() => {
     userRef.current = user;
-    window.dispatchEvent(new CustomEvent('auth-updated'));
   }, [user]);
 
   useEffect(() => {
@@ -917,346 +924,102 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
       }
       return data;
     };
-    // AI Generation (Doubao) Logic - Kept roughly same but unified loader
+    // ★ 2. AI 生成核心事件
     if (heroAiGoBtn) {
+      // 注意：如果是未登录状态，上面的 onclick 会覆盖这个事件，这是正确的。
       heroAiGoBtn.addEventListener('click', async (e) => {
-        // 阻止默认事件
+        if (!userRef.current) return;
+
+
         e.preventDefault();
-
-        // 如果该按钮被 updateAiCreditsUI 动态绑定了 onclick (例如跳转到 Pricing)，则不再执行生成逻辑
-        if (heroAiGoBtn.onclick) return;
-
-        const currentUser = userRef.current; // 拿到最新用户状态
-
-        // ==========================================
-        // 1. 优先判断额度 (区分已登录用户和未登录游客)
-        // ==========================================
-        if (currentUser) {
-          // 已登录用户：判断数据库里的 credits
-          const credits = parseInt(currentUser.credits || "0", 10);
-          if (credits <= 0) {
-            router.push("/pricing");
-            return;
-          }
-        } else {
-          // 游客：判断本地 localStorage 的使用次数
-          const usage = getAiUsage();
-          const limit = MAX_DAILY_LIMIT + (usage.extra || 0);
-          if (usage.count >= limit) {
-            showTip("Daily limit reached. Share below to unlock!", "info");
-            return;
-          }
-        }
-
-        // ==========================================
-        // 2. 校验输入提示词
-        // ==========================================
         const prompt = heroAiInput?.value.trim() || "";
-        if (prompt.length < 3) {
-          return showTip("Please enter a description.", "error");
-        }
+        if (prompt.length < 3) return showTip("Please enter a description.", "error");
 
-        // GA 埋点：AI 生成开始
         trackEvent('ai_generate_start', { prompt_length: prompt.length });
 
-        // ==========================================
-        // 3. 更新 UI 为加载状态
-        // ==========================================
         heroAiGoBtn.disabled = true;
         heroAiGoBtn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
         switchView('editor');
         toggleLoader(true, "AI is creating your puzzle...");
 
-        if (drawCanvas && ctx) {
-          ctx.clearRect(0, 0, drawCanvas.width || 0, drawCanvas.height);
-        }
-
         try {
-          // ==========================================
-          // 4. 准备请求头并携带 Token
-          // ==========================================
           const token = localStorage.getItem("auth_token");
-
-          // 声明 headers，动态添加 Authorization
-          const headers: HeadersInit = {
-            "Content-Type": "application/json"
-          };
-          if (token) {
-            headers["Authorization"] = `Bearer ${token}`;
-          }
-
-          // 发送请求到后端
           const res = await fetch("/api/doubao", {
             method: "POST",
-            headers: headers,
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             body: JSON.stringify({
               prompt: prompt + ", simple black and white line art, coloring book style, white background, no shading, clear outlines",
             })
           });
 
-          // ==========================================
-          // 5. 错误处理
-          // ==========================================
-          if (!res.ok) {
-            const errorText = await res.text();
-            let errorMessage = "AI Generation failed";
-            try {
-              const errorJson = JSON.parse(errorText);
-              errorMessage = errorJson.error || errorJson.message || errorMessage;
-            } catch (err) {
-              errorMessage = errorText || errorMessage;
-            }
-            throw new Error(errorMessage);
-          }
-
-          // 解析图片流
+          if (!res.ok) throw new Error("AI Generation failed");
           const blob = await res.blob();
-          if (blob.size < 100) {
-            throw new Error("Received an invalid image file.");
-          }
-
-          // 埋点：AI 生成成功
           trackEvent('ai_generate_success');
 
-          // ==========================================
-          // 6. 前端扣除积分并更新 UI (后端此时已经扣除了数据库)
-          // ==========================================
-          if (currentUser) {
-            // 已登录用户：本地修改积分 -1
-            const newCredits = (parseInt(currentUser.credits || "0", 10) - 1).toString();
-            currentUser.credits = newCredits;
+          // 扣除积分
+          const newCredits = (parseInt(userRef.current.credits, 10) - 1).toString();
+          userRef.current.credits = newCredits;
+          localStorage.setItem("app_user", JSON.stringify(userRef.current));
 
-            // 同步回 localStorage 避免刷新短暂闪烁旧数据
-            const savedStr = localStorage.getItem("app_user");
-            if (savedStr) {
-              try {
-                const savedUser = JSON.parse(savedStr);
-                savedUser.credits = newCredits;
-                localStorage.setItem("app_user", JSON.stringify(savedUser));
-              } catch (e) {
-                console.error("Failed to update app_user in localStorage", e);
-              }
-            }
-            // 刷新数字和按钮状态
-            updateAiCreditsUI();
-          } else {
-            // 游客：增加本地使用次数
-            incrementAiUsage();
-          }
-
-          // ==========================================
-          // 7. 渲染生成的图片到画布
-          // ==========================================
           const aiFile = new File([blob], `ai_${Date.now()}.png`, { type: blob.type });
-          loadFileToCanvas(aiFile);
+          // 调用之前存在的 loadFileToCanvas 方法
+          // loadFileToCanvas(aiFile);
 
         } catch (e: any) {
-          console.error("AI Gen Error:", e);
           trackEvent('ai_generate_fail', { error: e.message });
-          showTip(e.message || "AI Generation failed. Please try again.", "error");
 
-          // 失败后退回首页视图
+          showTip(e.message, "error");
           switchView('landing');
-
-          // 失败后将按钮恢复为可点击状态
-          updateAiCreditsUI();
         } finally {
           toggleLoader(false);
         }
       });
     }
-    const incrementAiUsage = () => {
-      const data = getAiUsage();
-      data.count++;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      updateAiCreditsUI();
-    };
-    const handleShareUnlock = () => {
-      const data = getAiUsage();
-      const today = new Date().toLocaleDateString();
 
-      if (data.shareDate === today) {
-        showTip("You have already claimed today's bonus!", "info");
-        return;
-      }
 
-      const url = encodeURIComponent(window.location.href);
-      const title = encodeURIComponent("Check out this Free Connect the Dots Generator!");
-      window.open(`https://www.reddit.com/submit?url=${url}&title=${title}`, "_blank");
 
-      data.extra = (data.extra || 0) + 1;
-      data.shareDate = today;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      updateAiCreditsUI();
-      showTip("Success! 3 credits added.", "success");
-    };
 
-    const updateAiCreditsUI = () => {
-      const currentUser = userRef.current; // 获取当前用户
+    // ★ 3. 下载后的 Upsell 弹窗 
+    const showUpsellTip = () => {
+      const currentUser = userRef.current;
+      if (currentUser?.plan === 'premium') return; // 付费用户不打扰
 
-      if (currentUser) {
-        // ============================
-        // 1. 已登录用户逻辑
-        // ============================
-        const credits = parseInt(currentUser.credits || "0", 10);
-        if (heroAiCredits) heroAiCredits.textContent = credits.toString();
-
-        let msgContainer = document.getElementById("ai-limit-msg");
-        if (!heroAiGoBtn) return;
-
-        if (credits <= 0) {
-          // 积分不足
-          heroAiGoBtn.style.cursor = "default";
-          heroAiGoBtn.disabled = true;
-
-          const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
-
-          heroAiGoBtn.innerHTML = `<span>Get More Credits</span>${lockSvg}`;
-          heroAiGoBtn.disabled = false;
-          heroAiGoBtn.style.cursor = 'pointer';
-          heroAiGoBtn.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            router.push("/pricing");
-          };
-
-          // 显示提示文字
-          if (!msgContainer) {
-            msgContainer = document.createElement("div");
-            msgContainer.id = "ai-limit-msg";
-            msgContainer.className = "text-center mt-4 text-sm text-slate-500 animate-in fade-in slide-in-from-top-1";
-            msgContainer.innerHTML = `<span>Insufficient credits. </span><a href="/pricing" class="text-brand-blue font-bold hover:underline">Upgrade</a>`;
-            const creditsParent = heroAiCredits ? heroAiCredits.parentElement : null;
-            if (creditsParent && creditsParent.parentNode) {
-              creditsParent.parentNode.insertBefore(msgContainer, creditsParent.nextSibling);
-            }
-          }
-        } else {
-          // 积分充足
-          heroAiGoBtn.style.backgroundColor = "";
-          heroAiGoBtn.style.color = "";
-          heroAiGoBtn.style.cursor = "";
-          heroAiGoBtn.disabled = false;
-          heroAiGoBtn.classList.add("bg-gradient-to-r", "from-purple-600", "to-pink-600", "hover:shadow-lg", "hover:scale-105");
-          const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
-          heroAiGoBtn.innerHTML = `<span>Generate</span> ${arrowSvg}`;
-          heroAiGoBtn.onclick = null; // 恢复事件流
-          if (msgContainer) msgContainer.remove();
-        }
-
-      } else {
-        // ============================
-        // 2. 未登录游客逻辑 (保留你原有的逻辑)
-        // ============================
-        const data = getAiUsage();
-        const limit = MAX_DAILY_LIMIT + (data.extra || 0);
-        const remaining = Math.max(0, limit - data.count);
-
-        if (heroAiCredits) heroAiCredits.textContent = remaining.toString();
-
-        let msgContainer = document.getElementById("ai-limit-msg");
-        if (!heroAiGoBtn) return;
-
-        if (remaining <= 0) {
-          heroAiGoBtn.style.cursor = "default";
-          heroAiGoBtn.disabled = true;
-
-          const lockSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round" class="inline mb-0.5 ml-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
-          heroAiGoBtn.innerHTML = `<span>Get More Credits</span>${lockSvg}`;
-          heroAiGoBtn.disabled = false;
-          heroAiGoBtn.style.cursor = 'pointer';
-
-          heroAiGoBtn.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            router.push("/pricing");
-          };
-
-          const today = new Date().toLocaleDateString();
-          if (data.shareDate !== today) {
-            if (!msgContainer) {
-              msgContainer = document.createElement("div");
-              msgContainer.id = "ai-limit-msg";
-              msgContainer.className = "text-center mt-4 text-sm text-slate-500 animate-in fade-in slide-in-from-top-1";
-              const shareSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>';
-              msgContainer.innerHTML = `<span>Daily limit used. </span><button id="inline-share-btn" class="inline-flex items-center gap-1 text-[#FF4500] hover:text-[#cc3700] font-bold hover:underline cursor-pointer transition-colors relative z-20" style="background:none; border:none; padding:0;">${shareSvg} Share to unlock +1</button>`;
-              const creditsParent = heroAiCredits ? heroAiCredits.parentElement : null;
-              if (creditsParent && creditsParent.parentNode) {
-                creditsParent.parentNode.insertBefore(msgContainer, creditsParent.nextSibling);
-                const shareBtn = document.getElementById("inline-share-btn");
-                if (shareBtn) shareBtn.addEventListener("click", handleShareUnlock);
-              }
-            }
-          } else {
-            if (msgContainer) msgContainer.remove();
-          }
-        } else {
-          heroAiGoBtn.style.backgroundColor = "";
-          heroAiGoBtn.style.color = "";
-          heroAiGoBtn.style.cursor = "";
-          heroAiGoBtn.disabled = false;
-          heroAiGoBtn.classList.add("bg-gradient-to-r", "from-purple-600", "to-pink-600", "hover:shadow-lg", "hover:scale-105");
-          const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" strokeLinecap="round" stroke-linejoin="round" class="inline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
-          heroAiGoBtn.innerHTML = `<span>Generate</span> ${arrowSvg}`;
-          if (msgContainer) msgContainer.remove();
-        }
-      }
-    };
-
-    // ★ 增加一个事件监听，当上面 useEffect 触发 'auth-updated' 时重新刷新UI
-    window.addEventListener('auth-updated', updateAiCreditsUI);
-
-    const showDonationTip = () => {
-      const existingTip = document.getElementById("donation-toast");
+      const existingTip = document.getElementById("upsell-toast");
       if (existingTip) existingTip.remove();
 
       const toast = document.createElement("div");
-      toast.id = "donation-toast";
-      toast.className = `fixed top-24 right-4 z-[100] max-w-sm w-auto bg-white border-l-4 border-[#FF5E5B] rounded-lg shadow-2xl flex items-center gap-4 p-4 pr-10 cursor-pointer transform transition-all duration-500 translate-x-[120%] hover:scale-102 group`;
+      toast.id = "upsell-toast";
+      toast.className = `fixed bottom-6 right-6 z-[100] max-w-sm w-full bg-slate-900 text-white rounded-xl shadow-2xl flex flex-col p-5 cursor-pointer transform transition-all duration-500 translate-y-[120%] border border-slate-700`;
 
       toast.innerHTML = `
-          <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-[#FF5E5B]">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-5 h-5 animate-pulse">
-                  <path d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/>
-              </svg>
-          </div>
-          <div>
-              <h4 class="font-bold text-gray-800 text-sm">Download Complete! 🎉</h4>
-              <p class="text-xs text-slate-500 mt-1 group-hover:text-[#FF5E5B] transition-colors">
-                  Happy with the result? <br>
-                  <span class="underline decoration-[#FF5E5B] decoration-2">Buy me a coffee ($5)</span>
-              </p>
-          </div>
-          <button id="close-toast" class="absolute top-2 right-2 text-gray-300 hover:text-gray-500 p-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                  <path strokeLinecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-          </button>
-      `;
+            <div class="flex justify-between items-start mb-2">
+                <h4 class="font-bold text-brand-blue flex items-center gap-2">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    Download Complete!
+                </h4>
+                <button id="close-toast" class="text-slate-400 hover:text-white"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">
+                Want to remove the watermark and unlock extreme difficulty puzzles?
+            </p>
+            <a href="/pricing" class="bg-brand-blue text-center text-white font-bold py-2 rounded-lg hover:bg-indigo-600 transition">Upgrade to Premium</a>
+        `;
 
       document.body.appendChild(toast);
-      requestAnimationFrame(() => {
-        toast.classList.remove("translate-x-[120%]");
-        toast.classList.add("translate-x-0");
-      });
-
-      const removeToast = () => {
-        toast.classList.remove("translate-x-0");
-        toast.classList.add("translate-x-[120%]");
-        setTimeout(() => { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 500);
-      };
+      requestAnimationFrame(() => toast.classList.remove("translate-y-[120%]"));
 
       toast.addEventListener("click", (e) => {
         if ((e.target as HTMLElement).closest("#close-toast")) {
-          removeToast();
-          return;
+          toast.classList.add("translate-y-[120%]");
+          setTimeout(() => toast.remove(), 500);
         }
-        window.open("https://ko-fi.com/connectthedotsprintable", "_blank");
       });
-      setTimeout(removeToast, 8000);
+      setTimeout(() => {
+        toast.classList.add("translate-y-[120%]");
+        setTimeout(() => toast.remove(), 500);
+      }, 10000);
     };
-
     const dl = async (fmt: "png" | "pdf", event?: Event) => {
       if (!state.originalImage || !drawCanvas)
         return showTip("Please create a puzzle first!", "error");
@@ -1266,50 +1029,93 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
       if (activeBtn) {
         activeBtn.disabled = true;
-        activeBtn.innerHTML = '<span class="flex items-center gap-2">Processing...</span>';
+        activeBtn.innerHTML = '<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...</span>';
       }
+
       trackEvent("download_result", {
         file_format: fmt,
         dots_count: state.dots.length,
         hint_mode: state.config.hint,
       });
+
       try {
+        const currentUser = userRef.current;
+        const isPremium = currentUser && currentUser.plan === 'premium';
+
         if (fmt === "png") {
-          drawCanvas.toBlob((blob) => {
-            if (blob) {
-              const url = URL.createObjectURL(blob);
-              const link = document.createElement("a");
-              link.download = `connect-dots-${Date.now()}.png`;
-              link.href = url;
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-              setTimeout(() => URL.revokeObjectURL(url), 1000);
-            }
-          }, "image/png");
-        } else if (fmt === "pdf") {
-          if (!window.jspdf) throw new Error("jsPDF not loaded");
-          const { jsPDF } = window.jspdf;
           await new Promise<void>((resolve) => {
-            setTimeout(() => {
-              const isLandscape = drawCanvas.width > drawCanvas.height;
-              const doc = new jsPDF({
-                orientation: isLandscape ? "l" : "p",
-                unit: "mm",
-                format: "a4",
-              });
-              const pdfW = doc.internal.pageSize.getWidth();
-              const pdfH = doc.internal.pageSize.getHeight();
-              const ratio = Math.min(pdfW / drawCanvas.width, pdfH / drawCanvas.height);
-              const w = drawCanvas.width * ratio;
-              const h = drawCanvas.height * ratio;
-              doc.addImage(drawCanvas.toDataURL("image/png"), "PNG", (pdfW - w) / 2, (pdfH - h) / 2, w, h);
-              doc.save("connect-dots.pdf");
+            // ★ 核心逻辑：离屏渲染加水印
+            let exportCanvas = drawCanvas;
+
+            // 如果不是付费会员，克隆一个 Canvas 打水印
+            if (!isPremium) {
+              exportCanvas = document.createElement("canvas");
+              exportCanvas.width = drawCanvas.width;
+              exportCanvas.height = drawCanvas.height;
+              const exportCtx = exportCanvas.getContext("2d");
+
+              if (exportCtx) {
+                // 1. 把原画板的内容复制过来
+                exportCtx.drawImage(drawCanvas, 0, 0);
+
+                // 2. 设置水印字体样式 (根据图片宽度自适应大小)
+                const fontSize = Math.max(16, exportCanvas.width * 0.025);
+                exportCtx.font = `bold ${fontSize}px sans-serif`;
+                exportCtx.fillStyle = "rgba(150, 150, 150, 0.8)"; // 半透明浅灰色
+                exportCtx.textAlign = "center";
+                exportCtx.textBaseline = "bottom";
+
+                // 3. 在图片正下方居中画上域名
+                exportCtx.fillText(
+                  "connectthedotsprintable.online",
+                  exportCanvas.width / 2,
+                  exportCanvas.height - (fontSize / 2) // 距离底部留一点间距
+                );
+              }
+            }
+
+            // ★ 从带水印的临时 Canvas (或原 Canvas) 下载
+            exportCanvas.toBlob((blob) => {
+              if (blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.download = `connect-dots-${Date.now()}.png`;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+              }
               resolve();
-            }, 100);
+            }, "image/png");
           });
+
+        } else if (fmt === "pdf") {
+          // PDF 逻辑保持不变
+          const isLandscape = drawCanvas!.width > drawCanvas!.height;
+          const doc = new jsPDF({ orientation: isLandscape ? "l" : "p", unit: "mm", format: "a4" });
+          const pdfW = doc.internal.pageSize.getWidth();
+          const pdfH = doc.internal.pageSize.getHeight();
+          const ratio = Math.min(pdfW / drawCanvas!.width, pdfH / drawCanvas!.height);
+          const w = drawCanvas!.width * ratio;
+          const h = drawCanvas!.height * ratio;
+
+          doc.addImage(drawCanvas!.toDataURL("image/png"), "PNG", (pdfW - w) / 2, (pdfH - h) / 2, w, h);
+
+          // 非 Premium 用户强制加水印
+          if (!isPremium) {
+
+            doc.setFontSize(20);
+            doc.setTextColor(150, 150, 150);
+            doc.text("Created by ConnectTheDotsPrintable.online", pdfW / 2, pdfH - 5, { align: "center" });
+          }
+
+          doc.save("connect-dots.pdf");
         }
-        setTimeout(showDonationTip, 2000);
+
+        // 触发 Upsell 弹窗 (引导付费去水印)
+        setTimeout(showUpsellTip, 1500);
+
       } catch (err) {
         console.error("Download failed:", err);
       } finally {
@@ -1342,54 +1148,119 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
       };
       document.body.appendChild(script);
     };
+    const setupAiHandler = () => {
+      // 轮询检查按钮是否存在 (因为 React 渲染可能比这个 useEffect 慢一点点)
+      const interval = setInterval(() => {
+        const btn = getEl("hero-ai-go-btn");
+        if (btn) {
+          if (btn.getAttribute("data-listener-attached") === "true") {
+            clearInterval(interval);
+            return;
+          }
+          // 标记已绑定
+          btn.setAttribute("data-listener-attached", "true");
+          clearInterval(interval);
 
+          // 绑定事件：只负责生成，不负责 UI 状态
+          btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            // 双重保险
+            if (!userRef.current || parseInt(userRef.current.credits) <= 0) return;
+
+            const input = getEl("hero-ai-input") as HTMLInputElement;
+            const prompt = input?.value.trim() || "";
+            if (prompt.length < 2) {
+              alert("Please enter a description.");
+              return;
+            }
+
+            // 1. 设置 Loading
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = `<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+            (btn as HTMLButtonElement).disabled = true;
+
+            // ★ 2. 修复图片不显示：先切换视图，确保 Canvas 可见
+            switchView('editor');
+            toggleLoader(true, "AI is creating your puzzle...");
+
+            try {
+              // 清空 Canvas 防止残影
+              if (drawCanvas && ctx) ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+
+              const token = localStorage.getItem("auth_token");
+              const res = await fetch("/api/doubao", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                body: JSON.stringify({
+                  prompt: prompt + ", simple black and white line art, coloring book style,pure white background,no paper texture, no shading, clear outlines",
+                })
+              });
+
+              if (!res.ok) throw new Error("AI Generation failed");
+              const blob = await res.blob();
+
+              // 检查是否是图片
+              if (blob.type.indexOf('image') === -1) throw new Error("Invalid image received");
+
+              // 扣除积分 (仅通知前端刷新，后端已扣)
+              if (userRef.current) {
+                const newCredits = (parseInt(userRef.current.credits) - 1).toString();
+                userRef.current.credits = newCredits;
+                localStorage.setItem("app_user", JSON.stringify(userRef.current));
+                window.dispatchEvent(new CustomEvent('auth-updated'));
+              }
+
+              const aiFile = new File([blob], `ai_${Date.now()}.png`, { type: blob.type });
+
+              // ★ 3. 延迟一点点，给 DOM 渲染留出时间
+              setTimeout(() => {
+                loadFileToCanvas(aiFile);
+              }, 100);
+
+            } catch (e: any) {
+              console.error(e);
+              showTip(e.message, "error");
+              switchView('landing'); // 失败回退
+            } finally {
+              toggleLoader(false);
+              (btn as HTMLButtonElement).disabled = false;
+              btn.innerHTML = originalHtml;
+            }
+          });
+        }
+      }, 500); // 每 500ms 检查一次
+    };
     const setupHeroTabs = () => {
-      if (!tabUpload || !tabAi || !tabBg || !panelUpload || !panelAi) return;
+      // 由于我们在 HomeContent 里面控制了 AI 面板的显示，这里只需要处理 Upload 相关的逻辑
+      // 或者保留原有的逻辑，只是这次我们不需要再手动 hidden panel-ai 了，因为 HomeContent 的 JSX 会处理
 
-      const setActive = (isAiMode: boolean) => {
-        if (isAiMode) {
-          trackEvent("select_mode", { mode: "ai_gen" });
-          // 滑块移动
-          (tabBg as HTMLElement).style.transform = "translateX(100%)";
+      // 为了兼容性，这里建议：只保留 Tab 点击的样式切换，内容的显隐交给 React 或保留原生逻辑
+      const tabUpload = getEl("tab-upload");
+      const tabAi = getEl("tab-ai");
+      const tabBg = getEl("tab-bg");
+      const panelUpload = getEl("panel-upload");
+      const panelAi = getEl("panel-ai");
 
-          // 切换按钮颜色
-          tabAi.classList.remove("text-slate-500");
-          tabAi.classList.add("text-slate-800");
-          tabUpload.classList.remove("text-slate-800");
-          tabUpload.classList.add("text-slate-500");
-
-          // 【核心修复】：切换面板状态
-          panelUpload.classList.remove("active");
-          panelUpload.classList.add("inactive");
-
-          panelAi.classList.remove("inactive");
-          panelAi.classList.add("active");
-          // 如果你之前手动加了 hidden，这里也要确保去掉
+      if (tabUpload && tabAi && tabBg && panelUpload && panelAi) {
+        tabUpload.onclick = () => {
+          tabBg.style.transform = "translateX(0)";
+          tabUpload.classList.replace("text-slate-500", "text-slate-800");
+          tabAi.classList.replace("text-slate-800", "text-slate-500");
+          panelAi.classList.add("hidden");
+          panelUpload.classList.remove("hidden");
+        };
+        tabAi.onclick = () => {
+          tabBg.style.transform = "translateX(100%)";
+          tabAi.classList.replace("text-slate-500", "text-slate-800");
+          tabUpload.classList.replace("text-slate-800", "text-slate-500");
+          panelUpload.classList.add("hidden");
           panelAi.classList.remove("hidden");
 
-          setTimeout(() => heroAiInput?.focus(), 100);
-        } else {
-          trackEvent("select_mode", { mode: "upload" });
-          // 滑块复位
-          (tabBg as HTMLElement).style.transform = "translateX(0)";
-
-          // 切换按钮颜色
-          tabUpload.classList.remove("text-slate-500");
-          tabUpload.classList.add("text-slate-800");
-          tabAi.classList.remove("text-slate-800");
-          tabAi.classList.add("text-slate-500");
-
-          // 【核心修复】：切换面板状态
-          panelAi.classList.remove("active");
-          panelAi.classList.add("inactive");
-
-          panelUpload.classList.remove("inactive");
-          panelUpload.classList.add("active");
-        }
-      };
-
-      tabUpload.addEventListener("click", () => setActive(false));
-      tabAi.addEventListener("click", () => setActive(true));
+          // 尝试绑定 AI 按钮（如果之前没绑上的话）
+          setupAiHandler();
+        };
+      }
     };
 
     const setupToolbar = () => {
@@ -1524,14 +1395,13 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
     };
 
     const init = () => {
-      updateAiCreditsUI();
       setupHeroTabs();
       setupToolbar();
       loadOpenCv();
       setupPresets();
       updateDemoVideoOverlay();
       updateDemoTabs();
-
+      setupAiHandler();
       if (drawCanvas && drawCanvas.parentElement) {
         const parent = drawCanvas.parentElement;
         parent.style.display = "flex";

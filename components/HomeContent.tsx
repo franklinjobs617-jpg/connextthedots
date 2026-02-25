@@ -1,25 +1,20 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Wand2, Brain, Sparkles, ArrowRight, Download, RefreshCw } from "lucide-react";
+import { Wand2, Brain, Sparkles, ArrowRight, Download, RefreshCw, Loader2, Lock } from "lucide-react"; // 引入新图标
 import { useTranslations } from "next-intl";
 import React from "react";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import Image from 'next/image';
 import { useLocale } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/routing"; // 使用你的 i18n Link
 import { useAuth } from "@/lib/auth-context";
 import { getAllPrintables, PrintableItem } from "@/lib/printables-data";
 import { jsPDF } from "jspdf";
 
-type Props = {
-    params: { locale: string };
-};
-
-
 export default function HomeContent() {
-    const { user } = useAuth();
+    const { user, login, isLoggingIn } = useAuth();
     const locale = useLocale();
-
+    const [activeTab, setActiveTab] = useState("upload")
     const tHero = useTranslations("hero");
     const tHowToGuide = useTranslations("howToGuide");
     const tCategories = useTranslations("categories");
@@ -202,7 +197,8 @@ export default function HomeContent() {
             setGeneratingPdfId(null);
         }
     };
-
+    const credits = user ? parseInt(user.credits || "0", 10) : 0;
+    const isOutOfCredits = user && credits <= 0;
     return (
         <main className="flex-grow relative w-full mx-auto">
             {/* ========================================= */}
@@ -210,212 +206,161 @@ export default function HomeContent() {
             {/* ========================================= */}
             <div id="landing-view" className="transition-opacity duration-300">
 
-                {/* 1. Hero Section */}
                 <section className="hero-bg w-full relative">
                     <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10 lg:pb-16">
                         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-10">
 
+                            {/* Left Column */}
                             <div className="lg:w-1/2 text-center lg:text-left z-10 flex flex-col items-center lg:items-start">
-                                <div className="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-wider text-brand-blue bg-indigo-50 rounded-full border border-indigo-100">
-                                    {tHero("badge")}
-                                </div>
+                                <div className="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-wider text-brand-blue bg-indigo-50 rounded-full border border-indigo-100">{tHero("badge")}</div>
                                 <h1 className="font-extrabold leading-[1.1] mb-4 text-4xl md:text-5xl text-transparent bg-clip-text bg-linear-to-r from-brand-blue to-brand-purple">
-                                    {tHero("titleMain")}   {tHero("titleHighlight")}
+                                    {tHero("titleMain")} {tHero("titleHighlight")}
                                 </h1>
-
-                                <h2 className="text-sm text-slate-500 mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                                    {tHero("subtitle")}
-                                </h2>
+                                <h2 className="text-sm text-slate-500 mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">{tHero("subtitle")}</h2>
 
                                 <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden relative z-20">
+
+                                    {/* Tabs (React Controlled) */}
                                     <div className="p-2 bg-slate-50 border-b border-slate-100">
                                         <div className="relative flex w-full bg-slate-200/60 p-1 rounded-xl">
+                                            {/* 滑块动画 */}
                                             <div
-                                                id="tab-bg"
-                                                className="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                                                className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300 ease-out ${activeTab === 'upload' ? 'left-1' : 'left-[calc(50%+2px)]'}`}
                                             ></div>
 
                                             <button
+                                                onClick={() => setActiveTab("upload")}
                                                 id="tab-upload"
-                                                className="relative z-10 w-1/2 py-2.5 text-sm font-bold text-slate-800 transition-colors flex justify-center items-center gap-2"
+                                                className={`relative z-10 w-1/2 py-2.5 text-sm font-bold transition-colors flex justify-center items-center gap-2 ${activeTab === 'upload' ? 'text-slate-800' : 'text-slate-500'}`}
                                             >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="16"
-                                                    height="16"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 576 512"
-                                                >
-                                                    <path d="M144 480c-79.5 0-144-64.5-144-144 0-63.4 41-117.2 97.9-136.5-1.3-7.7-1.9-15.5-1.9-23.5 0-79.5 64.5-144 144-144 55.4 0 103.5 31.3 127.6 77.1 14.2-8.3 30.8-13.1 48.4-13.1 53 0 96 43 96 96 0 15.7-3.8 30.6-10.5 43.7 44 20.3 74.5 64.7 74.5 116.3 0 70.7-57.3 128-128 128l-304 0zM305 191c-9.4-9.4-24.6-9.4-33.9 0l-72 72c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l31-31 0 102.1c0 13.3 10.7 24 24 24s24-10.7 24-24l0-102.1 31 31c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-72-72z" />
-                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 576 512"><path d="M144 480c-79.5 0-144-64.5-144-144 0-63.4 41-117.2 97.9-136.5-1.3-7.7-1.9-15.5-1.9-23.5 0-79.5 64.5-144 144-144 55.4 0 103.5 31.3 127.6 77.1 14.2-8.3 30.8-13.1 48.4-13.1 53 0 96 43 96 96 0 15.7-3.8 30.6-10.5 43.7 44 20.3 74.5 64.7 74.5 116.3 0 70.7-57.3 128-128 128l-304 0zM305 191c-9.4-9.4-24.6-9.4-33.9 0l-72 72c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l31-31 0 102.1c0 13.3 10.7 24 24 24s24-10.7 24-24l0-102.1 31 31c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-72-72z" /></svg>
                                                 {tHero("tabUpload")}
                                             </button>
 
                                             <button
+                                                onClick={() => setActiveTab("ai")}
                                                 id="tab-ai"
-                                                className="relative z-10 w-1/2 py-2.5 text-sm font-bold text-slate-500 transition-colors flex justify-center items-center gap-2"
+                                                className={`relative z-10 w-1/2 py-2.5 text-sm font-bold transition-colors flex justify-center items-center gap-2 ${activeTab === 'ai' ? 'text-slate-800' : 'text-slate-500'}`}
                                             >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="16"
-                                                    height="16"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 576 512"
-                                                >
-                                                    <path d="M263.4-27L278.2 9.8 315 24.6c3 1.2 5 4.2 5 7.4s-2 6.2-5 7.4L278.2 54.2 263.4 91c-1.2 3-4.2 5-7.4 5s-6.2-2-7.4-5L233.8 54.2 197 39.4c-3-1.2-5-4.2-5-7.4s2-6.2 5-7.4L233.8 9.8 248.6-27c1.2-3 4.2-5 7.4-5s6.2 2 7.4 5zM110.7 41.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7L59.8 164.2 9.7 142.7C3.8 140.2 0 134.4 0 128s3.8-12.2 9.7-14.7L59.8 91.8 81.3 41.7C83.8 35.8 89.6 32 96 32s12.2 3.8 14.7 9.7zM464 304c6.4 0 12.2 3.8 14.7 9.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7l-21.5-50.1-50.1-21.5c-5.9-2.5-9.7-8.3-9.7-14.7s3.8-12.2 9.7-14.7l50.1-21.5 21.5-50.1c2.5-5.9 8.3-9.7 14.7-9.7zM460 0c11 0 21.6 4.4 29.5 12.2l42.3 42.3C539.6 62.4 544 73 544 84s-4.4 21.6-12.2 29.5l-88.2 88.2-101.3-101.3 88.2-88.2C438.4 4.4 449 0 460 0zM44.2 398.5L308.4 134.3 409.7 235.6 145.5 499.8C137.6 507.6 127 512 116 512s-21.6-4.4-29.5-12.2L44.2 457.5C36.4 449.6 32 439 32 428s4.4-21.6 12.2-29.5z" />
-                                                </svg>
+                                                <Wand2 className="w-4 h-4" />
                                                 {tHero("tabAi")}
                                             </button>
                                         </div>
                                     </div>
-
                                     <div className="p-6 min-h-[160px] flex flex-col justify-center">
-                                        {/* MODE A: UPLOAD DROP ZONE */}
-                                        <div id="panel-upload" className="tab-panel active w-full h-full">
+
+                                        {/* MODE A: UPLOAD */}
+                                        <div id="panel-upload" className={`${activeTab === 'upload' ? 'block' : 'hidden'} w-full h-full`}>
                                             <button
                                                 id="hero-upload-btn"
-                                                className="relative group w-full h-32 border-2 border-dashed border-indigo-200 bg-indigo-50/50 rounded-2xl hover:bg-indigo-50 hover:border-indigo-400 transition-all flex flex-col items-center justify-center gap-2 cursor-pointer"
+                                                className="relative group w-full min-h-[160px] border-2 border-dashed border-indigo-200 bg-indigo-50/40 rounded-2xl hover:bg-indigo-50 hover:border-brand-blue transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer p-4 overflow-hidden"
                                             >
-                                                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-blue shadow-sm group-hover:scale-110 transition-transform">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="24"
-                                                        height="24"
-                                                        fill="currentColor"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path d="M144 480c-79.5 0-144-64.5-144-144 0-63.4 41-117.2 97.9-136.5-1.3-7.7-1.9-15.5-1.9-23.5 0-79.5 64.5-144 144-144 55.4 0 103.5 31.3 127.6 77.1 14.2-8.3 30.8-13.1 48.4-13.1 53 0 96 43 96 96 0 15.7-3.8 30.6-10.5 43.7 44 20.3 74.5 64.7 74.5 116.3 0 70.7-57.3 128-128 128l-304 0zM305 191c-9.4-9.4-24.6-9.4-33.9 0l-72 72c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l31-31 0 102.1c0 13.3 10.7 24 24 24s24-10.7 24-24l0-102.1 31 31c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-72-72z" />
-                                                    </svg>
+                                                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-blue shadow-sm group-hover:scale-110 group-hover:shadow transition-transform duration-300">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 576 512"><path d="M144 480c-79.5 0-144-64.5-144-144 0-63.4 41-117.2 97.9-136.5-1.3-7.7-1.9-15.5-1.9-23.5 0-79.5 64.5-144 144-144 55.4 0 103.5 31.3 127.6 77.1 14.2-8.3 30.8-13.1 48.4-13.1 53 0 96 43 96 96 0 15.7-3.8 30.6-10.5 43.7 44 20.3 74.5 64.7 74.5 116.3 0 70.7-57.3 128-128 128l-304 0zM305 191c-9.4-9.4-24.6-9.4-33.9 0l-72 72c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l31-31 0 102.1c0 13.3 10.7 24 24 24s24-10.7 24-24l0-102.1 31 31c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-72-72z" /></svg>
                                                 </div>
-                                                <div className="text-center">
-                                                    <span className="block text-brand-blue font-bold text-lg">
+
+                                                <div className="text-center flex flex-col items-center gap-2">
+                                                    <div className="inline-flex items-center justify-center px-6 py-2.5 text-md font-bold text-white bg-brand-blue rounded-xl shadow-md group-hover:bg-indigo-600 group-hover:shadow-lg transition-all pointer-events-none">
                                                         {tHero("uploadCta")}
-                                                    </span>
-                                                    <span className="text-slate-400 text-sm">
+                                                    </div>
+                                                    <span className="text-slate-400 text-sm font-medium">
                                                         {tHero("uploadHint")}
                                                     </span>
-                                                    <br />
                                                 </div>
-                                                <input
-                                                    type="file"
-                                                    id="hero-file-input"
-                                                    className="absolute inset-0 opacity-0 cursor-pointer"
-                                                    accept="image/*"
-                                                    aria-label="Upload Image File"
-                                                />
+
+                                                <input type="file" id="hero-file-input" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" accept="image/*" aria-label="Upload Image File" />
                                             </button>
 
-                                            <div className="mt-6 text-center lg:text-left w-full">
-                                                <p className="text-sm font-bold text-slate-400 mb-3">
+                                            <div className="mt-6 text-center lg:text-left w-full border-t border-slate-100 pt-4">
+                                                <p className="text-xs font-bold text-slate-400 mb-3 uppercase tracking-wider text-center">
                                                     {tHero("noImageLabel")}
                                                 </p>
-                                                <div
-                                                    className="flex justify-center lg:justify-start gap-4"
-                                                    id="examples-content"
-                                                >
-                                                    <button
-                                                        className="preset-btn w-auto h-auto md:w-24 md:h-24 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
-                                                        data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cartoon-animal-dog-dot-to-dot-generator-hd.webp"
-                                                        aria-label="Use Corgi Example"
-                                                    >
-                                                        <Image width="200" height="200"
-                                                            src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cartoon-animal-dog-dot-to-dot-generator.webp"
-                                                            className="w-full h-full object-cover"
-                                                            alt="Cute cartoon corgi puppy puzzle created with our free dot to dot generator"
-                                                        />
+                                                <div className="flex justify-center gap-3" id="examples-content">
+                                                    <button className="preset-btn w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-slate-100 shadow-sm hover:border-brand-blue transition-all transform hover:scale-105" data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cartoon-animal-dog-dot-to-dot-generator-hd.webp">
+                                                        <Image width={100} height={100} src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cartoon-animal-dog-dot-to-dot-generator.webp" className="w-full h-full object-cover" alt="Example 1" />
                                                     </button>
-                                                    <button
-                                                        className="preset-btn w-auto h-auto md:w-24 md:h-24 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
-                                                        data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker-hd.webp"
-                                                        aria-label="Use Cupcake Example"
-                                                    >
-                                                        <Image width="200" height="200"
-                                                            src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker.webp"
-                                                            alt="Simple cupcake connect the dots maker for easy kids worksheets"
-                                                            className="w-full h-full object-cover"
-                                                        />
+                                                    <button className="preset-btn w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-slate-100 shadow-sm hover:border-brand-blue transition-all transform hover:scale-105" data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker-hd.webp">
+                                                        <Image width={100} height={100} src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker.webp" className="w-full h-full object-cover" alt="Example 2" />
                                                     </button>
-                                                    <button
-                                                        className="preset-btn w-auto h-auto md:w-24 md:h-24 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
-                                                        data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/realistic-animal-custom-dot-to-dot-generator-printable-hd.webp"
-                                                        aria-label="Use Shiba Inu Example"
-                                                    >
-                                                        <Image width="200" height="200"
-                                                            src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/realistic-animal-custom-dot-to-dot-generator-printable.webp"
-                                                            alt="Realistic Shiba Inu dog animal worksheet generated by the Printable connect the dots maker online"
-                                                            className="w-full h-full object-cover"
-                                                        />
+                                                    <button className="preset-btn w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-slate-100 shadow-sm hover:border-brand-blue transition-all transform hover:scale-105" data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/realistic-animal-custom-dot-to-dot-generator-printable-hd.webp">
+                                                        <Image width={100} height={100} src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/realistic-animal-custom-dot-to-dot-generator-printable.webp" className="w-full h-full object-cover" alt="Example 3" />
                                                     </button>
-
-                                                    <button
-                                                        className="preset-btn w-auto h-auto md:w-24 md:h-24 rounded-xl overflow-hidden border-2 border-white shadow-md hover:border-brand-blue transition-all transform hover:scale-110"
-                                                        data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/statue-of-liberty-dot-to-dot-generator-hd.webp"
-                                                        aria-label="Statue of Liberty (Educational Mode)"
-                                                    >
-                                                        <Image width="200" height="200"
-                                                            src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/statue-of-liberty-dot-to-dot-generator.webp"
-                                                            alt="Statue of Liberty photo for dot to dot maker"
-                                                            className="w-full h-full object-cover"
-                                                        />
+                                                    <button className="preset-btn w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-slate-100 shadow-sm hover:border-brand-blue transition-all transform hover:scale-105" data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/statue-of-liberty-dot-to-dot-generator-hd.webp">
+                                                        <Image width={100} height={100} src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/statue-of-liberty-dot-to-dot-generator.webp" className="w-full h-full object-cover" alt="Example 4" />
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* MODE B: AI INPUT */}
-                                        <div id="panel-ai" className="tab-panel inactive w-full">
+                                        <div id="panel-ai" className={`${activeTab === 'ai' ? 'block' : 'hidden'} w-full`}>
                                             <div className="flex flex-col gap-3">
                                                 <div className="relative w-full">
-                                                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                                        <svg
-                                                            className="h-5 w-5 text-slate-400"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            stroke="currentColor"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth="2"
-                                                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                                                            />
-                                                        </svg>
+                                                    <div className="absolute top-4 left-0 pl-4 flex items-start pointer-events-none">
+                                                        <Wand2 className="h-5 w-5 text-slate-400" />
                                                     </div>
-                                                    <input
-                                                        type="text"
+                                                    <textarea
                                                         id="hero-ai-input"
-                                                        className="block w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all"
+                                                        rows={3}
+                                                        className="block w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all resize-none leading-relaxed"
                                                         placeholder={tHero("aiPlaceholder")}
-                                                    />
+                                                    ></textarea>
                                                 </div>
 
-                                                <div className="flex items-center justify-between mt-1">
-                                                    <div className="text-sm text-slate-500 font-medium pl-1">
-                                                        <span
-                                                            id="hero-ai-credits"
-                                                            className="font-bold text-brand-blue"
-                                                        >
-                                                            {user ? user.credits : "1"}
-                                                        </span>{" "}
-                                                        {tHero("aiCredits")}
+                                                <div className="mt-1">
+                                                    <div className="flex items-center justify-between mb-3">
+                                                        <div className="text-sm font-medium pl-1">
+                                                            {!user ? (
+                                                                <span className="text-slate-500" dangerouslySetInnerHTML={{ __html: tHero("loginToGetCredits") }} />
+                                                            ) : (
+                                                                <span className={credits > 0 ? "text-slate-600" : "text-red-500"}>
+                                                                    <span className="font-bold text-brand-blue">{credits}</span> {tHero("aiCredits")}
+                                                                </span>
+                                                            )}
+                                                        </div>
+
+                                                        {!user ? (
+                                                            <button
+                                                                onClick={() => login()}
+                                                                disabled={isLoggingIn}
+                                                                className="px-6 py-2.5 bg-slate-800 text-white font-bold rounded-xl shadow-md hover:bg-slate-900 transition-all flex items-center gap-2"
+                                                            >
+                                                                {isLoggingIn && <Loader2 className="w-4 h-4 animate-spin" />}
+                                                                <span>{tHero("signInToGenerate")}</span>
+                                                            </button>
+                                                        ) : isOutOfCredits ? (
+                                                            <Link href="/pricing" className="px-6 py-2.5 bg-white border-2 border-brand-blue text-brand-blue font-bold rounded-xl hover:bg-indigo-50 transition-all flex items-center gap-2">
+                                                                <span className='flex items-center gap-1'>{tHero("getCredits")} <Lock className="w-3 h-3" /></span>
+                                                            </Link>
+                                                        ) : (
+                                                            <button
+                                                                id="hero-ai-go-btn"
+                                                                className="px-8 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
+                                                            >
+                                                                <span>{tHero("aiButton")}</span>
+                                                                <Wand2 className="w-4 h-4" />
+                                                            </button>
+                                                        )}
                                                     </div>
 
-                                                    <button
-                                                        id="hero-ai-go-btn"
+                                                    {isOutOfCredits && (
+                                                        <div className="w-full bg-indigo-50/60 border border-indigo-100 rounded-xl p-3 flex flex-col sm:flex-row items-center justify-between gap-3 animate-in fade-in slide-in-from-top-2">
+                                                            <div className="text-xs text-slate-600 text-center sm:text-left">
+                                                                <strong className="block text-slate-800 text-sm mb-0.5 flex items-center gap-1">
+                                                                    {tHero("outOfCreditsTitle")} <span className="text-amber-500"></span>
+                                                                </strong>
+                                                                <span dangerouslySetInnerHTML={{
+                                                                    __html: tHero("outOfCreditsDesc").replace(/\*\*(.*?)\*\*/g, '<strong class="text-brand-blue">$1</strong>')
+                                                                }} />
+                                                            </div>
+                                                            <div className="flex gap-2 shrink-0">
+                                                                <Link href="/pricing" className="px-3 py-1.5 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-indigo-600 transition shadow-sm">
+                                                                    {tHero("btnUpgrade")}
+                                                                </Link>
 
-                                                        className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
-                                                    >
-                                                        <span>{tHero("aiButton")}</span>
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="16"
-                                                            height="16"
-                                                            fill="currentColor"
-                                                            viewBox="0 0 512 512"
-                                                        >
-                                                            <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                                                        </svg>
-                                                    </button>
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
@@ -423,59 +368,35 @@ export default function HomeContent() {
                                 </div>
                             </div>
 
+                            {/* Right Column (Slider) */}
                             <div className="lg:w-1/2 w-full flex justify-center perspective-1000">
                                 <div className="relative w-full max-w-lg aspect-square rounded-[2.5rem] shadow-floating bg-white p-3 transform rotate-2 hover:rotate-0 transition-transform duration-500 border border-slate-100">
                                     <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-100 group">
-                                        <Image
-                                            src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/result-cupcake-illustration-connect-the-dots-maker.webp"
-                                            className="absolute inset-0 w-full h-full object-cover"
-                                            width="500"
-                                            height="500"
-                                            alt="Result from Connect the Dots Generator"
-                                        />
-                                        <div
-                                            id="hero-before-layer"
-                                            className="absolute inset-0 w-full h-full overflow-hidden border-r-4 border-white"
-                                            style={{ clipPath: "inset(0 50% 0 0)" }}
-                                        >
-                                            <Image
-                                                src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker-hd.webp"
-                                                className="absolute inset-0 w-full h-full object-cover"
-                                                width="500"
-                                                height="500"
-                                                alt="Original Photo for Dot to Dot Generator"
-                                            />
+                                        <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/result-cupcake-illustration-connect-the-dots-maker.webp" className="absolute inset-0 w-full h-full object-cover" width="500" height="500" alt="Result" />
+                                        <div id="hero-before-layer" className="absolute inset-0 w-full h-full overflow-hidden border-r-4 border-white" style={{ clipPath: "inset(0 50% 0 0)" }}>
+                                            <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker-hd.webp" className="absolute inset-0 w-full h-full object-cover" width="500" height="500" alt="Original" />
                                         </div>
-                                        <div className="absolute bottom-6 left-6 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold pointer-events-none">
-                                            {tHero("sliderOriginal")}
-                                        </div>
-                                        <div className="absolute bottom-6 right-6 bg-brand-blue/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg pointer-events-none">
-                                            {tHero("sliderPuzzle")}
-                                        </div>
-                                        <div
-                                            id="hero-handle"
-                                            className="absolute inset-y-0 left-1/2 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_20px_rgba(0,0,0,0.2)]"
-                                        >
+                                        <div className="absolute bottom-6 left-6 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold pointer-events-none">{tHero("sliderOriginal")}</div>
+                                        <div className="absolute bottom-6 right-6 bg-brand-blue/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg pointer-events-none">{tHero("sliderPuzzle")}</div>
+                                        <div id="hero-handle" className="absolute inset-y-0 left-1/2 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_20px_rgba(0,0,0,0.2)]">
                                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-blue shadow-lg">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 576 512"
-                                                    width="16"
-                                                    height="16"
-                                                    fill="currentColor"
-                                                >
-                                                    <path d="M470.6 374.6l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l41.4 41.4-357.5 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-6 6-9.4 14.1-9.4 22.6s3.4 16.6 9.4 22.6l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-41.4-41.4 357.5 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" />
-                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" fill="currentColor"><path d="M470.6 374.6l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l41.4 41.4-357.5 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-6 6-9.4 14.1-9.4 22.6s3.4 16.6 9.4 22.6l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-41.4-41.4 357.5 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" /></svg>
                                             </div>
                                         </div>
+                                        {/* Slider 逻辑需配合 CSS/JS 调整，这里保留基础结构 */}
                                         <input
                                             type="range"
                                             min="0"
                                             max="100"
                                             defaultValue="50"
                                             className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
-                                            aria-label="Compare original image with dot-to-dot result"
-                                        // onInput={handleSliderInput}
+                                            onInput={(e) => {
+                                                const val = (e.target as HTMLInputElement).value;
+                                                const layer = document.getElementById("hero-before-layer");
+                                                const handle = document.getElementById("hero-handle");
+                                                if (layer) layer.style.clipPath = `inset(0 ${100 - parseInt(val)}% 0 0)`;
+                                                if (handle) handle.style.left = `${val}%`;
+                                            }}
                                         />
                                     </div>
                                 </div>

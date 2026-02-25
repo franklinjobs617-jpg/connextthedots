@@ -30,9 +30,9 @@ model User {
   type              String?   @default("1")
   last_daily_reward DateTime? @map("last_daily_reward")
   current_streak    String?   @default("0")
-
+  plan              String?   @default("free")
   // 关联支付表
-  payments Pay[]
+  payments          Pay[]
 
   @@map("google_user")
 }
