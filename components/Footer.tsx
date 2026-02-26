@@ -40,16 +40,22 @@ export default function Footer() {
                                     height={54}
                                 />
                             </Link>
+                            <Link href="https://startupslab.site" target="_blank" rel="noopener">
+                                <Image src="https://cdn.startupslab.site/site-images/badge-dark.png" alt="Featured on Startups Lab" width="150" height="54" />
+                            </Link>
+                            <Link href="https://launchigniter.com/product/connect-the-dots-printable?ref=badge-connect-the-dots-printable" target="_blank">
+                                <Image src="https://launchigniter.com/api/badge/connect-the-dots-printable?theme=dark" alt="Featured on LaunchIgniter" width="150" height="55" />
+                            </Link>
                         </div>
 
                         {/* 语言切换器 */}
                         <div className="mt-6 flex items-center gap-3">
                             <span className="text-white font-bold text-xs tracking-widest">{t("language")}:</span>
-                            <Link href={pathname}  locale="en" className="hover:text-white transition">English</Link>
-    <span className="text-slate-600">|</span>
-    <Link href={pathname}  locale="es" className="hover:text-white transition">Español</Link>
-    <span className="text-slate-600">|</span>
-    <Link href={pathname}  locale="de" className="hover:text-white transition">Deutsch</Link>
+                            <Link href={pathname} locale="en" className="hover:text-white transition">English</Link>
+                            <span className="text-slate-600">|</span>
+                            <Link href={pathname} locale="es" className="hover:text-white transition">Español</Link>
+                            <span className="text-slate-600">|</span>
+                            <Link href={pathname} locale="de" className="hover:text-white transition">Deutsch</Link>
                         </div>
                     </div>
 
