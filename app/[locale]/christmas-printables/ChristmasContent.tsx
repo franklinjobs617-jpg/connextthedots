@@ -55,7 +55,7 @@ export default function ChristmasContent() {
 
                     <div className="download-grid border-l-4 border-brand-blue pl-4 mb-8">
                         <h3 className="text-xl font-semibold text-gray-800">
-                            <Link href="/printable-connect-the-dots.html" className="text-brand-blue hover:underline">
+                            <Link href="/printable-connect-the-dots/" className="text-brand-blue hover:underline">
                                 Easy Santa Claus (Printable Worksheet)
                             </Link>
                         </h3>
@@ -126,7 +126,7 @@ export default function ChristmasContent() {
                         <p className="mb-6 text-gray-700">
                             Click below to download the full Christmas bundle today!
                         </p>
-                        <Link href="/printable-connect-the-dots.html"
+                        <Link href="/printable-connect-the-dots/"
                             className="inline-flex items-center justify-center px-8 py-4 bg-brand-blue hover:bg-indigo-700 text-white font-bold rounded-full transition duration-300 shadow-lg transform hover:-translate-y-0.5">
                             DOWNLOAD THE FREE CHRISTMAS DOTS BUNDLE
                         </Link>

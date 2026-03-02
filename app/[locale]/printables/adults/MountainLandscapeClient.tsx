@@ -57,7 +57,7 @@ export default function MountainLandscapeClient() {
                             <div className="text-sm font-medium text-indigo-200 mb-4 flex items-center gap-2">
                                 <Link href="/" className="hover:text-white transition-colors">Home</Link>
                                 <span className="opacity-50">/</span>
-                                <Link href="/printable-connect-the-dots" className="hover:text-white transition-colors">All Printables</Link>
+                                <Link href="/printable-connect-the-dots/" className="hover:text-white transition-colors">All Printables</Link>
                                 <span className="opacity-50">/</span>
                                 <span className="text-white">Mountain Landscape</span>
                             </div>
@@ -155,7 +155,7 @@ export default function MountainLandscapeClient() {
                                     <h2 className="text-2xl font-bold text-slate-800 mb-6">More Printables You Might Like</h2>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                                         {/* Related Card 1 */}
-                                        <Link href="/printables/easy-sailboat-connect-the-dots-puzzle-1-20-numbers" className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                                        <Link href="/printables/easy-sailboat-connect-the-dots-puzzle-1-20-numbers/" className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
                                             <div className="relative w-full aspect-[4/3] bg-white p-4 flex items-center justify-center overflow-hidden border-b border-slate-50">
                                                 <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/printable/easy-sailboat-connect-the-dots-puzzle-1-20-numbers.webp"
                                                     alt="Sailboat" fill className="object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" />
@@ -178,7 +178,7 @@ export default function MountainLandscapeClient() {
                             <aside className="w-full lg:w-1/4 space-y-6">
                                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 sticky top-24">
                                     <span className="text-xs font-bold tracking-wider text-[#4F46E5] uppercase mb-4 block">Our Top Article</span>
-                                    <Link href="/printables/connectTheDotsGenerator" className="block mb-6 group">
+                                    <Link href="/printables/connectTheDotsGenerator/" className="block mb-6 group">
                                         <h4 className="font-bold text-slate-800 group-hover:text-[#4F46E5] transition-colors mb-2 text-lg leading-tight">
                                             Unlock Limitless Creativity: Your Ultimate Guide to a Free Connect the Dots Generator
                                         </h4>
@@ -188,7 +188,7 @@ export default function MountainLandscapeClient() {
                                     </Link>
                                     <hr className="border-slate-100 mb-6" />
                                     {/* Article List Item */}
-                                    <Link href="/printables/animals" className="flex gap-4 mb-5 group items-start">
+                                    <Link href="/printables/animals/" className="flex gap-4 mb-5 group items-start">
                                         <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
                                             <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/6-Cute-Bunny-Rabbit-Connect-the-Dots-for-Young-Children-1-20-dots.avif" alt="Animals" fill className="object-cover group-hover:scale-110 transition-transform duration-300" />
                                         </div>

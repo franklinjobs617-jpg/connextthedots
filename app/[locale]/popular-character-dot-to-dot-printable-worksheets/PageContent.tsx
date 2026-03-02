@@ -190,7 +190,7 @@ export default function PageContent() {
                             child learn and grow.
                         </p>
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <Link href="/printable-connect-the-dots"
+                            <Link href="/printable-connect-the-dots/"
                                 className="block px-8 py-3 bg-white text-brand-blue font-bold rounded-full hover:bg-slate-100 transition">
                                 EXPLORE THE FULL LIBRARY
                             </Link>

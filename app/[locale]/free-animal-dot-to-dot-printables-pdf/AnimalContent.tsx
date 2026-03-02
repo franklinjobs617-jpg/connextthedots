@@ -147,28 +147,28 @@ export default function AnimalContent() {
                         <div className="p-4 border border-gray-100 rounded-lg hover:bg-indigo-50 transition group">
                             <h3 className="font-bold text-lg text-gray-800 flex items-center gap-2">
                                 <Dog className="w-5 h-5 text-brand-blue" />
-                                <Link href="/printable-connect-the-dots" className="text-brand-blue hover:underline">Husky – Dot-to-Dot Activity</Link>
+                                <Link href="/printable-connect-the-dots/" className="text-brand-blue hover:underline">Husky – Dot-to-Dot Activity</Link>
                             </h3>
                             <p className="text-sm text-gray-600">Connect 1-50 to reveal this loyal canine friend.</p>
                         </div>
                         <div className="p-4 border border-gray-100 rounded-lg hover:bg-indigo-50 transition group">
                             <h3 className="font-bold text-lg text-gray-800 flex items-center gap-2">
                                 <Bird className="w-5 h-5 text-brand-blue" />
-                                <Link href="/printable-connect-the-dots" className="text-brand-blue hover:underline">Bat – Free Printable Worksheet</Link>
+                                <Link href="/printable-connect-the-dots/" className="text-brand-blue hover:underline">Bat – Free Printable Worksheet</Link>
                             </h3>
                             <p className="text-sm text-gray-600">A perfect spooky-themed activity for Halloween or nature study.</p>
                         </div>
                         <div className="p-4 border border-gray-100 rounded-lg hover:bg-indigo-50 transition group">
                             <h3 className="font-bold text-lg text-gray-800 flex items-center gap-2">
                                 <Fish className="w-5 h-5 text-brand-blue" />
-                                <Link href="/printable-connect-the-dots" className="text-brand-blue hover:underline">Megalodon – Prehistoric Animal</Link>
+                                <Link href="/printable-connect-the-dots/" className="text-brand-blue hover:underline">Megalodon – Prehistoric Animal</Link>
                             </h3>
                             <p className="text-sm text-gray-600">A challenging puzzle for fans of ancient sea creatures.</p>
                         </div>
                         <div className="p-4 border border-gray-100 rounded-lg hover:bg-indigo-50 transition group">
                             <h3 className="font-bold text-lg text-gray-800 flex items-center gap-2">
                                 <Bird className="w-5 h-5 text-brand-blue" />
-                                <Link href="/printable-connect-the-dots" className="text-brand-blue hover:underline">Ostrich – Printable Dot-to-Dot</Link>
+                                <Link href="/printable-connect-the-dots/" className="text-brand-blue hover:underline">Ostrich – Printable Dot-to-Dot</Link>
                             </h3>
                             <p className="text-sm text-gray-600">Learn about the world&apos;s largest bird while counting dots.</p>
                         </div>
@@ -235,7 +235,7 @@ export default function AnimalContent() {
                         <p className="mb-6 text-blue-100">
                             Download our &quot;Ultimate 50-Animal Bundle&quot; PDF for free and start your journey through the animal kingdom today!
                         </p>
-                        <Link href="/printable-connect-the-dots"
+                        <Link href="/printable-connect-the-dots/"
                             className="inline-block px-10 py-4 bg-white text-blue-600 font-extrabold rounded-full hover:bg-yellow-400 transition transform hover:scale-105 shadow-lg">
                             DOWNLOAD FREE ANIMAL BUNDLE (PDF)
                         </Link>

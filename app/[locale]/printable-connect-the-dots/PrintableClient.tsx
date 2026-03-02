@@ -27,7 +27,7 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         "name": isEs ? "Fichas de Unir Puntos para Imprimir" : "Free Connect the Dots Worksheets",
-        "url": `https://connectthedotsprintable.online${isEs ? '/es' : ''}/printable-connect-the-dots`,
+        "url": `https://connectthedotsprintable.online${isEs ? '/es' : ''}/printable-connect-the-dots/`,
         "mainEntity": {
             "@type": "ItemList",
             "numberOfItems": displayedItems.length,

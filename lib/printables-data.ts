@@ -34,7 +34,7 @@ export function createPrintableItem(
 ): PrintableItem {
     // 关键修复：统一使用文件名（不带扩展名）作为 ID，以匹配 URL 访问
     const detailPageId = puzzleFilename.replace(/\.(webp|avif|png|jpg)$/, '');
-    const detailPage = `/printables/${detailPageId}`;
+    const detailPage = `/printables/${detailPageId}/`;
 
     const difficulty = customDetails.difficulty || 'Easy';
     const dotRange = customDetails.dotRange || [1, 50];

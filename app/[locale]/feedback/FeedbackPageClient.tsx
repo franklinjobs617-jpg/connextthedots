@@ -81,7 +81,7 @@ export default function FeedbackPageClient({ locale }: { locale: string }) {
                                 data-host="https://cusdis.com"
                                 data-app-id="4535a28e-08e9-411e-9c74-0f118e22c1af"
                                 data-page-id={`feedback-page-main-${locale}`}
-                                data-page-url={`https://connectthedotsprintable.online${isEs ? '/es' : ''}/feedback`}
+                                data-page-url={`https://connectthedotsprintable.online${isEs ? '/es' : ''}/feedback/`}
                                 data-page-title={isEs ? "Feedback Main (ES)" : "Feedback Main (EN)"}
                                 data-theme="light">
                             </div>
@@ -142,24 +142,24 @@ export default function FeedbackPageClient({ locale }: { locale: string }) {
                             </div>
                             <div className="mt-6 flex items-center gap-3">
                                 <span className="text-white font-bold text-xs uppercase tracking-widest">{isEs ? "Idioma:" : "Language:"}</span>
-                                <Link href="/feedback" className={!isEs ? "text-brand-blue font-bold" : "hover:text-white transition"}>English</Link>
+                                <Link href="/feedback/" className={!isEs ? "text-brand-blue font-bold" : "hover:text-white transition"}>English</Link>
                                 <span className="text-slate-600">|</span>
-                                <Link href="/es/feedback" className={isEs ? "text-brand-blue font-bold" : "hover:text-white transition"}>Español</Link>
+                                <Link href="/es/feedback/" className={isEs ? "text-brand-blue font-bold" : "hover:text-white transition"}>Español</Link>
                             </div>
                         </div>
                         <div>
                             <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-xs">{isEs ? "Fichas" : "Printables"}</h3>
                             <ul className="space-y-3">
                                 <li><Link href={isEs ? "/es/" : "/"} className="hover:text-white transition">{isEs ? "Inicio" : "Home"}</Link></li>
-                                <li><Link href="/printable-connect-the-dots" className="hover:text-white transition">{isEs ? "Todas las Fichas" : "All Printables"}</Link></li>
+                                <li><Link href="/printable-connect-the-dots/" className="hover:text-white transition">{isEs ? "Todas las Fichas" : "All Printables"}</Link></li>
                             </ul>
                         </div>
                         <div>
                             <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-xs">Legal</h3>
                             <ul className="space-y-3">
-                                <li><Link href="/privacy" className="hover:text-white transition">{isEs ? "Privacidad" : "Privacy Policy"}</Link></li>
-                                <li><Link href="/terms" className="hover:text-white transition">{isEs ? "Términos" : "Terms of Service"}</Link></li>
-                                <li><Link href="/feedback" className="text-brand-blue font-bold">{isEs ? "Feedback" : "Feedback"}</Link></li>
+                                <li><Link href="/privacy/" className="hover:text-white transition">{isEs ? "Privacidad" : "Privacy Policy"}</Link></li>
+                                <li><Link href="/terms/" className="hover:text-white transition">{isEs ? "Términos" : "Terms of Service"}</Link></li>
+                                <li><Link href="/feedback/" className="text-brand-blue font-bold">{isEs ? "Feedback" : "Feedback"}</Link></li>
                             </ul>
                         </div>
                     </div>

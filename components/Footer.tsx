@@ -64,9 +64,9 @@ export default function Footer() {
                         <div className="text-white font-bold mb-4 uppercase tracking-wider text-xs">{t("colPrintables")}</div>
                         <ul className="space-y-3">
                             <li><Link href="/" className="hover:text-white transition">{t("home")}</Link></li>
-                            <li><Link href="/printable-connect-the-dots" className="hover:text-white transition">{t("allPrintables")}</Link></li>
-                            <li><Link href="/how-to-make" className="hover:text-white transition">{t("howToMake")}</Link></li>
-                            <li><Link href="/christmas-printables" className="hover:text-white transition">{t("christmas")}</Link></li>
+                            <li><Link href="/printable-connect-the-dots/" className="hover:text-white transition">{t("allPrintables")}</Link></li>
+                            <li><Link href="/how-to-make/" className="hover:text-white transition">{t("howToMake")}</Link></li>
+                            <li><Link href="/christmas-printables/" className="hover:text-white transition">{t("christmas")}</Link></li>
                         </ul>
                     </div>
 
@@ -74,11 +74,11 @@ export default function Footer() {
                     <div>
                         <div className="text-white font-bold mb-4 uppercase tracking-wider text-xs">{t("colLegal")}</div>
                         <ul className="space-y-3">
-                            <li><Link href="/privacy" className="hover:text-white transition">{t("privacy")}</Link></li>
-                            <li><Link href="/terms" className="hover:text-white transition">{t("terms")}</Link></li>
-                            <li><Link href="/pricing" className="hover:text-white transition">{pricing("pricing")}</Link></li>
-                            < li > <Link href="/popular-character-dot-to-dot-printable-worksheets" className="hover:text-white transition">{t("popularCharacter")}</Link></li>
-                            <li><Link href="/free-animal-dot-to-dot-printables-pdf" className="hover:text-white transition">{t("animalPdf")}</Link></li>
+                            <li><Link href="/privacy/" className="hover:text-white transition">{t("privacy")}</Link></li>
+                            <li><Link href="/terms/" className="hover:text-white transition">{t("terms")}</Link></li>
+                            <li><Link href="/pricing/" className="hover:text-white transition">{pricing("pricing")}</Link></li>
+                            < li > <Link href="/popular-character-dot-to-dot-printable-worksheets/" className="hover:text-white transition">{t("popularCharacter")}</Link></li>
+                            <li><Link href="/free-animal-dot-to-dot-printables-pdf/" className="hover:text-white transition">{t("animalPdf")}</Link></li>
                         </ul>
                     </div>
                 </div>

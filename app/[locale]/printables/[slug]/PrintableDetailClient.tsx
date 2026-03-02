@@ -123,7 +123,7 @@ export default function PrintableDetailClient({ item, relatedItems, locale, slug
         "@type": "CreativeWork",
         "name": item.title,
         "description": item.description,
-        "url": `https://connectthedotsprintable.online${locale === 'en' ? '' : '/' + locale}/printables/${slug}`,
+        "url": `https://connectthedotsprintable.online${locale === 'en' ? '' : '/' + locale}/printables/${slug}/`,
         "image": item.imageUrl,
         "author": { "@type": "Organization", "name": "ConnectTheDotsPrintable.online" },
         "datePublished": "2025-12-26",
@@ -143,7 +143,7 @@ export default function PrintableDetailClient({ item, relatedItems, locale, slug
                             <Link href={locale === 'es' ? '/es/' : '/'} className="hover:underline">
                                 {locale === 'es' ? 'Inicio' : 'Home'}
                             </Link> &gt;
-                            <Link href={locale === 'es' ? '/es/printable-connect-the-dots' : '/printable-connect-the-dots'} className="hover:underline">
+                            <Link href={locale === 'es' ? '/es/printable-connect-the-dots/' : '/printable-connect-the-dots/'} className="hover:underline">
                                 {locale === 'es' ? 'Fichas de unir puntos' : 'All Printables'}
                             </Link> &gt;
                             <span>{item.title}</span>
@@ -327,7 +327,7 @@ export default function PrintableDetailClient({ item, relatedItems, locale, slug
                                         {locale === 'es' ? 'Artículos Destacados' : 'Our Top Articles'}
                                     </h3>
 
-                                    <Link href={locale === 'es' ? "/es/printables/connectTheDotsGenerator" : "/printables/connectTheDotsGenerator"} className="block mb-8 group">
+                                    <Link href={locale === 'es' ? "/es/printables/connectTheDotsGenerator/" : "/printables/connectTheDotsGenerator/"} className="block mb-8 group">
                                         <h4 className="font-bold text-slate-800 group-hover:text-brand-blue transition-colors mb-2 leading-tight">
                                             {locale === 'es' ? 'Guía del Generador de Unir Puntos' : 'Unlock Limitless Creativity: Your Ultimate Guide to a Free Connect the Dots Generator'}
                                         </h4>
@@ -344,7 +344,7 @@ export default function PrintableDetailClient({ item, relatedItems, locale, slug
                                         { url: "/printables/animals", img: "6-Cute-Bunny-Rabbit-Connect-the-Dots-for-Young-Children-1-20-dots.avif", title: locale === 'es' ? "Animales e Infantil" : "Animal Connect the Dots Printable", tag: "Educational" },
                                         { url: "/christmas-printables", img: "4-Christmas-Tree-Connect-the-Dots-Design-1-50-dots.avif", title: locale === 'es' ? "Especial de Navidad" : "Festive Christmas Activity Guide", tag: "Seasonal" }
                                     ].map((art, idx) => (
-                                        <Link key={idx} href={locale === 'es' ? `/es${art.url}` : art.url} className="flex gap-4 mb-6 group items-start">
+                                        <Link key={idx} href={locale === 'es' ? `/es${art.url}/` : `${art.url}/`} className="flex gap-4 mb-6 group items-start">
                                             <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-slate-100">
                                                 <Image src={`https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/400/${art.img}`} alt="Article" fill className="object-cover transition-transform group-hover:scale-110" />
                                             </div>

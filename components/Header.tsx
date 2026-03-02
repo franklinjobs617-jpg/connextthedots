@@ -22,13 +22,13 @@ export default function Header() {
             href: "/",
         }, {
             labelKey: "allPrintables",
-            href: "/printable-connect-the-dots",
+            href: "/printable-connect-the-dots/",
         }, {
             labelKey: "pricing",
-            href: "/pricing",
+            href: "/pricing/",
         }, {
             labelKey: "howToMake",
-            href: "/how-to-make",
+            href: "/how-to-make/",
         }
     ]
     const t = useTranslations("header");
@@ -117,7 +117,7 @@ export default function Header() {
                         {user?.plan !== 'premium' && (
                             <div className="pt-2">
                                 <Link
-                                    href="/pricing"
+                                    href="/pricing/"
                                     onClick={() => setShowProfileMenu(false)}
                                     className="flex items-center justify-center w-full py-2 bg-gradient-to-r from-brand-blue to-indigo-600 text-white  font-bold rounded-lg hover:shadow-md hover:scale-[1.02] transition-all"
                                 >

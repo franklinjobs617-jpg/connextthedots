@@ -1,10 +1,8 @@
 "use client";
 
-import { useState, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Script from "next/script";
-import { MessageSquare, X, FileDown } from "lucide-react";
+import { FileDown } from "lucide-react";
 
 export default function HowToMakeClient({ locale }: { locale: string }) {
 
@@ -123,7 +121,7 @@ export default function HowToMakeClient({ locale }: { locale: string }) {
                     {/* 底部共通跳转按钮 */}
                     <div className="p-8 rounded-lg text-center my-8 bg-[#4F46E5] text-white shadow-2xl">
                         <h2 className="text-3xl font-bold mb-4">{isEs ? "¿Listo para empezar?" : "Ready to Get Started?"}</h2>
-                        <Link href="/printable-connect-the-dots" className="inline-block px-10 py-4 bg-white text-[#4F46E5] font-extrabold rounded-full hover:bg-yellow-400 transition transform hover:scale-105 shadow-lg uppercase">
+                        <Link href="/printable-connect-the-dots/" className="inline-block px-10 py-4 bg-white text-[#4F46E5] font-extrabold rounded-full hover:bg-yellow-400 transition transform hover:scale-105 shadow-lg uppercase">
                             {isEs ? "Descargar Pack Navidad" : "Download Christmas Bundle"}
                         </Link>
                     </div>
