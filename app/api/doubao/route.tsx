@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
         // ==========================================
         const requestBody = {
             ...userInput,
-            model: "doubao-seedream-4-5-251128",
+            model: "doubao-seedream-4-0-250828",
             watermark: false
         };
 
