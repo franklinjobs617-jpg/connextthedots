@@ -199,26 +199,49 @@ function PlanCard({ title, price, desc, features, type, loading, onStripe, featu
                 </button>
 
                 <div className="z-0">
-                    <PayPalButtons
-                        style={{ layout: "vertical", shape: "rect", borderRadius: 12, height: 48, label: 'pay' }}
-                        createOrder={async () => {
+                <PayPalButtons
+                        style={{ 
+                            layout: "vertical", 
+                            shape: "rect", 
+                            borderRadius: 12, 
+                            height: 48, 
+                            label: 'subscribe' // 按钮文字会变成 "Subscribe"
+                        }}
+                        // 【关键修改 1】：订阅模式使用 createSubscription
+                        createSubscription={async () => {
                             if (!isLoggedIn) { login(); return ""; }
-                            const res = await fetch("/api/pay/paypal-smart-create", {
+                            
+                            const res = await fetch("/api/pay/paypal-smart-create-subscription", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({ type, googleUserId: user?.googleUserId || user?.id, email: user?.email, userId: user?.id })
+                                body: JSON.stringify({ 
+                                    type, 
+                                    googleUserId: user?.googleUserId || user?.id, 
+                                    email: user?.email, 
+                                    userId: user?.id 
+                                })
                             });
+                            
                             const json = await res.json();
-                            return json.data; // 返回 OrderID
+                            if (json.code === 200 || json.data) {
+                                return json.data; 
+                            } else {
+                                alert("Error: " + (json.msg || "Failed to create subscription"));
+                                return "";
+                            }
                         }}
                         onApprove={async (data) => {
-                            const res = await fetch("/api/pay/paypal-smart-capture", {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({ orderId: data.orderID })
-                            });
-                            const json = await res.json();
-                            if (json.code === 200) { window.location.reload(); }
+                            console.log("Subscription approved, ID:", data.subscriptionID);
+                            
+                            alert("Subscription Authorized! Your account is being upgraded.");
+                            
+                            window.location.href = "/"; 
+                        }}
+                        onCancel={() => {
+                            console.log("Subscription cancelled");
+                        }}
+                        onError={(err) => {
+                            console.error("PayPal Subscription Error:", err);
                         }}
                     />
                 </div>
