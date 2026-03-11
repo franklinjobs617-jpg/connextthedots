@@ -9,14 +9,13 @@ export default function PayPalProviderWrapper({
 }) {
     // 💡 Sanitize Client ID: Remove quotes if they exist in the env var
     // let clientId = "AQgGwtwMZuLeZGpzyslyWLBa_wC5VRJNkXiMs4mgK-91MoWGuBez4-lvtjJacVftQ_qD1ZdxGN4_yCb6";
-    let clientId  = "AWadfwOBXGEALRr0IyOd0oyYm-D16yyoWkPED0FoH-KPJjVVaZuE8iNq-nwG_vCPpR_DnLGiGU5Cmj9F";
+    let clientId  = "AUZv0pJuoq3krZSjrCrJOUXyis508Wf3R4DE52gBVIHbCrMK6kAzzNzpHvH1wKXhhsMl3DrcEjIki8gY";
     clientId = clientId.replace(/^"|"$/g, '').trim();
 
     const paypalOptions = {
         clientId: clientId,
         currency: "USD",
-        "vault": true,           
-        "intent": "subscription",
+        vault: true,
     };
 
     return (

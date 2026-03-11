@@ -23,6 +23,16 @@ export default function PricingContent() {
         if (urlParams.get('PayerID')) { handleVerifyPayPal(); }
     }, []);
 
+    
+// 在 PricingContent 函数内部，其他 useEffect 后面添加
+useEffect(() => {
+    if (verificationStatus === 'success') {
+        const timer = setTimeout(() => {
+            window.location.href = "/"; // 3秒后跳转回首页
+        }, 3000);
+        return () => clearTimeout(timer);
+    }
+}, [verificationStatus]);
     const handleVerifyPayPal = async () => {
         setVerificationStatus('loading');
         try {
@@ -175,7 +185,11 @@ export default function PricingContent() {
 }
 
 // 子组件：套餐卡片
-function PlanCard({ title, price, desc, features, type, loading, onStripe, featured = false, isLoggedIn, user, login }: any) {
+function PlanCard({ title, price, desc, features, type, loading, onStripe, featured = false, isLoggedIn, user, login, setVerificationStatus }: any) {
+    
+    // 【关键判断】：是否为订阅模式
+    const isSubscription = type.includes('monthly') || type.includes('yearly');
+
     return (
         <div className={`bg-white p-8 rounded-[2.5rem] flex flex-col transition-all border ${featured ? 'ring-4 ring-indigo-100 shadow-2xl md:scale-105 z-10' : 'shadow-sm border-slate-200'}`}>
             <div className="mb-6">
@@ -199,9 +213,17 @@ function PlanCard({ title, price, desc, features, type, loading, onStripe, featu
                 </button>
 
                 <div className="z-0">
-                    {/* <PayPalButtons
-                        style={{ layout: "vertical", shape: "rect", borderRadius: 12, height: 48, label: 'pay' }}
-                        createOrder={async () => {
+                    <PayPalButtons
+                        style={{ 
+                            layout: "vertical", 
+                            shape: "rect", 
+                            borderRadius: 12, 
+                            height: 48, 
+                            label: isSubscription ? 'subscribe' : 'pay' 
+                        }}
+                        
+                        // 【混合逻辑 1】：一次性支付走 createOrder
+                        createOrder={!isSubscription ? async () => {
                             if (!isLoggedIn) { login(); return ""; }
                             const res = await fetch("/api/pay/paypal-smart-create", {
                                 method: "POST",
@@ -209,18 +231,48 @@ function PlanCard({ title, price, desc, features, type, loading, onStripe, featu
                                 body: JSON.stringify({ type, googleUserId: user?.googleUserId || user?.id, email: user?.email, userId: user?.id })
                             });
                             const json = await res.json();
-                            return json.data; // 返回 OrderID
-                        }}
-                        onApprove={async (data) => {
-                            const res = await fetch("/api/pay/paypal-smart-capture", {
+                            return json.data; 
+                        } : undefined}
+
+                        // 【混合逻辑 2】：订阅会员走 createSubscription
+                        createSubscription={isSubscription ? async () => {
+                            if (!isLoggedIn) { login(); return ""; }
+                            const res = await fetch("/api/pay/paypal-smart-create-subscription", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({ orderId: data.orderID })
+                                body: JSON.stringify({ type, googleUserId: user?.googleUserId || user?.id, email: user?.email, userId: user?.id })
                             });
                             const json = await res.json();
-                            if (json.code === 200) { window.location.reload(); }
+                            return json.data; // 返回 I-XXXX
+                        } : undefined}
+
+                        onApprove={async (data) => {
+                            if (isSubscription) {
+                                // 订阅模式：无需 capture，直接切换 UI 状态
+                                console.log("Subscription ID:", data.subscriptionID);
+                                setVerificationStatus('success');
+                            } else {
+                                // 一次性模式：必须 capture
+                                setVerificationStatus('loading');
+                                const res = await fetch("/api/pay/paypal-smart-capture", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({ orderId: data.orderID })
+                                });
+                                const json = await res.json();
+                                if (json.code === 200) { 
+                                    setVerificationStatus('success'); 
+                                } else {
+                                    setVerificationStatus('error');
+                                }
+                            }
                         }}
-                    /> */}
+                        onCancel={() => console.log("Payment Cancelled")}
+                        onError={(err) => {
+                            console.error("PayPal Error:", err);
+                            setVerificationStatus('error');
+                        }}
+                    />
                 </div>
             </div>
         </div>
