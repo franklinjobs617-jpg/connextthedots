@@ -199,7 +199,7 @@ function PlanCard({ title, price, desc, features, type, loading, onStripe, featu
                 </button>
 
                 <div className="z-0">
-                    {/* <PayPalButtons
+                    <PayPalButtons
                         style={{ layout: "vertical", shape: "rect", borderRadius: 12, height: 48, label: 'pay' }}
                         createOrder={async () => {
                             if (!isLoggedIn) { login(); return ""; }
@@ -220,7 +220,7 @@ function PlanCard({ title, price, desc, features, type, loading, onStripe, featu
                             const json = await res.json();
                             if (json.code === 200) { window.location.reload(); }
                         }}
-                    /> */}
+                    />
                 </div>
             </div>
         </div>
