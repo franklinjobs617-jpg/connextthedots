@@ -106,6 +106,7 @@ useEffect(() => {
                         onStripe={() => handleStripePayment("content_lifesaver_once", "Life-saver")}
                         isLoggedIn={isLoggedIn}
                         user={user}
+                        setVerificationStatus={setVerificationStatus} // 必须加上这一行
                         featured
                         login={login}
                     />
@@ -119,7 +120,7 @@ useEffect(() => {
                         type="content_creator_monthly"
                         loading={loadingPlan === "content_creator_monthly"}
                         onStripe={() => handleStripePayment("content_creator_monthly", "Creator")}
-
+                        setVerificationStatus={setVerificationStatus} // 必须加上这一行
                         isLoggedIn={isLoggedIn}
                         user={user}
                         login={login}
@@ -128,6 +129,7 @@ useEffect(() => {
                     {/* --- 3. Pro Master (年订阅) --- */}
                     <PlanCard
                         title={t('tiers.annual.name')}
+                        setVerificationStatus={setVerificationStatus} // 必须加上这一行
                         price={t('tiers.annual.price')}
                         desc={t('tiers.annual.desc')}
                         features={[t('tiers.annual.features.0'), t('tiers.annual.features.1'), t('tiers.annual.features.2'), t('tiers.annual.features.3')]}
