@@ -177,7 +177,7 @@ export default function Header() {
                             <Link
                                 href={pathname}
                                 locale="en"
-                                onClick={() => setIsOpen(false)} // 点击后关闭
+                                onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
                             >
                                 English (EN)
@@ -197,6 +197,22 @@ export default function Header() {
                                 className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
                             >
                                 Deutsch (DE)
+                            </Link>
+                            <Link
+                                href={pathname}
+                                locale="pt"
+                                onClick={() => setIsOpen(false)}
+                                className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
+                            >
+                                Português (PT)
+                            </Link>
+                            <Link
+                                href={pathname}
+                                locale="fr"
+                                onClick={() => setIsOpen(false)}
+                                className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
+                            >
+                                Français (FR)
                             </Link>
                         </div>
                     </div>

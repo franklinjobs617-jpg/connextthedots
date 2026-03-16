@@ -273,6 +273,27 @@
       "q4": "Wie kann ich mein Abonnement kündigen?",
       "a4": "Keine versteckten Fallen. Sie können Ihr Abonnement jederzeit über Ihr Konto-Dashboard kündigen. Sie haben bis zum Ende Ihres Abrechnungszeitraums weiterhin Zugriff auf die Premium-Funktionen."
     }
+  },
+  "printablePage": {
+    "breadcrumbHome": "Startseite",
+    "breadcrumbAll": "Alle Vorlagen",
+    "pageTitle": "Punkt zu Punkt Vorlagen zum Ausdrucken",
+    "pageDescription": "Entdecken Sie unsere umfangreiche Sammlung kostenloser Punkt-zu-Punkt-Vorlagen für Kinder und Erwachsene. Alle unsere Vorlagen sind einfach herunterzuladen, ohne Wasserzeichen und druckfertig.",
+    "lastUpdated": "Zuletzt aktualisiert: 23. Oktober 2025",
+    "filters": "Filter",
+    "difficultyLevel": "Schwierigkeitsgrad",
+    "allLevels": "Alle Stufen",
+    "easy": "Einfach",
+    "medium": "Mittel",
+    "hard": "Schwer",
+    "extreme": "Extrem",
+    "allPrintables": "Alle Vorlagen",
+    "showingResults": "Zeige {count} von {total} Ergebnissen",
+    "customTools": "Benutzerdefinierte Tools",
+    "cantFindDesign": "Finden Sie nicht das perfekte Design?",
+    "createCustom": "Erstellen Sie Ihre eigenen benutzerdefinierten Punkt-zu-Punkt-Vorlagen mit unserem einfach zu bedienenden Generator.",
+    "tryGenerator": "Generator Ausprobieren",
+    "communityFeedback": "Community-Feedback"
   }
 
 }

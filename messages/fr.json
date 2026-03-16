@@ -1,0 +1,295 @@
+{
+  "metadata": {
+    "homeTitle": "Générateur de Points à Relier Gratuit | Créer en Ligne",
+    "homeDesc": "Créez des points à relier gratuits en ligne. Générateur de relier les points pour enfants et adultes. Transformez une image en points à relier facilement!"
+  },
+  "hero": {
+    "badge": "✨ Générateur Gratuit en Ligne ✨",
+    "titleMain": "Le Meilleur Générateur de",
+    "titleHighlight": "Points à Relier Gratuit",
+    "subtitle": "Créez instantanément des fiches personnalisées pour enfants et adultes. Sans filigrane.",
+    "tabUpload": "Télécharger Photo",
+    "tabAi": "Générateur IA",
+    "uploadCta": "Télécharger Image pour Générer Puzzle",
+    "uploadHint": "cliquez ou déposez (JPG, PNG)",
+    "noImageLabel": "Pas d'image ? Cliquez pour Essayer :",
+    "aiPlaceholder": "Décrivez votre dessin (ex: Un chat mignon)...",
+    "aiCredits": "Crédits restants",
+    "aiButton": "Générer",
+    "sliderOriginal": "Original",
+    "sliderPuzzle": "Puzzle",
+    "loginToGetCredits": "Connectez-vous pour <strong class=\"text-brand-blue\">2 Crédits Gratuits</strong>",
+    "signInToGenerate": "Se Connecter pour Générer",
+    "getCredits": "Obtenir des Crédits",
+    "outOfCreditsTitle": "Plus de Crédits IA ⚡",
+    "outOfCreditsDesc": "Obtenez **plus de crédits IA** et téléchargez des **PDF sans filigrane**",
+    "btnUpgrade": "Améliorer le Plan",
+    "btnFreeLibrary": "Bibliothèque Gratuite"
+  },
+  "howToGuide": {
+    "title": "Comment Créer des Points à Relier",
+    "subtitle": "Transformez une image en points à relier en 3 étapes simples",
+    "step1Title": "Téléchargez Votre Image",
+    "step1Desc": "Choisissez n'importe quelle photo ou image à transformer en points à relier",
+    "step2Title": "Personnalisez les Paramètres",
+    "step2Desc": "Ajustez le nombre de points, la difficulté et le style",
+    "step3Title": "Téléchargez et Imprimez",
+    "step3Desc": "Obtenez votre fichier PDF de haute qualité prêt à imprimer"
+  },
+  "instantDownloads": {
+    "badge": "Accès Instantané",
+    "titlePrefix": "Impression Rapide : ",
+    "titleHighlight": "Puzzles PDF Gratuits",
+    "description": "Téléchargez une fiche PDF haute résolution maintenant. Cliquez sur n'importe quelle image pour télécharger instantanément, ou appuyez sur le bouton Mélanger pour découvrir de nouveaux choix aléatoires !",
+    "btnShuffle": "Mélanger",
+    "btnViewLibrary": "Voir la Bibliothèque",
+    "overlayDownloading": "Téléchargement du PDF...",
+    "overlayDownload": "Télécharger PDF"
+  },
+  "categories": {
+    "title": "Fiches Points à Relier Personnalisées pour Tous les Âges",
+    "subtitle": "Explorez nos collections les plus téléchargées.",
+    "viewAll": "Voir Toutes les Catégories",
+    "card1Title": "Points à Relier Faciles pour Enfants (Numéros 1-20)",
+    "card1Desc": "Designs faciles pour enfants",
+    "card2Title": "Points à Relier Extrêmes pour Adultes (Difficiles et Complexes)",
+    "card2Desc": "Designs complexes pour adultes",
+    "card3Title": "Fiches Éducatives Alphabet pour Maternelle",
+    "card3Desc": "Apprendre en jouant",
+    "card4Title": "Fiches Thématiques Fêtes, Animaux et Plus",
+    "card4Desc": "Fêtes, animaux et plus de thèmes"
+  },
+  "aiFeatures": {
+    "badge": "Technologie de Pointe",
+    "title": "Transformez la Photo Préférée de Votre Enfant en Puzzle Points à Relier IA en Secondes.",
+    "description": "Arrêtez de chercher des modèles statiques. Notre générateur IA comprend votre imagination, transformant les descriptions textuelles en puzzles imprimables de haute qualité en quelques secondes.",
+    "f1Title": "Prompt vers Puzzle",
+    "f1Desc": "Décrivez n'importe quoi—d'un 'dragon robotique' à une 'maison victorienne'—et regardez notre générateur IA le construire.",
+    "f2Title": "Clarté de Ligne Parfaite",
+    "f2Desc": "Contrairement aux filtres standard, notre IA génère des contours vectoriels nets spécifiquement optimisés pour le mapping points à relier.",
+    "f3Title": "Variété Illimitée",
+    "f3Desc": "Créez des fiches uniques pour les salles de classe, les fêtes ou la thérapie qui n'existent tout simplement nulle part ailleurs.",
+    "cta": "Essayer le Générateur IA"
+  },
+  "editorPicks": {
+    "badge": "Choix de l'Éditeur",
+    "title": "Explorez les Catégories Populaires",
+    "subtitle": "Fiches les mieux notées créées par notre communauté.",
+    "card1Tag1": "Facile",
+    "card1Tag2": "Animaux",
+    "card1Title": "Points à Relier Animaux (Chiens, Chats, Lapins)",
+    "card1Desc": "Fiches simples pour jeunes enfants avec des designs d'animaux mignons.",
+    "card2Tag1": "Moyen",
+    "card2Tag2": "Fêtes",
+    "card2Title": "Points à Relier Fêtes et Noël",
+    "card2Desc": "Fiches festives sur le thème de Noël pour tous les âges.",
+    "card3Tag1": "Difficile",
+    "card3Tag2": "Mandala Avancé",
+    "card3Title": "Points à Relier Mandala et Géométrique",
+    "card3Desc": "Fiches complexes pour adultes avec design mandala.",
+    "downloads": "k",
+    "getPrintable": "Obtenir la Fiche",
+    "statusFree": "Gratuit"
+  },
+  "features": {
+    "title": "Fonctionnalités Professionnelles de Notre Générateur IA",
+    "subtitle": "Nous offrons la meilleure collection de fiches points à relier imprimables pour tous les âges et niveaux.",
+    "f1Title": "Téléchargement Instantané",
+    "f1Body": "Obtenez vos fiches immédiatement. Disponibles en formats PDF et PNG haute résolution.",
+    "f2Title": "Sans Filigrane",
+    "f2Body": "Toutes nos fiches sont complètement sans filigrane pour une impression propre et professionnelle.",
+    "f3Title": "Designs Personnalisés",
+    "f3Body": "Créez vos propres fiches personnalisées avec notre outil générateur facile à utiliser."
+  },
+  "demo": {
+    "badge": "Démo",
+    "title": "Regardez Comment Fonctionne le Générateur",
+    "subtitle": "Du téléchargement au téléchargement en moins de 30 secondes. Regardez à quel point l'expérience est fluide sur n'importe quel appareil.",
+    "tabDesktop": "Bureau",
+    "tabMobile": "Mobile",
+    "mobileHint": "Optimisé pour le tactile et le balayage."
+  },
+  "printingGuide": {
+    "title": "Guide d'Impression pour Fiches Points à Relier",
+    "settingsTitle": "Meilleurs Paramètres d'Impression",
+    "setting1": "Utilisez du papier format lettre (8,5\" x 11\") pour l'impression standard",
+    "setting2": "Réglez la qualité d'impression sur \"haute\" ou \"meilleure\" pour des points clairs",
+    "setting3": "Sélectionnez \"taille réelle\" (non mise à l'échelle) dans les options d'impression",
+    "setting4": "Économisez l'encre : Choisissez l'impression en noir et blanc.",
+    "setting5": "Choisissez l'orientation portrait pour la plupart des designs",
+    "tipsTitle": "Conseils de Téléchargement et d'Impression",
+    "tip1": "Téléchargez la version PDF pour les meilleurs résultats d'impression",
+    "tip2": "Pour les jeunes enfants, imprimez à 125% pour des points plus grands",
+    "tip3": "Utilisez du papier plus épais (cartonné) pour des activités plus durables",
+    "tip4": "Économisez l'encre en désélectionnant \"graphiques d'arrière-plan\" dans les paramètres d'impression"
+  },
+  "faq": {
+    "title": "Questions Fréquemment Posées",
+    "q1": "Vos fiches points à relier sont-elles vraiment gratuites ?",
+    "a1": "Oui, toutes nos fiches sont complètement gratuites à télécharger et imprimer. Nous ne demandons aucun paiement ou abonnement pour accéder à nos fiches de base. Certains designs premium peuvent être disponibles moyennant un petit supplément, mais ils sont clairement indiqués.",
+    "q2": "Quels formats de fichiers sont disponibles au téléchargement ?",
+    "a2": "Toutes nos fiches sont disponibles en format PDF, idéal pour l'impression. De nombreux designs sont également disponibles en format image PNG haute résolution. Le format PDF est recommandé pour les meilleurs résultats d'impression car il préserve la mise en page et la qualité quel que soit votre appareil ou imprimante.",
+    "q3": "Puis-je utiliser ces fiches à des fins commerciales ?",
+    "a3": "Nos fiches sont uniquement pour un usage personnel et éducatif. Elles ne peuvent pas être utilisées à des fins commerciales, y compris la vente des fiches ou leur utilisation dans des produits à vendre. Si vous êtes enseignant, vous pouvez les utiliser dans votre classe et les distribuer à vos élèves.",
+    "q4": "Comment créer une fiche personnalisée ?",
+    "a4": "Vous pouvez créer des fiches personnalisées en utilisant notre outil générateur. Téléchargez simplement une image, choisissez le nombre de points et le niveau de difficulté, et notre outil convertira votre image en fiche. Vous pouvez ensuite la télécharger en format PDF ou image pour l'impression.",
+    "q5": "Avez-vous des fiches pour adultes ?",
+    "a5": "Oui, nous avons une grande collection de fiches conçues spécifiquement pour les adultes. Celles-ci incluent des designs plus complexes avec des centaines de points, des motifs complexes et des images détaillées qui offrent une activité relaxante et méditative. Vous pouvez les trouver dans notre catégorie \"Points à Relier pour Adultes\"."
+  },
+  "contact": {
+    "title": "Aide et Support du Générateur",
+    "subtitle": "Besoin d'aide avec le générateur ou avez-vous une demande de fonctionnalité ? Nous serions ravis de vous entendre.",
+    "button": "Contacter le Support"
+  },
+  "customGenerator": {
+    "title": "Créez Vos Propres Fiches Points à Relier",
+    "subtitle": "Notre générateur personnalisé vous permet de transformer n'importe quelle image en fiche imprimable. Parfait pour créer des activités personnalisées pour enfants, du matériel éducatif ou des pages de coloriage uniques pour adultes."
+  },
+  "editor": {
+    "uploadNew": "Télécharger Nouvelle Image",
+    "downloadImage": "Télécharger Image",
+    "downloadPdf": "Télécharger PDF",
+    "recommended": "Recommandé",
+    "generating": "Génération...",
+    "difficulty": "Difficulté Ajustable pour Tous Niveaux",
+    "easy": "Facile",
+    "medium": "Moyen",
+    "hard": "Difficile",
+    "presetDesc": {
+      "easy": "Parfait pour enfants (20-30 points, grande police)",
+      "medium": "Difficulté standard (50-60 points)",
+      "hard": "Défi expert (plus de 80 points, sans indices)"
+    },
+    "bgHintTitle": "Indice d'Arrière-plan",
+    "smartHint": "Indice Intelligent",
+    "lightTrace": "Tracé Léger",
+    "noHint": "Sans Indice",
+    "eraserSize": "Taille Gomme",
+    "resetCanvas": "Réinitialiser",
+    "customSettings": "Paramètres Personnalisés",
+    "dotCount": "Nombre de Points",
+    "dotsUnit": "Points",
+    "fontSize": "Taille Police",
+    "dotRadius": "Rayon Point",
+    "dotColor": "Couleur Point"
+  },
+  "header": {
+    "logo": "ConnectTheDots",
+    "logoAlt": "Logo ConnectTheDots",
+    "home": "Accueil",
+    "allPrintables": "Fiches Gratuites",
+    "howToMake": "Comment Créer",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "feedback": "Feedback",
+    "christmas": "Noël",
+    "donate": "Faire un Don",
+    "ariaToggle": "Basculer le menu",
+    "langName": "FR",
+    "login": "Connexion",
+    "signOut": "Déconnexion",
+    "pricing": "Tarifs"
+  },
+  "footer": {
+    "description": "Votre source de fiches points à relier de haute qualité et gratuites pour enfants et adultes.",
+    "language": "Langue",
+    "colPrintables": "Fiches",
+    "colLegal": "Légal",
+    "home": "Accueil",
+    "allPrintables": "Fiches Gratuites",
+    "howToMake": "Comment Créer",
+    "christmas": "Fiches de Noël",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "feedback": "Feedback",
+    "popularCharacter": "Personnages Populaires",
+    "animalPdf": "Animaux Gratuits en PDF",
+    "rights": "Tous droits réservés.",
+    "disclaimer": "Toutes les fiches sont uniquement pour un usage personnel et éducatif."
+  },
+  "pricing": {
+    "heroTitle": "Choisissez le Plan Parfait pour Votre Créativité",
+    "heroSubtitle": "Débloquez les exports haute définition et les générations IA illimitées avec nos tarifs transparents.",
+    "title": "Tarifs - Générateur IA de Points à Relier | Puzzles Personnalisés Illimités",
+    "description": "Choisissez le meilleur plan pour débloquer la génération IA haute résolution. Tarifs abordables pour enseignants, parents et créateurs professionnels. Obtenez des fiches sans filigrane instantanément.",
+    "badgePopular": "Le Plus Populaire",
+    "saveNote": "Économisez 54% par rapport au mensuel",
+    "usd": "USD",
+    "tiers": {
+      "saver": {
+        "name": "Pack Économique",
+        "desc": "Idéal pour les projets personnalisés ponctuels",
+        "price": "4.90",
+        "unit": "une fois",
+        "button": "Acheter des Crédits",
+        "features": [
+          "50 Crédits de Génération IA",
+          "Export PDF Haute Résolution",
+          "Supprimer les Filigranes"
+        ]
+      },
+      "monthly": {
+        "name": "Créateur Mensuel",
+        "desc": "Possibilités créatives illimitées",
+        "price": "8.90",
+        "unit": "/mois",
+        "button": "Démarrer l'Abonnement",
+        "features": [
+          "200 Crédits IA Par Mois",
+          "Fichiers PDF HD Prêts à Imprimer",
+          "Licence Commerciale",
+          "Recharge de Crédits Prioritaire"
+        ]
+      },
+      "annual": {
+        "name": "Maître Annuel",
+        "desc": "Outils sérieux pour créateurs sérieux",
+        "price": "49.90",
+        "unit": "/an",
+        "button": "Devenir Pro Annuel",
+        "features": [
+          "Générations IA Illimitées*",
+          "Export SVG et PDF Vectoriel",
+          "Licence Commerciale",
+          "Toutes les Fonctionnalités Premium"
+        ]
+      }
+    },
+    "aiTech": {
+      "title": "Notre Technologie de Génération de \"Points à Relier\" par IA",
+      "body": "Nous sommes actuellement en Bêta. Notre générateur IA fonctionne mieux avec des contours clairs et des sujets de complexité moyenne. Votre abonnement finance directement nos coûts de serveur et améliorations d'algorithme."
+    },
+    "faq": {
+      "title": "Tout Ce Que Vous Devez Savoir",
+      "q1": "Qu'est-ce qu'un \"Crédit IA\" ?",
+      "a1": "Un crédit est consommé chaque fois que vous générez une nouvelle fiche avec notre outil IA. Les téléchargements de notre bibliothèque restent gratuits.",
+      "q2": "Puis-je vendre les fiches générées ?",
+      "a2": "Oui ! Avec les plans Créateur Mensuel et Maître Annuel, vous recevez une licence commerciale complète.",
+      "q3": "Pourquoi y a-t-il un système de crédits ?",
+      "a3": "La génération IA nécessite une puissance de calcul GPU importante. Le système de crédits nous permet de maintenir l'outil de base gratuit pour tous.",
+      "q4": "Comment annuler mon abonnement ?",
+      "a4": "Pas de pièges cachés. Vous pouvez annuler votre abonnement à tout moment via votre tableau de bord."
+    }
+  },
+  "printablePage": {
+    "breadcrumbHome": "Accueil",
+    "breadcrumbAll": "Toutes les Fiches",
+    "pageTitle": "Points à Relier à Imprimer Gratuits",
+    "pageDescription": "Explorez notre vaste collection de fiches point à relier gratuites pour enfants et adultes. Tous nos cahiers de points à relier sont faciles à télécharger, sans filigrane et prêts à imprimer en PDF.",
+    "lastUpdated": "Dernière mise à jour : 23 octobre 2025",
+    "filters": "Filtres",
+    "difficultyLevel": "Niveau de Difficulté",
+    "allLevels": "Tous les Niveaux",
+    "easy": "Facile",
+    "medium": "Moyen",
+    "hard": "Difficile",
+    "extreme": "Extrême",
+    "allPrintables": "Toutes les Fiches",
+    "showingResults": "Affichage de {count} sur {total} résultats",
+    "customTools": "Outils Personnalisés",
+    "cantFindDesign": "Vous ne trouvez pas le design parfait ?",
+    "createCustom": "Créez vos propres dessins à imprimer avec notre générateur facile à utiliser.",
+    "tryGenerator": "Essayer le Générateur Personnalisé",
+    "communityFeedback": "Retours de la Communauté"
+  }
+}

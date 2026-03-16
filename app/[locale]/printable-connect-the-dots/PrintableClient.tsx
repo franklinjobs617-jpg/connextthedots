@@ -5,10 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { MessageSquare, X, Filter, Clock, Heart, ChevronRight } from "lucide-react";
+import { useTranslations } from 'next-intl';
 import PrintableCard from "@/components/PrintableCard"; // 之前创建的卡片组件
 
 export default function PrintableListClient({ locale, data, allItems }: any) {
-    const isEs = locale === "es";
+    const t = useTranslations('printablePage');
     const [activeFilter, setActiveFilter] = useState("all");
     const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
     const [scriptsLoaded, setScriptsLoaded] = useState(false);
@@ -26,8 +27,8 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": isEs ? "Fichas de Unir Puntos para Imprimir" : "Free Connect the Dots Worksheets",
-        "url": `https://connectthedotsprintable.online${isEs ? '/es' : ''}/printable-connect-the-dots/`,
+        "name": t('pageTitle'),
+        "url": `https://connectthedotsprintable.online/${locale === 'en' ? '' : locale + '/'}printable-connect-the-dots/`,
         "mainEntity": {
             "@type": "ItemList",
             "numberOfItems": displayedItems.length,
@@ -67,28 +68,28 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
                     <div className="container max-w-7xl mx-auto px-6 relative z-10 text-center md:text-left">
                         <div className="max-w-4xl mx-auto md:mx-0">
                             <div className="text-sm font-medium text-slate-400 mb-6 flex items-center justify-center md:justify-start gap-2">
-                                <Link href={isEs ? "/es/" : "/"} className="hover:text-white transition-colors">{isEs ? "Inicio" : "Home"}</Link>
+                                <Link href={`/${locale === 'en' ? '' : locale + '/'}`} className="hover:text-white transition-colors">
+                                    {t('breadcrumbHome')}
+                                </Link>
                                 <ChevronRight size={12} className="opacity-50" />
-                                <span className="text-brand-blue">{isEs ? "Todas las Fichas" : "All Printables"}</span>
+                                <span className="text-brand-blue">
+                                    {t('breadcrumbAll')}
+                                </span>
                             </div>
 
                             <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
-                                {isEs ? "Fichas de " : "Printable "}
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-purple-400">
-                                    {isEs ? "Unir Puntos" : "Connect the Dots"}
+                                    {t('pageTitle')}
                                 </span>
-                                {isEs ? " para Imprimir" : " Worksheets"}
                             </h1>
 
                             <p className="text-md text-left text-slate-300 leading-relaxed mb-6">
-                                {isEs
-                                    ? "Explora nuestra gran colección de dibujos de unir puntos gratuitos para niños y adultos. Todas nuestras fichas de unir puntos son fáciles de descargar, sin marcas de agua y listas para imprimir."
-                                    : "Explore our extensive collection of free dot to dot printables for kids and adults. All our connect the dots printables are easy to download, no watermarks, and ready to print."}
+                                {t('pageDescription')}
                             </p>
 
                             <div className="flex items-center justify-center md:justify-start gap-2 text-sm text-slate-400 bg-slate-800/50 inline-flex px-4 py-2 rounded-full border border-slate-700">
                                 <Clock size={16} className="text-brand-blue" />
-                                {isEs ? "Última actualización: 23 de octubre de 2025" : "Last updated: October 23, 2025"}
+                                {t('lastUpdated')}
                             </div>
                         </div>
                     </div>
@@ -106,18 +107,22 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
                                         <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-brand-blue">
                                             <Filter size={16} />
                                         </div>
-                                        <h2 className="text-lg font-bold text-slate-800">{isEs ? "Filtros" : "Filters"}</h2>
+                                        <h2 className="text-lg font-bold text-slate-800">
+                                            {t('filters')}
+                                        </h2>
                                     </div>
 
                                     <div className="space-y-2">
-                                        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">{isEs ? "Nivel de Dificultad" : "Difficulty Level"}</h3>
+                                        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
+                                            {t('difficultyLevel')}
+                                        </h3>
 
                                         {[
-                                            { id: 'all', label: isEs ? 'Todos los Niveles' : 'All Levels', dot: true },
-                                            { id: 'easy', label: isEs ? 'Fácil' : 'Easy', badge: '1-20', color: 'bg-green-100 text-green-700' },
-                                            { id: 'medium', label: isEs ? 'Medio' : 'Medium', badge: '20-50', color: 'bg-yellow-100 text-yellow-700' },
-                                            { id: 'hard', label: isEs ? 'Difícil' : 'Hard', badge: '50-100', color: 'bg-purple-100 text-purple-700' },
-                                            { id: 'extreme', label: isEs ? 'Extremo' : 'Extreme', badge: '100+', color: 'bg-red-100 text-red-700' },
+                                            { id: 'all', label: t('allLevels'), dot: true },
+                                            { id: 'easy', label: t('easy'), badge: '1-20', color: 'bg-green-100 text-green-700' },
+                                            { id: 'medium', label: t('medium'), badge: '20-50', color: 'bg-yellow-100 text-yellow-700' },
+                                            { id: 'hard', label: t('hard'), badge: '50-100', color: 'bg-purple-100 text-purple-700' },
+                                            { id: 'extreme', label: t('extreme'), badge: '100+', color: 'bg-red-100 text-red-700' },
                                         ].map((f) => (
                                             <button
                                                 key={f.id}
@@ -141,10 +146,10 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
                                 <div className="flex flex-col sm:flex-row justify-between items-end mb-8 gap-4 border-b border-slate-200 pb-6">
                                     <div>
                                         <h2 className="text-2xl font-extrabold text-brand-dark">
-                                            {isEs ? "Todas las Fichas" : "All Printables"}
+                                            {t('allPrintables')}
                                         </h2>
                                         <p className="text-slate-500 mt-1">
-                                            {isEs ? `Mostrando ${displayedItems.length} de ${allItems.length} resultados` : `Showing ${displayedItems.length} of ${allItems.length} results`}
+                                            {t('showingResults', { count: displayedItems.length, total: allItems.length })}
                                         </p>
                                     </div>
                                 </div>
@@ -166,13 +171,17 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
                             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue opacity-5 rounded-full blur-3xl -mr-16 -mt-16"></div>
                             <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
                                 <div className="md:w-1/2">
-                                    <span className="text-brand-blue font-bold tracking-wider uppercase text-xs mb-3 block">{isEs ? "Herramientas Personalizadas" : "Custom Tools"}</span>
-                                    <h2 className="text-3xl md:text-4xl font-extrabold text-brand-dark mb-6">{isEs ? "¿No encuentras el diseño perfecto?" : "Can't Find the Perfect Design?"}</h2>
+                                    <span className="text-brand-blue font-bold tracking-wider uppercase text-xs mb-3 block">
+                                        {t('customTools')}
+                                    </span>
+                                    <h2 className="text-3xl md:text-4xl font-extrabold text-brand-dark mb-6">
+                                        {t('cantFindDesign')}
+                                    </h2>
                                     <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                                        {isEs ? "Crea tus propios dibujos de unir puntos para imprimir usando nuestro generador fácil de usar." : "Create your own custom connect the dots printables using our easy-to-use generator."}
+                                        {t('createCustom')}
                                     </p>
-                                    <Link href={isEs ? "/es/" : "/"} className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-bold rounded-full shadow-lg hover:bg-indigo-700 transition-all">
-                                        <span>{isEs ? "Probar Generador Personalizado" : "Try Custom Generator"}</span>
+                                    <Link href={`/${locale === 'en' ? '' : locale + '/'}`} className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-bold rounded-full shadow-lg hover:bg-indigo-700 transition-all">
+                                        <span>{t('tryGenerator')}</span>
                                     </Link>
                                 </div>
                                 <div className="md:w-1/2">
@@ -202,7 +211,9 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
                 <div className="fixed inset-0 bg-black/60 z-[100] flex justify-center items-center p-4" onClick={() => setIsFeedbackOpen(false)}>
                     <div className="bg-white w-full max-w-xl rounded-2xl p-6 shadow-2xl relative" onClick={e => e.stopPropagation()}>
                         <button className="absolute top-4 right-4 text-gray-400" onClick={() => setIsFeedbackOpen(false)}><X size={24} /></button>
-                        <h2 className="text-xl font-bold mb-4">{isEs ? "Feedback de la Comunidad" : "Community Feedback"}</h2>
+                        <h2 className="text-xl font-bold mb-4">
+                            {t('communityFeedback')}
+                        </h2>
                         <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="4535a28e-08e9-411e-9c74-0f118e22c1af" data-page-id={`list-page-${locale}`} data-theme="light"></div>
                     </div>
                 </div>

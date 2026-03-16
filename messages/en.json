@@ -285,5 +285,26 @@
   "metadata": {
     "homeTitle": "Free Connect the Dots Generator | Online Dot to Dot Maker",
     "homeDesc": "Instantly create custom printables with our Free Connect the Dots Generator & Maker. High-quality worksheets for kids/adults—no watermarks, no sign-up needed. Start creating now!  "
+  },
+  "printablePage": {
+    "breadcrumbHome": "Home",
+    "breadcrumbAll": "All Printables",
+    "pageTitle": "Printable Connect the Dots Worksheets",
+    "pageDescription": "Explore our extensive collection of free dot to dot printables for kids and adults. All our connect the dots printables are easy to download, no watermarks, and ready to print.",
+    "lastUpdated": "Last updated: October 23, 2025",
+    "filters": "Filters",
+    "difficultyLevel": "Difficulty Level",
+    "allLevels": "All Levels",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "extreme": "Extreme",
+    "allPrintables": "All Printables",
+    "showingResults": "Showing {count} of {total} results",
+    "customTools": "Custom Tools",
+    "cantFindDesign": "Can't Find the Perfect Design?",
+    "createCustom": "Create your own custom connect the dots printables using our easy-to-use generator.",
+    "tryGenerator": "Try Custom Generator",
+    "communityFeedback": "Community Feedback"
   }
 }

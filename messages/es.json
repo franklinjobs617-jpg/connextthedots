@@ -273,6 +273,27 @@
   "metadata": {
     "homeTitle": "Dibujos de Unir Puntos para Imprimir Gratis | Generador de Fichas",
     "homeDesc": "Crea y descarga dibujos de unir puntos para imprimir gratis. El mejor generador automático de fichas, ejercicios de unir puntos y actividades para niños del 1 al 20 y 1 al 100."
+  },
+  "printablePage": {
+    "breadcrumbHome": "Inicio",
+    "breadcrumbAll": "Todas las Fichas",
+    "pageTitle": "Fichas de Unir Puntos para Imprimir",
+    "pageDescription": "Explora nuestra gran colección de dibujos de unir puntos gratuitos para niños y adultos. Todas nuestras fichas de unir puntos son fáciles de descargar, sin marcas de agua y listas para imprimir.",
+    "lastUpdated": "Última actualización: 23 de octubre de 2025",
+    "filters": "Filtros",
+    "difficultyLevel": "Nivel de Dificultad",
+    "allLevels": "Todos los Niveles",
+    "easy": "Fácil",
+    "medium": "Medio",
+    "hard": "Difícil",
+    "extreme": "Extremo",
+    "allPrintables": "Todas las Fichas",
+    "showingResults": "Mostrando {count} de {total} resultados",
+    "customTools": "Herramientas Personalizadas",
+    "cantFindDesign": "¿No encuentras el diseño perfecto?",
+    "createCustom": "Crea tus propios dibujos de unir puntos para imprimir usando nuestro generador fácil de usar.",
+    "tryGenerator": "Probar Generador Personalizado",
+    "communityFeedback": "Feedback de la Comunidad"
   }
 
 }

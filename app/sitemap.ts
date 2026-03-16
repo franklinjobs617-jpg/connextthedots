@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
-import { getAllPrintables } from '@/lib/printables-data'; // 确保你的数据源路径正确
+import { getAllPrintables } from '@/lib/printables-data';
 
 const baseUrl = 'https://connectthedotsprintable.online';
-const locales = ['en', 'es', 'de'];
+const locales = ['en', 'es', 'de', 'pt', 'fr'];
 
 /**
  * 辅助函数，确保路径有尾部斜杠
@@ -49,12 +49,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: path === '/' ? 1.0 : 0.8,
             alternates: {
                 languages: {
-                    // 英文（默认）：https://site.com/pricing/
                     en: `${baseUrl}${cleanPath}`,
-                    // 西班牙语：https://site.com/es/pricing/
                     es: `${baseUrl}/es${cleanPath}`,
-                    // 德语：https://site.com/de/pricing/
                     de: `${baseUrl}/de${cleanPath}`,
+                    pt: `${baseUrl}/pt${cleanPath}`,
+                    fr: `${baseUrl}/fr${cleanPath}`,
                 },
             },
         };
@@ -78,6 +77,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
                     en: `${baseUrl}${cleanPath}`,
                     es: `${baseUrl}/es${cleanPath}`,
                     de: `${baseUrl}/de${cleanPath}`,
+                    pt: `${baseUrl}/pt${cleanPath}`,
+                    fr: `${baseUrl}/fr${cleanPath}`,
                 },
             },
         };
