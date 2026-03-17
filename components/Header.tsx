@@ -214,6 +214,22 @@ export default function Header() {
                             >
                                 Français (FR)
                             </Link>
+                            <Link
+                                href={pathname}
+                                locale="it"
+                                onClick={() => setIsOpen(false)}
+                                className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
+                            >
+                                Italiano (IT)
+                            </Link>
+                            <Link
+                                href={pathname}
+                                locale="nl"
+                                onClick={() => setIsOpen(false)}
+                                className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
+                            >
+                                Nederlands (NL)
+                            </Link>
                         </div>
                     </div>
                 )}
