@@ -31,6 +31,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/printables/general",
         "/printables/hard",
         "/printables/connectTheDotsGenerator",
+        '/convert-photo-to-beads',
+        '/gallery',
+        '/editor',
         '/privacy',
         '/terms',
     ];
