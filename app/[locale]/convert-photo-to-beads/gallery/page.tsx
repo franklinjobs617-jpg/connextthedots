@@ -6,7 +6,7 @@ import { Search, Grid3X3, Sparkles, ArrowRight } from "lucide-react";
 import { GalleryPattern, loadGalleryPatterns } from "../gallery-data";
 import BeadPreviewCanvas from "../components/BeadPreviewCanvas";
 
-// 分类定义
+// Categories
 const CATEGORIES = [
     { key: "all", label: "All Patterns" },
     { key: "gaming", label: "Gaming" },
@@ -17,20 +17,26 @@ const CATEGORIES = [
     { key: "custom", label: "Custom" },
 ];
 
-// 难度颜色映射
+// Difficulty styles
 const DIFFICULTY_STYLE: Record<string, string> = {
     beginner: "bg-emerald-50 text-emerald-700 border-emerald-200",
     intermediate: "bg-amber-50 text-amber-700 border-amber-200",
     advanced: "bg-red-50 text-red-700 border-red-200",
 };
 
+import { useSearchParams } from "next/navigation";
+
 export default function GalleryPage() {
+    const searchParams = useSearchParams();
+    const urlCategory = searchParams.get("category");
+    const urlSearch = searchParams.get("search");
+
     const [patterns, setPatterns] = useState<GalleryPattern[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedCategory, setSelectedCategory] = useState("all");
-    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState(urlCategory || "all");
+    const [searchQuery, setSearchQuery] = useState(urlSearch || "");
 
-    // 从 /public/gallery/ 加载 JSON 文件
+    // Load patterns from /public/gallery/ JSON files
     useEffect(() => {
         loadGalleryPatterns().then((data) => {
             setPatterns(data);
@@ -38,7 +44,13 @@ export default function GalleryPage() {
         });
     }, []);
 
-    // 过滤逻辑
+    // Also update local state if URL changes (e.g. user clicks another link)
+    useEffect(() => {
+        if (urlCategory) setSelectedCategory(urlCategory);
+        if (urlSearch) setSearchQuery(urlSearch);
+    }, [urlCategory, urlSearch]);
+
+    // Filtering logic
     const filteredPatterns = patterns.filter((pattern) => {
         const matchesCategory =
             selectedCategory === "all" || pattern.category === selectedCategory;
@@ -68,7 +80,6 @@ export default function GalleryPage() {
                         Click any pattern to view details, download, or open in the editor.
                     </p>
 
-                    {/* 搜索栏 */}
                     <div className="max-w-lg mx-auto relative">
                         <Search
                             size={20}
@@ -87,15 +98,15 @@ export default function GalleryPage() {
 
             {/* 分类过滤 + 画廊网格 */}
             <div className="container mx-auto px-6 py-12">
-                {/* 分类标签 */}
+                {/* Category Tags */}
                 <div className="flex flex-wrap gap-2 mb-10">
                     {CATEGORIES.map((cat) => (
                         <button
                             key={cat.key}
                             onClick={() => setSelectedCategory(cat.key)}
                             className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${selectedCategory === cat.key
-                                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
-                                    : "bg-white text-slate-600 border border-slate-200 hover:border-indigo-200 hover:text-indigo-600"
+                                ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
+                                : "bg-white text-slate-600 border border-slate-200 hover:border-indigo-200 hover:text-indigo-600"
                                 }`}
                         >
                             {cat.label}
@@ -103,7 +114,7 @@ export default function GalleryPage() {
                     ))}
                 </div>
 
-                {/* 加载状态 */}
+                {/* Loading State */}
                 {isLoading ? (
                     <div className="text-center py-20">
                         <div className="w-10 h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4" />
@@ -111,13 +122,13 @@ export default function GalleryPage() {
                     </div>
                 ) : filteredPatterns.length > 0 ? (
                     <>
-                        {/* 结果计数 */}
+                        {/* Result count */}
                         <p className="text-sm text-slate-400 mb-6 font-medium">
                             Showing {filteredPatterns.length} pattern
                             {filteredPatterns.length !== 1 ? "s" : ""}
                         </p>
 
-                        {/* 画廊网格 */}
+                        {/* Gallery Grid */}
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                             {filteredPatterns.map((pattern) => (
                                 <PatternCard key={pattern.id} pattern={pattern} />
@@ -125,7 +136,7 @@ export default function GalleryPage() {
                         </div>
                     </>
                 ) : patterns.length === 0 ? (
-                    // 画廊为空（还没有任何图纸）
+                    // Empty state
                     <div className="text-center py-20 bg-white rounded-3xl border border-slate-100">
                         <div className="text-6xl mb-6">🎨</div>
                         <h3 className="text-2xl font-black text-slate-900 mb-3">
@@ -144,7 +155,7 @@ export default function GalleryPage() {
                         </Link>
                     </div>
                 ) : (
-                    // 搜索无结果
+                    // No results
                     <div className="text-center py-20">
                         <div className="text-6xl mb-4">🔍</div>
                         <h3 className="text-xl font-bold text-slate-700 mb-2">
@@ -156,7 +167,7 @@ export default function GalleryPage() {
                     </div>
                 )}
 
-                {/* 底部 CTA */}
+                {/* Bottom CTA */}
                 <div className="mt-20 text-center bg-white rounded-3xl border border-slate-100 p-12 shadow-sm">
                     <h2 className="text-2xl font-black text-slate-900 mb-4">
                         Can&apos;t find what you need?
@@ -193,12 +204,14 @@ function PatternCard({ pattern }: { pattern: GalleryPattern }) {
                     {pattern.beadCount}
                 </div>
 
-                <BeadPreviewCanvas
-                    grid={pattern.grid}
-                    maxWidth={300}
-                    detailed={false}
-                    className="group-hover:scale-105 transition-transform duration-300"
-                />
+                {pattern.grid && (
+                    <BeadPreviewCanvas
+                        grid={pattern.grid}
+                        maxWidth={300}
+                        detailed={false}
+                        className="group-hover:scale-105 transition-transform duration-300"
+                    />
+                )}
             </div>
 
             {/* 信息 */}

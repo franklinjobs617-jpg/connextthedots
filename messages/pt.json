@@ -1,7 +1,9 @@
 {
   "metadata": {
     "homeTitle": "Ligar os Pontos Online Grátis | Gerador e Criador",
-    "homeDesc": "Gerador de ligar os pontos online grátis. Crie e personalize atividades de ligue os pontos para imprimir. Transforme fotos em jogo de ligar os pontos para crianças e adultos!"
+    "homeDesc": "Gerador de ligar os pontos online grátis. Crie e personalize atividades de ligue os pontos para imprimir. Transforme fotos em jogo de ligar os pontos para crianças e adultos!",
+    "beadsGalleryTitle": "Galeria de Padrões de Contas Perler | Desenhos Gratuitos e Imprimíveis",
+    "beadsGalleryDesc": "Navegue por centenas de padrões de contas perler gratuitos e imprimíveis. Desenhos de alta qualidade para personagens, games, animais e muito mais."
   },
   "hero": {
     "badge": "✨ Gerador Grátis de Ligar os Pontos ✨",
@@ -193,6 +195,8 @@
     "logoAlt": "Logo ConnectTheDots",
     "home": "Início",
     "allPrintables": "Atividades Grátis",
+    "beadTool": "Criador de Miçangas",
+    "beadGallery": "Galeria",
     "howToMake": "Como Criar",
     "privacy": "Privacidade",
     "terms": "Termos",

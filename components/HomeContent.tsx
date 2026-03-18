@@ -1,12 +1,13 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Wand2, Brain, Sparkles, ArrowRight, Download, RefreshCw, Loader2, Lock } from "lucide-react"; // 引入新图标
+import { Wand2, Brain, Sparkles, ArrowRight, Download, RefreshCw, Loader2, Lock, Grid3X3, Image as ImageIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import Image from 'next/image';
 import { useLocale } from "next-intl";
-import { Link } from "@/i18n/routing"; // 使用你的 i18n Link
+import BeadComparisonSlider from "./BeadComparisonSlider";
+import { Link } from "@/i18n/routing";
 import { useAuth } from "@/lib/auth-context";
 import { getAllPrintables, PrintableItem } from "@/lib/printables-data";
 import { jsPDF } from "jspdf";
@@ -223,27 +224,39 @@ export default function HomeContent() {
                                     {/* Tabs (React Controlled) */}
                                     <div className="p-2 bg-slate-50 border-b border-slate-100">
                                         <div className="relative flex w-full bg-slate-200/60 p-1 rounded-xl">
-                                            {/* 滑块动画 */}
+                                            {/* 滑块动画 (3 Tabs Version) */}
                                             <div
-                                                className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300 ease-out ${activeTab === 'upload' ? 'left-1' : 'left-[calc(50%+2px)]'}`}
+                                                className={`absolute top-1 bottom-1 w-[calc(33.33%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300 ease-out 
+                                                ${activeTab === 'upload' ? 'left-1' :
+                                                        activeTab === 'ai' ? 'left-[calc(33.33%+1px)]' :
+                                                            'left-[calc(66.66%+1px)]'}`}
                                             ></div>
 
                                             <button
                                                 onClick={() => setActiveTab("upload")}
-                                                id="tab-upload"
-                                                className={`relative z-10 w-1/2 py-2.5 text-sm font-bold transition-colors flex justify-center items-center gap-2 ${activeTab === 'upload' ? 'text-slate-800' : 'text-slate-500'}`}
+                                                className={`relative z-10 w-1/3 py-2.5 text-xs sm:text-sm font-bold transition-colors flex justify-center items-center gap-1.5 ${activeTab === 'upload' ? 'text-slate-800' : 'text-slate-500'}`}
                                             >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 576 512"><path d="M144 480c-79.5 0-144-64.5-144-144 0-63.4 41-117.2 97.9-136.5-1.3-7.7-1.9-15.5-1.9-23.5 0-79.5 64.5-144 144-144 55.4 0 103.5 31.3 127.6 77.1 14.2-8.3 30.8-13.1 48.4-13.1 53 0 96 43 96 96 0 15.7-3.8 30.6-10.5 43.7 44 20.3 74.5 64.7 74.5 116.3 0 70.7-57.3 128-128 128l-304 0zM305 191c-9.4-9.4-24.6-9.4-33.9 0l-72 72c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l31-31 0 102.1c0 13.3 10.7 24 24 24s24-10.7 24-24l0-102.1 31 31c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-72-72z" /></svg>
+                                                <ImageIcon className="w-4 h-4" />
                                                 {tHero("tabUpload")}
                                             </button>
 
                                             <button
                                                 onClick={() => setActiveTab("ai")}
-                                                id="tab-ai"
-                                                className={`relative z-10 w-1/2 py-2.5 text-sm font-bold transition-colors flex justify-center items-center gap-2 ${activeTab === 'ai' ? 'text-slate-800' : 'text-slate-500'}`}
+                                                className={`relative z-10 w-1/3 py-2.5 text-xs sm:text-sm font-bold transition-colors flex justify-center items-center gap-1.5 ${activeTab === 'ai' ? 'text-slate-800' : 'text-slate-500'}`}
                                             >
                                                 <Wand2 className="w-4 h-4" />
                                                 {tHero("tabAi")}
+                                            </button>
+
+                                            <button
+                                                onClick={() => setActiveTab("bead")}
+                                                className={`relative z-10 w-1/3 py-2.5 text-xs sm:text-sm font-bold transition-colors flex justify-center items-center gap-1.5 ${activeTab === 'bead' ? 'text-slate-800' : 'text-slate-500'}`}
+                                            >
+                                                <div className="flex items-center gap-1 relative">
+                                                    <Grid3X3 className="w-4 h-4" />
+                                                    {tHero("tabBead")}
+                                                    <span className="absolute -top-3.5 -right-3 px-1 py-0.5 bg-zinc-950 text-[8px] text-white rounded font-black scale-90 shadow-sm">{tHero("beadBadge")}</span>
+                                                </div>
                                             </button>
                                         </div>
                                     </div>
@@ -364,6 +377,34 @@ export default function HomeContent() {
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* MODE C: BEAD ART - New Diversion Section */}
+                                        <div id="panel-bead" className={`${activeTab === 'bead' ? 'block' : 'hidden'} w-full animate-in fade-in slide-in-from-bottom-2 duration-300`}>
+                                            <div className="flex flex-col sm:flex-row items-center gap-5 p-4 rounded-2xl bg-zinc-50 border border-zinc-100">
+                                                <div className="w-24 h-24 bg-white border border-zinc-200 rounded-xl shadow-sm flex items-center justify-center overflow-hidden shrink-0 group">
+                                                    <Image
+                                                        src="/transformar-foto-em-desenho-anime-online.webp"
+                                                        width={96} height={96}
+                                                        alt="Bead Art Preview"
+                                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                    />
+                                                </div>
+                                                <div className="flex-1 text-center sm:text-left space-y-1.5">
+                                                    <h3 className="text-base sm:text-lg font-bold text-zinc-900 tracking-tight">{tHero("beadTitle")}</h3>
+                                                    <p className="text-xs text-zinc-500 font-medium leading-relaxed">{tHero("beadDesc")}</p>
+
+                                                    <div className="pt-2">
+                                                        <Link
+                                                            href="/convert-photo-to-beads/editor/"
+                                                            className="inline-flex items-center gap-2 px-5 py-2 bg-zinc-950 text-white rounded-lg text-xs font-bold hover:bg-zinc-800 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                                                        >
+                                                            {tHero("beadCta")}
+                                                            <ArrowRight size={14} strokeWidth={3} />
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -372,32 +413,37 @@ export default function HomeContent() {
                             <div className="lg:w-1/2 w-full flex justify-center perspective-1000">
                                 <div className="relative w-full max-w-lg aspect-square rounded-[2.5rem] shadow-floating bg-white p-3 transform rotate-2 hover:rotate-0 transition-transform duration-500 border border-slate-100">
                                     <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-100 group">
-                                        <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/result-cupcake-illustration-connect-the-dots-maker.webp" className="absolute inset-0 w-full h-full object-cover" width="500" height="500" alt="Result" />
-                                        <div id="hero-before-layer" className="absolute inset-0 w-full h-full overflow-hidden border-r-4 border-white" style={{ clipPath: "inset(0 50% 0 0)" }}>
-                                            <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker-hd.webp" className="absolute inset-0 w-full h-full object-cover" width="500" height="500" alt="Original" />
-                                        </div>
-                                        <div className="absolute bottom-6 left-6 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold pointer-events-none">{tHero("sliderOriginal")}</div>
-                                        <div className="absolute bottom-6 right-6 bg-brand-blue/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg pointer-events-none">{tHero("sliderPuzzle")}</div>
-                                        <div id="hero-handle" className="absolute inset-y-0 left-1/2 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_20px_rgba(0,0,0,0.2)]">
-                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-blue shadow-lg">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" fill="currentColor"><path d="M470.6 374.6l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l41.4 41.4-357.5 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-6 6-9.4 14.1-9.4 22.6s3.4 16.6 9.4 22.6l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-41.4-41.4 357.5 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" /></svg>
-                                            </div>
-                                        </div>
-                                        {/* Slider 逻辑需配合 CSS/JS 调整，这里保留基础结构 */}
-                                        <input
-                                            type="range"
-                                            min="0"
-                                            max="100"
-                                            defaultValue="50"
-                                            className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
-                                            onInput={(e) => {
-                                                const val = (e.target as HTMLInputElement).value;
-                                                const layer = document.getElementById("hero-before-layer");
-                                                const handle = document.getElementById("hero-handle");
-                                                if (layer) layer.style.clipPath = `inset(0 ${100 - parseInt(val)}% 0 0)`;
-                                                if (handle) handle.style.left = `${val}%`;
-                                            }}
-                                        />
+                                        {activeTab === 'bead' ? (
+                                            <BeadComparisonSlider />
+                                        ) : (
+                                            <>
+                                                <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/result-cupcake-illustration-connect-the-dots-maker.webp" className="absolute inset-0 w-full h-full object-cover" width="500" height="500" alt="Result" />
+                                                <div id="hero-before-layer" className="absolute inset-0 w-full h-full overflow-hidden border-r-4 border-white" style={{ clipPath: "inset(0 50% 0 0)" }}>
+                                                    <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker-hd.webp" className="absolute inset-0 w-full h-full object-cover" width="500" height="500" alt="Original" />
+                                                </div>
+                                                <div className="absolute bottom-6 left-6 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold pointer-events-none">{tHero("sliderOriginal")}</div>
+                                                <div className="absolute bottom-6 right-6 bg-brand-blue/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg pointer-events-none">{tHero("sliderPuzzle")}</div>
+                                                <div id="hero-handle" className="absolute inset-y-0 left-1/2 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_20px_rgba(0,0,0,0.2)]">
+                                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-blue shadow-lg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" fill="currentColor"><path d="M470.6 374.6l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l41.4 41.4-357.5 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-6 6-9.4 14.1-9.4 22.6s3.4 16.6 9.4 22.6l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-41.4-41.4 357.5 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" /></svg>
+                                                    </div>
+                                                </div>
+                                                <input
+                                                    type="range"
+                                                    min="0"
+                                                    max="100"
+                                                    defaultValue="50"
+                                                    className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
+                                                    onInput={(e) => {
+                                                        const val = (e.target as HTMLInputElement).value;
+                                                        const layer = document.getElementById("hero-before-layer");
+                                                        const handle = document.getElementById("hero-handle");
+                                                        if (layer) layer.style.clipPath = `inset(0 ${100 - parseInt(val)}% 0 0)`;
+                                                        if (handle) handle.style.left = `${val}%`;
+                                                    }}
+                                                />
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </div>

@@ -30,7 +30,7 @@ export const ImageSizeModal = ({
     const width = PRESETS[presetIndex].name === "Custom" ? customWidth : boardSize * boardsX;
     const rawHeight = image ? Math.round((image.height / image.width) * width) : width;
 
-    // 优化：总高度直接根据图片比例计算，不再强制补齐到板子倍数，避免底部出现大片空位
+    // Optimization: Total height calculated directly from image ratio, no longer forced to board multiples to avoid large empty space at bottom
     const height = rawHeight;
 
     useEffect(() => {
@@ -135,13 +135,13 @@ export const ImageSizeModal = ({
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-xl w-full max-w-4xl p-4 md:p-6 max-h-[90vh] overflow-y-auto">
-                <h2 className="text-lg font-semibold mb-4">选择拼豆尺寸</h2>
+                <h2 className="text-lg font-semibold mb-4">Select Bead Size</h2>
 
                 <div className="flex flex-col lg:flex-row gap-6">
                     <div className="flex-1">
                         <div className="bg-gray-100 rounded-lg p-4 flex items-center justify-center min-h-[300px]">
                             {isProcessing ? (
-                                <div className="text-gray-500">处理中...</div>
+                                <div className="text-gray-500">Processing...</div>
                             ) : (
                                 <canvas ref={previewCanvasRef} className="max-w-full" />
                             )}
@@ -151,7 +151,7 @@ export const ImageSizeModal = ({
                     <div className="lg:w-80 space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                                拼豆板型号 (物理尺寸)
+                                Bead Board Size (Physical Size)
                             </label>
                             <select
                                 value={presetIndex}
@@ -169,7 +169,7 @@ export const ImageSizeModal = ({
                         {PRESETS[presetIndex].name === "Custom" ? (
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    自定义总宽度（颗）: {customWidth} px
+                                    Custom Total Width (beads): {customWidth} px
                                 </label>
                                 <input
                                     type="range"
@@ -187,7 +187,7 @@ export const ImageSizeModal = ({
                         ) : (
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    横向拼接板数: <span className="text-blue-600 font-semibold">{boardsX}</span> 块
+                                    Horizontal Boards: <span className="text-blue-600 font-semibold">{boardsX}</span> boards
                                 </label>
                                 <input
                                     type="range"
@@ -198,26 +198,26 @@ export const ImageSizeModal = ({
                                     className="w-full"
                                 />
                                 <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                    <span>1 块极简</span>
-                                    <span>10 块巨型</span>
+                                    <span>1 minimal</span>
+                                    <span>10 giant</span>
                                 </div>
                             </div>
                         )}
 
                         <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
                             <p className="text-sm text-gray-700 flex justify-between">
-                                <span>总宽度 (像素):</span>
-                                <span className="font-semibold text-blue-700">{width} 颗</span>
+                                <span>Total Width (pixels):</span>
+                                <span className="font-semibold text-blue-700">{width} beads</span>
                             </p>
                             <p className="text-sm text-gray-700 flex justify-between mt-1">
-                                <span>总高度 (约估):</span>
-                                <span className="font-semibold text-blue-700">{height} 颗</span>
+                                <span>Total Height (approx):</span>
+                                <span className="font-semibold text-blue-700">{height} beads</span>
                             </p>
                         </div>
 
                         <div className="bg-amber-50 p-3 rounded text-xs text-amber-700 border border-amber-200">
-                            <p className="font-medium mb-1 flex items-center gap-1">✨ 施工网格提示：</p>
-                            <p>我们将依据你选择的板子型号（如每 29 颗），在画布为你画出粗大的切割线，让你无需数错一颗珠子！</p>
+                            <p className="font-medium mb-1 flex items-center gap-1">✨ Grid Guide Tip:</p>
+                            <p>We will draw thick cutting lines on the canvas based on your selected board size (e.g., every 29 beads), so you won't miscount a single bead!</p>
                         </div>
 
                         <div className="flex gap-3 pt-2">
@@ -225,7 +225,7 @@ export const ImageSizeModal = ({
                                 onClick={onClose}
                                 className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-300 rounded-md"
                             >
-                                取消
+                                Cancel
                             </button>
                             <button
                                 onClick={() =>
@@ -234,7 +234,7 @@ export const ImageSizeModal = ({
                                 disabled={!previewGrid}
                                 className="flex-1 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md disabled:opacity-50"
                             >
-                                确认并划线
+                                Confirm & Draw Lines
                             </button>
                         </div>
                     </div>

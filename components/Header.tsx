@@ -24,6 +24,12 @@ export default function Header() {
             labelKey: "allPrintables",
             href: "/printable-connect-the-dots/",
         }, {
+            labelKey: "beadTool",
+            href: "/convert-photo-to-beads/",
+        }, {
+            labelKey: "beadGallery",
+            href: "/convert-photo-to-beads/gallery/",
+        }, {
             labelKey: "pricing",
             href: "/pricing/",
         }, {

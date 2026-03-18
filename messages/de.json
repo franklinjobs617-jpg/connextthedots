@@ -1,11 +1,10 @@
 {
-  
   "metadata": {
     "homeTitle": "Punkt zu Punkt Generator: Zahlenbilder verbinden & Ausdrucken (1-20, 500)",
     "homeDesc": "Erstellen Sie kostenlose Punkt zu Punkt Bilder für Erwachsene & Kinder. Von Zahlenbilder verbinden bis zu schweren Malen nach Zahlen von Punkt zu Punkt Vorlagen."
   },
   "hero": {
-  "badge": "✨ Kostenloser Punkt-zu-Punkt Generator ✨",
+    "badge": "✨ Kostenloser Punkt-zu-Punkt Generator ✨",
     "titleMain": "Bester Punkt-zu-Punkt",
     "titleHighlight": "Generator & Ersteller",
     "subtitle": "Erstellen Sie sofort individuelle Arbeitsblätter für Kinder und Erwachsene. Kostenlos und ohne Wasserzeichen.",
@@ -36,8 +35,8 @@
     "step2Desc": "Wählen Sie Leicht, Mittel oder Schwer. Sie können die Punktzahl manuell anpassen, z.B. für von punkt zu punkt bis 20 oder von punkt zu punkt bis 200.",
     "step3Title": "PDF speichern und von punkt zu punkt zum ausdrucken",
     "step3Desc": "Exportieren Sie Ihr Rätsel als PDF. Ideal für punkt zu punkt zum ausdrucken zu Hause oder in der Schule!"
-  }, 
-   "instantDownloads": {
+  },
+  "instantDownloads": {
     "badge": "Sofortiger Zugriff",
     "titlePrefix": "Schnelldruck: ",
     "titleHighlight": "Kostenlose PDF-Rätsel",
@@ -63,7 +62,7 @@
     "card4Title": "Feiertage, Tiere & weitere Themen",
     "card4Desc": "Feiertage, Tiere & weitere Themen"
   },
-   "aiFeatures": {
+  "aiFeatures": {
     "badge": "Spitzentechnologie",
     "title": "Der weltweit fortschrittlichste KI Punkt-zu-Punkt Generator",
     "description": "Hören Sie auf, nach statischen Vorlagen zu suchen. Unser ai dot to dot generator versteht Ihre Fantasie und erstellt in Sekunden druckbare Rätsel.",
@@ -194,6 +193,8 @@
     "logoAlt": "ConnectTheDots Logo",
     "home": "Startseite",
     "allPrintables": "Alle Vorlagen",
+    "beadTool": "Perlen-Designer",
+    "beadGallery": "Perlen-Galerie",
     "howToMake": "Anleitung",
     "privacy": "Datenschutz",
     "terms": "AGB",
@@ -203,11 +204,10 @@
     "ariaToggle": "Menü umschalten",
     "langName": "DE",
     "login": "Anmelden",
-    "signOut":"Ausloggen",
-"pricing": "Preise"
-
+    "signOut": "Ausloggen",
+    "pricing": "Preise"
   },
-   "footer": {
+  "footer": {
     "description": "Ihre Quelle für hochwertige, kostenlose von punkt zu punkt Vorlagen für Kinder und Erwachsene.",
     "language": "Sprache",
     "colPrintables": "Vorlagen",
@@ -224,11 +224,11 @@
     "rights": "Alle Rechte vorbehalten.",
     "disclaimer": "Alle Vorlagen sind nur für den persönlichen und schulischen Gebrauch bestimmt."
   },
-   "pricing": {
+  "pricing": {
     "heroTitle": "Wählen Sie den perfekten Plan für Ihre Kreativität",
     "heroSubtitle": "Schalten Sie HD-Exporte und unbegrenzte KI-Generierungen mit unseren transparenten Preisen frei.",
-     "title": "Preise - KI Punkt zu Punkt Generator | Erstelle eigene Malvorlagen",
-    "description":"Finden Sie den passenden Plan für Ihren KI-Punkt-zu-Punkt-Generator. Erstellen Sie individuelle Druckvorlagen für Kinder und Erwachsene in HD-Qualität ohne Wasserzeichen.", 
+    "title": "Preise - KI Punkt zu Punkt Generator | Erstelle eigene Malvorlagen",
+    "description": "Finden Sie den passenden Plan für Ihren KI-Punkt-zu-Punkt-Generator. Erstellen Sie individuelle Druckvorlagen für Kinder und Erwachsene in HD-Qualität ohne Wasserzeichen.",
     "badgePopular": "Am beliebtesten",
     "saveNote": "54% Ersparnis gegenüber monatlicher Zahlung",
     "usd": "USD",
@@ -239,7 +239,11 @@
         "price": "4,90 ",
         "unit": "einmalig",
         "button": "Einmalig Credits kaufen",
-        "features": ["50 KI-Generierungs-Credits", "Hochauflösender PDF-Export", "Wasserzeichen entfernen"]
+        "features": [
+          "50 KI-Generierungs-Credits",
+          "Hochauflösender PDF-Export",
+          "Wasserzeichen entfernen"
+        ]
       },
       "monthly": {
         "name": "Monatlicher Schöpfer",
@@ -247,7 +251,12 @@
         "price": "8,90 ",
         "unit": "/Monat",
         "button": "Mitgliedschaft starten",
-        "features": ["200 KI-Credits pro Monat", "HD-PDF & druckfertige Dateien", "Gewerbliche Lizenz", "Priorisierte Credit-Auffüllung"]
+        "features": [
+          "200 KI-Credits pro Monat",
+          "HD-PDF & druckfertige Dateien",
+          "Gewerbliche Lizenz",
+          "Priorisierte Credit-Auffüllung"
+        ]
       },
       "annual": {
         "name": "Jahres-Meister",
@@ -255,7 +264,12 @@
         "price": "49,00 ",
         "unit": "/Jahr",
         "button": "Jährlich Pro gehen",
-        "features": ["Unbegrenzte KI-Generierungen*", "SVG & Vektor-PDF-Export", "Gewerbliche Lizenz", "Alle Premium-Funktionen"]
+        "features": [
+          "Unbegrenzte KI-Generierungen*",
+          "SVG & Vektor-PDF-Export",
+          "Gewerbliche Lizenz",
+          "Alle Premium-Funktionen"
+        ]
       }
     },
     "aiTech": {
@@ -295,5 +309,4 @@
     "tryGenerator": "Generator Ausprobieren",
     "communityFeedback": "Community-Feedback"
   }
-
 }

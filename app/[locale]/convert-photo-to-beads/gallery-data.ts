@@ -1,6 +1,7 @@
 import { GridData } from "./types";
+import { decompressGrid } from "./lib/compress-utils";
 
-// 画廊图纸类型定义
+// 画廊图纸完整结构
 export interface GalleryPattern {
     id: string;
     slug: string;
@@ -13,42 +14,49 @@ export interface GalleryPattern {
     width: number;
     height: number;
     beadCount: number;
-    grid: GridData;
+    grid?: GridData;          // 原始二维数组，按需加载
+    gridString: string;       // 核心：压缩后的像素字符串
+    thumbnail?: string;       // 面向未来的缩略图预览
     createdAt: string;
 }
 
+// 内存级缓存：防止用户在页面间切换时重复请求
+let patternsCache: GalleryPattern[] | null = null;
+
 /**
- * 全自动画廊加载器
- *
- * 使用方式（只需 1 步！）：
- * 1. Editor → Export → 导出画廊 JSON → 把 .json 丢进 /public/gallery/ 目录
- *
- * 系统通过 /api/gallery 自动扫描目录，无需任何手动注册。
+ * 画廊高性能加载器 (带缓存机制)
  */
-export async function loadGalleryPatterns(): Promise<GalleryPattern[]> {
+export async function loadGalleryPatterns(forceRefresh = false): Promise<GalleryPattern[]> {
+    // 1. 如果已有缓存且不强制刷新，直接返回内存数据（实现秒开）
+    if (patternsCache && !forceRefresh) {
+        return patternsCache;
+    }
+
     try {
-        // Step 1: 调 API 获取 /public/gallery/ 下所有 JSON 文件名
-        const indexRes = await fetch("/api/gallery");
-        const fileNames: string[] = await indexRes.json();
+        // 请求 API 获取所有预聚合的摘要数据
+        const res = await fetch("/api/gallery", {
+            cache: 'no-store' // 确保获取的是最新列表
+        });
 
-        if (!fileNames.length) return [];
+        if (!res.ok) return patternsCache || [];
 
-        // Step 2: 并行加载所有 JSON 文件
-        const results = await Promise.all(
-            fileNames.map(async (name) => {
+        const index: GalleryPattern[] = await res.json();
+
+        // 2. 核心解压缩：前端只在需要时解压
+        const result = index.map((item) => {
+            if (!item.grid && item.gridString) {
                 try {
-                    const res = await fetch(`/gallery/${name}.json`);
-                    if (res.ok) return (await res.json()) as GalleryPattern;
-                } catch (e) {
-                    console.warn(`加载画廊图纸失败: ${name}`, e);
-                }
-                return null;
-            })
-        );
+                    item.grid = decompressGrid(item.gridString, item.width, item.height);
+                } catch { }
+            }
+            return item;
+        });
 
-        return results.filter(Boolean) as GalleryPattern[];
+        // 3. 更新缓存
+        patternsCache = result;
+        return result;
     } catch {
-        console.warn("画廊加载失败");
-        return [];
+        console.warn("画廊数据拉取失败");
+        return patternsCache || [];
     }
 }

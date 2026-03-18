@@ -13,10 +13,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Free Perler Bead Patterns | Simple & Printable Patterns Maker`,
     description: `Download hundreds of free perler bead patterns or create custom ones with our pattern maker. Simple and printable designs for all ages.`,
-    keywords: "perler bead patterns, free perler bead patterns, simple perler bead patterns, printable perler bead patterns, 14x14 perler bead patterns",
+    keywords:
+      "perler bead patterns, free perler bead patterns, simple perler bead patterns, printable perler bead patterns, 14x14 perler bead patterns",
     openGraph: {
       title: "Free Perler Bead Patterns & Pattern Maker",
-      description: "Convert photos into custom, printable perler bead patterns instantly.",
+      description:
+        "Convert photos into custom, printable perler bead patterns instantly.",
       type: "website",
     },
   };

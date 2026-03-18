@@ -16,7 +16,7 @@ import { GalleryPattern, loadGalleryPatterns } from "../../gallery-data";
 import { PALETTE } from "../../palette-data";
 import BeadPreviewCanvas from "../../components/BeadPreviewCanvas";
 
-// 难度颜色映射
+// Difficulty color mapping
 const DIFFICULTY_STYLE: Record<string, string> = {
     beginner: "bg-emerald-50 text-emerald-700 border-emerald-200",
     intermediate: "bg-amber-50 text-amber-700 border-amber-200",
@@ -39,9 +39,9 @@ export default function PatternDetailPage() {
         });
     }, [slug]);
 
-    // 颜色统计
+    // Color statistics
     const colorStats = useMemo(() => {
-        if (!pattern) return [];
+        if (!pattern || !pattern.grid) return [];
         const colorMap = new Map(PALETTE.map((p) => [p.id, p]));
         const counts: Record<string, number> = {};
 
@@ -61,7 +61,7 @@ export default function PatternDetailPage() {
             .sort((a: any, b: any) => b.count - a.count) as any[];
     }, [pattern]);
 
-    // 相关图案推荐
+    // Related patterns recommendation
     const relatedPatterns = useMemo(() => {
         if (!pattern) return [];
         return allPatterns
@@ -103,7 +103,7 @@ export default function PatternDetailPage() {
 
     return (
         <div className="min-h-screen bg-slate-50">
-            {/* 面包屑导航 */}
+            {/* Breadcrumb Navigation */}
             <div className="bg-white border-b border-slate-100">
                 <div className="container mx-auto px-6 py-4">
                     <nav className="flex items-center gap-2 text-sm text-slate-400">
@@ -130,15 +130,15 @@ export default function PatternDetailPage() {
 
             <div className="container mx-auto px-6 py-10">
                 <div className="grid lg:grid-cols-5 gap-10">
-                    {/* 左侧：Canvas 预览 (3/5) */}
+                    {/* Left: Canvas Preview (3/5) */}
                     <div className="lg:col-span-3">
-                        {/* 视图切换 */}
+                        {/* View Switcher */}
                         <div className="flex gap-2 mb-4">
                             <button
                                 onClick={() => setViewMode("finished")}
                                 className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${viewMode === "finished"
-                                        ? "bg-indigo-600 text-white"
-                                        : "bg-white text-slate-600 border border-slate-200"
+                                    ? "bg-indigo-600 text-white"
+                                    : "bg-white text-slate-600 border border-slate-200"
                                     }`}
                             >
                                 🎨 Finished View
@@ -146,27 +146,29 @@ export default function PatternDetailPage() {
                             <button
                                 onClick={() => setViewMode("pattern")}
                                 className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${viewMode === "pattern"
-                                        ? "bg-indigo-600 text-white"
-                                        : "bg-white text-slate-600 border border-slate-200"
+                                    ? "bg-indigo-600 text-white"
+                                    : "bg-white text-slate-600 border border-slate-200"
                                     }`}
                             >
                                 📐 Pattern View
                             </button>
                         </div>
 
-                        {/* Canvas 渲染区 */}
+                        {/* Canvas Rendering Area */}
                         <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 md:p-10 flex items-center justify-center min-h-[400px]">
-                            <BeadPreviewCanvas
-                                grid={pattern.grid}
-                                maxWidth={600}
-                                detailed={viewMode === "finished"}
-                            />
+                            {pattern.grid && (
+                                <BeadPreviewCanvas
+                                    grid={pattern.grid}
+                                    maxWidth={600}
+                                    detailed={viewMode === "finished"}
+                                />
+                            )}
                         </div>
                     </div>
 
-                    {/* 右侧：信息面板 (2/5) */}
+                    {/* Right: Info Panel (2/5) */}
                     <div className="lg:col-span-2 space-y-6">
-                        {/* 标题区 */}
+                        {/* Title Area */}
                         <div>
                             <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2">
                                 {pattern.title}
@@ -187,7 +189,7 @@ export default function PatternDetailPage() {
                             </div>
                         </div>
 
-                        {/* 快速信息 */}
+                        {/* Quick Info */}
                         <div className="grid grid-cols-3 gap-3">
                             <div className="bg-white rounded-2xl border border-slate-100 p-4 text-center">
                                 <Grid3X3
@@ -227,10 +229,10 @@ export default function PatternDetailPage() {
                             </div>
                         </div>
 
-                        {/* 操作按钮 */}
+                        {/* Action Buttons */}
                         <div className="space-y-3">
                             <Link
-                                href="/convert-photo-to-beads/editor"
+                                href={`/convert-photo-to-beads/editor?import=${pattern.slug}`}
                                 className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 no-underline"
                             >
                                 <Edit3 size={20} />
@@ -248,7 +250,7 @@ export default function PatternDetailPage() {
                             </div>
                         </div>
 
-                        {/* 材料清单 */}
+                        {/* Material List */}
                         <div className="bg-white rounded-2xl border border-slate-100 p-6">
                             <h3 className="font-bold text-slate-900 text-lg mb-4 flex items-center gap-2">
                                 <Palette size={18} className="text-indigo-500" />
@@ -298,7 +300,7 @@ export default function PatternDetailPage() {
                     </div>
                 </div>
 
-                {/* 相关图案 */}
+                {/* Related Patterns */}
                 {relatedPatterns.length > 0 && (
                     <section className="mt-20">
                         <h2 className="text-2xl font-black text-slate-900 mb-8">
@@ -312,12 +314,14 @@ export default function PatternDetailPage() {
                                     className="group bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-lg transition-all no-underline"
                                 >
                                     <div className="aspect-square bg-slate-50 p-4 flex items-center justify-center">
-                                        <BeadPreviewCanvas
-                                            grid={rp.grid}
-                                            maxWidth={200}
-                                            detailed={false}
-                                            className="group-hover:scale-105 transition-transform"
-                                        />
+                                        {rp.grid && (
+                                            <BeadPreviewCanvas
+                                                grid={rp.grid}
+                                                maxWidth={200}
+                                                detailed={false}
+                                                className="group-hover:scale-105 transition-transform"
+                                            />
+                                        )}
                                     </div>
                                     <div className="p-3 border-t border-slate-50">
                                         <h3 className="font-bold text-sm text-slate-900 truncate group-hover:text-indigo-600 transition-colors">

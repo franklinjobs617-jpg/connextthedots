@@ -7,7 +7,7 @@ import React, {
     useCallback,
     useMemo,
 } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import {
     Pencil,
     Eraser,
@@ -34,6 +34,13 @@ import { PALETTE } from "../palette-data";
 import { Tool, Cell, GridData } from "../types";
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT, CELL_SIZE, PRESETS } from "../constants";
 import { hexToRgb, colorDistance, findClosestColor, floodFill, getDetailedBeadCanvas } from "../utils";
+import { loadGalleryPatterns } from "../gallery-data";
+import {
+    generatePatternImage,
+    generateFinishedEffect,
+    generateMaterialList,
+    generateProfessionalPDF
+} from "../lib/export-utils";
 
 // --- Components ---
 import { ToolButton, IconButton } from "../components/Buttons";
@@ -51,6 +58,8 @@ import { GalleryExportModal } from "../components/GalleryExportModal";
 export default function App() {
     const router = useRouter();
     const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const importSlug = searchParams.get("import");
     const currentLocale = pathname.split("/")[1];
 
     const [grid, setGrid] = useState<GridData>(() =>
@@ -60,6 +69,38 @@ export default function App() {
     );
     const [history, setHistory] = useState<GridData[]>([grid]);
     const [historyIndex, setHistoryIndex] = useState(0);
+
+    // --- Core optimization: Import pattern from gallery ---
+    useEffect(() => {
+        if (!importSlug) return;
+
+        const performImport = async () => {
+            const patterns = await loadGalleryPatterns();
+            const target = patterns.find(p => p.slug === importSlug);
+
+            if (target && target.grid) {
+                console.log("[Editor] Importing pattern:", target.title);
+                setGrid(target.grid);
+                setHistory([target.grid]);
+                setHistoryIndex(0);
+
+                // Auto adjust camera position and zoom
+                setTimeout(() => {
+                    const canvasWidth = target.width * CELL_SIZE;
+                    const canvasHeight = target.height * CELL_SIZE;
+                    const sidebarWidth = window.innerWidth >= 1024 ? 320 : 0;
+                    const viewportWidth = (window.innerWidth - sidebarWidth) * 0.8;
+                    const viewportHeight = (window.innerHeight - 150) * 0.8;
+                    const autoZoom = Math.min(1.0, viewportWidth / canvasWidth, viewportHeight / canvasHeight);
+
+                    setZoom(autoZoom);
+                    setPan({ x: 0, y: 0 });
+                }, 200);
+            }
+        };
+
+        performImport();
+    }, [importSlug]);
 
     const [tool, setTool] = useState<Tool>("pen");
     const [currentColor, setCurrentColor] = useState<string | null>(null);
@@ -78,6 +119,7 @@ export default function App() {
     const [hoverCell, setHoverCell] = useState<{ x: number; y: number } | null>(
         null
     );
+    const [title, setTitle] = useState("My Project");
 
     const [isNewModalOpen, setIsNewModalOpen] = useState(false);
     const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
@@ -90,7 +132,6 @@ export default function App() {
 
     const languages = [
         { code: "en", name: "English" },
-        { code: "zh", name: "中文" },
         { code: "it", name: "Italiano" },
         { code: "pt", name: "Português" },
         { code: "fr", name: "Français" },
@@ -111,7 +152,7 @@ export default function App() {
     const historyRef = useRef(history);
     const historyIndexRef = useRef(historyIndex);
 
-    // 终极性能优化：追踪网格的变动版本号，拒绝 JSON.stringify
+    // Ultimate performance optimization: Track grid version number, avoid JSON.stringify
     const gridVersionRef = useRef(0);
     useEffect(() => {
         gridVersionRef.current += 1;
@@ -133,17 +174,17 @@ export default function App() {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        // 考虑到用户需要方便地放大来对照拼豆，降低切换的阈值门槛。
-        // 当屏幕上的网格显示大于 22px 时（也就是只要放大超过了 1.1 倍的 100% 原尺寸），就立刻平滑切换为精细拼豆模式！
+        // To make it easier for users to zoom in and compare beads, lower the switching threshold.
+        // When the grid display on screen is larger than 22px (i.e., zoomed in more than 1.1x of 100% original size), immediately switch to detailed bead mode!
         const useSimpleRender = (CELL_SIZE * zoom) < 5;
         const colorMap = new Map(PALETTE.map((p) => [p.id, p.color]));
-        // 必须加入 showGrid 控制缓存，因为接下来要在离屏自己画网格了
+        // Must include showGrid in cache control, because we'll draw the grid ourselves on the offscreen canvas
         const cacheKey = `${grid[0].length}x${grid.length}-${gridVersionRef.current}-${showNumbers}-${showGrid}-${useSimpleRender}-${boardSize}`;
 
         const renderCanvas = () => {
-            // 使用离屏缓存
+            // Use offscreen cache
             if (cacheKey !== cacheKeyRef.current) {
-                // 确保离屏 canvas 尺寸正确，如果尺寸改变则重新创建
+                // Ensure offscreen canvas size is correct, recreate if size changes
                 if (
                     !offscreenRef.current ||
                     offscreenRef.current.width !== canvas.width ||
@@ -152,14 +193,14 @@ export default function App() {
                     offscreenRef.current = document.createElement("canvas");
                     offscreenRef.current.width = canvas.width;
                     offscreenRef.current.height = canvas.height;
-                    console.log("重新创建离屏canvas:", canvas.width, "x", canvas.height);
+                    console.log("Recreating offscreen canvas:", canvas.width, "x", canvas.height);
                 }
                 const offCtx = offscreenRef.current.getContext("2d");
                 if (!offCtx) return;
 
                 offCtx.clearRect(0, 0, canvas.width, canvas.height);
 
-                // 绘制拼豆到离屏 Canvas
+                // Draw beads to offscreen Canvas
                 grid.forEach((row, y) => {
                     row.forEach((cell, x) => {
                         if (cell) {
@@ -167,15 +208,15 @@ export default function App() {
                             if (color) {
                                 const cx = x * CELL_SIZE + CELL_SIZE / 2;
                                 const cy = y * CELL_SIZE + CELL_SIZE / 2;
-                                // 大大缩小原始代码中离谱的拼豆间距，原来 CELL_SIZE/2 - 1.5 导致网格四角的
-                                // 真空透白漏光面积高达 45%，这是除了内孔外，颜色会被冲刷泛灰的最大真凶！
+                                // Greatly reduce the bead spacing from the original code. The original CELL_SIZE/2 - 1.5 caused
+                                // the white light leakage area at the four corners of the grid to be as high as 45%, which is the biggest culprit for color washing out!
                                 const outerRadius = CELL_SIZE / 2 - 0.5;
                                 const innerRadius = CELL_SIZE / 4;
 
                                 if (useSimpleRender) {
                                     offCtx.fillStyle = color;
 
-                                    // 对于数量大的实体效果，改回填充方形，保证色彩块百分百无缝接合，杜绝白光杀手
+                                    // For large quantities, use filled squares to ensure 100% seamless color blocks, eliminating white light
                                     offCtx.fillRect(
                                         x * CELL_SIZE,
                                         y * CELL_SIZE,
@@ -183,9 +224,9 @@ export default function App() {
                                         CELL_SIZE
                                     );
 
-                                    // 2. 取消原版的透明大空洞穿刺！
-                                    // 我们不用真实的透明孔洞（缩放会漏大白光），而是画一个深黑色的阴影半透明层，
-                                    // 这完美模拟了孔洞凹陷的厚重颗粒感，同时让颜色对比度暴增，不会发闷。
+                                    // 2. Cancel the original transparent hole!
+                                    // Instead of a real transparent hole (which leaks white light when zoomed), draw a dark semi-transparent shadow layer,
+                                    // which perfectly simulates the heavy grain feel of the hole depression while greatly increasing color contrast.
                                     offCtx.fillStyle = "rgba(0, 0, 0, 0.25)";
                                     offCtx.beginPath();
                                     offCtx.arc(cx, cy, innerRadius, 0, Math.PI * 2);
@@ -199,8 +240,8 @@ export default function App() {
                                         offCtx.fillText(cell, cx, cy);
                                     }
                                 } else {
-                                    // 超级性能优化：将原来每颗豆子包含阴影+渐变+7次绘图路径的极复杂矢量渲染，
-                                    // 变更为查字典式的“印章”绘制。直接抛弃 CPU 结算调用 GPU `drawImage`！性能暴增百倍！
+                                    // Super performance optimization: Change from complex vector rendering with shadows+gradients+7 drawing paths per bead,
+                                    // to dictionary-style “stamp” drawing. Directly use GPU `drawImage` instead of CPU calculation! Performance increased 100x!
                                     const beadPattern = getDetailedBeadCanvas(color, CELL_SIZE);
                                     offCtx.drawImage(beadPattern, cx - (CELL_SIZE + 6) / 2, cy - (CELL_SIZE + 6) / 2);
 
@@ -217,9 +258,9 @@ export default function App() {
                     });
                 });
 
-                // 关键补丁：如果当前是致密像素块渲染（无缝隙）且用户开启了网格（showGrid=true）
-                // 那么 CSS 背景会被完全遮挡，因此我们在这层纯像素底色之上，用微弱黑色补画一层前景网格。
-                // 这还能让成品效果图天然带有每个格子的弱边界线，比原本白色的网格线更提色！
+                // Key patch: If current is dense pixel block rendering (seamless) and user enabled grid (showGrid=true)
+                // then CSS background will be completely blocked, so we draw a weak black foreground grid on top of this pure pixel base.
+                // This also makes the finished effect naturally have weak boundary lines for each cell, better than the original white grid lines!
                 if (showGrid && useSimpleRender) {
                     offCtx.strokeStyle = "rgba(0, 0, 0, 0.15)";
                     offCtx.lineWidth = 1;
@@ -235,14 +276,14 @@ export default function App() {
                     offCtx.stroke();
                 }
 
-                // 革命性进步：物理工程辅助线（切割板子边界）
+                // Revolutionary progress: Physical engineering guide lines (cutting board boundaries)
                 if (showGrid && boardSize > 0) {
                     offCtx.save();
-                    offCtx.strokeStyle = "rgba(239, 68, 68, 0.7)"; // 明亮的红/粉色，区别于常驻图
-                    offCtx.lineWidth = 1.5; // 改细，穿插在豆子缝隙中间，绝对不挡住任何豆子
-                    offCtx.setLineDash([8, 6]); // 虚线，既有引导感，又不破坏图面
+                    offCtx.strokeStyle = "rgba(239, 68, 68, 0.7)"; // Bright red/pink, different from permanent image
+                    offCtx.lineWidth = 1.5; // Thin, inserted between bead gaps, absolutely not blocking any beads
+                    offCtx.setLineDash([8, 6]); // Dashed line, both guiding and not destroying the image
                     offCtx.beginPath();
-                    // 跳过 0，因为边缘不需要画在里面
+                    // Skip 0, because edges don't need to be drawn inside
                     for (let x = CELL_SIZE * boardSize; x < canvas.width; x += CELL_SIZE * boardSize) {
                         offCtx.moveTo(x, 0);
                         offCtx.lineTo(x, canvas.height);
@@ -258,17 +299,17 @@ export default function App() {
                 cacheKeyRef.current = cacheKey;
             }
 
-            // 极致丝滑优化：渲染跳跃门
-            // 如果当前的底图、辅助线没变，当前鼠标悬停的格子没变，
-            // 仅仅是因为用户在“放大缩小”触发了 zoom 进而触发了这里，我们绝对不重绘！
-            // 直接依赖 CSS 的 transform 缩放。这能省去一秒内 120 次庞大的 Canvas 复制。
+            // Ultimate smooth optimization: Render skip gate
+            // If the current base image and guide lines haven't changed, and the current hover cell hasn't changed,
+            // and it's only triggered by user “zoom in/out”, we absolutely don't redraw!
+            // Directly rely on CSS transform scaling. This saves 120 huge Canvas copies per second.
             const currentRenderKey = `${cacheKey}-hover:${hoverCell?.x},${hoverCell?.y}-tool:${tool}`;
             if (lastRenderKeyRef.current === currentRenderKey) {
                 return;
             }
             lastRenderKeyRef.current = currentRenderKey;
 
-            // 清空主 Canvas 并复制离屏 Canvas
+            // Clear main Canvas and copy offscreen Canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if (offscreenRef.current) {
                 ctx.drawImage(offscreenRef.current, 0, 0);
@@ -344,11 +385,13 @@ export default function App() {
     };
 
     const clearGrid = () => {
-        const newGrid = Array(grid.length)
+        const newGrid = Array(DEFAULT_HEIGHT)
             .fill(null)
-            .map(() => Array(grid[0].length).fill(null));
+            .map(() => Array(DEFAULT_WIDTH).fill(null));
         setGrid(newGrid);
         pushHistory(newGrid);
+        setPan({ x: 0, y: 0 });
+        setZoom(1);
     };
 
     const getCellCoordinates = (e: React.PointerEvent<HTMLCanvasElement>) => {
@@ -552,7 +595,7 @@ export default function App() {
             setHistoryIndex(0);
             setPan({ x: 0, y: 0 });
 
-            // 自动缩放到适应可视区域
+            // Auto zoom to fit viewport
             const canvasWidth = width * CELL_SIZE + 24;
             const canvasHeight = height * CELL_SIZE + 24;
             const sidebarWidth = window.innerWidth >= 1024 ? 320 : 0;
@@ -569,7 +612,7 @@ export default function App() {
 
     const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
 
-    const handleExport = (type: "pattern" | "finished" | "material" | "pdf" | "gallery") => {
+    const handleExport = async (type: "pattern" | "finished" | "material" | "pdf" | "gallery") => {
         setIsExportMenuOpen(false);
 
         if (type === "gallery") {
@@ -577,178 +620,29 @@ export default function App() {
             return;
         }
 
-        if (type === "pdf") {
-            window.print();
+        let dataUrl = "";
+        if (type === "pattern") {
+            dataUrl = await generatePatternImage(grid, PALETTE);
+        } else if (type === "finished") {
+            dataUrl = await generateFinishedEffect(grid, PALETTE);
+        } else if (type === "material") {
+            dataUrl = await generateMaterialList(stats);
+        } else if (type === "pdf") {
+            await generateProfessionalPDF(title, grid, stats, PALETTE);
             return;
         }
 
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
-
-        if (type === "material") {
-            canvas.width = 600;
-            canvas.height = Math.max(400, stats.length * 50 + 150);
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Header
-            ctx.fillStyle = "#111827";
-            ctx.font = "bold 28px sans-serif";
-            ctx.fillText("Perler Beads Material List", 40, 60);
-
-            ctx.fillStyle = "#6b7280";
-            ctx.font = "16px sans-serif";
-            ctx.fillText("1 bag ≈ 1000 beads", 40, 90);
-
-            // Table Header
-            ctx.fillStyle = "#9ca3af";
-            ctx.font = "bold 14px sans-serif";
-            ctx.fillText("COLOR", 100, 140);
-            ctx.fillText("CODE", 300, 140);
-            ctx.fillText("COUNT", 400, 140);
-            ctx.fillText("BAGS", 500, 140);
-
-            ctx.strokeStyle = "#e5e7eb";
-            ctx.beginPath();
-            ctx.moveTo(40, 150);
-            ctx.lineTo(560, 150);
-            ctx.stroke();
-
-            stats.forEach((stat, i) => {
-                const y = 180 + i * 50;
-
-                // Color Circle
-                ctx.fillStyle = stat.color;
-                ctx.beginPath();
-                ctx.arc(60, y - 5, 16, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.strokeStyle = "#e5e7eb";
-                ctx.lineWidth = 1;
-                ctx.stroke();
-
-                // Color Name
-                ctx.fillStyle = "#374151";
-                ctx.font = "bold 16px sans-serif";
-                ctx.fillText(stat.name, 100, y);
-
-                // Color Code
-                ctx.fillStyle = "#4b5563";
-                ctx.font = "16px monospace";
-                ctx.fillText(`#${stat.code}`, 300, y);
-
-                // Count
-                ctx.fillStyle = "#111827";
-                ctx.font = "bold 16px sans-serif";
-                ctx.fillText(`${stat.count} pcs`, 400, y);
-
-                // Bags
-                const bags = Math.ceil(stat.count / 1000);
-                ctx.fillStyle = "#2563eb"; // Blue color for bags to highlight purchasing
-                ctx.font = "bold 16px sans-serif";
-                ctx.fillText(`${bags} bag${bags > 1 ? "s" : ""}`, 500, y);
-
-                // Separator line
-                ctx.strokeStyle = "#f3f4f6";
-                ctx.beginPath();
-                ctx.moveTo(40, y + 25);
-                ctx.lineTo(560, y + 25);
-                ctx.stroke();
-            });
-        } else {
-            canvas.width = grid[0].length * CELL_SIZE;
-            canvas.height = grid.length * CELL_SIZE;
-
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            if (type === "pattern") {
-                ctx.strokeStyle = "#e5e7eb";
-                ctx.lineWidth = 1;
-                for (let x = 0; x <= canvas.width; x += CELL_SIZE) {
-                    ctx.beginPath();
-                    ctx.moveTo(x, 0);
-                    ctx.lineTo(x, canvas.height);
-                    ctx.stroke();
-                }
-                for (let y = 0; y <= canvas.height; y += CELL_SIZE) {
-                    ctx.beginPath();
-                    ctx.moveTo(0, y);
-                    ctx.lineTo(canvas.width, y);
-                    ctx.stroke();
-                }
-            }
-
-            grid.forEach((row, y) => {
-                row.forEach((cell, x) => {
-                    if (cell) {
-                        const colorObj = PALETTE.find((p) => p.id === cell);
-                        if (colorObj) {
-                            const cx = x * CELL_SIZE + CELL_SIZE / 2;
-                            const cy = y * CELL_SIZE + CELL_SIZE / 2;
-
-                            if (type === "finished") {
-                                const outerRadius = CELL_SIZE / 2 - 1;
-                                const innerRadius = CELL_SIZE / 4;
-
-                                // Draw the bead body
-                                ctx.fillStyle = colorObj.color;
-                                ctx.beginPath();
-                                ctx.arc(cx, cy, outerRadius, 0, Math.PI * 2);
-                                ctx.arc(cx, cy, innerRadius, 0, Math.PI * 2, true);
-                                ctx.fill();
-
-                                // Highlight
-                                ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
-                                ctx.lineWidth = 1.5;
-                                ctx.beginPath();
-                                ctx.arc(
-                                    cx - 1,
-                                    cy - 1,
-                                    outerRadius - 1.5,
-                                    Math.PI,
-                                    Math.PI * 1.5
-                                );
-                                ctx.stroke();
-
-                                // Shadow
-                                ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
-                                ctx.lineWidth = 1;
-                                ctx.beginPath();
-                                ctx.arc(cx, cy, innerRadius, 0, Math.PI * 0.5);
-                                ctx.stroke();
-                            } else {
-                                ctx.strokeStyle = colorObj.color;
-                                ctx.lineWidth = 3;
-                                ctx.beginPath();
-                                ctx.arc(cx, cy, CELL_SIZE / 2 - 1.5, 0, Math.PI * 2);
-                                ctx.stroke();
-
-                                ctx.fillStyle = "black";
-                                ctx.font = "8px sans-serif";
-                                ctx.textAlign = "center";
-                                ctx.textBaseline = "middle";
-                                ctx.fillText(colorObj.code, cx, cy);
-                            }
-                        }
-                    }
-                });
-            });
+        if (dataUrl) {
+            const link = document.createElement("a");
+            link.download = `beads-${type}.png`;
+            link.href = dataUrl;
+            link.click();
         }
-
-        const link = document.createElement("a");
-        link.download = `beads-${type}.png`;
-        link.href = canvas.toDataURL("image/png");
-        link.click();
     };
 
-    const handleGalleryConfirm = (meta: any) => {
+    const handleGalleryDownload = (meta: any) => {
         setIsGalleryModalOpen(false);
-
-        const beadCount = grid.reduce(
-            (total, row) => total + row.filter((c) => c !== null).length,
-            0
-        );
+        const beadCount = grid.reduce((total, row) => total + row.filter((c) => c !== null).length, 0);
 
         const galleryData = {
             ...meta,
@@ -756,7 +650,7 @@ export default function App() {
             width: grid[0].length,
             height: grid.length,
             beadCount,
-            grid,
+            grid, // 下载版可以保留原始 grid 方便二次编辑
             createdAt: new Date().toISOString().split("T")[0],
         };
 
@@ -767,6 +661,34 @@ export default function App() {
         link.href = URL.createObjectURL(blob);
         link.click();
         URL.revokeObjectURL(link.href);
+    };
+
+    const handleGalleryPublish = async (meta: any) => {
+        try {
+            const beadCount = grid.reduce((total, row) => total + row.filter((c) => c !== null).length, 0);
+
+            const response = await fetch("/api/gallery/upload", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    ...meta,
+                    width: grid[0].length,
+                    height: grid.length,
+                    beadCount,
+                    grid, // 发给后端进行压缩
+                }),
+            });
+
+            if (response.ok) {
+                // 发布成功后，强制刷新内存缓存，确保画廊能看到最新图纸
+                await loadGalleryPatterns(true);
+                return true;
+            }
+            return false;
+        } catch (e) {
+            console.error("Publish error:", e);
+            return false;
+        }
     };
 
     const stats = useMemo(() => {
@@ -788,41 +710,105 @@ export default function App() {
 
     const renderRulerX = useMemo(
         () => (
-            <div className="flex" style={{ marginLeft: "24px" }}>
-                {Array.from({ length: grid[0].length }).map((_, i) => (
-                    <div
-                        key={i}
-                        className="flex-shrink-0 flex items-end justify-center text-[10px] text-gray-400 border-b border-gray-200"
-                        style={{ width: CELL_SIZE, height: "24px" }}
-                    >
-                        {(i + 1) % 5 === 0 || i === 0 || i === grid[0].length - 1
-                            ? i + 1
-                            : ""}
-                    </div>
-                ))}
-            </div>
+            <svg
+                className="bg-[#f8fafc] block"
+                style={{ width: '100%', height: '100%', display: 'block' }}
+                viewBox={`0 0 ${grid[0].length * CELL_SIZE} 28`}
+                preserveAspectRatio="none"
+            >
+                {/* Ruler Bottom Border */}
+                <line x1="0" y1="28" x2={grid[0].length * CELL_SIZE} y2="28" stroke="#cbd5e1" strokeWidth="1" />
+
+                {Array.from({ length: grid[0].length }).map((_, i) => {
+                    const isHovered = hoverCell?.x === i;
+                    const x = (i + 1) * CELL_SIZE;
+                    const isMajor = (i + 1) % 5 === 0 || (i + 1) === 1 || (i + 1) === grid[0].length;
+
+                    return (
+                        <g key={i}>
+                            {/* Highlight background */}
+                            {isHovered && (
+                                <rect x={i * CELL_SIZE} y="0" width={CELL_SIZE} height="28" fill="#ebf2ff" />
+                            )}
+
+                            {/* Tick Marks */}
+                            <line
+                                x1={x} y1="28" x2={x} y2={isMajor ? 16 : 22}
+                                stroke={isMajor ? "#94a3b8" : "#cbd5e1"}
+                                strokeWidth="1"
+                            />
+
+                            {/* Label */}
+                            {isMajor && (
+                                <text
+                                    x={x} y="12"
+                                    textAnchor="middle"
+                                    fontSize="9"
+                                    fontWeight="900"
+                                    fill={isHovered ? "#0284c7" : "#94a3b8"}
+                                    style={{ fontFamily: 'Inter, sans-serif' }}
+                                >
+                                    {i + 1}
+                                </text>
+                            )}
+                        </g>
+                    );
+                })}
+            </svg>
         ),
-        [grid[0].length]
+        [grid[0].length, hoverCell?.x]
     );
 
     const renderRulerY = useMemo(
         () => (
-            <div
-                className="flex flex-col"
-                style={{ width: "24px", marginTop: "24px" }}
+            <svg
+                className="bg-[#f8fafc] block"
+                style={{ width: '100%', height: '100%', display: 'block' }}
+                viewBox={`0 0 28 ${grid.length * CELL_SIZE}`}
+                preserveAspectRatio="none"
             >
-                {Array.from({ length: grid.length }).map((_, i) => (
-                    <div
-                        key={i}
-                        className="flex-shrink-0 flex items-center justify-end pr-1 text-[10px] text-gray-400 border-r border-gray-200"
-                        style={{ height: CELL_SIZE }}
-                    >
-                        {(i + 1) % 5 === 0 || i === 0 || i === grid.length - 1 ? i + 1 : ""}
-                    </div>
-                ))}
-            </div>
+                {/* Ruler Right Border */}
+                <line x1="28" y1="0" x2="28" y2={grid.length * CELL_SIZE} stroke="#cbd5e1" strokeWidth="1" />
+
+                {Array.from({ length: grid.length }).map((_, i) => {
+                    const isHovered = hoverCell?.y === i;
+                    const y = (i + 1) * CELL_SIZE;
+                    const isMajor = (i + 1) % 5 === 0 || (i + 1) === 1 || (i + 1) === grid.length;
+
+                    return (
+                        <g key={i}>
+                            {/* Highlight background */}
+                            {isHovered && (
+                                <rect x="0" y={i * CELL_SIZE} width="28" height={CELL_SIZE} fill="#ebf2ff" />
+                            )}
+
+                            {/* Tick Marks */}
+                            <line
+                                x1="28" y1={y} x2={isMajor ? 16 : 22} y2={y}
+                                stroke={isMajor ? "#94a3b8" : "#cbd5e1"}
+                                strokeWidth="1"
+                            />
+
+                            {/* Label */}
+                            {isMajor && (
+                                <text
+                                    x="12" y={y}
+                                    dominantBaseline="middle"
+                                    textAnchor="middle"
+                                    fontSize="9"
+                                    fontWeight="900"
+                                    fill={isHovered ? "#0284c7" : "#94a3b8"}
+                                    style={{ fontFamily: 'Inter, sans-serif' }}
+                                >
+                                    {i + 1}
+                                </text>
+                            )}
+                        </g>
+                    );
+                })}
+            </svg>
         ),
-        [grid.length]
+        [grid.length, hoverCell?.y]
     );
 
     return (
@@ -900,9 +886,11 @@ export default function App() {
             <GalleryExportModal
                 isOpen={isGalleryModalOpen}
                 onClose={() => setIsGalleryModalOpen(false)}
-                onConfirm={handleGalleryConfirm}
+                onDownload={handleGalleryDownload}
+                onPublish={handleGalleryPublish}
                 width={grid[0].length}
                 height={grid.length}
+                grid={grid}
                 beadCount={grid.reduce((total, row) => total + row.filter(c => c !== null).length, 0)}
             />
         </div>

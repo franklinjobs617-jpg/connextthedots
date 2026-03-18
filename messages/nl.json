@@ -189,6 +189,8 @@
     "logoAlt": "ConnectTheDots Logo",
     "home": "Home",
     "allPrintables": "Gratis Afdrukbare",
+    "beadTool": "Kralenmaker",
+    "beadGallery": "Kralen Galerij",
     "howToMake": "Hoe te Maken",
     "privacy": "Privacy",
     "terms": "Voorwaarden",
@@ -284,7 +286,9 @@
   },
   "metadata": {
     "homeTitle": "Cijfertekening Generator | Gratis Connect the Dots",
-    "homeDesc": "Maak gratis cijfertekening online. Aangepaste connect the dots en punt tot punt tekening voor kinderen/volwassenen—zonder watermerk!"
+    "homeDesc": "Maak gratis cijfertekening online. Aangepaste connect the dots en punt tot punt tekening voor kinderen/volwassenen—zonder watermerk!",
+    "beadsGalleryTitle": "Perler Kralen Patronen Galerij | Gratis en Afdrukbaar",
+    "beadsGalleryDesc": "Blader door honderden gratis, afdrukbare perler kralen patronen. Hoogwaardige ontwerpen voor personages, gaming, dieren en meer."
   },
   "printablePage": {
     "breadcrumbHome": "Home",

@@ -18,6 +18,8 @@ export const Sidebar = ({
     showStats,
     stats
 }: SidebarProps) => {
+    const totalBeads = React.useMemo(() => stats.reduce((acc, s) => acc + s.count, 0), [stats]);
+
     return (
         <aside
             className={`${showPalette ? "fixed" : "hidden"
@@ -37,10 +39,10 @@ export const Sidebar = ({
                 </select>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4">
+            <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar p-4">
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="text-sm font-medium text-gray-500">
-                        调色板 (MARD)
+                        Palette (MARD)
                     </h3>
                     <span className="text-xs text-gray-400">{PALETTE.length}</span>
                 </div>
@@ -70,35 +72,71 @@ export const Sidebar = ({
             </div>
 
             {(showStats || stats.length > 0) && (
-                <div className="h-1/3 border-t border-gray-200 p-4 overflow-y-auto bg-gray-50">
-                    <h3 className="text-sm font-medium text-gray-500 mb-4">
-                        库存 ({stats.length})
-                    </h3>
-                    {stats.length === 0 ? (
-                        <div className="text-center text-sm text-gray-400 mt-10">
-                            Start drawing to generate the list
-                        </div>
-                    ) : (
-                        <div className="space-y-2">
-                            {stats.map((s) => (
+                <div className="flex-1 min-h-0 border-t border-gray-100 bg-slate-50/50 flex flex-col overflow-hidden">
+                    <div className="shrink-0 p-4 border-b border-gray-100 bg-white flex items-center justify-between">
+                        <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                            <span className="w-1.5 h-4 bg-indigo-500 rounded-full"></span>
+                            Inventory ({stats.length})
+                        </h3>
+                        <span className="text-[10px] font-bold text-slate-400">TOTAL: {totalBeads}</span>
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto no-scrollbar p-4 space-y-3">
+                        {stats.length === 0 ? (
+                            <div className="text-center py-10">
+                                <p className="text-sm text-slate-400 italic">Start drawing to see stats</p>
+                            </div>
+                        ) : (
+                            stats.map((s) => (
                                 <div
                                     key={s.id}
-                                    className="flex items-center justify-between text-sm"
+                                    className="group bg-white rounded-xl p-3 border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-200"
                                 >
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flex items-center gap-3">
+                                            <div
+                                                className="w-5 h-5 rounded-full shadow-inner border border-slate-200"
+                                                style={{
+                                                    backgroundColor: s.color,
+                                                    boxShadow: `inset 0 1px 2px rgba(0,0,0,0.1)`
+                                                }}
+                                            ></div>
+                                            <div className="flex flex-col">
+                                                <span className="text-[10px] font-bold text-slate-400">#{s.code}</span>
+                                                <span className="text-sm font-semibold text-slate-700 truncate max-w-[140px] leading-none mt-0.5">
+                                                    {s.name}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <div className="text-sm font-black text-slate-900 leading-none">
+                                                {s.count}
+                                            </div>
+                                            <div className="text-[10px] text-blue-600 font-bold uppercase mt-0.5">
+                                                {Math.ceil(s.count / 1000)} BAGS
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="relative h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
                                         <div
-                                            className="w-4 h-4 rounded-full"
-                                            style={{ backgroundColor: s.color }}
-                                        ></div>
-                                        <span className="text-gray-700">
-                                            #{s.code} {s.name}
+                                            className="h-full rounded-full opacity-80"
+                                            style={{
+                                                width: `${(s.count / totalBeads) * 100}%`,
+                                                backgroundColor: s.color,
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="mt-1 flex justify-between items-center text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
+                                        <span>{((s.count / totalBeads) * 100).toFixed(1)}% Usage</span>
+                                        <span className="opacity-0 group-hover:opacity-100 transition-opacity text-blue-500">
+                                            Click to select
                                         </span>
                                     </div>
-                                    <span className="text-gray-500">{s.count}</span>
                                 </div>
-                            ))}
-                        </div>
-                    )}
+                            ))
+                        )}
+                    </div>
                 </div>
             )}
         </aside>

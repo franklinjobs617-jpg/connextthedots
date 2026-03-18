@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Plus, Upload, Pencil, Eraser, PaintBucket, Replace, Pipette, Hand, Undo, Redo,
-  Grid3X3, Hash, BarChart2, Download, Image as ImageIcon, Sparkles, FileText
+  Grid3X3, Hash, BarChart2, Download, Image as ImageIcon, Sparkles, FileText, Globe, X, ChevronDown
 } from "lucide-react";
 import { ToolButton, IconButton } from "./Buttons";
 
@@ -48,33 +48,38 @@ export const Header = ({
   setIsExportMenuOpen,
   handleExport
 }: HeaderProps) => {
+  const menuRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isExportMenuOpen && menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsExportMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isExportMenuOpen, setIsExportMenuOpen]);
+
+  // Vercel Button Classes
+  const secondaryBtn = "flex items-center gap-2 px-3 py-1.5 bg-white text-zinc-600 border border-zinc-200 rounded-md text-xs font-semibold hover:bg-zinc-50 active:scale-[0.98] transition-all";
+  const primaryBtn = "flex items-center gap-2 px-4 py-2 bg-zinc-950 text-white rounded-md text-xs font-semibold hover:bg-zinc-800 active:scale-[0.98] transition-all shadow-sm";
+  const destructiveBtn = "flex items-center gap-2 px-3 py-1.5 bg-white text-red-500 border border-red-100 rounded-md text-xs font-semibold hover:bg-red-50 active:scale-[0.98] transition-all";
+
   return (
-    <header className="h-14 border-b border-gray-200 bg-white flex items-center justify-between px-2 md:px-4 shrink-0 shadow-sm relative z-50">
-      <div className="flex items-center gap-2 md:gap-4">
-        <button
-          onClick={() => setIsNewModalOpen(true)}
-          className="flex items-center gap-1 px-2 md:px-3 py-1.5 border border-gray-200 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition-all"
-        >
-          <Plus size={16} />
+    <header className="h-14 border-b border-zinc-200 bg-white flex items-center justify-between px-4 shrink-0 relative z-50">
+      <div className="flex items-center gap-2">
+        <button onClick={() => setIsNewModalOpen(true)} className={secondaryBtn}>
+          <Plus size={14} />
           <span className="hidden sm:inline">New</span>
         </button>
-        <input
-          type="file"
-          ref={fileInputRef}
-          className="hidden"
-          accept="image/*"
-          onChange={handleImageUpload}
-        />
-        <button
-          onClick={() => fileInputRef.current?.click()}
-          className="flex items-center gap-1 px-2 md:px-3 py-1.5 border border-gray-200 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition-all"
-        >
-          <Upload size={16} />
+        <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
+        <button onClick={() => fileInputRef.current?.click()} className={secondaryBtn}>
+          <Upload size={14} />
           <span className="hidden sm:inline">Upload</span>
         </button>
       </div>
 
-      <div className="hidden lg:flex items-center gap-1 bg-gray-50 p-1 rounded-lg border border-gray-200">
+      <div className="hidden lg:flex items-center gap-1 bg-zinc-50 p-1 rounded-md border border-zinc-100">
         <ToolButton icon={Pencil} label="Pen" active={tool === "pen"} onClick={() => setTool("pen")} />
         <ToolButton icon={Eraser} label="Eraser" active={tool === "eraser"} onClick={() => setTool("eraser")} />
         <ToolButton icon={PaintBucket} label="Fill" active={tool === "fill"} onClick={() => setTool("fill")} />
@@ -83,97 +88,75 @@ export const Header = ({
         <ToolButton icon={Hand} label="Pan" active={tool === "pan"} onClick={() => setTool("pan")} />
       </div>
 
-      <div className="flex items-center gap-1 md:gap-4">
-        <div className="flex items-center gap-1">
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-0.5">
           <IconButton icon={Undo} onClick={handleUndo} disabled={historyIndex === 0} />
           <IconButton icon={Redo} onClick={handleRedo} disabled={historyIndex === historyLength - 1} />
         </div>
-        <div className="h-6 w-px bg-gray-200 hidden md:block"></div>
-        <div className="flex items-center gap-1 hidden md:flex">
+        <div className="h-4 w-px bg-zinc-200 hidden md:block"></div>
+        <div className="flex items-center gap-0.5 hidden md:flex">
           <IconButton icon={Grid3X3} active={showGrid} onClick={() => setShowGrid(!showGrid)} />
           <IconButton icon={Hash} active={showNumbers} onClick={() => setShowNumbers(!showNumbers)} />
           <IconButton icon={BarChart2} active={showStats} onClick={() => setShowStats(!showStats)} />
         </div>
-        <div className="h-6 w-px bg-gray-200 hidden md:block"></div>
-        <div className="flex items-center gap-1 md:gap-2 relative">
-          <button
-            onClick={clearGrid}
-            className="px-2 md:px-4 py-1.5 text-red-500 border border-red-200 rounded-md text-sm font-medium hover:bg-red-50 active:bg-red-100 active:scale-95 transition-all hidden md:block"
-          >
+        <div className="h-4 w-px bg-zinc-200 hidden md:block"></div>
+
+        <div className="flex items-center gap-2 relative" ref={menuRef}>
+          <button onClick={clearGrid} className={`${destructiveBtn} hidden md:flex`}>
             Clear
           </button>
-          <button
-            onClick={() => setIsExportMenuOpen(!isExportMenuOpen)}
-            className="flex items-center gap-1 px-2 md:px-4 py-1.5 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600 active:bg-blue-700 active:scale-95 transition-all"
-          >
-            <Download size={16} />
-            <span className="hidden sm:inline">Export</span>
+
+          <button onClick={() => handleExport("gallery")} className={primaryBtn}>
+            <Globe size={14} />
+            Publish Pattern
+          </button>
+
+          <button onClick={() => setIsExportMenuOpen(!isExportMenuOpen)} className={secondaryBtn}>
+            <Download size={14} className="text-zinc-400" />
+            Export
           </button>
 
           {isExportMenuOpen && (
-            <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
-              <button
-                onClick={() => handleExport("pattern")}
-                className="w-full px-4 py-3 flex items-start gap-3 hover:bg-gray-50 transition-colors text-left"
-              >
-                <div className="p-2 bg-blue-50 text-blue-500 rounded-lg shrink-0">
-                  <ImageIcon size={18} />
+            <div className="absolute top-full right-0 mt-1 w-56 bg-white rounded-md shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-zinc-100 py-1.5 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+              <button onClick={() => handleExport("pattern")} className="w-full px-3 py-2 flex items-center gap-3 hover:bg-zinc-50 transition-colors text-left group">
+                <div className="w-8 h-8 flex items-center justify-center bg-zinc-50 text-zinc-400 rounded-sm group-hover:text-zinc-900 transition-colors">
+                  <ImageIcon size={16} />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-gray-900">图案图片</div>
-                  <div className="text-xs text-gray-500 mt-0.5">包含网格和色号</div>
+                  <div className="text-[13px] font-medium text-zinc-900">Pattern Image</div>
+                  <div className="text-[10px] text-zinc-400 -mt-0.5">Grid & color codes</div>
                 </div>
               </button>
 
-              <button
-                onClick={() => handleExport("finished")}
-                className="w-full px-4 py-3 flex items-start gap-3 hover:bg-gray-50 transition-colors text-left"
-              >
-                <div className="p-2 bg-emerald-50 text-emerald-500 rounded-lg shrink-0">
-                  <Sparkles size={18} />
+              <button onClick={() => handleExport("finished")} className="w-full px-3 py-2 flex items-center gap-3 hover:bg-zinc-50 transition-colors text-left group">
+                <div className="w-8 h-8 flex items-center justify-center bg-zinc-50 text-zinc-400 rounded-sm group-hover:text-zinc-900 transition-colors">
+                  <Sparkles size={16} />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-gray-900">成品效果图</div>
-                  <div className="text-xs text-gray-500 mt-0.5">模拟熨烫完成后的效果</div>
+                  <div className="text-[13px] font-medium text-zinc-900">Finished Effect</div>
+                  <div className="text-[10px] text-zinc-400 -mt-0.5">Ironed result sim</div>
                 </div>
               </button>
 
-              <button
-                onClick={() => handleExport("material")}
-                className="w-full px-4 py-3 flex items-start gap-3 hover:bg-gray-50 transition-colors text-left"
-              >
-                <div className="p-2 bg-indigo-50 text-indigo-500 rounded-lg shrink-0">
-                  <BarChart2 size={18} />
+              <button onClick={() => handleExport("material")} className="w-full px-3 py-2 flex items-center gap-3 hover:bg-zinc-50 transition-colors text-left group">
+                <div className="w-8 h-8 flex items-center justify-center bg-zinc-50 text-zinc-400 rounded-sm group-hover:text-zinc-900 transition-colors">
+                  <BarChart2 size={16} />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-gray-900">材料清单</div>
-                  <div className="text-xs text-gray-500 mt-0.5">颜色统计和符号</div>
+                  <div className="text-[13px] font-medium text-zinc-900">Material List</div>
+                  <div className="text-[10px] text-zinc-400 -mt-0.5">Stats & symbols</div>
                 </div>
               </button>
 
-              <button
-                onClick={() => handleExport("pdf")}
-                className="w-full px-4 py-3 flex items-start gap-3 hover:bg-gray-50 transition-colors text-left border-t border-gray-100 mt-1 pt-3"
-              >
-                <div className="p-2 bg-gray-100 text-gray-600 rounded-lg shrink-0">
-                  <FileText size={18} />
-                </div>
-                <div>
-                  <div className="text-sm font-medium text-gray-900">导出 PDF</div>
-                  <div className="text-xs text-gray-500 mt-0.5">可打印的小册子</div>
-                </div>
-              </button>
+              <div className="h-px bg-zinc-100 my-1 mx-2" />
 
-              <button
-                onClick={() => handleExport("gallery")}
-                className="w-full px-4 py-3 flex items-start gap-3 hover:bg-purple-50 transition-colors text-left border-t border-gray-100 mt-1 pt-3"
-              >
-                <div className="p-2 bg-purple-50 text-purple-500 rounded-lg shrink-0">
-                  <Download size={18} />
+              <button onClick={() => handleExport("pdf")} className="w-full px-3 py-2 flex items-center gap-3 hover:bg-zinc-50 transition-colors text-left group">
+                <div className="w-8 h-8 flex items-center justify-center bg-zinc-50 text-zinc-400 rounded-sm group-hover:text-zinc-900 transition-colors">
+                  <FileText size={16} />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-gray-900">导出画廊 JSON</div>
-                  <div className="text-xs text-gray-500 mt-0.5">导出 grid 数据用于画廊展示</div>
+                  <div className="text-[13px] font-medium text-zinc-900">Export PDF</div>
+                  <div className="text-[10px] text-zinc-400 -mt-0.5">Printable booklet</div>
                 </div>
               </button>
             </div>

@@ -6,6 +6,11 @@
     "subtitle": "Instantly create custom printable worksheets for kids & adults. No watermarks.",
     "tabUpload": "Upload Photo",
     "tabAi": "AI Generator",
+    "tabBead": "Bead Art",
+    "beadBadge": "NEW",
+    "beadTitle": "Free Perler Bead Patterns & Pattern Maker",
+    "beadDesc": "Convert any photo into a professional Perler Bead pattern instantly.",
+    "beadCta": "Start Designing",
     "uploadCta": "Upload Image to Generate Puzzle",
     "uploadHint": "click or drop (JPG, PNG)",
     "noImageLabel": "No image? Click to Try These:",
@@ -189,6 +194,8 @@
     "logoAlt": "ConnectTheDots Logo",
     "home": "Home",
     "allPrintables": "Free Printables",
+    "beadTool": "Bead Art Maker",
+    "beadGallery": "Pattern Gallery",
     "howToMake": "How to Make",
     "privacy": "Privacy",
     "terms": "Terms",
@@ -284,7 +291,9 @@
   },
   "metadata": {
     "homeTitle": "Free Connect the Dots Generator | Online Dot to Dot Maker",
-    "homeDesc": "Instantly create custom printables with our Free Connect the Dots Generator & Maker. High-quality worksheets for kids/adults—no watermarks, no sign-up needed. Start creating now!  "
+    "homeDesc": "Instantly create custom printables with our Free Connect the Dots Generator & Maker. High-quality worksheets for kids/adults—no watermarks, no sign-up needed. Start creating now!  ",
+    "beadsGalleryTitle": "Perler Bead Pattern Gallery | Free & Printable Designs",
+    "beadsGalleryDesc": "Browse hundreds of free, printable perler bead patterns. High-quality designs for characters, gaming, animals, and more."
   },
   "printablePage": {
     "breadcrumbHome": "Home",

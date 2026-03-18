@@ -33,49 +33,61 @@ export default function LandingClient() {
     return (
         <div className="bg-white min-h-screen">
             {/* Hero Section */}
-            <section className="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden bg-slate-50/50">
+            <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden bg-white">
                 <div className="container mx-auto px-6 relative z-10">
-                    <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-                        <div className="lg:w-1/2 text-left">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold mb-6 tracking-wide">
+                    <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+                        <div className="lg:w-[55%] text-left">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold mb-8 tracking-wide">
                                 <Sparkles size={14} />
                                 <span>{t("hero.badge")}</span>
                             </div>
-                            <h1 className="text-5xl lg:text-7xl font-black text-slate-900 mb-8 tracking-tighter leading-[1.1]">
+                            <h1 className="text-5xl lg:text-7xl font-black text-slate-900 mb-8 tracking-tighter leading-[1.05]">
                                 {t("hero.title")}
                             </h1>
-                            <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
+                            <p className="text-xl text-slate-600 mb-12 leading-relaxed max-w-xl font-medium">
                                 {t("hero.subtitle")}
                             </p>
-                            <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
+
+                            <div className="flex flex-col sm:flex-row items-center gap-6 mb-16">
                                 <Link
                                     href="/convert-photo-to-beads/editor"
-                                    className="w-full sm:w-auto px-10 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all hover:scale-105 shadow-2xl shadow-indigo-200 flex items-center justify-center gap-3 group no-underline"
+                                    className="w-full sm:w-auto px-10 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all hover:scale-105 shadow-xl shadow-indigo-100 flex items-center justify-center gap-3 group no-underline"
                                 >
                                     {t("hero.cta")}
                                     <ChevronRight className="group-hover:translate-x-1 transition-transform" />
                                 </Link>
-                                <div className="text-slate-400 text-sm font-medium">
-                                    {t("hero.hint")}
+                                <div className="flex flex-col">
+                                    <div className="flex items-center gap-2 text-slate-400 text-sm font-bold">
+                                        <CheckCircle2 size={16} className="text-emerald-500" />
+                                        <span>HD Printable PDF</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-slate-400 text-sm font-bold">
+                                        <CheckCircle2 size={16} className="text-emerald-500" />
+                                        <span>No Hidden Fees</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-t border-slate-200">
-                                <span className="flex items-center gap-2 text-slate-400 text-xs font-bold"><CheckCircle2 size={14} className="text-emerald-500" /> Free Online</span>
-                                <span className="flex items-center gap-2 text-slate-400 text-xs font-bold"><CheckCircle2 size={14} className="text-emerald-500" /> 1-Click PDF</span>
-                                <span className="flex items-center gap-2 text-slate-400 text-xs font-bold"><CheckCircle2 size={14} className="text-emerald-500" /> No Sign-up</span>
-                                <span className="flex items-center gap-2 text-slate-400 text-xs font-bold"><CheckCircle2 size={14} className="text-emerald-500" /> 14x14 Grids</span>
+
+                            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-10 border-t border-slate-100">
+                                <span className="flex items-center gap-2 text-slate-400 text-[10px] font-black uppercase tracking-widest leading-none"><CheckCircle2 size={14} className="text-slate-200" /> Free Online</span>
+                                <span className="flex items-center gap-2 text-slate-400 text-[10px] font-black uppercase tracking-widest leading-none"><CheckCircle2 size={14} className="text-slate-200" /> 1-Click Export</span>
+                                <span className="flex items-center gap-2 text-slate-400 text-[10px] font-black uppercase tracking-widest leading-none"><CheckCircle2 size={14} className="text-slate-200" /> No Sign-up</span>
+                                <span className="flex items-center gap-2 text-slate-400 text-[10px] font-black uppercase tracking-widest leading-none"><CheckCircle2 size={14} className="text-slate-200" /> 14x14 Grids</span>
                             </div>
                         </div>
-                        <div className="lg:w-1/2 w-full lg:block">
+
+                        <div className="lg:w-[45%] w-full">
                             <div className="relative group">
-                                {/* Decorative blur backgrounds */}
-                                <div className="absolute -inset-4 bg-indigo-500/10 rounded-[3rem] blur-3xl group-hover:bg-indigo-500/20 transition-all duration-700" />
-                                <div className="relative w-full aspect-square max-w-[560px] mx-auto rounded-[2.5rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(79,70,229,0.15)] border-8 border-white bg-white">
+                                {/* Subtle decorative bg */}
+                                <div className="absolute -inset-4 bg-indigo-500/5 rounded-[3rem] blur-3xl group-hover:bg-indigo-500/10 transition-all duration-700" />
+
+                                <div className="relative w-full aspect-square max-w-[500px] mx-auto rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border-8 border-white bg-white">
                                     <ComparisonSlider />
                                 </div>
-                                {/* Floating Action Hint */}
-                                <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-50 animate-bounce cursor-default select-none hidden md:flex">
-                                    <div className="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center">
+
+                                {/* Simplified Floating Hint */}
+                                <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-50 hidden md:flex">
+                                    <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
                                         <Zap size={18} fill="currentColor" />
                                     </div>
                                     <div className="text-xs">
@@ -90,14 +102,14 @@ export default function LandingClient() {
             </section>
 
             {/* Intro Section - Topic Cluster Authority */}
-            <section className="py-24 border-y border-slate-100 bg-slate-50/30">
-                <div className="container mx-auto px-6 max-w-4xl">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-bold text-slate-900 mb-6">{t("intro.title")}</h2>
-                        <p className="text-lg text-slate-600 leading-loose">
-                            {t("intro.description")}
-                        </p>
-                    </div>
+            <section className="py-24 border-y border-slate-50 bg-slate-50/30">
+                <div className="container mx-auto px-6 max-w-4xl text-center">
+                    <h2 className="text-3xl lg:text-4xl font-black text-slate-900 mb-8 tracking-tight">
+                        {t("intro.title")}
+                    </h2>
+                    <p className="text-lg lg:text-xl text-slate-600 leading-relaxed font-medium">
+                        {t("intro.description")}
+                    </p>
                 </div>
             </section>
 
@@ -108,13 +120,50 @@ export default function LandingClient() {
                         <h2 className="text-4xl font-black text-slate-900 mb-4 tracking-tight leading-tight">{t("categories.title")}</h2>
                         <p className="text-slate-500 font-medium max-w-2xl mx-auto">{t("categories.subtitle")}</p>
                     </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 xl:gap-6 max-w-7xl mx-auto">
-                        <CategoryItem icon={<Gamepad2 />} label={t("categories.items.gaming")} />
-                        <CategoryItem icon={<Layers />} label={t("categories.items.characters")} />
-                        <CategoryItem icon={<Zap className="text-yellow-500" />} label={t("categories.items.heroes")} />
-                        <CategoryItem icon={<Dog />} label={t("categories.items.animals")} />
-                        <CategoryItem icon={<Heart />} label={t("categories.items.seasonal")} />
-                        <CategoryItem icon={<Target className="text-indigo-600" />} label={t("categories.items.styles")} highlighted />
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-6 max-w-7xl mx-auto">
+                        <CategoryItem
+                            icon={<Gamepad2 size={32} />}
+                            label="Gaming"
+                            sublabel="Pokemon, Minecraft, Mario"
+                            color="bg-blue-50 text-blue-600 border-blue-100"
+                            href="/convert-photo-to-beads/gallery?category=gaming"
+                        />
+                        <CategoryItem
+                            icon={<Layers size={32} />}
+                            label="Characters"
+                            sublabel="Stitch, Hello Kitty, Harry Potter"
+                            color="bg-purple-50 text-purple-600 border-purple-100"
+                            href="/convert-photo-to-beads/gallery?category=characters"
+                        />
+                        <CategoryItem
+                            icon={<Zap size={32} className="text-yellow-600" />}
+                            label="Superheroes"
+                            sublabel="Spider Man, Marvel, Avengers"
+                            color="bg-yellow-50 text-yellow-600 border-yellow-100"
+                            href="/convert-photo-to-beads/gallery?search=marvel"
+                        />
+                        <CategoryItem
+                            icon={<Dog size={32} />}
+                            label="Animals"
+                            sublabel="Cats, Dogs, Pandas, Birds"
+                            color="bg-emerald-50 text-emerald-600 border-emerald-100"
+                            href="/convert-photo-to-beads/gallery?category=animals"
+                        />
+                        <CategoryItem
+                            icon={<Heart size={32} />}
+                            label="Holidays"
+                            sublabel="Christmas, Halloween, Easter"
+                            color="bg-red-50 text-red-600 border-red-100"
+                            href="/convert-photo-to-beads/gallery?category=nature"
+                        />
+                        <CategoryItem
+                            icon={<Target size={32} />}
+                            label="14x14 Patterns"
+                            sublabel="Small & Easy for Beginners"
+                            color="bg-indigo-600 text-white border-indigo-700"
+                            href="/convert-photo-to-beads/gallery?search=14x14"
+                            highlighted
+                        />
                     </div>
                 </div>
             </section>
@@ -250,7 +299,7 @@ export default function LandingClient() {
                 <div className="container mx-auto px-6 relative z-10 text-center">
                     <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter leading-tight">
                         Ready to make <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Your Own Patterns?</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Your Own Patterns?</span>
                     </h2>
                     <p className="text-slate-400 text-lg mb-12 max-w-xl mx-auto font-medium">
                         Join 50k+ bead artists using our free perler bead patterns tool today. No registration required.
@@ -460,11 +509,14 @@ function ComparisonSlider() {
 
             {/* Slider Handle */}
             <div
-                className="absolute top-0 bottom-0 z-30 w-1 bg-white shadow-[0_0_40px_rgba(0,0,0,0.4)] flex items-center justify-center active:scale-x-125 transition-transform"
+                className="absolute top-0 bottom-0 z-40 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.3)] flex items-center justify-center"
                 style={{ left: `${sliderPos}%`, transform: 'translateX(-50%)' }}
             >
-                <div className="w-12 h-12 bg-white rounded-2xl shadow-2xl border-[3px] border-indigo-600 flex flex-col items-center justify-center gap-1.5 cursor-grab active:cursor-grabbing hover:scale-110 transition-transform">
-                    <div className="w-1 h-5 bg-indigo-600 rounded-full" />
+                <div className="w-10 h-10 bg-white rounded-full shadow-xl border-4 border-indigo-600 flex items-center justify-center cursor-grab active:cursor-grabbing hover:scale-110 transition-transform">
+                    <div className="flex gap-1">
+                        <div className="w-1 h-3 bg-indigo-600 rounded-full" />
+                        <div className="w-1 h-3 bg-indigo-600 rounded-full" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -482,16 +534,44 @@ function CheckItem({ text }: { text: string }) {
     )
 }
 
-function CategoryItem({ icon, label, highlighted = false }: { icon: React.ReactNode, label: string, highlighted?: boolean }) {
+function CategoryItem({
+    icon,
+    label,
+    sublabel,
+    color,
+    href,
+    highlighted = false
+}: {
+    icon: React.ReactNode,
+    label: string,
+    sublabel?: string,
+    color: string,
+    href: string,
+    highlighted?: boolean
+}) {
     return (
-        <div className={`p-4 xl:p-6 rounded-2xl border transition-all hover:-translate-y-1 cursor-pointer flex flex-col items-center justify-center gap-4 text-center min-h-[160px] ${highlighted ? 'bg-indigo-50 border-indigo-100 ring-2 ring-indigo-500/10' : 'bg-white border-slate-100 hover:border-slate-200 shadow-sm shadow-slate-200/50'}`}>
-            <div className={`text-3xl ${highlighted ? 'text-indigo-600' : 'text-slate-400'}`}>
+        <Link
+            href={href}
+            className={`group p-6 rounded-[2.5rem] border transition-all duration-300 hover:-translate-y-2 flex flex-col items-center justify-center gap-4 text-center min-h-[200px] no-underline shadow-sm ${highlighted
+                ? 'bg-indigo-600 border-indigo-500 shadow-xl shadow-indigo-200 ring-4 ring-indigo-50'
+                : 'bg-white border-slate-100 hover:border-indigo-100 hover:shadow-xl hover:shadow-indigo-50'
+                }`}
+        >
+            <div className={`p-4 rounded-3xl transition-transform group-hover:scale-110 duration-500 flex items-center justify-center ${highlighted ? 'bg-white/10 text-white' : color.split(' ')[0] + ' ' + color.split(' ')[1]
+                }`}>
                 {icon}
             </div>
-            <span className={`text-[13px] xl:text-sm font-bold leading-snug break-words max-w-full italic px-1 ${highlighted ? 'text-indigo-700' : 'text-slate-700'}`}>
-                {label}
-            </span>
-        </div>
+            <div className="space-y-1">
+                <span className={`block text-base font-black tracking-tight ${highlighted ? 'text-white' : 'text-slate-900 group-hover:text-indigo-600'}`}>
+                    {label}
+                </span>
+                {sublabel && (
+                    <span className={`block text-[11px] font-bold uppercase tracking-widest leading-normal ${highlighted ? 'text-indigo-100' : 'text-slate-400 group-hover:text-slate-500'}`}>
+                        {sublabel}
+                    </span>
+                )}
+            </div>
+        </Link>
     )
 }
 

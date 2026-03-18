@@ -1,7 +1,9 @@
 {
   "metadata": {
     "homeTitle": "Générateur de Points à Relier Gratuit | Créer en Ligne",
-    "homeDesc": "Créez des points à relier gratuits en ligne. Générateur de relier les points pour enfants et adultes. Transformez une image en points à relier facilement!"
+    "homeDesc": "Créez des points à relier gratuits en ligne. Générateur de relier les points pour enfants et adultes. Transformez une image en points à relier facilement!",
+    "beadsGalleryTitle": "Galerie de Modèles de Perles Perler | Designs Gratuits et Imprimables",
+    "beadsGalleryDesc": "Parcourez des centaines de modèles de perles perler gratuits et imprimables. Designs de haute qualité pour personnages, jeux, animaux et plus."
   },
   "hero": {
     "badge": "✨ Générateur Gratuit en Ligne ✨",
@@ -178,6 +180,8 @@
     "logoAlt": "Logo ConnectTheDots",
     "home": "Accueil",
     "allPrintables": "Fiches Gratuites",
+    "beadTool": "Créateur de Perles",
+    "beadGallery": "Galerie de Modèles",
     "howToMake": "Comment Créer",
     "privacy": "Confidentialité",
     "terms": "Conditions",

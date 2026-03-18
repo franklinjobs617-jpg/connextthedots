@@ -1,6 +1,6 @@
 {
   "hero": {
-     "badge": "✨ Generador de Unir Puntos Gratis ✨",
+    "badge": "✨ Generador de Unir Puntos Gratis ✨",
     "titleMain": "El Mejor Generador de",
     "titleHighlight": "Unir Puntos para Imprimir",
     "subtitle": "Crea al instante fichas personalizadas de unir puntos para niños y adultos. Sin marcas de agua. Convierte fotos en puzles.",
@@ -32,7 +32,7 @@
     "step3Title": "Descarga e Imprime tu Actividad",
     "step3Desc": "Exporta tu rompecabezas como un PDF o PNG de alta resolución. ¡Listo para imprimir al instante en casa o en la escuela!"
   },
-   "instantDownloads": {
+  "instantDownloads": {
     "badge": "Acceso Inmediato",
     "titlePrefix": "Impresión Rápida: ",
     "titleHighlight": "Puzles en PDF Gratis",
@@ -58,7 +58,7 @@
     "card4Title": "Dibujos Temáticos",
     "card4Desc": "Navidad, animales y más temas"
   },
-   "aiFeatures": {
+  "aiFeatures": {
     "badge": "Tecnología de Vanguardia",
     "title": "El Generador de Unir Puntos con IA más Avanzado",
     "description": "Deja de buscar plantillas estáticas. Nuestro ai dot to dot generator entiende tu imaginación, convirtiendo descripciones en puzzles imprimibles en segundos.",
@@ -184,11 +184,13 @@
     "dotRadius": "Radio Punto",
     "dotColor": "Color Punto"
   },
-   "header": {
+  "header": {
     "logo": "ConnectTheDots",
     "logoAlt": "Logo de Unir Puntos",
     "home": "Inicio",
     "allPrintables": "Todas las Fichas",
+    "beadTool": "Creador de cuentas",
+    "beadGallery": "Galería de Patrones",
     "howToMake": "Cómo Crear",
     "privacy": "Privacidad",
     "terms": "Términos",
@@ -198,10 +200,8 @@
     "ariaToggle": "Abrir menú",
     "langName": "ES",
     "login": "Iniciar Sesión",
-    "signOut":"Cerrar sesión",
-"pricing": "Precios"
-
-
+    "signOut": "Cerrar sesión",
+    "pricing": "Precios"
   },
   "footer": {
     "description": "Tu fuente de dibujos de unir puntos de alta calidad, gratis para niños y adultos.",
@@ -220,11 +220,11 @@
     "rights": "Todos los derechos reservados.",
     "disclaimer": "Los dibujos son solo para uso personal y educativo."
   },
-   "pricing": {
-  "heroTitle": "Elige el Plan Perfecto para tu Creatividad",
+  "pricing": {
+    "heroTitle": "Elige el Plan Perfecto para tu Creatividad",
     "heroSubtitle": "Desbloquea exportaciones en alta definición y generaciones ilimitadas con IA.",
-     "title": "Precios - Generador de Unir Puntos con IA | Crea Fichas Personalizadas",
-    "description":"Elige el plan ideal para crear fichas de unir puntos personalizadas con IA. Exportaciones en alta resolución para niños y adultos. ¡Empieza ahora y descarga sin marcas de agua!", 
+    "title": "Precios - Generador de Unir Puntos con IA | Crea Fichas Personalizadas",
+    "description": "Elige el plan ideal para crear fichas de unir puntos personalizadas con IA. Exportaciones en alta resolución para niños y adultos. ¡Empieza ahora y descarga sin marcas de agua!",
     "badgePopular": "Más Popular",
     "saveNote": "Ahorra un 54% comparado con el mensual",
     "usd": "USD",
@@ -235,7 +235,11 @@
         "price": "4.90",
         "unit": "una vez",
         "button": "Comprar Créditos Una Vez",
-        "features": ["50 Créditos de Generación IA", "Exportación PDF en Alta Resolución", "Eliminar Marcas de Agua"]
+        "features": [
+          "50 Créditos de Generación IA",
+          "Exportación PDF en Alta Resolución",
+          "Eliminar Marcas de Agua"
+        ]
       },
       "monthly": {
         "name": "Creador Mensual",
@@ -243,7 +247,12 @@
         "price": "8.90",
         "unit": "/mes",
         "button": "Iniciar Suscripción",
-        "features": ["200 Créditos IA al mes", "Archivos HD PDF listos para imprimir", "Licencia Comercial", "Recarga de Créditos Prioritaria"]
+        "features": [
+          "200 Créditos IA al mes",
+          "Archivos HD PDF listos para imprimir",
+          "Licencia Comercial",
+          "Recarga de Créditos Prioritaria"
+        ]
       },
       "annual": {
         "name": "Maestro Anual",
@@ -251,7 +260,12 @@
         "price": "49.00",
         "unit": "/año",
         "button": "Hacerse Pro Anual",
-        "features": ["Generaciones IA Ilimitadas*", "Exportación SVG y PDF Vectorial", "Licencia Comercial", "Todas las Funciones Premium"]
+        "features": [
+          "Generaciones IA Ilimitadas*",
+          "Exportación SVG y PDF Vectorial",
+          "Licencia Comercial",
+          "Todas las Funciones Premium"
+        ]
       }
     },
     "aiTech": {
@@ -272,7 +286,9 @@
   },
   "metadata": {
     "homeTitle": "Dibujos de Unir Puntos para Imprimir Gratis | Generador de Fichas",
-    "homeDesc": "Crea y descarga dibujos de unir puntos para imprimir gratis. El mejor generador automático de fichas, ejercicios de unir puntos y actividades para niños del 1 al 20 y 1 al 100."
+    "homeDesc": "Crea y descarga dibujos de unir puntos para imprimir gratis. El mejor generador automático de fichas, ejercicios de unir puntos y actividades para niños del 1 al 20 y 1 al 100.",
+    "beadsGalleryTitle": "Galería de Patrones de Cuentas Perler | Diseños Gratuitos e Imprimibles",
+    "beadsGalleryDesc": "Explora cientos de patrones de cuentas perler gratuitos e imprimibles. Diseños de alta calidad para personajes, juegos, animales y más."
   },
   "printablePage": {
     "breadcrumbHome": "Inicio",
@@ -294,6 +310,71 @@
     "createCustom": "Crea tus propios dibujos de unir puntos para imprimir usando nuestro generador fácil de usar.",
     "tryGenerator": "Probar Generador Personalizado",
     "communityFeedback": "Feedback de la Comunidad"
+  },
+  "beadsLanding": {
+    "hero": {
+      "badge": "✨ 2026 TOP RATED TOOL ✨",
+      "title": "Free Perler Bead Patterns & Pattern Maker",
+      "subtitle": "Discover thousands of free perler bead patterns or create your own. Specialized in simple perler bead patterns for beginners and high-quality printable perler bead patterns.",
+      "cta": "Start Creating Patterns",
+      "hint": "Free Perler Bead Patterns • HD Printable PDF • No Fees",
+      "brandCompat": "Official Palette Support"
+    },
+    "magic": {
+      "badge": "Smart Converter",
+      "title": "Perler Bead Patterns, Like Magic.",
+      "description": "Transform any photo into a custom grid. Our tool is optimized for creating free perler bead patterns with perfect color accuracy instantly.",
+      "f1": "Lab Color Space Matching",
+      "f2": "Adjustable Dithering",
+      "f3": "Custom Size Controls"
+    },
+    "intro": {
+      "title": "The Best Source for Free Perler Bead Patterns",
+      "description": "Looking for perler bead patterns that are actually easy to follow? We provide a massive library of simple perler bead patterns and an AI tool to turn your images into printable perler bead patterns. From home decor to pixel art, generate the perfect patterns for your next project."
+    },
+    "categories": {
+      "title": "Popular Pattern Themes",
+      "subtitle": "Discover free patterns in our most searched categories. Each category is optimized for easy beading and perfect results.",
+      "items": {
+        "gaming": "Pokemon, Minecraft, Mario",
+        "characters": "Stitch, Hello Kitty, Harry Potter",
+        "heroes": "Spider Man, Marvel, Avengers",
+        "animals": "Perler Bead Cat & Dog",
+        "seasonal": "Christmas, Halloween, Easter",
+        "styles": "3D, 14x14, Kawaii Pixel Art"
+      }
+    },
+    "features": {
+      "title": "Professional-Grade Features",
+      "f1Title": "Instant Image Conversion",
+      "f1Desc": "Advanced algorithms map your photos to the nearest fuse bead colors using CIELAB color space for maximum accuracy.",
+      "f2Title": "Real-time Bead Inventory",
+      "f2Desc": "Automatically counts every bead required. Get a detailed shopping list with brand-specific color codes (Perler, Artkal, Hama).",
+      "f3Title": "Printable PDF with Symbols",
+      "f3Desc": "Export high-resolution patterns featuring numbered guides and symbol maps, perfect for clear, physical reference."
+    },
+    "howTo": {
+      "title": "How to Use the Photo to Bead Pattern Converter",
+      "step1": "Upload your photo or select an AI-generated image.",
+      "step2": "Adjust canvas size (e.g., standard 29x29 or mini 14x14 grids).",
+      "step3": "Choose your palette (Perler, Hama, or Artkal) and adjust colors.",
+      "step4": "Export your shopping list and printable PDF guide."
+    },
+    "expertTips": {
+      "title": "Expert Tips for Perfect Bead Art",
+      "tip1": "For the best results, use high-contrast images with simple backgrounds.",
+      "tip2": "Always check the 'Dithering' option for photos to create smooth gradients.",
+      "tip3": "Standard pegboards are 29x29. For quick projects, try our 14x14 simple patterns.",
+      "tip4": "Don't forget to use the 'Ironing Paper' and medium heat for even melting."
+    },
+    "faq": {
+      "title": "Pattern Maker FAQ",
+      "q1": "Is this Perler bead pattern maker really free?",
+      "a1": "Yes! We provide all core features—conversion, counting, and PDF exporting—completely free for the community.",
+      "q2": "What brands of beads are supported?",
+      "a2": "Our tool includes accurate color tables for Perler, Artkal (S and R series), and Hama fuse beads.",
+      "q3": "Can I save the pattern as a PDF?",
+      "a3": "Absolutely. You can export a printable PDF that includes the grid, the pattern, and the full color material list."
+    }
   }
-
 }

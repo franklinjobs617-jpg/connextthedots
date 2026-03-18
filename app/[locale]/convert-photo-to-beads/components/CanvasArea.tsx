@@ -51,29 +51,40 @@ export const CanvasArea = ({
             <div
                 className="absolute top-1/2 left-1/2 origin-center"
                 style={{
-                    transform: `translate(calc(-50% + ${pan.x}px), calc(-50% + ${pan.y}px)) scale(${zoom})`,
-                    willChange: "transform",
+                    transform: `translate(calc(-50% + ${pan.x}px), calc(-50% + ${pan.y}px))`,
                 }}
             >
                 <div
-                    className="relative bg-white shadow-sm border border-gray-200"
+                    className="relative bg-white shadow-lg border border-slate-200"
                     style={{
-                        width: grid[0].length * CELL_SIZE + 24,
-                        height: grid.length * CELL_SIZE + 24,
+                        width: (grid[0].length * CELL_SIZE) * zoom + 28,
+                        height: (grid.length * CELL_SIZE) * zoom + 28,
                     }}
                     onPointerDown={handleWrapperPointerDown}
                 >
-                    <div className="absolute top-0 left-0 w-full h-6 bg-gray-50 flex pointer-events-none">
-                        <div className="w-6 h-6 border-r border-b border-gray-200 bg-gray-50"></div>
-                        {renderRulerX}
+                    {/* Header Ruler Container */}
+                    <div className="absolute top-0 left-0 w-full h-[28px] bg-[#f8fafc] flex pointer-events-none z-10 border-b border-slate-200">
+                        <div className="w-[28px] h-[28px] border-r border-slate-200 bg-[#ebf2ff] flex-shrink-0 flex items-center justify-center relative">
+                            <div className="w-[1px] h-3 bg-slate-400 rotate-45" />
+                            <div className="absolute right-0 bottom-0 w-[1px] h-3 bg-slate-400 translate-x-1/2" />
+                            <div className="absolute right-0 bottom-0 h-[1px] w-3 bg-slate-400 translate-y-1/2" />
+                        </div>
+                        {/* Direct SVG sizing for pixel-perfect alignment and vector sharpness */}
+                        <div className="flex-1 overflow-hidden" style={{ width: (grid[0].length * CELL_SIZE) * zoom, height: 28 }}>
+                            {renderRulerX}
+                        </div>
                     </div>
-                    <div className="absolute top-0 left-0 w-6 h-full bg-gray-50 flex flex-col pt-6 pointer-events-none">
-                        {renderRulerY}
+
+                    {/* Side Ruler Container */}
+                    <div className="absolute top-0 left-0 w-[28px] h-full bg-[#f8fafc] flex flex-col pt-[28px] pointer-events-none border-r border-slate-200 z-10">
+                        <div className="flex-1 overflow-hidden" style={{ width: 28, height: (grid.length * CELL_SIZE) * zoom }}>
+                            {renderRulerY}
+                        </div>
                     </div>
 
                     <canvas
                         ref={canvasRef}
-                        className={`absolute top-6 left-6 touch-none ${tool === "pan"
+                        className={`absolute touch-none ${tool === "pan"
                             ? isPanning
                                 ? "cursor-grabbing"
                                 : "cursor-grab"
@@ -84,15 +95,22 @@ export const CanvasArea = ({
                         width={grid[0].length * CELL_SIZE}
                         height={grid.length * CELL_SIZE}
                         style={{
-                            width: grid[0].length * CELL_SIZE,
-                            height: grid.length * CELL_SIZE,
+                            top: 28,
+                            left: 28,
+                            width: (grid[0].length * CELL_SIZE) * zoom,
+                            height: (grid.length * CELL_SIZE) * zoom,
                             backgroundImage: showGrid
                                 ? `
-                linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-                linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
+                linear-gradient(to right, #cbd5e1 1px, transparent 1px),
+                linear-gradient(to bottom, #cbd5e1 1px, transparent 1px),
+                linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
               `
                                 : "none",
-                            backgroundSize: `${CELL_SIZE}px ${CELL_SIZE}px`,
+                            backgroundSize: `${CELL_SIZE * zoom * 5}px ${CELL_SIZE * zoom * 5}px, 
+                                            ${CELL_SIZE * zoom * 5}px ${CELL_SIZE * zoom * 5}px,
+                                            ${CELL_SIZE * zoom}px ${CELL_SIZE * zoom}px,
+                                            ${CELL_SIZE * zoom}px ${CELL_SIZE * zoom}px`,
                         }}
                         onPointerDown={handleCanvasPointerDown}
                         onPointerMove={handleCanvasPointerMove}

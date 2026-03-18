@@ -1,5 +1,5 @@
 {
- "hero": {
+  "hero": {
     "badge": "✨ Generatore Gratuito ✨",
     "titleMain": "Gioco Unisci i Puntini",
     "titleHighlight": "Online Gratis",
@@ -21,7 +21,7 @@
     "outOfCreditsDesc": "Ottieni **più crediti AI** e scarica PDF **senza filigrana**",
     "btnUpgrade": "Aggiorna Piano",
     "btnFreeLibrary": "Libreria Gratuita"
-},
+  },
   "howToGuide": {
     "title": "Crea i Tuoi Puzzle Stampabili in 3 Passaggi",
     "subtitle": "Trasforma qualsiasi foto o disegno in un foglio di lavoro professionale in 3 semplici passaggi.",
@@ -189,6 +189,8 @@
     "logoAlt": "Logo ConnectTheDots",
     "home": "Home",
     "allPrintables": "Stampabili Gratuiti",
+    "beadTool": "Creatore di Perline",
+    "beadGallery": "Galleria Modelli",
     "howToMake": "Come Creare",
     "privacy": "Privacy",
     "terms": "Termini",
@@ -284,7 +286,9 @@
   },
   "metadata": {
     "homeTitle": "Generatore Unisci i Puntini Gratuito | Creare Unisci i Puntini Online",
-    "homeDesc": "Crea unisci i puntini online con il nostro generatore gratuito. Giochi di unisci i puntini personalizzato per bambini/adulti—senza filigrana. Unisco i puntini facilmente!"
+    "homeDesc": "Crea unisci i puntini online con il nostro generatore gratuito. Giochi di unisci i puntini personalizzato per bambini/adulti—senza filigrana. Unisco i puntini facilmente!",
+    "beadsGalleryTitle": "Galleria di Schemi di Perline Perler | Disegni Gratuiti e Stampabili",
+    "beadsGalleryDesc": "Sfoglia centinaia di schemi di perline perler gratuiti e stampabili. Disegni di alta qualità per personaggi, giochi, animali e altro."
   },
   "printablePage": {
     "breadcrumbHome": "Home",
