@@ -11,11 +11,14 @@ import { Link } from "@/i18n/routing";
 import { useAuth } from "@/lib/auth-context";
 import { getAllPrintables, PrintableItem } from "@/lib/printables-data";
 import { jsPDF } from "jspdf";
+import { loadGalleryPatterns, GalleryPattern } from "@/app/[locale]/convert-photo-to-beads/gallery-data";
+import BeadPreviewCanvas from "@/app/[locale]/convert-photo-to-beads/components/BeadPreviewCanvas";
 
 export default function HomeContent() {
     const { user, login, isLoggingIn } = useAuth();
     const locale = useLocale();
     const [activeTab, setActiveTab] = useState("upload")
+    const [beadPatterns, setBeadPatterns] = useState<GalleryPattern[]>([]);
     const tHero = useTranslations("hero");
     const tHowToGuide = useTranslations("howToGuide");
     const tCategories = useTranslations("categories");
@@ -26,6 +29,7 @@ export default function HomeContent() {
     const tFaq = useTranslations("faq");
     const tContact = useTranslations("contact");
     const tAiFeatures = useTranslations("aiFeatures");
+    const tBeadFeatures = useTranslations("beadFeatures");
     const tInstant = useTranslations("instantDownloads");
     // NOTE: These namespaces were not in your provided JSON, 
     // but are required for the "Custom Generator" section and "Editor" view found in the HTML.
@@ -103,6 +107,13 @@ export default function HomeContent() {
     useEffect(() => {
         setRandomPuzzles(getRandomPuzzles());
         console.log(randomPuzzles)
+    }, []);
+
+    // 加载拼豆图案
+    useEffect(() => {
+        loadGalleryPatterns().then((patterns) => {
+            setBeadPatterns(patterns.slice(0, 4));
+        });
     }, []);
 
     // 5. 处理“换一批”点击
@@ -724,6 +735,80 @@ export default function HomeContent() {
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Bead Features Section */}
+                <section className="py-24 bg-gradient-to-br from-pink-50 via-white to-purple-50 relative overflow-hidden">
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-pink-50/50 blur-[100px] rounded-full pointer-events-none"></div>
+                    <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-50/50 blur-[100px] rounded-full pointer-events-none"></div>
+
+                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                        <div className="text-center mb-12">
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-100 text-pink-600 text-xs font-bold uppercase tracking-wider mb-6">
+                                <Sparkles className="w-3.5 h-3.5 fill-current" />
+                                {tBeadFeatures("badge")}
+                            </div>
+                            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight tracking-tight">
+                                {tBeadFeatures("title")}
+                            </h2>
+                            <p className="text-lg text-slate-500 mb-10 leading-relaxed max-w-2xl mx-auto">
+                                {tBeadFeatures("description")}
+                            </p>
+                        </div>
+
+                        {/* Pattern Gallery Preview */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                            {beadPatterns.map((pattern, i) => (
+                                <Link key={i} href={`/convert-photo-to-beads/gallery/${pattern.slug}`} className="group relative aspect-square rounded-2xl overflow-hidden bg-white border-2 border-slate-100 hover:border-pink-300 transition-all hover:shadow-lg">
+                                    {pattern.grid && (
+                                        <BeadPreviewCanvas
+                                            grid={pattern.grid}
+                                            maxWidth={300}
+                                            detailed={false}
+                                            className="w-full h-full"
+                                        />
+                                    )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <div className="absolute bottom-3 left-3 text-white font-bold text-sm">{pattern.title}</div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                            <div className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                                <div className="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center text-pink-600 mb-4">
+                                    <ImageIcon className="w-5 h-5" />
+                                </div>
+                                <h4 className="font-bold text-lg text-slate-800 mb-2">{tBeadFeatures("f1Title")}</h4>
+                                <p className="text-sm text-slate-500 leading-relaxed">{tBeadFeatures("f1Desc")}</p>
+                            </div>
+                            <div className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                                <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 mb-4">
+                                    <Grid3X3 className="w-5 h-5" />
+                                </div>
+                                <h4 className="font-bold text-lg text-slate-800 mb-2">{tBeadFeatures("f2Title")}</h4>
+                                <p className="text-sm text-slate-500 leading-relaxed">{tBeadFeatures("f2Desc")}</p>
+                            </div>
+                            <div className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                                <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-4">
+                                    <Download className="w-5 h-5" />
+                                </div>
+                                <h4 className="font-bold text-lg text-slate-800 mb-2">{tBeadFeatures("f3Title")}</h4>
+                                <p className="text-sm text-slate-500 leading-relaxed">{tBeadFeatures("f3Desc")}</p>
+                            </div>
+                        </div>
+
+                        <div className="flex justify-center">
+                            <Link
+                                href="/convert-photo-to-beads"
+                                className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-2xl hover:from-pink-600 hover:to-purple-700 transition-all active:scale-95 shadow-lg shadow-purple-200"
+                            >
+                                {tBeadFeatures("cta")}
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </Link>
                         </div>
                     </div>
                 </section>
