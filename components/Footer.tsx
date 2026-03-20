@@ -61,6 +61,8 @@ export default function Footer() {
                             <li><Link href="/printable-connect-the-dots/" className="hover:text-white transition">{t("allPrintables")}</Link></li>
                             <li><Link href="/how-to-make/" className="hover:text-white transition">{t("howToMake")}</Link></li>
                             <li><Link href="/christmas-printables/" className="hover:text-white transition">{t("christmas")}</Link></li>
+                            <li><Link href="/convert-photo-to-beads/" className="hover:text-white transition">{t("beadTool")}</Link></li>
+                            <li><Link href="/convert-photo-to-beads/gallery/" className="hover:text-white transition">{t("beadGallery")}</Link></li>
                         </ul>
                     </div>
 
