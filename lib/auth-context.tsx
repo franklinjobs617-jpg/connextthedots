@@ -68,7 +68,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 const data = await res.json();
                 const dbUser = data.user;
 
-                // 对比数据，仅在有变化时更新 (避免无限重渲染)
                 setUser(prev => {
                     if (JSON.stringify(prev) !== JSON.stringify(dbUser)) {
                         console.log("User data refreshed from DB/API");
@@ -91,7 +90,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
     }, [fetchLatestUser]);
 
-    // --- 4. 辅助：仅从 LocalStorage 读取数据 (响应本地扣费事件) ---
     const reloadFromLocalStorage = useCallback(() => {
         const savedUser = localStorage.getItem("app_user");
         if (savedUser) {
