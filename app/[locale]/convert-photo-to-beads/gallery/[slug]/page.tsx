@@ -11,16 +11,36 @@ import {
     Download,
     Printer,
     ChevronRight,
+    Loader2
 } from "lucide-react";
 import { GalleryPattern, loadGalleryPatterns } from "../../gallery-data";
 import { PALETTE } from "../../palette-data";
 import BeadPreviewCanvas from "../../components/BeadPreviewCanvas";
+import { generateProfessionalPDF } from "../../lib/export-utils";
 
 // Difficulty color mapping
 const DIFFICULTY_STYLE: Record<string, string> = {
     beginner: "bg-emerald-50 text-emerald-700 border-emerald-200",
     intermediate: "bg-amber-50 text-amber-700 border-amber-200",
     advanced: "bg-red-50 text-red-700 border-red-200",
+};
+
+
+const downloadBeads = async (pattern: GalleryPattern, stats: any[]) => {
+    try {
+        if (!pattern.grid) {
+            alert("Pattern data is not fully loaded. Please try again.");
+            return;
+        }
+        await generateProfessionalPDF(pattern.title, pattern.grid, stats, PALETTE);
+    } catch (error) {
+        console.error("Download error:", error);
+        alert("Failed to generate PDF. Please try again.");
+    }
+};
+
+const printBeads = () => {
+    window.print();
 };
 
 export default function PatternDetailPage() {
@@ -30,6 +50,7 @@ export default function PatternDetailPage() {
     const [pattern, setPattern] = useState<GalleryPattern | null>(null);
     const [allPatterns, setAllPatterns] = useState<GalleryPattern[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isDownloading, setIsDownloading] = useState(false);
 
     useEffect(() => {
         loadGalleryPatterns().then((data) => {
@@ -239,11 +260,33 @@ export default function PatternDetailPage() {
                                 Open in Editor
                             </Link>
                             <div className="grid grid-cols-2 gap-3">
-                                <button className="flex items-center justify-center gap-2 px-4 py-3 bg-white border border-slate-200 rounded-xl font-bold text-sm text-slate-700 hover:border-indigo-200 transition-all">
-                                    <Download size={16} />
-                                    Download
+                                <button 
+                                    className="flex items-center justify-center gap-2 px-4 py-3 bg-white border border-slate-200 rounded-xl font-bold text-sm text-slate-700 hover:border-indigo-200 transition-all"
+                                    onClick={async () => {
+                                        if (pattern && !isDownloading && pattern.grid) {
+                                            setIsDownloading(true);
+                                            await downloadBeads(pattern, colorStats);
+                                            setIsDownloading(false);
+                                        }
+                                    }}
+                                    disabled={isDownloading || !pattern?.grid}
+                                >
+                                    {isDownloading ? (
+                                        <>
+                                            <Loader2 size={16} className="animate-spin" />
+                                            Generating...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Download size={16} />
+                                            Download
+                                        </>
+                                    )}
                                 </button>
-                                <button className="flex items-center justify-center gap-2 px-4 py-3 bg-white border border-slate-200 rounded-xl font-bold text-sm text-slate-700 hover:border-indigo-200 transition-all">
+                                <button 
+                                    className="flex items-center justify-center gap-2 px-4 py-3 bg-white border border-slate-200 rounded-xl font-bold text-sm text-slate-700 hover:border-indigo-200 transition-all"
+                                    onClick={printBeads}
+                                >
                                     <Printer size={16} />
                                     Print
                                 </button>
