@@ -314,5 +314,71 @@
     "createCustom": "Créez vos propres dessins à imprimer avec notre générateur facile à utiliser.",
     "tryGenerator": "Essayer le Générateur Personnalisé",
     "communityFeedback": "Retours de la Communauté"
+  },
+  "beadsLanding": {
+    "hero": {
+      "badge": "✨ OUTIL TOP 2026 ✨",
+      "title": "Modèles Gratuits de Perles Perler et Créateur de Motifs",
+      "subtitle": "Découvrez des milliers de modèles gratuits de perles perler ou créez les vôtres. Spécialisé en modèles simples pour débutants et modèles imprimables de haute qualité.",
+      "cta": "Commencer à Créer des Modèles",
+      "hint": "Modèles Gratuits de Perles Perler • PDF Imprimable HD • Sans Frais",
+      "brandCompat": "Support Officiel de Palettes"
+    },
+    "magic": {
+      "badge": "Convertisseur Intelligent",
+      "title": "Modèles de Perles Perler, Comme par Magie.",
+      "description": "Transformez n'importe quelle photo en une grille personnalisée. Notre outil est optimisé pour créer des modèles gratuits de perles perler avec une précision de couleur parfaite instantanément.",
+      "f1": "Correspondance d'Espace de Couleur Lab",
+      "f2": "Dithering Ajustable",
+      "f3": "Contrôles de Taille Personnalisés"
+    },
+    "intro": {
+      "title": "La Meilleure Source de Modèles Gratuits de Perles Perler",
+      "description": "Cherchez-vous des modèles de perles perler vraiment faciles à suivre ? Nous offrons une vaste bibliothèque de modèles simples et un outil IA pour transformer vos images en modèles imprimables. Du décor maison à l'art pixel, générez les modèles parfaits pour votre prochain projet."
+    },
+    "categories": {
+      "title": "Thèmes de Modèles Populaires",
+      "subtitle": "Découvrez des modèles gratuits dans nos catégories les plus recherchées. Chaque catégorie est optimisée pour un perlage facile et des résultats parfaits.",
+      "items": {
+        "gaming": "Pokemon, Minecraft, Mario",
+        "characters": "Stitch, Hello Kitty, Harry Potter",
+        "heroes": "Spider Man, Marvel, Avengers",
+        "animals": "Chat et Chien en Perles Perler",
+        "seasonal": "Noël, Halloween, Pâques",
+        "styles": "3D, 14x14, Art Pixel Kawaii"
+      }
+    },
+    "features": {
+      "title": "Fonctionnalités de Niveau Professionnel",
+      "f1Title": "Conversion Instantanée d'Images",
+      "f1Desc": "Des algorithmes avancés mappent vos photos aux couleurs de perles fusionnables les plus proches en utilisant l'espace de couleur CIELAB pour une précision maximale.",
+      "f2Title": "Inventaire de Perles en Temps Réel",
+      "f2Desc": "Compte automatiquement chaque perle requise. Obtenez une liste de courses détaillée avec des codes de couleur spécifiques à la marque (Perler, Artkal, Hama).",
+      "f3Title": "PDF Imprimable avec Symboles",
+      "f3Desc": "Exporter des modèles haute résolution avec guides numérotés et cartes de symboles, parfaits pour une référence physique claire."
+    },
+    "howTo": {
+      "title": "Comment Utiliser le Convertisseur de Photos en Modèles de Perles",
+      "step1": "Téléchargez votre photo ou sélectionnez une image générée par IA.",
+      "step2": "Ajustez la taille du canevas (par exemple, grilles standard 29x29 ou mini 14x14).",
+      "step3": "Choisissez votre palette (Perler, Hama ou Artkal) et ajustez les couleurs.",
+      "step4": "Exporter votre liste de courses et guide PDF imprimable."
+    },
+    "expertTips": {
+      "title": "Conseils d'Experts pour un Art de Perles Parfait",
+      "tip1": "Pour les meilleurs résultats, utilisez des images à contraste élevé avec des arrière-plans simples.",
+      "tip2": "Toujours cocher l'option 'Dithering' pour les photos pour créer des dégradés harmonieux.",
+      "tip3": "Les planches standard sont de 29x29. Pour les projets rapides, essayez nos modèles simples de 14x14.",
+      "tip4": "N'oubliez pas d'utiliser le 'Papier à Repasser' et une chaleur moyenne pour une fusion uniforme."
+    },
+    "faq": {
+      "title": "FAQ du Créateur de Modèles",
+      "q1": "Ce créateur de modèles de perles Perler est-il vraiment gratuit ?",
+      "a1": "Oui ! Nous offrons toutes les fonctionnalités de base : conversion, comptage et exportation PDF, complètement gratuites pour la communauté.",
+      "q2": "Quelles marques de perles sont prises en charge ?",
+      "a2": "Notre outil inclut des tables de couleurs précises pour Perler, Artkal (séries S et R) et Hama Fuse Beads.",
+      "q3": "Puis-je sauvegarder le modèle en PDF ?",
+      "a3": "Absolument. Vous pouvez exporter un PDF imprimable qui inclut la grille, le modèle et la liste complète de matériaux par couleur."
+    }
   }
 }

@@ -329,5 +329,71 @@
     "createCustom": "Crie seus próprios desenhos de ligar os pontos para imprimir usando nosso gerador fácil de usar.",
     "tryGenerator": "Experimentar Gerador Personalizado",
     "communityFeedback": "Feedback da Comunidade"
+  },
+  "beadsLanding": {
+    "hero": {
+      "badge": "✨ FERRAMENTA TOP 2026 ✨",
+      "title": "Padrões Grátis de Perler Beads e Criador de Padrões",
+      "subtitle": "Descubra milhares de padrões grátis de perler beads ou crie os seus. Especializado em padrões simples para iniciantes e padrões imprimíveis de alta qualidade.",
+      "cta": "Começar a Criar Padrões",
+      "hint": "Padrões Grátis de Perler Beads • PDF Imprimível HD • Sem Taxas",
+      "brandCompat": "Suporte Oficial de Paletas"
+    },
+    "magic": {
+      "badge": "Conversor Inteligente",
+      "title": "Padrões de Perler Beads, Como por Magia.",
+      "description": "Transforme qualquer foto em uma grade personalizada. Nossa ferramenta é otimizada para criar padrões grátis de perler beads com precisão de cor perfeita instantaneamente.",
+      "f1": "Correspondência de Espaço de Cor Lab",
+      "f2": "Dithering Ajustável",
+      "f3": "Controles de Tamanho Personalizados"
+    },
+    "intro": {
+      "title": "A Melhor Fonte de Padrões Grátis de Perler Beads",
+      "description": "Procurando por padrões de perler beads que sejam realmente fáceis de seguir? Oferecemos uma vasta biblioteca de padrões simples e uma ferramenta de IA para transformar suas imagens em padrões imprimíveis. Do decoração de casa à arte pixel, gere os padrões perfeitos para seu próximo projeto."
+    },
+    "categories": {
+      "title": "Temas de Padrões Populares",
+      "subtitle": "Descubra padrões grátis em nossas categorias mais procuradas. Cada categoria é otimizada para um perlejar fácil e resultados perfeitos.",
+      "items": {
+        "gaming": "Pokemon, Minecraft, Mario",
+        "characters": "Stitch, Hello Kitty, Harry Potter",
+        "heroes": "Spider Man, Marvel, Avengers",
+        "animals": "Gato e Cachorro em Perler Beads",
+        "seasonal": "Natal, Halloween, Páscoa",
+        "styles": "3D, 14x14, Arte Pixel Kawaii"
+      }
+    },
+    "features": {
+      "title": "Recursos de Nível Profissional",
+      "f1Title": "Conversão Instantânea de Imagens",
+      "f1Desc": "Algoritmos avançados mapeiam suas fotos para as cores de contas fusíveis mais próximas usando o espaço de cor CIELAB para máxima precisão.",
+      "f2Title": "Inventário de Contas em Tempo Real",
+      "f2Desc": "Conta automaticamente cada conta necessária. Obtenha uma lista de compras detalhada com códigos de cor específicos da marca (Perler, Artkal, Hama).",
+      "f3Title": "PDF Imprimível com Símbolos",
+      "f3Desc": "Exporte padrões de alta resolução com guias numeradas e mapas de símbolos, perfeitos para uma referência física clara."
+    },
+    "howTo": {
+      "title": "Como Usar o Conversor de Fotos em Padrões de Contas",
+      "step1": "Envie sua foto ou selecione uma imagem gerada por IA.",
+      "step2": "Ajuste o tamanho do canvas (por exemplo, grades padrão 29x29 ou mini 14x14).",
+      "step3": "Escolha sua paleta (Perler, Hama ou Artkal) e ajuste as cores.",
+      "step4": "Exporte sua lista de compras e guia PDF imprimível."
+    },
+    "expertTips": {
+      "title": "Dicas de Expert para uma Arte de Contas Perfeita",
+      "tip1": "Para os melhores resultados, use imagens de alto contraste com fundos simples.",
+      "tip2": "Sempre marque a opção 'Dithering' para fotos para criar gradientes fluidos.",
+      "tip3": "Os painéis padrão são 29x29. Para projetos rápidos, tente nossos padrões simples de 14x14.",
+      "tip4": "Não esqueça de usar o 'Papel de Passar' e calor médio para uma fusão uniforme."
+    },
+    "faq": {
+      "title": "FAQ do Criador de Padrões",
+      "q1": "Este criador de padrões de Perler Beads é realmente gratuito?",
+      "a1": "Sim! Oferecemos todas as funcionalidades principais: conversão, contagem e exportação PDF, completamente gratuitas para a comunidade.",
+      "q2": "Quais marcas de contas são suportadas?",
+      "a2": "Nossa ferramenta inclui tabelas de cores precisas para Perler, Artkal (séries S e R) e Hama Fuse Beads.",
+      "q3": "Posso salvar o padrão como PDF?",
+      "a3": "Absolutamente. Você pode exportar um PDF imprimível que inclui a grade, o padrão e a lista completa de materiais por cor."
+    }
   }
 }

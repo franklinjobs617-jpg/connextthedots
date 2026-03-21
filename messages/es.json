@@ -332,68 +332,68 @@
   },
   "beadsLanding": {
     "hero": {
-      "badge": "✨ 2026 TOP RATED TOOL ✨",
-      "title": "Free Perler Bead Patterns & Pattern Maker",
-      "subtitle": "Discover thousands of free perler bead patterns or create your own. Specialized in simple perler bead patterns for beginners and high-quality printable perler bead patterns.",
-      "cta": "Start Creating Patterns",
-      "hint": "Free Perler Bead Patterns • HD Printable PDF • No Fees",
-      "brandCompat": "Official Palette Support"
+      "badge": "✨ HERRAMIENTA TOP 2026 ✨",
+      "title": "Patrones Gratis de Perler Beads y Creador de Patrones",
+      "subtitle": "Descubre miles de patrones gratis de perler beads o crea los tuyos propios. Especializados en patrones simples para principiantes y patrones imprimibles de alta calidad.",
+      "cta": "Empezar a Crear Patrones",
+      "hint": "Patrones Gratis de Perler Beads • PDF Imprimible HD • Sin Costos",
+      "brandCompat": "Soporte Oficial de Paletas"
     },
     "magic": {
-      "badge": "Smart Converter",
-      "title": "Perler Bead Patterns, Like Magic.",
-      "description": "Transform any photo into a custom grid. Our tool is optimized for creating free perler bead patterns with perfect color accuracy instantly.",
-      "f1": "Lab Color Space Matching",
-      "f2": "Adjustable Dithering",
-      "f3": "Custom Size Controls"
+      "badge": "Convertidor Inteligente",
+      "title": "Patrones de Perler Beads, Como por Arte de Magia.",
+      "description": "Transforma cualquier foto en una cuadrícula personalizada. Nuestra herramienta está optimizada para crear patrones gratis de perler beads con precisión de color perfecta al instante.",
+      "f1": "Coincidencia de Espacio de Color Lab",
+      "f2": "Dithering Ajustable",
+      "f3": "Controles de Tamaño Personalizados"
     },
     "intro": {
-      "title": "The Best Source for Free Perler Bead Patterns",
-      "description": "Looking for perler bead patterns that are actually easy to follow? We provide a massive library of simple perler bead patterns and an AI tool to turn your images into printable perler bead patterns. From home decor to pixel art, generate the perfect patterns for your next project."
+      "title": "La Mejor Fuente de Patrones Gratis de Perler Beads",
+      "description": "¿Buscas patrones de perler beads que sean realmente fáciles de seguir? Ofrecemos una amplia biblioteca de patrones simples de perler beads y una herramienta de IA para convertir tus imágenes en patrones imprimibles. Desde decoración del hogar hasta arte de píxeles, genera los patrones perfectos para tu próximo proyecto."
     },
     "categories": {
-      "title": "Popular Pattern Themes",
-      "subtitle": "Discover free patterns in our most searched categories. Each category is optimized for easy beading and perfect results.",
+      "title": "Temas de Patrones Populares",
+      "subtitle": "Descubre patrones gratis en nuestras categorías más buscadas. Cada categoría está optimizada para un hilado fácil y resultados perfectos.",
       "items": {
         "gaming": "Pokemon, Minecraft, Mario",
         "characters": "Stitch, Hello Kitty, Harry Potter",
         "heroes": "Spider Man, Marvel, Avengers",
-        "animals": "Perler Bead Cat & Dog",
-        "seasonal": "Christmas, Halloween, Easter",
-        "styles": "3D, 14x14, Kawaii Pixel Art"
+        "animals": "Gato y Perro de Perler Beads",
+        "seasonal": "Navidad, Halloween, Pascua",
+        "styles": "3D, 14x14, Arte de Píxeles Kawaii"
       }
     },
     "features": {
-      "title": "Professional-Grade Features",
-      "f1Title": "Instant Image Conversion",
-      "f1Desc": "Advanced algorithms map your photos to the nearest fuse bead colors using CIELAB color space for maximum accuracy.",
-      "f2Title": "Real-time Bead Inventory",
-      "f2Desc": "Automatically counts every bead required. Get a detailed shopping list with brand-specific color codes (Perler, Artkal, Hama).",
-      "f3Title": "Printable PDF with Symbols",
-      "f3Desc": "Export high-resolution patterns featuring numbered guides and symbol maps, perfect for clear, physical reference."
+      "title": "Características de Nivel Profesional",
+      "f1Title": "Conversión Instantánea de Imágenes",
+      "f1Desc": "Algoritmos avanzados mapean tus fotos a los colores de cuentas fusibles más cercanos utilizando el espacio de color CIELAB para máxima precisión.",
+      "f2Title": "Inventario de Cuentas en Tiempo Real",
+      "f2Desc": "Cuenta automáticamente cada cuenta necesaria. Obtén una lista de compras detallada con códigos de color específicos de la marca (Perler, Artkal, Hama).",
+      "f3Title": "PDF Imprimible con Símbolos",
+      "f3Desc": "Exporta patrones de alta resolución con guías numeradas y mapas de símbolos, perfectos para referencia física clara."
     },
     "howTo": {
-      "title": "How to Use the Photo to Bead Pattern Converter",
-      "step1": "Upload your photo or select an AI-generated image.",
-      "step2": "Adjust canvas size (e.g., standard 29x29 or mini 14x14 grids).",
-      "step3": "Choose your palette (Perler, Hama, or Artkal) and adjust colors.",
-      "step4": "Export your shopping list and printable PDF guide."
+      "title": "Cómo Usar el Convertidor de Fotos a Patrones de Cuentas",
+      "step1": "Sube tu foto o selecciona una imagen generada por IA.",
+      "step2": "Ajusta el tamaño del lienzo (ej. cuadrículas estándar 29x29 o mini 14x14).",
+      "step3": "Elige tu paleta (Perler, Hama o Artkal) y ajusta los colores.",
+      "step4": "Exporta tu lista de compras y guía PDF imprimible."
     },
     "expertTips": {
-      "title": "Expert Tips for Perfect Bead Art",
-      "tip1": "For the best results, use high-contrast images with simple backgrounds.",
-      "tip2": "Always check the 'Dithering' option for photos to create smooth gradients.",
-      "tip3": "Standard pegboards are 29x29. For quick projects, try our 14x14 simple patterns.",
-      "tip4": "Don't forget to use the 'Ironing Paper' and medium heat for even melting."
+      "title": "Consejos de Expertos para un Arte de Cuentas Perfecto",
+      "tip1": "Para los mejores resultados, usa imágenes de alto contraste con fondos simples.",
+      "tip2": "Siempre activa la opción 'Dithering' para fotos para crear gradientes suaves.",
+      "tip3": "Las tablas estándar son de 29x29. Para proyectos rápidos, prueba nuestros patrones simples de 14x14.",
+      "tip4": "No olvides usar el 'Papel para Planchar' y calor medio para una fusión uniforme."
     },
     "faq": {
-      "title": "Pattern Maker FAQ",
-      "q1": "Is this Perler bead pattern maker really free?",
-      "a1": "Yes! We provide all core features—conversion, counting, and PDF exporting—completely free for the community.",
-      "q2": "What brands of beads are supported?",
-      "a2": "Our tool includes accurate color tables for Perler, Artkal (S and R series), and Hama fuse beads.",
-      "q3": "Can I save the pattern as a PDF?",
-      "a3": "Absolutely. You can export a printable PDF that includes the grid, the pattern, and the full color material list."
+      "title": "Preguntas Frecuentes del Creador de Patrones",
+      "q1": "¿Este creador de patrones de Perler beads es realmente gratuito?",
+      "a1": "¡Sí! Ofrecemos todas las funciones básicas: conversión, conteo y exportación PDF, completamente gratuitas para la comunidad.",
+      "q2": "¿Qué marcas de cuentas son compatibles?",
+      "a2": "Nuestra herramienta incluye tablas de colores precisas para Perler, Artkal (series S y R) y Hama Fuse Beads.",
+      "q3": "¿Puedo guardar el patrón como PDF?",
+      "a3": "Absolutamente. Puedes exportar un PDF imprimible que incluye la cuadrícula, el patrón y la lista completa de materiales por color."
     }
   }
 }

@@ -329,5 +329,71 @@
     "createCustom": "Crea i tuoi stampabili personalizzati usando il nostro generatore facile da usare.",
     "tryGenerator": "Prova Generatore Personalizzato",
     "communityFeedback": "Feedback della Comunità"
+  },
+  "beadsLanding": {
+    "hero": {
+      "badge": "✨ STRUMENTO TOP 2026 ✨",
+      "title": "Schemi Gratuiti Perline Perler e Creatore di Pattern",
+      "subtitle": "Scopri migliaia di schemi gratuiti di perline perler o crea i tuoi. Specializzato in schemi semplici per principianti e schemi stampabili di alta qualità.",
+      "cta": "Inizia a Creare Schemi",
+      "hint": "Schemi Gratuiti Perline Perler • PDF Stampabile HD • Nessun Costo",
+      "brandCompat": "Supporto Ufficiale delle Temi"
+    },
+    "magic": {
+      "badge": "Convertitore Intelligente",
+      "title": "Schemi di Perline Perler, Come per Magia.",
+      "description": "Trasforma qualsiasi foto in una griglia personalizzata. Il nostro strumento è ottimizzato per creare schemi gratuiti di perline perler con precisione di colore perfetta istantaneamente.",
+      "f1": "Corrispondenza Spazio Colore Lab",
+      "f2": "Dithering Regolabile",
+      "f3": "Controlli Dimensioni Personalizzati"
+    },
+    "intro": {
+      "title": "La Migliore Fonte di Schemi Gratuiti di Perline Perler",
+      "description": "Cerca schemi di perline perler che siano davvero facili da seguire? Offriamo una vasta libreria di schemi semplici e uno strumento AI per trasformare le tue immagini in schemi stampabili. Dal decorazione casa all'arte pixel, genera i schemi perfetti per il tuo prossimo progetto."
+    },
+    "categories": {
+      "title": "Temi di Schemi Popolari",
+      "subtitle": "Scopri schemi gratuiti nelle nostre categorie più ricercate. Ogni categoria è ottimizzata per un perlage facile e risultati perfetti.",
+      "items": {
+        "gaming": "Pokemon, Minecraft, Mario",
+        "characters": "Stitch, Hello Kitty, Harry Potter",
+        "heroes": "Spider Man, Marvel, Avengers",
+        "animals": "Gatto e Cane in Perline Perler",
+        "seasonal": "Natale, Halloween, Pasqua",
+        "styles": "3D, 14x14, Arte Pixel Kawaii"
+      }
+    },
+    "features": {
+      "title": "Funzionalità di Livello Professionale",
+      "f1Title": "Conversione Istantanea Immagini",
+      "f1Desc": "Algoritmi avanzati mappano le tue foto ai colori di perline fusibili più vicini utilizzando lo spazio colore CIELAB per una precisione massima.",
+      "f2Title": "Inventario Perline in Tempo Reale",
+      "f2Desc": "Conte automaticamente ogni perla richiesta. Ottieni un elenco di shopping dettagliato con codici colore specifici per marca (Perler, Artkal, Hama).",
+      "f3Title": "PDF Stampabile con Simboli",
+      "f3Desc": "Esporta schemi ad alta risoluzione con guide numerate e mappe di simboli, perfetti per un riferimento fisico chiaro."
+    },
+    "howTo": {
+      "title": "Come Usare il Convertitore Foto-Schemi Perline",
+      "step1": "Carica la tua foto o seleziona un'immagine generata da AI.",
+      "step2": "Regola le dimensioni della tela (es. griglie standard 29x29 o mini 14x14).",
+      "step3": "Scegli la tua palette (Perler, Hama o Artkal) e regola i colori.",
+      "step4": "Esporta il tuo elenco di shopping e guida PDF stampabile."
+    },
+    "expertTips": {
+      "title": "Suggerimenti degli Esperti per un'Arte Perline Perfetta",
+      "tip1": "Per i migliori risultati, usa immagini ad alto contrasto con sfondi semplici.",
+      "tip2": "Controlla sempre l'opzione 'Dithering' per le foto per creare gradienti fluidi.",
+      "tip3": "Le piastre standard sono 29x29. Per progetti rapidi, prova i nostri schemi semplici 14x14.",
+      "tip4": "Non dimenticare di usare il 'Carta da Stiro' e calore medio per una fusione uniforme."
+    },
+    "faq": {
+      "title": "FAQ Creatore di Schemi",
+      "q1": "Questo creatore di schemi perline Perler è davvero gratuito?",
+      "a1": "Sì! Offriamo tutte le funzionalità core: conversione, conteggio e esportazione PDF, completamente gratuite per la comunità.",
+      "q2": "Quale marche di perline sono supportate?",
+      "a2": "Il nostro strumento include tabelle colori precise per Perler, Artkal (serie S e R) e Hama Fuse Beads.",
+      "q3": "Posso salvare lo schema come PDF?",
+      "a3": "Assolutamente. Puoi esportare un PDF stampabile che include la griglia, lo schema e l'elenco completo di materiali per colore."
+    }
   }
 }

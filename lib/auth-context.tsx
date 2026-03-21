@@ -55,7 +55,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
     }, []);
 
-    // --- 2. 核心：请求后端获取最新数据 (静默刷新) ---
     const fetchLatestUser = useCallback(async (token: string) => {
         try {
             const res = await fetch('/api/auth/login', {
@@ -82,7 +81,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
     }, []);
 
-    // --- 3. 封装给外部调用的手动刷新方法 ---
     const refreshUser = useCallback(async () => {
         const token = localStorage.getItem("auth_token");
         if (token) {

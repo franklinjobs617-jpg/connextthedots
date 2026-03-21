@@ -327,5 +327,71 @@
     "createCustom": "Erstellen Sie Ihre eigenen benutzerdefinierten Punkt-zu-Punkt-Vorlagen mit unserem einfach zu bedienenden Generator.",
     "tryGenerator": "Generator Ausprobieren",
     "communityFeedback": "Community-Feedback"
+  },
+  "beadsLanding": {
+    "hero": {
+      "badge": "✨ 2026 TOP BEWERTETES TOOL ✨",
+      "title": "Kostenlose Bügelperlen Vorlagen & Muster Generator",
+      "subtitle": "Entdecken Sie Tausende kostenlose Bügelperlen Vorlagen oder erstellen Sie Ihre eigenen. Spezialisiert auf einfache Bügelperlen Vorlagen für Anfänger und hochwertige druckbare Muster.",
+      "cta": "Muster erstellen",
+      "hint": "Kostenlose Bügelperlen Vorlagen • HD Druckfertiges PDF • Keine Gebühren",
+      "brandCompat": "Offizielle Paletten-Unterstützung"
+    },
+    "magic": {
+      "badge": "Intelligenter Konverter",
+      "title": "Bügelperlen Muster, wie durch Zauber.",
+      "description": "Transformieren Sie jedes Foto in ein individuelles Raster. Unser Tool ist optimiert für die Erstellung kostenloser Bügelperlen Vorlagen mit perfekter Farbgenauigkeit in Sekunden.",
+      "f1": "Lab-Farbraum-Abgleich",
+      "f2": "Anpassbares Dithering",
+      "f3": "Benutzerdefinierte Größenkontrolle"
+    },
+    "intro": {
+      "title": "Die beste Quelle für kostenlose Bügelperlen Vorlagen",
+      "description": "Auf der Suche nach Bügelperlen Vorlagen, die wirklich einfach zu folgen sind? Wir bieten eine massive Bibliothek einfacher Bügelperlen Vorlagen und ein KI-Tool, um Ihre Bilder in druckbare Muster zu verwandeln. Von Wohnaccessoires bis Pixelkunst – generieren Sie die perfekten Muster für Ihr nächstes Projekt."
+    },
+    "categories": {
+      "title": "Beliebte Muster-Themen",
+      "subtitle": "Entdecken Sie kostenlose Muster in unseren am häufigsten gesuchten Kategorien. Jede Kategorie ist für einfaches Perlen und perfekte Ergebnisse optimiert.",
+      "items": {
+        "gaming": "Pokemon, Minecraft, Mario",
+        "characters": "Stitch, Hello Kitty, Harry Potter",
+        "heroes": "Spider Man, Marvel, Avengers",
+        "animals": "Bügelperlen Katze & Hund",
+        "seasonal": "Weihnachten, Halloween, Ostern",
+        "styles": "3D, 14x14, Kawaii Pixelkunst"
+      }
+    },
+    "features": {
+      "title": "Professionelle Features",
+      "f1Title": "Sofortige Bildkonvertierung",
+      "f1Desc": "Fortgeschrittene Algorithmen kartieren Ihre Fotos auf die nächsten Fuse-Bead-Farben mithilfe des CIELAB-Farbraums für maximale Genauigkeit.",
+      "f2Title": "Echtzeit-Perlen-Inventar",
+      "f2Desc": "Automatisch zählt jede erforderliche Perle. Erhalten Sie eine detaillierte Einkaufsliste mit markenspezifischen Farbcodes (Perler, Artkal, Hama).",
+      "f3Title": "Druckbares PDF mit Symbolen",
+      "f3Desc": "Exportieren Sie hochauflösende Muster mit nummerierten Anleitungen und Symbolkarten, perfekt für klare, physische Referenz."
+    },
+    "howTo": {
+      "title": "So verwenden Sie den Foto-zu-Perlen-Muster-Konverter",
+      "step1": "Laden Sie Ihr Foto hoch oder wählen Sie ein KI-generiertes Bild.",
+      "step2": "Passen Sie die Canvas-Größe an (z.B. Standard 29x29 oder Mini 14x14 Raster).",
+      "step3": "Wählen Sie Ihre Palette (Perler, Hama oder Artkal) und passen Sie die Farben an.",
+      "step4": "Exportieren Sie Ihre Einkaufsliste und druckbare PDF-Anleitung."
+    },
+    "expertTips": {
+      "title": "Experten-Tipps für perfekte Perlenkunst",
+      "tip1": "Für die besten Ergebnisse verwenden Sie kontrastreiche Bilder mit einfachen Hintergründen.",
+      "tip2": "Aktivieren Sie immer die 'Dithering'-Option für Fotos, um sanfte Farbverläufe zu erstellen.",
+      "tip3": "Standard-Pegboards sind 29x29. Für schnelle Projekte probieren Sie unsere einfachen 14x14-Muster.",
+      "tip4": "Vergessen Sie nicht, das 'Bügelpapier' und mittlere Hitze für gleichmäßiges Schmelzen zu verwenden."
+    },
+    "faq": {
+      "title": "Muster-Maker-FAQ",
+      "q1": "Ist dieser Bügelperlen-Muster-Maker wirklich kostenlos?",
+      "a1": "Ja! Wir bieten alle Kernfunktionen – Konvertierung, Zählung und PDF-Export – vollständig kostenlos für die Community.",
+      "q2": "Welche Perlen-Marken werden unterstützt?",
+      "a2": "Unser Tool enthält genaue Farbtabellen für Perler, Artkal (S- und R-Serie) und Hama Fuse-Beads.",
+      "q3": "Kann ich das Muster als PDF speichern?",
+      "a3": "Absolut. Sie können ein druckbares PDF exportieren, das das Raster, das Muster und die vollständige Farbmaterial-Liste enthält."
+    }
   }
 }

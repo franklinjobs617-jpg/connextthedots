@@ -329,5 +329,71 @@
     "createCustom": "Maak je eigen aangepaste nummer tekening met onze gebruiksvriendelijke generator.",
     "tryGenerator": "Probeer Aangepaste Generator",
     "communityFeedback": "Gemeenschap Feedback"
+  },
+  "beadsLanding": {
+    "hero": {
+      "badge": "✨ TOP GEVALIDEERD TOOL 2026 ✨",
+      "title": "Gratis Strijkkralen Patronen & Patroon Maker",
+      "subtitle": "Ontdek duizenden gratis strijkkralen patronen of maak je eigen. Specialized in eenvoudige strijkkralen patronen voor beginners en hoogwaardige afdrukbare patronen.",
+      "cta": "Begin met Patroon Maken",
+      "hint": "Gratis Strijkkralen Patronen • HD Afdrukbare PDF • Geen Kosten",
+      "brandCompat": "Officiële Palet Ondersteuning"
+    },
+    "magic": {
+      "badge": "Slimme Converter",
+      "title": "Strijkkralen Patronen, Zoals door Magie.",
+      "description": "Transformeer elke foto in een aangepaste grid. Ons tool is geoptimaliseerd voor het maken van gratis strijkkralen patronen met perfecte kleuraccuratie direct.",
+      "f1": "Lab Kleurruimte Matching",
+      "f2": "Instelbaar Dithering",
+      "f3": "Aangepaste Grootte Controles"
+    },
+    "intro": {
+      "title": "De Beste Bron voor Gratis Strijkkralen Patronen",
+      "description": "Op zoek naar strijkkralen patronen die echt eenvoudig te volgen zijn? We bieden een enorme bibliotheek van eenvoudige strijkkralen patronen en een AI tool om je afbeeldingen om te zetten in afdrukbare patronen. Van huisdecoratie tot pixelkunst, genereer de perfecte patronen voor je volgende project."
+    },
+    "categories": {
+      "title": "Populaire Patroon Themas",
+      "subtitle": "Ontdek gratis patronen in onze meest gezochte categorieën. Elke categorie is geoptimaliseerd voor eenvoudige kralenwerk en perfecte resultaten.",
+      "items": {
+        "gaming": "Pokemon, Minecraft, Mario",
+        "characters": "Stitch, Hello Kitty, Harry Potter",
+        "heroes": "Spider Man, Marvel, Avengers",
+        "animals": "Strijkkralen Kat & Hond",
+        "seasonal": "Kerstmis, Halloween, Pasen",
+        "styles": "3D, 14x14, Kawaii Pixel Kunst"
+      }
+    },
+    "features": {
+      "title": "Professionele Functies",
+      "f1Title": "Directe Afbeelding Conversie",
+      "f1Desc": "Geavanceerde algoritmen mappen je foto's naar de dichtstbijzijnde fusie kralen kleuren met behulp van CIELAB kleurruimte voor maximale nauwkeurigheid.",
+      "f2Title": "Real-time Kralen Inventaris",
+      "f2Desc": "Telt automatisch elke benodigde kralen. Krijg een gedetailleerde boodschappenlijst met merk-specifieke kleurcodes (Perler, Artkal, Hama).",
+      "f3Title": "Afdrukbare PDF met Symbolen",
+      "f3Desc": "Exporteer hoogwaardige patronen met genummerde handleidingen en symboolkaarten, perfect voor duidelijke, fysieke referentie."
+    },
+    "howTo": {
+      "title": "Hoe te Gebruiken de Foto naar Kralen Patroon Converter",
+      "step1": "Upload je foto of selecteer een AI-genereerde afbeelding.",
+      "step2": "Pas canvasgrootte aan (bijv. standaard 29x29 of mini 14x14 grids).",
+      "step3": "Kies je palet (Perler, Hama of Artkal) en pas kleuren aan.",
+      "step4": "Exporteer je boodschappenlijst en afdrukbare PDF handleiding."
+    },
+    "expertTips": {
+      "title": "Expert Tips voor Perfecte Kralenkunst",
+      "tip1": "Voor de beste resultaten, gebruik afbeeldingen met hoog contrast en eenvoudige achtergronden.",
+      "tip2": "Controleer altijd de 'Dithering' optie voor foto's om vloeiende verloop te creëren.",
+      "tip3": "Standaard pegboards zijn 29x29. Voor snelle projecten, probeer onze eenvoudige 14x14 patronen.",
+      "tip4": "Vergeet niet om 'IJzerpapier' te gebruiken en gemiddelde warmte voor gelijkmatige smelting."
+    },
+    "faq": {
+      "title": "Patroon Maker FAQ",
+      "q1": "Is deze Perler kralen patroon maker echt gratis?",
+      "a1": "Ja! We bieden alle core functies—conversie, telling en PDF export—volledig gratis voor de gemeenschap.",
+      "q2": "Welke merken van kralen worden ondersteund?",
+      "a2": "Ons tool bevat nauwkeurige kleur tabellen voor Perler, Artkal (S en R series), en Hama fuse kralen.",
+      "q3": "Kan ik het patroon opslaan als PDF?",
+      "a3": "Absoluut. Je kunt een afdrukbare PDF exporteren die de grid, het patroon, en de volledige kleur materiaal lijst bevat."
+    }
   }
 }
