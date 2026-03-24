@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
 import { useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/routing";
 import { jsPDF } from "jspdf";
 
 interface DotGeneratorProps {
-  locale: string; user?: any;
+  locale: string;
+  user?: any;
 }
 
 interface DotGeneratorProps {
@@ -16,7 +17,7 @@ interface DotGeneratorProps {
 // 全局类型声明
 declare global {
   interface Window {
-    gtag?: (command: 'event', eventName: string, params?: object) => void;
+    gtag?: (command: "event", eventName: string, params?: object) => void;
     Module: any;
     jspdf: any;
     cv: any;
@@ -47,7 +48,10 @@ interface State {
   pendingFile: File | null;
 }
 
-export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) {
+export default function DotGeneratorClient({
+  locale,
+  user,
+}: DotGeneratorProps) {
   const router = useRouter();
   const userRef = useRef(user);
 
@@ -155,7 +159,10 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
     // Presets & Advanced
     const presetButtons = document.querySelectorAll(".preset-btn-js");
 
-    const showTip = (message: string, type: "info" | "success" | "error" = "info") => {
+    const showTip = (
+      message: string,
+      type: "info" | "success" | "error" = "info"
+    ) => {
       const oldTip = document.getElementById("custom-tip");
       if (oldTip) oldTip.remove();
 
@@ -165,8 +172,8 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         type === "error"
           ? "bg-red-500"
           : type === "success"
-            ? "bg-green-500"
-            : "bg-slate-800";
+          ? "bg-green-500"
+          : "bg-slate-800";
 
       tip.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[9999] ${bgClass} text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-0`;
       tip.innerHTML = `<span class="font-medium text-sm">${message}</span>`;
@@ -226,7 +233,10 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
       const formData = new FormData();
       formData.append("file", file);
       try {
-        const res = await fetch(RMBG_API_URL, { method: "POST", body: formData });
+        const res = await fetch(RMBG_API_URL, {
+          method: "POST",
+          body: formData,
+        });
         if (!res.ok) throw new Error("API Error");
         return await res.blob();
       } catch (e) {
@@ -235,10 +245,15 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
       }
     };
 
-    const applyHighDefSketchLogic = async (imgEl: HTMLImageElement): Promise<File> => {
+    const applyHighDefSketchLogic = async (
+      imgEl: HTMLImageElement
+    ): Promise<File> => {
       const cv = window.cv;
       const MAX_PROC_SIZE = 1500;
-      let scaleToFit = Math.min(1.0, MAX_PROC_SIZE / Math.max(imgEl.width, imgEl.height));
+      let scaleToFit = Math.min(
+        1.0,
+        MAX_PROC_SIZE / Math.max(imgEl.width, imgEl.height)
+      );
 
       let canvas = document.createElement("canvas");
       canvas.width = imgEl.width * scaleToFit;
@@ -267,12 +282,24 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         let offsetX = Math.floor((origW - targetW) / 2);
         let offsetY = Math.floor((origH - targetH) / 2);
 
-        let paddedSrc = new cv.Mat(origH, origW, cv.CV_8UC4, new cv.Scalar(255, 255, 255, 0));
+        let paddedSrc = new cv.Mat(
+          origH,
+          origW,
+          cv.CV_8UC4,
+          new cv.Scalar(255, 255, 255, 0)
+        );
         mats.push(paddedSrc);
 
         let resizedInner = new cv.Mat();
         mats.push(resizedInner);
-        cv.resize(src, resizedInner, new cv.Size(targetW, targetH), 0, 0, cv.INTER_AREA);
+        cv.resize(
+          src,
+          resizedInner,
+          new cv.Size(targetW, targetH),
+          0,
+          0,
+          cv.INTER_AREA
+        );
 
         let rect = new cv.Rect(offsetX, offsetY, targetW, targetH);
         let roi = paddedSrc.roi(rect);
@@ -283,7 +310,14 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         let bigH = origH * SKETCH_CONFIG.SuperScale;
         let bigSrc = new cv.Mat();
         mats.push(bigSrc);
-        cv.resize(paddedSrc, bigSrc, new cv.Size(bigW, bigH), 0, 0, cv.INTER_CUBIC);
+        cv.resize(
+          paddedSrc,
+          bigSrc,
+          new cv.Size(bigW, bigH),
+          0,
+          0,
+          cv.INTER_CUBIC
+        );
 
         let bigGray = new cv.Mat();
         mats.push(bigGray);
@@ -293,7 +327,15 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         mats.push(bigSketch);
         let bigB = SKETCH_CONFIG.BlockSize * SKETCH_CONFIG.SuperScale;
         if (bigB % 2 === 0) bigB++;
-        cv.adaptiveThreshold(bigGray, bigSketch, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, bigB, SKETCH_CONFIG.C);
+        cv.adaptiveThreshold(
+          bigGray,
+          bigSketch,
+          255,
+          cv.ADAPTIVE_THRESH_GAUSSIAN_C,
+          cv.THRESH_BINARY,
+          bigB,
+          SKETCH_CONFIG.C
+        );
 
         let rgbaPlanes = new cv.MatVector();
         cv.split(bigSrc, rgbaPlanes);
@@ -310,14 +352,34 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
         let contours = new cv.MatVector();
         let hierarchy = new cv.Mat();
-        cv.findContours(mask, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+        cv.findContours(
+          mask,
+          contours,
+          hierarchy,
+          cv.RETR_EXTERNAL,
+          cv.CHAIN_APPROX_SIMPLE
+        );
         for (let i = 0; i < contours.size(); ++i) {
-          cv.drawContours(bigSketch, contours, i, new cv.Scalar(0, 0, 0, 255), SKETCH_CONFIG.SuperScale, cv.LINE_AA);
+          cv.drawContours(
+            bigSketch,
+            contours,
+            i,
+            new cv.Scalar(0, 0, 0, 255),
+            SKETCH_CONFIG.SuperScale,
+            cv.LINE_AA
+          );
         }
 
         let finalSketch = new cv.Mat();
         mats.push(finalSketch);
-        cv.resize(bigSketch, finalSketch, new cv.Size(origW, origH), 0, 0, cv.INTER_AREA);
+        cv.resize(
+          bigSketch,
+          finalSketch,
+          new cv.Size(origW, origH),
+          0,
+          0,
+          cv.INTER_AREA
+        );
 
         const outputCanvas = document.createElement("canvas");
         cv.imshow(outputCanvas, finalSketch);
@@ -331,7 +393,9 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         return new Promise((resolve) => {
           outputCanvas.toBlob((blob) => {
             if (blob) {
-              resolve(new File([blob], "processed_sketch.png", { type: "image/png" }));
+              resolve(
+                new File([blob], "processed_sketch.png", { type: "image/png" })
+              );
             }
           }, "image/png");
         });
@@ -342,7 +406,9 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         }
         console.error("Critical OpenCV Error:", msg);
         mats.forEach((m) => {
-          try { m.delete(); } catch (i) { }
+          try {
+            m.delete();
+          } catch (i) {}
         });
         throw new Error(msg);
       }
@@ -392,7 +458,11 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         img.onload = () => {
           state.originalImage = img;
           const TARGET_MIN_WIDTH = 2000;
-          const scale = Math.max(1, TARGET_MIN_WIDTH / Math.max(img.naturalWidth, img.naturalHeight)) || 1;
+          const scale =
+            Math.max(
+              1,
+              TARGET_MIN_WIDTH / Math.max(img.naturalWidth, img.naturalHeight)
+            ) || 1;
 
           drawCanvas.width = Math.floor(img.naturalWidth * scale);
           drawCanvas.height = Math.floor(img.naturalHeight * scale);
@@ -401,7 +471,10 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           state.history = [];
           state.internalHintImage = null;
 
-          if (state.config.hint === "internal" && typeof window.cv !== "undefined") {
+          if (
+            state.config.hint === "internal" &&
+            typeof window.cv !== "undefined"
+          ) {
             state.internalHintImage = generateInternalHintImage();
           }
 
@@ -476,7 +549,10 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
         const tempCanvas = document.createElement("canvas");
         const processWidth = 1000;
-        const processScale = Math.min(1, processWidth / Math.max(drawCanvas.width, drawCanvas.height));
+        const processScale = Math.min(
+          1,
+          processWidth / Math.max(drawCanvas.width, drawCanvas.height)
+        );
 
         const w = Math.floor(drawCanvas.width * processScale);
         const h = Math.floor(drawCanvas.height * processScale);
@@ -499,12 +575,26 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         let hierarchy = new cv.Mat();
 
         cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-        cv.adaptiveThreshold(gray, binary, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 11, 2);
+        cv.adaptiveThreshold(
+          gray,
+          binary,
+          255,
+          cv.ADAPTIVE_THRESH_GAUSSIAN_C,
+          cv.THRESH_BINARY_INV,
+          11,
+          2
+        );
 
         let M = cv.Mat.ones(3, 3, cv.CV_8U);
         cv.dilate(binary, binary, M);
 
-        cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE);
+        cv.findContours(
+          binary,
+          contours,
+          hierarchy,
+          cv.RETR_EXTERNAL,
+          cv.CHAIN_APPROX_NONE
+        );
 
         let allPoints: Point[] = [];
         let maxArea = 0;
@@ -521,7 +611,12 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         if (maxContourIndex !== -1) {
           let mainContour = contours.get(maxContourIndex);
           let approx = new cv.Mat();
-          cv.approxPolyDP(mainContour, approx, cv.arcLength(mainContour, true) * 0.001, true);
+          cv.approxPolyDP(
+            mainContour,
+            approx,
+            cv.arcLength(mainContour, true) * 0.001,
+            true
+          );
 
           for (let j = 0; j < approx.rows; j++) {
             allPoints.push({
@@ -539,8 +634,11 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         hierarchy.delete();
         M.delete();
 
-        const targetCount = dotCountSlider ? parseInt(dotCountSlider.value) : 25;
-        state.dots = allPoints.length > 0 ? resampleDots(allPoints, targetCount) : [];
+        const targetCount = dotCountSlider
+          ? parseInt(dotCountSlider.value)
+          : 25;
+        state.dots =
+          allPoints.length > 0 ? resampleDots(allPoints, targetCount) : [];
 
         saveHistory();
         redraw();
@@ -549,6 +647,9 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         console.error("Auto detect runtime error:", e);
       } finally {
         toggleLoader(false);
+        if (userRef.current && state.dots.length > 0) {
+          autoSavePuzzle();
+        }
       }
     };
 
@@ -562,7 +663,9 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         });
       }
       result.push(points[points.length - 1]);
-      return result.length < minCount ? interpolatePoints(result, minCount) : result;
+      return result.length < minCount
+        ? interpolatePoints(result, minCount)
+        : result;
     };
 
     const resampleDots = (points: Point[], targetCount: number): Point[] => {
@@ -592,11 +695,16 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
         const segmentStartDist = cumLengths[j];
         const segmentLength = cumLengths[j + 1] - cumLengths[j];
-        const t = segmentLength === 0 ? 0 : (targetDist - segmentStartDist) / segmentLength;
+        const t =
+          segmentLength === 0
+            ? 0
+            : (targetDist - segmentStartDist) / segmentLength;
 
         newPoints.push({
-          x: closedPoints[j].x + (closedPoints[j + 1].x - closedPoints[j].x) * t,
-          y: closedPoints[j].y + (closedPoints[j + 1].y - closedPoints[j].y) * t,
+          x:
+            closedPoints[j].x + (closedPoints[j + 1].x - closedPoints[j].x) * t,
+          y:
+            closedPoints[j].y + (closedPoints[j + 1].y - closedPoints[j].y) * t,
         });
       }
       return newPoints;
@@ -608,7 +716,8 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         return null;
       try {
         const tempCanvas = document.createElement("canvas");
-        const w = drawCanvas!.width, h = drawCanvas!.height;
+        const w = drawCanvas!.width,
+          h = drawCanvas!.height;
         tempCanvas.width = w;
         tempCanvas.height = h;
 
@@ -625,11 +734,29 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           hierarchy = new cv.Mat();
 
         cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-        cv.threshold(gray, binary, 127, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU);
-        cv.findContours(binary, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+        cv.threshold(
+          gray,
+          binary,
+          127,
+          255,
+          cv.THRESH_BINARY_INV | cv.THRESH_OTSU
+        );
+        cv.findContours(
+          binary,
+          contours,
+          hierarchy,
+          cv.RETR_EXTERNAL,
+          cv.CHAIN_APPROX_SIMPLE
+        );
 
         const thickness = Math.max(2, state.config.eraseThickness * (w / 1000));
-        cv.drawContours(src, contours, -1, new cv.Scalar(255, 255, 255, 255), thickness);
+        cv.drawContours(
+          src,
+          contours,
+          -1,
+          new cv.Scalar(255, 255, 255, 255),
+          thickness
+        );
 
         const outputCanvas = document.createElement("canvas");
         outputCanvas.width = w;
@@ -656,11 +783,29 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         ctx.save();
         if (state.config.hint === "trace") {
           ctx.globalAlpha = 0.3;
-          ctx.drawImage(state.originalImage, 0, 0, drawCanvas.width, drawCanvas.height);
+          ctx.drawImage(
+            state.originalImage,
+            0,
+            0,
+            drawCanvas.width,
+            drawCanvas.height
+          );
         } else if (state.config.hint === "internal") {
-          ctx.drawImage(state.internalHintImage || state.originalImage, 0, 0, drawCanvas.width, drawCanvas.height);
+          ctx.drawImage(
+            state.internalHintImage || state.originalImage,
+            0,
+            0,
+            drawCanvas.width,
+            drawCanvas.height
+          );
         } else {
-          ctx.drawImage(state.originalImage, 0, 0, drawCanvas.width, drawCanvas.height);
+          ctx.drawImage(
+            state.originalImage,
+            0,
+            0,
+            drawCanvas.width,
+            drawCanvas.height
+          );
         }
         ctx.restore();
       }
@@ -673,7 +818,8 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      let centerX = 0, centerY = 0;
+      let centerX = 0,
+        centerY = 0;
       if (state.dots.length > 0) {
         state.dots.forEach((d) => {
           centerX += d.x;
@@ -695,7 +841,8 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         ctx.lineWidth = 2 * scale;
         ctx.stroke();
 
-        const dx = dot.x - centerX || 1, dy = dot.y - centerY || 1;
+        const dx = dot.x - centerX || 1,
+          dy = dot.y - centerY || 1;
         const len = Math.hypot(dx, dy);
         const offset = r + fontSize * 0.8;
         const labelX = dot.x + (dx / len) * offset,
@@ -728,8 +875,8 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         offsetY = 0;
       }
 
-      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+      const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+      const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
 
       return {
         x: ((clientX - rect.left - offsetX) * drawCanvas.width) / displayWidth,
@@ -800,11 +947,25 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
     };
 
     if (drawCanvas) {
-      drawCanvas.addEventListener("mousedown", handleInputStart as EventListener);
-      drawCanvas.addEventListener("mousemove", handleInputMove as EventListener);
+      drawCanvas.addEventListener(
+        "mousedown",
+        handleInputStart as EventListener
+      );
+      drawCanvas.addEventListener(
+        "mousemove",
+        handleInputMove as EventListener
+      );
       drawCanvas.addEventListener("mouseup", handleInputEnd);
-      drawCanvas.addEventListener("touchstart", handleInputStart as EventListener, { passive: false });
-      drawCanvas.addEventListener("touchmove", handleInputMove as EventListener, { passive: false });
+      drawCanvas.addEventListener(
+        "touchstart",
+        handleInputStart as EventListener,
+        { passive: false }
+      );
+      drawCanvas.addEventListener(
+        "touchmove",
+        handleInputMove as EventListener,
+        { passive: false }
+      );
       drawCanvas.addEventListener("touchend", handleInputEnd);
     }
 
@@ -864,7 +1025,9 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
     if (dotCountSlider) {
       dotCountSlider.addEventListener("input", (e) => {
         if (dotCountDisplay)
-          dotCountDisplay.textContent = `${(e.target as HTMLInputElement).value} Dots`;
+          dotCountDisplay.textContent = `${
+            (e.target as HTMLInputElement).value
+          } Dots`;
       });
       dotCountSlider.addEventListener("change", () => {
         if (typeof window.cv !== "undefined" && state.originalImage) {
@@ -901,7 +1064,12 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
         e.preventDefault();
         e.stopPropagation();
 
-        if (typeof window !== "undefined" && window.confirm("Are you sure you want to clear all dots? This cannot be undone.")) {
+        if (
+          typeof window !== "undefined" &&
+          window.confirm(
+            "Are you sure you want to clear all dots? This cannot be undone."
+          )
+        ) {
           trackEvent("clear_canvas", { dots_before: state.dots.length });
           saveHistory();
           state.dots = [];
@@ -927,63 +1095,69 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
     // ★ 2. AI 生成核心事件
     if (heroAiGoBtn) {
       // 注意：如果是未登录状态，上面的 onclick 会覆盖这个事件，这是正确的。
-      heroAiGoBtn.addEventListener('click', async (e) => {
+      heroAiGoBtn.addEventListener("click", async (e) => {
         if (!userRef.current) return;
-
 
         e.preventDefault();
         const prompt = heroAiInput?.value.trim() || "";
-        if (prompt.length < 3) return showTip("Please enter a description.", "error");
+        if (prompt.length < 3)
+          return showTip("Please enter a description.", "error");
 
-        trackEvent('ai_generate_start', { prompt_length: prompt.length });
+        trackEvent("ai_generate_start", { prompt_length: prompt.length });
 
         heroAiGoBtn.disabled = true;
-        heroAiGoBtn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+        heroAiGoBtn.innerHTML =
+          '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
-        switchView('editor');
+        switchView("editor");
         toggleLoader(true, "AI is creating your puzzle...");
 
         try {
           const token = localStorage.getItem("auth_token");
           const res = await fetch("/api/doubao", {
             method: "POST",
-            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify({
-              prompt: prompt + ", simple black and white line art, coloring book style, white background, no shading, clear outlines",
-            })
+              prompt:
+                prompt +
+                ", simple black and white line art, coloring book style, white background, no shading, clear outlines",
+            }),
           });
 
           if (!res.ok) throw new Error("AI Generation failed");
           const blob = await res.blob();
-          trackEvent('ai_generate_success');
+          trackEvent("ai_generate_success");
 
           // 扣除积分
-          const newCredits = (parseInt(userRef.current.credits, 10) - 1).toString();
+          const newCredits = (
+            parseInt(userRef.current.credits, 10) - 1
+          ).toString();
           userRef.current.credits = newCredits;
           localStorage.setItem("app_user", JSON.stringify(userRef.current));
 
-          const aiFile = new File([blob], `ai_${Date.now()}.png`, { type: blob.type });
+          const aiFile = new File([blob], `ai_${Date.now()}.png`, {
+            type: blob.type,
+          });
           // 调用之前存在的 loadFileToCanvas 方法
           // loadFileToCanvas(aiFile);
-
         } catch (e: any) {
-          trackEvent('ai_generate_fail', { error: e.message });
+          trackEvent("ai_generate_fail", { error: e.message });
 
           showTip(e.message, "error");
-          switchView('landing');
+          switchView("landing");
         } finally {
           toggleLoader(false);
         }
       });
     }
 
-
-
-
-    // ★ 3. 下载后的 Upsell 弹窗 
+    // ★ 3. 下载后的 Upsell 弹窗
     const showUpsellTip = () => {
       const currentUser = userRef.current;
-      if (currentUser?.plan === 'premium') return; // 付费用户不打扰
+      if (currentUser?.plan === "premium") return; // 付费用户不打扰
 
       const existingTip = document.getElementById("upsell-toast");
       if (existingTip) existingTip.remove();
@@ -1029,7 +1203,8 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
       if (activeBtn) {
         activeBtn.disabled = true;
-        activeBtn.innerHTML = '<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...</span>';
+        activeBtn.innerHTML =
+          '<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...</span>';
       }
 
       trackEvent("download_result", {
@@ -1040,7 +1215,7 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
       try {
         const currentUser = userRef.current;
-        const isPremium = currentUser && currentUser.plan === 'premium';
+        const isPremium = currentUser && currentUser.plan === "premium";
 
         if (fmt === "png") {
           await new Promise<void>((resolve) => {
@@ -1069,7 +1244,7 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
                 exportCtx.fillText(
                   "connectthedotsprintable.online",
                   exportCanvas.width / 2,
-                  exportCanvas.height - (fontSize / 2) // 距离底部留一点间距
+                  exportCanvas.height - fontSize / 2 // 距离底部留一点间距
                 );
               }
             }
@@ -1089,25 +1264,42 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
               resolve();
             }, "image/png");
           });
-
         } else if (fmt === "pdf") {
           // PDF 逻辑保持不变
           const isLandscape = drawCanvas!.width > drawCanvas!.height;
-          const doc = new jsPDF({ orientation: isLandscape ? "l" : "p", unit: "mm", format: "a4" });
+          const doc = new jsPDF({
+            orientation: isLandscape ? "l" : "p",
+            unit: "mm",
+            format: "a4",
+          });
           const pdfW = doc.internal.pageSize.getWidth();
           const pdfH = doc.internal.pageSize.getHeight();
-          const ratio = Math.min(pdfW / drawCanvas!.width, pdfH / drawCanvas!.height);
+          const ratio = Math.min(
+            pdfW / drawCanvas!.width,
+            pdfH / drawCanvas!.height
+          );
           const w = drawCanvas!.width * ratio;
           const h = drawCanvas!.height * ratio;
 
-          doc.addImage(drawCanvas!.toDataURL("image/png"), "PNG", (pdfW - w) / 2, (pdfH - h) / 2, w, h);
+          doc.addImage(
+            drawCanvas!.toDataURL("image/png"),
+            "PNG",
+            (pdfW - w) / 2,
+            (pdfH - h) / 2,
+            w,
+            h
+          );
 
           // 非 Premium 用户强制加水印
           if (!isPremium) {
-
             doc.setFontSize(20);
             doc.setTextColor(150, 150, 150);
-            doc.text("Created by ConnectTheDotsPrintable.online", pdfW / 2, pdfH - 5, { align: "center" });
+            doc.text(
+              "Created by ConnectTheDotsPrintable.online",
+              pdfW / 2,
+              pdfH - 5,
+              { align: "center" }
+            );
           }
 
           doc.save("connect-dots.pdf");
@@ -1115,7 +1307,6 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
         // 触发 Upsell 弹窗 (引导付费去水印)
         setTimeout(showUpsellTip, 1500);
-
       } catch (err) {
         console.error("Download failed:", err);
       } finally {
@@ -1126,14 +1317,107 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
       }
     };
 
+    const saveToGallery = async () => {
+      if (!state.originalImage || !drawCanvas)
+        return showTip("Please create a puzzle first!", "error");
+      if (!userRef.current) return showTip("Please login to save to gallery", "error");
+
+      const title = prompt("Enter puzzle title:");
+      if (!title) return;
+
+      try {
+        toggleLoader(true, "Saving to gallery...");
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", "");
+        formData.append("difficulty", "medium");
+        formData.append("dotCount", state.dots.length.toString());
+        formData.append("width", drawCanvas.width.toString());
+        formData.append("height", drawCanvas.height.toString());
+        formData.append("settings", JSON.stringify(state.config));
+
+        const originalBlob = await new Promise<Blob>((resolve) => {
+          const canvas = document.createElement("canvas");
+          canvas.width = state.originalImage!.width;
+          canvas.height = state.originalImage!.height;
+          const ctx = canvas.getContext("2d");
+          ctx?.drawImage(state.originalImage!, 0, 0);
+          canvas.toBlob((blob) => resolve(blob!), "image/jpeg");
+        });
+
+        const puzzleBlob = await new Promise<Blob>((resolve) => {
+          drawCanvas.toBlob((blob) => resolve(blob!), "image/png");
+        });
+
+        formData.append("originalImage", originalBlob, "original.jpg");
+        formData.append("puzzleImage", puzzleBlob, "puzzle.png");
+
+        const res = await fetch("/api/connect-dots/save", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          showTip("Saved successfully!", "success");
+        } else {
+          showTip("Failed to save", "error");
+        }
+      } catch (error) {
+        showTip("Failed to save", "error");
+      } finally {
+        toggleLoader(false);
+      }
+    };
+
+    const autoSavePuzzle = async () => {
+      if (!state.originalImage || !drawCanvas) return;
+
+      try {
+        const formData = new FormData();
+        formData.append("title", `Puzzle ${Date.now()}`);
+        formData.append("description", "");
+        formData.append("difficulty", "medium");
+        formData.append("dotCount", state.dots.length.toString());
+        formData.append("width", drawCanvas.width.toString());
+        formData.append("height", drawCanvas.height.toString());
+        formData.append("settings", JSON.stringify(state.config));
+
+        const originalBlob = await new Promise<Blob>((resolve) => {
+          const canvas = document.createElement("canvas");
+          canvas.width = state.originalImage!.width;
+          canvas.height = state.originalImage!.height;
+          const ctx = canvas.getContext("2d");
+          ctx?.drawImage(state.originalImage!, 0, 0);
+          canvas.toBlob((blob) => resolve(blob!), "image/jpeg");
+        });
+
+        const puzzleBlob = await new Promise<Blob>((resolve) => {
+          drawCanvas.toBlob((blob) => resolve(blob!), "image/png");
+        });
+
+        formData.append("originalImage", originalBlob, "original.jpg");
+        formData.append("puzzleImage", puzzleBlob, "puzzle.png");
+
+        await fetch("/api/connect-dots/save", { method: "POST", body: formData });
+      } catch (error) {
+        console.error("Auto save failed:", error);
+      }
+    };
+
     let cvCallbacks: Array<() => void> = [];
     const loadOpenCv = (cb?: () => void) => {
-      if (cvReady) { if (cb) cb(); return; }
+      if (cvReady) {
+        if (cb) cb();
+        return;
+      }
       if (cb) cvCallbacks.push(cb);
       if (document.querySelector('script[src*="opencv.js"]')) return;
 
       const script = document.createElement("script");
-      script.src = "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js";
+      script.src =
+        "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js";
       script.async = true;
       window.Module = {
         onRuntimeInitialized: function () {
@@ -1162,11 +1446,12 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           clearInterval(interval);
 
           // 绑定事件：只负责生成，不负责 UI 状态
-          btn.addEventListener('click', async (e) => {
+          btn.addEventListener("click", async (e) => {
             e.preventDefault();
 
             // 双重保险
-            if (!userRef.current || parseInt(userRef.current.credits) <= 0) return;
+            if (!userRef.current || parseInt(userRef.current.credits) <= 0)
+              return;
 
             const input = getEl("hero-ai-input") as HTMLInputElement;
             const prompt = input?.value.trim() || "";
@@ -1181,47 +1466,58 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
             (btn as HTMLButtonElement).disabled = true;
 
             // ★ 2. 修复图片不显示：先切换视图，确保 Canvas 可见
-            switchView('editor');
+            switchView("editor");
             toggleLoader(true, "AI is creating your puzzle...");
 
             try {
               // 清空 Canvas 防止残影
-              if (drawCanvas && ctx) ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+              if (drawCanvas && ctx)
+                ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 
               const token = localStorage.getItem("auth_token");
               const res = await fetch("/api/doubao", {
                 method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
                 body: JSON.stringify({
-                  prompt: prompt + ", simple black and white line art, coloring book style,pure white background,no paper texture, no shading, clear outlines",
-                })
+                  prompt:
+                    prompt +
+                    ", simple black and white line art, coloring book style,pure white background,no paper texture, no shading, clear outlines",
+                }),
               });
 
               if (!res.ok) throw new Error("AI Generation failed");
               const blob = await res.blob();
 
-              // 检查是否是图片
-              if (blob.type.indexOf('image') === -1) throw new Error("Invalid image received");
+              if (blob.type.indexOf("image") === -1)
+                throw new Error("Invalid image received");
 
-              // 扣除积分 (仅通知前端刷新，后端已扣)
               if (userRef.current) {
-                const newCredits = (parseInt(userRef.current.credits) - 1).toString();
+                const newCredits = (
+                  parseInt(userRef.current.credits) - 1
+                ).toString();
                 userRef.current.credits = newCredits;
-                localStorage.setItem("app_user", JSON.stringify(userRef.current));
-                window.dispatchEvent(new CustomEvent('auth-updated'));
+                localStorage.setItem(
+                  "app_user",
+                  JSON.stringify(userRef.current)
+                );
+                window.dispatchEvent(new CustomEvent("auth-updated"));
               }
 
-              const aiFile = new File([blob], `ai_${Date.now()}.png`, { type: blob.type });
+              const aiFile = new File([blob], `ai_${Date.now()}.png`, {
+                type: blob.type,
+              });
 
               // ★ 3. 延迟一点点，给 DOM 渲染留出时间
               setTimeout(() => {
                 loadFileToCanvas(aiFile);
               }, 100);
-
             } catch (e: any) {
               console.error(e);
               showTip(e.message, "error");
-              switchView('landing'); // 失败回退
+              switchView("landing"); // 失败回退
             } finally {
               toggleLoader(false);
               (btn as HTMLButtonElement).disabled = false;
@@ -1272,9 +1568,11 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           btn.classList.toggle("bg-brand-blue", isActive);
           btn.classList.toggle("text-white", isActive);
           btn.classList.toggle("bg-slate-700", !isActive);
-          if (btn.id === "tool-add" && !isActive) btn.classList.add("text-brand-blue");
+          if (btn.id === "tool-add" && !isActive)
+            btn.classList.add("text-brand-blue");
         });
-        if (drawCanvas) drawCanvas.style.cursor = tool === "move" ? "grab" : "crosshair";
+        if (drawCanvas)
+          drawCanvas.style.cursor = tool === "move" ? "grab" : "crosshair";
       };
 
       if (toolAdd) toolAdd.addEventListener("click", () => setActive("add"));
@@ -1286,18 +1584,42 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
     const setupPresets = () => {
       const presetConfigs: any = {
-        easy: { count: 25, font: 28, dotRadius: 8, hint: "trace", desc: "Perfect for kids (20-30 dots, large font)" },
-        medium: { count: 55, font: 20, dotRadius: 6, hint: "trace", desc: "Standard difficulty (50-60 dots)" },
-        hard: { count: 90, font: 14, dotRadius: 4, hint: "trace", desc: "Expert challenge (80+ dots, no hints)" },
+        easy: {
+          count: 25,
+          font: 28,
+          dotRadius: 8,
+          hint: "trace",
+          desc: "Perfect for kids (20-30 dots, large font)",
+        },
+        medium: {
+          count: 55,
+          font: 20,
+          dotRadius: 6,
+          hint: "trace",
+          desc: "Standard difficulty (50-60 dots)",
+        },
+        hard: {
+          count: 90,
+          font: 14,
+          dotRadius: 4,
+          hint: "trace",
+          desc: "Expert challenge (80+ dots, no hints)",
+        },
       };
 
       presetButtons.forEach((btn) => {
         btn.addEventListener("click", () => {
           presetButtons.forEach((b) => {
-            b.classList.remove("active", "border-brand-blue", "bg-indigo-50", "bg-indigo-50/50");
+            b.classList.remove(
+              "active",
+              "border-brand-blue",
+              "bg-indigo-50",
+              "bg-indigo-50/50"
+            );
             b.classList.add("border-transparent", "bg-slate-50");
             const span = b.querySelector("span:last-child");
-            if (span) span.classList.replace("text-brand-blue", "text-slate-600");
+            if (span)
+              span.classList.replace("text-brand-blue", "text-slate-600");
           });
 
           btn.classList.add("active", "border-brand-blue", "bg-indigo-50");
@@ -1306,11 +1628,12 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           if (span) span.classList.replace("text-slate-600", "text-brand-blue");
 
           const presetType = (btn as HTMLElement).dataset.preset;
-          const config = presetConfigs[presetType || 'easy'];
+          const config = presetConfigs[presetType || "easy"];
 
           if (dotCountSlider) {
             dotCountSlider.value = `${config.count}`;
-            if (dotCountDisplay) dotCountDisplay.textContent = `${config.count} Dots`;
+            if (dotCountDisplay)
+              dotCountDisplay.textContent = `${config.count} Dots`;
           }
           if (fontSizeSlider) {
             fontSizeSlider.value = `${config.font}`;
@@ -1325,12 +1648,14 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
           state.config.dotRadius = config.dotRadius;
 
           const radios = document.getElementsByName("hint-type");
-          for (let radio of (radios as any)) {
+          for (let radio of radios as any) {
             if (radio.value === config.hint) {
               radio.checked = true;
               updateConfig("hint", config.hint);
               if (thicknessContainer) {
-                config.hint === "internal" ? thicknessContainer.classList.remove("hidden") : thicknessContainer.classList.add("hidden");
+                config.hint === "internal"
+                  ? thicknessContainer.classList.remove("hidden")
+                  : thicknessContainer.classList.add("hidden");
               }
               break;
             }
@@ -1347,8 +1672,12 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
     };
 
     const updateDemoVideoOverlay = () => {
-      const pcVideo = document.getElementById("demo-video-pc") as HTMLVideoElement | null;
-      const mobileVideo = document.getElementById("demo-video-mobile") as HTMLVideoElement | null;
+      const pcVideo = document.getElementById(
+        "demo-video-pc"
+      ) as HTMLVideoElement | null;
+      const mobileVideo = document.getElementById(
+        "demo-video-mobile"
+      ) as HTMLVideoElement | null;
       const pcOverlay = document.getElementById("video-overlay");
       const mobileOverlay = document.getElementById("mobile-video-overlay");
 
@@ -1424,10 +1753,13 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
 
       if (thicknessSlider) {
         thicknessSlider.value = `${DEFAULT_CONFIG.eraseThickness}`;
-        if (thicknessValue) thicknessValue.textContent = `${DEFAULT_CONFIG.eraseThickness}`;
+        if (thicknessValue)
+          thicknessValue.textContent = `${DEFAULT_CONFIG.eraseThickness}`;
       }
 
-      const defaultPresetBtn = document.querySelector('.preset-btn-js[data-preset="easy"]');
+      const defaultPresetBtn = document.querySelector(
+        '.preset-btn-js[data-preset="easy"]'
+      );
       if (defaultPresetBtn) (defaultPresetBtn as HTMLElement).click();
     };
 
@@ -1456,12 +1788,20 @@ export default function DotGeneratorClient({ locale, user }: DotGeneratorProps) 
       });
     });
 
-    if (backToHomeBtn) backToHomeBtn.addEventListener("click", () => switchView("landing"));
+    if (backToHomeBtn)
+      backToHomeBtn.addEventListener("click", () => switchView("landing"));
 
-    if (sidebarPngBtn) sidebarPngBtn.addEventListener("click", (e) => dl("png", e));
-    if (sidebarPdfBtn) sidebarPdfBtn.addEventListener("click", (e) => dl("pdf", e));
-    if (mobilePdfBtn) mobilePdfBtn.addEventListener("click", (e) => dl("pdf", e));
-    if (mobilePngBtn) mobilePngBtn.addEventListener("click", (e) => dl("png", e));
+    if (sidebarPngBtn)
+      sidebarPngBtn.addEventListener("click", (e) => dl("png", e));
+    if (sidebarPdfBtn)
+      sidebarPdfBtn.addEventListener("click", (e) => dl("pdf", e));
+    if (mobilePdfBtn)
+      mobilePdfBtn.addEventListener("click", (e) => dl("pdf", e));
+    if (mobilePngBtn)
+      mobilePngBtn.addEventListener("click", (e) => dl("png", e));
+
+    const saveGalleryBtn = getEl("save-to-gallery-btn");
+    if (saveGalleryBtn) saveGalleryBtn.addEventListener("click", saveToGallery);
 
     init();
   }, []);

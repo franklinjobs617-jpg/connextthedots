@@ -32,7 +32,8 @@ model User {
   current_streak    String?   @default("0")
   plan              String?   @default("free")
   // 关联支付表
-  payments          Pay[]
+  payments              Pay[]
+  connectDotsPuzzles    ConnectDotsPuzzle[]
 
   @@map("google_user")
 }
@@ -62,4 +63,25 @@ model Pay {
   user User? @relation(fields: [userId], references: [id])
 
   @@map("pay")
+}
+
+model ConnectDotsPuzzle {
+  id                Int       @id @default(autoincrement())
+  userId            Int       @map("user_id")
+  slug              String    @unique
+  title             String
+  description       String?   @db.Text
+  originalImageUrl  String    @map("original_image_url") @db.Text
+  puzzleImageUrl    String    @map("puzzle_image_url") @db.Text
+  difficulty        String    @default("medium")
+  dotCount          Int       @map("dot_count")
+  width             Int
+  height            Int
+  settings          String?   @db.Text
+  isPublic          Boolean   @default(true) @map("is_public")
+  createTime        DateTime  @default(now()) @map("create_time")
+  updateTime        DateTime  @updatedAt @map("update_time")
+  user              User      @relation(fields: [userId], references: [id])
+
+  @@map("connect_dots_puzzle")
 }

@@ -10,14 +10,14 @@ const locales = ['en', 'es', 'de', 'pt', 'fr', 'it', 'nl'];
  * @returns 带斜杠的路径
  */
 const ensureTrailingSlash = (path: string) => {
-    if (path === '/') return '/'; // 根路径特殊处理
+    if (path === '/') return '/'; 
     return path.endsWith('/') ? path : `${path}/`;
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
     // 1. 静态页面
     const staticPages = [
-        '/',          // 首页
+        '/',      
         '/pricing',
         "/printable-connect-the-dots",
         '/how-to-make',

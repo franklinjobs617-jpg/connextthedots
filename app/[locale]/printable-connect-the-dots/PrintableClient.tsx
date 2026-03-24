@@ -6,13 +6,15 @@ import Link from "next/link";
 import Script from "next/script";
 import { MessageSquare, X, Filter, Clock, Heart, ChevronRight } from "lucide-react";
 import { useTranslations } from 'next-intl';
-import PrintableCard from "@/components/PrintableCard"; // 之前创建的卡片组件
+import PrintableCard from "@/components/PrintableCard";
+import UserPuzzleCard from "./components/UserPuzzleCard"; // 之前创建的卡片组件
 
 export default function PrintableListClient({ locale, data, allItems }: any) {
     const t = useTranslations('printablePage');
     const [activeFilter, setActiveFilter] = useState("all");
     const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
     const [scriptsLoaded, setScriptsLoaded] = useState(false);
+    const [userPuzzles, setUserPuzzles] = useState([]);
 
     // 1:1 还原 list-page-logic.js 的渲染逻辑
     const displayedItems = useMemo(() => {
@@ -48,6 +50,13 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
     const handleFilter = (filter: string) => {
         setActiveFilter(filter.replace('difficulty-', ''));
     };
+
+    useEffect(() => {
+        fetch('/api/connect-dots/gallery?limit=12')
+            .then(res => res.json())
+            .then(data => setUserPuzzles(data))
+            .catch(err => console.error(err));
+    }, []);
 
     return (
         <>
@@ -163,6 +172,20 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
                         </div>
                     </div>
                 </section>
+
+                {/* Community Gallery Section */}
+                {userPuzzles.length > 0 && (
+                    <section className="py-16 bg-slate-50">
+                        <div className="container max-w-7xl mx-auto px-6">
+                            <h2 className="text-3xl font-bold mb-8">Community Gallery</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                {userPuzzles.map((puzzle: any) => (
+                                    <UserPuzzleCard key={puzzle.id} puzzle={puzzle} />
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                )}
 
                 {/* 3. Bottom CTA */}
                 <section className="py-16 bg-white border-t border-slate-100">
