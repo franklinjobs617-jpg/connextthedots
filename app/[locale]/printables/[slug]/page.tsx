@@ -32,7 +32,36 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale, slug } = await params;
     const { all } = getLocaleData(locale);
-    const item = all.find((i) => i.id === slug);
+    let item = all.find((i) => i.id === slug);
+
+    // 如果在静态数据中找不到，尝试从数据库获取动态数据
+    if (!item) {
+        try {
+            const res = await fetch(`/api/connect-dots/${slug}`, { cache: "no-store" });
+            if (res.ok) {
+                const puzzle = await res.json();
+                item = {
+                    id: puzzle.slug,
+                    title: puzzle.title,
+                    description: puzzle.description,
+                    difficulty: puzzle.difficulty,
+                    tagColor: "bg-brand-blue",
+                    imageUrl: puzzle.puzzleImageUrl,
+                    imageSrcset: `${puzzle.puzzleImageUrl} 600w`,
+                    altText: puzzle.title,
+                    detailPage: `/printables/${puzzle.slug}`,
+                    solutionUrl: puzzle.puzzleImageUrl,
+                    solutionAltText: `${puzzle.title} solution`,
+                    category: [],
+                    dotRange: [1, puzzle.dotCount],
+                    ageRecommendation: "All Ages",
+                    popularity: 0,
+                };
+            }
+        } catch (error) {
+            console.error("Error fetching dynamic puzzle for metadata:", error);
+        }
+    }
 
     if (!item) return {};
 
@@ -76,18 +105,18 @@ export default async function Page({ params }: Props) {
                     id: puzzle.slug,
                     title: puzzle.title,
                     description: puzzle.description,
+                    difficulty: puzzle.difficulty,
+                    tagColor: "bg-brand-blue",
                     imageUrl: puzzle.puzzleImageUrl,
                     imageSrcset: `${puzzle.puzzleImageUrl} 600w`,
-                    solutionUrl: puzzle.puzzleImageUrl, // 假设 solutionUrl 与 puzzleImageUrl 相同
-                    solutionAltText: `${puzzle.title} solution`,
-                    dotRange: [1, puzzle.dotCount],
-                    difficulty: puzzle.difficulty,
-                    category: [], // 动态数据可能没有分类
-                    ageRecommendation: "All Ages", // 动态数据可能没有年龄推荐
-                    popularity: 0, // 动态数据可能没有 popularity
                     altText: puzzle.title,
                     detailPage: `/printables/${puzzle.slug}`,
-                    tagColor: "bg-brand-blue"
+                    solutionUrl: puzzle.puzzleImageUrl,
+                    solutionAltText: `${puzzle.title} solution`,
+                    category: [],
+                    dotRange: [1, puzzle.dotCount],
+                    ageRecommendation: "All Ages",
+                    popularity: 0,
                 };
             }
         } catch (error) {

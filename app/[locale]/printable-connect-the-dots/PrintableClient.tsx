@@ -7,7 +7,7 @@ import Script from "next/script";
 import { MessageSquare, X, Filter, Clock, Heart, ChevronRight } from "lucide-react";
 import { useTranslations } from 'next-intl';
 import PrintableCard from "@/components/PrintableCard";
-import UserPuzzleCard from "./components/UserPuzzleCard"; // 之前创建的卡片组件
+import UserPuzzleCard from "./components/UserPuzzleCard";
 
 export default function PrintableListClient({ locale, data, allItems }: any) {
     const t = useTranslations('printablePage');
@@ -19,7 +19,6 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
     // 1:1 还原 list-page-logic.js 的渲染逻辑
     const displayedItems = useMemo(() => {
         if (activeFilter === "all") {
-            // 这里的随机打乱在服务端和客户端不一致会报错，故固定取前12个，或在 useEffect 里 shuffle
             return allItems.slice(0, 12);
         }
         return data[activeFilter] || [];
@@ -27,25 +26,24 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
 
     // 合并静态和动态数据
     const allPuzzles = useMemo(() => {
-        // 将动态数据转换为与静态数据相同的格式
         const formattedUserPuzzles = userPuzzles.map((puzzle: any) => ({
             id: puzzle.slug,
             title: puzzle.title,
             description: puzzle.description,
+            difficulty: puzzle.difficulty,
+            tagColor: "bg-brand-blue",
             imageUrl: puzzle.puzzleImageUrl,
             imageSrcset: `${puzzle.puzzleImageUrl} 600w`,
-            solutionUrl: puzzle.puzzleImageUrl, // 假设 solutionUrl 与 puzzleImageUrl 相同
-            solutionAltText: `${puzzle.title} solution`,
-            dotRange: [1, puzzle.dotCount],
-            difficulty: puzzle.difficulty,
-            category: [], // 动态数据可能没有分类
-            ageRecommendation: "All Ages", // 动态数据可能没有年龄推荐
-            popularity: 0, // 动态数据可能没有 popularity
             altText: puzzle.title,
             detailPage: `/printables/${puzzle.slug}`,
-            tagColor: "bg-brand-blue"
+            solutionUrl: puzzle.puzzleImageUrl,
+            solutionAltText: `${puzzle.title} solution`,
+            category: [],
+            dotRange: [1, puzzle.dotCount],
+            ageRecommendation: "All Ages",
+            popularity: 0,
         }));
-        
+
         // 合并静态和动态数据
         return [...allItems, ...formattedUserPuzzles];
     }, [allItems, userPuzzles]);
@@ -68,9 +66,6 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
         }
     };
 
-
-
-
     // 筛选器点击处理
     const handleFilter = (filter: string) => {
         setActiveFilter(filter.replace('difficulty-', ''));
@@ -86,7 +81,6 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-
             <style jsx global>{`
         .filter-btn.active { background-color: #4f46e5; color: white; }
         .filter-btn.active .indicator-dot { background-color: white; }
