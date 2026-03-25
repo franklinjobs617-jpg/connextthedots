@@ -69,7 +69,7 @@ export default async function Page({ params }: Props) {
     // 如果在静态数据中找不到，尝试从数据库获取动态数据
     if (!item) {
         try {
-            const res = await fetch(`http://localhost:3000/api/connect-dots/${slug}`, { cache: "no-store" });
+            const res = await fetch(`/api/connect-dots/${slug}`, { cache: "no-store" });
             if (res.ok) {
                 const puzzle = await res.json();
                 item = {
