@@ -65,7 +65,7 @@ export default async function Page({ params }: Props) {
     const { data, all } = getLocaleData(locale);
 
     let item = all.find((i) => i.id === slug);
-    
+
     // 如果在静态数据中找不到，尝试从数据库获取动态数据
     if (!item) {
         try {

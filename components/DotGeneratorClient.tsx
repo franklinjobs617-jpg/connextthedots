@@ -1400,7 +1400,12 @@ export default function DotGeneratorClient({
         formData.append("originalImage", originalBlob, "original.jpg");
         formData.append("puzzleImage", puzzleBlob, "puzzle.png");
 
-        await fetch("/api/connect-dots/save", { method: "POST", body: formData });
+        const token = localStorage.getItem("auth_token");
+        await fetch("/api/connect-dots/save", {
+          method: "POST",
+          body: formData,
+          headers: token ? { "Authorization": `Bearer ${token}` } : {}
+        });
       } catch (error) {
         console.error("Auto save failed:", error);
       }

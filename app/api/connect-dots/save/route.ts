@@ -1,19 +1,31 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { cookies } from "next/headers";
 import { uploadConnectDotsImage } from "@/app/[locale]/convert-photo-to-beads/lib/r2-connect-dots-service";
 
 export async function POST(req: Request) {
     try {
-        const cookieStore = await cookies();
-        const userId = cookieStore.get("session_user_id")?.value;
+        // 从 Authorization 头中获取 token
+        const authHeader = req.headers.get("authorization");
+        const token = authHeader?.replace("Bearer ", "");
 
-        if (!userId) {
+        if (!token) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
+        // 调用 Google 接口验证 Token
+        const googleRes = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+        });
+
+        if (!googleRes.ok) {
+            return NextResponse.json({ error: "Invalid Token" }, { status: 401 });
+        }
+
+        const googleUser = await googleRes.json();
+
+        // 查找用户
         const user = await prisma.user.findUnique({
-            where: { googleUserId: userId },
+            where: { email: googleUser.email },
         });
 
         if (!user) {
@@ -38,10 +50,10 @@ export async function POST(req: Request) {
         const puzzleBuffer = Buffer.from(await puzzleImage.arrayBuffer());
 
         const originalUrl = await uploadConnectDotsImage(
-            userId, puzzleId, "original", originalBuffer, originalImage.type
+            user.googleUserId!, puzzleId, "original", originalBuffer, originalImage.type
         );
         const puzzleUrl = await uploadConnectDotsImage(
-            userId, puzzleId, "puzzle", puzzleBuffer, puzzleImage.type
+            user.googleUserId!, puzzleId, "puzzle", puzzleBuffer, puzzleImage.type
         );
 
         const puzzle = await prisma.connectDotsPuzzle.create({
