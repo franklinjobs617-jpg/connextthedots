@@ -64,7 +64,37 @@ export default async function Page({ params }: Props) {
     const { locale, slug } = await params;
     const { data, all } = getLocaleData(locale);
 
-    const item = all.find((i) => i.id === slug);
+    let item = all.find((i) => i.id === slug);
+    
+    // 如果在静态数据中找不到，尝试从数据库获取动态数据
+    if (!item) {
+        try {
+            const res = await fetch(`http://localhost:3000/api/connect-dots/${slug}`, { cache: "no-store" });
+            if (res.ok) {
+                const puzzle = await res.json();
+                item = {
+                    id: puzzle.slug,
+                    title: puzzle.title,
+                    description: puzzle.description,
+                    imageUrl: puzzle.puzzleImageUrl,
+                    imageSrcset: `${puzzle.puzzleImageUrl} 600w`,
+                    solutionUrl: puzzle.puzzleImageUrl, // 假设 solutionUrl 与 puzzleImageUrl 相同
+                    solutionAltText: `${puzzle.title} solution`,
+                    dotRange: [1, puzzle.dotCount],
+                    difficulty: puzzle.difficulty,
+                    category: [], // 动态数据可能没有分类
+                    ageRecommendation: "All Ages", // 动态数据可能没有年龄推荐
+                    popularity: 0, // 动态数据可能没有 popularity
+                    altText: puzzle.title,
+                    detailPage: `/printables/${puzzle.slug}`,
+                    tagColor: "bg-brand-blue"
+                };
+            }
+        } catch (error) {
+            console.error("Error fetching dynamic puzzle:", error);
+        }
+    }
+
     if (!item) notFound();
 
     // 查找同难度的所有卡片

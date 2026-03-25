@@ -25,6 +25,31 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
         return data[activeFilter] || [];
     }, [activeFilter, data, allItems]);
 
+    // 合并静态和动态数据
+    const allPuzzles = useMemo(() => {
+        // 将动态数据转换为与静态数据相同的格式
+        const formattedUserPuzzles = userPuzzles.map((puzzle: any) => ({
+            id: puzzle.slug,
+            title: puzzle.title,
+            description: puzzle.description,
+            imageUrl: puzzle.puzzleImageUrl,
+            imageSrcset: `${puzzle.puzzleImageUrl} 600w`,
+            solutionUrl: puzzle.puzzleImageUrl, // 假设 solutionUrl 与 puzzleImageUrl 相同
+            solutionAltText: `${puzzle.title} solution`,
+            dotRange: [1, puzzle.dotCount],
+            difficulty: puzzle.difficulty,
+            category: [], // 动态数据可能没有分类
+            ageRecommendation: "All Ages", // 动态数据可能没有年龄推荐
+            popularity: 0, // 动态数据可能没有 popularity
+            altText: puzzle.title,
+            detailPage: `/printables/${puzzle.slug}`,
+            tagColor: "bg-brand-blue"
+        }));
+        
+        // 合并静态和动态数据
+        return [...allItems, ...formattedUserPuzzles];
+    }, [allItems, userPuzzles]);
+
     // 动态 JSON-LD
     const jsonLd = {
         "@context": "https://schema.org",
@@ -163,7 +188,7 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pb-8">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 pb-8">
                                     {displayedItems.map((item: any, index: number) => (
                                         <PrintableCard key={item.id} item={item} priority={index < 3} />
                                     ))}
@@ -173,19 +198,7 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
                     </div>
                 </section>
 
-                {/* Community Gallery Section */}
-                {userPuzzles.length > 0 && (
-                    <section className="py-16 bg-slate-50">
-                        <div className="container max-w-7xl mx-auto px-6">
-                            <h2 className="text-3xl font-bold mb-8">Community Gallery</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                {userPuzzles.map((puzzle: any) => (
-                                    <UserPuzzleCard key={puzzle.id} puzzle={puzzle} />
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-                )}
+                {/* Community Gallery Section - 已合并到主网格中，不再单独显示 */}
 
                 {/* 3. Bottom CTA */}
                 <section className="py-16 bg-white border-t border-slate-100">
