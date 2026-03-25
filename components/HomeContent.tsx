@@ -1784,6 +1784,7 @@ export default function HomeContent() {
                                             {tEditor("medium")}
                                         </span>
                                     </button>
+                                    
                                     <button
                                         className="preset-btn-js relative flex flex-col items-center justify-center py-3 px-1 rounded-xl border-2 border-transparent bg-slate-50 hover:bg-slate-100 transition-all cursor-pointer"
                                         data-preset="hard"
