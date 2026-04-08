@@ -8,7 +8,7 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 
 export default function PricingContent() {
     const t = useTranslations("pricing");
-    const { user, isLoggedIn, login, refreshUser } = useAuth();
+    const { user, isLoggedIn, isLoaded, login, refreshUser } = useAuth();
 
     const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
     const [verificationStatus, setVerificationStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -127,6 +127,7 @@ export default function PricingContent() {
                         type="content_lifesaver_once"
                         loading={loadingPlan === "content_lifesaver_once"}
                         onStripe={() => handleStripePayment("content_lifesaver_once")}
+                        isLoaded={isLoaded}
                         isLoggedIn={isLoggedIn}
                         user={user}
                         refreshUser={refreshUser}
@@ -144,6 +145,7 @@ export default function PricingContent() {
                         loading={loadingPlan === "content_creator_monthly"}
                         onStripe={() => handleStripePayment("content_creator_monthly")}
                         setVerificationStatus={setVerificationStatus}
+                        isLoaded={isLoaded}
                         isLoggedIn={isLoggedIn}
                         user={user}
                         refreshUser={refreshUser}
@@ -159,6 +161,7 @@ export default function PricingContent() {
                         type="content_pro_master_yearly"
                         loading={loadingPlan === "content_pro_master_yearly"}
                         onStripe={() => handleStripePayment("content_pro_master_yearly")}
+                        isLoaded={isLoaded}
                         isLoggedIn={isLoggedIn}
                         user={user}
                         refreshUser={refreshUser}
@@ -214,6 +217,7 @@ interface PlanCardProps {
     loading: boolean;
     onStripe: () => void;
     featured?: boolean;
+    isLoaded: boolean;
     isLoggedIn: boolean;
     user: {
         googleUserId?: string | number;
@@ -234,6 +238,7 @@ function PlanCard({
     loading,
     onStripe,
     featured = false,
+    isLoaded,
     isLoggedIn,
     user,
     login,
@@ -311,6 +316,21 @@ function PlanCard({
                     >
                         {paypalLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <>Subscribe with PayPal <ArrowRight className="w-4 h-4" /></>}
                     </button>
+                ) : !isLoaded ? (
+                    <button
+                        disabled
+                        className="w-full py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 bg-[#0070ba] text-white opacity-70"
+                    >
+                        <Loader2 className="animate-spin w-5 h-5" />
+                        Loading PayPal...
+                    </button>
+                ) : !isLoggedIn ? (
+                    <button
+                        onClick={login}
+                        className="w-full py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 bg-[#0070ba] text-white hover:bg-[#005ea6]"
+                    >
+                        Login to use PayPal <ArrowRight className="w-4 h-4" />
+                    </button>
                 ) : (
                     <div className="z-0">
                         <PayPalButtons
@@ -321,10 +341,10 @@ function PlanCard({
                                 height: 48,
                                 label: "pay",
                             }}
+                            forceReRender={[type, String(user?.id || ""), String(user?.googleUserId || "")]}
                             createOrder={async () => {
                                 if (!isLoggedIn) {
-                                    login();
-                                    return "";
+                                    throw new Error("Please login before PayPal checkout");
                                 }
 
                                 const res = await fetch("/api/pay/paypal-smart-create", {

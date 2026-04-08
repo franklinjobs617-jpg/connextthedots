@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   try {
-    const { googleUserId, type, email, userId } = await req.json();
+    const { googleUserId, type } = await req.json();
 
     const backendRes = await fetch(
       "https://api.connectthedotsprintable.online/prod-api/paypal/smart/create-order",
@@ -17,9 +16,10 @@ export async function POST(req: NextRequest) {
     const data = await backendRes.json();
 
     return NextResponse.json(data);
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Internal server error";
     return NextResponse.json(
-      { code: 500, msg: error.message },
+      { code: 500, msg: message },
       { status: 500 }
     );
   }
