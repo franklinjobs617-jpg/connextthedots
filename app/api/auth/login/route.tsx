@@ -1,71 +1,74 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
-// 商业化配置：新用户注册只送 2 个体验积分 (止血策略)
 const NEW_USER_STARTING_CREDITS = "2";
-// 站点 ID配置
 const SITE_TYPE_ID = "6";
 
 export async function POST(req: NextRequest) {
     try {
         const { accessToken } = await req.json();
+        if (!accessToken) {
+            return NextResponse.json({ error: "Missing access token" }, { status: 400 });
+        }
 
-        // 1. 调用 Google 接口验证 Token
-        const googleRes = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo`, {
-            headers: { 'Authorization': `Bearer ${accessToken}` },
+        const googleRes = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+            headers: { Authorization: `Bearer ${accessToken}` },
         });
 
         if (!googleRes.ok) {
-            return NextResponse.json({ error: 'Invalid Google Token' }, { status: 401 });
+            return NextResponse.json({ error: "Invalid Google Token" }, { status: 401 });
         }
 
         const payload = await googleRes.json();
-        const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
+        const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0] || "127.0.0.1";
 
-        // 2. 先查询用户是否存在
-        let user = await prisma.user.findUnique({
-            where: { email: payload.email },
+        const orConditions: Array<{ email?: string; googleUserId?: string }> = [];
+        if (payload?.email) {
+            orConditions.push({ email: payload.email });
+        }
+        if (payload?.sub) {
+            orConditions.push({ googleUserId: payload.sub });
+        }
+
+        if (orConditions.length === 0) {
+            return NextResponse.json({ error: "Google user info missing email/sub" }, { status: 400 });
+        }
+
+        let user = await prisma.user.findFirst({
+            where: { OR: orConditions },
         });
 
         if (!user) {
-            // ============================
-            // 场景 A: 新用户注册
-            // ============================
             user = await prisma.user.create({
                 data: {
-                    email: payload.email,
-                    googleUserId: payload.sub,
-                    name: payload.name,
-                    givenName: payload.given_name,
-                    familyName: payload.family_name,
-                    picture: payload.picture,
-                    accessToken: accessToken,
+                    email: payload.email ?? null,
+                    googleUserId: payload.sub ?? null,
+                    name: payload.name ?? null,
+                    givenName: payload.given_name ?? null,
+                    familyName: payload.family_name ?? null,
+                    picture: payload.picture ?? null,
+                    accessToken,
                     ip: clientIp,
-
-                    score: "0",                     // 初始分数
-                    credits: NEW_USER_STARTING_CREDITS, // ★ 初始 2 积分 
-
-                    type: SITE_TYPE_ID,             // ★ 站点 ID (6)
-                    plan: "free",                   // ★ 新增：初始会员等级 (free)
-                }
+                    score: "0",
+                    credits: NEW_USER_STARTING_CREDITS,
+                    type: SITE_TYPE_ID,
+                    plan: "free",
+                },
             });
         } else {
-            // ============================
-            // 场景 B: 老用户登录
-            // ============================
-            // 只更新基础信息，绝不碰 credits 和 plan
             user = await prisma.user.update({
-                where: { email: payload.email },
+                where: { id: user.id },
                 data: {
-                    accessToken: accessToken,
+                    accessToken,
                     ip: clientIp,
-                    picture: payload.picture,
-                    name: payload.name,
-                }
+                    picture: payload.picture ?? user.picture,
+                    name: payload.name ?? user.name,
+                    email: payload.email ?? user.email,
+                    googleUserId: payload.sub ?? user.googleUserId,
+                },
             });
         }
 
-        // 3. 返回数据给前端
         return NextResponse.json({
             status: "success",
             user: {
@@ -76,13 +79,13 @@ export async function POST(req: NextRequest) {
                 picture: user.picture,
                 credits: user.credits,
                 score: user.score,
-                type: user.type, // "6" (站点ID)
-                plan: user.plan, // ★ "free" 或 "premium" (用于判断权限)
-            }
+                type: user.type,
+                plan: user.plan,
+            },
         });
-
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Login API Error:", error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        const message = error instanceof Error ? error.message : "Internal server error";
+        return NextResponse.json({ error: message }, { status: 500 });
     }
 }

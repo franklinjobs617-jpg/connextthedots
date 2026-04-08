@@ -15,7 +15,8 @@ export default function StripePaymentPage() {
     const { refreshUser } = useAuth();
 
     const [status, setStatus] = useState<"verifying" | "success" | "error" | "timeout">("verifying");
-    const [message, setMessage] = useState("");
+    const [message] = useState("");
+    const [attempt, setAttempt] = useState(0);
 
     // 轮询计数器
     const checkCountRef = useRef(0);
@@ -31,7 +32,7 @@ export default function StripePaymentPage() {
         const checkOrderStatus = async () => {
             try {
                 // 2. 直接请求 Java 中转接口查询 Stripe 状态
-                const res = await fetch(`https://connectthedotsprintable.online/prod-api/stripe/check-order-status?sessionId=${sessionId}`, {
+                const res = await fetch(`https://api.connectthedotsprintable.online/prod-api/stripe/check-order-status?sessionId=${sessionId}`, {
                     // 避免缓存，确保查到最新状态
                     cache: 'no-store',
                     headers: { 'Pragma': 'no-cache' }
@@ -73,6 +74,7 @@ export default function StripePaymentPage() {
         // 5. 设置轮询定时器 (每 2 秒一次)
         const timer = setInterval(async () => {
             checkCountRef.current += 1;
+            setAttempt(checkCountRef.current);
             const isDone = await checkOrderStatus();
 
             if (isDone) {
@@ -102,7 +104,7 @@ export default function StripePaymentPage() {
                             Waiting for confirmation...
                         </p>
                         <p className="text-zinc-700 text-xs mt-6 font-mono">
-                            Attempt {checkCountRef.current} of {maxChecks}
+                            Attempt {attempt} of {maxChecks}
                         </p>
                     </div>
                 )}
