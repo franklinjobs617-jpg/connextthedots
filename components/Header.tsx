@@ -16,6 +16,17 @@ import {
     Crown
 } from "lucide-react";
 export default function Header() {
+    const normalizePlan = (plan?: string) => (plan || "free").toLowerCase();
+    const getPlanLabel = (plan?: string) => {
+        const normalized = normalizePlan(plan);
+        if (normalized === "pro_master") return "PRO MASTER";
+        if (normalized === "creator") return "CREATOR";
+        if (normalized === "lifesaver") return "LIFE-SAVER";
+        if (normalized === "premium") return "PREMIUM";
+        return "FREE";
+    };
+    const isPaidPlan = (plan?: string) => normalizePlan(plan) !== "free";
+
     const LinkArr = [
         {
             labelKey: "home",
@@ -94,12 +105,12 @@ export default function Header() {
                         {/* 会员等级 */}
                         <div className="flex items-center justify-between">
                             <span className="text-slate-500 flex items-center gap-1.5 text-md">
-                                <Crown size={14} className={user?.plan === 'premium' ? 'text-amber-500' : 'text-slate-400'} />
+                                <Crown size={14} className={isPaidPlan(user?.plan) ? 'text-amber-500' : 'text-slate-400'} />
                                 Plan
                             </span>
-                            {user?.plan === 'premium' ? (
+                            {isPaidPlan(user?.plan) ? (
                                 <span className="font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-700 uppercase tracking-wider">
-                                    Premium
+                                    {getPlanLabel(user?.plan)}
                                 </span>
                             ) : (
                                 <span className="font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 uppercase tracking-wider">
@@ -120,7 +131,7 @@ export default function Header() {
                         </div>
 
                         {/* 促单升级按钮 (仅对免费用户显示) */}
-                        {user?.plan !== 'premium' && (
+                        {!isPaidPlan(user?.plan) && (
                             <div className="pt-2">
                                 <Link
                                     href="/pricing/"
@@ -305,7 +316,7 @@ export default function Header() {
                                 className="hover:text-brand-blue no-underline"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                {/* @ts-ignore */}
+                                {/* @ts-expect-error i18n key by labelKey */}
                                 {t(item.labelKey)}
                             </Link>
                         ))}

@@ -1157,7 +1157,7 @@ export default function DotGeneratorClient({
     // ★ 3. 下载后的 Upsell 弹窗
     const showUpsellTip = () => {
       const currentUser = userRef.current;
-      if (currentUser?.plan === "premium") return; // 付费用户不打扰
+      if (String(currentUser?.plan || "free").toLowerCase() !== "free") return; // 付费用户不打扰
 
       const existingTip = document.getElementById("upsell-toast");
       if (existingTip) existingTip.remove();
@@ -1215,7 +1215,7 @@ export default function DotGeneratorClient({
 
       try {
         const currentUser = userRef.current;
-        const isPremium = currentUser && currentUser.plan === "premium";
+        const isPremium = currentUser && String(currentUser.plan || "free").toLowerCase() !== "free";
 
         if (fmt === "png") {
           await new Promise<void>((resolve) => {

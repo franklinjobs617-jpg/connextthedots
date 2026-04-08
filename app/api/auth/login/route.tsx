@@ -3,6 +3,73 @@ import { prisma } from "@/lib/prisma";
 
 const NEW_USER_STARTING_CREDITS = "2";
 const SITE_TYPE_ID = "6";
+const CONTENT_TYPE_PRO = "content_pro_master_yearly";
+const CONTENT_TYPE_CREATOR = "content_creator_monthly";
+const CONTENT_TYPE_LIFESAVER = "content_lifesaver_once";
+const CONTENT_TYPES = [CONTENT_TYPE_PRO, CONTENT_TYPE_CREATOR, CONTENT_TYPE_LIFESAVER] as const;
+
+type PaymentTypeRow = { type: string | null };
+
+function planRank(plan?: string | null): number {
+    const normalized = String(plan || "free").toLowerCase();
+    if (normalized === "pro_master") return 3;
+    if (normalized === "creator") return 2;
+    if (normalized === "lifesaver") return 1;
+    if (normalized === "premium") return 2;
+    return 0;
+}
+
+function planByPayType(payType?: string | null): string | null {
+    if (payType === CONTENT_TYPE_PRO) return "pro_master";
+    if (payType === CONTENT_TYPE_CREATOR) return "creator";
+    if (payType === CONTENT_TYPE_LIFESAVER) return "lifesaver";
+    return null;
+}
+
+async function resolveConnectPlan(googleUserId?: string, email?: string, currentPlan?: string | null): Promise<string> {
+    const safeGoogleUserId = googleUserId || "__EMPTY__";
+    const safeEmail = email || "__EMPTY__";
+
+    const stripeRows = await prisma.$queryRawUnsafe<PaymentTypeRow[]>(
+        `SELECT type
+         FROM pay
+         WHERE type IN (?, ?, ?)
+           AND status = '1'
+           AND (google_user_id = ? OR email = ?)
+         ORDER BY update_time DESC, id DESC
+         LIMIT 30`,
+        CONTENT_TYPES[0],
+        CONTENT_TYPES[1],
+        CONTENT_TYPES[2],
+        safeGoogleUserId,
+        safeEmail
+    );
+
+    const paypalRows = await prisma.$queryRawUnsafe<PaymentTypeRow[]>(
+        `SELECT type
+         FROM paypal_pay
+         WHERE type IN (?, ?, ?)
+           AND status = '2'
+           AND (google_user_id = ? OR email = ?)
+         ORDER BY update_time DESC, id DESC
+         LIMIT 30`,
+        CONTENT_TYPES[0],
+        CONTENT_TYPES[1],
+        CONTENT_TYPES[2],
+        safeGoogleUserId,
+        safeEmail
+    );
+
+    let resolvedPlan = String(currentPlan || "free");
+    const allRows = [...stripeRows, ...paypalRows];
+    for (const row of allRows) {
+        const candidate = planByPayType(row.type);
+        if (candidate && planRank(candidate) > planRank(resolvedPlan)) {
+            resolvedPlan = candidate;
+        }
+    }
+    return resolvedPlan;
+}
 
 export async function POST(req: NextRequest) {
     try {
@@ -72,6 +139,16 @@ export async function POST(req: NextRequest) {
                     googleUserId: payload.sub ?? user.googleUserId,
                 },
             });
+        }
+
+        if (user.type === SITE_TYPE_ID) {
+            const derivedPlan = await resolveConnectPlan(user.googleUserId || undefined, user.email || undefined, user.plan);
+            if (derivedPlan !== (user.plan || "free")) {
+                user = await prisma.user.update({
+                    where: { id: user.id },
+                    data: { plan: derivedPlan },
+                });
+            }
         }
 
         return NextResponse.json({
