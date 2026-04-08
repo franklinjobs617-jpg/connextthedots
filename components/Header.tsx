@@ -316,7 +316,6 @@ export default function Header() {
                                 className="hover:text-brand-blue no-underline"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                {/* @ts-expect-error i18n key by labelKey */}
                                 {t(item.labelKey)}
                             </Link>
                         ))}
