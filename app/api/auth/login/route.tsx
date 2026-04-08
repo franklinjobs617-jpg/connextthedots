@@ -34,8 +34,13 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Google user info missing email/sub" }, { status: 400 });
         }
 
+        // 关键：只在当前站点(type=6)内查找，避免跨站点串账号
         let user = await prisma.user.findFirst({
-            where: { OR: orConditions },
+            where: {
+                type: SITE_TYPE_ID,
+                OR: orConditions,
+            },
+            orderBy: { id: "desc" },
         });
 
         if (!user) {
