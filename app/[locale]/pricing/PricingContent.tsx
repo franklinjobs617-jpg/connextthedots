@@ -189,11 +189,9 @@ export default function PricingContent() {
                         {[1, 2, 3, 4].map((num) => (
                             <div key={num} className="group border border-slate-100 rounded-2xl p-6 hover:border-indigo-100 hover:shadow-sm transition-all">
                                 <h4 className="font-bold text-lg mb-3 text-slate-800 group-hover:text-indigo-600 transition-colors">
-                                    {/* @ts-expect-error i18n dynamic key */}
                                     {t(`faq.q${num}`)}
                                 </h4>
                                 <p className="text-slate-500 leading-relaxed text-sm">
-                                    {/* @ts-expect-error i18n dynamic key */}
                                     {t(`faq.a${num}`)}
                                 </p>
                             </div>
