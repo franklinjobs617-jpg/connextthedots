@@ -41,11 +41,11 @@ export default function FeedbackPageClient({ locale }: { locale: string }) {
 
         // 打开弹窗时，手动触发弹窗内 ID 的渲染
         setTimeout(() => {
-            // @ts-ignore
+            // @ts-expect-error global is injected by cusdis script
             if (window.renderCusdis) {
                 const modalTarget = document.getElementById('cusdis_thread_modal');
                 if (modalTarget) {
-                    // @ts-ignore
+                    // @ts-expect-error global is injected by cusdis script
                     window.renderCusdis(modalTarget);
                 }
             }
@@ -159,6 +159,7 @@ export default function FeedbackPageClient({ locale }: { locale: string }) {
                             <ul className="space-y-3">
                                 <li><Link href="/privacy/" className="hover:text-white transition">{isEs ? "Privacidad" : "Privacy Policy"}</Link></li>
                                 <li><Link href="/terms/" className="hover:text-white transition">{isEs ? "Términos" : "Terms of Service"}</Link></li>
+                                <li><Link href="/dmca/" className="hover:text-white transition">DMCA Policy</Link></li>
                                 <li><Link href="/feedback/" className="text-brand-blue font-bold">{isEs ? "Feedback" : "Feedback"}</Link></li>
                             </ul>
                         </div>

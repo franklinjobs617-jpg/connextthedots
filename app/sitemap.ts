@@ -2,7 +2,6 @@ import { MetadataRoute } from 'next';
 import { getAllPrintables } from '@/lib/printables-data';
 
 const baseUrl = 'https://connectthedotsprintable.online';
-const locales = ['en', 'es', 'de', 'pt', 'fr', 'it', 'nl'];
 
 /**
  * 辅助函数，确保路径有尾部斜杠
@@ -36,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/editor',
         '/privacy',
         '/terms',
+        '/dmca',
     ];
 
     const staticUrls = staticPages.map(path => {
