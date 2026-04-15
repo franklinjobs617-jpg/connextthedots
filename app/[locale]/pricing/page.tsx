@@ -31,7 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function PricingPage() {
   // return <PricingContent />;
-  //返回首页 暂无定价功能 英文：No pricing feature available yet
   return (
     <div className="container mx-auto px-4 py-30 text-center">
       <h1 className="text-3xl font-bold mb-4">Pricing Plans</h1>
