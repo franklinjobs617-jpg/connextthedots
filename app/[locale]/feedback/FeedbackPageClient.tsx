@@ -41,11 +41,9 @@ export default function FeedbackPageClient({ locale }: { locale: string }) {
 
         // 打开弹窗时，手动触发弹窗内 ID 的渲染
         setTimeout(() => {
-            // @ts-expect-error global is injected by cusdis script
             if (window.renderCusdis) {
                 const modalTarget = document.getElementById('cusdis_thread_modal');
                 if (modalTarget) {
-                    // @ts-expect-error global is injected by cusdis script
                     window.renderCusdis(modalTarget);
                 }
             }
