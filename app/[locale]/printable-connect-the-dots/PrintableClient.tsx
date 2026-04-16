@@ -227,26 +227,6 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
                 </section>
             </main>
 
-            {/* Floating Feedback Button */}
-            <button
-                className="fixed bottom-6 right-6 bg-brand-blue text-white p-4 rounded-full shadow-lg z-[90] hover:scale-105 transition-all"
-                onClick={() => setIsFeedbackOpen(true)}
-            >
-                <MessageSquare size={24} />
-            </button>
-
-            {/* Feedback Modal */}
-            {isFeedbackOpen && (
-                <div className="fixed inset-0 bg-black/60 z-[100] flex justify-center items-center p-4" onClick={() => setIsFeedbackOpen(false)}>
-                    <div className="bg-white w-full max-w-xl rounded-2xl p-6 shadow-2xl relative" onClick={e => e.stopPropagation()}>
-                        <button className="absolute top-4 right-4 text-gray-400" onClick={() => setIsFeedbackOpen(false)}><X size={24} /></button>
-                        <h2 className="text-xl font-bold mb-4">
-                            {t('communityFeedback')}
-                        </h2>
-                        <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="4535a28e-08e9-411e-9c74-0f118e22c1af" data-page-id={`list-page-${locale}`} data-theme="light"></div>
-                    </div>
-                </div>
-            )}
         </>
     );
 }
