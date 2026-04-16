@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import Script from "next/script";
 import Footer from "@/components/Footer";
+import FeedbackWidget from "@/components/FeedbackWidget";
 import { AuthProvider } from "@/lib/auth-context";
 import PayPalProviderWrapper from "@/components/PayPalProviderWrapper";
 import { GoogleAnalytics } from '@next/third-parties/google'
@@ -74,6 +75,7 @@ export default async function LocaleLayout({
                             <Header />
                             {children}
                             <Footer />
+                            <FeedbackWidget />
                         </PayPalProviderWrapper>
                     </AuthProvider>
                 </NextIntlClientProvider>

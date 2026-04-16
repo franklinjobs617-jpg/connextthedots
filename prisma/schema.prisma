@@ -85,3 +85,31 @@ model ConnectDotsPuzzle {
 
   @@map("connect_dots_puzzle")
 }
+
+model Feedback {
+  id             Int       @id @default(autoincrement())
+  message        String    @db.Text
+  contact        String?
+  quickType      String?   @map("quick_type")
+  helpfulVote    Boolean?  @map("helpful_vote")
+  triggerSource  String?   @map("trigger_source")
+  pageUrl        String?   @map("page_url") @db.Text
+  pagePath       String?   @map("page_path")
+  actionPath     String?   @map("action_path") @db.Text
+  referrer       String?   @db.Text
+  timezone       String?
+  browserLang    String?   @map("browser_lang")
+  deviceType     String?   @map("device_type")
+  platform       String?
+  userAgent      String?   @map("user_agent") @db.Text
+  viewportWidth  Int?      @map("viewport_width")
+  viewportHeight Int?      @map("viewport_height")
+  screenWidth    Int?      @map("screen_width")
+  screenHeight   Int?      @map("screen_height")
+  ip             String?   @default("0.0.0.0")
+  screenshot     String?   @db.LongText
+  createTime     DateTime? @default(now()) @map("create_time")
+
+  @@index([createTime], map: "feedback_create_time_idx")
+  @@map("feedback")
+}
