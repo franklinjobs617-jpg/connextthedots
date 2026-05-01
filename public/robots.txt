@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://connectthedotsprintable.online//sitemap.xml
+Sitemap: https://connectthedotsprintable.online/sitemap.xml

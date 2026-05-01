@@ -9,7 +9,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const { locale } = await params;
-    const path = "/christmas-printables/";
+    const path = "/terms/";
 
     return {
         title: "Terms of Service | ConnectTheDotsPrintable.online",

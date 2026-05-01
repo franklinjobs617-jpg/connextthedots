@@ -1,7 +1,7 @@
 // 1. 基础配置
 export const siteConfig = {
     baseUrl: 'https://connectthedotsprintable.online',
-    locales: ['en', 'de', 'es'],
+    locales: ['en', 'de', 'es', 'pt', 'fr', 'it', 'nl'],
     defaultLocale: 'en',
 };
 

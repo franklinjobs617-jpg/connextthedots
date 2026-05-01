@@ -58,6 +58,7 @@ export default function Footer() {
                         <div className="text-white font-bold mb-4 uppercase tracking-wider text-xs">{t("colPrintables")}</div>
                         <ul className="space-y-3">
                             <li><Link href="/" className="hover:text-white transition">{t("home")}</Link></li>
+                            <li><Link href="/connect-the-dots-1-to-10/" className="hover:text-white transition">{t("dots1to10")}</Link></li>
                             <li><Link href="/printable-connect-the-dots/" className="hover:text-white transition">{t("allPrintables")}</Link></li>
                             <li><Link href="/how-to-make/" className="hover:text-white transition">{t("howToMake")}</Link></li>
                             <li><Link href="/christmas-printables/" className="hover:text-white transition">{t("christmas")}</Link></li>

@@ -30,6 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/printables/general",
         "/printables/hard",
         "/printables/connectTheDotsGenerator",
+        '/connect-the-dots-1-to-10',
+        '/blog/are-dot-to-dot-puzzles-good-for-kids',
         '/convert-photo-to-beads',
         '/gallery',
         '/editor',
