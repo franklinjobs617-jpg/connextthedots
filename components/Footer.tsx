@@ -108,6 +108,9 @@ export default function Footer() {
                 {/* 版权信息 */}
                 <div className="text-center text-xs">
                     <p>&copy; 2026 ConnectTheDotsPrintable.online. {t("rights")}</p>
+                    <p className="mt-2">
+                        <a href="https://seed3dlabs.com/" target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-100 hover:text-white transition">Powered by Seed3DLabs</a>
+                    </p>
                     <p className="mt-2 opacity-50">{t("disclaimer")}</p>
                 </div>
             </div>
