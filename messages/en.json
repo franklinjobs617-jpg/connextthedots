@@ -218,7 +218,8 @@
     "langName": "EN",
     "login": "Login",
     "signOut": "sign Out",
-    "pricing": "Pricing"
+    "pricing": "Pricing",
+    "coloringPages": "Coloring Pages"
   },
   "footer": {
     "description": "Your source for high-quality, free connect the dots printables for kids and adults.",
@@ -238,7 +239,8 @@
     "animalPdf": "Free Animal Dot-to-Dot Printables PDF",
     "rights": "All rights reserved.",
     "disclaimer": "All printables are for personal and educational use only.",
-    "dots1to10": "Connect the Dots 1 to 10"
+    "dots1to10": "Connect the Dots 1 to 10",
+    "coloringPages": "Coloring Pages"
   },
   "pricing": {
     "heroTitle": "Choose the Perfect Plan for Your Creativity",

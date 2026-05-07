@@ -273,6 +273,10 @@ export default function ConnectDots1to10Content() {
                             <h3 className="font-semibold text-blue-600 group-hover:underline">How to Make Dot to Dot</h3>
                             <p className="text-sm text-gray-600 mt-1">Learn how to create your own custom connect the dots puzzles.</p>
                         </Link>
+                        <Link href="/connect-the-dots-coloring-pages/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow group">
+                            <h3 className="font-semibold text-blue-600 group-hover:underline">Connect the Dots Coloring Pages</h3>
+                            <p className="text-sm text-gray-600 mt-1">Two-in-one activity pages: connect dots then color the revealed picture.</p>
+                        </Link>
                     </div>
                     <div className="mt-6 text-center">
                         <Link href="/" className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:underline">

@@ -52,6 +52,10 @@ export default function Header() {
       labelKey: "howToMake",
       href: "/how-to-make/",
     },
+    {
+      labelKey: "coloringPages",
+      href: "/connect-the-dots-coloring-pages/",
+    },
   ];
   const t = useTranslations("header");
   const pathname = usePathname(); // 获取当前纯净路径（不含语言前缀）

@@ -209,7 +209,8 @@
     "langName": "FR",
     "login": "Connexion",
     "signOut": "Déconnexion",
-    "pricing": "Tarifs"
+    "pricing": "Tarifs",
+    "coloringPages": "Pages à Colorier"
   },
   "footer": {
     "description": "Votre source de fiches points à relier de haute qualité et gratuites pour enfants et adultes.",
@@ -229,7 +230,8 @@
     "animalPdf": "Animaux Gratuits en PDF",
     "rights": "Tous droits réservés.",
     "disclaimer": "Toutes les fiches sont uniquement pour un usage personnel et éducatif.",
-    "dots1to10": "Relier les Points 1 à 10"
+    "dots1to10": "Relier les Points 1 à 10",
+    "coloringPages": "Pages à Colorier"
   },
   "pricing": {
     "heroTitle": "Choisissez le Plan Parfait pour Votre Créativité",

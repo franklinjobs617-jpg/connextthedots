@@ -193,6 +193,26 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
 
                 {/* Community Gallery Section - 已合并到主网格中，不再单独显示 */}
 
+                {/* Internal Links */}
+                <section className="py-8 bg-slate-50">
+                    <div className="container max-w-7xl mx-auto px-6">
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <Link href="/connect-the-dots-coloring-pages/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow group border border-gray-100">
+                                <h3 className="font-semibold text-brand-blue group-hover:underline">Connect the Dots Coloring Pages</h3>
+                                <p className="text-sm text-gray-600 mt-1">Two-in-one activity: connect dots then color the revealed picture.</p>
+                            </Link>
+                            <Link href="/connect-the-dots-1-to-10/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow group border border-gray-100">
+                                <h3 className="font-semibold text-brand-blue group-hover:underline">Connect the Dots 1 to 10</h3>
+                                <p className="text-sm text-gray-600 mt-1">Easy worksheets for toddlers and preschoolers learning to count.</p>
+                            </Link>
+                            <Link href="/free-animal-dot-to-dot-printables-pdf/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow group border border-gray-100">
+                                <h3 className="font-semibold text-brand-blue group-hover:underline">Animal Dot to Dot Printables</h3>
+                                <p className="text-sm text-gray-600 mt-1">Animal-themed worksheets that kids love — dogs, cats, dinosaurs, and more.</p>
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
                 {/* 3. Bottom CTA */}
                 <section className="py-16 bg-white border-t border-slate-100">
                     <div className="container max-w-7xl mx-auto px-6">

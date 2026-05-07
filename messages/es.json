@@ -218,7 +218,8 @@
     "langName": "ES",
     "login": "Iniciar Sesión",
     "signOut": "Cerrar sesión",
-    "pricing": "Precios"
+    "pricing": "Precios",
+    "coloringPages": "Páginas para Colorear"
   },
   "footer": {
     "description": "Tu fuente de dibujos de unir puntos de alta calidad, gratis para niños y adultos.",
@@ -238,7 +239,8 @@
     "animalPdf": "Animales en PDF Gratis",
     "rights": "Todos los derechos reservados.",
     "disclaimer": "Los dibujos son solo para uso personal y educativo.",
-    "dots1to10": "Unir los Puntos 1 a 10"
+    "dots1to10": "Unir los Puntos 1 a 10",
+    "coloringPages": "Páginas para Colorear"
   },
   "pricing": {
     "heroTitle": "Elige el Plan Perfecto para tu Creatividad",

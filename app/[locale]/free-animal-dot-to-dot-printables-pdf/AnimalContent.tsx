@@ -230,6 +230,21 @@ export default function AnimalContent() {
                         </li>
                     </ul>
 
+                    {/* Internal Links */}
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 my-8">
+                        <h2 className="text-xl font-bold text-gray-900 mb-3">Explore More Printables</h2>
+                        <div className="grid sm:grid-cols-2 gap-3">
+                            <Link href="/connect-the-dots-coloring-pages/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow group">
+                                <h3 className="font-semibold text-brand-blue group-hover:underline">Connect the Dots Coloring Pages</h3>
+                                <p className="text-sm text-gray-600 mt-1">Two-in-one activity: connect dots then color the revealed picture.</p>
+                            </Link>
+                            <Link href="/connect-the-dots-1-to-10/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow group">
+                                <h3 className="font-semibold text-brand-blue group-hover:underline">Connect the Dots 1 to 10</h3>
+                                <p className="text-sm text-gray-600 mt-1">Easy worksheets for toddlers and preschoolers learning to count.</p>
+                            </Link>
+                        </div>
+                    </div>
+
                     <div className="p-8 rounded-lg text-center my-8 bg-blue-600 text-white shadow-2xl">
                         <h2 className="text-3xl font-bold mb-4">Ready to Start Connecting?</h2>
                         <p className="mb-6 text-blue-100">

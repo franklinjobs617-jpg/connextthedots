@@ -16,6 +16,7 @@ export interface PrintableItem {
     detailPage: string;
     solutionUrl: string;
     solutionAltText: string;
+    coloredImageUrl?: string;
     category: string[];
     dotRange: number[] | string;
     ageRecommendation: string;
@@ -30,7 +31,8 @@ export function createPrintableItem(
     title: string,
     puzzleFilename: string,
     solutionFilename: string,
-    customDetails: any = {}
+    customDetails: any = {},
+    coloredFilename?: string
 ): PrintableItem {
     // 关键修复：统一使用文件名（不带扩展名）作为 ID，以匹配 URL 访问
     const detailPageId = puzzleFilename.replace(/\.(webp|avif|png|jpg)$/, '');
@@ -56,6 +58,7 @@ export function createPrintableItem(
         detailPage: detailPage,
         solutionUrl: CDN_BASE_URL + solutionFilename,
         solutionAltText: customDetails.solutionAltText || `Solution ${title}`,
+        coloredImageUrl: coloredFilename ? CDN_BASE_URL + coloredFilename : undefined,
         category: categories,
         dotRange: dotRange,
         ageRecommendation: customDetails.ageRecommendation || 'All Ages',
