@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
                     userEmail = userInfo.email; // 获取到对应的谷歌邮箱
                 } else {
                     console.warn("Invalid or expired Google access token");
-                    return NextResponse.json({ error: "Invalid or expired token. Please log in again." }, { status: 401, headers: CORS_HEADERS });
+                    return NextResponse.json({ error: "Your session has expired. Please sign in again to continue." }, { status: 401, headers: CORS_HEADERS });
                 }
             } catch (error) {
                 console.error("Token validation error:", error);
@@ -57,19 +57,53 @@ export async function POST(request: NextRequest) {
             });
 
             if (!dbUser) {
-                return NextResponse.json({ error: 'User not found in database.' }, { status: 404, headers: CORS_HEADERS });
+                return NextResponse.json({ error: 'We couldn\'t find your account. Please try signing in again.' }, { status: 404, headers: CORS_HEADERS });
             }
 
             // 你的 schema 中 credits 是 String 类型，需要转换为 int 判断
             const currentCredits = parseInt(dbUser.credits || "0", 10);
 
             if (currentCredits <= 0) {
-                return NextResponse.json({ error: 'Insufficient credits. Please upgrade.' }, { status: 403, headers: CORS_HEADERS });
+                return NextResponse.json({ error: 'You\'ve used up all your credits. Upgrade your plan to keep creating!' }, { status: 403, headers: CORS_HEADERS });
             }
         }
 
         // ==========================================
-        // 3. 准备豆包 API 参数
+        // 3. Creem.io 内容审核
+        // ==========================================
+        const userPrompt = userInput.prompt;
+        if (userPrompt) {
+            try {
+                const moderationRes = await fetch('https://api.creem.io/v1/moderation/prompt', {
+                    method: 'POST',
+                    headers: {
+                        'x-api-key': 'creem_3fmMvFBIxAnIfLvxs9TGtd',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        prompt: userPrompt,
+                        external_id: userEmail ? `${userEmail}:gen_${Date.now()}` : `anonymous:gen_${Date.now()}`,
+                    }),
+                });
+
+                if (moderationRes.ok) {
+                    const moderationData = await moderationRes.json();
+                    // 如果审核不通过，拒绝生成
+                    if (moderationData.status === 'flagged' || moderationData.flagged === true || moderationData.compliant === false) {
+                        return NextResponse.json(
+                            { error: 'Oops! Your prompt seems to contain content that doesn\'t meet our community guidelines. Please adjust it and give it another try.' },
+                            { status: 400, headers: CORS_HEADERS }
+                        );
+                    }
+                }
+                // 如果审核 API 调用失败，放行（不阻塞用户）
+            } catch (moderationError) {
+                console.warn('Moderation API error, proceeding:', moderationError);
+            }
+        }
+
+        // ==========================================
+        // 4. 准备豆包 API 参数
         // ==========================================
         const requestBody = {
             ...userInput,
@@ -80,7 +114,7 @@ export async function POST(request: NextRequest) {
         const DOUBAO_IMAGE_API_URL = 'https://ark.cn-beijing.volces.com/api/v3/images/generations';
 
         // ==========================================
-        // 4. 请求豆包生成图片
+        // 5. 请求豆包生成图片
         // ==========================================
         const doubaoResponse = await fetch(DOUBAO_IMAGE_API_URL, {
             method: 'POST',
@@ -93,22 +127,22 @@ export async function POST(request: NextRequest) {
 
         if (!doubaoResponse.ok) {
             const errorData = await doubaoResponse.json();
-            return NextResponse.json({ error: errorData.error?.message || 'Upstream API Error' }, { status: doubaoResponse.status, headers: CORS_HEADERS });
+            return NextResponse.json({ error: errorData.error?.message || 'Something went wrong while generating your image. Please try again in a moment.' }, { status: doubaoResponse.status, headers: CORS_HEADERS });
         }
 
         const data = await doubaoResponse.json();
         const imageUrl = data.data?.[0]?.url;
 
         if (!imageUrl) {
-            return NextResponse.json({ error: 'No image URL returned from AI' }, { status: 500, headers: CORS_HEADERS });
+            return NextResponse.json({ error: 'The generation didn\'t complete as expected. Try a different description and try again.' }, { status: 500, headers: CORS_HEADERS });
         }
 
         // ==========================================
-        // 5. 获取生成的图片
+        // 6. 获取生成的图片
         // ==========================================
         const imageFetchResponse = await fetch(imageUrl);
         if (!imageFetchResponse.ok) {
-            return NextResponse.json({ error: 'Failed to fetch generated image' }, { status: 500, headers: CORS_HEADERS });
+            return NextResponse.json({ error: 'We had trouble loading the image. Please hit generate again.' }, { status: 500, headers: CORS_HEADERS });
         }
 
         // 获取 Content-Type 并以二进制流返回
@@ -116,7 +150,7 @@ export async function POST(request: NextRequest) {
         const imageArrayBuffer = await imageFetchResponse.arrayBuffer();
 
         // ==========================================
-        // 6. 扣除数据库积分 (在图片成功获取后)
+        // 7. 扣除数据库积分 (在图片成功获取后)
         // ==========================================
         if (userEmail && dbUser) {
             const currentCredits = parseInt(dbUser.credits || "0", 10);
@@ -131,7 +165,7 @@ export async function POST(request: NextRequest) {
         }
 
         // ==========================================
-        // 7. 返回结果
+        // 8. 返回结果
         // ==========================================
         return new Response(imageArrayBuffer, {
             status: 200,
@@ -145,7 +179,7 @@ export async function POST(request: NextRequest) {
     } catch (error: any) {
         console.error("System Error:", error);
         return NextResponse.json(
-            { error: 'Internal Server Error', details: error.message },
+            { error: 'Something unexpected happened on our end. Please try again shortly.' },
             { status: 500, headers: CORS_HEADERS }
         );
     }

@@ -1127,7 +1127,10 @@ export default function DotGeneratorClient({
             }),
           });
 
-          if (!res.ok) throw new Error("AI Generation failed");
+          if (!res.ok) {
+            const errData = await res.json().catch(() => null);
+            throw new Error(errData?.error || "Something went wrong. Please try again.");
+          }
           const blob = await res.blob();
           trackEvent("ai_generate_success");
 
@@ -1493,11 +1496,14 @@ export default function DotGeneratorClient({
                 }),
               });
 
-              if (!res.ok) throw new Error("AI Generation failed");
+              if (!res.ok) {
+                const errData = await res.json().catch(() => null);
+                throw new Error(errData?.error || "Something went wrong. Please try again.");
+              }
               const blob = await res.blob();
 
               if (blob.type.indexOf("image") === -1)
-                throw new Error("Invalid image received");
+                throw new Error("The result didn't look right. Please try generating again.");
 
               if (userRef.current) {
                 const newCredits = (
