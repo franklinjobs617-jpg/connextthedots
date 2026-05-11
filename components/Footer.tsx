@@ -76,6 +76,7 @@ export default function Footer() {
                             <li><Link href="/terms/" className="hover:text-white transition">{t("terms")}</Link></li>
                             <li><Link href="/dmca/" className="hover:text-white transition">DMCA Policy</Link></li>
                             <li><Link href="/pricing/" className="hover:text-white transition">{pricing("pricing")}</Link></li>
+                            <li><Link href="https://enjoy4game.com/" className="hover:text-white transition">enjoy4game.com</Link></li>
                             < li > <Link href="/popular-character-dot-to-dot-printable-worksheets/" className="hover:text-white transition">{t("popularCharacter")}</Link></li>
                             <li><Link href="/free-animal-dot-to-dot-printables-pdf/" className="hover:text-white transition">{t("animalPdf")}</Link></li>
                         </ul>
