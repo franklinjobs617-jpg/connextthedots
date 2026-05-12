@@ -1,55 +1,102 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Check, Cpu, ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { ArrowRight, Check, Cpu, Loader2, Sparkles, Zap } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
-import { PayPalButtons } from "@paypal/react-paypal-js";
+
+type Plan = {
+    type: string;
+    title: string;
+    price: string;
+    cadence: string;
+    desc: string;
+    credits: string;
+    badge?: string;
+    featured?: boolean;
+    features: string[];
+};
+
+type BillingCycle = "monthly" | "yearly";
+
+const ONE_TIME_PLANS: Plan[] = [
+    {
+        type: "content_credits_15",
+        title: "Mini Pack",
+        price: "6.90",
+        cadence: "once",
+        desc: "A quick refill for small custom worksheet batches.",
+        credits: "15 AI Credits",
+        features: ["One-time purchase", "HD PDF exports", "No subscription"],
+    },
+    {
+        type: "content_credits_45",
+        title: "Value Bundle",
+        price: "9.90",
+        cadence: "once",
+        desc: "More room to iterate on classroom and printable ideas.",
+        credits: "45 AI Credits",
+        badge: "Best value pack",
+        features: ["One-time purchase", "45 generations", "No subscription"],
+    },
+];
+
+const SUBSCRIPTION_PLANS: Record<BillingCycle, Plan[]> = {
+    monthly: [
+        {
+            type: "content_hobbyist_monthly",
+            title: "Hobbyist",
+            price: "12.90",
+            cadence: "month",
+            desc: "A steady monthly allowance for personal projects.",
+            credits: "100 credits / month",
+            features: ["Monthly credit refill", "Watermark-free PDFs", "Cancel anytime"],
+        },
+        {
+            type: "content_creator_pro_monthly",
+            title: "Creator Pro",
+            price: "22.90",
+            cadence: "month",
+            desc: "For commercial creators who need more monthly capacity.",
+            credits: "250 credits / month",
+            featured: true,
+            badge: "Most popular",
+            features: ["Commercial license", "Monthly credit refill", "Priority creative capacity"],
+        },
+    ],
+    yearly: [
+        {
+            type: "content_hobbyist_yearly",
+            title: "Hobbyist",
+            price: "129",
+            cadence: "year",
+            desc: "The hobbyist plan with a lower yearly rate.",
+            credits: "100 credits / month",
+            badge: "Save annually",
+            features: ["Monthly credit refill", "Yearly billing", "Watermark-free PDFs"],
+        },
+        {
+            type: "content_creator_pro_yearly",
+            title: "Creator Pro",
+            price: "199",
+            cadence: "year",
+            desc: "The strongest plan for sellers, teachers, and repeat creators.",
+            credits: "250 credits / month",
+            badge: "Best yearly deal",
+            featured: true,
+            features: ["Commercial license", "Yearly billing", "Monthly credit refill"],
+        },
+    ],
+};
 
 export default function PricingContent() {
     const t = useTranslations("pricing");
-    const { user, isLoggedIn, isLoaded, login, refreshUser } = useAuth();
-
+    const { user, isLoggedIn, login } = useAuth();
+    const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
     const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
-    const [verificationStatus, setVerificationStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const visiblePlans = [...ONE_TIME_PLANS, ...SUBSCRIPTION_PLANS[billingCycle]];
 
-    useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get("PayerID")) {
-            handleVerifyPayPal();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    useEffect(() => {
-        if (verificationStatus === "success") {
-            const timer = setTimeout(() => {
-                window.location.href = "/";
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [verificationStatus]);
-
-    const handleVerifyPayPal = async () => {
-        setVerificationStatus("loading");
-        try {
-            const res = await fetch(`https://api.connectthedotsprintable.online/prod-api/paypal/retUrl${window.location.search}`);
-            const data = await res.json();
-            if (data.code === 200) {
-                await refreshUser();
-                setVerificationStatus("success");
-                setTimeout(() => {
-                    window.location.href = "/";
-                }, 3000);
-            } else {
-                setVerificationStatus("error");
-            }
-        } catch {
-            setVerificationStatus("error");
-        }
-    };
-
-    const handleStripePayment = async (planType: string) => {
+    const handleCreemPayment = async (planType: string) => {
         if (!isLoggedIn) {
             login();
             return;
@@ -61,6 +108,7 @@ export default function PricingContent() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    provider: "creem",
                     googleUserId: user?.googleUserId || user?.id,
                     userId: user?.id,
                     type: planType,
@@ -69,9 +117,9 @@ export default function PricingContent() {
             const data = await res.json();
             if (data.url) {
                 window.location.href = data.url;
-            } else {
-                alert("Service busy, please try again.");
+                return;
             }
+            alert(data.error || "Service busy, please try again.");
         } catch {
             alert("Payment connection failed.");
         } finally {
@@ -79,105 +127,57 @@ export default function PricingContent() {
         }
     };
 
-    if (verificationStatus !== "idle") {
-        return (
-            <div className="min-h-[80vh] flex flex-col items-center justify-center p-6 text-center">
-                {verificationStatus === "loading" && (
-                    <div className="space-y-4">
-                        <Loader2 className="w-12 h-12 animate-spin text-indigo-600 mx-auto" />
-                        <h2>Verifying Payment...</h2>
-                    </div>
-                )}
-                {verificationStatus === "success" && (
-                    <div className="space-y-4">
-                        <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto" />
-                        <h2>Payment Successful!</h2>
-                        <p>Redirecting to home...</p>
-                    </div>
-                )}
-                {verificationStatus === "error" && (
-                    <div className="space-y-4">
-                        <AlertCircle className="w-12 h-12 text-red-500 mx-auto" />
-                        <h2>Payment Verification Failed</h2>
-                        <button onClick={() => setVerificationStatus("idle")} className="px-6 py-2 bg-slate-900 text-white rounded-xl">
-                            Retry
-                        </button>
-                    </div>
-                )}
-            </div>
-        );
-    }
-
     return (
         <>
-            <div className="bg-slate-50 min-h-screen text-slate-900 pb-20 pt-10">
+            <div className="bg-slate-50 min-h-screen text-slate-950 pb-20 pt-10">
                 <div className="max-w-5xl mx-auto text-center px-4">
-                    <h1 className="text-5xl font-black mb-4 tracking-tight">
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-500">{t("heroTitle")}</span>
+                    <div className="inline-flex items-center gap-2 rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-bold text-slate-600 shadow-sm mb-6">
+                        <Sparkles className="h-4 w-4 text-lime-500" />
+                        Secure checkout powered by Creem
+                    </div>
+                    <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-950 via-indigo-700 to-lime-500">{t("heroTitle")}</span>
                     </h1>
-                    <p className="text-slate-600 font-medium mb-12">{t("heroSubtitle")}</p>
+                    <p className="text-slate-600 font-medium mb-12 max-w-2xl mx-auto">{t("heroSubtitle")}</p>
+
+                    <div className="inline-flex rounded-2xl border border-slate-200 bg-white p-1 shadow-sm mb-10">
+                        {(["monthly", "yearly"] as const).map((cycle) => (
+                            <button
+                                key={cycle}
+                                type="button"
+                                onClick={() => setBillingCycle(cycle)}
+                                className={`min-w-28 rounded-xl px-5 py-3 text-sm font-black capitalize transition-all ${billingCycle === cycle
+                                    ? "bg-slate-950 text-white shadow-md"
+                                    : "text-slate-500 hover:text-slate-950"
+                                    }`}
+                                aria-pressed={billingCycle === cycle}
+                            >
+                                {cycle}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
-                    <PlanCard
-                        title={t("tiers.saver.name")}
-                        price={t("tiers.saver.price")}
-                        desc={t("tiers.saver.desc")}
-                        features={[t("tiers.saver.features.0"), t("tiers.saver.features.1"), t("tiers.saver.features.2")]}
-                        type="content_lifesaver_once"
-                        loading={loadingPlan === "content_lifesaver_once"}
-                        onStripe={() => handleStripePayment("content_lifesaver_once")}
-                        isLoaded={isLoaded}
-                        isLoggedIn={isLoggedIn}
-                        user={user}
-                        refreshUser={refreshUser}
-                        setVerificationStatus={setVerificationStatus}
-                        featured
-                        login={login}
-                    />
-
-                    <PlanCard
-                        title={t("tiers.monthly.name")}
-                        price={t("tiers.monthly.price")}
-                        desc={t("tiers.monthly.desc")}
-                        features={[t("tiers.monthly.features.0"), t("tiers.monthly.features.1"), t("tiers.monthly.features.2"), t("tiers.monthly.features.3")]}
-                        type="content_creator_monthly"
-                        loading={loadingPlan === "content_creator_monthly"}
-                        onStripe={() => handleStripePayment("content_creator_monthly")}
-                        setVerificationStatus={setVerificationStatus}
-                        isLoaded={isLoaded}
-                        isLoggedIn={isLoggedIn}
-                        user={user}
-                        refreshUser={refreshUser}
-                        login={login}
-                    />
-
-                    <PlanCard
-                        title={t("tiers.annual.name")}
-                        setVerificationStatus={setVerificationStatus}
-                        price={t("tiers.annual.price")}
-                        desc={t("tiers.annual.desc")}
-                        features={[t("tiers.annual.features.0"), t("tiers.annual.features.1"), t("tiers.annual.features.2"), t("tiers.annual.features.3")]}
-                        type="content_pro_master_yearly"
-                        loading={loadingPlan === "content_pro_master_yearly"}
-                        onStripe={() => handleStripePayment("content_pro_master_yearly")}
-                        isLoaded={isLoaded}
-                        isLoggedIn={isLoggedIn}
-                        user={user}
-                        refreshUser={refreshUser}
-                        login={login}
-                    />
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 px-4">
+                    {visiblePlans.map((plan) => (
+                        <PlanCard
+                            key={plan.type}
+                            plan={plan}
+                            loading={loadingPlan === plan.type}
+                            onPay={() => handleCreemPayment(plan.type)}
+                        />
+                    ))}
                 </div>
 
-                <div className="max-w-4xl mx-auto px-4 mt-24">
-                    <div className="bg-white border border-indigo-100 rounded-[2.5rem] p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center shadow-lg shadow-indigo-100/50">
+                <div className="max-w-4xl mx-auto px-4 mt-20">
+                    <div className="bg-white border border-indigo-100 rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center shadow-lg shadow-indigo-100/50">
                         <div className="mb-6 md:mb-0 md:mr-10 bg-indigo-50 p-5 rounded-2xl shrink-0">
                             <Cpu size={48} className="text-indigo-600" strokeWidth={1.5} />
                         </div>
                         <div>
                             <h4 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
                                 {t("aiTech.title")}
-                                <span className="bg-indigo-100 text-indigo-700 text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wide">Beta</span>
+                                <span className="bg-lime-100 text-lime-700 text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wide">Beta</span>
                             </h4>
                             <p className="text-slate-600 text-sm leading-relaxed">{t("aiTech.body")}</p>
                         </div>
@@ -206,194 +206,47 @@ export default function PricingContent() {
     );
 }
 
-type VerificationStatus = "idle" | "loading" | "success" | "error";
-
-interface PlanCardProps {
-    title: string;
-    price: string;
-    desc: string;
-    features: string[];
-    type: string;
-    loading: boolean;
-    onStripe: () => void;
-    featured?: boolean;
-    isLoaded: boolean;
-    isLoggedIn: boolean;
-    user: {
-        googleUserId?: string | number;
-        id?: string | number;
-        email?: string;
-    } | null;
-    login: () => void;
-    refreshUser: () => Promise<void>;
-    setVerificationStatus: (status: VerificationStatus) => void;
-}
-
-function PlanCard({
-    title,
-    price,
-    desc,
-    features,
-    type,
-    loading,
-    onStripe,
-    featured = false,
-    isLoaded,
-    isLoggedIn,
-    user,
-    login,
-    refreshUser,
-    setVerificationStatus,
-}: PlanCardProps) {
-    const isSubscription = type.includes("monthly") || type.includes("yearly");
-    const [paypalLoading, setPaypalLoading] = useState(false);
-
-    const handlePayPalSubscription = async () => {
-        if (!isLoggedIn) {
-            login();
-            return;
-        }
-
-        setPaypalLoading(true);
-        try {
-            const res = await fetch("/api/pay/paypal-smart-create-subscription", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    type,
-                    googleUserId: user?.googleUserId || user?.id,
-                    email: user?.email,
-                    userId: user?.id,
-                }),
-            });
-            const json = await res.json();
-            const approveUrl = json?.data;
-
-            if (json?.code === 200 && typeof approveUrl === "string" && approveUrl.startsWith("http")) {
-                window.location.href = approveUrl;
-                return;
-            }
-
-            setVerificationStatus("error");
-        } catch (error) {
-            console.error("PayPal subscription create error:", error);
-            setVerificationStatus("error");
-        } finally {
-            setPaypalLoading(false);
-        }
-    };
-
+function PlanCard({ plan, loading, onPay }: { plan: Plan; loading: boolean; onPay: () => void }) {
     return (
-        <div className={`bg-white p-8 rounded-[2.5rem] flex flex-col transition-all border ${featured ? "ring-4 ring-indigo-100 shadow-2xl md:scale-105 z-10" : "shadow-sm border-slate-200"}`}>
-            <div className="mb-6">
-                <h3 className="text-xl font-bold">{title}</h3>
-                <p className="text-slate-500 text-sm mt-1">{desc}</p>
-                <div className="mt-4 text-4xl font-black">${price}</div>
+        <div className={`relative bg-white p-7 rounded-[2rem] flex flex-col transition-all border ${plan.featured ? "ring-4 ring-lime-100 shadow-2xl shadow-lime-100/70 md:scale-[1.02] z-10" : "shadow-sm border-slate-200"}`}>
+            {plan.badge && (
+                <div className={`absolute right-5 top-5 rounded-full px-3 py-1 text-xs font-black uppercase tracking-wide ${plan.featured ? "bg-lime-400 text-slate-950" : "bg-slate-100 text-slate-600"}`}>
+                    {plan.badge}
+                </div>
+            )}
+
+            <div className="mb-6 pr-24">
+                <h3 className="text-xl font-black tracking-tight">{plan.title}</h3>
+                <p className="text-slate-500 text-sm mt-2 min-h-10">{plan.desc}</p>
             </div>
+
+            <div className="mb-6">
+                <div className="flex items-end gap-2">
+                    <span className="text-4xl font-black tracking-tight">${plan.price}</span>
+                    <span className="text-sm font-bold text-slate-500 mb-1">/{plan.cadence}</span>
+                </div>
+                <div className="mt-3 inline-flex items-center gap-2 rounded-xl bg-indigo-50 px-3 py-2 text-sm font-black text-indigo-700">
+                    <Zap className="h-4 w-4" />
+                    {plan.credits}
+                </div>
+            </div>
+
             <ul className="space-y-3 mb-8 grow">
-                {features.map((f: string, i: number) => (
-                    <li key={i} className="flex items-center text-sm font-medium">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2" />
-                        {f}
+                {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-center text-sm font-medium text-slate-700">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 shrink-0" />
+                        {feature}
                     </li>
                 ))}
             </ul>
 
-            <div className="space-y-3">
-                <button
-                    disabled={loading}
-                    onClick={onStripe}
-                    className={`w-full py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 ${featured ? "bg-indigo-600 text-white hover:bg-indigo-700" : "bg-slate-900 text-white hover:bg-black"}`}
-                >
-                    {loading ? <Loader2 className="animate-spin w-5 h-5" /> : <>Pay with Stripe <ArrowRight className="w-4 h-4" /></>}
-                </button>
-
-                {isSubscription ? (
-                    <button
-                        disabled={paypalLoading}
-                        onClick={handlePayPalSubscription}
-                        className="w-full py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 bg-[#0070ba] text-white hover:bg-[#005ea6] disabled:opacity-70"
-                    >
-                        {paypalLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <>Subscribe with PayPal <ArrowRight className="w-4 h-4" /></>}
-                    </button>
-                ) : !isLoaded ? (
-                    <button
-                        disabled
-                        className="w-full py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 bg-[#0070ba] text-white opacity-70"
-                    >
-                        <Loader2 className="animate-spin w-5 h-5" />
-                        Loading PayPal...
-                    </button>
-                ) : !isLoggedIn ? (
-                    <button
-                        onClick={login}
-                        className="w-full py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 bg-[#0070ba] text-white hover:bg-[#005ea6]"
-                    >
-                        Login to use PayPal <ArrowRight className="w-4 h-4" />
-                    </button>
-                ) : (
-                    <div className="z-0">
-                        <PayPalButtons
-                            style={{
-                                layout: "vertical",
-                                shape: "rect",
-                                borderRadius: 12,
-                                height: 48,
-                                label: "pay",
-                            }}
-                            forceReRender={[type, String(user?.id || ""), String(user?.googleUserId || "")]}
-                            createOrder={async () => {
-                                if (!isLoggedIn) {
-                                    throw new Error("Please login before PayPal checkout");
-                                }
-
-                                const res = await fetch("/api/pay/paypal-smart-create", {
-                                    method: "POST",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify({
-                                        type,
-                                        googleUserId: user?.googleUserId || user?.id,
-                                        email: user?.email,
-                                        userId: user?.id,
-                                    }),
-                                });
-                                const json = await res.json();
-
-                                if (json?.code !== 200 || !json?.data) {
-                                    throw new Error(json?.msg || "Create PayPal order failed");
-                                }
-
-                                return json.data;
-                            }}
-                            onApprove={async (data) => {
-                                try {
-                                    setVerificationStatus("loading");
-                                    const res = await fetch("/api/pay/paypal-smart-capture", {
-                                        method: "POST",
-                                        headers: { "Content-Type": "application/json" },
-                                        body: JSON.stringify({ orderId: data.orderID }),
-                                    });
-                                    const json = await res.json();
-                                    if (json.code === 200) {
-                                        await refreshUser();
-                                        setVerificationStatus("success");
-                                    } else {
-                                        setVerificationStatus("error");
-                                    }
-                                } catch (error) {
-                                    console.error("PayPal capture error:", error);
-                                    setVerificationStatus("error");
-                                }
-                            }}
-                            onCancel={() => console.log("Payment Cancelled")}
-                            onError={(error) => {
-                                console.error("PayPal Error:", error);
-                                setVerificationStatus("error");
-                            }}
-                        />
-                    </div>
-                )}
-            </div>
+            <button
+                disabled={loading}
+                onClick={onPay}
+                className={`w-full py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-2 disabled:opacity-70 ${plan.featured ? "bg-lime-400 text-slate-950 hover:bg-lime-300" : "bg-slate-950 text-white hover:bg-indigo-700"}`}
+            >
+                {loading ? <Loader2 className="animate-spin w-5 h-5" /> : <>Pay with Creem <ArrowRight className="w-4 h-4" /></>}
+            </button>
         </div>
     );
 }

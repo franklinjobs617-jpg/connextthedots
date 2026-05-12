@@ -6,14 +6,28 @@ const SITE_TYPE_ID = "6";
 const CONTENT_TYPE_PRO = "content_pro_master_yearly";
 const CONTENT_TYPE_CREATOR = "content_creator_monthly";
 const CONTENT_TYPE_LIFESAVER = "content_lifesaver_once";
-const CONTENT_TYPES = [CONTENT_TYPE_PRO, CONTENT_TYPE_CREATOR, CONTENT_TYPE_LIFESAVER] as const;
+const CONTENT_TYPE_CREATOR_PRO_YEARLY = "content_creator_pro_yearly";
+const CONTENT_TYPE_CREATOR_PRO_MONTHLY = "content_creator_pro_monthly";
+const CONTENT_TYPE_HOBBYIST_YEARLY = "content_hobbyist_yearly";
+const CONTENT_TYPE_HOBBYIST_MONTHLY = "content_hobbyist_monthly";
+const CONTENT_TYPES = [
+    CONTENT_TYPE_PRO,
+    CONTENT_TYPE_CREATOR,
+    CONTENT_TYPE_LIFESAVER,
+    CONTENT_TYPE_CREATOR_PRO_YEARLY,
+    CONTENT_TYPE_CREATOR_PRO_MONTHLY,
+    CONTENT_TYPE_HOBBYIST_YEARLY,
+    CONTENT_TYPE_HOBBYIST_MONTHLY,
+] as const;
 
 type PaymentTypeRow = { type: string | null };
 
 function planRank(plan?: string | null): number {
     const normalized = String(plan || "free").toLowerCase();
+    if (normalized === "creator_pro") return 4;
     if (normalized === "pro_master") return 3;
     if (normalized === "creator") return 2;
+    if (normalized === "hobbyist") return 2;
     if (normalized === "lifesaver") return 1;
     if (normalized === "premium") return 2;
     return 0;
@@ -23,6 +37,8 @@ function planByPayType(payType?: string | null): string | null {
     if (payType === CONTENT_TYPE_PRO) return "pro_master";
     if (payType === CONTENT_TYPE_CREATOR) return "creator";
     if (payType === CONTENT_TYPE_LIFESAVER) return "lifesaver";
+    if (payType === CONTENT_TYPE_CREATOR_PRO_YEARLY || payType === CONTENT_TYPE_CREATOR_PRO_MONTHLY) return "creator_pro";
+    if (payType === CONTENT_TYPE_HOBBYIST_YEARLY || payType === CONTENT_TYPE_HOBBYIST_MONTHLY) return "hobbyist";
     return null;
 }
 
@@ -33,14 +49,12 @@ async function resolveConnectPlan(googleUserId?: string, email?: string, current
     const stripeRows = await prisma.$queryRawUnsafe<PaymentTypeRow[]>(
         `SELECT type
          FROM pay
-         WHERE type IN (?, ?, ?)
+         WHERE type IN (${CONTENT_TYPES.map(() => "?").join(", ")})
            AND status = '1'
            AND (google_user_id = ? OR email = ?)
          ORDER BY update_time DESC, id DESC
          LIMIT 30`,
-        CONTENT_TYPES[0],
-        CONTENT_TYPES[1],
-        CONTENT_TYPES[2],
+        ...CONTENT_TYPES,
         safeGoogleUserId,
         safeEmail
     );
@@ -48,14 +62,12 @@ async function resolveConnectPlan(googleUserId?: string, email?: string, current
     const paypalRows = await prisma.$queryRawUnsafe<PaymentTypeRow[]>(
         `SELECT type
          FROM paypal_pay
-         WHERE type IN (?, ?, ?)
+         WHERE type IN (${CONTENT_TYPES.map(() => "?").join(", ")})
            AND status = '2'
            AND (google_user_id = ? OR email = ?)
          ORDER BY update_time DESC, id DESC
          LIMIT 30`,
-        CONTENT_TYPES[0],
-        CONTENT_TYPES[1],
-        CONTENT_TYPES[2],
+        ...CONTENT_TYPES,
         safeGoogleUserId,
         safeEmail
     );

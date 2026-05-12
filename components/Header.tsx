@@ -19,6 +19,8 @@ export default function Header() {
   const normalizePlan = (plan?: string) => (plan || "free").toLowerCase();
   const getPlanLabel = (plan?: string) => {
     const normalized = normalizePlan(plan);
+    if (normalized === "creator_pro") return "CREATOR PRO";
+    if (normalized === "hobbyist") return "HOBBYIST";
     if (normalized === "pro_master") return "PRO MASTER";
     if (normalized === "creator") return "CREATOR";
     if (normalized === "lifesaver") return "LIFE-SAVER";
