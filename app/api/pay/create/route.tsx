@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
         });
 
         const resData = await gatewayRes.json();
-        const checkoutUrl = resData?.data || resData?.url;
+        const checkoutUrl = resData?.data?.checkoutUrl || resData?.checkoutUrl || resData?.url;
 
         if (!gatewayRes.ok || !checkoutUrl) {
             return NextResponse.json(
