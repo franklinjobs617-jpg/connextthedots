@@ -51,7 +51,6 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale} suppressHydrationWarning  >
-            <Script src="https://accounts.google.com/gsi/client" strategy="lazyOnload" async defer />
             <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
                 crossOrigin="anonymous"></Script>
             <body>

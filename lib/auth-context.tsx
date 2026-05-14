@@ -1,5 +1,6 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 interface User {
     id: number;
@@ -9,8 +10,8 @@ interface User {
     googleUserId: string;
     credits: string;
     score: string;
-    type: string; // 站点 ID (例如 "6")
-    plan: string; // ★ 会员等级 (例如 "free", "premium", "pro")
+    type: string;
+    plan: string;
 }
 
 interface AuthContextType {
@@ -25,146 +26,184 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const AUTH_API_BASE_URL = "https://api.connectthedotsprintable.online";
+const GOOGLE_CLIENT_ID = "310385587632-5ibeugvo20btim20lif0fopi442ge90h.apps.googleusercontent.com";
+const BACKEND_REDIRECT_URI = `${AUTH_API_BASE_URL}/prod-api/g/callback`;
+const APP_TYPE = "content";
+
+function normalizeUser(rawUser: User): User {
+    return {
+        ...rawUser,
+        credits: String(rawUser.credits ?? "0"),
+        score: String(rawUser.score ?? "0"),
+        type: String(rawUser.type ?? "6"),
+        plan: rawUser.plan || "free",
+    };
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoggingIn, setIsLoggingIn] = useState(false);
-    const [tokenClient, setTokenClient] = useState<any>(null);
 
-    // --- 1. 同步用户到数据库 (登录/SDK回调专用) ---
-    const syncUserToDatabase = useCallback(async (accessToken: string) => {
-        setIsLoggingIn(true);
-        try {
-            const res = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ accessToken })
-            });
+    const persistUser = useCallback((nextUser: User) => {
+        const normalized = normalizeUser(nextUser);
+        setUser(normalized);
+        localStorage.setItem("app_user", JSON.stringify(normalized));
+    }, []);
 
-            if (res.ok) {
-                const data = await res.json();
-                const dbUser = data.user;
-                setUser(dbUser);
-                localStorage.setItem("auth_token", accessToken);
-                localStorage.setItem("app_user", JSON.stringify(dbUser));
-            }
-        } catch (e) {
-            console.error("Database sync failed", e);
-        } finally {
-            setIsLoggingIn(false);
-        }
+    const clearAuth = useCallback(() => {
+        setUser(null);
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("app_user");
     }, []);
 
     const fetchLatestUser = useCallback(async (token: string) => {
-        try {
-            const res = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ accessToken: token })
-            });
+        const res = await fetch(`${AUTH_API_BASE_URL}/prod-api/g/getUser?type=6`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+                "X-App-Type": APP_TYPE,
+            },
+            cache: "no-store",
+        });
 
-            if (res.ok) {
-                const data = await res.json();
-                const dbUser = data.user;
-
-                setUser(prev => {
-                    if (JSON.stringify(prev) !== JSON.stringify(dbUser)) {
-                        console.log("User data refreshed from DB/API");
-                        localStorage.setItem("app_user", JSON.stringify(dbUser));
-                        return dbUser;
-                    }
-                    return prev;
-                });
-            }
-        } catch (e) {
-            console.error("Silent refresh failed", e);
+        if (!res.ok) {
+            throw new Error("Failed to refresh user");
         }
-    }, []);
+
+        const data = await res.json();
+        const dbUser = data?.data;
+        if (!dbUser) {
+            throw new Error("User data not found");
+        }
+
+        persistUser(dbUser);
+    }, [persistUser]);
 
     const refreshUser = useCallback(async () => {
         const token = localStorage.getItem("auth_token");
-        if (token) {
+        if (!token) return;
+
+        try {
             await fetchLatestUser(token);
+        } catch (error) {
+            console.error("Silent refresh failed", error);
+            clearAuth();
         }
-    }, [fetchLatestUser]);
+    }, [clearAuth, fetchLatestUser]);
 
     const reloadFromLocalStorage = useCallback(() => {
         const savedUser = localStorage.getItem("app_user");
-        if (savedUser) {
-            try {
-                const parsed = JSON.parse(savedUser);
-                setUser(prev => {
-                    if (JSON.stringify(prev) !== JSON.stringify(parsed)) {
-                        return parsed;
-                    }
-                    return prev;
-                });
-            } catch (e) {
-                console.error("Parse local user failed");
-            }
-        }
-    }, []);
+        if (!savedUser) return;
 
-    // --- 5. 初始化与事件监听 ---
+        try {
+            persistUser(JSON.parse(savedUser));
+        } catch {
+            localStorage.removeItem("app_user");
+        }
+    }, [persistUser]);
+
     useEffect(() => {
         const initialize = async () => {
             const savedToken = localStorage.getItem("auth_token");
             const savedUser = localStorage.getItem("app_user");
 
-            // A. 优先显示本地缓存
             if (savedToken && savedUser) {
                 try {
-                    setUser(JSON.parse(savedUser));
-                } catch (e) {
-                    localStorage.removeItem("auth_token");
+                    setUser(normalizeUser(JSON.parse(savedUser)));
+                } catch {
+                    clearAuth();
                 }
             }
 
-            // B. 后台发起网络请求，获取最新状态
             if (savedToken) {
-                await fetchLatestUser(savedToken);
+                await refreshUser();
             }
 
             setIsLoaded(true);
         };
 
-        const loadGoogleSDK = () => {
-            const google = (window as any).google;
-            if (google?.accounts?.oauth2) {
-                const client = google.accounts.oauth2.initTokenClient({
-                    client_id: "131343215251-vaqu6k4mrbd3k95uoc9l7419jc2m173v.apps.googleusercontent.com",
-                    scope: "openid profile email",
-                    callback: (tokenResponse: any) => {
-                        if (tokenResponse?.access_token) {
-                            syncUserToDatabase(tokenResponse.access_token);
-                        }
-                    },
-                });
-                setTokenClient(client);
-            } else {
-                setTimeout(loadGoogleSDK, 300);
+        initialize();
+        window.addEventListener("auth-updated", reloadFromLocalStorage);
+
+        return () => {
+            window.removeEventListener("auth-updated", reloadFromLocalStorage);
+        };
+    }, [clearAuth, refreshUser, reloadFromLocalStorage]);
+
+    const login = useCallback(() => {
+        const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+        const state = `${Date.now()}_${APP_TYPE}`;
+        const params = new URLSearchParams({
+            client_id: GOOGLE_CLIENT_ID,
+            redirect_uri: BACKEND_REDIRECT_URI,
+            response_type: "code",
+            scope: "openid email profile",
+            prompt: "select_account",
+            state,
+        });
+
+        const width = 600;
+        const height = 600;
+        const left = window.screen.width / 2 - width / 2;
+        const top = window.screen.height / 2 - height / 2;
+
+        setIsLoggingIn(true);
+
+        let cleanup = () => {
+            setIsLoggingIn(false);
+        };
+
+        const handleMessage = async (event: MessageEvent) => {
+            if (event.origin !== AUTH_API_BASE_URL) return;
+
+            try {
+                const payload = typeof event.data?.token === "string"
+                    ? JSON.parse(event.data.token)
+                    : event.data;
+                const { user: nextUser, token: jwtToken } = payload || {};
+
+                if (!nextUser || !jwtToken) return;
+
+                localStorage.setItem("auth_token", jwtToken);
+                await fetchLatestUser(jwtToken).catch(() => persistUser(nextUser));
+                cleanup();
+            } catch (error) {
+                console.error("Login parsing error:", error);
+                cleanup();
             }
         };
 
-        initialize();
-        loadGoogleSDK();
+        window.addEventListener("message", handleMessage);
 
-        window.addEventListener('auth-updated', reloadFromLocalStorage);
+        const popup = window.open(
+            `${googleAuthUrl}?${params.toString()}`,
+            "GoogleLogin",
+            `width=${width},height=${height},left=${left},top=${top}`
+        );
 
-        return () => {
-            window.removeEventListener('auth-updated', reloadFromLocalStorage);
+        if (!popup) {
+            window.removeEventListener("message", handleMessage);
+            setIsLoggingIn(false);
+            return;
+        }
+
+        const closeTimer = window.setInterval(() => {
+            if (popup.closed) cleanup();
+        }, 500);
+
+        cleanup = () => {
+            window.removeEventListener("message", handleMessage);
+            window.clearInterval(closeTimer);
+            setIsLoggingIn(false);
         };
-    }, [syncUserToDatabase, fetchLatestUser, reloadFromLocalStorage]);
+    }, [fetchLatestUser, persistUser]);
 
-    const login = () => {
-        if (tokenClient) tokenClient.requestAccessToken();
-    };
-
-    const logout = () => {
-        setUser(null);
-        localStorage.removeItem("auth_token");
-        localStorage.removeItem("app_user");
-    };
+    const logout = useCallback(() => {
+        clearAuth();
+    }, [clearAuth]);
 
     return (
         <AuthContext.Provider value={{
