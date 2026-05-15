@@ -189,8 +189,19 @@ export default function Footer() {
                   {t("animalPdf")}
                 </Link>
               </li>
+              <li>
+                <a
+                  href="https://aiclotheschangers.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition"
+                >
+                  AI Clothes Changer
+                </a>
+              </li>
             </ul>
           </div>
+
         </div>
 
         {/* 社交分享按钮区 */}
