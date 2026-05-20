@@ -199,6 +199,16 @@ export default function Footer() {
                   AI Clothes Changer
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://gridmakeronline.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition"
+                >
+                  gridmakeronline.com
+                </a>
+              </li>
             </ul>
           </div>
 
