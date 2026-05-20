@@ -125,6 +125,8 @@ export default function PrintableDetailClient({ item, relatedItems, locale, slug
         "description": item.description,
         "url": `https://connectthedotsprintable.online${locale === 'en' ? '' : '/' + locale}/printables/${slug}/`,
         "image": item.imageUrl,
+        "license": item.licenseUrl,
+        "isBasedOn": item.sourceUrl,
         "author": { "@type": "Organization", "name": "ConnectTheDotsPrintable.online" },
         "datePublished": "2025-12-26",
         "learningResourceType": "Printable",
@@ -260,8 +262,87 @@ export default function PrintableDetailClient({ item, relatedItems, locale, slug
                                                     )}
                                                 </button>
                                             </div>
+
+                                            {item.sourceUrl && (
+                                                <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                                    <h3 className="text-lg font-bold text-slate-800 mb-4">
+                                                        {locale === 'es' ? 'Fuente y licencia' : 'Source & License'}
+                                                    </h3>
+                                                    <div className="space-y-3 text-sm text-slate-700">
+                                                        {item.sourceTitle && (
+                                                            <p>
+                                                                <span className="font-semibold text-slate-800">{locale === 'es' ? 'Fuente:' : 'Source:'}</span>{" "}
+                                                                <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="text-brand-blue hover:underline">
+                                                                    {item.sourceTitle}
+                                                                </a>
+                                                            </p>
+                                                        )}
+                                                        {item.sourceCredit && (
+                                                            <p>
+                                                                <span className="font-semibold text-slate-800">{locale === 'es' ? 'Autor:' : 'Creator:'}</span>{" "}
+                                                                {item.sourceCredit}
+                                                            </p>
+                                                        )}
+                                                        {item.licenseName && (
+                                                            <p>
+                                                                <span className="font-semibold text-slate-800">{locale === 'es' ? 'Licencia:' : 'License:'}</span>{" "}
+                                                                {item.licenseUrl ? (
+                                                                    <a href={item.licenseUrl} target="_blank" rel="noreferrer" className="text-brand-blue hover:underline">
+                                                                        {item.licenseName}
+                                                                    </a>
+                                                                ) : (
+                                                                    item.licenseName
+                                                                )}
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
+
+                                    {item.referenceImageUrl && (
+                                        <div className="border-t border-slate-100 pt-8 mb-8">
+                                            <h2 className="text-2xl font-bold text-slate-800 mb-6 border-l-4 border-brand-blue pl-4">
+                                                {locale === 'es' ? 'Imagen original y versi贸n para imprimir' : 'Reference Image and Printable Versions'}
+                                            </h2>
+                                            <div className="grid gap-5 md:grid-cols-3">
+                                                {[
+                                                    {
+                                                        key: "reference",
+                                                        label: locale === 'es' ? 'Imagen original' : 'Original image',
+                                                        src: item.referenceImageUrl,
+                                                        alt: item.altText,
+                                                    },
+                                                    {
+                                                        key: "puzzle",
+                                                        label: locale === 'es' ? 'Rompecabezas de puntos' : 'Dot-to-dot puzzle',
+                                                        src: item.imageUrl,
+                                                        alt: item.altText,
+                                                    },
+                                                    {
+                                                        key: "solution",
+                                                        label: locale === 'es' ? 'Contorno resuelto' : 'Solved outline',
+                                                        src: item.solutionUrl,
+                                                        alt: item.solutionAltText,
+                                                    },
+                                                ].map((image) => (
+                                                    <div key={image.key} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                                                        <p className="mb-3 text-sm font-semibold text-slate-700">{image.label}</p>
+                                                        <div className="overflow-hidden rounded-xl border border-white bg-white shadow-sm">
+                                                            <Image
+                                                                src={image.src}
+                                                                alt={image.alt}
+                                                                width={600}
+                                                                height={600}
+                                                                className="w-full h-auto"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
 
                                     <div className="border-t border-slate-100 pt-8">
                                         <h2 className="text-2xl font-bold text-slate-800 mb-4 border-l-4 border-brand-blue pl-4">

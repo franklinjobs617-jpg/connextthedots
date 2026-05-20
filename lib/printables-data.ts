@@ -1,5 +1,7 @@
 
 // lib/printables-data.ts
+import generatedStandalonePrintablesJson from "./generated-standalone-printables.json";
+
 export const CDN_BASE_URL = "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/printable/";
 export const IMAGE_DEFAULT_WIDTH = 600;
 export const IMAGE_DEFAULT_HEIGHT = 600;
@@ -17,11 +19,29 @@ export interface PrintableItem {
     solutionUrl: string;
     solutionAltText: string;
     coloredImageUrl?: string;
+    referenceImageUrl?: string;
+    sourceUrl?: string;
+    sourceCredit?: string;
+    sourceTitle?: string;
+    licenseName?: string;
+    licenseUrl?: string;
     category: string[];
     dotRange: number[] | string;
     ageRecommendation: string;
     popularity: number;
 }
+
+const generatedStandalonePrintables =
+    generatedStandalonePrintablesJson as PrintableItem[];
+
+const generatedByDifficulty = generatedStandalonePrintables.reduce<Record<string, PrintableItem[]>>(
+    (accumulator, item) => {
+        accumulator[item.difficulty] = accumulator[item.difficulty] || [];
+        accumulator[item.difficulty].push(item);
+        return accumulator;
+    },
+    {}
+);
 // 获取总数
 export const getTotalCount = () => {
     return getAllPrintables().length;
@@ -70,6 +90,7 @@ export function createPrintableItem(
 // 数据部分保持不变（此时 id 会自动转为文件名形式）
 export const printablesData: Record<string, PrintableItem[]> = {
     easy: [
+        ...(generatedByDifficulty.Easy || []),
         createPrintableItem('bluey-playful-01', 'Playful Bluey', 'easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp', 'easy-bluey-01-connect-the-dots-solution.webp', { difficulty: 'Easy', tagColor: 'bg-green-600', dotRange: [1, 25], category: ['Cartoons', 'Animals'], ageRecommendation: '3-6 Years', popularity: 98 }),
         createPrintableItem('happy-sun-03', 'Happy Sun 3', 'easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.webp', 'easy-happy-sun-03-connect-the-dots-solution.webp', { difficulty: 'Easy', tagColor: 'bg-green-600', dotRange: [1, 22], category: ['Nature'], ageRecommendation: '3-6 Years', popularity: 85 }),
         createPrintableItem('rainbow', 'Rainbow', 'easy-rainbow-connect-the-dots-puzzle-1-15-numbers.webp', 'easy-rainbow-connect-the-dots-solution.webp', { difficulty: 'Easy', tagColor: 'bg-green-600', dotRange: [1, 15], category: ['Nature'], ageRecommendation: '3-5 Years', popularity: 92 }),
@@ -81,6 +102,7 @@ export const printablesData: Record<string, PrintableItem[]> = {
         createPrintableItem('happy-sun-01', 'Happy Sun 1', 'easy-happy-sun-01-connect-the-dots-puzzle-1-20-numbers.webp', 'easy-happy-sun-01-connect-the-dots-solution.webp', { difficulty: 'Easy', tagColor: 'bg-green-600', dotRange: [1, 20], category: ['Nature'], ageRecommendation: '3-6 Years', popularity: 87 }),
     ],
     medium: [
+        ...(generatedByDifficulty.Medium || []),
         createPrintableItem('spongebob-classic-01', 'Classic SpongeBob', 'medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp', 'medium-spongebob-01-connect-the-dots-solution.webp', { difficulty: 'Medium', tagColor: 'bg-yellow-600', dotRange: [1, 50], category: ['Cartoons', 'Under the Sea'], ageRecommendation: '5-8 Years', popularity: 95 }),
         createPrintableItem('castle-01', 'Majestic Castle', 'medium-castle-01-connect-the-dots-puzzle-1-80-numbers.webp', 'medium-castle-01-connect-the-dots-solution-1-80-numbers.webp', { difficulty: 'Medium', tagColor: 'bg-yellow-600', dotRange: [1, 80], category: ['Buildings', 'Fantasy'], ageRecommendation: '7-10 Years', popularity: 70 }),
         createPrintableItem('halloween-pumpkin-01', 'Halloween Pumpkin', 'medium-halloween-pumpkin-01-connect-the-dots-puzzle-1-65-numbers.webp', 'medium-halloween-pumpkin-01-connect-the-dots-solution-1-65-numbers.webp', { difficulty: 'Medium', tagColor: 'bg-yellow-600', dotRange: [1, 65], category: ['Holiday'], ageRecommendation: '7-10 Years', popularity: 80 }),
@@ -93,9 +115,11 @@ export const printablesData: Record<string, PrintableItem[]> = {
         createPrintableItem('train-01', 'Old-fashioned Train', 'medium-train-01-connect-the-dots-puzzle-1-60-numbers.webp', 'medium-train-01-connect-the-dots-solution-1-60-numbers.webp', { difficulty: 'Medium', tagColor: 'bg-yellow-600', dotRange: [1, 60], category: ['Vehicles'], ageRecommendation: '7-10 Years', popularity: 76 }),
     ],
     hard: [
+        ...(generatedByDifficulty.Hard || []),
         createPrintableItem('mountain-landscape-html-original', 'Mountain Landscape', '6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.avif', '6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots-solution.avif', { difficulty: 'Hard', tagColor: 'bg-orange-600', dotRange: [100, 200], category: ['Nature', 'Scenery'], ageRecommendation: '12+ Years', popularity: 60 }),
     ],
     extreme: [
+        ...(generatedByDifficulty.Extreme || []),
         createPrintableItem('extreme-mandala-html-original', 'Extreme Mandala', '7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.avif', '7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots-solution.avif', { difficulty: 'Extreme', tagColor: 'bg-red-700', dotRange: [200, 300], category: ['Abstract', 'Art'], ageRecommendation: 'Adults', popularity: 50 }),
     ]
 };

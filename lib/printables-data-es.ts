@@ -1,4 +1,5 @@
 // lib/printables-data-es.ts
+import generatedStandalonePrintablesJson from "./generated-standalone-printables.json";
 
 export const CDN_BASE_URL = "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/printable/";
 export const IMAGE_DEFAULT_WIDTH = 600;
@@ -16,11 +17,29 @@ export interface PrintableItem {
     detailPage: string;
     solutionUrl: string;
     solutionAltText: string;
+    referenceImageUrl?: string;
+    sourceUrl?: string;
+    sourceCredit?: string;
+    sourceTitle?: string;
+    licenseName?: string;
+    licenseUrl?: string;
     category: string[];
     dotRange: number[] | string;
     ageRecommendation: string;
     popularity: number;
 }
+
+const generatedStandalonePrintables =
+    generatedStandalonePrintablesJson as PrintableItem[];
+
+const generatedByDifficulty = generatedStandalonePrintables.reduce<Record<string, PrintableItem[]>>(
+    (accumulator, item) => {
+        accumulator[item.difficulty] = accumulator[item.difficulty] || [];
+        accumulator[item.difficulty].push(item);
+        return accumulator;
+    },
+    {}
+);
 
 interface CustomDetails {
     difficulty?: string;
@@ -93,6 +112,7 @@ export function createPrintableItem(
 
 export const printablesData: Record<string, PrintableItem[]> = {
     easy: [
+        ...(generatedByDifficulty.Easy || []),
         createPrintableItem(
             'bluey-playful-01', 'Bluey Juguetón',
             'easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp',
@@ -181,6 +201,7 @@ export const printablesData: Record<string, PrintableItem[]> = {
         ),
     ],
     medium: [
+        ...(generatedByDifficulty.Medium || []),
         createPrintableItem(
             'spongebob-classic-01', 'Bob Esponja Clásico',
             'medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp',
@@ -278,6 +299,7 @@ export const printablesData: Record<string, PrintableItem[]> = {
         ),
     ],
     hard: [
+        ...(generatedByDifficulty.Hard || []),
         createPrintableItem(
             'mountain-landscape-html-original', 'Paisaje de Montaña',
             '6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots.avif',
@@ -291,6 +313,7 @@ export const printablesData: Record<string, PrintableItem[]> = {
         ),
     ],
     extreme: [
+        ...(generatedByDifficulty.Extreme || []),
         createPrintableItem(
             'extreme-mandala-html-original', 'Mandala Extremo',
             '7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots.avif',
