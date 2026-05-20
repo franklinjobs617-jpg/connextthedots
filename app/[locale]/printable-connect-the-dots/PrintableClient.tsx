@@ -13,7 +13,7 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
     const [activeFilter, setActiveFilter] = useState("all");
     const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
     const [scriptsLoaded, setScriptsLoaded] = useState(false);
-    const [userPuzzles, setUserPuzzles] = useState([]);
+    const [userPuzzles, setUserPuzzles] = useState<any[]>([]);
 
     // 1:1 还原 list-page-logic.js 的渲染逻辑
     const displayedItems = useMemo(() => {
@@ -73,7 +73,7 @@ export default function PrintableListClient({ locale, data, allItems }: any) {
     useEffect(() => {
         fetch('/api/connect-dots/gallery?limit=12')
             .then(res => res.json())
-            .then(data => setUserPuzzles(data))
+            .then(data => setUserPuzzles(Array.isArray(data) ? data : []))
             .catch(err => console.error(err));
     }, []);
 

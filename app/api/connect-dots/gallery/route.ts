@@ -3,6 +3,10 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(req: Request) {
     try {
+        if (!process.env.DATABASE_URL) {
+            return NextResponse.json([]);
+        }
+
         const { searchParams } = new URL(req.url);
         const difficulty = searchParams.get("difficulty");
         const limit = parseInt(searchParams.get("limit") || "50");
