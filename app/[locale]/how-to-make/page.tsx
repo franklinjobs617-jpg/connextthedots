@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import HowToMakeClient from "./HowToMakeContent";
 import { getAlternates, getUrl } from "@/lib/metadata";
 
@@ -7,18 +6,17 @@ type Props = {
     params: Promise<{ locale: string }>;
 };
 
-// 2. 动态生成 SEO 元数据
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
     const isEs = locale === "es";
 
     const title = isEs
-        ? "Cómo Crear Fichas de Unir Puntos Personalizadas Online | Guía Paso a Paso"
-        : "Make Custom Dot to Dot Worksheets Online | Step-by-Step Guide";
+        ? "C贸mo Crear Fichas de Unir Puntos Personalizadas Online | Gu铆a Paso a Paso"
+        : "How to Make Your Own Dot-to-Dot Worksheet from a Photo";
 
     const description = isEs
         ? "Aprende el proceso paso a paso para crear tus propios dibujos de unir puntos para imprimir desde cualquier foto usando nuestro generador gratuito. Ideal para maestros y padres."
-        : "Learn the step-by-step process to make your own custom connect the dots printables from any photo or image using our free online generator tool. Perfect for teachers and parents.";
+        : "Learn how to make your own connect-the-dots worksheet from a photo, drawing, or outline. Follow the step-by-step process, then generate and print your custom puzzle online.";
 
     const path = "/how-to-make/";
 
@@ -34,9 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-// 3. 处理逻辑与重定向
 export default async function Page({ params }: Props) {
     const { locale } = await params;
-
     return <HowToMakeClient locale={locale} />;
 }

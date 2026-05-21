@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import PrintableListClient from "./PrintableClient";
 import { printablesData as dataEN, getAllPrintables as getAllEN } from "@/lib/printables-data";
 import { printablesData as dataES, getAllPrintables as getAllES } from "@/lib/printables-data-es";
@@ -21,20 +20,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const isPt = locale === "pt";
     const isFr = locale === "fr";
 
-    let title, description;
+    let title: string;
+    let description: string;
 
     if (isFr) {
-        title = "Points à Relier à Imprimer Gratuits | Fiches PDF pour Enfants";
-        description = "Collection gratuite de fiches point à relier à imprimer. Cahier de points à relier PDF de haute qualité pour enfants et adultes. Téléchargez et imprimez gratuitement !";
+        title = "Points 脿 Relier 脿 Imprimer Gratuits | Fiches PDF pour Enfants";
+        description = "Collection gratuite de fiches point 脿 relier 脿 imprimer. Cahier de points 脿 relier PDF de haute qualit茅 pour enfants et adultes. T茅l茅chargez et imprimez gratuitement !";
     } else if (isPt) {
-        title = "Ligar os Pontos para Imprimir Grátis | Desenhos PDF para Crianças";
-        description = "Coleção gratuita de desenhos de ligar os pontos para imprimir. Folhas de ligar os pontos em PDF de alta qualidade para crianças e adultos. Baixe e imprima grátis!";
+        title = "Ligar os Pontos para Imprimir Gr谩tis | Desenhos PDF para Crian莽as";
+        description = "Cole莽茫o gratuita de desenhos de ligar os pontos para imprimir. Folhas de ligar os pontos em PDF de alta qualidade para crian莽as e adultos. Baixe e imprima gr谩tis!";
     } else if (isEs) {
-        title = "Fichas de Unir Puntos para Imprimir Gratis | Dibujos de Unir Puntos para Niños";
-        description = "Descubre nuestra gran colección de fichas de unir puntos para imprimir y dibujos de unir puntos para niños y adultos. Diseños de alta calidad, sin marcas de agua, listos para descargar.";
+        title = "Fichas de Unir Puntos para Imprimir Gratis | Dibujos de Unir Puntos para Ni帽os";
+        description = "Descubre nuestra gran colecci贸n de fichas de unir puntos para imprimir y dibujos de unir puntos para ni帽os y adultos. Dise帽os de alta calidad, sin marcas de agua, listos para descargar.";
     } else {
-        title = "Free Connect the Dots Worksheets & Dot to Dot Puzzles | Printables for All Ages";
-        description = "Discover our vast collection of free printable connect the dots worksheets & dot to dot puzzles for kids and adults. Enjoy high-quality, no-watermark designs, ready to download and print.";
+        title = "Free Connect the Dots Printables for Kids and Adults | PDF Worksheets";
+        description = "Browse free connect the dots printables by age, difficulty, and theme. Download animal, holiday, easy, and hard PDF worksheets or make your own custom dot-to-dot online.";
     }
 
     const path = "/printable-connect-the-dots/";
@@ -43,7 +43,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title,
         description,
         alternates: getAlternates(locale, path),
-
         openGraph: {
             title,
             description,
@@ -59,7 +58,8 @@ export default async function Page({ params }: Props) {
     const isPt = locale === "pt";
     const isFr = locale === "fr";
 
-    let data, allItems;
+    let data;
+    let allItems;
 
     if (isFr) {
         data = dataFR;
@@ -75,11 +75,5 @@ export default async function Page({ params }: Props) {
         allItems = getAllEN();
     }
 
-    return (
-        <PrintableListClient
-            locale={locale}
-            data={data}
-            allItems={allItems}
-        />
-    );
+    return <PrintableListClient locale={locale} data={data} allItems={allItems} />;
 }

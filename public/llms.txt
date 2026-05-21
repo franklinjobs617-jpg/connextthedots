@@ -1,0 +1,17 @@
+# Connect the Dots Printable
+> Free connect-the-dots generator and printable worksheet library for kids, teachers, parents, and adults.
+
+## Main sections
+- [Home](https://connectthedotsprintable.online/): Main generator landing page with direct access to the online tool.
+- [Printable Connect the Dots](https://connectthedotsprintable.online/printable-connect-the-dots/): Printable worksheet hub grouped by age, difficulty, and theme.
+- [How to Make Your Own Dot-to-Dot](https://connectthedotsprintable.online/how-to-make/): Tutorial page that explains how to create a custom puzzle from an image.
+- [Animal Dot-to-Dot Printables](https://connectthedotsprintable.online/free-animal-dot-to-dot-printables-pdf/): Animal worksheet landing page with printable rabbit, dog, cat, turtle, owl, fox, and ocean themes.
+- [Christmas Dot-to-Dot Printables](https://connectthedotsprintable.online/christmas-printables/): Seasonal printable worksheet page for Santa, ornaments, trees, and holiday scenes.
+- [Dot-to-Dot Generator from Photo](https://connectthedotsprintable.online/dot-to-dot-generator-from-photo/): Landing page focused on turning uploaded images into printable dot-to-dot worksheets.
+- [Make Your Own Dot-to-Dot](https://connectthedotsprintable.online/make-your-own-dot-to-dot/): Conversion-focused page for creating custom printable puzzles from photos, drawings, and outlines.
+- [Generator Guide](https://connectthedotsprintable.online/printables/connectTheDotsGenerator/): Product explainer page for the generator and printable export workflow.
+
+## Key facts
+- Main product intent: create a custom connect-the-dots worksheet from an uploaded image.
+- Main printable intent: browse free PDF-ready worksheets by theme and difficulty.
+- Image detail pages include the original reference image, numbered puzzle, and solved outline when available.

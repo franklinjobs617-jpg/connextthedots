@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import GeneratorPageClient from "./GeneratorPageClient";
+import { getAlternates, getUrl } from "@/lib/metadata";
 
 type Props = {
     params: Promise<{ locale: string }>;
@@ -13,39 +13,33 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
     const isEs = locale === "es";
+    const isDe = locale === "de";
 
-    // SEO 文本完全对应您提供的版本
     const title = isEs
         ? "Generador de Dibujos de Unir Puntos Gratis | Crea Fichas Online Personalizadas"
-        : "Connect the Dots Printable Hard: Extreme Challenge & Concentration Training Guide";
+        : isDe
+            ? "Punkt-zu-Punkt Generator | Eigene Druckvorlagen Online Erstellen"
+            : "Connect the Dots Generator | Create Custom Printable Worksheets Online";
 
     const description = isEs
-        ? "Los datos de búsqueda revelan que términos como generador de unir puntos son prioridades constantes. Esta guía explica qué pueden hacer estas herramientas."
-        : "Unlock Limitless Creativity: Your Ultimate Guide to a Free Connect the Dots Generator. Learn how these tools work and why they are best for education.";
+        ? "Crea fichas de unir puntos personalizadas desde cualquier imagen. Ajusta la dificultad, genera una vista previa y descarga tu dibujo para imprimir."
+        : isDe
+            ? "Erstelle eigene Punkt-zu-Punkt Arbeitsblätter aus Bildern. Passe die Punktzahl an, prüfe die Vorschau und lade deine Druckvorlage herunter."
+            : "Turn any image into a printable dot-to-dot worksheet. Adjust the dot count, review the preview, and download a clean puzzle for kids or adults.";
 
-    const baseUrl = "https://connectthedotsprintable.online";
-    const pagePath = "/printables/connectTheDotsGenerator.html";
-    const canonicalUrl = isEs ? `${baseUrl}/es${pagePath}` : `${baseUrl}${pagePath}`;
+    const path = "/printables/connectTheDotsGenerator/";
 
     return {
         title,
         description,
-        alternates: {
-            canonical: canonicalUrl,
-            languages: {
-                en: `${baseUrl}${pagePath}`,
-                es: `${baseUrl}/es${pagePath}`,
-                de: `${baseUrl}/de${pagePath}`,
-                "x-default": `${baseUrl}${pagePath}`,
-            },
-        },
+        alternates: getAlternates(locale, path),
         openGraph: {
             title,
             description,
-            url: canonicalUrl,
+            url: getUrl(locale, path),
             siteName: "ConnectTheDotsPrintable.online",
-            type: "article",
-            images: [{ url: `${baseUrl}/og-image.jpg` }],
+            type: "website",
+            images: [{ url: "https://connectthedotsprintable.online/images/og-image.jpg" }],
         },
         other: {
             "google-adsense-account": "ca-pub-3383070348689557",

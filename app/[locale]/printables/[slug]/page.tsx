@@ -9,12 +9,39 @@ type Props = {
     params: Promise<{ locale: string; slug: string }>;
 };
 
-// 获取对应语言的数据集
 function getLocaleData(locale: string) {
     return locale === "es" ? { data: dataES, all: getAllES() } : { data: dataEN, all: getAllEN() };
 }
 
-// 1. 批量生成静态路径 (SSG)
+type DynamicPuzzle = {
+    slug: string;
+    title: string;
+    description: string;
+    difficulty: string;
+    puzzleImageUrl: string;
+    dotCount: number;
+};
+
+function buildDynamicItem(puzzle: DynamicPuzzle) {
+    return {
+        id: puzzle.slug,
+        title: puzzle.title,
+        description: puzzle.description,
+        difficulty: puzzle.difficulty,
+        tagColor: "bg-brand-blue",
+        imageUrl: puzzle.puzzleImageUrl,
+        imageSrcset: `${puzzle.puzzleImageUrl} 600w`,
+        altText: puzzle.title,
+        detailPage: `/printables/${puzzle.slug}/`,
+        solutionUrl: puzzle.puzzleImageUrl,
+        solutionAltText: `${puzzle.title} solution`,
+        category: [],
+        dotRange: [1, puzzle.dotCount],
+        ageRecommendation: "All Ages",
+        popularity: 0,
+    };
+}
+
 export async function generateStaticParams() {
     const locales = ["en", "es"];
     const paths: { locale: string; slug: string }[] = [];
@@ -28,35 +55,16 @@ export async function generateStaticParams() {
     return paths;
 }
 
-// 2. 动态生成元数据 (SEO)
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale, slug } = await params;
     const { all } = getLocaleData(locale);
     let item = all.find((i) => i.id === slug);
 
-    // 如果在静态数据中找不到，尝试从数据库获取动态数据
     if (!item) {
         try {
             const res = await fetch(`/api/connect-dots/${slug}`, { cache: "no-store" });
             if (res.ok) {
-                const puzzle = await res.json();
-                item = {
-                    id: puzzle.slug,
-                    title: puzzle.title,
-                    description: puzzle.description,
-                    difficulty: puzzle.difficulty,
-                    tagColor: "bg-brand-blue",
-                    imageUrl: puzzle.puzzleImageUrl,
-                    imageSrcset: `${puzzle.puzzleImageUrl} 600w`,
-                    altText: puzzle.title,
-                    detailPage: `/printables/${puzzle.slug}`,
-                    solutionUrl: puzzle.puzzleImageUrl,
-                    solutionAltText: `${puzzle.title} solution`,
-                    category: [],
-                    dotRange: [1, puzzle.dotCount],
-                    ageRecommendation: "All Ages",
-                    popularity: 0,
-                };
+                item = buildDynamicItem(await res.json());
             }
         } catch (error) {
             console.error("Error fetching dynamic puzzle for metadata:", error);
@@ -68,10 +76,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const path = `/printables/${slug}/`;
 
     return {
-        title: `${item.title} | ${item.difficulty} Dot to Dot Printable (${Array.isArray(item.dotRange) ? item.dotRange.join('-') : item.dotRange} Dots)`,
+        title: `${item.title} | ${item.difficulty} Dot to Dot Printable (${Array.isArray(item.dotRange) ? item.dotRange.join("-") : item.dotRange} Dots)`,
         description: item.description,
         alternates: getAlternates(locale, path),
-
         openGraph: {
             title: item.title,
             description: item.description,
@@ -88,36 +95,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-// 3. 服务端渲染入口
 export default async function Page({ params }: Props) {
     const { locale, slug } = await params;
     const { data, all } = getLocaleData(locale);
 
     let item = all.find((i) => i.id === slug);
 
-    // 如果在静态数据中找不到，尝试从数据库获取动态数据
     if (!item) {
         try {
             const res = await fetch(`/api/connect-dots/${slug}`, { cache: "no-store" });
             if (res.ok) {
-                const puzzle = await res.json();
-                item = {
-                    id: puzzle.slug,
-                    title: puzzle.title,
-                    description: puzzle.description,
-                    difficulty: puzzle.difficulty,
-                    tagColor: "bg-brand-blue",
-                    imageUrl: puzzle.puzzleImageUrl,
-                    imageSrcset: `${puzzle.puzzleImageUrl} 600w`,
-                    altText: puzzle.title,
-                    detailPage: `/printables/${puzzle.slug}`,
-                    solutionUrl: puzzle.puzzleImageUrl,
-                    solutionAltText: `${puzzle.title} solution`,
-                    category: [],
-                    dotRange: [1, puzzle.dotCount],
-                    ageRecommendation: "All Ages",
-                    popularity: 0,
-                };
+                item = buildDynamicItem(await res.json());
             }
         } catch (error) {
             console.error("Error fetching dynamic puzzle:", error);
@@ -126,19 +114,10 @@ export default async function Page({ params }: Props) {
 
     if (!item) notFound();
 
-    // 查找同难度的所有卡片
-    const difficultyKey = Object.keys(data).find(key =>
-        data[key].some(i => i.id === slug)
-    ) || "easy";
+    const difficultyKey =
+        Object.keys(data).find((key) => data[key].some((entry) => entry.id === slug)) || "easy";
 
-    const relatedItems = data[difficultyKey].filter(i => i.id !== slug);
-    console.log(relatedItems);
-    return (
-        <PrintableDetailClient
-            item={item}
-            relatedItems={relatedItems}
-            locale={locale}
-            slug={slug}
-        />
-    );
+    const relatedItems = data[difficultyKey].filter((entry) => entry.id !== slug);
+
+    return <PrintableDetailClient item={item} relatedItems={relatedItems} locale={locale} slug={slug} />;
 }

@@ -1129,7 +1129,9 @@ export default function DotGeneratorClient({
 
           if (!res.ok) {
             const errData = await res.json().catch(() => null);
-            throw new Error(errData?.error || "Something went wrong. Please try again.");
+            throw new Error(
+              errData?.error || "Something went wrong. Please try again."
+            );
           }
           const blob = await res.blob();
           trackEvent("ai_generate_success");
@@ -1218,7 +1220,9 @@ export default function DotGeneratorClient({
 
       try {
         const currentUser = userRef.current;
-        const isPremium = currentUser && String(currentUser.plan || "free").toLowerCase() !== "free";
+        const isPremium =
+          currentUser &&
+          String(currentUser.plan || "free").toLowerCase() !== "free";
 
         if (fmt === "png") {
           await new Promise<void>((resolve) => {
@@ -1323,7 +1327,8 @@ export default function DotGeneratorClient({
     const saveToGallery = async () => {
       if (!state.originalImage || !drawCanvas)
         return showTip("Please create a puzzle first!", "error");
-      if (!userRef.current) return showTip("Please login to save to gallery", "error");
+      if (!userRef.current)
+        return showTip("Please login to save to gallery", "error");
 
       const title = prompt("Enter puzzle title:");
       if (!title) return;
@@ -1407,7 +1412,7 @@ export default function DotGeneratorClient({
         await fetch("/api/connect-dots/save", {
           method: "POST",
           body: formData,
-          headers: token ? { "Authorization": `Bearer ${token}` } : {}
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
       } catch (error) {
         console.error("Auto save failed:", error);
@@ -1498,12 +1503,16 @@ export default function DotGeneratorClient({
 
               if (!res.ok) {
                 const errData = await res.json().catch(() => null);
-                throw new Error(errData?.error || "Something went wrong. Please try again.");
+                throw new Error(
+                  errData?.error || "Something went wrong. Please try again."
+                );
               }
               const blob = await res.blob();
 
               if (blob.type.indexOf("image") === -1)
-                throw new Error("The result didn't look right. Please try generating again.");
+                throw new Error(
+                  "The result didn't look right. Please try generating again."
+                );
 
               if (userRef.current) {
                 const newCredits = (

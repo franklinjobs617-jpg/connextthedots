@@ -2,79 +2,63 @@ import { MetadataRoute } from 'next';
 import { getAllPrintables } from '@/lib/printables-data';
 
 const baseUrl = 'https://connectthedotsprintable.online';
+const siteLocales = ['en', 'de', 'es', 'pt', 'fr', 'it', 'nl'];
 
-/**
- * 辅助函数，确保路径有尾部斜杠
- * @param path 路径
- * @returns 带斜杠的路径
- */
 const ensureTrailingSlash = (path: string) => {
-    if (path === '/') return '/'; 
+    if (path === '/') return '/';
     return path.endsWith('/') ? path : `${path}/`;
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    // 1. 静态页面
-    const staticPages = [
-        '/',      
-        '/pricing',
-        "/printable-connect-the-dots",
-        '/how-to-make',
-        "/christmas-printables",
-        "/free-animal-dot-to-dot-printables-pdf",
-        "/popular-character-dot-to-dot-printable-worksheets",
-        "/printables/adults",
-        "/printables/animals",
-        "/printables/christmas",
-        "/printables/core",
-        "/printables/general",
-        "/printables/hard",
-        "/printables/connectTheDotsGenerator",
-        '/connect-the-dots-1-to-10',
-        '/connect-the-dots-coloring-pages',
-        '/blog/are-dot-to-dot-puzzles-good-for-kids',
-        '/convert-photo-to-beads',
-        '/gallery',
-        '/editor',
-        '/privacy',
-        '/terms',
-        '/dmca',
+    const staticPages: Array<{ path: string; locales?: string[]; priority?: number }> = [
+        { path: '/', locales: siteLocales, priority: 1.0 },
+        { path: '/pricing', locales: siteLocales },
+        { path: '/printable-connect-the-dots', locales: siteLocales },
+        { path: '/how-to-make', locales: siteLocales },
+        { path: '/christmas-printables', locales: siteLocales },
+        { path: '/free-animal-dot-to-dot-printables-pdf', locales: siteLocales },
+        { path: '/popular-character-dot-to-dot-printable-worksheets', locales: siteLocales },
+        { path: '/printables/adults', locales: siteLocales },
+        { path: '/printables/animals', locales: siteLocales },
+        { path: '/printables/christmas', locales: siteLocales },
+        { path: '/printables/core', locales: siteLocales },
+        { path: '/printables/general', locales: siteLocales },
+        { path: '/printables/hard', locales: siteLocales },
+        { path: '/printables/connectTheDotsGenerator', locales: siteLocales },
+        { path: '/connect-the-dots-1-to-10', locales: siteLocales },
+        { path: '/connect-the-dots-coloring-pages', locales: siteLocales },
+        { path: '/blog/are-dot-to-dot-puzzles-good-for-kids', locales: siteLocales },
+        { path: '/convert-photo-to-beads', locales: siteLocales },
+        { path: '/gallery', locales: siteLocales },
+        { path: '/editor', locales: siteLocales },
+        { path: '/privacy', locales: siteLocales },
+        { path: '/terms', locales: siteLocales },
+        { path: '/dmca', locales: siteLocales },
+        { path: '/dot-to-dot-generator-from-photo', locales: ['en'] },
+        { path: '/make-your-own-dot-to-dot', locales: ['en'] },
     ];
 
-    const staticUrls = staticPages.map(path => {
-        // 1. 确保路径以 / 结尾
+    const staticUrls = staticPages.map(({ path, locales = siteLocales, priority = 0.8 }) => {
         const cleanPath = ensureTrailingSlash(path);
+        const languages = Object.fromEntries(
+            locales.map((locale) => [
+                locale,
+                `${baseUrl}${locale === 'en' ? '' : `/${locale}`}${cleanPath}`,
+            ])
+        );
 
         return {
-            // 2. 拼接 URL：baseUrl + cleanPath
-            // 结果示例: https://site.com/ 或 https://site.com/pricing/
             url: `${baseUrl}${cleanPath}`,
-
             lastModified: new Date(),
             changeFrequency: 'weekly' as const,
-            priority: path === '/' ? 1.0 : 0.8,
-            alternates: {
-                languages: {
-                    en: `${baseUrl}${cleanPath}`,
-                    es: `${baseUrl}/es${cleanPath}`,
-                    de: `${baseUrl}/de${cleanPath}`,
-                    pt: `${baseUrl}/pt${cleanPath}`,
-                    fr: `${baseUrl}/fr${cleanPath}`,
-                    it: `${baseUrl}/it${cleanPath}`,
-                    nl: `${baseUrl}/nl${cleanPath}`,
-                },
-            },
+            priority,
+            alternates: { languages },
         };
     });
 
-    // 2. 动态生成的详情页
     const allPrintables = getAllPrintables();
-    const dynamicUrls = allPrintables.map(item => {
-        // 1. 清理数据中的 .html 后缀，并确保以 / 结尾
-        // 假设 item.detailPage 是 "/printables/abc.html"
-        // 结果: "/printables/abc/"
+    const dynamicUrls = allPrintables.map((item) => {
         const cleanPath = ensureTrailingSlash(item.detailPage.replace('.html', ''));
-
         return {
             url: `${baseUrl}${cleanPath}`,
             lastModified: new Date(),
@@ -94,8 +78,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         };
     });
 
-    return [
-        ...staticUrls,
-        ...dynamicUrls,
-    ];
+    return [...staticUrls, ...dynamicUrls];
 }
