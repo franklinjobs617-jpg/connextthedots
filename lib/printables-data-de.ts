@@ -46,11 +46,7 @@ export function createPrintableItem(
 ): PrintableItem {
   // Extrahiere Dateinamen ohne Erweiterung als eindeutige ID
   const detailPageId = puzzleFilename.replace(/\.(webp|avif|png|jpg)$/, "");
-
-  // Behalte die ursprüngliche Suffix-Logik
   const detailPage = customDetails.detailPage || `/printables/${detailPageId}`;
-
-  // Schwierigkeitsgrad-Mapping (deutscher Anzeigetext)
   const difficultyMap: Record<string, string> = {
     Easy: "Einfach",
     Medium: "Mittel",
@@ -60,7 +56,6 @@ export function createPrintableItem(
 
   const difficulty = customDetails.difficulty || "Easy";
   const difficultyDE = difficultyMap[difficulty] || difficulty;
-
   const dotRange = customDetails.dotRange || [1, 50];
   const dotRangeString = Array.isArray(dotRange)
     ? dotRange[0] === dotRange[1]
@@ -68,8 +63,6 @@ export function createPrintableItem(
       : `${dotRange[0]}-${dotRange[1]}`
     : dotRange;
   const categories = customDetails.category || ["Allgemein"];
-
-  // SEO-optimierter Standardtext für Deutsch
   const defaultAltText = `Punkt-zu-Punkt-Malvorlage Level ${difficultyDE.toLowerCase()}: ${title} (Punkte: ${dotRangeString}).`;
   const defaultSolutionAltText = `Lösung der Punkt-zu-Punkt-Aktivität von ${title} (Zahlen von ${dotRangeString}).`;
   const defaultDescription = `Eine unterhaltsame Punkt-zu-Punkt-Aktivität von ${title.toLowerCase()} für Kinder. Bildungsaktivität ideal zum Lernen der Zahlen und Verbessern der Feinmotorik. Perfekt für ${
@@ -77,7 +70,7 @@ export function createPrintableItem(
   }.`;
 
   return {
-    id: detailPageId, // Verwende Dateinamen als Haupt-ID für SSG-Slug
+    id: detailPageId,
     title: title,
     description: customDetails.description || defaultDescription,
     difficulty: difficultyDE,
@@ -88,7 +81,6 @@ export function createPrintableItem(
     detailPage: detailPage,
     solutionUrl: CDN_BASE_URL + solutionFilename,
     solutionAltText: customDetails.solutionAltText || defaultSolutionAltText,
-
     category: categories,
     dotRange: dotRange,
     ageRecommendation: customDetails.ageRecommendation || "Alle Altersgruppen",
