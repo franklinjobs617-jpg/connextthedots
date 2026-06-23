@@ -6,5 +6,5 @@ export default createMiddleware(routing);
 
 export const config = {
   // 匹配所有路径，排除静态文件和 API
-  matcher: ['/', '/(de|en|es|pt|fr|it|nl)/:path*', '/((?!api|_next|_vercel|.*\\..*).*)']
+  matcher: ['/', '/(de|en|es|pt|fr|it|nl)/:path*', '/((?!api|_next|_vercel|shopping-guide|.*\\..*).*)']
 };
