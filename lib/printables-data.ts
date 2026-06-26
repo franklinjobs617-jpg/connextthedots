@@ -91,7 +91,6 @@ export function createPrintableItem(
 export const printablesData: Record<string, PrintableItem[]> = {
     easy: [
         ...(generatedByDifficulty.Easy || []),
-        createPrintableItem('bluey-playful-01', 'Playful Bluey', 'easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp', 'easy-bluey-01-connect-the-dots-solution.webp', { difficulty: 'Easy', tagColor: 'bg-green-600', dotRange: [1, 25], category: ['Cartoons', 'Animals'], ageRecommendation: '3-6 Years', popularity: 98 }),
         createPrintableItem('happy-sun-03', 'Happy Sun 3', 'easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.webp', 'easy-happy-sun-03-connect-the-dots-solution.webp', { difficulty: 'Easy', tagColor: 'bg-green-600', dotRange: [1, 22], category: ['Nature'], ageRecommendation: '3-6 Years', popularity: 85 }),
         createPrintableItem('rainbow', 'Rainbow', 'easy-rainbow-connect-the-dots-puzzle-1-15-numbers.webp', 'easy-rainbow-connect-the-dots-solution.webp', { difficulty: 'Easy', tagColor: 'bg-green-600', dotRange: [1, 15], category: ['Nature'], ageRecommendation: '3-5 Years', popularity: 92 }),
         createPrintableItem('robot-01', 'Friendly Robot', 'easy-robot-01-connect-the-dots-puzzle-1-25-numbers.webp', 'easy-robot-01-connect-the-dots-solution.webp', { difficulty: 'Easy', tagColor: 'bg-green-600', dotRange: [1, 25], category: ['Vehicles', 'Robots'], ageRecommendation: '4-7 Years', popularity: 78 }),
@@ -103,7 +102,6 @@ export const printablesData: Record<string, PrintableItem[]> = {
     ],
     medium: [
         ...(generatedByDifficulty.Medium || []),
-        createPrintableItem('spongebob-classic-01', 'Classic SpongeBob', 'medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp', 'medium-spongebob-01-connect-the-dots-solution.webp', { difficulty: 'Medium', tagColor: 'bg-yellow-600', dotRange: [1, 50], category: ['Cartoons', 'Under the Sea'], ageRecommendation: '5-8 Years', popularity: 95 }),
         createPrintableItem('castle-01', 'Majestic Castle', 'medium-castle-01-connect-the-dots-puzzle-1-80-numbers.webp', 'medium-castle-01-connect-the-dots-solution-1-80-numbers.webp', { difficulty: 'Medium', tagColor: 'bg-yellow-600', dotRange: [1, 80], category: ['Buildings', 'Fantasy'], ageRecommendation: '7-10 Years', popularity: 70 }),
         createPrintableItem('halloween-pumpkin-01', 'Halloween Pumpkin', 'medium-halloween-pumpkin-01-connect-the-dots-puzzle-1-65-numbers.webp', 'medium-halloween-pumpkin-01-connect-the-dots-solution-1-65-numbers.webp', { difficulty: 'Medium', tagColor: 'bg-yellow-600', dotRange: [1, 65], category: ['Holiday'], ageRecommendation: '7-10 Years', popularity: 80 }),
         createPrintableItem('lighthouse-01', 'Coastal Lighthouse', 'medium-lighthouse-01-connect-the-dots-puzzle-1-75-numbers.webp', 'medium-lighthouse-01-connect-the-dots-solution-1-75-numbers.webp', { difficulty: 'Medium', tagColor: 'bg-yellow-600', dotRange: [1, 75], category: ['Buildings', 'Nature'], ageRecommendation: '8-11 Years', popularity: 65 }),
