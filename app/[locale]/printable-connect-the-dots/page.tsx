@@ -78,7 +78,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
     const { locale } = await params;
 
-    const dataMap: Record<string, { data: ReturnType<typeof dataEN extends infer T ? () => T : never> | any; allItems: ReturnType<typeof getAllEN> }> = {
+    const dataMap: Record<string, { data: any; allItems: any[] }> = {
         de: { data: dataDE, allItems: getAllDE() },
         fr: { data: dataFR, allItems: getAllFR() },
         it: { data: dataIT, allItems: getAllIT() },

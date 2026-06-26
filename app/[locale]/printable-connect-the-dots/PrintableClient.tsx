@@ -15,7 +15,32 @@ type Props = {
 };
 
 // ─── i18n copy ────────────────────────────────────────────────────────────────
-const copy: Record<string, Record<string, string>> = {
+interface LocaleCopy {
+    breadcrumbHome: string;
+    breadcrumbCurrent: string;
+    h1: string;
+    subtitle: string;
+    ctaBrowse: string;
+    ctaMake: string;
+    filterTitle: string;
+    filterAll: string;
+    filterEasy: string;
+    filterMedium: string;
+    filterHard: string;
+    filterExtreme: string;
+    gridTitle: string;
+    gridSub: (n: number, t: number) => string;
+    generatorHeading: string;
+    generatorSub: string;
+    faqHeading: string;
+    faqItems: Array<{ q: string; a: string }>;
+    relatedTitle: string;
+    related: Array<{ href: string; title: string; desc: string }>;
+    diffLabels: Record<string, string>;
+    dotsBadge: string;
+    ageBadge: string;
+}
+const copy: Record<string, LocaleCopy> = {
     en: {
         breadcrumbHome: "Home",
         breadcrumbCurrent: "Free Printables",
