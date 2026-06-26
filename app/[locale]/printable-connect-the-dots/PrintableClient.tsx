@@ -367,20 +367,20 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                                 {c.subtitle}
                             </p>
                             <div className="flex flex-wrap gap-3">
-                                <a
-                                    href="#printable-grid"
+                                <button
+                                    onClick={() => document.getElementById("printable-grid")?.scrollIntoView({ behavior: "smooth" })}
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-full hover:bg-indigo-700 transition-colors"
                                 >
                                     <Download size={16} aria-hidden="true" />
                                     {c.ctaBrowse}
-                                </a>
-                                <a
-                                    href="#generator"
+                                </button>
+                                <button
+                                    onClick={() => document.getElementById("generator")?.scrollIntoView({ behavior: "smooth" })}
                                     className="inline-flex items-center gap-2 px-6 py-3 border border-slate-600 text-white font-semibold rounded-full hover:bg-slate-800 transition-colors"
                                 >
                                     <Sparkles size={16} aria-hidden="true" />
                                     {c.ctaMake}
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
