@@ -91,22 +91,6 @@ export function createPrintableItem(
 export const printablesData: Record<string, PrintableItem[]> = {
   easy: [
     createPrintableItem(
-      "bluey-playful-01",
-      "Spielerische Bluey",
-      "easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp",
-      "easy-bluey-01-connect-the-dots-solution.webp",
-      {
-        difficulty: "Easy",
-        tagColor: "bg-green-600",
-        dotRange: [1, 25],
-        category: ["Cartoon", "Tiere"],
-        ageRecommendation: "3-6 Jahre",
-        popularity: 98,
-        description:
-          "Lass Bluey zum Leben erwecken, indem du die Punkte verbindest! Eine Punkt-zu-Punkt-Aktivität von 1 bis 25, ideal für kleine Fans der Serie.",
-      }
-    ),
-    createPrintableItem(
       "happy-sun-03",
       "Fröhliche Sonne 3",
       "easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.webp",
@@ -236,22 +220,6 @@ export const printablesData: Record<string, PrintableItem[]> = {
     ),
   ],
   medium: [
-    createPrintableItem(
-      "spongebob-classic-01",
-      "Klassischer SpongeBob",
-      "medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp",
-      "medium-spongebob-01-connect-the-dots-solution.webp",
-      {
-        difficulty: "Medium",
-        tagColor: "bg-yellow-600",
-        dotRange: [1, 50],
-        category: ["Cartoon", "Unter Wasser"],
-        ageRecommendation: "5-8 Jahre",
-        popularity: 95,
-        description:
-          "Verbinde 50 Punkte, um den Lieblingsschwamm von Bikini Bottom zu enthüllen. Ideal zum Üben der Zahlen von 1 bis 50.",
-      }
-    ),
     createPrintableItem(
       "castle-01",
       "Majestätisches Schloss",

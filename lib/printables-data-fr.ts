@@ -91,20 +91,6 @@ export function createPrintableItem(
 export const printablesData: Record<string, PrintableItem[]> = {
   easy: [
     createPrintableItem(
-      "bluey-playful-01",
-      "Bluey Joueur",
-      "easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp",
-      "easy-bluey-01-connect-the-dots-solution.webp",
-      {
-        difficulty: "Easy",
-        tagColor: "bg-green-600",
-        dotRange: [1, 25],
-        category: ["Dessins Animés", "Animaux"],
-        ageRecommendation: "3-6 ans",
-        popularity: 98,
-      }
-    ),
-    createPrintableItem(
       "happy-sun-03",
       "Soleil Joyeux 3",
       "easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.webp",
@@ -218,20 +204,6 @@ export const printablesData: Record<string, PrintableItem[]> = {
     ),
   ],
   medium: [
-    createPrintableItem(
-      "spongebob-classic-01",
-      "Bob l'Éponge Classique",
-      "medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp",
-      "medium-spongebob-01-connect-the-dots-solution.webp",
-      {
-        difficulty: "Medium",
-        tagColor: "bg-yellow-600",
-        dotRange: [1, 50],
-        category: ["Dessins Animés", "Sous la mer"],
-        ageRecommendation: "5-8 ans",
-        popularity: 95,
-      }
-    ),
     createPrintableItem(
       "castle-01",
       "Château Majestueux",

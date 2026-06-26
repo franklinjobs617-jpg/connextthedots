@@ -1,9 +1,11 @@
 import { Metadata } from "next";
-import PrintableListClient from "./PrintableClient";
+import PrintableClient from "./PrintableClient";
 import { printablesData as dataEN, getAllPrintables as getAllEN } from "@/lib/printables-data";
+import { printablesData as dataDE, getAllPrintables as getAllDE } from "@/lib/printables-data-de";
 import { printablesData as dataES, getAllPrintables as getAllES } from "@/lib/printables-data-es";
 import { printablesData as dataPT, getAllPrintables as getAllPT } from "@/lib/printables-data-pt";
 import { printablesData as dataFR, getAllPrintables as getAllFR } from "@/lib/printables-data-fr";
+import { printablesData as dataIT, getAllPrintables as getAllIT } from "@/lib/printables-data-it";
 import { getAlternates, getUrl } from "@/lib/metadata";
 
 type Props = {
@@ -11,32 +13,53 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-    return [{ locale: "en" }, { locale: "es" }, { locale: "de" }, { locale: "pt" }, { locale: "fr" }];
+    return [
+        { locale: "en" },
+        { locale: "de" },
+        { locale: "es" },
+        { locale: "pt" },
+        { locale: "fr" },
+        { locale: "it" },
+    ];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
-    const isEs = locale === "es";
-    const isPt = locale === "pt";
-    const isFr = locale === "fr";
 
-    let title: string;
-    let description: string;
+    const meta: Record<string, { title: string; description: string }> = {
+        en: {
+            title: "Free Connect the Dots Printables for Kids & Adults | PDF Worksheets",
+            description:
+                "Browse 50+ free connect the dots printables by age, difficulty, and theme. Download animal, holiday, easy and hard PDF worksheets — or make your own custom dot-to-dot from any photo.",
+        },
+        de: {
+            title: "Zahlen Verbinden zum Ausdrucken Kostenlos | Punkt-zu-Punkt PDF",
+            description:
+                "Kostenlose Punkt-zu-Punkt Ausmalbilder zum Ausdrucken für Kinder und Erwachsene. Tiere, Weihnachten, einfach und schwer — als PDF herunterladen oder eigenes Bild hochladen.",
+        },
+        fr: {
+            title: "Points à Relier à Imprimer Gratuits | Fiches PDF Enfants & Adultes",
+            description:
+                "Collection gratuite de points à relier à imprimer par âge, difficulté et thème. Téléchargez des fiches PDF animaux, Noël, faciles et difficiles — ou créez les vôtres depuis une photo.",
+        },
+        it: {
+            title: "Unisci i Punti da Stampare Gratis | Schede PDF per Bambini e Adulti",
+            description:
+                "Oltre 50 schede unisci i punti da stampare gratis per bambini e adulti. Animali, Natale, facili e difficili in PDF — oppure crea il tuo puzzle da una foto.",
+        },
+        es: {
+            title: "Fichas de Unir Puntos para Imprimir Gratis | PDF para Niños y Adultos",
+            description:
+                "Más de 50 fichas de unir puntos para imprimir gratis por edad, dificultad y tema. Descarga PDF de animales, Navidad, fáciles y difíciles — o crea los tuyos desde una foto.",
+        },
+        pt: {
+            title: "Ligar os Pontos para Imprimir Grátis | Fichas PDF para Crianças e Adultos",
+            description:
+                "Mais de 50 fichas de ligar os pontos para imprimir grátis por idade, dificuldade e tema. Baixe PDF de animais, Natal, fáceis e difíceis — ou crie o seu a partir de uma foto.",
+        },
+    };
 
-    if (isFr) {
-        title = "Points 脿 Relier 脿 Imprimer Gratuits | Fiches PDF pour Enfants";
-        description = "Collection gratuite de fiches point 脿 relier 脿 imprimer. Cahier de points 脿 relier PDF de haute qualit茅 pour enfants et adultes. T茅l茅chargez et imprimez gratuitement !";
-    } else if (isPt) {
-        title = "Ligar os Pontos para Imprimir Gr谩tis | Desenhos PDF para Crian莽as";
-        description = "Cole莽茫o gratuita de desenhos de ligar os pontos para imprimir. Folhas de ligar os pontos em PDF de alta qualidade para crian莽as e adultos. Baixe e imprima gr谩tis!";
-    } else if (isEs) {
-        title = "Fichas de Unir Puntos para Imprimir Gratis | Dibujos de Unir Puntos para Ni帽os";
-        description = "Descubre nuestra gran colecci贸n de fichas de unir puntos para imprimir y dibujos de unir puntos para ni帽os y adultos. Dise帽os de alta calidad, sin marcas de agua, listos para descargar.";
-    } else {
-        title = "Free Connect the Dots Printables for Kids and Adults | PDF Worksheets";
-        description = "Browse free connect the dots printables by age, difficulty, and theme. Download animal, holiday, easy, and hard PDF worksheets or make your own custom dot-to-dot online.";
-    }
-
+    const { title, description } = meta[locale] ?? meta.en;
     const path = "/printable-connect-the-dots/";
 
     return {
@@ -47,6 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             title,
             description,
             url: getUrl(locale, path),
+            type: "website",
         },
     };
 }
@@ -54,26 +78,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
     const { locale } = await params;
 
-    const isEs = locale === "es";
-    const isPt = locale === "pt";
-    const isFr = locale === "fr";
+    const dataMap: Record<string, { data: ReturnType<typeof dataEN extends infer T ? () => T : never> | any; allItems: ReturnType<typeof getAllEN> }> = {
+        de: { data: dataDE, allItems: getAllDE() },
+        fr: { data: dataFR, allItems: getAllFR() },
+        it: { data: dataIT, allItems: getAllIT() },
+        es: { data: dataES, allItems: getAllES() },
+        pt: { data: dataPT, allItems: getAllPT() },
+    };
 
-    let data;
-    let allItems;
+    const { data, allItems } = dataMap[locale] ?? { data: dataEN, allItems: getAllEN() };
 
-    if (isFr) {
-        data = dataFR;
-        allItems = getAllFR();
-    } else if (isPt) {
-        data = dataPT;
-        allItems = getAllPT();
-    } else if (isEs) {
-        data = dataES;
-        allItems = getAllES();
-    } else {
-        data = dataEN;
-        allItems = getAllEN();
-    }
-
-    return <PrintableListClient locale={locale} data={data} allItems={allItems} />;
+    return <PrintableClient locale={locale} data={data} allItems={allItems} />;
 }

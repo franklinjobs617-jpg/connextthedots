@@ -94,20 +94,6 @@ export function createPrintableItem(
 export const printablesData: Record<string, PrintableItem[]> = {
     easy: [
         createPrintableItem(
-            'bluey-playful-01', 'Speelse Bluey',
-            'easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp',
-            'easy-bluey-01-connect-the-dots-solution.webp',
-            {
-                difficulty: 'Easy',
-                tagColor: 'bg-green-600',
-                dotRange: [1, 25],
-                category: ['Cartoon', 'Dieren'],
-                ageRecommendation: '3-6 jaar',
-                popularity: 98,
-                description: 'Laat Bluey tot leven komen door de punten te verbinden! Een punt-op-punt-activiteit van 1 tot 25, ideaal voor kleine fans van de serie.'
-            }
-        ),
-        createPrintableItem(
             'happy-sun-03', 'Vrolijke Zon 3',
             'easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.webp',
             'easy-happy-sun-03-connect-the-dots-solution.webp',
@@ -181,20 +167,6 @@ export const printablesData: Record<string, PrintableItem[]> = {
         ),
     ],
     medium: [
-        createPrintableItem(
-            'spongebob-classic-01', 'Klassieke SpongeBob',
-            'medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp',
-            'medium-spongebob-01-connect-the-dots-solution.webp',
-            {
-                difficulty: 'Medium',
-                tagColor: 'bg-yellow-600',
-                dotRange: [1, 50],
-                category: ['Cartoon', 'Onder Water'],
-                ageRecommendation: '5-8 jaar',
-                popularity: 95,
-                description: 'Verbind 50 punten om de favoriete spons van Bikini Bottom te ontdekken. Ideaal voor het oefenen van getallen van 1 tot 50.'
-            }
-        ),
         createPrintableItem(
             'castle-01', 'Majestueus Kasteel',
             'medium-castle-01-connect-the-dots-puzzle-1-80-numbers.webp',

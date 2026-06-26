@@ -97,22 +97,6 @@ export function createPrintableItem(
 export const printablesData: Record<string, PrintableItem[]> = {
   easy: [
     createPrintableItem(
-      "bluey-playful-01",
-      "Bluey Brincalhona",
-      "easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp",
-      "easy-bluey-01-connect-the-dots-solution.webp",
-      {
-        difficulty: "Easy",
-        tagColor: "bg-green-600",
-        dotRange: [1, 25],
-        category: ["Desenhos animados", "Animais"],
-        ageRecommendation: "3-6 anos",
-        popularity: 98,
-        description:
-          "Deixe Bluey ganhar vida conectando os pontos! Uma atividade de unir pontos de 1 a 25, ideal para pequenos fãs da série.",
-      },
-    ),
-    createPrintableItem(
       "happy-sun-03",
       "Sol Feliz 3",
       "easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.webp",
@@ -242,22 +226,6 @@ export const printablesData: Record<string, PrintableItem[]> = {
     ),
   ],
   medium: [
-    createPrintableItem(
-      "spongebob-classic-01",
-      "Bob Esponja Clássico",
-      "medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp",
-      "medium-spongebob-01-connect-the-dots-solution.webp",
-      {
-        difficulty: "Medium",
-        tagColor: "bg-yellow-600",
-        dotRange: [1, 50],
-        category: ["Desenhos animados", "Sob a água"],
-        ageRecommendation: "5-8 anos",
-        popularity: 95,
-        description:
-          "Conecte 50 pontos para revelar a esponja favorita de Fundo de Bikini. Ideal para praticar números de 1 a 50.",
-      },
-    ),
     createPrintableItem(
       "castle-01",
       "Castelo Majestoso",

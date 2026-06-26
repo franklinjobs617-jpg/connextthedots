@@ -114,20 +114,6 @@ export const printablesData: Record<string, PrintableItem[]> = {
     easy: [
         ...(generatedByDifficulty.Easy || []),
         createPrintableItem(
-            'bluey-playful-01', 'Bluey Juguetón',
-            'easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp',
-            'easy-bluey-01-connect-the-dots-solution.webp',
-            {
-                difficulty: 'Easy',
-                tagColor: 'bg-green-600',
-                dotRange: [1, 25],
-                category: ['Dibujos Animados', 'Animales'],
-                ageRecommendation: '3-6 años',
-                popularity: 98,
-                description: '¡Haz que Bluey cobre vida uniendo los puntos! Una ficha de unir puntos del 1 al 25 ideal para los pequeños fans de la serie.'
-            }
-        ),
-        createPrintableItem(
             'happy-sun-03', 'Sol Feliz 3',
             'easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.webp',
             'easy-happy-sun-03-connect-the-dots-solution.webp',
@@ -202,20 +188,6 @@ export const printablesData: Record<string, PrintableItem[]> = {
     ],
     medium: [
         ...(generatedByDifficulty.Medium || []),
-        createPrintableItem(
-            'spongebob-classic-01', 'Bob Esponja Clásico',
-            'medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp',
-            'medium-spongebob-01-connect-the-dots-solution.webp',
-            {
-                difficulty: 'Medium',
-                tagColor: 'bg-yellow-600',
-                dotRange: [1, 50],
-                category: ['Dibujos Animados', 'Bajo el Mar'],
-                ageRecommendation: '5-8 años',
-                popularity: 95,
-                description: 'Une 50 puntos para revelar a la esponja favorita de Fondo de Bikini. Ideal para practicar números del 1 al 50.'
-            }
-        ),
         createPrintableItem(
             'castle-01', 'Castillo Majestuoso',
             'medium-castle-01-connect-the-dots-puzzle-1-80-numbers.webp',

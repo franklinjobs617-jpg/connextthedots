@@ -94,20 +94,6 @@ export function createPrintableItem(
 export const printablesData: Record<string, PrintableItem[]> = {
     easy: [
         createPrintableItem(
-            'bluey-playful-01', 'Bluey Gioiosa',
-            'easy-bluey-01-connect-the-dots-puzzle-1-25-numbers.webp',
-            'easy-bluey-01-connect-the-dots-solution.webp',
-            {
-                difficulty: 'Easy',
-                tagColor: 'bg-green-600',
-                dotRange: [1, 25],
-                category: ['Cartoni animati', 'Animali'],
-                ageRecommendation: '3-6 anni',
-                popularity: 98,
-                description: 'Fai venire Bluey alla vita collegando i punti! Un attività di unisci i puntini da 1 a 25, ideale per i piccoli fan della serie.'
-            }
-        ),
-        createPrintableItem(
             'happy-sun-03', 'Sole Felice 3',
             'easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers.webp',
             'easy-happy-sun-03-connect-the-dots-solution.webp',
@@ -181,20 +167,6 @@ export const printablesData: Record<string, PrintableItem[]> = {
         ),
     ],
     medium: [
-        createPrintableItem(
-            'spongebob-classic-01', 'SpongeBob Classico',
-            'medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers.webp',
-            'medium-spongebob-01-connect-the-dots-solution.webp',
-            {
-                difficulty: 'Medium',
-                tagColor: 'bg-yellow-600',
-                dotRange: [1, 50],
-                category: ['Cartoni animati', 'Sotto il mare'],
-                ageRecommendation: '5-8 anni',
-                popularity: 95,
-                description: 'Collega 50 punti per scoprire la spugna preferita di Bikini Bottom. Ideale per praticare i numeri da 1 a 50.'
-            }
-        ),
         createPrintableItem(
             'castle-01', 'Castello Maestoso',
             'medium-castle-01-connect-the-dots-puzzle-1-80-numbers.webp',
