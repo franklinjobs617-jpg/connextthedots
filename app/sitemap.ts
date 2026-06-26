@@ -29,8 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/connect-the-dots-coloring-pages', locales: siteLocales },
         { path: '/blog/are-dot-to-dot-puzzles-good-for-kids', locales: siteLocales },
         { path: '/convert-photo-to-beads', locales: siteLocales },
-        { path: '/gallery', locales: siteLocales },
-        { path: '/editor', locales: siteLocales },
         { path: '/privacy', locales: siteLocales },
         { path: '/terms', locales: siteLocales },
         { path: '/dmca', locales: siteLocales },
