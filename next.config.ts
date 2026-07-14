@@ -32,6 +32,29 @@ const nextConfig: NextConfig = {
     },
     trailingSlash: true,
     async redirects() {
+        // 已下线的版权风险 printable 详情页（Bluey / SpongeBob）
+        // 统一 301 跳转到对应语言的免费图库 Hub 页，覆盖全部 7 个语言前缀
+        const localePrefixes = ['', '/de', '/es', '/pt', '/fr', '/it', '/nl'];
+        const removedPrintableSlugs = [
+            'easy-bluey-01-connect-the-dots-puzzle-1-25-numbers',
+            'medium-spongebob-01-connect-the-dots-puzzle-1-50-numbers',
+        ];
+
+        const removedPrintableRedirects = localePrefixes.flatMap((prefix) =>
+            removedPrintableSlugs.flatMap((slug) => ([
+                {
+                    source: `${prefix}/printables/${slug}`,
+                    destination: `${prefix}/printable-connect-the-dots/`,
+                    permanent: true,
+                },
+                {
+                    source: `${prefix}/printables/${slug}/`,
+                    destination: `${prefix}/printable-connect-the-dots/`,
+                    permanent: true,
+                },
+            ]))
+        );
+
         return [
             {
                 source: '/testpricing',
@@ -67,7 +90,7 @@ const nextConfig: NextConfig = {
                 destination: '/:slug/',
                 permanent: true,
             },
-
+            ...removedPrintableRedirects,
         ];
     },
 };
