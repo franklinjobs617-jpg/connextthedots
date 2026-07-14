@@ -85,6 +85,8 @@ const copy: Record<string, LocaleCopy> = {
         ],
         relatedTitle: "Related Collections",
         related: [
+            { href: "/connect-the-dots-for-adults/", title: "Connect the Dots for Adults", desc: "Extreme 100-300+ dot puzzles for teens and adults." },
+            { href: "/dot-to-dot-printable/", title: "Dot to Dot Printable Guide", desc: "What dot to dot puzzles are and how to use them." },
             { href: "/free-animal-dot-to-dot-printables-pdf/", title: "Animal Dot-to-Dot Printables", desc: "Dogs, cats, rabbits, owls, turtles, and more." },
             { href: "/christmas-printables/", title: "Christmas Connect the Dots", desc: "Santa, trees, ornaments, and holiday scenes." },
             { href: "/connect-the-dots-1-to-10/", title: "Connect the Dots 1 to 10", desc: "Beginner sheets for toddlers and preschoolers." },

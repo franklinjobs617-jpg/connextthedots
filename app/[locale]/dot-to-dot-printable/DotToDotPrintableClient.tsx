@@ -80,6 +80,7 @@ const FAQ_ITEMS = [
 ];
 
 const RELATED_LINKS = [
+    { href: "/connect-the-dots-for-adults/", title: "Connect the Dots for Adults", desc: "Extreme 100-300+ dot puzzles for teens and adults." },
     { href: "/printable-connect-the-dots/", title: "Connect the Dots Printables", desc: "Browse the full collection filtered by theme and age." },
     { href: "/free-animal-dot-to-dot-printables-pdf/", title: "Animal Dot to Dot PDFs", desc: "Dogs, cats, rabbits, owls, turtles and more." },
     { href: "/christmas-printables/", title: "Christmas Dot to Dot", desc: "Santa, trees, ornaments and holiday scenes." },
