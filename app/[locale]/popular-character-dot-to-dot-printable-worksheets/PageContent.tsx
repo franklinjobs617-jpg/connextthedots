@@ -1,9 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Script from "next/script";
+import type { PrintableItem } from "@/lib/printables-data";
 
-export default function PageContent() {
+type ThemeSummary = {
+    label: string;
+    count: number;
+    sample: PrintableItem[];
+};
+
+type Props = {
+    themeSummary: ThemeSummary[];
+};
+
+export default function PageContent({ themeSummary }: Props) {
     const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
     // 社交分享链接动态生成逻辑
@@ -34,8 +44,6 @@ export default function PageContent() {
     const openModal = () => {
         setIsFeedbackOpen(true);
         document.body.style.overflow = 'hidden';
-
-        // 初始化 Cusdis (如果尚未初始化)
         // @ts-ignore
         if (window.CUSDIS && window.CUSDIS.initial && !document.querySelector('#cusdis_thread iframe')) {
             requestAnimationFrame(() => {
@@ -47,11 +55,9 @@ export default function PageContent() {
 
     const closeModal = () => {
         document.body.style.overflow = '';
-        // 简单的延迟以允许动画播放（可选，这里直接关闭以简化 React 逻辑）
         setIsFeedbackOpen(false);
     };
 
-    // 键盘事件监听 (Escape 关闭弹窗)
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === 'Escape' && isFeedbackOpen) {
@@ -67,7 +73,7 @@ export default function PageContent() {
             <main>
                 <div className="container mx-auto max-w-7xl px-6 lg:px-8 bg-white shadow-xl rounded-xl p-6 md:p-10 text-gray-800">
 
-                    {/* H1: 吸引人的文章大标题 */}
+                    {/* H1 */}
                     <h1 className="text-3xl lg:text-5xl font-extrabold mb-8 text-center text-gray-900 leading-tight">
                         More Than Just Lines: The Ultimate Guide to <span className="text-primary">Connect the Dots for Kids</span>
                     </h1>
@@ -76,10 +82,9 @@ export default function PageContent() {
                     <p className="text-lg leading-relaxed mb-6 text-gray-700">
                         For decades, <strong className="text-primary">connect the dots</strong> puzzles have been a staple in
                         classrooms and homes alike. What might look like a simple game of drawing lines is actually a powerful
-                        developmental tool. In this guide, we’ll explore how <strong className="text-primary">dot to dots for
+                        developmental tool. In this guide, we&apos;ll explore how <strong className="text-primary">dot to dots for
                             kids</strong> bridge the gap between play and essential skill-building, and why they remain one of
-                        the most effective <strong className="text-primary">online dot to dot fun tutorials</strong> available
-                        today.
+                        the most effective ways to combine learning with fun.
                     </p>
 
                     {/* 插图 1 */}
@@ -91,12 +96,12 @@ export default function PageContent() {
                             patience and concentration.</figcaption>
                     </figure>
 
-                    {/* H2: 益处分析 (内容深度) */}
+                    {/* H2: 益处分析 */}
                     <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-gray-800">The Surrounding Science: Why Dots Connect to
                         Learning</h2>
                     <p className="mb-6">
                         When a child picks up a pencil to <strong className="text-primary">print dots</strong> and connect them,
-                        their brain is working overtime. It’s not just about the final picture; it’s about the journey of the
+                        their brain is working overtime. It&apos;s not just about the final picture; it&apos;s about the journey of the
                         line.
                     </p>
 
@@ -114,11 +119,11 @@ export default function PageContent() {
                         </div>
                     </div>
 
-                    {/* H2: 在线与打印的对比 (意图匹配) */}
+                    {/* H2: 在线与打印的对比 */}
                     <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-gray-800">Digital vs. Paper: Which One Should You
                         Choose?</h2>
                     <p className="mb-4 text-gray-700">
-                        In today&apos;s digital landscape, parents often ask whether they should use <strong
+                        Parents often ask whether they should use <strong
                             className="text-primary">online dot to dots exercises</strong> or stick to traditional <strong
                                 className="text-primary">printable pages</strong>. The truth is, both have unique advantages:
                     </p>
@@ -127,58 +132,48 @@ export default function PageContent() {
                         <li className="flex items-start">
                             <span className="text-green-500 mr-2">✔</span>
                             <span><strong>The Online Advantage:</strong> <strong className="text-primary">Online dot to dots for
-                                kids</strong> provide instant feedback. If a child clicks the wrong number, the system can
-                                guide them, making it a &quot;fun tutorial&quot; that requires zero cleanup.</span>
+                                kids</strong> provide instant feedback and require zero cleanup — great for a quick activity
+                                between other tasks.</span>
                         </li>
                         <li className="flex items-start">
                             <span className="text-green-500 mr-2">✔</span>
                             <span><strong>The Printable Advantage:</strong> When you <strong className="text-primary">print connect
-                                the dots</strong>, you’re encouraging &quot;pencil-to-paper&quot; time, which is crucial for reducing
+                                the dots</strong>, you&apos;re encouraging &quot;pencil-to-paper&quot; time, which is crucial for reducing
                                 screen time and improving tactile focus.</span>
                         </li>
                     </ul>
 
-                    {/* H2: 热门角色如何提升参与度 (复刻策略词汇) */}
-                    <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-gray-800">Engagement Through Themes: From Goku to Barbie
-                    </h2>
+                    {/* H2: 按主题浏览 — 真实数据驱动，不含任何第三方版权角色 */}
+                    <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-gray-800">Explore Dot to Dot Worksheets by Theme</h2>
                     <p className="mb-6">
-                        The best way to keep a child engaged is to offer themes they already love. Our database features a wide
-                        range of popular culture icons that turn a simple <strong className="text-primary">kids dot to dot</strong>
-                        into an exciting adventure.
+                        The best way to keep a child engaged is to offer themes they already love. Browse our free collection
+                        organized by theme — every puzzle below is a real, downloadable worksheet from our library.
                     </p>
 
                     <div className="bg-gray-50 p-8 rounded-2xl mb-12">
-                        <h4 className="text-lg font-bold mb-4 text-center text-gray-600 uppercase tracking-widest">Trending
-                            Categories</h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                            {/* H5 使用于具体角色名，符合提供的策略 */}
-                            <div className="text-center">
-                                <h5 className="font-bold text-indigo-600">Action & Anime</h5>
-                                <p className="text-sm">Features <strong>Goku</strong> and <strong>Pokemon</strong> challenges for
-                                    high-energy learners.</p>
-                            </div>
-                            <div className="text-center">
-                                <h5 className="font-bold text-pink-600">Fantasy & Fashion</h5>
-                                <p className="text-sm">Includes <strong>Barbie</strong> and <strong>Unicorns</strong> to spark
-                                    creative imagination.</p>
-                            </div>
-                            <div className="text-center">
-                                <h5 className="font-bold text-blue-600">Heroic Pups</h5>
-                                <p className="text-sm">The <strong>PAW Patrol</strong> series, featuring <strong>Skye</strong> and
-                                    <strong>Rubble</strong>, is perfect for toddlers.
-                                </p>
-                            </div>
+                        <h4 className="text-lg font-bold mb-6 text-center text-gray-600 uppercase tracking-widest">Browse by Theme</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {themeSummary.map((theme) => (
+                                <Link
+                                    key={theme.label}
+                                    href="/printable-connect-the-dots/"
+                                    className="block text-center bg-white rounded-xl p-5 border border-gray-100 hover:border-indigo-300 hover:shadow-md transition-all"
+                                >
+                                    <h5 className="font-bold text-indigo-600 mb-1">{theme.label}</h5>
+                                    <p className="text-sm text-gray-500">{theme.count} free {theme.count === 1 ? "worksheet" : "worksheets"}</p>
+                                </Link>
+                            ))}
                         </div>
                     </div>
 
                     {/* H2: 关于如何使用的建议 */}
-                    <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-gray-800">How to Use These Fun Tutorials Effectively
+                    <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-gray-800">How to Use These Worksheets Effectively
                     </h2>
                     <p className="mb-6">
                         To get the most out of <strong className="text-primary">connect the dot worksheets</strong>, we recommend
-                        starting with low-count puzzles (1-20 dots) and gradually increasing the difficulty. For advanced
-                        students, our &quot;Recently Added&quot; section includes <strong>Classic Automobile Sequential Games</strong> and
-                        <strong>African Safari Equine Fun</strong>, which offer higher dot counts for a greater challenge.
+                        starting with low-count puzzles (1-20 dots) and gradually increasing the difficulty. Our vehicle and
+                        animal themed puzzles include options with higher dot counts for kids who are ready for a bigger
+                        challenge.
                     </p>
 
                     {/* 结尾 CTA */}
@@ -203,9 +198,6 @@ export default function PageContent() {
 
                 </div>
             </main>
-
-
-
         </>
     );
 }
