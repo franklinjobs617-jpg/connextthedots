@@ -11,22 +11,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
     const path = "/connect-the-dots-coloring-pages/";
 
+    const title = "Free Connect the Dots Coloring Pages | Printable PDFs";
+    const description = "Free connect the dots coloring pages for kids. Download PDF worksheets that combine dot-to-dot puzzles with coloring in one activity.";
+
     return {
-        title: "Free Connect the Dots Coloring Pages | Printable PDF Sheets for Kids",
-        description: "Download 20+ free connect the dots coloring pages for kids. Fun printable PDF worksheets that combine dot-to-dot puzzles with coloring activities. No sign-up, instant download.",
+        title,
+        description,
         keywords: "connect the dots coloring pages, dot to dot coloring pages, connect the dots colouring pages, free printable coloring pages, dot to dot worksheets coloring, connect the dots printable coloring sheets",
         alternates: getAlternates(locale, path),
         openGraph: {
             siteName: "ConnectTheDotsPrintable.online",
             url: getUrl(locale, path),
-            title: "Free Connect the Dots Coloring Pages | Printable PDF Sheets for Kids",
-            description: "Download 20+ free connect the dots coloring pages for kids. Fun printable PDF worksheets that combine dot-to-dot puzzles with coloring activities.",
+            title,
+            description,
             type: "website",
         },
         twitter: {
             card: "summary_large_image",
-            title: "Free Connect the Dots Coloring Pages | Printable PDF Sheets for Kids",
-            description: "Download 20+ free connect the dots coloring pages for kids. Fun printable PDF worksheets that combine dot-to-dot puzzles with coloring activities.",
+            title,
+            description,
         },
     };
 }

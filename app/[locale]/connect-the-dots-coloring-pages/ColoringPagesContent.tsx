@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { jsPDF } from "jspdf";
 import { getAllPrintables, PrintableItem, CDN_BASE_URL } from "@/lib/printables-data";
-import { Download, Printer, Star, ChevronDown, ChevronUp, BookOpen, Palette, ArrowRight, CheckCircle2, Loader2, Sparkles } from "lucide-react";
+import { Download, Printer, Star, ChevronDown, Palette, ArrowRight, CheckCircle2, Loader2, Sparkles } from "lucide-react";
 
 function getColoringPrintables(): PrintableItem[] {
     const all = getAllPrintables();
@@ -184,27 +184,18 @@ function PrintableCard({ item }: { item: PrintableItem }) {
     );
 }
 
-function FAQItem({ question, answer, isOpen, onToggle }: {
+function FAQItem({ question, answer }: {
     question: string;
     answer: string;
-    isOpen: boolean;
-    onToggle: () => void;
 }) {
     return (
         <div className="border border-gray-200 rounded-lg overflow-hidden">
-            <button
-                className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
-                onClick={onToggle}
-                aria-expanded={isOpen}
-            >
-                <span className="font-semibold text-gray-800 pr-4">{question}</span>
-                {isOpen ? <ChevronUp size={20} className="text-gray-500 shrink-0" /> : <ChevronDown size={20} className="text-gray-500 shrink-0" />}
-            </button>
-            {isOpen && (
-                <div className="px-4 pb-4 text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
-                    {answer}
-                </div>
-            )}
+            <div className="w-full p-4 text-left">
+                <span className="font-semibold text-gray-800">{question}</span>
+            </div>
+            <div className="px-4 pb-4 text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
+                {answer}
+            </div>
         </div>
     );
 }
@@ -424,7 +415,6 @@ function ComparisonShowcase() {
 export default function ColoringPagesContent() {
     const printables = getColoringPrintables();
     const [showAll, setShowAll] = useState(false);
-    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     const displayedPrintables = showAll ? printables : printables.slice(0, 8);
 
@@ -477,10 +467,26 @@ export default function ColoringPagesContent() {
                         <span className="flex items-center gap-1"><Printer size={16} /> Instant PDF Download</span>
                         <span className="flex items-center gap-1"><Palette size={16} /> Connect & Color</span>
                     </div>
+                    <p className="text-xs text-gray-400 mt-3">Last updated July 14, 2026</p>
                 </header>
 
                 {/* Comparison Showcase */}
                 <ComparisonShowcase />
+
+                {/* Compact generator CTA — earlier in the page than the bottom-of-page one */}
+                <div className="mb-16 flex flex-col sm:flex-row items-center justify-between gap-4 bg-purple-50 border border-purple-100 rounded-2xl px-6 py-5">
+                    <p className="text-sm text-gray-700">
+                        <span className="font-semibold text-purple-700">Want a design not on this page?</span>{" "}
+                        Turn any photo into a custom connect-the-dots coloring page in seconds.
+                    </p>
+                    <Link
+                        href="/"
+                        className="shrink-0 inline-flex items-center gap-1.5 px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold rounded-full transition-colors"
+                    >
+                        Try the Free Generator
+                        <ArrowRight size={14} />
+                    </Link>
+                </div>
 
                 {/* Printable Grid */}
                 <section className="mb-16">
@@ -528,6 +534,17 @@ export default function ColoringPagesContent() {
                             <p className="text-gray-600 leading-relaxed">
                                 This combination of structured problem-solving followed by open-ended creativity
                                 makes these pages ideal for both classroom activities and quiet time at home.
+                            </p>
+                            <p className="text-xs text-gray-400 mt-4">
+                                Source:{" "}
+                                <a
+                                    href="https://research.aota.org/ajot/article/78/3/7803205080/25181/Quantifying-Coloring-Skills-Among-Preschoolers"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-purple-600 hover:underline"
+                                >
+                                    American Journal of Occupational Therapy — coloring skills in preschoolers
+                                </a>
                             </p>
                         </div>
                         <div className="bg-purple-50 rounded-xl p-6">
@@ -677,8 +694,6 @@ export default function ColoringPagesContent() {
                                 key={index}
                                 question={item.q}
                                 answer={item.a}
-                                isOpen={openFaq === index}
-                                onToggle={() => setOpenFaq(openFaq === index ? null : index)}
                             />
                         ))}
                     </div>
