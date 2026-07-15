@@ -268,6 +268,124 @@ const copy: Record<string, LocaleCopy> = {
         dotsBadge: "puntini",
         ageBadge: "Età",
     },
+    es: {
+        breadcrumbHome: "Inicio",
+        breadcrumbCurrent: "Fichas gratuitas",
+        h1: "Unir Puntos para Imprimir – Fichas PDF Gratis",
+        subtitle:
+            "Más de 50 fichas de unir puntos gratis por dificultad, tema y edad. Descarga en PDF — o crea tu propio puzzle personalizado desde una foto.",
+        ctaBrowse: "Ver las fichas ↓",
+        ctaMake: "Crea la tuya →",
+        filterTitle: "Filtrar por dificultad",
+        filterAll: "Todos",
+        filterEasy: "Fácil",
+        filterMedium: "Medio",
+        filterHard: "Difícil",
+        filterExtreme: "Extremo",
+        gridTitle: "Fichas de unir puntos para imprimir",
+        gridSub: (n: number, t: number) => `Mostrando ${n} de ${t} fichas`,
+        generatorHeading: "¿No encuentras lo que buscas?",
+        generatorSub:
+            "Convierte cualquier foto en un puzzle de unir puntos personalizado. Ajusta el número de puntos, previsualiza y descarga en PDF.",
+        faqHeading: "Preguntas frecuentes",
+        faqItems: [
+            {
+                q: "¿Qué es una ficha de unir puntos?",
+                a: "Una ficha de unir puntos es una hoja de actividad donde puntos numerados forman una imagen oculta. Al unir los puntos del 1 al 2, del 2 al 3 y así sucesivamente, la imagen se revela. Estas fichas se usan para practicar el conteo, desarrollar la motricidad fina y ofrecer una actividad sin pantallas para niños y adultos.",
+            },
+            {
+                q: "¿Estas fichas para imprimir son realmente gratis?",
+                a: "Sí — cada ficha de esta colección es gratuita para descargar e imprimir, sin marca de agua y sin necesidad de registro. Haz clic en cualquier puzzle, abre la versión de tamaño completo e imprime con la configuración estándar Carta o A4.",
+            },
+            {
+                q: "¿Para qué edad son adecuadas estas fichas?",
+                a: "Las fichas están etiquetadas por rango de edad. Las fichas fáciles con 10–25 puntos son adecuadas para niños de 3 a 6 años. Las fichas medias con 25–60 puntos funcionan bien para niños de 6 a 10 años. Las fichas difíciles y extremas con 60–200+ puntos están pensadas para niños mayores de 10 años y adultos.",
+            },
+            {
+                q: "¿Hay fichas de unir puntos para adultos?",
+                a: "Sí. Las fichas marcadas como Difícil y Extremo, con 60 a más de 200 puntos, están diseñadas para adultos y adolescentes que buscan un reto más detallado. También puedes usar el generador para crear tu propio diseño personalizado con el nivel de dificultad que prefieras.",
+            },
+            {
+                q: "¿Puedo crear mi propia ficha desde una foto?",
+                a: "Sí. El generador más abajo te permite subir cualquier imagen y convertirla en un puzzle de puntos numerados que puedes ajustar y descargar en PDF.",
+            },
+            {
+                q: "¿Cómo imprimo correctamente una ficha?",
+                a: "Haz clic en una ficha para abrir la página de detalle, luego usa la función de impresión de tu navegador (Ctrl+P o Cmd+P). Selecciona 'Ajustar a la página' e imprime en papel Carta estándar o A4.",
+            },
+        ],
+        relatedTitle: "Colecciones relacionadas",
+        related: [
+            { href: "/es/free-animal-dot-to-dot-printables-pdf/", title: "Unir puntos animales", desc: "Perros, gatos, conejos, búhos y más." },
+            { href: "/es/christmas-printables/", title: "Unir puntos de Navidad", desc: "Papá Noel, árboles y escenas navideñas." },
+            { href: "/es/connect-the-dots-1-to-10/", title: "Unir puntos del 1 al 10", desc: "Fichas para los más pequeños y preescolar." },
+            { href: "/es/connect-the-dots-coloring-pages/", title: "Páginas para colorear", desc: "Une los puntos y luego colorea la imagen." },
+            { href: "/es/how-to-make/", title: "¿Cómo crear un puzzle?", desc: "Tutorial paso a paso con tus propias imágenes." },
+            { href: "/es/popular-character-dot-to-dot-printable-worksheets/", title: "Fichas temáticas", desc: "Puzzles organizados por tema y categoría." },
+        ],
+        diffLabels: { Easy: "Fácil", Medium: "Medio", Hard: "Difícil", Extreme: "Extremo" },
+        dotsBadge: "puntos",
+        ageBadge: "Edad",
+    },
+    pt: {
+        breadcrumbHome: "Início",
+        breadcrumbCurrent: "Fichas gratuitas",
+        h1: "Ligar os Pontos para Imprimir – Fichas PDF Grátis",
+        subtitle:
+            "Mais de 50 fichas de ligar os pontos grátis por dificuldade, tema e idade. Baixe em PDF — ou crie o seu próprio puzzle personalizado a partir de uma foto.",
+        ctaBrowse: "Ver as fichas ↓",
+        ctaMake: "Crie a sua →",
+        filterTitle: "Filtrar por dificuldade",
+        filterAll: "Todos",
+        filterEasy: "Fácil",
+        filterMedium: "Médio",
+        filterHard: "Difícil",
+        filterExtreme: "Extremo",
+        gridTitle: "Fichas de ligar os pontos para imprimir",
+        gridSub: (n: number, t: number) => `Mostrando ${n} de ${t} fichas`,
+        generatorHeading: "Não encontrou o que procurava?",
+        generatorSub:
+            "Transforme qualquer foto num puzzle de ligar os pontos personalizado. Ajuste o número de pontos, veja a pré-visualização e baixe em PDF.",
+        faqHeading: "Perguntas frequentes",
+        faqItems: [
+            {
+                q: "O que é uma ficha de ligar os pontos?",
+                a: "Uma ficha de ligar os pontos é uma folha de atividade onde pontos numerados formam uma imagem escondida. Ao ligar os pontos do 1 ao 2, do 2 ao 3 e assim por diante, a imagem é revelada. Estas fichas são usadas para praticar a contagem, desenvolver a motricidade fina e oferecer uma atividade sem telas para crianças e adultos.",
+            },
+            {
+                q: "Estas fichas de atividades para imprimir são realmente grátis?",
+                a: "Sim — cada ficha desta coleção é gratuita para baixar e imprimir, sem marca d'água e sem necessidade de cadastro. Clique em qualquer puzzle, abra a versão em tamanho real e imprima com as configurações padrão Carta ou A4.",
+            },
+            {
+                q: "Para que idade estas fichas são adequadas?",
+                a: "As fichas são identificadas por faixa etária. Fichas fáceis com 10–25 pontos são adequadas para crianças de 3 a 6 anos. Fichas médias com 25–60 pontos funcionam bem para crianças de 6 a 10 anos. Fichas difíceis e extremas com 60–200+ pontos são pensadas para crianças acima de 10 anos e adultos.",
+            },
+            {
+                q: "Posso criar minha própria ficha a partir de uma foto?",
+                a: "Sim. O gerador logo abaixo permite enviar qualquer imagem e transformá-la num puzzle de pontos numerados que você pode ajustar e baixar em PDF.",
+            },
+            {
+                q: "Como imprimo corretamente uma ficha?",
+                a: "Clique em uma ficha para abrir a página de detalhes, depois use a função de impressão do seu navegador (Ctrl+P ou Cmd+P). Selecione 'Ajustar à página' e imprima em papel Carta padrão ou A4.",
+            },
+            {
+                q: "Estas atividades de ligar pontos ajudam no desenvolvimento infantil?",
+                a: "Sim. Ligar os pontos em ordem numérica reforça o reconhecimento de números e a sequência, além de desenvolver a coordenação motora fina necessária para a escrita. É uma atividade educativa comum usada em casa e na escola.",
+            },
+        ],
+        relatedTitle: "Coleções relacionadas",
+        related: [
+            { href: "/pt/free-animal-dot-to-dot-printables-pdf/", title: "Ligar pontos de animais", desc: "Cães, gatos, coelhos, corujas e mais." },
+            { href: "/pt/christmas-printables/", title: "Ligar pontos de Natal", desc: "Papai Noel, árvores e cenas natalinas." },
+            { href: "/pt/connect-the-dots-1-to-10/", title: "Ligar os pontos de 1 a 10", desc: "Fichas para os pequenos e pré-escola." },
+            { href: "/pt/connect-the-dots-coloring-pages/", title: "Páginas para colorir", desc: "Ligue os pontos e depois colora a imagem." },
+            { href: "/pt/how-to-make/", title: "Como criar um puzzle?", desc: "Tutorial passo a passo com suas próprias imagens." },
+            { href: "/pt/popular-character-dot-to-dot-printable-worksheets/", title: "Fichas temáticas", desc: "Puzzles organizados por tema e categoria." },
+        ],
+        diffLabels: { Easy: "Fácil", Medium: "Médio", Hard: "Difícil", Extreme: "Extremo" },
+        dotsBadge: "pontos",
+        ageBadge: "Idade",
+    },
 };
 
 // Fallback to EN for any locale not explicitly defined
