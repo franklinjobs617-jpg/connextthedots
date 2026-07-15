@@ -2,100 +2,42 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { getAllPrintables, PrintableItem, CDN_BASE_URL } from "@/lib/printables-data";
-import { Download, Printer, Star, ChevronDown, ChevronUp, BookOpen, GraduationCap, ArrowRight } from "lucide-react";
+import { getAllPrintables, PrintableItem } from "@/lib/printables-data";
+import PrintableCard from "@/components/PrintableCard";
+import { Download, Printer, Star, ChevronDown, BookOpen, GraduationCap, ArrowRight, ExternalLink } from "lucide-react";
 
-// 筛选 1-10 范围的 printables（点数 <= 10 的 + 一些最简单的）
+// 筛选适合初学者的最简单 printables（优先选点数最少的 Easy 图）
+// 注：目前图库中没有点数上限严格 <=10 的图，最简单的是 1-20。
+// 因此展示"最简单的入门级"图案，文案避免声称精确练习 1-10。
 function getEasyPrintables(): PrintableItem[] {
     const all = getAllPrintables();
-    // 优先选 dotRange 最大值 <= 10 的，如果没有就选最简单的几个
-    const exact = all.filter(item => {
-        const range = item.dotRange;
-        if (Array.isArray(range)) return range[1] <= 10;
-        return false;
-    });
 
-    if (exact.length >= 8) return exact.slice(0, 12);
-
-    // 补充最简单的 items（dotRange 最大值 <= 25 的）
-    const easy = all.filter(item => {
-        const range = item.dotRange;
-        if (Array.isArray(range)) return range[1] <= 25 && item.difficulty === "Easy";
-        return false;
-    }).sort((a, b) => {
-        const aMax = Array.isArray(a.dotRange) ? a.dotRange[1] : 999;
-        const bMax = Array.isArray(b.dotRange) ? b.dotRange[1] : 999;
-        return aMax - bMax;
-    });
-
-    return easy.slice(0, 12);
+    return all
+        .filter((item) => {
+            const range = item.dotRange;
+            return Array.isArray(range) && range[1] <= 25 && item.difficulty === "Easy";
+        })
+        .sort((a, b) => {
+            const aMax = Array.isArray(a.dotRange) ? a.dotRange[1] : 999;
+            const bMax = Array.isArray(b.dotRange) ? b.dotRange[1] : 999;
+            return aMax - bMax;
+        })
+        .slice(0, 12);
 }
 
-// Printable 卡片组件
-function PrintableCard({ item }: { item: PrintableItem }) {
-    const dotLabel = Array.isArray(item.dotRange)
-        ? `${item.dotRange[0]}-${item.dotRange[1]}`
-        : item.dotRange;
-
-    return (
-        <div className="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
-            <Link href={item.detailPage} className="block">
-                <div className="relative aspect-square bg-gray-50 overflow-hidden">
-                    <Image
-                        src={item.imageUrl}
-                        alt={item.altText}
-                        fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                    />
-                </div>
-            </Link>
-            <div className="p-3">
-                <h3 className="font-semibold text-gray-800 text-sm truncate">{item.title}</h3>
-                <div className="flex items-center gap-2 mt-1">
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">
-                        {dotLabel} dots
-                    </span>
-                    <span className="text-xs text-gray-500">{item.ageRecommendation}</span>
-                </div>
-                <a
-                    href={item.solutionUrl}
-                    download
-                    className="mt-2 w-full flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    <Download size={14} />
-                    Download PDF
-                </a>
-            </div>
-        </div>
-    );
-}
-
-// FAQ 手风琴组件
-function FAQItem({ question, answer, isOpen, onToggle }: {
+// FAQ 组件（始终展开，与已声明的 FAQPage Schema 保持一致）
+function FAQItem({ question, answer }: {
     question: string;
     answer: string;
-    isOpen: boolean;
-    onToggle: () => void;
 }) {
     return (
         <div className="border border-gray-200 rounded-lg overflow-hidden">
-            <button
-                className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
-                onClick={onToggle}
-                aria-expanded={isOpen}
-            >
-                <span className="font-semibold text-gray-800 pr-4">{question}</span>
-                {isOpen ? <ChevronUp size={20} className="text-gray-500 shrink-0" /> : <ChevronDown size={20} className="text-gray-500 shrink-0" />}
-            </button>
-            {isOpen && (
-                <div className="px-4 pb-4 text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
-                    {answer}
-                </div>
-            )}
+            <div className="w-full p-4 text-left">
+                <span className="font-semibold text-gray-800">{question}</span>
+            </div>
+            <div className="px-4 pb-4 text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
+                {answer}
+            </div>
         </div>
     );
 }
@@ -103,7 +45,6 @@ function FAQItem({ question, answer, isOpen, onToggle }: {
 export default function ConnectDots1to10Content() {
     const printables = getEasyPrintables();
     const [showAll, setShowAll] = useState(false);
-    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     const displayedPrintables = showAll ? printables : printables.slice(0, 8);
 
@@ -148,28 +89,29 @@ export default function ConnectDots1to10Content() {
                         Free <span className="text-blue-600">Connect the Dots 1 to 10</span> Printables
                     </h1>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                        Download 20+ easy connect the dots worksheets designed for toddlers and preschoolers.
-                        Large dots, simple shapes, and instant PDF download — perfect for little hands learning to count.
+                        Download our easiest connect the dots worksheets, designed for toddlers and preschoolers just starting to count.
+                        Large dots, simple shapes, and instant PDF download — perfect for little hands learning their numbers.
                     </p>
                     <div className="flex items-center justify-center gap-4 mt-6 text-sm text-gray-500">
-                        <span className="flex items-center gap-1"><Star size={16} className="text-yellow-500" /> 20+ Free Worksheets</span>
+                        <span className="flex items-center gap-1"><Star size={16} className="text-yellow-500" /> Easiest Worksheets</span>
                         <span className="flex items-center gap-1"><Printer size={16} /> Instant PDF Download</span>
                         <span className="flex items-center gap-1"><BookOpen size={16} /> Ages 2-5</span>
                     </div>
+                    <p className="text-xs text-gray-400 mt-4">Last updated: July 15, 2026</p>
                 </header>
 
                 {/* Printable Grid - 核心内容 */}
                 <section className="mb-16">
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                        Download Free 1 to 10 Dot to Dot Worksheets
+                        Our Easiest Dot to Dot Worksheets
                     </h2>
                     <p className="text-gray-600 mb-6">
-                        Click any worksheet to preview, or download the PDF directly. All printables are free, with no watermarks.
+                        Click any worksheet to preview and download the PDF. All printables are free, with no watermarks.
                     </p>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                        {displayedPrintables.map((item) => (
-                            <PrintableCard key={item.id} item={item} />
+                        {displayedPrintables.map((item, idx) => (
+                            <PrintableCard key={item.id} item={item} priority={idx < 4} />
                         ))}
                     </div>
 
@@ -195,7 +137,7 @@ export default function ConnectDots1to10Content() {
                     <div className="grid md:grid-cols-2 gap-8">
                         <div>
                             <p className="text-gray-600 leading-relaxed mb-4">
-                                Connect the dots 1 to 10 worksheets are the ideal starting point for young learners.
+                                Our easiest connect the dots worksheets are the ideal starting point for young learners.
                                 The small number range keeps activities short and achievable, which is crucial for
                                 maintaining a toddler&apos;s attention span. Each completed worksheet gives children a
                                 sense of accomplishment that builds confidence.
@@ -206,13 +148,25 @@ export default function ConnectDots1to10Content() {
                                 <strong className="text-gray-800"> hand-eye coordination</strong> — three foundational
                                 skills that prepare children for writing and math in kindergarten.
                             </p>
+                            <p className="text-xs text-gray-400 mt-4">
+                                Source:{" "}
+                                <a
+                                    href="https://research.aota.org/ajot/article/78/3/7803205080/25181/Quantifying-Coloring-Skills-Among-Preschoolers"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-600 hover:underline inline-flex items-center gap-1"
+                                >
+                                    American Journal of Occupational Therapy — fine motor skills in preschoolers
+                                    <ExternalLink size={11} />
+                                </a>
+                            </p>
                         </div>
                         <div className="bg-blue-50 rounded-xl p-6">
                             <h3 className="font-semibold text-gray-800 mb-3">Skills Your Child Will Develop:</h3>
                             <ul className="space-y-3">
                                 <li className="flex items-start gap-2">
                                     <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
-                                    <span className="text-gray-700"><strong>Number Recognition:</strong> Identifying and sequencing numbers 1 through 10</span>
+                                    <span className="text-gray-700"><strong>Number Recognition:</strong> Identifying and sequencing numbers in order</span>
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
@@ -257,7 +211,7 @@ export default function ConnectDots1to10Content() {
                 <section className="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">What Comes After 1 to 10?</h2>
                     <p className="text-gray-600 mb-6">
-                        Once your child masters numbers 1 through 10, gradually increase the challenge.
+                        Once your child is comfortable with these easiest worksheets, gradually increase the challenge.
                         These next-level worksheets help build counting skills step by step.
                     </p>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -294,8 +248,6 @@ export default function ConnectDots1to10Content() {
                                 key={index}
                                 question={item.q}
                                 answer={item.a}
-                                isOpen={openFaq === index}
-                                onToggle={() => setOpenFaq(openFaq === index ? null : index)}
                             />
                         ))}
                     </div>
