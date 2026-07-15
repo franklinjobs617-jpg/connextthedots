@@ -1,27 +1,20 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import AnimalPageClient from "./AnimalPageClient";
 import { getAlternates, getUrl } from "@/lib/metadata";
+import { getAllPrintables } from "@/lib/printables-data";
+
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 
-// 2. 动态元数据逻辑
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
+    const path = "/printables/animals/";
 
-    // 核心逻辑：只有 es 使用西语，de 和 en 统一使用英文 Metadata
-    const isEs = locale === "es";
-
-    const title = isEs
-        ? "Dibujos de Animales para Unir Puntos: Diversión Educativa y Fichas Realistas"
-        : "Animal Connect the Dots Printable: Educational Fun & Lifelike Wildlife Templates";
-
-    const description = isEs
-        ? "¡Descarga gratis nuestra colección de dibujos de animales para unir puntos! Ofrecemos fichas educativas con vida silvestre real, ideales para niños y adultos. ¡Descarga e imprime ahora!"
-        : "Get free watermark-free connect the dots printables for kids & adults. Create custom dot-to-dot activities with our generator, instant download in PDF/HD image.";
-
-
-    const path = "printables/animals/";
+    const title = "Animales para Unir con Puntos | Fichas Gratis para Imprimir";
+    const description =
+        "Dibujos de animales para unir con puntos, listos para imprimir gratis. Descarga fichas en PDF o crea tu propio diseño personalizado a partir de una foto.";
 
     return {
         title,
@@ -31,11 +24,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             title,
             description,
             url: getUrl(locale, path),
+            type: "website",
         },
     };
 }
 
 export default async function Page({ params }: Props) {
     const { locale } = await params;
-    return <AnimalPageClient locale={locale} />;
+
+    // 防御性兜底：next.config.ts 已经对非 es 前缀做了 301 跳转，
+    // 这里再加一层保护，避免任何遗漏的语言前缀直接访问到未本地化的内容
+    if (locale !== "es") {
+        redirect("/free-animal-dot-to-dot-printables-pdf/");
+    }
+
+    const allItems = getAllPrintables();
+    const animalItems = allItems.filter((item) => item.category.includes("Animals"));
+
+    return <AnimalPageClient items={animalItems} />;
 }

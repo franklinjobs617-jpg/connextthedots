@@ -26,7 +26,23 @@ const faqSchema = {
             name: "Why does my photo create messy dots?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "Messy dots usually come from low contrast, busy backgrounds, or too many details in the source image. Cropping the subject tightly and simplifying the image before upload produces a cleaner printable path.",
+                text: "Messy dot placement usually comes from low contrast, a background with too many edges, or a subject that is too small inside the frame. Crop the image tighter, raise the contrast, and remove background noise before you upload it again.",
+            },
+        },
+        {
+            "@type": "Question",
+            name: "How many dots should I choose for kids vs adults?",
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: "Use roughly 15 to 30 dots for early learners, 30 to 60 dots for most classroom worksheets, and 60 or more when you want a harder printable challenge. The right dot count depends on both the learner and the amount of detail in the image.",
+            },
+        },
+        {
+            "@type": "Question",
+            name: "What image format works best?",
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: "PNG is usually the easiest format for clean dot placement because it preserves sharp edges and transparent backgrounds well. JPG still works, but the generator performs best when the subject outline stays crisp and the background stays quiet.",
             },
         },
         {
@@ -34,11 +50,17 @@ const faqSchema = {
             name: "Can I print the final puzzle as PDF?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "Yes. After reviewing the preview you can export a printable file and print it on standard letter paper. Lower dot counts work better for young kids while denser layouts suit older learners and adults.",
+                text: "Yes. Once the preview looks balanced, export the puzzle and print it on standard letter paper. Check the print preview before sending it to the printer so the outline stays centered and the number labels stay readable.",
             },
         },
     ],
 };
+
+const DOT_COUNT_TABLE = [
+    { goal: "Early counting practice", age: "Ages 3–5", dots: "15 – 30", note: "Simple shapes, fast completion" },
+    { goal: "Most classroom worksheets", age: "Ages 6–10", dots: "30 – 60", note: "Balanced detail and difficulty" },
+    { goal: "Harder printable puzzle", age: "Ages 10+ / adults", dots: "60+", note: "More detail, longer completion time" },
+];
 
 const issues = [
     {
@@ -116,7 +138,7 @@ export default function HowToMakeClient({ locale }: { locale: string }) {
                             You can turn a photo, drawing, or outline into a printable dot-to-dot worksheet by starting with a clear subject, matching the dot count to the learner, and cleaning up the preview before export. The strongest results come from high-contrast images with simple edges and very little background clutter.
                         </p>
                         <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-                            <span className="rounded-full bg-slate-100 px-4 py-2">Last updated: May 21, 2026</span>
+                            <span className="rounded-full bg-slate-100 px-4 py-2">Last updated: July 15, 2026</span>
                             <Link href="/" className="rounded-full bg-brand-blue px-5 py-2 font-semibold text-white transition hover:bg-indigo-700">
                                 Open the generator
                             </Link>
@@ -167,13 +189,46 @@ export default function HowToMakeClient({ locale }: { locale: string }) {
                                 <p className="text-base text-gray-700 leading-8">
                                     High-contrast line art, logos, pets photographed against plain backgrounds, and simple classroom illustrations tend to produce the cleanest dot paths. Busy group photos, textured landscapes, and low-light mobile pictures usually create too many edges and produce confusing dots. If you need to use a photo, crop it tightly and simplify it first.
                                 </p>
+                                <p className="text-xs text-gray-400 mt-3">
+                                    Source:{" "}
+                                    <a
+                                        href="https://www.adobe.com/creativecloud/photography/technique/high-contrast.html"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-brand-blue hover:underline"
+                                    >
+                                        Adobe — techniques for high-contrast photography
+                                    </a>
+                                </p>
                             </section>
 
                             <section>
                                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">How Many Dots to Choose</h2>
-                                <p className="text-base text-gray-700 leading-8">
-                                    Dot count controls both difficulty and how much of the image survives the conversion. Use roughly 15 to 30 dots for early counting practice, 30 to 60 for most elementary worksheets, and 60 or more when you want a harder printable puzzle for older kids or adults. If the picture has many curves or small details, increase the dot count gradually until the shape reads clearly.
+                                <p className="text-base text-gray-700 leading-8 mb-5">
+                                    Dot count controls both difficulty and how much of the image survives the conversion. If the picture has many curves or small details, increase the dot count gradually until the shape reads clearly.
                                 </p>
+                                <div className="overflow-x-auto rounded-2xl border border-slate-200">
+                                    <table className="w-full text-sm text-left">
+                                        <thead>
+                                            <tr className="bg-slate-100 text-slate-600">
+                                                <th className="px-4 py-3 font-semibold">Goal</th>
+                                                <th className="px-4 py-3 font-semibold">Age</th>
+                                                <th className="px-4 py-3 font-semibold">Dot Count</th>
+                                                <th className="px-4 py-3 font-semibold">Notes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="bg-white">
+                                            {DOT_COUNT_TABLE.map((row) => (
+                                                <tr key={row.goal} className="border-t border-slate-100">
+                                                    <td className="px-4 py-3 font-medium text-gray-800">{row.goal}</td>
+                                                    <td className="px-4 py-3 text-gray-600">{row.age}</td>
+                                                    <td className="px-4 py-3 font-bold text-brand-blue">{row.dots}</td>
+                                                    <td className="px-4 py-3 text-gray-500">{row.note}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </section>
 
                             <section>
@@ -186,10 +241,10 @@ export default function HowToMakeClient({ locale }: { locale: string }) {
 
                         <div className="space-y-8">
                             <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Common Problems and Fixes</h2>
+                                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Common Problems &amp; FAQ</h2>
                                 <div className="space-y-5">
                                     {issues.map((issue) => (
-                                        <article key={issue.title}>
+                                        <article key={issue.title} className="border-b border-slate-100 pb-5 last:border-b-0 last:pb-0">
                                             <h3 className="font-semibold text-gray-900">{issue.title}</h3>
                                             <p className="mt-2 text-sm leading-7 text-gray-600">{issue.body}</p>
                                         </article>
@@ -202,18 +257,6 @@ export default function HowToMakeClient({ locale }: { locale: string }) {
                                 <p className="text-sm leading-7 text-gray-700">
                                     Pet images are best when the subject fills the frame and the background stays quiet. Cartoon outlines work well because the edges are already simplified. Worksheet-style images with one bold shape are the easiest option when you need a fast printable page for younger learners.
                                 </p>
-                            </section>
-
-                            <section className="rounded-3xl border border-slate-200 bg-white p-6">
-                                <h2 className="text-2xl font-semibold text-gray-900 mb-4">FAQ</h2>
-                                <div className="space-y-5">
-                                    {issues.map((issue) => (
-                                        <article key={`faq-${issue.title}`} className="border-b border-slate-100 pb-5 last:border-b-0 last:pb-0">
-                                            <h3 className="font-semibold text-gray-900">{issue.title}</h3>
-                                            <p className="mt-2 text-sm leading-7 text-gray-600">{issue.body}</p>
-                                        </article>
-                                    ))}
-                                </div>
                             </section>
                         </div>
                     </section>

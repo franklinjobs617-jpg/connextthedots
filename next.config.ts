@@ -73,8 +73,6 @@ const nextConfig: NextConfig = {
         // 早期低质量的重复图库/详情页，统一 301 到对应的正式页面
         // core / general 都是"终极图库合集"页，与 /printable-connect-the-dots/ 重复
         // adults / hard 是单图详情页，图片已由标准 [slug] 系统覆盖，且与 /connect-the-dots-for-adults/ 重复
-        // 注意：/printables/animals/ 暂不跳转 —— GSC年度数据显示其西语版曝光高达1661次，
-        // 但目标页 /free-animal-dot-to-dot-printables-pdf/ 西语内容覆盖情况未确认，需先补充数据再决定
         const legacyDuplicateRedirects = localePrefixes.flatMap((prefix) => {
             const pairs: [string, string][] = [
                 ['/printables/core', `${prefix}/printable-connect-the-dots/`],
@@ -87,6 +85,22 @@ const nextConfig: NextConfig = {
                 { source: `${prefix}${source}/`, destination, permanent: true },
             ]));
         });
+
+        // /printables/animals/ 单独处理：GSC年度数据证实 es 版本已有真实排名信号
+        // （年曝光1661次，均位7.58），保留并重建；其余语言版本仍跳转到官方动物图库页
+        const animalsPrefixes = localePrefixes.filter((p) => p !== '/es');
+        const animalsRedirects = animalsPrefixes.flatMap((prefix) => ([
+            {
+                source: `${prefix}/printables/animals`,
+                destination: `${prefix}/free-animal-dot-to-dot-printables-pdf/`,
+                permanent: true,
+            },
+            {
+                source: `${prefix}/printables/animals/`,
+                destination: `${prefix}/free-animal-dot-to-dot-printables-pdf/`,
+                permanent: true,
+            },
+        ]));
 
         return [
             {
@@ -126,6 +140,7 @@ const nextConfig: NextConfig = {
             ...removedPrintableRedirects,
             ...christmasMergeRedirects,
             ...legacyDuplicateRedirects,
+            ...animalsRedirects,
         ];
     },
 };

@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const isEs = locale === "es";
 
     const title = isEs
-        ? "C贸mo Crear Fichas de Unir Puntos Personalizadas Online | Gu铆a Paso a Paso"
+        ? "Cómo Crear Fichas de Unir Puntos Personalizadas Online | Guía Paso a Paso"
         : "How to Make Your Own Dot-to-Dot Worksheet from a Photo";
 
     const description = isEs
