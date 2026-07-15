@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/dot-to-dot-generator-from-photo', locales: ['en'] },
         { path: '/make-your-own-dot-to-dot', locales: ['en'] },
         { path: '/dot-to-dot-printable', locales: ['en'] },
-        { path: '/connect-the-dots-for-adults', locales: ['en'] },
+        { path: '/connect-the-dots-for-adults', locales: ['en', 'fr'] },
     ];
 
     const staticUrls = staticPages.map(({ path, locales = siteLocales, priority = 0.8 }) => {

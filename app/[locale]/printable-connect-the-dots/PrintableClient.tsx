@@ -197,6 +197,7 @@ const copy: Record<string, LocaleCopy> = {
         ],
         relatedTitle: "Collections associées",
         related: [
+            { href: "/fr/connect-the-dots-for-adults/", title: "Points à Relier pour Adultes", desc: "Puzzles extrêmes de 100 à 300+ points pour adultes." },
             { href: "/fr/free-animal-dot-to-dot-printables-pdf/", title: "Points à relier animaux", desc: "Chiens, chats, lapins, hiboux et plus." },
             { href: "/fr/christmas-printables/", title: "Points à relier Noël", desc: "Père Noël, sapins et scènes hivernales." },
             { href: "/fr/connect-the-dots-1-to-10/", title: "Points à relier 1 à 10", desc: "Fiches pour les tout-petits et la maternelle." },
