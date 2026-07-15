@@ -43,9 +43,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                 "Collection gratuite de points à relier à imprimer par âge, difficulté et thème. Téléchargez des fiches PDF animaux, Noël, faciles et difficiles — ou créez les vôtres depuis une photo.",
         },
         it: {
-            title: "Unisci i Punti da Stampare Gratis | Schede PDF per Bambini e Adulti",
+            title: "Unisci i Puntini da Stampare Gratis | Schede PDF",
             description:
-                "Oltre 50 schede unisci i punti da stampare gratis per bambini e adulti. Animali, Natale, facili e difficili in PDF — oppure crea il tuo puzzle da una foto.",
+                "Oltre 50 schede unisci i puntini da stampare gratis per bambini e adulti. PDF facili e difficili, animali e Natale — crea anche il tuo puzzle da una foto.",
         },
         es: {
             title: "Fichas de Unir Puntos para Imprimir Gratis | PDF para Niños y Adultos",
