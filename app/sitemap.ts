@@ -20,7 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/popular-character-dot-to-dot-printable-worksheets', locales: siteLocales },
         { path: '/printables/adults', locales: siteLocales },
         { path: '/printables/animals', locales: siteLocales },
-        { path: '/printables/christmas', locales: siteLocales },
         { path: '/printables/core', locales: siteLocales },
         { path: '/printables/general', locales: siteLocales },
         { path: '/printables/hard', locales: siteLocales },
@@ -35,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/dot-to-dot-generator-from-photo', locales: ['en'] },
         { path: '/make-your-own-dot-to-dot', locales: ['en'] },
         { path: '/dot-to-dot-printable', locales: ['en'] },
+        { path: '/connect-the-dots-for-adults', locales: ['en'] },
     ];
 
     const staticUrls = staticPages.map(({ path, locales = siteLocales, priority = 0.8 }) => {

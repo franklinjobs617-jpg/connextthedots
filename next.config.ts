@@ -1,4 +1,3 @@
-// trigger redeploy
 import { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
@@ -56,6 +55,21 @@ const nextConfig: NextConfig = {
             ]))
         );
 
+        // 合并重复的圣诞节页面：/printables/christmas/ 与 /christmas-printables/ 曾同时存在
+        // 内部竞争同一意图，统一保留 /christmas-printables/，旧 URL 301 跳转过去
+        const christmasMergeRedirects = localePrefixes.flatMap((prefix) => ([
+            {
+                source: `${prefix}/printables/christmas`,
+                destination: `${prefix}/christmas-printables/`,
+                permanent: true,
+            },
+            {
+                source: `${prefix}/printables/christmas/`,
+                destination: `${prefix}/christmas-printables/`,
+                permanent: true,
+            },
+        ]));
+
         return [
             {
                 source: '/testpricing',
@@ -92,6 +106,7 @@ const nextConfig: NextConfig = {
                 permanent: true,
             },
             ...removedPrintableRedirects,
+            ...christmasMergeRedirects,
         ];
     },
 };
