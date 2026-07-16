@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/popular-character-dot-to-dot-printable-worksheets', locales: siteLocales },
         { path: '/printables/connectTheDotsGenerator', locales: siteLocales },
         { path: '/printables/animals', locales: ['es'] },
-        { path: '/connect-the-dots-1-to-10', locales: siteLocales },
+        { path: '/connect-the-dots-1-to-10', locales: ['en', 'fr'] },
         { path: '/connect-the-dots-coloring-pages', locales: siteLocales },
         { path: '/blog/are-dot-to-dot-puzzles-good-for-kids', locales: siteLocales },
         { path: '/convert-photo-to-beads', locales: siteLocales },

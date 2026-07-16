@@ -200,7 +200,7 @@ const copy: Record<string, LocaleCopy> = {
             { href: "/fr/connect-the-dots-for-adults/", title: "Points à Relier pour Adultes", desc: "Puzzles extrêmes de 100 à 300+ points pour adultes." },
             { href: "/fr/free-animal-dot-to-dot-printables-pdf/", title: "Points à relier animaux", desc: "Chiens, chats, lapins, hiboux et plus." },
             { href: "/fr/christmas-printables/", title: "Points à relier Noël", desc: "Père Noël, sapins et scènes hivernales." },
-            { href: "/fr/connect-the-dots-1-to-10/", title: "Points à relier 1 à 10", desc: "Fiches pour les tout-petits et la maternelle." },
+            { href: "/fr/connect-the-dots-1-to-10/", title: "Points à Relier Maternelle", desc: "Fiches faciles pour la maternelle et les tout-petits." },
             { href: "/fr/connect-the-dots-coloring-pages/", title: "Pages à colorier", desc: "Reliez les points puis coloriez l'image." },
             { href: "/fr/how-to-make/", title: "Comment créer un puzzle ?", desc: "Tutoriel pas à pas avec vos propres images." },
             { href: "/fr/popular-character-dot-to-dot-printable-worksheets/", title: "Fiches personnages", desc: "Puzzles sur des personnages populaires." },
