@@ -257,9 +257,10 @@ const copy: Record<string, LocaleCopy> = {
         ],
         relatedTitle: "Raccolte correlate",
         related: [
+            { href: "/it/connect-the-dots-for-adults/", title: "Unisci i Puntini Difficili", desc: "Puzzle estremi da 100 a 300+ puntini." },
             { href: "/it/free-animal-dot-to-dot-printables-pdf/", title: "Unisci i puntini animali", desc: "Cani, gatti, conigli, gufi e altro." },
             { href: "/it/christmas-printables/", title: "Unisci i puntini Natale", desc: "Babbo Natale, alberi e scene invernali." },
-            { href: "/it/connect-the-dots-1-to-10/", title: "Unisci i puntini da 1 a 10", desc: "Schede per bambini piccoli e prescolare." },
+            { href: "/it/connect-the-dots-1-to-10/", title: "Unisci i Puntini per Bambini", desc: "Schede facili per bambini piccoli e prescolare." },
             { href: "/it/connect-the-dots-coloring-pages/", title: "Pagine da colorare", desc: "Collega i puntini e poi colora l'immagine." },
             { href: "/it/how-to-make/", title: "Come creare un puzzle?", desc: "Tutorial passo passo con le tue immagini." },
             { href: "/it/popular-character-dot-to-dot-printable-worksheets/", title: "Schede a tema", desc: "Puzzle organizzati per tema e categoria." },
