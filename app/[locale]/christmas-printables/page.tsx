@@ -11,11 +11,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const path = "/christmas-printables/";
 
     const isEs = locale === "es";
+    const isIt = locale === "it";
     const title = isEs
         ? "Dibujos de Unir Puntos de Navidad Gratis | Paquete PDF"
+        : isIt
+        ? "Unisci i Puntini di Natale Gratis | Pacchetto PDF"
         : "Free Christmas Connect the Dots Printables | PDF Bundle";
     const description = isEs
         ? "Descarga gratis un paquete PDF de unir puntos navideños — Papá Noel, árboles, adornos, fácil y difícil. O genera tu propio diseño personalizado."
+        : isIt
+        ? "Scarica gratis un pacchetto PDF di unisci i puntini di Natale — Babbo Natale, alberi, decorazioni, facile e difficile. O crea il tuo puzzle personalizzato."
         : "Download a free Christmas connect the dots PDF bundle — Santa, trees, ornaments, easy and hard. Or generate your own custom holiday puzzle.";
 
     return {

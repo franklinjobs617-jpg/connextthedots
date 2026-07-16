@@ -122,6 +122,48 @@ const copy: Record<string, LocaleCopy> = {
         schemaAbout: "Un paquete PDF gratuito y descargable de fichas de unir puntos navideñas, fáciles y difíciles.",
         metaDescription: "Descarga gratis un paquete PDF de unir puntos navideños — Papá Noel, árboles, adornos, fácil y difícil. O genera tu propio diseño personalizado.",
     },
+    it: {
+        eyebrow: "Pacchetto natalizio gratuito",
+        h1: "Unisci i Puntini di Natale da Stampare Gratis",
+        heroBody: "Scarica il nostro pacchetto PDF gratuito di unisci i puntini di Natale — Babbo Natale, alberi, decorazioni e scene invernali, in versioni facili e difficili, tutto in un unico file da stampare.",
+        lastUpdated: "Ultimo aggiornamento: 14 luglio 2026",
+        downloadBtn: "Scarica il Pacchetto PDF Gratis",
+        tags: ["Babbo Natale", "Albero di Natale", "Decorazioni", "Scena Natalizia", "Attività Scolastica"],
+        previewLabel: "Cosa contiene il pacchetto",
+        contentCards: [
+            { title: "Unisci i Puntini di Natale Facile per Bambini", body: "Le schede natalizie facili sono ideali per una breve attività da stampare, perfetta per la scuola materna o elementare. Volti di Babbo Natale, alberi, decorazioni e forme invernali semplici sono più facili da riconoscere con meno puntini, il che rende la scheda divertente invece che frustrante." },
+            { title: "Puzzle Natalizi Difficili per Bambini Più Grandi e Adulti", body: "Le schede natalizie difficili funzionano bene per bambini più grandi e adulti che cercano un puzzle più denso, con più linee e più dettaglio. I disegni di decorazioni e scene giustificano i puntini extra perché l'immagine finale è più soddisfacente quando richiede più tempo per essere completata." },
+            { title: "I Temi Natalizi Più Popolari", body: "Babbo Natale, alberi di Natale, decorazioni e scene invernali sono i temi natalizi più richiesti, e sono la base di questo pacchetto, insieme a idee di attività adatte alla classe per feste natalizie e momenti tranquilli." },
+        ],
+        howToTitle: "Come Stampare il Pacchetto",
+        howToSteps: [
+            "Scarica il pacchetto PDF gratuito con il pulsante qui sopra.",
+            "Apri il file e controlla l'anteprima prima di stampare, così i numeri restano leggibili.",
+            "Usa carta A4 o Letter standard e scegli 'adatta alla pagina' nella finestra di stampa.",
+            "Per una scheda più resistente, usa il cartoncino dopo aver confermato il layout su carta normale.",
+        ],
+        screenFreeTitle: "Un'Attività Natalizia Senza Schermi",
+        screenFreeBody: "Le schede natalizie unisci i puntini funzionano bene come brevi pause senza schermi, attività tranquilla in classe, o attività da stampare durante i viaggi e le riunioni di famiglia. Si adattano anche alla rotazione scolastica, fungendo prima da esercizio di conteggio e poi da attività di colorazione.",
+        screenFreeTags: ["Lavoro mattutino", "Centri natalizi", "Attività da viaggio", "Colora dopo aver unito"],
+        sourceLabel: "Fonte:",
+        sourceText: "HealthyChildren.org (AAP) — tempo in famiglia senza schermi (in inglese)",
+        faqTitle: "Domande Frequenti",
+        faqItems: [
+            { q: "Cosa include il pacchetto natalizio gratuito da stampare?", a: "Il pacchetto gratuito è un singolo file PDF scaricabile che contiene diversi puzzle unisci i puntini a tema natalizio — Babbo Natale, alberi di Natale, decorazioni e scene invernali — con un mix di livelli di difficoltà facile e difficile." },
+            { q: "Per quale età è adatto questo pacchetto natalizio?", a: "Il pacchetto include schede facili adatte a 3-6 anni con meno puntini e più grandi, e schede difficili con più dettaglio per gli over 7, inclusi adolescenti e adulti che amano un puzzle natalizio più denso." },
+            { q: "Come scarico e stampo il pacchetto?", a: "Clicca sul pulsante di download per salvare il PDF, poi aprilo e stampalo su carta A4 o Letter standard. Seleziona 'Adatta alla pagina' nella finestra di stampa per il miglior risultato." },
+            { q: "Posso avere un singolo design natalizio invece del pacchetto completo?", a: "Al momento i design natalizi sono disponibili solo come pacchetto PDF completo, non come puzzle singoli sfogliabili. Se vuoi un design specifico — per esempio dalla tua foto natalizia — usa il generatore personalizzato per crearlo tu stesso." },
+            { q: "Questo pacchetto natalizio da stampare è davvero gratuito?", a: "Sì. Il pacchetto è gratuito da scaricare e stampare, senza registrazione e senza filigrana, per uso personale e scolastico." },
+            { q: "Posso creare un puzzle natalizio personalizzato dalla mia foto?", a: "Sì — il generatore gratuito ti permette di caricare qualsiasi foto, incluse le tue foto natalizie, e la trasforma in un puzzle di puntini numerati che puoi scaricare in PDF." },
+        ],
+        ctaTitle: "Hai bisogno di un design natalizio specifico?",
+        ctaBody: "Il pacchetto qui sopra copre i temi natalizi più richiesti. Se vuoi un puzzle creato dalla tua foto natalizia, dalla mascotte della classe, o da un disegno specifico, usa il generatore gratuito.",
+        browseLibraryBtn: "Sfoglia tutta la libreria da stampare",
+        openGeneratorBtn: "Apri il generatore personalizzato",
+        schemaName: "Unisci i Puntini di Natale da Stampare Gratis",
+        schemaAbout: "Un pacchetto PDF gratuito e scaricabile di schede unisci i puntini natalizie, facili e difficili.",
+        metaDescription: "Scarica gratis un pacchetto PDF di unisci i puntini di Natale — Babbo Natale, alberi, decorazioni, facile e difficile. O crea il tuo puzzle personalizzato.",
+    },
 };
 
 // Preview images — these illustrate what's inside the bundle.
@@ -130,17 +172,17 @@ const previewImages = [
     {
         src: "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/Christmas-Dot-To-Dot-Bundle-Hero.webp",
         alt: "Preview of the Christmas connect-the-dots bundle cover",
-        label: { en: "Bundle preview", es: "Vista previa del paquete" },
+        label: { en: "Bundle preview", es: "Vista previa del paquete", it: "Anteprima del pacchetto" },
     },
     {
         src: "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/Hard-Christmas-Ornament-Connect-The-Dots-Adults.webp",
         alt: "Hard Christmas ornament connect-the-dots puzzle for older kids and adults",
-        label: { en: "Hard puzzle sample", es: "Ejemplo puzzle difícil" },
+        label: { en: "Hard puzzle sample", es: "Ejemplo puzzle difícil", it: "Esempio puzzle difficile" },
     },
     {
         src: "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/Paper-Type-Comparison-Print-Quality.webp",
         alt: "Print quality comparison for the Christmas worksheet bundle",
-        label: { en: "Print quality sample", es: "Ejemplo calidad de impresión" },
+        label: { en: "Print quality sample", es: "Ejemplo calidad de impresión", it: "Esempio qualità di stampa" },
     },
 ];
 
@@ -231,7 +273,7 @@ export default function ChristmasContent({ locale }: Props) {
                                         <figure key={image.alt} className="rounded-3xl border border-slate-100 bg-slate-50 p-3">
                                             <Image src={image.src} alt={image.alt} width={320} height={320} className="aspect-square w-full rounded-2xl object-cover" />
                                             <figcaption className="mt-3 text-sm font-medium text-gray-700">
-                                                {locale === "es" ? image.label.es : image.label.en}
+                                                {image.label[locale as keyof typeof image.label] ?? image.label.en}
                                             </figcaption>
                                         </figure>
                                     ))}

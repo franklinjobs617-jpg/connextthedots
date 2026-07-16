@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/pricing', locales: siteLocales },
         { path: '/printable-connect-the-dots', locales: siteLocales },
         { path: '/how-to-make', locales: siteLocales },
-        { path: '/christmas-printables', locales: siteLocales },
+        { path: '/christmas-printables', locales: ['en', 'es', 'it'] },
         { path: '/free-animal-dot-to-dot-printables-pdf', locales: siteLocales },
         { path: '/popular-character-dot-to-dot-printable-worksheets', locales: siteLocales },
         { path: '/printables/connectTheDotsGenerator', locales: siteLocales },
@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/dot-to-dot-generator-from-photo', locales: ['en'] },
         { path: '/make-your-own-dot-to-dot', locales: ['en'] },
         { path: '/dot-to-dot-printable', locales: ['en'] },
-        { path: '/connect-the-dots-for-adults', locales: ['en', 'fr'] },
+        { path: '/connect-the-dots-for-adults', locales: ['en', 'fr', 'it'] },
     ];
 
     const staticUrls = staticPages.map(({ path, locales = siteLocales, priority = 0.8 }) => {
