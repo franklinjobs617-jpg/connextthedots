@@ -237,21 +237,21 @@ const copy: Record<string, LocaleCopy> = {
 
 // Apply only to /connect-the-dots-for-adults/; preserve locale fallback output.
 const englishL1Copy: Partial<LocaleCopy> = {
-    heroBody: "Adult dot-to-dot activities use numbered sequences to reveal a picture. The current Mountain and Mandala entries below are reference artwork only, not verified high-dot-count numbered worksheets. Check each entry before printing, or use the homepage upload flow to make a puzzle from your own image.",
-    ctaFeatured: "View featured artwork ↓",
+    heroBody: "Explore connect-the-dots activities for adults and browse Hard and Extreme themes. Open an entry to inspect its artwork and download options, or make a worksheet from your own image using the homepage upload flow.",
+    ctaFeatured: "Browse featured entries ↓",
     toolBoxTitle: "Make a puzzle from your own image",
     signInCta: "AI generation: sign in for credits",
-    featuredSub: "These two catalog entries retain their original difficulty labels. Their dot counts and matching solutions are not confirmed. Reference artwork only — not verified numbered dot-to-dot worksheets.",
-    difficultySub: "Difficulty labels are guidance, not verified dot counts. The current Mountain and Mandala artwork does not establish a playable Hard or Extreme worksheet.",
-    difficultyTable: copy.en.difficultyTable.map(row => ({ ...row, dots: "Not verified", time: "Varies; not measured" })),
-    whyItems: copy.en.whyItems.map((item, i) => i === 1 ? { ...item, body: "Time to complete a numbered worksheet depends on its sequence and print readability. Completion times for these catalog entries have not been verified." } : i === 2 ? { ...item, body: "Static detail-page PDF downloads and basic homepage image upload do not require an account. AI image generation is separate and requires sign-in and available credits." } : item),
+    featuredSub: "Mountain and Mandala currently provide reference line art, not playable numbered worksheets. Numbered versions and matching solutions still need repair; do not treat their old catalog ranges as confirmed dot counts.",
+    difficultySub: "Compare the numbered sequence, number spacing and outline detail when choosing a worksheet. Difficulty labels describe the intended level, not a measured completion time.",
+    difficultyTable: copy.en.difficultyTable.map(row => ({ ...row, dots: row.level === "Hard" || row.level === "Extreme" ? "Reference art below" : "See worksheet labels", time: "Depends on worksheet" })),
+    whyItems: copy.en.whyItems.map((item, i) => i === 1 ? { ...item, body: "Choose a numbered worksheet, print it at a comfortable size and work through the sequence at your own pace." } : i === 2 ? { ...item, body: "Open a worksheet detail to preview the image and use its free static downloads. Basic image upload is also available on the homepage without an account." } : item),
     faqItems: copy.en.faqItems.map((item, i) => ({ ...item, a: [
-        "Adult dot-to-dot worksheets use numbered dots to build an outline. Difficulty depends on the actual sequence and readability; a title or difficulty label alone does not establish the number of dots or that a worksheet is ready to solve.",
-        "Static detail-page PDF downloads do not require an account and include a website credit. The current Mountain and Mandala entries are reference artwork, not verified numbered worksheets. AI image generation requires sign-in and available credits.",
-        "The dot counts of the current Mountain and Mandala entries have not been verified. Their catalog ranges must not be treated as confirmed counts of numbered dots. No playable 100+ dot adult worksheet is confirmed here.",
-        "Use the homepage upload flow to make a puzzle from your own image. Review the numbered result before printing; a clear outline is a useful starting point. A playable extreme puzzle from every photo is not guaranteed. AI image generation is separate and requires sign-in and available credits.",
+        "An adult dot-to-dot worksheet uses a numbered sequence to form an outline. Detail and number spacing influence the challenge, so start with the worksheet preview.",
+        "Static detail-page PDFs are free, generated in your browser and include a website credit. No account is needed to download them.",
+        "Use a worksheet's catalog range as a selection guide, then inspect the numbered preview. A catalog label is not a point-by-point audit. See the featured-entry note for the current Mountain and Mandala status.",
+        "Use the homepage upload flow to make a worksheet from your own image. A clear outline is a useful starting point; inspect the result before printing. AI image generation is a separate feature requiring sign-in and available credits.",
         copy.en.faqItems[4].a,
-        "The detail-page PDF export uses A4 portrait. Check the preview and print readability before printing. US Letter output has not been verified, and a downloadable PDF alone does not establish a playable numbered worksheet.",
+        "The detail-page PDF export uses A4 portrait. Check the print preview and number readability. US Letter output has not been tested.",
     ][i] })),
 };
 
@@ -407,8 +407,8 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                                 {featuredItems.map((item) => (
                                     <PrintableCard key={item.id} item={locale === "en" ? {
                                         ...item,
-                                        dotRange: "Not verified",
-                                        description: "Reference artwork only — not a verified numbered dot-to-dot worksheet. Dot count and matching solution are not confirmed.",
+                                        dotRange: "Not applicable (reference art)",
+                                        description: "Reference line art. Numbered worksheet and matching solution repair pending.",
                                     } : item} priority />
                                 ))}
                             </div>

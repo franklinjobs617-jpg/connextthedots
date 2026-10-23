@@ -99,24 +99,43 @@ function getPageContent(locale: string) {
     };
     const answers = [
         FAQ_ITEMS[0].a,
-        "Static worksheet PDF downloads do not require an account. Open a card to view its downloads. PDFs are generated in your browser and include a website credit. AI image generation is separate and requires sign-in and available credits.",
+        "Static detail-page PDFs are free to download without an account. Open a card for its preview and download buttons. The browser-generated PDF includes a website credit.",
         FAQ_ITEMS[2].a,
-        "The detail-page PDF export uses A4 portrait. Check the preview before printing. US Letter output has not been verified; do not assume every worksheet fits without cropping.",
-        "Use the homepage image-upload flow to make a puzzle from your own image. A simple drawing with a clear outline is a useful starting point; review the result before printing. AI image generation requires sign-in and available credits.",
-        "Numbered dot-to-dot activities can offer a focused, screen-free break. The Mountain and Mandala entries here are reference artwork, not verified high-dot-count numbered worksheets. A playable adult worksheet and matching solution have not been confirmed for those entries.",
+        "The detail-page PDF export uses A4 portrait. Check the print preview and select Fit to page if needed. US Letter output has not been tested.",
+        "Use the homepage image-upload flow to make a worksheet from your own image. A clear, simple outline is a useful starting point. AI image generation is separate and requires sign-in and available credits.",
+        "Dot-to-dot activities can offer adults a focused, screen-free break. Choose a numbered worksheet with comfortable number spacing and a level of detail you enjoy; inspect its preview before printing.",
     ];
     return {
-        whyItems: WHY_ITEMS.map((item, i) => i === 3 ? { ...item, body: "Choose a numbered worksheet that suits the reader. Difficulty labels alone do not confirm the actual dot count or that a worksheet is ready to solve." } : item),
+        whyItems: WHY_ITEMS.map((item, i) => i === 3 ? { ...item, body: "Pick a short sequence for beginning counters, or a more detailed outline for a longer screen-free activity." } : item),
         difficultyGuide: DIFFICULTY_GUIDE.map(item => ({
-            ...item, dots: "Dot count not verified",
+            ...item, dots: "Use the card's catalog range",
             desc: item.level === "Hard" || item.level === "Extreme"
-                ? "The current Mountain and Mandala entries are reference artwork, not verified numbered worksheets."
-                : "Use the worksheet preview to check the numbered sequence and suitability. Completion times vary.",
+                ? "Browse detailed themes and check the entry's worksheet status before downloading."
+                : "Compare the numbered sequence, number spacing and outline detail in the preview.",
         })),
-        howToSteps: HOW_TO_STEPS.map((item, i) => i === 0 ? { ...item, body: "Open a card to view worksheet details. Download PDF creates an A4 PDF from the Puzzle image; Download PNG exports the Solution image. These are different resources. Check availability before printing." } : item),
+        howToSteps: HOW_TO_STEPS.map((item, i) => i === 0 ? { ...item, body: "Open a card for its preview and download buttons. Download PDF creates an A4 file from the Puzzle image; Download PNG exports the available Solution image." } : item),
         faqItems: FAQ_ITEMS.map((item, i) => ({ ...item, a: answers[i] })),
-        relatedLinks: RELATED_LINKS.map((item, i) => i === 0 ? { ...item, desc: "Check the current adult artwork and worksheet availability." } : i === 6 ? { ...item, desc: "Learn about making a puzzle from your own image." } : item),
+        relatedLinks: RELATED_LINKS.map((item, i) => i === 0 ? { ...item, desc: "Browse adult themes and check current worksheet availability." } : i === 6 ? { ...item, desc: "Learn about making a puzzle from your own image." } : item),
     };
+}
+
+// Evidence applies to these named samples, not to exact dot counts or the whole library.
+const EXPORT_CHECKED_IDS = new Set([
+    "simple-rabbit-outline", "cute-happy-rabbit", "puppy-sketch", "cute-sitting-puppy",
+]);
+const REFERENCE_ARTWORK_IDS = new Set([
+    "6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots",
+    "7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots",
+]);
+
+function getEnglishCardItem(item: PrintableItem): PrintableItem {
+    if (REFERENCE_ARTWORK_IDS.has(item.id)) return {
+        ...item,
+        dotRange: "Not applicable (reference art)",
+        description: "Reference line art. Numbered worksheet and matching solution repair pending.",
+    };
+    const catalogRange = Array.isArray(item.dotRange) ? item.dotRange.join("–") : item.dotRange;
+    return { ...item, dotRange: `Catalog ${catalogRange}` };
 }
 
 function buildJsonLd(items: PrintableItem[], locale: string) {
@@ -131,7 +150,7 @@ function buildJsonLd(items: PrintableItem[], locale: string) {
                 url: "https://connectthedotsprintable.online/dot-to-dot-printable/",
                 description:
                     locale === "en"
-                        ? "Browse dot-to-dot catalog entries. Open a card to check the preview and available downloads; adult reference artwork is not a verified numbered worksheet."
+                        ? "Browse free dot-to-dot printables by catalog range and theme. Open a card for the worksheet preview, PDF download and available solution."
                         : "Download free dot to dot printables as PDF. Easy to extreme difficulty puzzles for all ages — animals, nature, fantasy and more.",
                 inLanguage: "en",
                 mainEntity: {
@@ -224,11 +243,11 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                                 Free Dot to Dot Printables
                             </h1>
                             <p className="text-base sm:text-lg text-slate-300 leading-7 mb-3 max-w-2xl">
-                                {isL1 ? "Browse free dot-to-dot catalog entries for kids and adults. Open a card to check the preview and available downloads. Static PDF downloads do not require an account." : <>Download printable dot to dot puzzles as PDF — no watermarks, no sign-up.
+                                {isL1 ? "Browse free dot-to-dot printables by theme and catalog dot range. Open a worksheet card for its preview, printable PDF and available solution." : <>Download printable dot to dot puzzles as PDF — no watermarks, no sign-up.
                                 Easy 10-dot sheets for toddlers through extreme 200-dot challenges for adults.</>}
                             </p>
                             <p className="text-sm text-slate-400 mb-8 max-w-2xl">
-                                {isL1 ? "To make a puzzle from your own image, use the homepage upload flow. AI image generation is a separate feature that requires sign-in and available credits." : "Want something unique? The custom generator below turns any photo into a numbered dot-to-dot puzzle in seconds."}
+                                {isL1 ? "Static downloads are free and do not need an account. To make a worksheet from your own image, use the homepage upload flow." : "Want something unique? The custom generator below turns any photo into a numbered dot-to-dot puzzle in seconds."}
                             </p>
                             <div className="flex flex-wrap gap-3">
                                 <button
@@ -269,7 +288,7 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                                     The activity goes by several names: <em>dot to dot</em>, <em>connect the dots</em>, <em>join the dots</em>, or <em>point to point</em>. All refer to the same numbered puzzle format. The term &ldquo;dot to dot&rdquo; is most common in British English (UK, Australia), while &ldquo;connect the dots&rdquo; is standard in American English.
                                 </p>
                                 <p className="text-slate-600 leading-7">
-                                    {isL1 ? "Dot-to-dot activities are used at school and at home. The detail-page PDF export uses A4 portrait and includes a website credit. Check each preview and solution before printing; US Letter output has not been verified." : "Dot to dot puzzles are used in schools, at home, and as a calming adult activity. Every PDF in this collection prints cleanly on A4 or US Letter paper with no watermarks."}
+                                    {isL1 ? "Detail-page PDF exports use A4 portrait and include a website credit. Inspect the print preview and choose Fit to page if needed." : "Dot to dot puzzles are used in schools, at home, and as a calming adult activity. Every PDF in this collection prints cleanly on A4 or US Letter paper with no watermarks."}
                                 </p>
                             </div>
                             <div>
@@ -301,7 +320,7 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                             Choosing the right difficulty level
                         </h2>
                         <p className="text-slate-500 text-center mb-8 text-sm max-w-xl mx-auto">
-                            {isL1 ? "Difficulty and age tags are catalog guidance. Dot counts have not been independently verified; a label is not proof that a worksheet is playable." : "Every puzzle in this collection is tagged with a difficulty level and age recommendation."}
+                            {isL1 ? "Use difficulty and age tags to narrow your choice, then compare the catalog range and worksheet preview." : "Every puzzle in this collection is tagged with a difficulty level and age recommendation."}
                         </p>
                         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             {difficultyGuide.map((d) => (
@@ -372,18 +391,15 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                         </div>
 
                         {isL1 && <p className="text-sm text-slate-600 mb-5">
-                            Catalog entries are not a count of verified playable worksheets. Mountain and Mandala are reference artwork only, not verified numbered dot-to-dot worksheets. Download PDF uses the Puzzle image; Download PNG uses the Solution image. File availability and matching solutions must be checked per entry.
+                            Catalog ranges are source labels, not independently audited point counts. “Export checked” identifies four Rabbit/Puppy samples with PDF and solution PNG evidence; independent play and print QA is still pending. Mountain and Mandala are reference line art, not numbered worksheets; their playable versions and matching answers remain unresolved.
                         </p>}
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                            {displayedItems.map((item, idx) => (
-                                <PrintableCard key={item.id} item={isL1 ? {
-                                    ...item,
-                                    dotRange: "Not verified",
-                                    ...((item.difficulty === "Hard" || item.difficulty === "Extreme") ? {
-                                        description: "Reference artwork only — not a verified numbered dot-to-dot worksheet. Dot count and matching solution are not confirmed.",
-                                    } : {}),
-                                } : item} priority={idx < 4} />
-                            ))}
+                            {displayedItems.map((item, idx) => isL1 ? (
+                                <div key={item.id}>
+                                    <PrintableCard item={getEnglishCardItem(item)} priority={idx < 4} />
+                                    {EXPORT_CHECKED_IDS.has(item.id) && <p className="text-xs text-slate-600 mt-2 px-1">Export checked: PDF + solution PNG</p>}
+                                </div>
+                            ) : <PrintableCard key={item.id} item={item} priority={idx < 4} />)}
                         </div>
                     </div>
                 </section>
