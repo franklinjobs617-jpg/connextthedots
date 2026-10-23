@@ -1,0 +1,118 @@
+{
+  "total_count": 1,
+  "check_runs": [
+    {
+      "id": 120466277547,
+      "name": "Vercel Preview Comments",
+      "node_id": "CR_kwDOPmWdW88AAAAcDFmEqw",
+      "head_sha": "60fe15a12d861d799b06d23bbdf0f941dc4ebe30",
+      "external_id": "",
+      "url": "https://api.github.com/repos/franklinjobs617-jpg/connextthedots/check-runs/120466277547",
+      "html_url": "https://github.com/franklinjobs617-jpg/connextthedots/runs/120466277547",
+      "details_url": "https://vercel.com/github",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-23T14:21:50Z",
+      "completed_at": "2026-10-23T14:21:50Z",
+      "output": {
+        "title": "✅ No unresolved feedback",
+        "summary": "💬 0 unresolved, 0 resolved. [Go to feedback](https://vercel.live/open-feedback/connextthedots-git-codex-growt-6eaa1e-franklinjobs617s-projects.vercel.app?via=pr-comment-feedback-link)",
+        "text": null,
+        "annotations_count": 0,
+        "annotations_url": "https://api.github.com/repos/franklinjobs617-jpg/connextthedots/check-runs/120466277547/annotations"
+      },
+      "check_suite": {
+        "id": 108334291709
+      },
+      "app": {
+        "id": 8329,
+        "client_id": "Iv1.9d7d662ea00b8481",
+        "slug": "vercel",
+        "node_id": "MDM6QXBwODMyOQ==",
+        "owner": {
+          "login": "vercel",
+          "id": 14985020,
+          "node_id": "MDEyOk9yZ2FuaXphdGlvbjE0OTg1MDIw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/14985020?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/vercel",
+          "html_url": "https://github.com/vercel",
+          "followers_url": "https://api.github.com/users/vercel/followers",
+          "following_url": "https://api.github.com/users/vercel/following{/other_user}",
+          "gists_url": "https://api.github.com/users/vercel/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/vercel/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/vercel/subscriptions",
+          "organizations_url": "https://api.github.com/users/vercel/orgs",
+          "repos_url": "https://api.github.com/users/vercel/repos",
+          "events_url": "https://api.github.com/users/vercel/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/vercel/received_events",
+          "type": "Organization",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "name": "Vercel",
+        "description": "Vercel for GitHub automatically deploys your PRs to Vercel.\r\nPreview every PR live, without any configuration required.\r\n\r\nFor more information, see our [documentation](https://vercel.com/docs/github?utm_source=github&utm_medium=marketplace&utm_campaign=vercel-app).\r\n\r\n![](https://assets.vercel.com/image/upload/v1597943727/front/github/github-comment-monorepo.png)",
+        "external_url": "https://vercel.com/github",
+        "html_url": "https://github.com/apps/vercel",
+        "created_at": "2018-01-19T21:51:06Z",
+        "updated_at": "2026-10-12T19:18:05Z",
+        "permissions": {
+          "actions": "read",
+          "administration": "write",
+          "checks": "write",
+          "contents": "write",
+          "deployments": "write",
+          "emails": "read",
+          "issues": "write",
+          "members": "read",
+          "metadata": "read",
+          "pull_requests": "write",
+          "repository_hooks": "write",
+          "statuses": "write",
+          "workflows": "write"
+        },
+        "events": [
+          "branch_protection_rule",
+          "check_run",
+          "delete",
+          "deployment",
+          "issue_comment",
+          "membership",
+          "pull_request",
+          "pull_request_review",
+          "pull_request_review_comment",
+          "pull_request_review_thread",
+          "push",
+          "repository",
+          "status",
+          "team"
+        ]
+      },
+      "pull_requests": [
+        {
+          "url": "https://api.github.com/repos/franklinjobs617-jpg/connextthedots/pulls/2",
+          "id": 4977230226,
+          "number": 2,
+          "head": {
+            "ref": "codex/growth-sprint-1-l1",
+            "sha": "60fe15a12d861d799b06d23bbdf0f941dc4ebe30",
+            "repo": {
+              "id": 1046846811,
+              "url": "https://api.github.com/repos/franklinjobs617-jpg/connextthedots",
+              "name": "connextthedots"
+            }
+          },
+          "base": {
+            "ref": "main",
+            "sha": "da8e3b54df99a3e63246c496ade226890bf236ba",
+            "repo": {
+              "id": 1046846811,
+              "url": "https://api.github.com/repos/franklinjobs617-jpg/connextthedots",
+              "name": "connextthedots"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

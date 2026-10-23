@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "simple-rabbit-outline",
+    "Download PDF": {
+      "file": "Simple_Rabbit_Outline_Puzzle.pdf",
+      "sha256": "88758bc5db89989492a61e1fbf908df469eb828338eb927499bb62c371bfe218",
+      "a4": true,
+      "credit": true,
+      "puzzle_pixel_rmse": 0.22443447447603349
+    },
+    "Download PNG": {
+      "file": "Simple_Rabbit_Outline_Solution.png",
+      "sha256": "b68041f0aed424d9df05f6eb817c7bf3c8f98330da171b96056f7ee0459b748a",
+      "solution_pixels_match": true
+    }
+  },
+  {
+    "slug": "cute-happy-rabbit",
+    "Download PDF": {
+      "file": "Cute_Happy_Rabbit_Puzzle.pdf",
+      "sha256": "51d079031ff1ad27212d2d4ea3ed3c1d79cdbf6f8592159c751469a24dde35fc",
+      "a4": true,
+      "credit": true,
+      "puzzle_pixel_rmse": 0.20240052426370397
+    },
+    "Download PNG": {
+      "file": "Cute_Happy_Rabbit_Solution.png",
+      "sha256": "61e5c525743f01d96e2e6b45a6e770cb727ad4d6955784b721a828fae800709e",
+      "solution_pixels_match": true
+    }
+  },
+  {
+    "slug": "puppy-sketch",
+    "Download PDF": {
+      "file": "Puppy_Sketch_Puzzle.pdf",
+      "sha256": "3660893baeab83216be0e299fa2d31879d4c1d8b83d1ea88c0fbc1486328cd67",
+      "a4": true,
+      "credit": true,
+      "puzzle_pixel_rmse": 0.23609231951364562
+    },
+    "Download PNG": {
+      "file": "Puppy_Sketch_Solution.png",
+      "sha256": "e83a8572ecc35f8bb78f44436b30177060d3ce94a4ab41362c8927c62eb1e5b2",
+      "solution_pixels_match": true
+    }
+  },
+  {
+    "slug": "cute-sitting-puppy",
+    "Download PDF": {
+      "file": "Cute_Sitting_Puppy_Puzzle.pdf",
+      "sha256": "3a7afa4efc34a2745dc90bcca316dcddf0ea397126280307880610e0df07b5de",
+      "a4": true,
+      "credit": true,
+      "puzzle_pixel_rmse": 0.24349167222811635
+    },
+    "Download PNG": {
+      "file": "Cute_Sitting_Puppy_Solution.png",
+      "sha256": "7d848922f4ad5ff0c5db50da55a6db8a0cb46fa2214ef813e5457e962e986fa8",
+      "solution_pixels_match": true
+    }
+  }
+]

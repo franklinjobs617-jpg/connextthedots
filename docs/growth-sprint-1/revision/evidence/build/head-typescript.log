@@ -1,0 +1,48 @@
+.next/types/app/[locale]/blog/are-dot-to-dot-puzzles-good-for-kids/page.ts(36,29): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/blog/are-dot-to-dot-puzzles-good-for-kids/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/connect-the-dots-coloring-pages/page.ts(36,29): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/connect-the-dots-coloring-pages/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/free-animal-dot-to-dot-printables-pdf/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/page.ts(36,29): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/printables/adults/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/printables/christmas/page.ts(36,29): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/printables/christmas/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/printables/general/page.ts(36,29): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/printables/general/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/printables/hard/page.ts(36,29): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/printables/hard/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/privacy/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+.next/types/app/[locale]/terms/page.ts(40,31): error TS2344: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]

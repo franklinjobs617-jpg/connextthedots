@@ -1,0 +1,54 @@
+Opening simple-rabbit-outline
+REQUEST http://localhost:3101/printables/simple-rabbit-outline/
+REQUEST http://localhost:3101/_next/image/?url=%2Fgenerated%2Fdot-to-dot%2Fstandalone-openclipart%2Fsimple-rabbit-outline-puzzle.webp&w=640&q=75
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+REQUEST http://localhost:3101/_next/image/?url=%2Fgenerated%2Fdot-to-dot%2Fstandalone-openclipart%2Fsimple-rabbit-outline-solution.webp&w=1920&q=75
+REQUEST http://localhost:3101/_next/image/?url=%2Fgenerated%2Fdot-to-dot%2Fstandalone-openclipart%2Fsimple-rabbit-outline-reference.webp&w=640&q=75
+REQUEST http://localhost:3101/_next/image/?url=%2Fgenerated%2Fdot-to-dot%2Fstandalone-openclipart%2Fsimple-rabbit-outline-solution.webp&w=640&q=75
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load the PayPal JS SDK script. Error: The script "https://www.paypal.com/sdk/js?client-id=AUZv0pJuoq3krZSjrCrJOUXyis508Wf3R4DE52gBVIHbCrMK6kAzzNzpHvH1wKXhhsMl3DrcEjIki8gY&currency=USD&vault=true" failed to load. Check the HTTP status code and response body in DevTools to learn more.
+CONSOLE error Failed to load resource: net::ERR_FAILED
+REQUEST http://localhost:3101/generated/dot-to-dot/standalone-openclipart/simple-rabbit-outline-puzzle.webp?t=1792765632287
+simple-rabbit-outline Download PDF PASS
+REQUEST http://localhost:3101/generated/dot-to-dot/standalone-openclipart/simple-rabbit-outline-solution.webp?t=1792765633647
+simple-rabbit-outline Download PNG PASS
+Opening cute-happy-rabbit
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load the PayPal JS SDK script. Error: The script "https://www.paypal.com/sdk/js?client-id=AUZv0pJuoq3krZSjrCrJOUXyis508Wf3R4DE52gBVIHbCrMK6kAzzNzpHvH1wKXhhsMl3DrcEjIki8gY&currency=USD&vault=true" failed to load. Check the HTTP status code and response body in DevTools to learn more.
+CONSOLE error Failed to load resource: net::ERR_FAILED
+REQUEST http://localhost:3101/_next/image/?url=%2Fgenerated%2Fdot-to-dot%2Fstandalone-openclipart%2Fsimple-rabbit-outline-puzzle.webp&w=1920&q=75
+cute-happy-rabbit Download PDF PASS
+cute-happy-rabbit Download PNG PASS
+Opening puppy-sketch
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load the PayPal JS SDK script. Error: The script "https://www.paypal.com/sdk/js?client-id=AUZv0pJuoq3krZSjrCrJOUXyis508Wf3R4DE52gBVIHbCrMK6kAzzNzpHvH1wKXhhsMl3DrcEjIki8gY&currency=USD&vault=true" failed to load. Check the HTTP status code and response body in DevTools to learn more.
+CONSOLE error Failed to load resource: net::ERR_FAILED
+REQUEST http://localhost:3101/_next/image/?url=%2Fgenerated%2Fdot-to-dot%2Fstandalone-openclipart%2Fsimple-rabbit-outline-puzzle.webp&w=1920&q=75
+puppy-sketch Download PDF PASS
+puppy-sketch Download PNG PASS
+Opening cute-sitting-puppy
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load resource: net::ERR_FAILED
+CONSOLE error Failed to load the PayPal JS SDK script. Error: The script "https://www.paypal.com/sdk/js?client-id=AUZv0pJuoq3krZSjrCrJOUXyis508Wf3R4DE52gBVIHbCrMK6kAzzNzpHvH1wKXhhsMl3DrcEjIki8gY&currency=USD&vault=true" failed to load. Check the HTTP status code and response body in DevTools to learn more.
+CONSOLE error Failed to load resource: net::ERR_FAILED
+REQUEST http://localhost:3101/_next/image/?url=%2Fgenerated%2Fdot-to-dot%2Fstandalone-openclipart%2Fsimple-rabbit-outline-puzzle.webp&w=1920&q=75
+cute-sitting-puppy Download PDF PASS
+cute-sitting-puppy Download PNG PASS
