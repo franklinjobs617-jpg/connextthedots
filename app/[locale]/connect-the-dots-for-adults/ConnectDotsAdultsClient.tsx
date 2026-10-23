@@ -235,8 +235,28 @@ const copy: Record<string, LocaleCopy> = {
     },
 };
 
+// Apply only to /connect-the-dots-for-adults/; preserve locale fallback output.
+const englishL1Copy: Partial<LocaleCopy> = {
+    heroBody: "Adult dot-to-dot activities use numbered sequences to reveal a picture. The current Mountain and Mandala entries below are reference artwork only, not verified high-dot-count numbered worksheets. Check each entry before printing, or use the homepage upload flow to make a puzzle from your own image.",
+    ctaFeatured: "View featured artwork ↓",
+    toolBoxTitle: "Make a puzzle from your own image",
+    signInCta: "AI generation: sign in for credits",
+    featuredSub: "These two catalog entries retain their original difficulty labels. Their dot counts and matching solutions are not confirmed. Reference artwork only — not verified numbered dot-to-dot worksheets.",
+    difficultySub: "Difficulty labels are guidance, not verified dot counts. The current Mountain and Mandala artwork does not establish a playable Hard or Extreme worksheet.",
+    difficultyTable: copy.en.difficultyTable.map(row => ({ ...row, dots: "Not verified", time: "Varies; not measured" })),
+    whyItems: copy.en.whyItems.map((item, i) => i === 1 ? { ...item, body: "Time to complete a numbered worksheet depends on its sequence and print readability. Completion times for these catalog entries have not been verified." } : i === 2 ? { ...item, body: "Static detail-page PDF downloads and basic homepage image upload do not require an account. AI image generation is separate and requires sign-in and available credits." } : item),
+    faqItems: copy.en.faqItems.map((item, i) => ({ ...item, a: [
+        "Adult dot-to-dot worksheets use numbered dots to build an outline. Difficulty depends on the actual sequence and readability; a title or difficulty label alone does not establish the number of dots or that a worksheet is ready to solve.",
+        "Static detail-page PDF downloads do not require an account and include a website credit. The current Mountain and Mandala entries are reference artwork, not verified numbered worksheets. AI image generation requires sign-in and available credits.",
+        "The dot counts of the current Mountain and Mandala entries have not been verified. Their catalog ranges must not be treated as confirmed counts of numbered dots. No playable 100+ dot adult worksheet is confirmed here.",
+        "Use the homepage upload flow to make a puzzle from your own image. Review the numbered result before printing; a clear outline is a useful starting point. A playable extreme puzzle from every photo is not guaranteed. AI image generation is separate and requires sign-in and available credits.",
+        copy.en.faqItems[4].a,
+        "The detail-page PDF export uses A4 portrait. Check the preview and print readability before printing. US Letter output has not been verified, and a downloadable PDF alone does not establish a playable numbered worksheet.",
+    ][i] })),
+};
+
 function getCopy(locale: string): LocaleCopy {
-    return copy[locale] ?? copy.en;
+    return locale === "en" ? { ...copy.en, ...englishL1Copy } : copy[locale] ?? copy.en;
 }
 
 function buildJsonLd(locale: string, items: PrintableItem[]) {
@@ -267,7 +287,9 @@ function buildJsonLd(locale: string, items: PrintableItem[]) {
                     priceCurrency: "USD",
                 },
                 description:
-                    "Upload any photo and generate a custom numbered dot-to-dot puzzle with adjustable difficulty, downloadable as PDF.",
+                    locale === "en"
+                        ? "Use the homepage image-upload flow to make and review a numbered puzzle. AI image generation requires sign-in and available credits; results vary by image."
+                        : "Upload any photo and generate a custom numbered dot-to-dot puzzle with adjustable difficulty, downloadable as PDF.",
             },
             {
                 "@type": "FAQPage",
@@ -362,7 +384,10 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                                         </span>
                                     )}
                                 </div>
-                                <DotGeneratorClient locale={locale} user={user} />
+                                {locale === "en" ? <>
+                                    <Link href="/#hero-upload-btn" className="inline-flex px-5 py-3 rounded-full bg-brand-blue text-white font-semibold">Make a puzzle from your own image</Link>
+                                    <p className="text-sm text-slate-500 mt-3">Basic image upload does not require sign-in. AI generation is a separate feature requiring sign-in and available credits.</p>
+                                </> : <DotGeneratorClient locale={locale} user={user} />}
                             </div>
                         </div>
                     </div>
@@ -380,7 +405,11 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                         {featuredItems.length > 0 ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl">
                                 {featuredItems.map((item) => (
-                                    <PrintableCard key={item.id} item={item} priority />
+                                    <PrintableCard key={item.id} item={locale === "en" ? {
+                                        ...item,
+                                        dotRange: "Not verified",
+                                        description: "Reference artwork only — not a verified numbered dot-to-dot worksheet. Dot count and matching solution are not confirmed.",
+                                    } : item} priority />
                                 ))}
                             </div>
                         ) : (
