@@ -18,6 +18,9 @@
 | `app/[locale]/connect-the-dots-for-adults/ConnectDotsAdultsClient.tsx` | 英文成人资源说明、点数/时间审慎标记、上传 CTA、对应 FAQ/应用 Schema | `/connect-the-dots-for-adults/` |
 | `docs/growth-sprint-1/implementation-review.md` | 本交接、Change Cards、停止项 | 无运行时影响 |
 | `docs/growth-sprint-1/seo-impact-diff.json` | 逐 URL 保护字段对照摘要、精确 JSON-LD diff | 无运行时影响 |
+| `docs/growth-sprint-1/evidence.zip` | HTML、截图、原始对照、导出文件/哈希及隔离验证脚本/日志 | 无运行时影响 |
+
+应用实现提交：`576cba391939b60a3eef7a5c7778f7a466edb7ae`；后续提交只附证据与文档。[下载证据包](./evidence.zip) · [SEO Impact Diff](./seo-impact-diff.json)。
 
 首页 `/#hero-upload-btn` 是新 CTA 的目的地；首页本身未修改。目标页的 de/es/pt/fr/it/nl 变体，以及支持详情、其他集合页，均不属于本次正文变更 URL。
 
