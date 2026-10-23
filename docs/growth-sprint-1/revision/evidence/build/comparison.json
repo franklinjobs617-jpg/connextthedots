@@ -1,0 +1,281 @@
+{
+  "main_sha": "da8e3b54df99a3e63246c496ade226890bf236ba",
+  "application_sha": "60fe15a12d861d799b06d23bbdf0f941dc4ebe30",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "typescript": "5.9.3",
+  "lockfile_sha256": "c3e4bbdd2be6b6bb9b53aaed14c293a4bfbc6cf660b7b484be660479cc606465",
+  "default_production": {
+    "command": "NEXT_TELEMETRY_DISABLED=1 npm run build",
+    "main_exit": 0,
+    "head_exit": 0,
+    "typescript_stage": "Running TypeScript; no ignoreBuildErrors override",
+    "pages_generated_each": 135,
+    "mode": "Turbopack",
+    "configuration_same_as_main": true,
+    "dependency_setup": "Same installed lockfile-matching dependencies, hard-linked into each isolated archive; initial symlink-only attempts failed on filesystem-root constraints and were corrected without source/config changes"
+  },
+  "webpack_production": {
+    "command": "NEXT_TELEMETRY_DISABLED=1 npm run build -- --webpack",
+    "main_exit": 1,
+    "head_exit": 1,
+    "first_failure": "app/[locale]/blog/are-dot-to-dot-puzzles-good-for-kids/page.tsx: Props.params is synchronous, not Promise-compatible"
+  },
+  "raw_typecheck_command": "./node_modules/.bin/tsc --noEmit --incremental false --pretty false",
+  "webpack_generated_type_context": {
+    "main": {
+      "exit": 2,
+      "raw_sha256": "938e7175a95ff6e945659e1ea2f155f9b9608ad90a40133019181fdd9167b4cf",
+      "diagnostics": [
+        {
+          "path": ".next/types/app/[locale]/blog/are-dot-to-dot-puzzles-good-for-kids/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/blog/are-dot-to-dot-puzzles-good-for-kids/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/connect-the-dots-coloring-pages/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/connect-the-dots-coloring-pages/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/free-animal-dot-to-dot-printables-pdf/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/adults/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/christmas/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/christmas/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/general/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/general/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/hard/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/hard/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/privacy/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/terms/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        }
+      ]
+    },
+    "head": {
+      "exit": 2,
+      "raw_sha256": "938e7175a95ff6e945659e1ea2f155f9b9608ad90a40133019181fdd9167b4cf",
+      "diagnostics": [
+        {
+          "path": ".next/types/app/[locale]/blog/are-dot-to-dot-puzzles-good-for-kids/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/blog/are-dot-to-dot-puzzles-good-for-kids/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/connect-the-dots-coloring-pages/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/connect-the-dots-coloring-pages/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/free-animal-dot-to-dot-printables-pdf/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/adults/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/christmas/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/christmas/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/general/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/general/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/hard/page.ts",
+          "line": 36,
+          "column": 29,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/printables/hard/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/privacy/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        },
+        {
+          "path": ".next/types/app/[locale]/terms/page.ts",
+          "line": 40,
+          "column": 31,
+          "code": "TS2344",
+          "message": "Type 'Props' does not satisfy the constraint 'PageProps'.\n  Types of property 'params' are incompatible.\n    Type '{ locale: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]"
+        }
+      ]
+    },
+    "difference": {
+      "added": [],
+      "removed": [],
+      "raw_logs_byte_identical": true
+    }
+  },
+  "default_generated_type_context": {
+    "main": {
+      "exit": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diagnostics": []
+    },
+    "head": {
+      "exit": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diagnostics": []
+    }
+  },
+  "interpretation": "Diagnostics depend on Next-generated validator context. Webpack creates per-page checks; default Turbopack creates .next/types/validator.ts with a different AppPageConfig signature. No source typing correction or type-check bypass was introduced. Default build pass does not erase the separately reproducible webpack diagnostics or establish full end-to-end/production release approval."
+}

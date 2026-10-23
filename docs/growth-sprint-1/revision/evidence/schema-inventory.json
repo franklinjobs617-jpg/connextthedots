@@ -1,0 +1,321 @@
+[
+  {
+    "url": "/dot-to-dot-printable/",
+    "faq_dom_matches_jsonld": true,
+    "faq_count": 6,
+    "schema": [
+      {
+        "@type": "WebPage",
+        "@id": "https://connectthedotsprintable.online/dot-to-dot-printable/",
+        "name": "Free Dot to Dot Printables — PDF Puzzles for Kids & Adults",
+        "url": "https://connectthedotsprintable.online/dot-to-dot-printable/",
+        "description": "Browse free dot-to-dot printables by catalog range and theme. Open a card for the worksheet preview, PDF download and available solution.",
+        "inLanguage": "en",
+        "mainEntity": {
+          "@type": "ItemList",
+          "numberOfItems": 49,
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "url": "https://connectthedotsprintable.online/printables/simple-rabbit-outline/",
+              "name": "Simple Rabbit Outline"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "url": "https://connectthedotsprintable.online/printables/cute-happy-rabbit/",
+              "name": "Cute Happy Rabbit"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "url": "https://connectthedotsprintable.online/printables/puppy-sketch/",
+              "name": "Puppy Sketch"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "url": "https://connectthedotsprintable.online/printables/cute-sitting-puppy/",
+              "name": "Cute Sitting Puppy"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "url": "https://connectthedotsprintable.online/printables/friendly-dog-outline/",
+              "name": "Friendly Dog Outline"
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "url": "https://connectthedotsprintable.online/printables/cute-hamster-line-art/",
+              "name": "Cute Hamster Line Art"
+            },
+            {
+              "@type": "ListItem",
+              "position": 7,
+              "url": "https://connectthedotsprintable.online/printables/cat-outline/",
+              "name": "Cat Outline"
+            },
+            {
+              "@type": "ListItem",
+              "position": 8,
+              "url": "https://connectthedotsprintable.online/printables/turtle-crawling-line-art/",
+              "name": "Turtle Crawling Line Art"
+            },
+            {
+              "@type": "ListItem",
+              "position": 9,
+              "url": "https://connectthedotsprintable.online/printables/turtle-side-outline/",
+              "name": "Turtle Side Outline"
+            },
+            {
+              "@type": "ListItem",
+              "position": 10,
+              "url": "https://connectthedotsprintable.online/printables/cute-bear-sitting/",
+              "name": "Cute Bear Sitting"
+            },
+            {
+              "@type": "ListItem",
+              "position": 11,
+              "url": "https://connectthedotsprintable.online/printables/cute-bear-laying-line-art/",
+              "name": "Cute Bear Laying Line Art"
+            },
+            {
+              "@type": "ListItem",
+              "position": 12,
+              "url": "https://connectthedotsprintable.online/printables/cute-bear-outline/",
+              "name": "Cute Bear Outline"
+            },
+            {
+              "@type": "ListItem",
+              "position": 13,
+              "url": "https://connectthedotsprintable.online/printables/teddy-bear-outline/",
+              "name": "Teddy Bear Outline"
+            },
+            {
+              "@type": "ListItem",
+              "position": 14,
+              "url": "https://connectthedotsprintable.online/printables/penguin/",
+              "name": "Penguin"
+            },
+            {
+              "@type": "ListItem",
+              "position": 15,
+              "url": "https://connectthedotsprintable.online/printables/koala-sleeping/",
+              "name": "Koala Sleeping"
+            },
+            {
+              "@type": "ListItem",
+              "position": 16,
+              "url": "https://connectthedotsprintable.online/printables/cartoon-ladybug/",
+              "name": "Cartoon Ladybug"
+            },
+            {
+              "@type": "ListItem",
+              "position": 17,
+              "url": "https://connectthedotsprintable.online/printables/bee-lineart/",
+              "name": "Bee Lineart"
+            },
+            {
+              "@type": "ListItem",
+              "position": 18,
+              "url": "https://connectthedotsprintable.online/printables/frog/",
+              "name": "Frog"
+            },
+            {
+              "@type": "ListItem",
+              "position": 19,
+              "url": "https://connectthedotsprintable.online/printables/snail-lineart/",
+              "name": "Snail Lineart"
+            },
+            {
+              "@type": "ListItem",
+              "position": 20,
+              "url": "https://connectthedotsprintable.online/printables/easy-happy-sun-03-connect-the-dots-puzzle-1-22-numbers/",
+              "name": "Happy Sun 3"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a dot to dot printable?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A dot to dot printable (also called connect the dots) is a worksheet where numbered dots are arranged on a page. Drawing lines between the dots in order — from 1 to 2 to 3 — gradually reveals a hidden picture. Printable versions can be downloaded as PDF files and printed at home."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are these dot to dot printables free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Static detail-page PDFs are free to download without an account. Open a card for its preview and download buttons. The browser-generated PDF includes a website credit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between dot to dot and connect the dots?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They are the same activity described with different words. 'Dot to dot' is more commonly used in British English (UK, Australia, New Zealand), while 'connect the dots' is the standard American English term. Both refer to numbered dot puzzles that reveal a picture when completed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What paper size should I use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The detail-page PDF export uses A4 portrait. Check the print preview and select Fit to page if needed. US Letter output has not been tested."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I make a custom dot to dot from my own photo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the homepage image-upload flow to make a worksheet from your own image. A clear, simple outline is a useful starting point. AI image generation is separate and requires sign-in and available credits."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are dot to dot puzzles good for adults?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Dot-to-dot activities can offer adults a focused, screen-free break. Choose a numbered worksheet with comfortable number spacing and a level of detail you enjoy; inspect its preview before printing."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to do a dot to dot printable",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Download the PDF",
+            "text": "Open a card for its preview and download buttons. Download PDF creates an A4 file from the Puzzle image; Download PNG exports the available Solution image."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Print it out",
+            "text": "Use any home or office printer. Black-and-white works perfectly — no colour ink needed. Print on standard 80gsm paper."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Connect the dots",
+            "text": "Start at dot 1 and draw a line to dot 2, then 3, and so on. When you reach the last number, the hidden picture is revealed."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Colour it in (optional)",
+            "text": "Once the outline is complete, grab some coloured pencils or crayons and bring the picture to life."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/connect-the-dots-for-adults/",
+    "faq_dom_matches_jsonld": true,
+    "faq_count": 6,
+    "schema": [
+      {
+        "@type": "WebPage",
+        "@id": "https://connectthedotsprintable.online/connect-the-dots-for-adults/",
+        "name": "Connect the Dots for Adults",
+        "url": "https://connectthedotsprintable.online/connect-the-dots-for-adults/",
+        "description": "Free connect the dots for adults, 100-300+ dots. Download extreme printable PDFs or turn any photo into your own custom puzzle in seconds.",
+        "inLanguage": "en",
+        "dateModified": "2026-07-15"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Connect the Dots Generator",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any (Web-based)",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Use the homepage image-upload flow to make and review a numbered puzzle. AI image generation requires sign-in and available credits; results vary by image."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a connect the dots puzzle for adults?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An adult dot-to-dot worksheet uses a numbered sequence to form an outline. Detail and number spacing influence the challenge, so start with the worksheet preview."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are these connect the dots printables really free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Static detail-page PDFs are free, generated in your browser and include a website credit. No account is needed to download them."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many dots do adult puzzles typically have?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use a worksheet's catalog range as a selection guide, then inspect the numbered preview. A catalog label is not a point-by-point audit. See the featured-entry note for the current Mountain and Mandala status."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I create a custom extreme dot-to-dot puzzle from my own photo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the homepage upload flow to make a worksheet from your own image. A clear outline is a useful starting point; inspect the result before printing. AI image generation is a separate feature requiring sign-in and available credits."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are dot to dot puzzles good for stress relief?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Focused, repetitive visual tasks like connect-the-dots share the same mechanism researchers associate with anxiety reduction in adult coloring: sustained attention on a single simple action tends to quiet distracting thoughts. Cleveland Clinic has written about why structured creative activities like this can help adults unwind — see the reference link below."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What paper size should I print an adult puzzle on?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The detail-page PDF export uses A4 portrait. Check the print preview and number readability. US Letter output has not been tested."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "numberOfItems": 2,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "url": "https://connectthedotsprintable.online/printables/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots/",
+            "name": "Mountain Landscape"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "url": "https://connectthedotsprintable.online/printables/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots/",
+            "name": "Extreme Mandala"
+          }
+        ]
+      }
+    ]
+  }
+]

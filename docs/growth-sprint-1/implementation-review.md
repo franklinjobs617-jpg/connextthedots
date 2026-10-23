@@ -1,3 +1,5 @@
+> **历史记录：以下对应原审核 Head `93b0ce783b2feb71f3e9f9e35bb04ceebabe4314`，已被[本轮修订交接](./revision/README.md)取代。原证据可在该固定提交读取；当前 evidence.zip 是修订后的证据包。尤其不要把原稿的全卡 Not verified 或 webpack 构建结论作为当前完整结论。**
+
 # Growth Sprint 1 — L1 implementation review
 
 日期：2026-10-23（Asia/Shanghai）。范围：修改批准的局部代码、隔离验证、一个 Draft PR；不 Merge、不 Deploy、不修改生产配置。附件中的研究建议、W2 新题、W4 数据采集和 AI 8Q 复测不是本轮执行授权，均未执行。
