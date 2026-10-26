@@ -1,0 +1,286 @@
+{
+  "base_sha": "ebdb92c1143ef149cc5dfc04e43f51cb0dbc0f13",
+  "scope": "Local production builds; third-party browser requests blocked",
+  "collections": {
+    "en": {
+      "all": {
+        "before": 49,
+        "after": 50,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "6e83764705e095908fc05a2e5c9d807dd1f83b5bfa28b11fabf14b57f6294484"
+      },
+      "easy": {
+        "before": 27,
+        "after": 27,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "3fc343911f0a677a6d88b2cb85c775aba6da3c78432449ef9bbf14b4a7fb66e2"
+      },
+      "medium": {
+        "before": 20,
+        "after": 20,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "1319e7b1b3a48563706aa6a9f702f7d3df071af23774a2cab89a159d9952c3a8"
+      },
+      "hard": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "a765e0d54da0ac983967163ebec476de60711f06f96b170496e38557b8d84393"
+      },
+      "100+": {
+        "before": 1,
+        "after": 2,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "5fcf248a219867792e9cc96f4120998b4d8f1ca247c18defd70f58b9ce366f1d"
+      }
+    },
+    "de": {
+      "all": {
+        "before": 19,
+        "after": 19,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "b1e4abb788bfd4f13e161ee7e7d8d3e7edc7dfa099f49a79a4c766beb1b85d2c"
+      },
+      "easy": {
+        "before": 8,
+        "after": 8,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "555c65c4e1ffcc341a98e0d1c3e8b44a01ad997ab20577d844e9a0d5d03a66c3"
+      },
+      "medium": {
+        "before": 9,
+        "after": 9,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "690e282400c7240ea859573753a3b8ad218550e810853b5aa67d9b9fb5c29758"
+      },
+      "hard": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "21a15a0da7eec4e31936aafc3f32d3c0061d75d2be8c49ab12f28c8435371ab0"
+      },
+      "100+": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "5d79b68b3843b1799f7faec45da98ed6aa88c7a40031759708f42abc3dd493e9"
+      }
+    },
+    "fr": {
+      "all": {
+        "before": 22,
+        "after": 22,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "2fc4db6e22469e71959aa2c1998790a701f11844212825b7f724979da29262de"
+      },
+      "easy": {
+        "before": 8,
+        "after": 8,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "80d6b8dc93ac8936cf0b80723d11adf933fc7a62c5b2d1b541c09603a343ae77"
+      },
+      "medium": {
+        "before": 9,
+        "after": 9,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "86c4d252ae49b1696b6c45b3e66d0890dc20a757be70fa5de8214b9328b4f6c1"
+      },
+      "hard": {
+        "before": 3,
+        "after": 3,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "3b6251accc396f829902e469b44ac04fec26392ea2826e66e52d5e506d70c0b0"
+      },
+      "100+": {
+        "before": 2,
+        "after": 2,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "756bb987fa19c20f5988b1a151395d2361812db6054002d85b97e2814bf73a38"
+      }
+    },
+    "it": {
+      "all": {
+        "before": 19,
+        "after": 19,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "0c8e4bc4092127d501cafc65bfc504e1076d3631c630e4cec69112576ebe904c"
+      },
+      "easy": {
+        "before": 8,
+        "after": 8,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "6a458fb3b9e12f73ef7082597486ab3bbca48873e96393267efa7fe04f4d9772"
+      },
+      "medium": {
+        "before": 9,
+        "after": 9,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "9244d6e2a98eaee60ba3c04c01da53b7e3beaa990c49fc9ea02df0fe3c745e3d"
+      },
+      "hard": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "fd590810429bf80b3116dbe51b458579541fd3378e11be5ce84045ebf86a6daf"
+      },
+      "100+": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "81cec66337b3c1048bdc0735acbf91c6ebfbcf3d963d3962123e4c795361f691"
+      }
+    },
+    "es": {
+      "all": {
+        "before": 49,
+        "after": 49,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "39afd03b1dcc2088b4914b981a32deb966971bdf7a3cd98657f2bfe095c13b34"
+      },
+      "easy": {
+        "before": 27,
+        "after": 27,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "c054f83424aa752c845cda304747d17cee9c76b688d806d6a1b82574b8e21f8c"
+      },
+      "medium": {
+        "before": 20,
+        "after": 20,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "795ffb6ca72180f3601513fa6e858a394932677051023db24bfbbf7f27499c23"
+      },
+      "hard": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "8ec3cdc8b70cba4844cec5dd184950ce282d131d47cc58a5fff191d15a6ddf72"
+      },
+      "100+": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "71a5b877027d36e6f483e65cfe4b805c51eaf47df2270a1f78c9fcd09ee2a3d5"
+      }
+    },
+    "pt": {
+      "all": {
+        "before": 19,
+        "after": 19,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "68e6d44f4bbbbb4e227a8ad0d60601e604da8e063fa8159e24301d35eb1a6335"
+      },
+      "easy": {
+        "before": 8,
+        "after": 8,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "93b3064994e01ed50712700d0b135c5d1002ce661d98314a9979c96db8287c9b"
+      },
+      "medium": {
+        "before": 9,
+        "after": 9,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "95ea53b7be63d7999fc69cfb8ea1fcc9e8a97f544efffe6f09ba3dab6e76d510"
+      },
+      "hard": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "606594f7483ff5a184533500f3b20abb49b512e5b252c60ed2d489f051f23b8d"
+      },
+      "100+": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "c62a742065b0ca29a19cddc1eab128caf47bb98a482d342e55f5ad7d44c5a296"
+      }
+    },
+    "nl": {
+      "all": {
+        "before": 49,
+        "after": 49,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "6e83764705e095908fc05a2e5c9d807dd1f83b5bfa28b11fabf14b57f6294484"
+      },
+      "easy": {
+        "before": 27,
+        "after": 27,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "3fc343911f0a677a6d88b2cb85c775aba6da3c78432449ef9bbf14b4a7fb66e2"
+      },
+      "medium": {
+        "before": 20,
+        "after": 20,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "1319e7b1b3a48563706aa6a9f702f7d3df071af23774a2cab89a159d9952c3a8"
+      },
+      "hard": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "a765e0d54da0ac983967163ebec476de60711f06f96b170496e38557b8d84393"
+      },
+      "100+": {
+        "before": 1,
+        "after": 1,
+        "legacy_card_html_and_order_unchanged": true,
+        "legacy_cards_sha256": "5fcf248a219867792e9cc96f4120998b4d8f1ca247c18defd70f58b9ce366f1d"
+      }
+    }
+  },
+  "downloads": [
+    {
+      "label": "Puzzle",
+      "href": "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle.pdf",
+      "status": 200,
+      "type": "application/pdf",
+      "browser_download_matches_original": true,
+      "sha256": "8f7b6040b00d9eab32e42615ff20bc971ee4218dac2f51a3b29b01b9348153c4"
+    },
+    {
+      "label": "Solution",
+      "href": "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Solution.pdf",
+      "status": 200,
+      "type": "application/pdf",
+      "browser_download_matches_original": true,
+      "sha256": "017acde4697cbfe92c2a2f4a6e73336558a4e8b66aa190355bc0f3d383bc802c"
+    }
+  ],
+  "mobile": {
+    "1440": {
+      "no_horizontal_overflow": true,
+      "mountain_thumbnail_decoded": true,
+      "card_text": "Free\nUnrated\nMountain Landscape — 120-Point Dot to Dot\nDots: 120\nLandscape\n\nConnect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\n\nAdults"
+    },
+    "390": {
+      "no_horizontal_overflow": true,
+      "mountain_thumbnail_decoded": true,
+      "card_text": "Free\nUnrated\nMountain Landscape — 120-Point Dot to Dot\nDots: 120\nLandscape\n\nConnect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\n\nAdults"
+    }
+  },
+  "sitemap": {
+    "unchanged_excluding_build_lastmod": true,
+    "mountain_english_entries": 1,
+    "mountain_language_alternates": 0,
+    "sha256": "1fb4675e106b867e37a66ee487e765da9326f5da2b5d5de7811503df01ffa37a"
+  },
+  "robots_txt": {
+    "unchanged": true,
+    "sha256": "94d31e945dae9f78b8bf85361206ea6278d096a0663eceb160ff0894f25b8d41"
+  },
+  "result": "PASS",
+  "checks": {
+    "baseline_default_build": "PASS",
+    "candidate_default_build": "PASS",
+    "typescript_no_emit": "PASS",
+    "changed_components_eslint": "0 errors; pre-existing next/no-img-element warning",
+    "whitespace": "PASS",
+    "mountain_card_click": "existing /printables/mountain-landscape-120/",
+    "screenshots_manual_review": "1440px and 390px PASS"
+  },
+  "not_verified": [
+    "Live hosting/CDN responses and deployed behavior (no deployment performed)",
+    "Actual search-engine indexation or ranking",
+    "Third-party image CDN availability (browser requests blocked)",
+    "Physical print/playtest and point/label audit not repeated; existing assets reused"
+  ]
+}

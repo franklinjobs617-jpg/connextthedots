@@ -7,6 +7,7 @@ import PrintableCard from "@/components/PrintableCard";
 import { useAuth } from "@/lib/auth-context";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import type { PrintableItem } from "@/lib/printables-data";
+import { mountain120 } from "@/lib/mountain-120";
 
 type Props = {
     locale: string;
@@ -448,13 +449,21 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
 
     const [activeFilter, setActiveFilter] = useState<string>("all");
 
+    // Collection-only integration: shared catalogs and other locales stay unchanged.
+    const collectionItems = useMemo(() =>
+        locale === "en" ? [...allItems, mountain120] : allItems,
+    [locale, allItems]);
+
     const displayedItems = useMemo(() => {
-        if (activeFilter === "all") return allItems;
+        if (activeFilter === "all") return collectionItems;
+        // The English 100+ browsing bucket includes an unrated 120-point sheet.
+        // Keep the existing Extreme records in their original order and rating.
+        if (locale === "en" && activeFilter === "extreme") return [...(data.extreme ?? []), mountain120];
         return data[activeFilter] ?? [];
-    }, [activeFilter, data, allItems]);
+    }, [activeFilter, data, collectionItems, locale]);
 
     const homeHref = locale === "en" ? "/" : `/${locale}/`;
-    const jsonLd = buildJsonLd(locale, allItems);
+    const jsonLd = buildJsonLd(locale, collectionItems);
 
     return (
         <>
@@ -531,7 +540,7 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                                                 f.id === "easy" ? c.filterEasy :
                                                 f.id === "medium" ? c.filterMedium :
                                                 f.id === "hard" ? c.filterHard :
-                                                c.filterExtreme;
+                                                locale === "en" ? "100+ dots" : c.filterExtreme;
                                             const active = activeFilter === f.id;
                                             return (
                                                 <button
@@ -545,7 +554,7 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                                                 >
                                                     <span>{label}</span>
                                                     <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${active ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>
-                                                        {f.dotBadge}
+                                                        {locale === "en" && f.id === "all" ? collectionItems.length : f.dotBadge}
                                                     </span>
                                                 </button>
                                             );
@@ -560,7 +569,7 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                                     <div>
                                         <h2 className="text-xl font-extrabold text-slate-900">{c.gridTitle}</h2>
                                         <p className="text-sm text-slate-500 mt-0.5">
-                                            {c.gridSub(displayedItems.length, allItems.length)}
+                                            {c.gridSub(displayedItems.length, collectionItems.length)}
                                         </p>
                                     </div>
                                     <Star size={16} className="text-amber-400 flex-shrink-0" aria-hidden="true" />
@@ -568,7 +577,13 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
                                     {displayedItems.map((item, idx) => (
-                                        <PrintableCard key={item.id} item={item} priority={idx < 3} />
+                                        <PrintableCard
+                                            key={item.id}
+                                            item={item}
+                                            priority={idx < 3}
+                                            showPopularity={item.id !== mountain120.id}
+                                            imageFit={item.id === mountain120.id ? "contain" : "cover"}
+                                        />
                                     ))}
                                 </div>
                             </div>
