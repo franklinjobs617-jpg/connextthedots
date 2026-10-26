@@ -1,0 +1,425 @@
+{
+  "compared_review_head": "93b0ce783b2feb71f3e9f9e35bb04ceebabe4314",
+  "revision_application_commit": "60fe15a12d861d799b06d23bbdf0f941dc4ebe30",
+  "main_sha": "da8e3b54df99a3e63246c496ade226890bf236ba",
+  "scope": "English presentation only; evidence-only follow-up commits do not change runtime files",
+  "capture": "Local webpack dev; no TypeScript bypass. External browser requests blocked; APIs locally intercepted. Four local-image detail controls recaptured at same localhost origin to remove test-port-only OG/Twitter image differences; original port capture retained in ZIP.",
+  "protected_fields": [
+    "document title",
+    "all head meta tags",
+    "canonical and hreflang/alternate links",
+    "all main H1/H2/H3"
+  ],
+  "cumulative_main_frozen_source_files": [
+    {
+      "path": "app/[locale]/dot-to-dot-printable/page.tsx",
+      "main_and_revision_sha256": "adf92a88eed22cf3de86fec1ef3a9cd10fa418ff0953d74616ae8aae398c8ec4"
+    },
+    {
+      "path": "app/[locale]/connect-the-dots-for-adults/page.tsx",
+      "main_and_revision_sha256": "9a064602ce4f512ecf01b330816bc5ada08b08dc91d2f7fcbb3a8d75bbf77009"
+    },
+    {
+      "path": "app/[locale]/page.tsx",
+      "main_and_revision_sha256": "fc83592fa5d56706854a6c7ffc95a3fdcc4d9c979e44e3e2570d1110422c1134"
+    },
+    {
+      "path": "app/[locale]/layout.tsx",
+      "main_and_revision_sha256": "a088073426d756145649e77108ad6e338f51c168d33b54b1c1b78fc70d754c11"
+    },
+    {
+      "path": "app/[locale]/printables/[slug]/page.tsx",
+      "main_and_revision_sha256": "135eceec51d8a7c7903fcbbf8700990ba016f3836448b05276fd0b3a95ae7b32"
+    },
+    {
+      "path": "app/[locale]/printables/[slug]/PrintableDetailClient.tsx",
+      "main_and_revision_sha256": "bcad3cefebe1b38286116ed1b02a9adfd2f745c80d55a2edc6b54358b4f646e2"
+    },
+    {
+      "path": "components/PrintableCard.tsx",
+      "main_and_revision_sha256": "539ba7b1669b073cf413311baa0e9e489b9eea40a810ac04dd42274bbc2c5689"
+    },
+    {
+      "path": "components/DotGeneratorClient.tsx",
+      "main_and_revision_sha256": "aa01f5d576cd501866741c5c07c7578993d50af1a1863462fee12d38dcf2471b"
+    },
+    {
+      "path": "components/HomeContent.tsx",
+      "main_and_revision_sha256": "7db6d884c5784c7e7f0f1e2d2a6e41860c2986ae14997ace08b349b753c3b40d"
+    },
+    {
+      "path": "lib/metadata.ts",
+      "main_and_revision_sha256": "df8ea9ed1aa5dbc520026ed30ce2ad64cc5600f99cfa3163c52770b3934bd04d"
+    },
+    {
+      "path": "lib/generated-standalone-printables.json",
+      "main_and_revision_sha256": "2946b7e59e0d0f7685e2b4ee79a1923ee2cef5321e6576b7b2f154d97767381e"
+    },
+    {
+      "path": "middleware.ts",
+      "main_and_revision_sha256": "ed82904502d0196d6b5126862774663497e770830def442af14b7215264d7109"
+    },
+    {
+      "path": "next.config.ts",
+      "main_and_revision_sha256": "cd8520f655f60c168761c20413acd2d9d8636b72cb4b79ecb81900d69bee6d73"
+    },
+    {
+      "path": "app/sitemap.ts",
+      "main_and_revision_sha256": "46c5c81e196ecd808ccb649fb65283bc0437fe849089b5e2c27d95b17e2fe98f"
+    },
+    {
+      "path": "public/robots.txt",
+      "main_and_revision_sha256": "94d31e945dae9f78b8bf85361206ea6278d096a0663eceb160ff0894f25b8d41"
+    },
+    {
+      "path": "i18n/routing.ts",
+      "main_and_revision_sha256": "3ea586627b136092f3e7c1b17859baca6172386a1a2c637a14f0ef1c524bbace"
+    }
+  ],
+  "all_catalog_data_modules_unchanged": true,
+  "urls": [
+    {
+      "url": "/dot-to-dot-printable/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "754e7094743328f664ba980a5dac0a51b66d683cc115a88d31aac99a4d9d69fa",
+      "protected_after_sha256": "754e7094743328f664ba980a5dac0a51b66d683cc115a88d31aac99a4d9d69fa",
+      "href_sequence_equal": true,
+      "main_text_equal": false,
+      "jsonld_diff": [
+        {
+          "field": "/0/@graph/0/description",
+          "before": "Browse dot-to-dot catalog entries. Open a card to check the preview and available downloads; adult reference artwork is not a verified numbered worksheet.",
+          "after": "Browse free dot-to-dot printables by catalog range and theme. Open a card for the worksheet preview, PDF download and available solution."
+        },
+        {
+          "field": "/0/@graph/1/mainEntity/1/acceptedAnswer/text",
+          "before": "Static worksheet PDF downloads do not require an account. Open a card to view its downloads. PDFs are generated in your browser and include a website credit. AI image generation is separate and requires sign-in and available credits.",
+          "after": "Static detail-page PDFs are free to download without an account. Open a card for its preview and download buttons. The browser-generated PDF includes a website credit."
+        },
+        {
+          "field": "/0/@graph/1/mainEntity/3/acceptedAnswer/text",
+          "before": "The detail-page PDF export uses A4 portrait. Check the preview before printing. US Letter output has not been verified; do not assume every worksheet fits without cropping.",
+          "after": "The detail-page PDF export uses A4 portrait. Check the print preview and select Fit to page if needed. US Letter output has not been tested."
+        },
+        {
+          "field": "/0/@graph/1/mainEntity/4/acceptedAnswer/text",
+          "before": "Use the homepage image-upload flow to make a puzzle from your own image. A simple drawing with a clear outline is a useful starting point; review the result before printing. AI image generation requires sign-in and available credits.",
+          "after": "Use the homepage image-upload flow to make a worksheet from your own image. A clear, simple outline is a useful starting point. AI image generation is separate and requires sign-in and available credits."
+        },
+        {
+          "field": "/0/@graph/1/mainEntity/5/acceptedAnswer/text",
+          "before": "Numbered dot-to-dot activities can offer a focused, screen-free break. The Mountain and Mandala entries here are reference artwork, not verified high-dot-count numbered worksheets. A playable adult worksheet and matching solution have not been confirmed for those entries.",
+          "after": "Dot-to-dot activities can offer adults a focused, screen-free break. Choose a numbered worksheet with comfortable number spacing and a level of detail you enjoy; inspect its preview before printing."
+        },
+        {
+          "field": "/0/@graph/2/step/0/text",
+          "before": "Open a card to view worksheet details. Download PDF creates an A4 PDF from the Puzzle image; Download PNG exports the Solution image. These are different resources. Check availability before printing.",
+          "after": "Open a card for its preview and download buttons. Download PDF creates an A4 file from the Puzzle image; Download PNG exports the available Solution image."
+        }
+      ]
+    },
+    {
+      "url": "/connect-the-dots-for-adults/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "e674f235d7c4814bb55259179c51178f666d88bff14c297f9f74883f1254d964",
+      "protected_after_sha256": "e674f235d7c4814bb55259179c51178f666d88bff14c297f9f74883f1254d964",
+      "href_sequence_equal": true,
+      "main_text_equal": false,
+      "jsonld_diff": [
+        {
+          "field": "/0/@graph/2/mainEntity/0/acceptedAnswer/text",
+          "before": "Adult dot-to-dot worksheets use numbered dots to build an outline. Difficulty depends on the actual sequence and readability; a title or difficulty label alone does not establish the number of dots or that a worksheet is ready to solve.",
+          "after": "An adult dot-to-dot worksheet uses a numbered sequence to form an outline. Detail and number spacing influence the challenge, so start with the worksheet preview."
+        },
+        {
+          "field": "/0/@graph/2/mainEntity/1/acceptedAnswer/text",
+          "before": "Static detail-page PDF downloads do not require an account and include a website credit. The current Mountain and Mandala entries are reference artwork, not verified numbered worksheets. AI image generation requires sign-in and available credits.",
+          "after": "Static detail-page PDFs are free, generated in your browser and include a website credit. No account is needed to download them."
+        },
+        {
+          "field": "/0/@graph/2/mainEntity/2/acceptedAnswer/text",
+          "before": "The dot counts of the current Mountain and Mandala entries have not been verified. Their catalog ranges must not be treated as confirmed counts of numbered dots. No playable 100+ dot adult worksheet is confirmed here.",
+          "after": "Use a worksheet's catalog range as a selection guide, then inspect the numbered preview. A catalog label is not a point-by-point audit. See the featured-entry note for the current Mountain and Mandala status."
+        },
+        {
+          "field": "/0/@graph/2/mainEntity/3/acceptedAnswer/text",
+          "before": "Use the homepage upload flow to make a puzzle from your own image. Review the numbered result before printing; a clear outline is a useful starting point. A playable extreme puzzle from every photo is not guaranteed. AI image generation is separate and requires sign-in and available credits.",
+          "after": "Use the homepage upload flow to make a worksheet from your own image. A clear outline is a useful starting point; inspect the result before printing. AI image generation is a separate feature requiring sign-in and available credits."
+        },
+        {
+          "field": "/0/@graph/2/mainEntity/5/acceptedAnswer/text",
+          "before": "The detail-page PDF export uses A4 portrait. Check the preview and print readability before printing. US Letter output has not been verified, and a downloadable PDF alone does not establish a playable numbered worksheet.",
+          "after": "The detail-page PDF export uses A4 portrait. Check the print preview and number readability. US Letter output has not been tested."
+        }
+      ]
+    },
+    {
+      "url": "/de/dot-to-dot-printable/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "ba90f6b7d2c4a45fd0082bc41c34364b11a7756f5c0e249d783c536fd126167b",
+      "protected_after_sha256": "ba90f6b7d2c4a45fd0082bc41c34364b11a7756f5c0e249d783c536fd126167b",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/de/connect-the-dots-for-adults/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "38cf029cce786462e18a2a4f6f87d1fc21c4e5122005e6654f7b45fd618f1990",
+      "protected_after_sha256": "38cf029cce786462e18a2a4f6f87d1fc21c4e5122005e6654f7b45fd618f1990",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/es/dot-to-dot-printable/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "0598555178743326899d31564b332f0705225564922fa47dbdda9dec82a24767",
+      "protected_after_sha256": "0598555178743326899d31564b332f0705225564922fa47dbdda9dec82a24767",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/es/connect-the-dots-for-adults/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "7e672738987cc9040d4095cc95ef9b6d552bc4e75fb56687b09b78366cc6acde",
+      "protected_after_sha256": "7e672738987cc9040d4095cc95ef9b6d552bc4e75fb56687b09b78366cc6acde",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/pt/dot-to-dot-printable/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "019900d31386a4599dc691a8d87d532717a125dc4567198fcd3d7c0f07756332",
+      "protected_after_sha256": "019900d31386a4599dc691a8d87d532717a125dc4567198fcd3d7c0f07756332",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/pt/connect-the-dots-for-adults/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "88107f33a0601e29eada2ff9e23cf3cea08fdecec746bf1e3fa5a3b313fe815a",
+      "protected_after_sha256": "88107f33a0601e29eada2ff9e23cf3cea08fdecec746bf1e3fa5a3b313fe815a",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/fr/dot-to-dot-printable/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "d472ee2c6e5d1cb0504fbecab2da1196c34439b5f3a0b7dd09849011e7973d42",
+      "protected_after_sha256": "d472ee2c6e5d1cb0504fbecab2da1196c34439b5f3a0b7dd09849011e7973d42",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/fr/connect-the-dots-for-adults/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "6345b61f26371b4b1da898ad0f72ebd1d4eec48ef789deb5f960bc3ffce7e962",
+      "protected_after_sha256": "6345b61f26371b4b1da898ad0f72ebd1d4eec48ef789deb5f960bc3ffce7e962",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/it/dot-to-dot-printable/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "baae8260be1638abaaf25f222fbbda8b3b8f632b4cc463f45755dba1998cfaf1",
+      "protected_after_sha256": "baae8260be1638abaaf25f222fbbda8b3b8f632b4cc463f45755dba1998cfaf1",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/it/connect-the-dots-for-adults/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "8c47e07ba4fd406a26942b1f384f7c44a6c37355465d0a542668a3c4e701a153",
+      "protected_after_sha256": "8c47e07ba4fd406a26942b1f384f7c44a6c37355465d0a542668a3c4e701a153",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/nl/dot-to-dot-printable/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "6cb82fb986546d5c4ed17b702f53f880b1801663b9fceda499a29493438dca98",
+      "protected_after_sha256": "6cb82fb986546d5c4ed17b702f53f880b1801663b9fceda499a29493438dca98",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/nl/connect-the-dots-for-adults/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "2245a6abbbdbabd67a9cd7cf47c1e5e4d6006c5e9321e6578fc802de7e9303c6",
+      "protected_after_sha256": "2245a6abbbdbabd67a9cd7cf47c1e5e4d6006c5e9321e6578fc802de7e9303c6",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "1319e60e60469ab55c3e08ee3c50c28b481ca04425061847be32248ef7208ef8",
+      "protected_after_sha256": "1319e60e60469ab55c3e08ee3c50c28b481ca04425061847be32248ef7208ef8",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/printable-connect-the-dots/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "0a025b27efe87ab0f21e6e20db1736cb1a3ff0e5c08049b251584923c944d3b2",
+      "protected_after_sha256": "0a025b27efe87ab0f21e6e20db1736cb1a3ff0e5c08049b251584923c944d3b2",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/free-animal-dot-to-dot-printables-pdf/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "fb0563c54312877db1f6c8320b2162cba01cdea68f31ffa437214f3236a7101b",
+      "protected_after_sha256": "fb0563c54312877db1f6c8320b2162cba01cdea68f31ffa437214f3236a7101b",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/fr/printable-connect-the-dots/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "de606c6c911b483e557d38cd2b9b993fddd514d3a2cfae49d721253ddf49e4d9",
+      "protected_after_sha256": "de606c6c911b483e557d38cd2b9b993fddd514d3a2cfae49d721253ddf49e4d9",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/it/printable-connect-the-dots/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "b139f29ad8abb89eb47f52ac5b3be656d9fa411895c3eab6069e1e6b40b2eb42",
+      "protected_after_sha256": "b139f29ad8abb89eb47f52ac5b3be656d9fa411895c3eab6069e1e6b40b2eb42",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/es/printable-connect-the-dots/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "2f12acb98bd6fd4b88c09f5b163cfd32a9e7e872ae09bad0f24e995ce46ab50b",
+      "protected_after_sha256": "2f12acb98bd6fd4b88c09f5b163cfd32a9e7e872ae09bad0f24e995ce46ab50b",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/printables/simple-rabbit-outline/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "7591700e797851175a0750e86e078176ade96f0107d6bf9393076b60131150ac",
+      "protected_after_sha256": "7591700e797851175a0750e86e078176ade96f0107d6bf9393076b60131150ac",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/printables/cute-happy-rabbit/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "4c788180070583f2b4f50780f4c0270a94148598176e5f8494dbc6da55df5e3d",
+      "protected_after_sha256": "4c788180070583f2b4f50780f4c0270a94148598176e5f8494dbc6da55df5e3d",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/printables/puppy-sketch/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "2a2fbfbeb4ee855657996beae1a99e59f2c937c442b7528871db1519a0680d21",
+      "protected_after_sha256": "2a2fbfbeb4ee855657996beae1a99e59f2c937c442b7528871db1519a0680d21",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/printables/cute-sitting-puppy/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "f129e0ad285139172ad5affdff32c4ec30f32bc06e3fd31350b3a12a3c0ba7c0",
+      "protected_after_sha256": "f129e0ad285139172ad5affdff32c4ec30f32bc06e3fd31350b3a12a3c0ba7c0",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/printables/6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "e8e98c80c1e7fae5d02db42cd9f047e2883ea4147790ac730a1adbfd2ca614cf",
+      "protected_after_sha256": "e8e98c80c1e7fae5d02db42cd9f047e2883ea4147790ac730a1adbfd2ca614cf",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    },
+    {
+      "url": "/printables/7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots/",
+      "status_before": 200,
+      "status_after": 200,
+      "protected_fields_equal": true,
+      "protected_before_sha256": "79fd69ec3802405109d6c1dc5ba80ff9f9e115b9019b5bb6c2aee94571a569ce",
+      "protected_after_sha256": "79fd69ec3802405109d6c1dc5ba80ff9f9e115b9019b5bb6c2aee94571a569ce",
+      "href_sequence_equal": true,
+      "main_text_equal": true,
+      "jsonld_diff": []
+    }
+  ]
+}

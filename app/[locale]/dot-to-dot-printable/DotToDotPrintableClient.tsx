@@ -90,7 +90,56 @@ const RELATED_LINKS = [
 ];
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
-function buildJsonLd(items: PrintableItem[]) {
+// These presentation overrides apply only to the approved English page.
+// Catalog records and the shared card/detail/metadata templates stay unchanged.
+function getPageContent(locale: string) {
+    if (locale !== "en") return {
+        whyItems: WHY_ITEMS, difficultyGuide: DIFFICULTY_GUIDE,
+        howToSteps: HOW_TO_STEPS, faqItems: FAQ_ITEMS, relatedLinks: RELATED_LINKS,
+    };
+    const answers = [
+        FAQ_ITEMS[0].a,
+        "Static detail-page PDFs are free to download without an account. Open a card for its preview and download buttons. The browser-generated PDF includes a website credit.",
+        FAQ_ITEMS[2].a,
+        "The detail-page PDF export uses A4 portrait. Check the print preview and select Fit to page if needed. US Letter output has not been tested.",
+        "Use the homepage image-upload flow to make a worksheet from your own image. A clear, simple outline is a useful starting point. AI image generation is separate and requires sign-in and available credits.",
+        "Dot-to-dot activities can offer adults a focused, screen-free break. Choose a numbered worksheet with comfortable number spacing and a level of detail you enjoy; inspect its preview before printing.",
+    ];
+    return {
+        whyItems: WHY_ITEMS.map((item, i) => i === 3 ? { ...item, body: "Pick a short sequence for beginning counters, or a more detailed outline for a longer screen-free activity." } : item),
+        difficultyGuide: DIFFICULTY_GUIDE.map(item => ({
+            ...item, dots: "Use the card's catalog range",
+            desc: item.level === "Hard" || item.level === "Extreme"
+                ? "Browse detailed themes and check the entry's worksheet status before downloading."
+                : "Compare the numbered sequence, number spacing and outline detail in the preview.",
+        })),
+        howToSteps: HOW_TO_STEPS.map((item, i) => i === 0 ? { ...item, body: "Open a card for its preview and download buttons. Download PDF creates an A4 file from the Puzzle image; Download PNG exports the available Solution image." } : item),
+        faqItems: FAQ_ITEMS.map((item, i) => ({ ...item, a: answers[i] })),
+        relatedLinks: RELATED_LINKS.map((item, i) => i === 0 ? { ...item, desc: "Browse adult themes and check current worksheet availability." } : i === 6 ? { ...item, desc: "Learn about making a puzzle from your own image." } : item),
+    };
+}
+
+// Evidence applies to these named samples, not to exact dot counts or the whole library.
+const EXPORT_CHECKED_IDS = new Set([
+    "simple-rabbit-outline", "cute-happy-rabbit", "puppy-sketch", "cute-sitting-puppy",
+]);
+const REFERENCE_ARTWORK_IDS = new Set([
+    "6-Advanced-Mountain-Landscape-Connect-the-Dots-Design-for-Adults-Over-100-dots",
+    "7-Extreme-Difficulty-Mandala-Connect-the-Dots-Design-for-Adults-Over-200-dots",
+]);
+
+function getEnglishCardItem(item: PrintableItem): PrintableItem {
+    if (REFERENCE_ARTWORK_IDS.has(item.id)) return {
+        ...item,
+        dotRange: "Not applicable (reference art)",
+        description: "Reference line art. Numbered worksheet and matching solution repair pending.",
+    };
+    const catalogRange = Array.isArray(item.dotRange) ? item.dotRange.join("–") : item.dotRange;
+    return { ...item, dotRange: `Catalog ${catalogRange}` };
+}
+
+function buildJsonLd(items: PrintableItem[], locale: string) {
+    const { faqItems, howToSteps } = getPageContent(locale);
     return {
         "@context": "https://schema.org",
         "@graph": [
@@ -100,7 +149,9 @@ function buildJsonLd(items: PrintableItem[]) {
                 name: "Free Dot to Dot Printables — PDF Puzzles for Kids & Adults",
                 url: "https://connectthedotsprintable.online/dot-to-dot-printable/",
                 description:
-                    "Download free dot to dot printables as PDF. Easy to extreme difficulty puzzles for all ages — animals, nature, fantasy and more.",
+                    locale === "en"
+                        ? "Browse free dot-to-dot printables by catalog range and theme. Open a card for the worksheet preview, PDF download and available solution."
+                        : "Download free dot to dot printables as PDF. Easy to extreme difficulty puzzles for all ages — animals, nature, fantasy and more.",
                 inLanguage: "en",
                 mainEntity: {
                     "@type": "ItemList",
@@ -115,7 +166,7 @@ function buildJsonLd(items: PrintableItem[]) {
             },
             {
                 "@type": "FAQPage",
-                mainEntity: FAQ_ITEMS.map((f) => ({
+                mainEntity: faqItems.map((f) => ({
                     "@type": "Question",
                     name: f.q,
                     acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -124,7 +175,7 @@ function buildJsonLd(items: PrintableItem[]) {
             {
                 "@type": "HowTo",
                 name: "How to do a dot to dot printable",
-                step: HOW_TO_STEPS.map((s) => ({
+                step: howToSteps.map((s) => ({
                     "@type": "HowToStep",
                     name: s.title,
                     text: s.body,
@@ -156,7 +207,9 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
         );
     }, [activeFilter, allItems]);
 
-    const jsonLd = buildJsonLd(allItems);
+    const isL1 = locale === "en";
+    const { whyItems, difficultyGuide, howToSteps, faqItems, relatedLinks } = getPageContent(locale);
+    const jsonLd = buildJsonLd(allItems, locale);
 
     return (
         <>
@@ -190,11 +243,11 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                                 Free Dot to Dot Printables
                             </h1>
                             <p className="text-base sm:text-lg text-slate-300 leading-7 mb-3 max-w-2xl">
-                                Download printable dot to dot puzzles as PDF — no watermarks, no sign-up.
-                                Easy 10-dot sheets for toddlers through extreme 200-dot challenges for adults.
+                                {isL1 ? "Browse free dot-to-dot printables by theme and catalog dot range. Open a worksheet card for its preview, printable PDF and available solution." : <>Download printable dot to dot puzzles as PDF — no watermarks, no sign-up.
+                                Easy 10-dot sheets for toddlers through extreme 200-dot challenges for adults.</>}
                             </p>
                             <p className="text-sm text-slate-400 mb-8 max-w-2xl">
-                                Want something unique? The custom generator below turns any photo into a numbered dot-to-dot puzzle in seconds.
+                                {isL1 ? "Static downloads are free and do not need an account. To make a worksheet from your own image, use the homepage upload flow." : "Want something unique? The custom generator below turns any photo into a numbered dot-to-dot puzzle in seconds."}
                             </p>
                             <div className="flex flex-wrap gap-3">
                                 <button
@@ -204,13 +257,17 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                                     <Download size={16} aria-hidden="true" />
                                     Browse Free PDFs ↓
                                 </button>
-                                <button
+                                {isL1 ? (
+                                    <Link href="/#hero-upload-btn" className="inline-flex items-center gap-2 px-6 py-3 border border-slate-600 text-white font-semibold rounded-full hover:bg-slate-800 transition-colors">
+                                        <Sparkles size={16} aria-hidden="true" />Make Your Own →
+                                    </Link>
+                                ) : <button
                                     onClick={() => document.getElementById("custom-generator")?.scrollIntoView({ behavior: "smooth" })}
                                     className="inline-flex items-center gap-2 px-6 py-3 border border-slate-600 text-white font-semibold rounded-full hover:bg-slate-800 transition-colors"
                                 >
                                     <Sparkles size={16} aria-hidden="true" />
                                     Make Your Own ↓
-                                </button>
+                                </button>}
                             </div>
                         </div>
                     </div>
@@ -231,7 +288,7 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                                     The activity goes by several names: <em>dot to dot</em>, <em>connect the dots</em>, <em>join the dots</em>, or <em>point to point</em>. All refer to the same numbered puzzle format. The term &ldquo;dot to dot&rdquo; is most common in British English (UK, Australia), while &ldquo;connect the dots&rdquo; is standard in American English.
                                 </p>
                                 <p className="text-slate-600 leading-7">
-                                    Dot to dot puzzles are used in schools, at home, and as a calming adult activity. Every PDF in this collection prints cleanly on A4 or US Letter paper with no watermarks.
+                                    {isL1 ? "Detail-page PDF exports use A4 portrait and include a website credit. Inspect the print preview and choose Fit to page if needed." : "Dot to dot puzzles are used in schools, at home, and as a calming adult activity. Every PDF in this collection prints cleanly on A4 or US Letter paper with no watermarks."}
                                 </p>
                             </div>
                             <div>
@@ -239,7 +296,7 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                                     Why dot to dot activities work
                                 </h2>
                                 <div className="space-y-4">
-                                    {WHY_ITEMS.map((item) => (
+                                    {whyItems.map((item) => (
                                         <div key={item.title} className="flex gap-3 items-start">
                                             <div className="flex-shrink-0 mt-0.5 w-9 h-9 rounded-lg bg-indigo-50 flex items-center justify-center">
                                                 {item.icon}
@@ -263,10 +320,10 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                             Choosing the right difficulty level
                         </h2>
                         <p className="text-slate-500 text-center mb-8 text-sm max-w-xl mx-auto">
-                            Every puzzle in this collection is tagged with a difficulty level and age recommendation.
+                            {isL1 ? "Use difficulty and age tags to narrow your choice, then compare the catalog range and worksheet preview." : "Every puzzle in this collection is tagged with a difficulty level and age recommendation."}
                         </p>
                         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                            {DIFFICULTY_GUIDE.map((d) => (
+                            {difficultyGuide.map((d) => (
                                 <div
                                     key={d.level}
                                     className={`rounded-2xl border p-5 ${d.color}`}
@@ -290,7 +347,7 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                             How to do a dot to dot puzzle
                         </h2>
                         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {HOW_TO_STEPS.map((step) => (
+                            {howToSteps.map((step) => (
                                 <div key={step.n} className="relative">
                                     <div className="w-10 h-10 rounded-full bg-brand-blue text-white font-extrabold text-lg flex items-center justify-center mb-3">
                                         {step.n}
@@ -312,7 +369,7 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                                     Free Dot to Dot PDFs
                                 </h2>
                                 <p className="text-sm text-slate-500 mt-1">
-                                    {displayedItems.length} puzzles · click any card to download
+                                    {displayedItems.length} {isL1 ? `catalog entries shown of ${allItems.length} · open a card to view details and downloads` : "puzzles · click any card to download"}
                                 </p>
                             </div>
                             {/* Difficulty filter tabs */}
@@ -333,10 +390,16 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                             </div>
                         </div>
 
+                        {isL1 && <p className="text-sm text-slate-600 mb-5">
+                            Catalog ranges are source labels, not independently audited point counts. “Export checked” identifies four Rabbit/Puppy samples with PDF and solution PNG evidence; independent play and print QA is still pending. Mountain and Mandala are reference line art, not numbered worksheets; their playable versions and matching answers remain unresolved.
+                        </p>}
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                            {displayedItems.map((item, idx) => (
-                                <PrintableCard key={item.id} item={item} priority={idx < 4} />
-                            ))}
+                            {displayedItems.map((item, idx) => isL1 ? (
+                                <div key={item.id}>
+                                    <PrintableCard item={getEnglishCardItem(item)} priority={idx < 4} />
+                                    {EXPORT_CHECKED_IDS.has(item.id) && <p className="text-xs text-slate-600 mt-2 px-1">Export checked: PDF + solution PNG</p>}
+                                </div>
+                            ) : <PrintableCard key={item.id} item={item} priority={idx < 4} />)}
                         </div>
                     </div>
                 </section>
@@ -349,10 +412,14 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                                 Make your own dot to dot from any photo
                             </h2>
                             <p className="text-slate-500 max-w-xl mx-auto text-sm sm:text-base">
-                                Upload any image — a pet, portrait, or simple drawing — and our tool converts it into a numbered dot-to-dot puzzle. Adjust the dot count and download as PDF, free.
+                                {isL1 ? "Upload your own image on the homepage and review the generated dots before printing. A clear, simple outline is a useful starting point; results vary by image." : "Upload any image — a pet, portrait, or simple drawing — and our tool converts it into a numbered dot-to-dot puzzle. Adjust the dot count and download as PDF, free."}
                             </p>
                         </div>
 
+                        {isL1 && <div className="text-center mb-6">
+                            <Link href="/#hero-upload-btn" className="inline-flex px-5 py-3 rounded-full bg-brand-blue text-white font-semibold">Make a puzzle from your own image</Link>
+                            <p className="text-sm text-slate-500 mt-3">Basic image upload does not require sign-in. AI image generation requires sign-in and available credits.</p>
+                        </div>}
                         <div className="flex justify-center mb-6">
                             {!user ? (
                                 <button
@@ -360,18 +427,18 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                                     disabled={isLoggingIn}
                                     className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-brand-blue border border-brand-blue rounded-full hover:bg-indigo-50 transition-colors"
                                 >
-                                    {isLoggingIn ? "Signing in…" : "Sign in with Google to get free credits"}
+                                    {isLoggingIn ? "Signing in…" : isL1 ? "AI generation: sign in with Google" : "Sign in with Google to get free credits"}
                                 </button>
                             ) : (
                                 <span className={`text-sm font-medium px-4 py-1.5 rounded-full border ${credits > 0 ? "text-slate-600 border-slate-200 bg-slate-50" : "text-red-500 border-red-200 bg-red-50"}`}>
                                     {credits > 0
                                         ? `${credits} AI credits remaining`
-                                        : "No credits left — upgrade to continue"}
+                                        : isL1 ? "No AI credits available" : "No credits left — upgrade to continue"}
                                 </span>
                             )}
                         </div>
 
-                        <DotGeneratorClient locale={locale} user={user} />
+                        {!isL1 && <DotGeneratorClient locale={locale} user={user} />}
                     </div>
                 </section>
 
@@ -382,7 +449,7 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                             Frequently asked questions
                         </h2>
                         <div className="space-y-5">
-                            {FAQ_ITEMS.map((item) => (
+                            {faqItems.map((item) => (
                                 <article
                                     key={item.q}
                                     className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm"
@@ -400,7 +467,7 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                     <div className="container max-w-6xl mx-auto px-4 sm:px-6">
                         <h2 className="text-lg font-bold text-slate-700 mb-5">Related collections</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                            {RELATED_LINKS.map((link) => (
+                            {relatedLinks.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
