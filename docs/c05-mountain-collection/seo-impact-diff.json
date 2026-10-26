@@ -1,0 +1,619 @@
+{
+  "base_sha": "ebdb92c1143ef149cc5dfc04e43f51cb0dbc0f13",
+  "method": "Local production baseline :3100 vs candidate :3101; production Host/proto headers; fixed English locale cookie for HTTP checks. Compare all meta tags, canonical/hreflang, H1, JSON-LD and SEO response headers. Normalize only localhost origins in inherited social metadata. Exclude only build-time lastmod from sitemap comparison. Raw HTML hashes retained but not compared because build scripts differ.",
+  "expected_diffs": {
+    "english_collection_ItemList_numberOfItems": {
+      "before": 49,
+      "after": 50
+    },
+    "english_collection_card_links": "+1 card to existing Mountain URL; previous separate HTML entry retained",
+    "english_collection_filter_label": "Extreme (100+) -> 100+ dots (100+); original cards keep their difficulty labels",
+    "english_All_badge": "50+ -> 50"
+  },
+  "routes": {
+    "/printable-connect-the-dots/": {
+      "protected_fields_unchanged": true,
+      "before": {
+        "status": 200,
+        "title": "Free Connect the Dots Printables for Kids & Adults | PDF Worksheets",
+        "description": [
+          "<meta name=\"description\" content=\"Browse 50+ free connect the dots printables by age, difficulty, and theme. Download animal, holiday, easy and hard PDF worksheets — or make your own custom dot-to-dot from any photo.\">"
+        ],
+        "H1": [
+          "Free Connect the Dots Printables"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "306910b0ec74f92a7fefac63f020e1793f45633e125dec9fc527e16d84613ec5",
+        "schema_sha256": "50ceb83caa1a8b878a26dbe8777ef5cab7f307ec731d98fa5e1ec67b3b6ee64e",
+        "raw_html_sha256": "0f1efd115c68435cb7641d265e297e138ca61e2656af16a9f057625807ffea49"
+      },
+      "after": {
+        "status": 200,
+        "title": "Free Connect the Dots Printables for Kids & Adults | PDF Worksheets",
+        "description": [
+          "<meta name=\"description\" content=\"Browse 50+ free connect the dots printables by age, difficulty, and theme. Download animal, holiday, easy and hard PDF worksheets — or make your own custom dot-to-dot from any photo.\">"
+        ],
+        "H1": [
+          "Free Connect the Dots Printables"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "306910b0ec74f92a7fefac63f020e1793f45633e125dec9fc527e16d84613ec5",
+        "schema_sha256": "e7b80082bc3bc5933f78bc2272d0c3ee46d7feea444c8bcbb0a488a08567345f",
+        "raw_html_sha256": "a53d0a87ba976f8a63b2c167ed7eb896c5810aa8e3236ec425af23c5b31c9466"
+      },
+      "allowed_schema_diff": {
+        "ItemList.numberOfItems": {
+          "before": 49,
+          "after": 50
+        }
+      }
+    },
+    "/de/printable-connect-the-dots/": {
+      "protected_fields_unchanged": true,
+      "before": {
+        "status": 200,
+        "title": "Zahlen Verbinden zum Ausdrucken Kostenlos | Punkt-zu-Punkt PDF",
+        "description": [
+          "<meta name=\"description\" content=\"Kostenlose Punkt-zu-Punkt Ausmalbilder zum Ausdrucken für Kinder und Erwachsene. Tiere, Weihnachten, einfach und schwer — als PDF herunterladen oder eigenes Bild hochladen.\">"
+        ],
+        "H1": [
+          "Zahlen Verbinden zum Ausdrucken – Kostenlose Arbeitsblätter"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "2a01550da1a5513ad2e2d04987766ffd6a35cb5b9e517d89bae135a705f5b52c",
+        "schema_sha256": "02e8da2e0f0c3ef734a41c02e90e38f88e1ff5cd61b95e508339358b4751b85f",
+        "raw_html_sha256": "b0ce4faa7ded96493b9b23f81658838800ded4cbb500268a8a44b55bf9cc3239"
+      },
+      "after": {
+        "status": 200,
+        "title": "Zahlen Verbinden zum Ausdrucken Kostenlos | Punkt-zu-Punkt PDF",
+        "description": [
+          "<meta name=\"description\" content=\"Kostenlose Punkt-zu-Punkt Ausmalbilder zum Ausdrucken für Kinder und Erwachsene. Tiere, Weihnachten, einfach und schwer — als PDF herunterladen oder eigenes Bild hochladen.\">"
+        ],
+        "H1": [
+          "Zahlen Verbinden zum Ausdrucken – Kostenlose Arbeitsblätter"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "2a01550da1a5513ad2e2d04987766ffd6a35cb5b9e517d89bae135a705f5b52c",
+        "schema_sha256": "02e8da2e0f0c3ef734a41c02e90e38f88e1ff5cd61b95e508339358b4751b85f",
+        "raw_html_sha256": "baf2473aa370d2150e810f86724343c27346737dd0b6d0bd5548738b754b4ae2"
+      },
+      "allowed_schema_diff": null
+    },
+    "/fr/printable-connect-the-dots/": {
+      "protected_fields_unchanged": true,
+      "before": {
+        "status": 200,
+        "title": "Points à Relier à Imprimer Gratuits | Fiches PDF Enfants & Adultes",
+        "description": [
+          "<meta name=\"description\" content=\"Collection gratuite de points à relier à imprimer par âge, difficulté et thème. Téléchargez des fiches PDF animaux, Noël, faciles et difficiles — ou créez les vôtres depuis une photo.\">"
+        ],
+        "H1": [
+          "Points à Relier à Imprimer – Fiches Gratuites PDF"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "e0e8dbdb7d2f9126d8bbbd1679d8d1f414c0c7e8142ce0457e3bee0bfa945826",
+        "schema_sha256": "fee2b844c8ec1d6fe9bd146cf067a097fd85f3bb0d1d5a772a19a4eb3cda23f0",
+        "raw_html_sha256": "2dcd3f241508a0f726cee2d4d134cd98f66fe9372c332dd0e5d0c44288b33ff3"
+      },
+      "after": {
+        "status": 200,
+        "title": "Points à Relier à Imprimer Gratuits | Fiches PDF Enfants & Adultes",
+        "description": [
+          "<meta name=\"description\" content=\"Collection gratuite de points à relier à imprimer par âge, difficulté et thème. Téléchargez des fiches PDF animaux, Noël, faciles et difficiles — ou créez les vôtres depuis une photo.\">"
+        ],
+        "H1": [
+          "Points à Relier à Imprimer – Fiches Gratuites PDF"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "e0e8dbdb7d2f9126d8bbbd1679d8d1f414c0c7e8142ce0457e3bee0bfa945826",
+        "schema_sha256": "fee2b844c8ec1d6fe9bd146cf067a097fd85f3bb0d1d5a772a19a4eb3cda23f0",
+        "raw_html_sha256": "603c479297926c0c4931d06a0c67856397aa3c364a43e4c649bb3dae2309f1f1"
+      },
+      "allowed_schema_diff": null
+    },
+    "/it/printable-connect-the-dots/": {
+      "protected_fields_unchanged": true,
+      "before": {
+        "status": 200,
+        "title": "Unisci i Puntini da Stampare Gratis | Schede PDF",
+        "description": [
+          "<meta name=\"description\" content=\"Oltre 50 schede unisci i puntini da stampare gratis per bambini e adulti. PDF facili e difficili, animali e Natale — crea anche il tuo puzzle da una foto.\">"
+        ],
+        "H1": [
+          "Unisci i Puntini da Stampare – Schede PDF Gratuite"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "45e416ed5e6c261129aa51131782eda14d09d3d1831a62bc45a4b479052f1e92",
+        "schema_sha256": "a4306ff6eff8c03905ad978a51b28e461cbef7ed9a913b4494b05f99b9e6af03",
+        "raw_html_sha256": "98b3d60bb9b6afb2270b0987cbe4ffd7a0af0e1d1ba9ab1c0ab091acf7b251d7"
+      },
+      "after": {
+        "status": 200,
+        "title": "Unisci i Puntini da Stampare Gratis | Schede PDF",
+        "description": [
+          "<meta name=\"description\" content=\"Oltre 50 schede unisci i puntini da stampare gratis per bambini e adulti. PDF facili e difficili, animali e Natale — crea anche il tuo puzzle da una foto.\">"
+        ],
+        "H1": [
+          "Unisci i Puntini da Stampare – Schede PDF Gratuite"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "45e416ed5e6c261129aa51131782eda14d09d3d1831a62bc45a4b479052f1e92",
+        "schema_sha256": "a4306ff6eff8c03905ad978a51b28e461cbef7ed9a913b4494b05f99b9e6af03",
+        "raw_html_sha256": "10aa1b9ff888953ecd412b3064041ec0f7760f108c367ce8a0beed4789c98662"
+      },
+      "allowed_schema_diff": null
+    },
+    "/es/printable-connect-the-dots/": {
+      "protected_fields_unchanged": true,
+      "before": {
+        "status": 200,
+        "title": "Fichas de Unir Puntos para Imprimir Gratis | PDF para Niños y Adultos",
+        "description": [
+          "<meta name=\"description\" content=\"Más de 50 fichas de unir puntos para imprimir gratis por edad, dificultad y tema. Descarga PDF de animales, Navidad, fáciles y difíciles — o crea los tuyos desde una foto.\">"
+        ],
+        "H1": [
+          "Unir Puntos para Imprimir – Fichas PDF Gratis"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "01261f65cc1c807059b3977d5b12d2608d5c9360afcd5fbcd8267b86cd7a9dfc",
+        "schema_sha256": "98638508d4122a6c82696d06db15d79c21a16c05b7820ad4bc0efe013c86e0fc",
+        "raw_html_sha256": "b4e9a92569be0f19685e614267ad420516e508ab1e5587f56c4b9c43b6dc2398"
+      },
+      "after": {
+        "status": 200,
+        "title": "Fichas de Unir Puntos para Imprimir Gratis | PDF para Niños y Adultos",
+        "description": [
+          "<meta name=\"description\" content=\"Más de 50 fichas de unir puntos para imprimir gratis por edad, dificultad y tema. Descarga PDF de animales, Navidad, fáciles y difíciles — o crea los tuyos desde una foto.\">"
+        ],
+        "H1": [
+          "Unir Puntos para Imprimir – Fichas PDF Gratis"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "01261f65cc1c807059b3977d5b12d2608d5c9360afcd5fbcd8267b86cd7a9dfc",
+        "schema_sha256": "98638508d4122a6c82696d06db15d79c21a16c05b7820ad4bc0efe013c86e0fc",
+        "raw_html_sha256": "16a4fdd88bdc64bdbe472ce7293ca0553d56ff1df3f2f472d4d11303ab093384"
+      },
+      "allowed_schema_diff": null
+    },
+    "/pt/printable-connect-the-dots/": {
+      "protected_fields_unchanged": true,
+      "before": {
+        "status": 200,
+        "title": "Ligar os Pontos para Imprimir Grátis | Fichas PDF para Crianças e Adultos",
+        "description": [
+          "<meta name=\"description\" content=\"Mais de 50 fichas de ligar os pontos para imprimir grátis por idade, dificuldade e tema. Baixe PDF de animais, Natal, fáceis e difíceis — ou crie o seu a partir de uma foto.\">"
+        ],
+        "H1": [
+          "Ligar os Pontos para Imprimir – Fichas PDF Grátis"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "6d0bc9e3ca5bebcbc7fe1c93a1b466835c566818539832a2acb12d645601bce6",
+        "schema_sha256": "b9301d454219221fcceb87df53adb422135ae9a74c3d57157cf9bb978c16eea7",
+        "raw_html_sha256": "25ea2d3e9d59069f99e1d55ee5eb05a0d4a2fc8dc1022c84eac3d9ee55f1f3c8"
+      },
+      "after": {
+        "status": 200,
+        "title": "Ligar os Pontos para Imprimir Grátis | Fichas PDF para Crianças e Adultos",
+        "description": [
+          "<meta name=\"description\" content=\"Mais de 50 fichas de ligar os pontos para imprimir grátis por idade, dificuldade e tema. Baixe PDF de animais, Natal, fáceis e difíceis — ou crie o seu a partir de uma foto.\">"
+        ],
+        "H1": [
+          "Ligar os Pontos para Imprimir – Fichas PDF Grátis"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "6d0bc9e3ca5bebcbc7fe1c93a1b466835c566818539832a2acb12d645601bce6",
+        "schema_sha256": "b9301d454219221fcceb87df53adb422135ae9a74c3d57157cf9bb978c16eea7",
+        "raw_html_sha256": "0febadf8fab09432401b1076a2607b9f3579d28652aac6d3bdb3f148ed76baa5"
+      },
+      "allowed_schema_diff": null
+    },
+    "/nl/printable-connect-the-dots/": {
+      "protected_fields_unchanged": true,
+      "before": {
+        "status": 200,
+        "title": "Free Connect the Dots Printables for Kids & Adults | PDF Worksheets",
+        "description": [
+          "<meta name=\"description\" content=\"Browse 50+ free connect the dots printables by age, difficulty, and theme. Download animal, holiday, easy and hard PDF worksheets — or make your own custom dot-to-dot from any photo.\">"
+        ],
+        "H1": [
+          "Free Connect the Dots Printables"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "f51bd1f5e00d57bedbdaab36d09ef644cca2c6eb017b21d05b672f41971d5480",
+        "schema_sha256": "bd849a7061bbedc263993056dff5aef8a565c7e275e56f3ee90915372063cd67",
+        "raw_html_sha256": "17af63d7559aa6debdc1a963712f9c46dd889aba84d92eddbe7a43e0e8861444"
+      },
+      "after": {
+        "status": 200,
+        "title": "Free Connect the Dots Printables for Kids & Adults | PDF Worksheets",
+        "description": [
+          "<meta name=\"description\" content=\"Browse 50+ free connect the dots printables by age, difficulty, and theme. Download animal, holiday, easy and hard PDF worksheets — or make your own custom dot-to-dot from any photo.\">"
+        ],
+        "H1": [
+          "Free Connect the Dots Printables"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"alternate\" hreflang=\"de\" href=\"https://connectthedotsprintable.online/de/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"en\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"es\" href=\"https://connectthedotsprintable.online/es/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"fr\" href=\"https://connectthedotsprintable.online/fr/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"it\" href=\"https://connectthedotsprintable.online/it/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"nl\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"pt\" href=\"https://connectthedotsprintable.online/pt/printable-connect-the-dots/\">",
+          "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://connectthedotsprintable.online/printable-connect-the-dots/\">",
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/nl/printable-connect-the-dots/\">"
+        ],
+        "robots_meta": [],
+        "seo_headers": {
+          "link": "<https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printable-connect-the-dots/>; rel=\"alternate\"; hreflang=\"x-default\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "f51bd1f5e00d57bedbdaab36d09ef644cca2c6eb017b21d05b672f41971d5480",
+        "schema_sha256": "bd849a7061bbedc263993056dff5aef8a565c7e275e56f3ee90915372063cd67",
+        "raw_html_sha256": "436fb69822c614a2d8d0b44c83d74e7693f98d8bd2bf130775edc805582e0939"
+      },
+      "allowed_schema_diff": null
+    },
+    "/printables/mountain-landscape-120/browser": {
+      "protected_fields_unchanged": true,
+      "after": {
+        "status": 200,
+        "title": "Mountain Landscape 120-Point Dot to Dot | Puzzle & Solution PDF",
+        "description": [
+          "<meta name=\"description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">"
+        ],
+        "H1": [
+          "Mountain Landscape — 120-Point Dot to Dot"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
+        ],
+        "robots_meta": [
+          "<meta name=\"robots\" content=\"index, follow\">"
+        ],
+        "seo_headers": {
+          "link": "</printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png>; rel=preload; as=\"image\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "6de883963d65c21d4c6390146357bb99b3bdf467712c173629e1ed8787296b2d",
+        "schema_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_html_sha256": "c954e01a58a12808934e14d1a837b6aa53890343a72c9464a5d33636760efad9"
+      }
+    },
+    "/printables/mountain-landscape-120/Googlebot": {
+      "protected_fields_unchanged": true,
+      "after": {
+        "status": 200,
+        "title": "Mountain Landscape 120-Point Dot to Dot | Puzzle & Solution PDF",
+        "description": [
+          "<meta name=\"description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">"
+        ],
+        "H1": [
+          "Mountain Landscape — 120-Point Dot to Dot"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
+        ],
+        "robots_meta": [
+          "<meta name=\"robots\" content=\"index, follow\">"
+        ],
+        "seo_headers": {
+          "link": "</printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png>; rel=preload; as=\"image\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "6de883963d65c21d4c6390146357bb99b3bdf467712c173629e1ed8787296b2d",
+        "schema_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_html_sha256": "c954e01a58a12808934e14d1a837b6aa53890343a72c9464a5d33636760efad9"
+      }
+    },
+    "/printables/mountain-landscape-120/Bingbot": {
+      "protected_fields_unchanged": true,
+      "after": {
+        "status": 200,
+        "title": "Mountain Landscape 120-Point Dot to Dot | Puzzle & Solution PDF",
+        "description": [
+          "<meta name=\"description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">"
+        ],
+        "H1": [
+          "Mountain Landscape — 120-Point Dot to Dot"
+        ],
+        "canonical_and_hreflang": [
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
+        ],
+        "robots_meta": [
+          "<meta name=\"robots\" content=\"index, follow\">"
+        ],
+        "seo_headers": {
+          "link": "</printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png>; rel=preload; as=\"image\"",
+          "x-robots-tag": null,
+          "location": null,
+          "refresh": null
+        },
+        "all_meta_sha256": "6de883963d65c21d4c6390146357bb99b3bdf467712c173629e1ed8787296b2d",
+        "schema_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_html_sha256": "7dd20ae090a811e2e5e036d27a94bb0db1d7dea5d9a0c8d2744022500f73000e"
+      }
+    },
+    "/de/printables/mountain-landscape-120/": {
+      "before_status": 404,
+      "after_status": 404,
+      "noindex": true
+    },
+    "/fr/printables/mountain-landscape-120/": {
+      "before_status": 404,
+      "after_status": 404,
+      "noindex": true
+    },
+    "/it/printables/mountain-landscape-120/": {
+      "before_status": 404,
+      "after_status": 404,
+      "noindex": true
+    },
+    "/es/printables/mountain-landscape-120/": {
+      "before_status": 404,
+      "after_status": 404,
+      "noindex": true
+    },
+    "/pt/printables/mountain-landscape-120/": {
+      "before_status": 404,
+      "after_status": 404,
+      "noindex": true
+    },
+    "/nl/printables/mountain-landscape-120/": {
+      "before_status": 404,
+      "after_status": 404,
+      "noindex": true
+    }
+  },
+  "sitemap": {
+    "unchanged_excluding_build_lastmod": true,
+    "mountain_english_entries": 1,
+    "mountain_language_alternates": 0,
+    "sha256": "1fb4675e106b867e37a66ee487e765da9326f5da2b5d5de7811503df01ffa37a"
+  },
+  "robots_txt": {
+    "unchanged": true,
+    "sha256": "94d31e945dae9f78b8bf85361206ea6278d096a0663eceb160ff0894f25b8d41"
+  },
+  "unchanged_source": [
+    "all shared printable datasets",
+    "lib/mountain-120.ts",
+    "collection server page and metadata",
+    "Mountain detail route and metadata",
+    "app/sitemap.ts",
+    "middleware.ts",
+    "lib/metadata.ts",
+    "i18n/routing.ts",
+    "next.config.ts",
+    "public/robots.txt",
+    "all PDF/SVG/PNG assets"
+  ]
+}

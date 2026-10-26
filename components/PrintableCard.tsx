@@ -5,9 +5,11 @@ import { IMAGE_DEFAULT_WIDTH, IMAGE_DEFAULT_HEIGHT, PrintableItem } from '@/lib/
 interface PrintableCardProps {
     item: PrintableItem;
     priority?: boolean; // 用于控制 lazy loading
+    showPopularity?: boolean;
+    imageFit?: "cover" | "contain";
 }
 
-export default function PrintableCard({ item, priority = false }: PrintableCardProps) {
+export default function PrintableCard({ item, priority = false, showPopularity = true, imageFit = "cover" }: PrintableCardProps) {
     // 处理 dotRange 显示逻辑
     const displayDotRange = Array.isArray(item.dotRange)
         ? (item.dotRange[0] === item.dotRange[1] ? item.dotRange[0] : `${item.dotRange[0]}-${item.dotRange[1]}`)
@@ -27,7 +29,7 @@ export default function PrintableCard({ item, priority = false }: PrintableCardP
                     srcSet={item.imageSrcset || `${item.imageUrl} ${IMAGE_DEFAULT_WIDTH}w`}
                     sizes="(min-width: 1024px) 33.3vw, (min-width: 640px) 50vw, 50vw"
                     alt={item.altText}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className={`w-full h-full ${imageFit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-300 group-hover:scale-105`}
                     loading={priority ? "eager" : "lazy"}
                     decoding="async"
                     width={IMAGE_DEFAULT_WIDTH}
@@ -70,13 +72,13 @@ export default function PrintableCard({ item, priority = false }: PrintableCardP
                         </svg>
                         {item.ageRecommendation}
                     </span>
-                    <span className="flex items-center gap-1">
+                    {showPopularity && <span className="flex items-center gap-1">
                         {/* Popularity Icon */}
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-red-400" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                         </svg>
                         {item.popularity} Popularity
-                    </span>
+                    </span>}
                 </div>
             </div>
         </Link>
