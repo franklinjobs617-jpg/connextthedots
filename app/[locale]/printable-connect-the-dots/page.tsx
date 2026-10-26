@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import PrintableClient from "./PrintableClient";
+import Link from "next/link";
+import { mountain120 } from "@/lib/mountain-120";
 import { printablesData as dataEN, getAllPrintables as getAllEN } from "@/lib/printables-data";
 import { printablesData as dataDE, getAllPrintables as getAllDE } from "@/lib/printables-data-de";
 import { printablesData as dataES, getAllPrintables as getAllES } from "@/lib/printables-data-es";
@@ -88,5 +90,12 @@ export default async function Page({ params }: Props) {
 
     const { data, allItems } = dataMap[locale] ?? { data: dataEN, allItems: getAllEN() };
 
-    return <PrintableClient locale={locale} data={data} allItems={allItems} />;
+    return <>
+        <PrintableClient locale={locale} data={data} allItems={allItems} />
+        {locale === "en" && <section aria-labelledby="mountain-120-entry" className="mx-auto max-w-7xl px-4 py-10">
+            <h2 id="mountain-120-entry" className="text-2xl font-bold text-slate-800">Original 120-point mountain worksheet</h2>
+            <p className="mt-3 max-w-3xl text-slate-600">Connect 120 numbered dots to reveal mountain peaks and a fir tree. A4 Puzzle and matching Solution PDFs are available together.</p>
+            <Link href={mountain120.detailPage} className="mt-4 inline-block rounded-lg bg-brand-blue px-5 py-3 font-semibold text-white">Preview Mountain Landscape 120 &amp; download PDFs</Link>
+        </section>}
+    </>;
 }

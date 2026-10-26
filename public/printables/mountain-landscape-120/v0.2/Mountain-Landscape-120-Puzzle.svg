@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297">
+<title>Mountain Landscape — 120-point Puzzle</title>
+<desc>Original geometry. Join points 1 through 120, then 120 to 1. Labels remain editable text. Use DejaVu Sans; PDF is the canonical print export.</desc>
+<rect width="210" height="297" fill="white"/>
+<g font-family="DejaVu Sans, sans-serif" fill="#14191f">
+<text x="17" y="24" font-size="7.7611" font-weight="bold">Mountain Landscape</text>
+<text x="193" y="23.5" text-anchor="end" font-size="3.5278" font-weight="bold">120 DOTS</text>
+<text x="17" y="33" font-size="3.5983">PUZZLE · 120-point worksheet · v0.2</text>
+<text x="17" y="41" font-size="3.2808">Connect 1 to 120 in order, then join 120 back to 1.</text>
+<path d="M17 46H193 M17 268H193" fill="none" stroke="#a6adb3" stroke-width="0.0882"/>
+<g id="numbered-points" fill="black">
+<circle id="dot-001" data-number="1" cx="34.0" cy="234.0" r="0.6"/>
+<circle id="dot-002" data-number="2" cx="34.0" cy="227.0" r="0.6"/>
+<circle id="dot-003" data-number="3" cx="34.0" cy="220.0" r="0.6"/>
+<circle id="dot-004" data-number="4" cx="28.5" cy="220.0" r="0.6"/>
+<circle id="dot-005" data-number="5" cx="23.0" cy="220.0" r="0.6"/>
+<circle id="dot-006" data-number="6" cx="27.0" cy="214.5" r="0.6"/>
+<circle id="dot-007" data-number="7" cx="31.0" cy="209.0" r="0.6"/>
+<circle id="dot-008" data-number="8" cx="26.0" cy="209.0" r="0.6"/>
+<circle id="dot-009" data-number="9" cx="30.0" cy="203.5" r="0.6"/>
+<circle id="dot-010" data-number="10" cx="34.0" cy="198.0" r="0.6"/>
+<circle id="dot-011" data-number="11" cx="29.0" cy="198.0" r="0.6"/>
+<circle id="dot-012" data-number="12" cx="33.5" cy="191.5" r="0.6"/>
+<circle id="dot-013" data-number="13" cx="38.0" cy="185.0" r="0.6"/>
+<circle id="dot-014" data-number="14" cx="42.0" cy="191.5" r="0.6"/>
+<circle id="dot-015" data-number="15" cx="46.0" cy="198.0" r="0.6"/>
+<circle id="dot-016" data-number="16" cx="41.0" cy="198.0" r="0.6"/>
+<circle id="dot-017" data-number="17" cx="45.0" cy="203.5" r="0.6"/>
+<circle id="dot-018" data-number="18" cx="49.0" cy="209.0" r="0.6"/>
+<circle id="dot-019" data-number="19" cx="44.0" cy="209.0" r="0.6"/>
+<circle id="dot-020" data-number="20" cx="48.5" cy="214.5" r="0.6"/>
+<circle id="dot-021" data-number="21" cx="53.0" cy="220.0" r="0.6"/>
+<circle id="dot-022" data-number="22" cx="47.5" cy="220.0" r="0.6"/>
+<circle id="dot-023" data-number="23" cx="42.0" cy="220.0" r="0.6"/>
+<circle id="dot-024" data-number="24" cx="42.0" cy="225.5" r="0.6"/>
+<circle id="dot-025" data-number="25" cx="42.0" cy="231.0" r="0.6"/>
+<circle id="dot-026" data-number="26" cx="47.66667" cy="227.0" r="0.6"/>
+<circle id="dot-027" data-number="27" cx="53.33333" cy="223.0" r="0.6"/>
+<circle id="dot-028" data-number="28" cx="59.0" cy="219.0" r="0.6"/>
+<circle id="dot-029" data-number="29" cx="62.0" cy="214.5" r="0.6"/>
+<circle id="dot-030" data-number="30" cx="65.0" cy="210.0" r="0.6"/>
+<circle id="dot-031" data-number="31" cx="67.0" cy="202.5" r="0.6"/>
+<circle id="dot-032" data-number="32" cx="69.0" cy="195.0" r="0.6"/>
+<circle id="dot-033" data-number="33" cx="72.5" cy="189.0" r="0.6"/>
+<circle id="dot-034" data-number="34" cx="76.0" cy="183.0" r="0.6"/>
+<circle id="dot-035" data-number="35" cx="78.5" cy="173.5" r="0.6"/>
+<circle id="dot-036" data-number="36" cx="81.0" cy="164.0" r="0.6"/>
+<circle id="dot-037" data-number="37" cx="83.5" cy="158.5" r="0.6"/>
+<circle id="dot-038" data-number="38" cx="86.0" cy="153.0" r="0.6"/>
+<circle id="dot-039" data-number="39" cx="87.66667" cy="146.0" r="0.6"/>
+<circle id="dot-040" data-number="40" cx="89.33333" cy="139.0" r="0.6"/>
+<circle id="dot-041" data-number="41" cx="91.0" cy="132.0" r="0.6"/>
+<circle id="dot-042" data-number="42" cx="94.0" cy="123.5" r="0.6"/>
+<circle id="dot-043" data-number="43" cx="97.0" cy="115.0" r="0.6"/>
+<circle id="dot-044" data-number="44" cx="100.0" cy="122.5" r="0.6"/>
+<circle id="dot-045" data-number="45" cx="103.0" cy="130.0" r="0.6"/>
+<circle id="dot-046" data-number="46" cx="108.0" cy="135.0" r="0.6"/>
+<circle id="dot-047" data-number="47" cx="110.0" cy="141.33333" r="0.6"/>
+<circle id="dot-048" data-number="48" cx="112.0" cy="147.66667" r="0.6"/>
+<circle id="dot-049" data-number="49" cx="114.0" cy="154.0" r="0.6"/>
+<circle id="dot-050" data-number="50" cx="116.5" cy="147.0" r="0.6"/>
+<circle id="dot-051" data-number="51" cx="119.0" cy="140.0" r="0.6"/>
+<circle id="dot-052" data-number="52" cx="120.66667" cy="133.0" r="0.6"/>
+<circle id="dot-053" data-number="53" cx="122.33333" cy="126.0" r="0.6"/>
+<circle id="dot-054" data-number="54" cx="124.0" cy="119.0" r="0.6"/>
+<circle id="dot-055" data-number="55" cx="126.5" cy="114.5" r="0.6"/>
+<circle id="dot-056" data-number="56" cx="129.0" cy="110.0" r="0.6"/>
+<circle id="dot-057" data-number="57" cx="131.66667" cy="102.0" r="0.6"/>
+<circle id="dot-058" data-number="58" cx="134.33333" cy="94.0" r="0.6"/>
+<circle id="dot-059" data-number="59" cx="137.0" cy="86.0" r="0.6"/>
+<circle id="dot-060" data-number="60" cx="139.66667" cy="79.0" r="0.6"/>
+<circle id="dot-061" data-number="61" cx="142.33333" cy="72.0" r="0.6"/>
+<circle id="dot-062" data-number="62" cx="145.0" cy="65.0" r="0.6"/>
+<circle id="dot-063" data-number="63" cx="148.5" cy="73.5" r="0.6"/>
+<circle id="dot-064" data-number="64" cx="152.0" cy="82.0" r="0.6"/>
+<circle id="dot-065" data-number="65" cx="155.0" cy="86.5" r="0.6"/>
+<circle id="dot-066" data-number="66" cx="158.0" cy="91.0" r="0.6"/>
+<circle id="dot-067" data-number="67" cx="160.0" cy="97.33333" r="0.6"/>
+<circle id="dot-068" data-number="68" cx="162.0" cy="103.66667" r="0.6"/>
+<circle id="dot-069" data-number="69" cx="164.0" cy="110.0" r="0.6"/>
+<circle id="dot-070" data-number="70" cx="167.0" cy="117.0" r="0.6"/>
+<circle id="dot-071" data-number="71" cx="170.0" cy="124.0" r="0.6"/>
+<circle id="dot-072" data-number="72" cx="172.0" cy="131.5" r="0.6"/>
+<circle id="dot-073" data-number="73" cx="174.0" cy="139.0" r="0.6"/>
+<circle id="dot-074" data-number="74" cx="176.0" cy="133.0" r="0.6"/>
+<circle id="dot-075" data-number="75" cx="178.0" cy="127.0" r="0.6"/>
+<circle id="dot-076" data-number="76" cx="180.5" cy="118.0" r="0.6"/>
+<circle id="dot-077" data-number="77" cx="183.0" cy="109.0" r="0.6"/>
+<circle id="dot-078" data-number="78" cx="185.5" cy="103.5" r="0.6"/>
+<circle id="dot-079" data-number="79" cx="188.0" cy="98.0" r="0.6"/>
+<circle id="dot-080" data-number="80" cx="189.0" cy="105.66667" r="0.6"/>
+<circle id="dot-081" data-number="81" cx="190.0" cy="113.33333" r="0.6"/>
+<circle id="dot-082" data-number="82" cx="191.0" cy="121.0" r="0.6"/>
+<circle id="dot-083" data-number="83" cx="190.0" cy="127.66667" r="0.6"/>
+<circle id="dot-084" data-number="84" cx="189.0" cy="134.33333" r="0.6"/>
+<circle id="dot-085" data-number="85" cx="188.0" cy="141.0" r="0.6"/>
+<circle id="dot-086" data-number="86" cx="190.0" cy="148.5" r="0.6"/>
+<circle id="dot-087" data-number="87" cx="192.0" cy="156.0" r="0.6"/>
+<circle id="dot-088" data-number="88" cx="190.0" cy="165.0" r="0.6"/>
+<circle id="dot-089" data-number="89" cx="188.0" cy="174.0" r="0.6"/>
+<circle id="dot-090" data-number="90" cx="189.0" cy="182.5" r="0.6"/>
+<circle id="dot-091" data-number="91" cx="190.0" cy="191.0" r="0.6"/>
+<circle id="dot-092" data-number="92" cx="187.0" cy="199.5" r="0.6"/>
+<circle id="dot-093" data-number="93" cx="184.0" cy="208.0" r="0.6"/>
+<circle id="dot-094" data-number="94" cx="185.0" cy="214.0" r="0.6"/>
+<circle id="dot-095" data-number="95" cx="186.0" cy="220.0" r="0.6"/>
+<circle id="dot-096" data-number="96" cx="181.5" cy="225.0" r="0.6"/>
+<circle id="dot-097" data-number="97" cx="177.0" cy="230.0" r="0.6"/>
+<circle id="dot-098" data-number="98" cx="171.0" cy="231.0" r="0.6"/>
+<circle id="dot-099" data-number="99" cx="165.0" cy="232.0" r="0.6"/>
+<circle id="dot-100" data-number="100" cx="159.5" cy="230.5" r="0.6"/>
+<circle id="dot-101" data-number="101" cx="154.0" cy="229.0" r="0.6"/>
+<circle id="dot-102" data-number="102" cx="147.5" cy="232.5" r="0.6"/>
+<circle id="dot-103" data-number="103" cx="141.0" cy="236.0" r="0.6"/>
+<circle id="dot-104" data-number="104" cx="134.5" cy="235.0" r="0.6"/>
+<circle id="dot-105" data-number="105" cx="128.0" cy="234.0" r="0.6"/>
+<circle id="dot-106" data-number="106" cx="121.5" cy="237.0" r="0.6"/>
+<circle id="dot-107" data-number="107" cx="115.0" cy="240.0" r="0.6"/>
+<circle id="dot-108" data-number="108" cx="108.5" cy="238.5" r="0.6"/>
+<circle id="dot-109" data-number="109" cx="102.0" cy="237.0" r="0.6"/>
+<circle id="dot-110" data-number="110" cx="96.0" cy="240.0" r="0.6"/>
+<circle id="dot-111" data-number="111" cx="90.0" cy="243.0" r="0.6"/>
+<circle id="dot-112" data-number="112" cx="83.5" cy="241.0" r="0.6"/>
+<circle id="dot-113" data-number="113" cx="77.0" cy="239.0" r="0.6"/>
+<circle id="dot-114" data-number="114" cx="70.5" cy="241.5" r="0.6"/>
+<circle id="dot-115" data-number="115" cx="64.0" cy="244.0" r="0.6"/>
+<circle id="dot-116" data-number="116" cx="57.5" cy="242.0" r="0.6"/>
+<circle id="dot-117" data-number="117" cx="51.0" cy="240.0" r="0.6"/>
+<circle id="dot-118" data-number="118" cx="46.0" cy="241.0" r="0.6"/>
+<circle id="dot-119" data-number="119" cx="41.0" cy="242.0" r="0.6"/>
+<circle id="dot-120" data-number="120" cx="37.5" cy="238.0" r="0.6"/>
+</g><g id="number-labels" fill="black" font-size="3.245555555555555">
+<text id="label-001" data-number="1" x="30.56338" y="237.24725">1</text>
+<text id="label-002" data-number="2" x="30.56338" y="230.24725">2</text>
+<text id="label-003" data-number="3" x="30.56338" y="223.24725">3</text>
+<text id="label-004" data-number="4" x="25.06338" y="223.24725">4</text>
+<text id="label-005" data-number="5" x="19.56338" y="223.24725">5</text>
+<text id="label-006" data-number="6" x="29.36754" y="215.34308">6</text>
+<text id="label-007" data-number="7" x="33.25169" y="208.9631">7</text>
+<text id="label-008" data-number="8" x="22.56338" y="212.24725">8</text>
+<text id="label-009" data-number="9" x="32.36754" y="204.34308">9</text>
+<text id="label-010" data-number="10" x="33.63508" y="195.8986">10</text>
+<text id="label-011" data-number="11" x="23.65093" y="199.72307">11</text>
+<text id="label-012" data-number="12" x="28.15093" y="191.4631">12</text>
+<text id="label-013" data-number="13" x="37.63508" y="182.8986">13</text>
+<text id="label-014" data-number="14" x="43.21923" y="191.4631">14</text>
+<text id="label-015" data-number="15" x="47.21923" y="197.9631">15</text>
+<text id="label-016" data-number="16" x="36.03594" y="201.74222">16</text>
+<text id="label-017" data-number="17" x="46.21923" y="203.4631">17</text>
+<text id="label-018" data-number="18" x="50.21923" y="208.9631">18</text>
+<text id="label-019" data-number="19" x="40.23508" y="212.78757">19</text>
+<text id="label-020" data-number="20" x="49.98578" y="213.29308">20</text>
+<text id="label-021" data-number="21" x="52.63508" y="217.8986">21</text>
+<text id="label-022" data-number="22" x="43.73508" y="223.78757">22</text>
+<text id="label-023" data-number="23" x="41.63508" y="217.8986">23</text>
+<text id="label-024" data-number="24" x="36.65093" y="227.22307">24</text>
+<text id="label-025" data-number="25" x="38.23508" y="234.78757">25</text>
+<text id="label-026" data-number="26" x="46.48173" y="231.12723">26</text>
+<text id="label-027" data-number="27" x="52.14839" y="227.12723">27</text>
+<text id="label-028" data-number="28" x="60.21923" y="220.72307">28</text>
+<text id="label-029" data-number="29" x="63.21923" y="216.22307">29</text>
+<text id="label-030" data-number="30" x="66.21923" y="209.9631">30</text>
+<text id="label-031" data-number="31" x="61.65093" y="204.22307">31</text>
+<text id="label-032" data-number="32" x="63.65093" y="196.72307">32</text>
+<text id="label-033" data-number="33" x="73.71923" y="190.72307">33</text>
+<text id="label-034" data-number="34" x="77.21923" y="182.9631">34</text>
+<text id="label-035" data-number="35" x="73.15093" y="175.22307">35</text>
+<text id="label-036" data-number="36" x="75.65093" y="165.72307">36</text>
+<text id="label-037" data-number="37" x="84.83508" y="159.34308">37</text>
+<text id="label-038" data-number="38" x="87.21923" y="152.9631">38</text>
+<text id="label-039" data-number="39" x="82.3176" y="147.72307">39</text>
+<text id="label-040" data-number="40" x="83.98426" y="140.72307">40</text>
+<text id="label-041" data-number="41" x="85.65093" y="133.72307">41</text>
+<text id="label-042" data-number="42" x="88.53508" y="124.34308">42</text>
+<text id="label-043" data-number="43" x="96.63508" y="112.8986">43</text>
+<text id="label-044" data-number="44" x="101.21923" y="122.4631">44</text>
+<text id="label-045" data-number="45" x="99.23508" y="133.78757">45</text>
+<text id="label-046" data-number="46" x="107.63508" y="132.8986">46</text>
+<text id="label-047" data-number="47" x="104.65093" y="143.0564">47</text>
+<text id="label-048" data-number="48" x="106.65093" y="149.38974">48</text>
+<text id="label-049" data-number="49" x="110.23508" y="157.78757">49</text>
+<text id="label-050" data-number="50" x="117.83508" y="147.84308">50</text>
+<text id="label-051" data-number="51" x="120.21923" y="139.9631">51</text>
+<text id="label-052" data-number="52" x="115.3176" y="134.72307">52</text>
+<text id="label-053" data-number="53" x="116.98426" y="127.72307">53</text>
+<text id="label-054" data-number="54" x="118.65093" y="120.72307">54</text>
+<text id="label-055" data-number="55" x="127.71923" y="116.22307">55</text>
+<text id="label-056" data-number="56" x="130.33508" y="110.84308">56</text>
+<text id="label-057" data-number="57" x="133.00175" y="102.84308">57</text>
+<text id="label-058" data-number="58" x="135.66841" y="94.84308">58</text>
+<text id="label-059" data-number="59" x="138.33508" y="86.84308">59</text>
+<text id="label-060" data-number="60" x="141.00175" y="79.84308">60</text>
+<text id="label-061" data-number="61" x="136.86841" y="72.84308">61</text>
+<text id="label-062" data-number="62" x="144.63508" y="62.8986">62</text>
+<text id="label-063" data-number="63" x="149.71923" y="73.4631">63</text>
+<text id="label-064" data-number="64" x="146.65093" y="83.72307">64</text>
+<text id="label-065" data-number="65" x="149.65093" y="88.22307">65</text>
+<text id="label-066" data-number="66" x="152.65093" y="92.72307">66</text>
+<text id="label-067" data-number="67" x="154.65093" y="99.0564">67</text>
+<text id="label-068" data-number="68" x="156.65093" y="105.38974">68</text>
+<text id="label-069" data-number="69" x="158.65093" y="111.72307">69</text>
+<text id="label-070" data-number="70" x="161.65093" y="118.72307">70</text>
+<text id="label-071" data-number="71" x="164.65093" y="125.72307">71</text>
+<text id="label-072" data-number="72" x="166.65093" y="133.22307">72</text>
+<text id="label-073" data-number="73" x="170.23508" y="142.78757">73</text>
+<text id="label-074" data-number="74" x="177.33508" y="133.84308">74</text>
+<text id="label-075" data-number="75" x="179.21923" y="126.9631">75</text>
+<text id="label-076" data-number="76" x="175.15093" y="119.72307">76</text>
+<text id="label-077" data-number="77" x="177.65093" y="110.72307">77</text>
+<text id="label-078" data-number="78" x="180.03508" y="104.34308">78</text>
+<text id="label-079" data-number="79" x="187.63508" y="95.8986">79</text>
+<text id="label-080" data-number="80" x="190.21923" y="105.62977">80</text>
+<text id="label-081" data-number="81" x="184.65093" y="115.0564">81</text>
+<text id="label-082" data-number="82" x="185.65093" y="122.72307">82</text>
+<text id="label-083" data-number="83" x="184.65093" y="129.38974">83</text>
+<text id="label-084" data-number="84" x="183.65093" y="136.0564">84</text>
+<text id="label-085" data-number="85" x="182.65093" y="142.72307">85</text>
+<text id="label-086" data-number="86" x="184.65093" y="150.22307">86</text>
+<text id="label-087" data-number="87" x="186.65093" y="157.72307">87</text>
+<text id="label-088" data-number="88" x="184.65093" y="166.72307">88</text>
+<text id="label-089" data-number="89" x="182.65093" y="175.72307">89</text>
+<text id="label-090" data-number="90" x="183.65093" y="184.22307">90</text>
+<text id="label-091" data-number="91" x="184.53508" y="191.84308">91</text>
+<text id="label-092" data-number="92" x="188.33508" y="200.34308">92</text>
+<text id="label-093" data-number="93" x="178.65093" y="209.72307">93</text>
+<text id="label-094" data-number="94" x="179.65093" y="215.72307">94</text>
+<text id="label-095" data-number="95" x="187.21923" y="219.9631">95</text>
+<text id="label-096" data-number="96" x="181.13508" y="228.78757">96</text>
+<text id="label-097" data-number="97" x="173.23508" y="233.78757">97</text>
+<text id="label-098" data-number="98" x="167.23508" y="234.78757">98</text>
+<text id="label-099" data-number="99" x="164.63508" y="229.8986">99</text>
+<text id="label-100" data-number="100" x="154.70262" y="234.28757">100</text>
+<text id="label-101" data-number="101" x="152.60262" y="226.8986">101</text>
+<text id="label-102" data-number="102" x="146.10262" y="236.28757">102</text>
+<text id="label-103" data-number="103" x="136.20262" y="239.78757">103</text>
+<text id="label-104" data-number="104" x="133.10262" y="232.8986">104</text>
+<text id="label-105" data-number="105" x="125.7826" y="231.55894">105</text>
+<text id="label-106" data-number="106" x="119.2826" y="241.12723">106</text>
+<text id="label-107" data-number="107" x="110.20262" y="243.78757">107</text>
+<text id="label-108" data-number="108" x="107.10262" y="236.3986">108</text>
+<text id="label-109" data-number="109" x="99.7826" y="234.55894">109</text>
+<text id="label-110" data-number="110" x="93.7826" y="244.12723">110</text>
+<text id="label-111" data-number="111" x="85.20262" y="246.78757">111</text>
+<text id="label-112" data-number="112" x="82.10262" y="238.8986">112</text>
+<text id="label-113" data-number="113" x="74.7826" y="236.55894">113</text>
+<text id="label-114" data-number="114" x="67.40262" y="245.74308">114</text>
+<text id="label-115" data-number="115" x="60.02263" y="248.12723">115</text>
+<text id="label-116" data-number="116" x="52.70262" y="245.78757">116</text>
+<text id="label-117" data-number="117" x="49.60262" y="237.8986">117</text>
+<text id="label-118" data-number="118" x="43.7826" y="245.12723">118</text>
+<text id="label-119" data-number="119" x="36.20262" y="245.78757">119</text>
+<text id="label-120" data-number="120" x="31.50348" y="241.74222">120</text>
+</g>
+<text x="17" y="276" font-size="3.175">Print at Actual size / 100% on A4.</text>
+<text x="17" y="284" font-size="2.7164">ConnectTheDotsPrintable.online</text>
+<text x="165" y="276" text-anchor="middle" font-size="2.7164">50 mm print check</text>
+<path d="M140 282H190 M140 280.5V283.5 M190 280.5V283.5" fill="none" stroke="black" stroke-width="0.1764"/>
+</g></svg>

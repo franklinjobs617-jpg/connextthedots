@@ -1,0 +1,260 @@
+{
+  "overall": "PASS",
+  "scope": "Digital file / numbering / geometry / layout audit only. No independent human playtest or physical print has occurred.",
+  "point_count": 120,
+  "sequence": "1 \u2192 120 \u2192 1",
+  "metrics": {
+    "minimum_point_separation_mm": 3.018461344609203,
+    "minimum_step_mm": 5.0,
+    "maximum_step_mm": 9.82344135219425,
+    "Puzzle_all_text_margins_mm_left_top_right_bottom": [
+      17.00000131395128,
+      18.10337388780382,
+      15.652431233723973,
+      12.347435167100741
+    ],
+    "Puzzle_minimum_actual_label_bbox_gap_mm": 0.7998004489474795,
+    "Solution_all_text_margins_mm_left_top_right_bottom": [
+      17.00000131395128,
+      18.10337388780382,
+      15.652431233723973,
+      12.347435167100741
+    ],
+    "Solution_minimum_actual_label_bbox_gap_mm": 0.7998004489474795
+  },
+  "checks": {
+    "JSON exactly 120 sequential unique IDs": {
+      "pass": true,
+      "detail": null
+    },
+    "v0.2 preserves every v0.1 point and label": {
+      "pass": true,
+      "detail": null
+    },
+    "120 unique physical point coordinates": {
+      "pass": true,
+      "detail": null
+    },
+    "Closed solution has no nonadjacent self-intersections": {
+      "pass": true,
+      "detail": []
+    },
+    "Printed dots have separated ink": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle SVG has exactly 120 dots": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle SVG has labels 1..120 once": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle SVG point positions match JSON": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle SVG does not contain the answer path": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle PDF is one readable A4 page": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle PDF has exactly one correct brand footer": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle PDF removes internal labels": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle SVG has exactly one correct brand footer": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle SVG removes internal labels": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle PDF actually contains labels 1..120 once": {
+      "pass": true,
+      "detail": {
+        "extracted_labels": 120
+      }
+    },
+    "Puzzle number font is at least 9.2pt": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle all printed text stays >=12mm from page edge": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle actually used fonts are embedded": {
+      "pass": true,
+      "detail": {
+        "used": [
+          "DejaVuSans",
+          "DejaVuSans-Bold"
+        ],
+        "embedded": [
+          "DejaVuSans",
+          "DejaVuSans-Bold"
+        ]
+      }
+    },
+    "Puzzle PDF contains 120 actual dot markers at JSON coordinates": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle PDF contains no answer polyline": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle actual exported label boxes do not overlap": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle all number labels retain >=15mm horizontal page margin and clear header/footer": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle labels avoid all dot markers": {
+      "pass": true,
+      "detail": []
+    },
+    "Puzzle each label is closest to its own dot": {
+      "pass": true,
+      "detail": []
+    },
+    "Puzzle labels avoid the solution strokes": {
+      "pass": true,
+      "detail": []
+    },
+    "Puzzle PDF is vector, not a raster-only page": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle has an actual 50mm calibration segment": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution SVG has exactly 120 dots": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution SVG has labels 1..120 once": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution SVG point positions match JSON": {
+      "pass": true,
+      "detail": null
+    },
+    "SVG solution follows the complete numbered sequence and closing edge": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution PDF is one readable A4 page": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution PDF has exactly one correct brand footer": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution PDF removes internal labels": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution SVG has exactly one correct brand footer": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution SVG removes internal labels": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution PDF actually contains labels 1..120 once": {
+      "pass": true,
+      "detail": {
+        "extracted_labels": 120
+      }
+    },
+    "Solution number font is at least 9.2pt": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution all printed text stays >=12mm from page edge": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution actually used fonts are embedded": {
+      "pass": true,
+      "detail": {
+        "used": [
+          "DejaVuSans",
+          "DejaVuSans-Bold"
+        ],
+        "embedded": [
+          "DejaVuSans",
+          "DejaVuSans-Bold"
+        ]
+      }
+    },
+    "Solution PDF contains 120 actual dot markers at JSON coordinates": {
+      "pass": true,
+      "detail": null
+    },
+    "PDF answer consists of the same 120 ordered edges, including 120 to 1": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution actual exported label boxes do not overlap": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution all number labels retain >=15mm horizontal page margin and clear header/footer": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution labels avoid all dot markers": {
+      "pass": true,
+      "detail": []
+    },
+    "Solution each label is closest to its own dot": {
+      "pass": true,
+      "detail": []
+    },
+    "Solution labels avoid the solution strokes": {
+      "pass": true,
+      "detail": []
+    },
+    "Solution PDF is vector, not a raster-only page": {
+      "pass": true,
+      "detail": null
+    },
+    "Solution has an actual 50mm calibration segment": {
+      "pass": true,
+      "detail": null
+    },
+    "Puzzle and Solution labels have identical printed positions": {
+      "pass": true,
+      "detail": null
+    }
+  },
+  "physical_print": "Not Tested",
+  "independent_playtest": "Pending Founder / non-author tester",
+  "difficulty_rating": "Not measured; adult-targeted sample, not a verified Hard/Extreme classification",
+  "artifacts_sha256": {
+    "Mountain-Landscape-120-Puzzle-preview.png": "c45250e1ea532e34d1501276c84813501ccc9af786c21972796dbc814ab81fab",
+    "Mountain-Landscape-120-Puzzle.pdf": "8f7b6040b00d9eab32e42615ff20bc971ee4218dac2f51a3b29b01b9348153c4",
+    "Mountain-Landscape-120-Puzzle.svg": "f1de6fde77ea9a94d51c336e2c24100c66021cb4f15927d6df090bbe9fcad783",
+    "Mountain-Landscape-120-Solution-preview.png": "2ba7a2504ab06d6803eddf67980d2e0220dcd68307d711bbf1d92225ce740657",
+    "Mountain-Landscape-120-Solution.pdf": "017acde4697cbfe92c2a2f4a6e73336558a4e8b66aa190355bc0f3d383bc802c",
+    "Mountain-Landscape-120-Solution.svg": "34d065e62fab47828bcc71c0eeb6391e9d71ff6e160346cd33e8f403226fd227"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "base_sha": "da8e3b54df99a3e63246c496ade226890bf236ba",
+  "application_commit": "fbcf1c49af0cf91083bd0d7a7649f2e17d2cb1f4",
+  "pr2_head_sha": "6400802b88c12ea511ada7c25fadacc889ab8b17",
+  "branch": "feat/mountain-120-printable",
+  "derived_directly_from_main": true,
+  "pr2_changed_file_overlap": [],
+  "merge_tree_exit": 0,
+  "simulated_merge_tree_sha": "665b014e4d1859febe795e5943b0ca77cba6e6d7",
+  "note": "Read-only merge-tree simulation; neither branch was merged or changed. Git object creation only. Later delivery commit contains documentation only."
+}

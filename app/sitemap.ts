@@ -73,5 +73,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         };
     });
 
-    return [...staticUrls, ...dynamicUrls];
+    return [...staticUrls, ...dynamicUrls, {
+        // English-only original: no language alternatives until translations exist.
+        url: `${baseUrl}/printables/mountain-landscape-120/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }];
 }
