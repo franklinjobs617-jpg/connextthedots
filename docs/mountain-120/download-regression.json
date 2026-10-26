@@ -1,8 +1,9 @@
 {
   "downloads_per_build": 8,
-  "main_head_outputs_equal": true,
+  "before_after_outputs_equal": true,
+  "baseline_sha": "ef4996ee1cdcffe154b5e9823bd00472d796e43d",
   "results": {
-    "main": {
+    "before": {
       "simple-rabbit-outline": {
         "pdf": {
           "pages": 1,
@@ -80,7 +81,7 @@
         }
       }
     },
-    "head": {
+    "after": {
       "simple-rabbit-outline": {
         "pdf": {
           "pages": 1,

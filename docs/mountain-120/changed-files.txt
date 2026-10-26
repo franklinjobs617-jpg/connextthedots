@@ -1,5 +1,6 @@
 app/[locale]/printable-connect-the-dots/page.tsx
 app/[locale]/printables/mountain-landscape-120/page.tsx
+app/sitemap.ts
 docs/mountain-120/README.md
 docs/mountain-120/branch-check.json
 docs/mountain-120/browser-checks.json
@@ -9,10 +10,12 @@ docs/mountain-120/download-regression.json
 docs/mountain-120/preview-1440.png
 docs/mountain-120/preview-390.png
 docs/mountain-120/reproducibility.json
+docs/mountain-120/seo-change-card.md
 docs/mountain-120/seo-impact-diff.json
 docs/mountain-120/verification/regression.py
 docs/mountain-120/verification/verify.py
 lib/mountain-120.ts
+middleware.ts
 public/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png
 public/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle.pdf
 public/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle.svg

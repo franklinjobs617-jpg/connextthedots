@@ -14,9 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: "Mountain Landscape 120-Point Dot to Dot | Puzzle & Solution PDF",
         description: item.description,
         alternates: { canonical },
-        // Release hold: shared middleware advertises untranslated locale URLs.
-        // Founder approval is required for a route-scoped hreflang fix before indexing.
-        robots: { index: false, follow: true },
+        robots: { index: true, follow: true },
         openGraph: {
             title: item.title, description: item.description, url: canonical, type: "article",
             images: [{ url: `${siteConfig.baseUrl}${item.imageUrl}`, width: 1191, height: 1684, alt: item.altText }],

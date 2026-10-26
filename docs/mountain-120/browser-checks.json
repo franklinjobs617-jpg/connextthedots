@@ -1,171 +1,745 @@
 {
+  "baseline_sha": "ef4996ee1cdcffe154b5e9823bd00472d796e43d",
+  "mode": "next build + next start; production Host and HTTPS forwarded headers; local, not deployed",
+  "new_page": {
+    "before": {
+      "chain": [
+        {
+          "path": "/printables/mountain-landscape-120/",
+          "status": 200,
+          "headers": {
+            "link": "<https://connectthedotsprintable.online/printables/mountain-landscape-120/>; rel=\"alternate\"; hreflang=\"en\", <https://connectthedotsprintable.online/de/printables/mountain-landscape-120/>; rel=\"alternate\"; hreflang=\"de\", <https://connectthedotsprintable.online/es/printables/mountain-landscape-120/>; rel=\"alternate\"; hreflang=\"es\", <https://connectthedotsprintable.online/pt/printables/mountain-landscape-120/>; rel=\"alternate\"; hreflang=\"pt\", <https://connectthedotsprintable.online/fr/printables/mountain-landscape-120/>; rel=\"alternate\"; hreflang=\"fr\", <https://connectthedotsprintable.online/it/printables/mountain-landscape-120/>; rel=\"alternate\"; hreflang=\"it\", <https://connectthedotsprintable.online/nl/printables/mountain-landscape-120/>; rel=\"alternate\"; hreflang=\"nl\", <https://connectthedotsprintable.online/printables/mountain-landscape-120/>; rel=\"alternate\"; hreflang=\"x-default\", </printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png>; rel=preload; as=\"image\"",
+            "x-robots-tag": null,
+            "location": null,
+            "refresh": null,
+            "content-type": "text/html; charset=utf-8",
+            "x-middleware-rewrite": "/en/printables/mountain-landscape-120/",
+            "content-security-policy": null
+          }
+        }
+      ],
+      "html": {
+        "title": "Mountain Landscape 120-Point Dot to Dot | Puzzle & Solution PDF",
+        "meta": [
+          "<meta charset=\"utf-8\">",
+          "<meta name=\"description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">",
+          "<meta name=\"google-adsense-account\" content=\"ca-pub-3383070348689557\">",
+          "<meta name=\"robots\" content=\"noindex, follow\">",
+          "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+          "<meta name=\"twitter:description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">",
+          "<meta name=\"twitter:image\" content=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png\">",
+          "<meta name=\"twitter:title\" content=\"Mountain Landscape — 120-Point Dot to Dot\">",
+          "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+          "<meta property=\"og:description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">",
+          "<meta property=\"og:image\" content=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png\">",
+          "<meta property=\"og:image:alt\" content=\"A4 Mountain Landscape puzzle with 120 numbered dots and a website credit in the footer\">",
+          "<meta property=\"og:image:height\" content=\"1684\">",
+          "<meta property=\"og:image:width\" content=\"1191\">",
+          "<meta property=\"og:title\" content=\"Mountain Landscape — 120-Point Dot to Dot\">",
+          "<meta property=\"og:type\" content=\"article\">",
+          "<meta property=\"og:url\" content=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
+        ],
+        "seoLinks": [
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
+        ],
+        "h1": [
+          "Mountain Landscape — 120-Point Dot to Dot"
+        ],
+        "headings": [
+          [
+            "H1",
+            "Mountain Landscape — 120-Point Dot to Dot"
+          ],
+          [
+            "H2",
+            "Puzzle preview"
+          ],
+          [
+            "H2",
+            "Print the puzzle"
+          ],
+          [
+            "H2",
+            "How to use this worksheet"
+          ],
+          [
+            "H2",
+            "Explore more dot-to-dot activities"
+          ]
+        ],
+        "links": [
+          [
+            "/",
+            "ConnectTheDots"
+          ],
+          [
+            "/",
+            "Home"
+          ],
+          [
+            "/printable-connect-the-dots/",
+            "Free Printables"
+          ],
+          [
+            "/convert-photo-to-beads/",
+            "Bead Art Maker"
+          ],
+          [
+            "/convert-photo-to-beads/gallery/",
+            "Pattern Gallery"
+          ],
+          [
+            "/pricing/",
+            "Pricing"
+          ],
+          [
+            "/how-to-make/",
+            "How to Make"
+          ],
+          [
+            "/connect-the-dots-coloring-pages/",
+            "Coloring Pages"
+          ],
+          [
+            "/",
+            "Home"
+          ],
+          [
+            "/printable-connect-the-dots/",
+            "All Printables"
+          ],
+          [
+            "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png",
+            ""
+          ],
+          [
+            "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle.pdf",
+            "Download Puzzle PDF"
+          ],
+          [
+            "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Solution.pdf",
+            "Download Solution PDF"
+          ],
+          [
+            "/printable-connect-the-dots/",
+            "Browse all printables"
+          ],
+          [
+            "/connect-the-dots-for-adults/",
+            "Connect the dots for adults"
+          ],
+          [
+            "https://dang.ai/",
+            ""
+          ],
+          [
+            "/en/printables/mountain-landscape-120/",
+            "English"
+          ],
+          [
+            "/es/printables/mountain-landscape-120/",
+            "Español"
+          ],
+          [
+            "/de/printables/mountain-landscape-120/",
+            "Deutsch"
+          ],
+          [
+            "/",
+            "Home"
+          ],
+          [
+            "/connect-the-dots-1-to-10/",
+            "Connect the Dots 1 to 10"
+          ],
+          [
+            "/printable-connect-the-dots/",
+            "Free Printables"
+          ],
+          [
+            "/how-to-make/",
+            "How to Make"
+          ],
+          [
+            "/christmas-printables/",
+            "Christmas Printables"
+          ],
+          [
+            "/convert-photo-to-beads/",
+            "Bead Art Maker"
+          ],
+          [
+            "/convert-photo-to-beads/gallery/",
+            "Pattern Gallery"
+          ],
+          [
+            "/connect-the-dots-coloring-pages/",
+            "Coloring Pages"
+          ],
+          [
+            "/privacy/",
+            "Privacy Policy"
+          ],
+          [
+            "/terms/",
+            "Terms of Service"
+          ],
+          [
+            "/dmca/",
+            "DMCA Policy"
+          ],
+          [
+            "/pricing/",
+            "Pricing"
+          ],
+          [
+            "https://enjoy4game.com/",
+            "enjoy4game.com"
+          ],
+          [
+            "/popular-character-dot-to-dot-printable-worksheets/",
+            "Popular Character Dot-to-Dot Printables"
+          ],
+          [
+            "/free-animal-dot-to-dot-printables-pdf/",
+            "Free Animal Dot-to-Dot Printables PDF"
+          ],
+          [
+            "https://aiclotheschangers.app/",
+            "AI Clothes Changer"
+          ],
+          [
+            "https://gridmakeronline.com/",
+            "gridmakeronline.com"
+          ],
+          [
+            "https://ipooket.com/",
+            "Romestead"
+          ],
+          [
+            "https://twitter.com",
+            "Twitter"
+          ],
+          [
+            "https://www.linkedin.com",
+            "LinkedIn"
+          ],
+          [
+            "https://www.facebook.com",
+            "Facebook"
+          ],
+          [
+            "https://www.reddit.com",
+            "Reddit"
+          ],
+          [
+            "https://seed3dlabs.com/",
+            "Powered by Seed3DLabs"
+          ]
+        ],
+        "images": [
+          "<img alt=\"A4 Mountain Landscape puzzle with 120 numbered dots and a website credit in the footer\" width=\"1191\" height=\"1684\" decoding=\"async\" data-nimg=\"1\" class=\"h-auto w-full\" style=\"color:transparent\" src=\"/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png\">",
+          "<img alt=\"ConnectTheDots Logo\" loading=\"lazy\" width=\"24\" height=\"24\" decoding=\"async\" data-nimg=\"1\" style=\"color:transparent\" srcset=\"/_next/image/?url=%2Flogo.png&amp;w=32&amp;q=75 1x, /_next/image/?url=%2Flogo.png&amp;w=48&amp;q=75 2x\" src=\"/_next/image/?url=%2Flogo.png&amp;w=48&amp;q=75\">",
+          "<img alt=\"Dang.ai\" loading=\"lazy\" width=\"150\" height=\"54\" decoding=\"async\" data-nimg=\"1\" style=\"color:transparent\" srcset=\"/_next/image/?url=https%3A%2F%2Fcdn.prod.website-files.com%2F63d8afd87da01fb58ea3fbcb%2F6487e2868c6c8f93b4828827_dang-badge.png&amp;w=256&amp;q=75 1x, /_next/image/?url=https%3A%2F%2Fcdn.prod.website-files.com%2F63d8afd87da01fb58ea3fbcb%2F6487e2868c6c8f93b4828827_dang-badge.png&amp;w=384&amp;q=75 2x\" src=\"/_next/image/?url=https%3A%2F%2Fcdn.prod.website-files.com%2F63d8afd87da01fb58ea3fbcb%2F6487e2868c6c8f93b4828827_dang-badge.png&amp;w=384&amp;q=75\">",
+          "<img alt=\"Matching Mountain Landscape solution connecting points 1 through 120 and back to 1\" loading=\"lazy\" width=\"1191\" height=\"1684\" decoding=\"async\" data-nimg=\"1\" class=\"mt-4 h-auto w-full\" style=\"color:transparent\" src=\"/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Solution-preview.png\">"
+        ],
+        "schema": [],
+        "bodyText": "ConnectTheDotsENHomeFree PrintablesBead Art MakerPattern GalleryPricingHow to MakeColoring PagesENLoginHome / All Printables / Mountain Landscape 120Mountain Landscape — 120-Point Dot to DotConnect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.Puzzle previewTap the preview to inspect the full page.Print the puzzleNumbered dots120 (1–120)Paper sizeA4 · 210 × 297 mmNumber size9.2 ptSuggested audienceAdultsDifficultyNot yet ratedDownload Puzzle PDFDownload Solution PDFFree downloads, no account needed. Each PDF is one A4 page with the same website credit.How to use this worksheetPrint the Puzzle PDF on A4 at Actual size / 100%. Check the 50 mm footer line with a ruler.Connect 1 to 120 in order, then join 120 back to 1 to complete the outline.Compare your drawing with the matching Solution PDF, which follows the same complete point sequence.Physical print testing and independent playtesting are pending. Completion time and difficulty have not been measured.Show solution previewExplore more dot-to-dot activitiesThis original mountain-and-fir outline is a separate 120-point worksheet. Browse the collection for other themes or explore activities for adults.Browse all printablesConnect the dots for adultsConnectthedotsprintableYour source for high-quality, free connect the dots printables for kids and adults.Language:English|Español|DeutschPrintablesHomeConnect the Dots 1 to 10Free PrintablesHow to MakeChristmas PrintablesBead Art MakerPattern GalleryColoring PagesLegalPrivacy PolicyTerms of ServiceDMCA PolicyPricingenjoy4game.com Popular Character Dot-to-Dot PrintablesFree Animal Dot-to-Dot Printables PDFAI Clothes Changergridmakeronline.comRomesteadTwitterLinkedInFacebookReddit© 2026 ConnectTheDotsPrintable.online. All rights reserved.Powered by Seed3DLabsAll printables are for personal and educational use only.Feedback"
+      },
+      "raw_html_sha256": "9cbaeacfcea65b3dc64df293b796ce8a58122160eb5641192e49cdd99f5580c3"
+    },
+    "after": {
+      "chain": [
+        {
+          "path": "/printables/mountain-landscape-120/",
+          "status": 200,
+          "headers": {
+            "link": "</printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png>; rel=preload; as=\"image\"",
+            "x-robots-tag": null,
+            "location": null,
+            "refresh": null,
+            "content-type": "text/html; charset=utf-8",
+            "x-middleware-rewrite": "/en/printables/mountain-landscape-120/",
+            "content-security-policy": null
+          }
+        }
+      ],
+      "html": {
+        "title": "Mountain Landscape 120-Point Dot to Dot | Puzzle & Solution PDF",
+        "meta": [
+          "<meta charset=\"utf-8\">",
+          "<meta name=\"description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">",
+          "<meta name=\"google-adsense-account\" content=\"ca-pub-3383070348689557\">",
+          "<meta name=\"robots\" content=\"index, follow\">",
+          "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+          "<meta name=\"twitter:description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">",
+          "<meta name=\"twitter:image\" content=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png\">",
+          "<meta name=\"twitter:title\" content=\"Mountain Landscape — 120-Point Dot to Dot\">",
+          "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+          "<meta property=\"og:description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">",
+          "<meta property=\"og:image\" content=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png\">",
+          "<meta property=\"og:image:alt\" content=\"A4 Mountain Landscape puzzle with 120 numbered dots and a website credit in the footer\">",
+          "<meta property=\"og:image:height\" content=\"1684\">",
+          "<meta property=\"og:image:width\" content=\"1191\">",
+          "<meta property=\"og:title\" content=\"Mountain Landscape — 120-Point Dot to Dot\">",
+          "<meta property=\"og:type\" content=\"article\">",
+          "<meta property=\"og:url\" content=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
+        ],
+        "seoLinks": [
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
+        ],
+        "h1": [
+          "Mountain Landscape — 120-Point Dot to Dot"
+        ],
+        "headings": [
+          [
+            "H1",
+            "Mountain Landscape — 120-Point Dot to Dot"
+          ],
+          [
+            "H2",
+            "Puzzle preview"
+          ],
+          [
+            "H2",
+            "Print the puzzle"
+          ],
+          [
+            "H2",
+            "How to use this worksheet"
+          ],
+          [
+            "H2",
+            "Explore more dot-to-dot activities"
+          ]
+        ],
+        "links": [
+          [
+            "/",
+            "ConnectTheDots"
+          ],
+          [
+            "/",
+            "Home"
+          ],
+          [
+            "/printable-connect-the-dots/",
+            "Free Printables"
+          ],
+          [
+            "/convert-photo-to-beads/",
+            "Bead Art Maker"
+          ],
+          [
+            "/convert-photo-to-beads/gallery/",
+            "Pattern Gallery"
+          ],
+          [
+            "/pricing/",
+            "Pricing"
+          ],
+          [
+            "/how-to-make/",
+            "How to Make"
+          ],
+          [
+            "/connect-the-dots-coloring-pages/",
+            "Coloring Pages"
+          ],
+          [
+            "/",
+            "Home"
+          ],
+          [
+            "/printable-connect-the-dots/",
+            "All Printables"
+          ],
+          [
+            "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png",
+            ""
+          ],
+          [
+            "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle.pdf",
+            "Download Puzzle PDF"
+          ],
+          [
+            "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Solution.pdf",
+            "Download Solution PDF"
+          ],
+          [
+            "/printable-connect-the-dots/",
+            "Browse all printables"
+          ],
+          [
+            "/connect-the-dots-for-adults/",
+            "Connect the dots for adults"
+          ],
+          [
+            "https://dang.ai/",
+            ""
+          ],
+          [
+            "/en/printables/mountain-landscape-120/",
+            "English"
+          ],
+          [
+            "/es/printables/mountain-landscape-120/",
+            "Español"
+          ],
+          [
+            "/de/printables/mountain-landscape-120/",
+            "Deutsch"
+          ],
+          [
+            "/",
+            "Home"
+          ],
+          [
+            "/connect-the-dots-1-to-10/",
+            "Connect the Dots 1 to 10"
+          ],
+          [
+            "/printable-connect-the-dots/",
+            "Free Printables"
+          ],
+          [
+            "/how-to-make/",
+            "How to Make"
+          ],
+          [
+            "/christmas-printables/",
+            "Christmas Printables"
+          ],
+          [
+            "/convert-photo-to-beads/",
+            "Bead Art Maker"
+          ],
+          [
+            "/convert-photo-to-beads/gallery/",
+            "Pattern Gallery"
+          ],
+          [
+            "/connect-the-dots-coloring-pages/",
+            "Coloring Pages"
+          ],
+          [
+            "/privacy/",
+            "Privacy Policy"
+          ],
+          [
+            "/terms/",
+            "Terms of Service"
+          ],
+          [
+            "/dmca/",
+            "DMCA Policy"
+          ],
+          [
+            "/pricing/",
+            "Pricing"
+          ],
+          [
+            "https://enjoy4game.com/",
+            "enjoy4game.com"
+          ],
+          [
+            "/popular-character-dot-to-dot-printable-worksheets/",
+            "Popular Character Dot-to-Dot Printables"
+          ],
+          [
+            "/free-animal-dot-to-dot-printables-pdf/",
+            "Free Animal Dot-to-Dot Printables PDF"
+          ],
+          [
+            "https://aiclotheschangers.app/",
+            "AI Clothes Changer"
+          ],
+          [
+            "https://gridmakeronline.com/",
+            "gridmakeronline.com"
+          ],
+          [
+            "https://ipooket.com/",
+            "Romestead"
+          ],
+          [
+            "https://twitter.com",
+            "Twitter"
+          ],
+          [
+            "https://www.linkedin.com",
+            "LinkedIn"
+          ],
+          [
+            "https://www.facebook.com",
+            "Facebook"
+          ],
+          [
+            "https://www.reddit.com",
+            "Reddit"
+          ],
+          [
+            "https://seed3dlabs.com/",
+            "Powered by Seed3DLabs"
+          ]
+        ],
+        "images": [
+          "<img alt=\"A4 Mountain Landscape puzzle with 120 numbered dots and a website credit in the footer\" width=\"1191\" height=\"1684\" decoding=\"async\" data-nimg=\"1\" class=\"h-auto w-full\" style=\"color:transparent\" src=\"/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png\">",
+          "<img alt=\"ConnectTheDots Logo\" loading=\"lazy\" width=\"24\" height=\"24\" decoding=\"async\" data-nimg=\"1\" style=\"color:transparent\" srcset=\"/_next/image/?url=%2Flogo.png&amp;w=32&amp;q=75 1x, /_next/image/?url=%2Flogo.png&amp;w=48&amp;q=75 2x\" src=\"/_next/image/?url=%2Flogo.png&amp;w=48&amp;q=75\">",
+          "<img alt=\"Dang.ai\" loading=\"lazy\" width=\"150\" height=\"54\" decoding=\"async\" data-nimg=\"1\" style=\"color:transparent\" srcset=\"/_next/image/?url=https%3A%2F%2Fcdn.prod.website-files.com%2F63d8afd87da01fb58ea3fbcb%2F6487e2868c6c8f93b4828827_dang-badge.png&amp;w=256&amp;q=75 1x, /_next/image/?url=https%3A%2F%2Fcdn.prod.website-files.com%2F63d8afd87da01fb58ea3fbcb%2F6487e2868c6c8f93b4828827_dang-badge.png&amp;w=384&amp;q=75 2x\" src=\"/_next/image/?url=https%3A%2F%2Fcdn.prod.website-files.com%2F63d8afd87da01fb58ea3fbcb%2F6487e2868c6c8f93b4828827_dang-badge.png&amp;w=384&amp;q=75\">",
+          "<img alt=\"Matching Mountain Landscape solution connecting points 1 through 120 and back to 1\" loading=\"lazy\" width=\"1191\" height=\"1684\" decoding=\"async\" data-nimg=\"1\" class=\"mt-4 h-auto w-full\" style=\"color:transparent\" src=\"/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Solution-preview.png\">"
+        ],
+        "schema": [],
+        "bodyText": "ConnectTheDotsENHomeFree PrintablesBead Art MakerPattern GalleryPricingHow to MakeColoring PagesENLoginHome / All Printables / Mountain Landscape 120Mountain Landscape — 120-Point Dot to DotConnect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.Puzzle previewTap the preview to inspect the full page.Print the puzzleNumbered dots120 (1–120)Paper sizeA4 · 210 × 297 mmNumber size9.2 ptSuggested audienceAdultsDifficultyNot yet ratedDownload Puzzle PDFDownload Solution PDFFree downloads, no account needed. Each PDF is one A4 page with the same website credit.How to use this worksheetPrint the Puzzle PDF on A4 at Actual size / 100%. Check the 50 mm footer line with a ruler.Connect 1 to 120 in order, then join 120 back to 1 to complete the outline.Compare your drawing with the matching Solution PDF, which follows the same complete point sequence.Physical print testing and independent playtesting are pending. Completion time and difficulty have not been measured.Show solution previewExplore more dot-to-dot activitiesThis original mountain-and-fir outline is a separate 120-point worksheet. Browse the collection for other themes or explore activities for adults.Browse all printablesConnect the dots for adultsConnectthedotsprintableYour source for high-quality, free connect the dots printables for kids and adults.Language:English|Español|DeutschPrintablesHomeConnect the Dots 1 to 10Free PrintablesHow to MakeChristmas PrintablesBead Art MakerPattern GalleryColoring PagesLegalPrivacy PolicyTerms of ServiceDMCA PolicyPricingenjoy4game.com Popular Character Dot-to-Dot PrintablesFree Animal Dot-to-Dot Printables PDFAI Clothes Changergridmakeronline.comRomesteadTwitterLinkedInFacebookReddit© 2026 ConnectTheDotsPrintable.online. All rights reserved.Powered by Seed3DLabsAll printables are for personal and educational use only.Feedback"
+      },
+      "raw_html_sha256": "acf1f6eab6896da6557f302dac9cfbf85f80baa2e13aeeac435603ace032eed4"
+    },
+    "googlebot_bingbot_200_indexable": true,
+    "language_variants": [
+      {
+        "path": "/en/printables/mountain-landscape-120/",
+        "chain": [
+          {
+            "path": "/en/printables/mountain-landscape-120/",
+            "status": 307,
+            "headers": {
+              "link": null,
+              "x-robots-tag": null,
+              "location": "/printables/mountain-landscape-120/",
+              "refresh": null,
+              "content-type": null,
+              "x-middleware-rewrite": null,
+              "content-security-policy": null
+            }
+          },
+          {
+            "path": "/printables/mountain-landscape-120/",
+            "status": 200,
+            "headers": {
+              "link": "</printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png>; rel=preload; as=\"image\"",
+              "x-robots-tag": null,
+              "location": null,
+              "refresh": null,
+              "content-type": "text/html; charset=utf-8",
+              "x-middleware-rewrite": "/en/printables/mountain-landscape-120/",
+              "content-security-policy": null
+            }
+          }
+        ],
+        "html_alternates": [
+          "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
+        ]
+      },
+      {
+        "path": "/de/printables/mountain-landscape-120/",
+        "chain": [
+          {
+            "path": "/de/printables/mountain-landscape-120/",
+            "status": 404,
+            "headers": {
+              "link": null,
+              "x-robots-tag": null,
+              "location": null,
+              "refresh": null,
+              "content-type": "text/html; charset=utf-8",
+              "x-middleware-rewrite": null,
+              "content-security-policy": null
+            }
+          }
+        ],
+        "html_alternates": []
+      },
+      {
+        "path": "/es/printables/mountain-landscape-120/",
+        "chain": [
+          {
+            "path": "/es/printables/mountain-landscape-120/",
+            "status": 404,
+            "headers": {
+              "link": null,
+              "x-robots-tag": null,
+              "location": null,
+              "refresh": null,
+              "content-type": "text/html; charset=utf-8",
+              "x-middleware-rewrite": null,
+              "content-security-policy": null
+            }
+          }
+        ],
+        "html_alternates": []
+      },
+      {
+        "path": "/pt/printables/mountain-landscape-120/",
+        "chain": [
+          {
+            "path": "/pt/printables/mountain-landscape-120/",
+            "status": 404,
+            "headers": {
+              "link": null,
+              "x-robots-tag": null,
+              "location": null,
+              "refresh": null,
+              "content-type": "text/html; charset=utf-8",
+              "x-middleware-rewrite": null,
+              "content-security-policy": null
+            }
+          }
+        ],
+        "html_alternates": []
+      },
+      {
+        "path": "/fr/printables/mountain-landscape-120/",
+        "chain": [
+          {
+            "path": "/fr/printables/mountain-landscape-120/",
+            "status": 404,
+            "headers": {
+              "link": null,
+              "x-robots-tag": null,
+              "location": null,
+              "refresh": null,
+              "content-type": "text/html; charset=utf-8",
+              "x-middleware-rewrite": null,
+              "content-security-policy": null
+            }
+          }
+        ],
+        "html_alternates": []
+      },
+      {
+        "path": "/it/printables/mountain-landscape-120/",
+        "chain": [
+          {
+            "path": "/it/printables/mountain-landscape-120/",
+            "status": 404,
+            "headers": {
+              "link": null,
+              "x-robots-tag": null,
+              "location": null,
+              "refresh": null,
+              "content-type": "text/html; charset=utf-8",
+              "x-middleware-rewrite": null,
+              "content-security-policy": null
+            }
+          }
+        ],
+        "html_alternates": []
+      },
+      {
+        "path": "/nl/printables/mountain-landscape-120/",
+        "chain": [
+          {
+            "path": "/nl/printables/mountain-landscape-120/",
+            "status": 404,
+            "headers": {
+              "link": null,
+              "x-robots-tag": null,
+              "location": null,
+              "refresh": null,
+              "content-type": "text/html; charset=utf-8",
+              "x-middleware-rewrite": null,
+              "content-security-policy": null
+            }
+          }
+        ],
+        "html_alternates": []
+      }
+    ]
+  },
+  "sitemap": {
+    "added": [
+      "https://connectthedotsprintable.online/printables/mountain-landscape-120/"
+    ],
+    "existing_entries_unchanged_except_build_time_lastmod": true,
+    "existing_count": 69,
+    "new_entry": "<ns0:url xmlns:ns0=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n<ns0:loc>https://connectthedotsprintable.online/printables/mountain-landscape-120/</ns0:loc>\n<ns0:changefreq>monthly</ns0:changefreq>\n<ns0:priority>0.6</ns0:priority>\n</ns0:url>\n",
+    "new_entry_language_alternates": []
+  },
+  "robots_txt_unchanged_and_allows_crawling": true,
+  "directory_html_link_unchanged": true,
+  "directory_click_pass": true,
+  "assets": [
+    {
+      "path": "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png",
+      "before_after_source_bytes_equal": true,
+      "sha256": "c45250e1ea532e34d1501276c84813501ccc9af786c21972796dbc814ab81fab"
+    },
+    {
+      "path": "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle.pdf",
+      "before_after_source_bytes_equal": true,
+      "sha256": "8f7b6040b00d9eab32e42615ff20bc971ee4218dac2f51a3b29b01b9348153c4"
+    },
+    {
+      "path": "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle.svg",
+      "before_after_source_bytes_equal": true,
+      "sha256": "f1de6fde77ea9a94d51c336e2c24100c66021cb4f15927d6df090bbe9fcad783"
+    },
+    {
+      "path": "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Solution-preview.png",
+      "before_after_source_bytes_equal": true,
+      "sha256": "2ba7a2504ab06d6803eddf67980d2e0220dcd68307d711bbf1d92225ce740657"
+    },
+    {
+      "path": "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Solution.pdf",
+      "before_after_source_bytes_equal": true,
+      "sha256": "017acde4697cbfe92c2a2f4a6e73336558a4e8b66aa190355bc0f3d383bc802c"
+    },
+    {
+      "path": "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Solution.svg",
+      "before_after_source_bytes_equal": true,
+      "sha256": "34d065e62fab47828bcc71c0eeb6391e9d71ff6e160346cd33e8f403226fd227"
+    }
+  ],
   "downloads": [
     {
       "role": "Puzzle",
-      "filename": "Mountain-Landscape-120-Puzzle.pdf",
       "status": 200,
       "content_type": "application/pdf",
+      "readable_pages": 1,
+      "brand_footer_once": true,
       "sha256": "8f7b6040b00d9eab32e42615ff20bc971ee4218dac2f51a3b29b01b9348153c4",
-      "source_bytes_equal": true,
-      "readable_pages": 1
+      "source_bytes_equal": true
     },
     {
       "role": "Solution",
-      "filename": "Mountain-Landscape-120-Solution.pdf",
       "status": 200,
       "content_type": "application/pdf",
+      "readable_pages": 1,
+      "brand_footer_once": true,
       "sha256": "017acde4697cbfe92c2a2f4a6e73336558a4e8b66aa190355bc0f3d383bc802c",
-      "source_bytes_equal": true,
-      "readable_pages": 1
+      "source_bytes_equal": true
     }
   ],
   "viewports": [
     {
-      "width": 1440,
-      "scroll": 1440,
       "viewport": 1440,
+      "scrollWidth": 1440,
       "images": [
-        {
-          "width": 1191,
-          "height": 1684,
-          "displayWidth": 494
-        },
-        {
-          "width": 1191,
-          "height": 1684,
-          "displayWidth": 494
-        }
+        [
+          1191,
+          1684
+        ],
+        [
+          1191,
+          1684
+        ]
       ]
     },
     {
-      "width": 390,
-      "scroll": 390,
       "viewport": 390,
+      "scrollWidth": 390,
       "images": [
-        {
-          "width": 1191,
-          "height": 1684,
-          "displayWidth": 324
-        },
-        {
-          "width": 1191,
-          "height": 1684,
-          "displayWidth": 308
-        }
+        [
+          1191,
+          1684
+        ],
+        [
+          1191,
+          1684
+        ]
       ]
     }
   ],
-  "locale_guards": {
-    "es": {
-      "http_status": 404,
-      "not_found": true,
-      "noindex": true
-    },
-    "de": {
-      "http_status": 404,
-      "not_found": true,
-      "noindex": true
-    },
-    "pt": {
-      "http_status": 404,
-      "not_found": true,
-      "noindex": true
-    },
-    "fr": {
-      "http_status": 404,
-      "not_found": true,
-      "noindex": true
-    },
-    "it": {
-      "http_status": 404,
-      "not_found": true,
-      "noindex": true
-    },
-    "nl": {
-      "http_status": 404,
-      "not_found": true,
-      "noindex": true
-    }
-  },
-  "directory_entry_navigation": true,
-  "new_page": {
-    "status": 200,
-    "title": "Mountain Landscape 120-Point Dot to Dot | Puzzle & Solution PDF",
-    "meta": [
-      "<meta charset=\"utf-8\">",
-      "<meta name=\"description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">",
-      "<meta name=\"google-adsense-account\" content=\"ca-pub-3383070348689557\">",
-      "<meta name=\"robots\" content=\"noindex, follow\">",
-      "<meta name=\"twitter:card\" content=\"summary_large_image\">",
-      "<meta name=\"twitter:description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">",
-      "<meta name=\"twitter:image\" content=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png\">",
-      "<meta name=\"twitter:title\" content=\"Mountain Landscape \u2014 120-Point Dot to Dot\">",
-      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
-      "<meta property=\"og:description\" content=\"Connect 120 numbered dots to reveal three mountain peaks and a foreground fir tree. Download the free A4 puzzle and its matching solution PDF.\">",
-      "<meta property=\"og:image\" content=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png\">",
-      "<meta property=\"og:image:alt\" content=\"A4 Mountain Landscape puzzle with 120 numbered dots and a website credit in the footer\">",
-      "<meta property=\"og:image:height\" content=\"1684\">",
-      "<meta property=\"og:image:width\" content=\"1191\">",
-      "<meta property=\"og:title\" content=\"Mountain Landscape \u2014 120-Point Dot to Dot\">",
-      "<meta property=\"og:type\" content=\"article\">",
-      "<meta property=\"og:url\" content=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
-    ],
-    "seoLinks": [
-      "<link rel=\"canonical\" href=\"https://connectthedotsprintable.online/printables/mountain-landscape-120/\">"
-    ],
-    "h1": [
-      "Mountain Landscape \u2014 120-Point Dot to Dot"
-    ],
-    "headings": [
-      "Puzzle preview",
-      "Print the puzzle",
-      "How to use this worksheet",
-      "Explore more dot-to-dot activities"
-    ],
-    "hrefs": [
-      "/",
-      "/",
-      "/printable-connect-the-dots/",
-      "/convert-photo-to-beads/",
-      "/convert-photo-to-beads/gallery/",
-      "/pricing/",
-      "/how-to-make/",
-      "/connect-the-dots-coloring-pages/",
-      "/",
-      "/printable-connect-the-dots/",
-      "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle-preview.png",
-      "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Puzzle.pdf",
-      "/printables/mountain-landscape-120/v0.2/Mountain-Landscape-120-Solution.pdf",
-      "/printable-connect-the-dots/",
-      "/connect-the-dots-for-adults/",
-      "https://dang.ai/",
-      "/en/printables/mountain-landscape-120/",
-      "/es/printables/mountain-landscape-120/",
-      "/de/printables/mountain-landscape-120/",
-      "/",
-      "/connect-the-dots-1-to-10/",
-      "/printable-connect-the-dots/",
-      "/how-to-make/",
-      "/christmas-printables/",
-      "/convert-photo-to-beads/",
-      "/convert-photo-to-beads/gallery/",
-      "/connect-the-dots-coloring-pages/",
-      "/privacy/",
-      "/terms/",
-      "/dmca/",
-      "/pricing/",
-      "https://enjoy4game.com/",
-      "/popular-character-dot-to-dot-printable-worksheets/",
-      "/free-animal-dot-to-dot-printables-pdf/",
-      "https://aiclotheschangers.app/",
-      "https://gridmakeronline.com/",
-      "https://ipooket.com/",
-      "https://twitter.com",
-      "https://www.linkedin.com",
-      "https://www.facebook.com",
-      "https://www.reddit.com",
-      "https://seed3dlabs.com/"
-    ],
-    "schema": []
-  }
+  "physical_print": "Pending",
+  "independent_playtest": "Pending"
 }
