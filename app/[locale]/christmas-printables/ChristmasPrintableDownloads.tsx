@@ -92,12 +92,78 @@ const items = [
   }
 ];
 
+type FaqItem = { q: string; a: string };
+const approvedFaqs = {
+  "en": [
+    {
+      "q": "What is included in this Christmas PDF collection?",
+      "a": "This page offers separate PDF downloads for two original designs: a 40-point Christmas tree and presents puzzle and a 150-point ornament. Each has matching Puzzle and Solution PDFs in native A4 and US Letter sizes."
+    },
+    {
+      "q": "How do I download the puzzle and answer?",
+      "a": "Choose a labeled Puzzle or Solution link for A4 or US Letter, then open the PDF and inspect the print preview. The legacy /ChristmasDottoDot.pdf contains only the two-page A4 P1 tree puzzle (40 points) and its matching answer."
+    },
+    {
+      "q": "Are the downloads free, and do they include a website credit?",
+      "a": "The static PDFs are free to download without an account for personal and classroom use. They include a website credit in the footer."
+    },
+    {
+      "q": "What ages and difficulty levels are these puzzles suitable for?",
+      "a": "Digital checks confirm 40 and 150 numbered dots. Age suitability, difficulty and completion time have not been independently rated. Physical printing and independent full playtesting have not been performed."
+    }
+  ],
+  "es": [
+    {
+      "q": "¿Qué incluye esta colección de PDF navideños?",
+      "a": "Esta página ofrece descargas PDF independientes de dos diseños originales: un árbol de Navidad y regalos de 40 puntos y un adorno de 150 puntos. Cada diseño tiene PDF de actividad y solución correspondientes en tamaños nativos A4 y carta (US Letter)."
+    },
+    {
+      "q": "¿Cómo descargo el puzzle y su solución?",
+      "a": "Elige un enlace de Puzzle o Solución para A4 o US Letter, abre el PDF y revisa la vista previa de impresión. El archivo anterior /ChristmasDottoDot.pdf contiene solo dos páginas A4 del P1: el árbol de 40 puntos y su solución correspondiente."
+    },
+    {
+      "q": "¿Las descargas son gratuitas e incluyen el crédito del sitio?",
+      "a": "Los PDF estáticos se descargan gratis y sin cuenta para uso personal y escolar. Incluyen el crédito del sitio en el pie de página."
+    },
+    {
+      "q": "¿Para qué edades y niveles de dificultad son estos puzzles?",
+      "a": "Las comprobaciones digitales confirman 40 y 150 puntos numerados. No se han evaluado de forma independiente la edad recomendada, la dificultad ni el tiempo de realización. No se han realizado pruebas de impresión física ni una resolución completa por una persona independiente."
+    }
+  ],
+  "it": [
+    {
+      "q": "Cosa include questa raccolta di PDF natalizi?",
+      "a": "Questa pagina offre PDF separati per due disegni originali: un albero di Natale con regali da 40 punti e una decorazione da 150 punti. Ogni disegno ha PDF puzzle e soluzione corrispondenti nei formati nativi A4 e US Letter."
+    },
+    {
+      "q": "Come scarico il puzzle e la soluzione?",
+      "a": "Scegli un collegamento Puzzle o Soluzione per A4 o US Letter, apri il PDF e controlla l’anteprima di stampa. Il file precedente /ChristmasDottoDot.pdf contiene soltanto due pagine A4 del P1: l’albero da 40 punti e la soluzione corrispondente."
+    },
+    {
+      "q": "I download sono gratuiti e includono il credito del sito?",
+      "a": "I PDF statici si scaricano gratuitamente senza account per uso personale e scolastico. Includono il credito del sito nel piè di pagina."
+    },
+    {
+      "q": "A quali età e livelli di difficoltà sono adatti questi puzzle?",
+      "a": "I controlli digitali confermano 40 e 150 punti numerati. Età consigliata, difficoltà e tempo di completamento non sono stati valutati indipendentemente. Non sono state effettuate prove di stampa fisica né una risoluzione completa da parte di una persona indipendente."
+    }
+  ]
+};
+
+// B approval applies only to the three named locales. Preserve A's existing
+// English-copy fallback FAQ for all other locale routes.
+export function getChristmasFaqs(locale: string): FaqItem[] {
+    if (locale === "en" || locale === "es" || locale === "it") return approvedFaqs[locale];
+    const c = copy.en;
+    const included = items.map(i => `${i.name.en} (${i.count})`).join("; ");
+    return [{ q: c.qa, a: `${included}. A4 / US Letter. ${c.note}` }, { q: c.qb, a: c.ab }, { q: c.qc, a: c.ac }];
+}
+
 export default function ChristmasPrintableDownloads({ locale }: { locale: string }) {
     const lang = locale === "es" || locale === "it" ? locale : "en";
     const c = copy[lang];
     const prefix = locale === "en" ? "" : `/${locale}`;
-    const included = items.map(i => `${i.name[lang]} (${i.count})`).join("; ");
-    const faqs = [{ q: c.qa, a: `${included}. A4 / US Letter. ${c.note}` }, { q: c.qb, a: c.ab }, { q: c.qc, a: c.ac }];
+    const faqs = getChristmasFaqs(locale);
     return <main className="bg-slate-50 py-10 text-slate-800">
         <div className="mx-auto max-w-6xl space-y-8 px-5">
             <section className="rounded-3xl bg-white p-7 shadow-sm">

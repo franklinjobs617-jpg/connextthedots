@@ -18,9 +18,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? "Unisci i Puntini di Natale Gratis | Pacchetto PDF"
         : "Free Christmas Connect the Dots Printables | PDF Bundle";
     const description = isEs
-        ? "Descarga gratis un paquete PDF de unir puntos navideños — Papá Noel, árboles, adornos, fácil y difícil. O genera tu propio diseño personalizado."
+        ? "Descarga PDF gratis de unir puntos de Navidad: árbol y regalos de 40 puntos y adorno de 150 puntos, con soluciones en A4 y tamaño carta."
         : isIt
-        ? "Scarica gratis un pacchetto PDF di unisci i puntini di Natale — Babbo Natale, alberi, decorazioni, facile e difficile. O crea il tuo puzzle personalizzato."
+        ? "Scarica PDF gratuiti di unisci i puntini di Natale: albero e regali da 40 punti e decorazione da 150 punti, con soluzioni in A4 e formato Letter."
+        : locale === "en"
+        ? "Download free Christmas dot-to-dot PDFs: a 40-point tree and presents puzzle and a 150-point ornament, with matching answers in A4 and US Letter."
         : "Download a free Christmas connect the dots PDF bundle — Santa, trees, ornaments, easy and hard. Or generate your own custom holiday puzzle.";
 
     return {
