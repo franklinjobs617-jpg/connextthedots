@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import Script from "next/script";
-import { FileDown, ExternalLink } from "lucide-react";
+import ChristmasPrintableDownloads from "./ChristmasPrintableDownloads";
 
 type Props = { locale: string };
 
@@ -166,26 +164,6 @@ const copy: Record<string, LocaleCopy> = {
     },
 };
 
-// Preview images — these illustrate what's inside the bundle.
-// They are standalone showcase images, not individually downloadable puzzles.
-const previewImages = [
-    {
-        src: "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/Christmas-Dot-To-Dot-Bundle-Hero.webp",
-        alt: "Preview of the Christmas connect-the-dots bundle cover",
-        label: { en: "Bundle preview", es: "Vista previa del paquete", it: "Anteprima del pacchetto" },
-    },
-    {
-        src: "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/Hard-Christmas-Ornament-Connect-The-Dots-Adults.webp",
-        alt: "Hard Christmas ornament connect-the-dots puzzle for older kids and adults",
-        label: { en: "Hard puzzle sample", es: "Ejemplo puzzle difícil", it: "Esempio puzzle difficile" },
-    },
-    {
-        src: "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/Paper-Type-Comparison-Print-Quality.webp",
-        alt: "Print quality comparison for the Christmas worksheet bundle",
-        label: { en: "Print quality sample", es: "Ejemplo calidad de impresión", it: "Esempio qualità di stampa" },
-    },
-];
-
 function getCopy(locale: string): LocaleCopy {
     return copy[locale] ?? copy.en;
 }
@@ -216,158 +194,15 @@ function buildSchemas(locale: string, c: LocaleCopy) {
     return { collectionSchema, faqSchema };
 }
 
+// Protected JSON-LD intentionally uses the unchanged legacy copy below.
+// Visible facts/FAQ are maintained separately until the exact schema correction
+// receives 04 review and Founder approval. This known mismatch blocks release.
 export default function ChristmasContent({ locale }: Props) {
-    const c = getCopy(locale);
-    const homeHref = locale === "en" ? "/" : `/${locale}/`;
-    const libraryHref = locale === "en" ? "/printable-connect-the-dots/" : `/${locale}/printable-connect-the-dots/`;
-    const { collectionSchema, faqSchema } = buildSchemas(locale, c);
-
-    return (
-        <>
-            <Script id="christmas-collection-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
-            <Script id="christmas-faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-            <main className="bg-slate-50 py-10">
-                <div className="container mx-auto max-w-7xl px-6 lg:px-8 space-y-10">
-
-                    {/* Hero */}
-                    <section className="rounded-[2rem] bg-white p-6 md:p-10 shadow-xl">
-                        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] items-center">
-                            <div>
-                                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue mb-3">
-                                    {c.eyebrow}
-                                </p>
-                                <h1 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-5">
-                                    {c.h1}
-                                </h1>
-                                <p className="text-lg leading-8 text-gray-600 mb-4">
-                                    {c.heroBody}
-                                </p>
-                                <p className="text-xs text-gray-400 mb-6">
-                                    {c.lastUpdated}
-                                </p>
-
-                                <a
-                                    href="/ChristmasDottoDot.pdf"
-                                    download
-                                    className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand-blue text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:bg-indigo-700 transition-all"
-                                >
-                                    <FileDown size={18} />
-                                    {c.downloadBtn}
-                                </a>
-
-                                <div className="flex flex-wrap gap-3 text-sm mt-6">
-                                    {c.tags.map((tag) => (
-                                        <span key={tag} className="rounded-full bg-slate-100 px-4 py-2 font-medium text-slate-700">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div>
-                                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
-                                    {c.previewLabel}
-                                </p>
-                                <div className="grid gap-4 sm:grid-cols-3">
-                                    {previewImages.map((image) => (
-                                        <figure key={image.alt} className="rounded-3xl border border-slate-100 bg-slate-50 p-3">
-                                            <Image src={image.src} alt={image.alt} width={320} height={320} className="aspect-square w-full rounded-2xl object-cover" />
-                                            <figcaption className="mt-3 text-sm font-medium text-gray-700">
-                                                {image.label[locale as keyof typeof image.label] ?? image.label.en}
-                                            </figcaption>
-                                        </figure>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Content sections */}
-                    <section className="grid gap-6 lg:grid-cols-3">
-                        {c.contentCards.map((card) => (
-                            <article key={card.title} className="rounded-3xl bg-white p-6 shadow-sm border border-slate-100">
-                                <h2 className="text-2xl font-bold text-gray-900 mb-3">{card.title}</h2>
-                                <p className="text-sm leading-7 text-gray-600">{card.body}</p>
-                            </article>
-                        ))}
-                    </section>
-
-                    {/* How to print + activity ideas */}
-                    <section className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-                        <article className="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-100">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-4">{c.howToTitle}</h2>
-                            <ol className="space-y-4">
-                                {c.howToSteps.map((step, index) => (
-                                    <li key={step} className="flex gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue font-bold text-white">{index + 1}</span>
-                                        <span className="text-sm leading-7 text-gray-700">{step}</span>
-                                    </li>
-                                ))}
-                            </ol>
-                        </article>
-
-                        <article className="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-100">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-4">{c.screenFreeTitle}</h2>
-                            <p className="text-sm leading-7 text-gray-600 mb-4">
-                                {c.screenFreeBody}
-                            </p>
-                            <div className="flex flex-wrap gap-3 mb-4">
-                                {c.screenFreeTags.map((tag, i) => {
-                                    const colors = ["bg-red-50 text-red-700", "bg-green-50 text-green-700", "bg-blue-50 text-blue-700", "bg-yellow-50 text-yellow-700"];
-                                    return (
-                                        <span key={tag} className={`rounded-full px-4 py-2 text-sm font-medium ${colors[i % colors.length]}`}>
-                                            {tag}
-                                        </span>
-                                    );
-                                })}
-                            </div>
-                            <p className="text-xs text-gray-400 flex items-center gap-1.5">
-                                {c.sourceLabel}{" "}
-                                <a
-                                    href="https://www.healthychildren.org/English/family-life/Media/Pages/helping-kids-thrive-in-a-digital-world-AAP-policy-explained.aspx"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-brand-blue hover:underline inline-flex items-center gap-1"
-                                >
-                                    {c.sourceText}
-                                    <ExternalLink size={11} aria-hidden="true" />
-                                </a>
-                            </p>
-                        </article>
-                    </section>
-
-                    {/* FAQ + generator CTA */}
-                    <section className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-                        <article className="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-100">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-4">{c.faqTitle}</h2>
-                            <div className="space-y-5">
-                                {c.faqItems.map((item) => (
-                                    <div key={item.q} className="border-b border-slate-100 pb-5 last:border-b-0 last:pb-0">
-                                        <h3 className="font-semibold text-gray-900">{item.q}</h3>
-                                        <p className="mt-2 text-sm leading-7 text-gray-600">{item.a}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </article>
-
-                        <article className="rounded-[2rem] bg-slate-900 px-8 py-10 text-white">
-                            <h2 className="text-3xl font-bold mb-4">{c.ctaTitle}</h2>
-                            <p className="max-w-2xl text-slate-300 leading-8 mb-6">
-                                {c.ctaBody}
-                            </p>
-                            <div className="flex flex-wrap gap-3">
-                                <Link href={libraryHref} className="rounded-full bg-white px-5 py-3 font-semibold text-slate-900 transition hover:bg-slate-200">
-                                    {c.browseLibraryBtn}
-                                </Link>
-                                <Link href={homeHref} className="rounded-full bg-brand-blue px-5 py-3 font-semibold text-white transition hover:bg-indigo-700">
-                                    {c.openGeneratorBtn}
-                                </Link>
-                            </div>
-                        </article>
-                    </section>
-
-                </div>
-            </main>
-        </>
-    );
+    const legacySchemaCopy = getCopy(locale);
+    const { collectionSchema, faqSchema } = buildSchemas(locale, legacySchemaCopy);
+    return <>
+        <Script id="christmas-collection-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
+        <Script id="christmas-faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        <ChristmasPrintableDownloads locale={locale} />
+    </>;
 }
