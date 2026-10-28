@@ -2,6 +2,7 @@
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 import type { NextRequest } from 'next/server';
+import { originalSheetIds } from '@/lib/original-sheets';
 
 const handleI18n = createMiddleware(routing);
 
@@ -11,6 +12,9 @@ export default function middleware(request: NextRequest) {
   if (/^\/(?:(?:en|de|es|pt|fr|it|nl)\/)?printables\/mountain-landscape-120\/?$/.test(request.nextUrl.pathname)) {
     response.headers.delete('link');
   }
+  // Additive only: these five new resources have no translated counterparts.
+  const originalMatch = request.nextUrl.pathname.match(/^\/(?:(?:en|de|es|pt|fr|it|nl)\/)?printables\/([^/]+)\/?$/);
+  if (originalMatch && originalSheetIds.includes(originalMatch[1])) response.headers.delete('link');
   return response;
 }
 
