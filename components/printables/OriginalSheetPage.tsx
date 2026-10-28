@@ -35,7 +35,7 @@ export async function OriginalSheetPage({ item, params }: OriginalSheetProps & {
                 <section aria-labelledby="puzzle-preview" className="rounded-2xl border border-slate-200 bg-white p-4 md:p-6">
                     <h2 id="puzzle-preview" className="text-xl font-bold">Puzzle preview</h2>
                     <a href={sheetAsset(item, "A4", "Puzzle", "png")} aria-label={`Open full-size ${item.title} puzzle preview`}>
-                        <Image src={sheetAsset(item, "A4", "Puzzle", "png")} alt={`Actual A4 puzzle PDF preview: ${item.title}, numbers 1–${item.count}, with pre-drawn details`} width={893} height={1263} unoptimized priority className="mt-4 h-auto w-full" />
+                        <Image src={sheetAsset(item, "A4", "Puzzle", "png")} alt={`Actual A4 puzzle PDF preview: ${item.title}, numbers 1–${item.count}, ${item.hasPreDrawnDetails === false ? "outline only" : "with pre-drawn details"}`} width={893} height={1263} unoptimized priority className="mt-4 h-auto w-full" />
                     </a>
                     <p className="mt-3 text-sm text-slate-600">Rasterized from the A4 Puzzle PDF. Open the image to inspect labels; use a PDF below for printing.</p>
                     <details className="mt-5 border-t border-slate-200 pt-4">
@@ -65,7 +65,7 @@ export async function OriginalSheetPage({ item, params }: OriginalSheetProps & {
                         <ol className="mt-4 list-decimal space-y-3 pl-5 leading-relaxed">
                             <li>Choose the Puzzle PDF for your paper. Select the matching paper size and Actual size / 100% in your print dialog.</li>
                             <li>Measure the footer check line: it should be 50 mm. Fit-to-page can change the printed number size.</li>
-                            <li>Connect 1 through {item.count} in order, then join {item.count} back to 1. Solid details are already drawn.</li>
+                            <li>Connect 1 through {item.count} in order, then join {item.count} back to 1. {item.hasPreDrawnDetails === false ? "No interior details are pre-drawn." : "Solid details are already drawn."}</li>
                             <li>{item.solveTip}</li>
                         </ol>
                         <p className="mt-4 text-sm leading-relaxed text-slate-600">Physical A4 and Letter printing and independent human full-solve are NOT TESTED. Printer margins vary. This is not a verified large-print resource; age suitability and solve time are unmeasured.</p>
