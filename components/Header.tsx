@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Link, usePathname } from "@/i18n/routing";
+import { sheetLanguageTarget } from "@/lib/original-sheets";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { useAuth } from "@/lib/auth-context";
@@ -220,7 +221,7 @@ export default function Header() {
           <div className="absolute right-0 top-full pt-2 w-[140px] z-[70]">
             <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden flex flex-col">
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "en")}
                 locale="en"
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
@@ -228,7 +229,7 @@ export default function Header() {
                 English (EN)
               </Link>
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "es")}
                 locale="es"
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
@@ -236,7 +237,7 @@ export default function Header() {
                 Español (ES)
               </Link>
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "de")}
                 locale="de"
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
@@ -244,7 +245,7 @@ export default function Header() {
                 Deutsch (DE)
               </Link>
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "pt")}
                 locale="pt"
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
@@ -252,7 +253,7 @@ export default function Header() {
                 Português (PT)
               </Link>
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "fr")}
                 locale="fr"
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
@@ -260,7 +261,7 @@ export default function Header() {
                 Français (FR)
               </Link>
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "it")}
                 locale="it"
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"
@@ -268,7 +269,7 @@ export default function Header() {
                 Italiano (IT)
               </Link>
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "nl")}
                 locale="nl"
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 no-underline"

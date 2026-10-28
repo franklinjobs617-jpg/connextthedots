@@ -2,14 +2,36 @@
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 import type { NextRequest } from 'next/server';
+// This approval covers only these five Wave A routes, never a future wave.
+const waveAIds = new Set([
+  'elephant-100', 'hot-air-balloon-100', 'seahorse-100',
+  'hummingbird-120', 'shark-140',
+]);
 
 const handleI18n = createMiddleware(routing);
+// Ignore language preference only on the exact unprefixed English resources.
+// Keep the user's cookie intact for all subsequent unrelated navigation.
+const handleEnglishSheet = createMiddleware({
+  ...routing, localeDetection: false, localeCookie: false, alternateLinks: false,
+});
 
 export default function middleware(request: NextRequest) {
-  const response = handleI18n(request);
+  const match = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?printables\/([^/]+)\/?$/);
+  const isWaveA = Boolean(match && waveAIds.has(match[2]));
+  const response = isWaveA && !match?.[1] ? handleEnglishSheet(request) : handleI18n(request);
   // This new worksheet exists only in English; do not advertise untranslated URLs.
   if (/^\/(?:(?:en|de|es|pt|fr|it|nl)\/)?printables\/mountain-landscape-120\/?$/.test(request.nextUrl.pathname)) {
     response.headers.delete('link');
+  }
+  // Remove only language alternatives on explicit Wave A locale requests.
+  // Preserve any unrelated Link values (for example image preloads).
+  if (isWaveA) {
+    const link = response.headers.get('link');
+    if (link) {
+      const retained = link.split(/,(?=\s*<)/).filter((value) => !/;\s*hreflang\s*=/i.test(value)).join(',');
+      if (retained) response.headers.set('link', retained);
+      else response.headers.delete('link');
+    }
   }
   return response;
 }

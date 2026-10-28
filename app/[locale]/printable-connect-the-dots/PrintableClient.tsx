@@ -626,6 +626,20 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                     </div>
                 </section>
 
+                {locale === "en" && <section aria-labelledby="original-pdfs" className="py-10 bg-white">
+                    <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+                        <h2 id="original-pdfs" className="text-xl font-bold">Original numbered PDF worksheets</h2>
+                        <p className="mt-3">Each has free A4 and US Letter puzzles and matching answers.</p>
+                        <ul className="mt-4 space-y-2">
+                            <li><Link href="/printables/elephant-100/" className="text-brand-blue underline">Elephant · 100 dots</Link></li>
+                            <li><Link href="/printables/hot-air-balloon-100/" className="text-brand-blue underline">Hot-air Balloon · 100 dots</Link></li>
+                            <li><Link href="/printables/seahorse-100/" className="text-brand-blue underline">Seahorse · 100 dots</Link></li>
+                            <li><Link href="/printables/hummingbird-120/" className="text-brand-blue underline">Hummingbird · 120 dots</Link></li>
+                            <li><Link href="/printables/shark-140/" className="text-brand-blue underline">Shark · 140 dots</Link></li>
+                        </ul>
+                    </div>
+                </section>}
+
                 {/* ── FAQ ── */}
                 <section className="py-12 md:py-16 bg-slate-50 border-t border-slate-100">
                     <div className="container max-w-3xl mx-auto px-4 sm:px-6">

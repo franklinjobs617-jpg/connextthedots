@@ -1,6 +1,7 @@
 "use client";
 
 import { Link, usePathname } from "@/i18n/routing";
+import { sheetLanguageTarget } from "@/lib/original-sheets";
 
 import { useTranslations } from "next-intl";
 import { Shapes, Twitter, Linkedin, Facebook, Share2 } from "lucide-react";
@@ -43,7 +44,7 @@ export default function Footer() {
                 {t("language")}:
               </span>
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "en")}
                 locale="en"
                 className="hover:text-white transition"
               >
@@ -51,7 +52,7 @@ export default function Footer() {
               </Link>
               <span className="text-slate-600">|</span>
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "es")}
                 locale="es"
                 className="hover:text-white transition"
               >
@@ -59,7 +60,7 @@ export default function Footer() {
               </Link>
               <span className="text-slate-600">|</span>
               <Link
-                href={pathname}
+                href={sheetLanguageTarget(pathname, "de")}
                 locale="de"
                 className="hover:text-white transition"
               >
