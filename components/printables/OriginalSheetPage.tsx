@@ -77,7 +77,7 @@ export async function OriginalSheetPage({ item, params }: OriginalSheetProps & {
                 <p className="mt-4 max-w-4xl leading-relaxed">{item.reveal}</p>
                 <p className="mt-3 max-w-4xl leading-relaxed">{item.learningNote}</p>
                 <h3 className="mt-6 font-bold">Original source and reuse</h3>
-                <p className="mt-3 leading-relaxed">© 2026 ConnectTheDotsPrintable. Original artwork and geometry are available under <a href="https://creativecommons.org/licenses/by/4.0/" className="text-brand-blue underline">CC BY 4.0</a>; credit the site when sharing or adapting. The same geometry produces both paper formats and the matching answers.</p>
+                <p className="mt-3 leading-relaxed">© 2026 ConnectTheDotsPrintable.online. Free to download and print for personal and educational use. Commercial use requires prior written permission. See <Link href="/terms/" className="text-brand-blue underline">Terms of Service</Link>. The same geometry produces both paper formats and the matching answers.</p>
                 <div className="mt-3 flex flex-wrap gap-5 text-sm text-brand-blue underline">
                     <a href={`${source}/SOURCE.md`}>Source and limitations</a><a href={`${source}/geometry.json`} download>Download numbered source geometry</a>
                 </div>

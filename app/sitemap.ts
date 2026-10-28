@@ -74,6 +74,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
 
     return [...staticUrls, ...dynamicUrls, {
+        url: `${baseUrl}/printables/elephant-100/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/hot-air-balloon-100/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/seahorse-100/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/hummingbird-120/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/shark-140/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+
         // English-only original: no language alternatives until translations exist.
         url: `${baseUrl}/printables/mountain-landscape-120/`,
         changeFrequency: 'monthly' as const,

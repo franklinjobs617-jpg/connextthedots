@@ -14,6 +14,8 @@ MM=72/25.4
 FONT=9
 R=.48
 GAP=.65
+RELEASE_USAGE='© 2026 ConnectTheDotsPrintable.online. Free to download and print for personal and educational use. Commercial use requires prior written permission. See Terms of Service.'
+SOURCE_USAGE='© 2026 ConnectTheDotsPrintable.online. Usage for this release: personal and educational downloading and printing; commercial use requires prior written permission. See the website Terms of Service.'
 
 def dist(a,b): return math.dist(a,b)
 def sample(a,n):
@@ -88,7 +90,7 @@ def render(d,paper,solution,out):
     ox,oy=(width-210)/2,(height-279.4)/2
     c=canvas.Canvas(str(out),pagesize=(width*MM,height*MM),invariant=1,pageCompression=1)
     c.setTitle(f'{d["title"]} {d["count"]} — {paper} {"Solution" if solution else "Puzzle"}')
-    c.setAuthor('ConnectTheDotsPrintable');c.setSubject('Original numbered worksheet; CC BY 4.0')
+    c.setAuthor('ConnectTheDotsPrintable.online');c.setSubject(RELEASE_USAGE)
     def text(x,y,t,size=FONT):
         c.setFont('Helvetica',size);c.drawString((x+ox)*MM,(height-y-oy)*MM,t)
     def line(a,b):c.line((a[0]+ox)*MM,(height-a[1]-oy)*MM,(b[0]+ox)*MM,(height-b[1]-oy)*MM)
@@ -108,7 +110,8 @@ def render(d,paper,solution,out):
         b=label['box'];text(b[0],b[1]+.718*FONT/MM,str(label['number']))
     line([16,250],[66,250]);line([16,248],[16,252]);line([66,248],[66,252])
     text(16,257,'50 mm check line | Physical printing & independent human solve: NOT TESTED',8)
-    text(16,264,'Original: ConnectTheDotsPrintable | CC BY 4.0 | connectthedotsprintable.online',8)
+    text(16,264,'© 2026 ConnectTheDotsPrintable.online. Free to download and print for personal and educational use.',8)
+    text(16,269,'Commercial use requires prior written permission. See Terms of Service.',8)
     c.showPage();c.save()
     with fitz.open(out) as pdf:
         pix=pdf[0].get_pixmap(matrix=fitz.Matrix(1.5,1.5),alpha=False);pix.save(out.with_suffix('.png'))
@@ -116,11 +119,15 @@ def render(d,paper,solution,out):
 def main():
     designs=json.loads((Path(__file__).with_name('designs.json')).read_text())
     for d in designs:
-        d['points']=sample(d['anchors'],d['count']);d['labels']=layout(d['points'],d['details'])
-        d.update(schemaVersion=1,units='mm',frame=[210,279.4],labelFont='Helvetica',labelFontPt=FONT,dotRadiusMm=R,connection='1..N then N to 1',license='CC BY 4.0',copyright='2026 ConnectTheDotsPrintable')
+        out=ROOT/'public/printables'/d['id']/'v1'
+        if (out/'geometry.json').exists():
+            d=json.loads((out/'geometry.json').read_text())
+        else:
+            d['points']=sample(d['anchors'],d['count']);d['labels']=layout(d['points'],d['details'])
+        d.update(schemaVersion=1,units='mm',frame=[210,279.4],labelFont='Helvetica',labelFontPt=FONT,dotRadiusMm=R,connection='1..N then N to 1',license=SOURCE_USAGE,copyright='2026 ConnectTheDotsPrintable.online')
         out=ROOT/'public/printables'/d['id']/'v1';out.mkdir(parents=True,exist_ok=True)
         (out/'geometry.json').write_text(json.dumps(d,indent=2)+'\n')
-        (out/'SOURCE.md').write_text(f'# {d["title"]} — original source\n\nCopyright 2026 ConnectTheDotsPrintable. Artwork and geometry: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Original coordinates authored for C08; no tracing, competitor artwork, CDN asset, or image-generation model used.\n\n`geometry.json` contains the exact {d["count"]} points, label boxes, fixed details and closed sequence. All four PDFs and PNGs derive from it via `scripts/original-sheets/build.py`; source anchors are in `designs.json`. Uses PDF standard Helvetica without distributing font binaries. PNGs are rasterizations of the actual PDFs.\n\n9 pt labels; common physical geometry on A4 and US Letter. Print at 100% and measure the 50 mm line. Physical print and independent human full-solve: **NOT TESTED**. Difficulty, age suitability, completion time and large-print suitability are not established. Actual effort is recorded in the private C08 ledger, not inferred from PDF timestamps.\n')
+        (out/'SOURCE.md').write_text(f'# {d["title"]} — original source\n\n{SOURCE_USAGE} Original coordinates authored for C08; no tracing, competitor artwork, CDN asset, or image-generation model used.\n\n`geometry.json` contains the exact {d["count"]} points, label boxes, fixed details and closed sequence. All four PDFs and PNGs derive from it via `scripts/original-sheets/build.py`; source anchors are in `designs.json`. Uses PDF standard Helvetica without distributing font binaries. PNGs are rasterizations of the actual PDFs.\n\n9 pt labels; common physical geometry on A4 and US Letter. Print at 100% and measure the 50 mm line. Physical print and independent human full-solve: **NOT TESTED**. Difficulty, age suitability, completion time and large-print suitability are not established. Actual effort is recorded in the private C08 ledger, not inferred from PDF timestamps.\n')
         for paper in ['A4','Letter']:
             for solution in [False,True]:render(d,paper,solution,out/f'{d["id"]}-{paper}-{"Solution" if solution else "Puzzle"}.pdf')
         print(d['id'],'dots',len(d['points']),'minimum centers',round(min(dist(p,q) for i,p in enumerate(d['points']) for q in d['points'][i+1:]),3))
