@@ -126,5 +126,6 @@ export function sheetSource(item: OriginalSheet) {
 /** A language switch on a new English sheet leads to the selected home page. */
 export function sheetLanguageTarget(pathname: string, locale: string): string {
     const isOriginal = [...originalSheetIds, ...segmentedSheetIds].some((id) => pathname.replace(/\/$/, "") === `/printables/${id}`);
-    return isOriginal && locale !== "en" ? "/" : pathname;
+    const isHundredCollection = pathname.replace(/\/$/, "") === "/connect-the-dots-1-to-100";
+    return (isOriginal || isHundredCollection) && locale !== "en" ? "/" : pathname;
 }
