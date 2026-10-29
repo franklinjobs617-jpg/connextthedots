@@ -428,6 +428,24 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                     </div>
                 </section>
 
+                {locale === "en" && <section id="numbered-challenges" aria-labelledby="numbered-challenges-title" className="py-12 bg-white border-b border-slate-100">
+                    <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+                        <h2 id="numbered-challenges-title" className="text-2xl font-extrabold text-slate-900">Detailed numbered challenges</h2>
+                        <p className="mt-3 max-w-3xl text-slate-600">Two original worksheets include numbered internal features as well as their main contours. Each has separate A4 and US Letter puzzle and matching answer PDFs. Lift your pen between the numbered ranges; close only ranges marked C and stop at the end of ranges marked O.</p>
+                        <ul className="mt-6 grid gap-6 sm:grid-cols-2">
+                            <li className="rounded-2xl border border-slate-200 p-6">
+                                <h3 className="text-xl font-bold"><Link href="/printables/tufted-owl-study-207/" className="text-brand-blue underline">Tufted owl study — 207 dots, 10 segments</Link></h3>
+                                <p className="mt-3">Connect the body, facial discs, eyes, beak and feather markings using the listed open and closed ranges.</p>
+                            </li>
+                            <li className="rounded-2xl border border-slate-200 p-6">
+                                <h3 className="text-xl font-bold"><Link href="/printables/hilltop-observatory-202/" className="text-brand-blue underline">Hilltop observatory — 202 dots, 9 segments</Link></h3>
+                                <p className="mt-3">Build the dome, telescope, windows, doorway and steps. Some architectural ranges remain open.</p>
+                            </li>
+                        </ul>
+                        <p className="mt-5 text-sm text-slate-600">9 pt numbers at 100% print scale. Difficulty and solve time are unmeasured. Physical printing and independent human full-solve are NOT TESTED.</p>
+                    </div>
+                </section>}
+
                 {/* ── Difficulty comparison table ── */}
                 <section className="py-12 bg-slate-50 border-b border-slate-100">
                     <div className="container max-w-4xl mx-auto px-4 sm:px-6">

@@ -78,6 +78,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: 'monthly' as const,
         priority: 0.6,
     }, {
+        url: `${baseUrl}/printables/tufted-owl-study-207/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/hilltop-observatory-202/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
         url: `${baseUrl}/printables/elephant-100/`,
         changeFrequency: 'monthly' as const,
         priority: 0.6,
