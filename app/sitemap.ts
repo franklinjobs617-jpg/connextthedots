@@ -95,6 +95,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.6,
     }, {
 
+        url: `${baseUrl}/printables/flamingo-150/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/chameleon-160/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/cactus-160/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/swan-90/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/maple-leaf-90/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
         // English-only original: no language alternatives until translations exist.
         url: `${baseUrl}/printables/mountain-landscape-120/`,
         changeFrequency: 'monthly' as const,

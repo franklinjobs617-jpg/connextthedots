@@ -5,7 +5,7 @@ A4 adds 8.8 mm vertical centering; Letter adds 2.95 mm horizontal centering.
 Requires reportlab and PyMuPDF. Uses PDF's standard Helvetica, no font binaries.
 """
 from pathlib import Path
-import math,json,hashlib,html
+import math,json,hashlib,html,argparse
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 import fitz
@@ -88,47 +88,81 @@ def layout(points,details):
 def render(d,paper,solution,out):
     width,height=(210,297) if paper=='A4' else (215.9,279.4)
     ox,oy=(width-210)/2,(height-279.4)/2
+    native=d.get('paperLayouts',{}).get(paper)
+    if native:
+        # Import frozen C09 positions, never resample or run label placement.
+        ox=oy=0
+        converted=[]
+        for i,((x,y),(tx,ty)) in enumerate(zip(native['points'],native['labels'])):
+            top=height-ty/MM-.718*FONT/MM
+            converted.append({'number':i+1,'point':[x/MM,height-y/MM],
+                'box':[tx/MM,top,(tx+stringWidth(str(i+1),'Helvetica',FONT))/MM,top+FONT/MM]})
+        d={**d,'points':[v['point'] for v in converted],'labels':converted}
     c=canvas.Canvas(str(out),pagesize=(width*MM,height*MM),invariant=1,pageCompression=1)
     c.setTitle(f'{d["title"]} {d["count"]} — {paper} {"Solution" if solution else "Puzzle"}')
     c.setAuthor('ConnectTheDotsPrintable.online');c.setSubject(RELEASE_USAGE)
     def text(x,y,t,size=FONT):
         c.setFont('Helvetica',size);c.drawString((x+ox)*MM,(height-y-oy)*MM,t)
     def line(a,b):c.line((a[0]+ox)*MM,(height-a[1]-oy)*MM,(b[0]+ox)*MM,(height-b[1]-oy)*MM)
-    text(16,20,f'{d["title"]} | {d["count"]} dots',18)
-    text(16,29,f'{paper} {"SOLUTION" if solution else "PUZZLE"} | Free printable | Numbers 1-{d["count"]}',10)
-    text(16,37,f'Connect 1 to {d["count"]} in order, then {d["count"]} back to 1. Solid details are already drawn.',9)
-    text(16,43,'Print at Actual size / 100%. Compare with the separate matching solution.',9)
-    c.setLineWidth(.30*MM)
+    if native:
+        text(36/MM,37/MM,f'{d["title"]} | {d["count"]} dots | {paper} {"Solution" if solution else "Puzzle"}',13)
+        text(36/MM,53/MM,f'Connect 1 to {d["count"]} in order, then connect {d["count"]} to 1.',9)
+    else:
+        text(16,20,f'{d["title"]} | {d["count"]} dots',18)
+        text(16,29,f'{paper} {"SOLUTION" if solution else "PUZZLE"} | Free printable | Numbers 1-{d["count"]}',10)
+        text(16,37,f'Connect 1 to {d["count"]} in order, then {d["count"]} back to 1. Solid details are already drawn.',9)
+        text(16,43,'Print at Actual size / 100%. Compare with the separate matching solution.',9)
+    c.setLineWidth(d.get('strokeWidthMm',.30)*MM)
     if solution:
         pts=d['points']
-        for a,b in zip(pts,pts[1:]+pts[:1]):line(a,b)
+        if native:
+            path=c.beginPath();path.moveTo((pts[0][0]+ox)*MM,(height-pts[0][1]-oy)*MM)
+            for p in pts[1:]:path.lineTo((p[0]+ox)*MM,(height-p[1]-oy)*MM)
+            path.close();c.drawPath(path)
+        else:
+            for a,b in zip(pts,pts[1:]+pts[:1]):line(a,b)
     for path in d['details']:
         for a,b in zip(path,path[1:]):line(a,b)
     for p in d['eyes']:c.circle((p[0]+ox)*MM,(height-p[1]-oy)*MM,.75*MM,fill=1,stroke=0)
     for label in d['labels']:
-        p=label['point'];c.circle((p[0]+ox)*MM,(height-p[1]-oy)*MM,R*MM,fill=1,stroke=0)
+        p=label['point'];c.circle((p[0]+ox)*MM,(height-p[1]-oy)*MM,d.get('dotRadiusMm',R)*MM,fill=1,stroke=0)
         b=label['box'];text(b[0],b[1]+.718*FONT/MM,str(label['number']))
-    line([16,250],[66,250]);line([16,248],[16,252]);line([66,248],[66,252])
-    text(16,257,'50 mm check line | Physical printing & independent human solve: NOT TESTED',8)
-    text(16,264,'© 2026 ConnectTheDotsPrintable.online. Free to download and print for personal and educational use.',8)
-    text(16,269,'Commercial use requires prior written permission. See Terms of Service.',8)
+    if native:
+        # Preserve the native art and keep all footer ink at least 8 mm from edges.
+        right=width-36/MM;left=right-50;y=height-47/MM
+        line([left,y],[right,y]);line([left,y-2/MM],[left,y+2/MM]);line([right,y-2/MM],[right,y+2/MM])
+        text(left,height-37/MM,'50 mm',7)
+        text(36/MM,height-45/MM,'Print at 100% | Physical print / independent solve NOT TESTED',7)
+        text(36/MM,height-35/MM,'© 2026 ConnectTheDotsPrintable.online. Free to download and print for personal and educational use.',7)
+        text(36/MM,height-25/MM,'Commercial use requires prior written permission. See Terms of Service.',7)
+    else:
+        line([16,250],[66,250]);line([16,248],[16,252]);line([66,248],[66,252])
+        text(16,257,'50 mm check line | Physical printing & independent human solve: NOT TESTED',8)
+        text(16,264,'© 2026 ConnectTheDotsPrintable.online. Free to download and print for personal and educational use.',8)
+        text(16,269,'Commercial use requires prior written permission. See Terms of Service.',8)
     c.showPage();c.save()
     with fitz.open(out) as pdf:
         pix=pdf[0].get_pixmap(matrix=fitz.Matrix(1.5,1.5),alpha=False);pix.save(out.with_suffix('.png'))
 
 def main():
     designs=json.loads((Path(__file__).with_name('designs.json')).read_text())
+    parser=argparse.ArgumentParser();parser.add_argument('--ids',nargs='+');args=parser.parse_args()
+    if args.ids:
+        by_id={v['id']:v for v in designs}
+        designs=[by_id.get(id,{'id':id}) for id in args.ids]
     for d in designs:
         out=ROOT/'public/printables'/d['id']/'v1'
         if (out/'geometry.json').exists():
             d=json.loads((out/'geometry.json').read_text())
         else:
             d['points']=sample(d['anchors'],d['count']);d['labels']=layout(d['points'],d['details'])
-        d.update(schemaVersion=1,units='mm',frame=[210,279.4],labelFont='Helvetica',labelFontPt=FONT,dotRadiusMm=R,connection='1..N then N to 1',license=SOURCE_USAGE,copyright='2026 ConnectTheDotsPrintable.online')
+        d.update(schemaVersion=d.get('schemaVersion',1),units=d.get('units','mm'),frame=d.get('frame',[210,279.4]),labelFont='Helvetica',labelFontPt=FONT,dotRadiusMm=d.get('dotRadiusMm',R),connection='1..N then N to 1',license=SOURCE_USAGE,copyright='2026 ConnectTheDotsPrintable.online')
         out=ROOT/'public/printables'/d['id']/'v1';out.mkdir(parents=True,exist_ok=True)
         (out/'geometry.json').write_text(json.dumps(d,indent=2)+'\n')
         (out/'SOURCE.md').write_text(f'# {d["title"]} — original source\n\n{SOURCE_USAGE} Original coordinates authored for C08; no tracing, competitor artwork, CDN asset, or image-generation model used.\n\n`geometry.json` contains the exact {d["count"]} points, label boxes, fixed details and closed sequence. All four PDFs and PNGs derive from it via `scripts/original-sheets/build.py`; source anchors are in `designs.json`. Uses PDF standard Helvetica without distributing font binaries. PNGs are rasterizations of the actual PDFs.\n\n9 pt labels; common physical geometry on A4 and US Letter. Print at 100% and measure the 50 mm line. Physical print and independent human full-solve: **NOT TESTED**. Difficulty, age suitability, completion time and large-print suitability are not established. Actual effort is recorded in the private C08 ledger, not inferred from PDF timestamps.\n')
+        if 'paperLayouts' in d:
+            (out/'SOURCE.md').write_text(f'# {d["title"]} — fixed C09 source integration\n\n{SOURCE_USAGE}\n\nOriginal project-owned C09 source `{d["originalSourceId"]}`, frozen private handoff `273a222f8df4885e48f82d04ae61b7cab5a784be`. `original-source.json` is the exact original normalized source, SHA-256 `{d["originalSourceSha256"]}`. No external artwork or tracing. No failed/rejected design is included here.\n\n`geometry.json` records the same original normalized points and exact frozen per-paper PDF-point layouts (y upward, Helvetica 9 pt); paper sizes differ in uniform scale and label positioning exactly as in C09. No new point sampling or label layout. `python scripts/original-sheets/build.py --ids {d["id"]}` re-exports these positions using the existing shared renderer. The puzzle and solution share exactly {d["count"]} points and close {d["count"]} to 1. There are no pre-drawn interior details.\n\nAll four final PDFs carry current release usage and a 50 mm footer check line; all four PNGs are rasterized from those final PDFs. A4 and US Letter at 100%. Physical printing and independent full human solving: NOT TESTED. Actual person-time UNKNOWN. Ordinary 9 pt, not a verified large-print resource. Difficulty, age suitability and completion time unmeasured. Original historical evidence remains preserved.\n')
         for paper in ['A4','Letter']:
             for solution in [False,True]:render(d,paper,solution,out/f'{d["id"]}-{paper}-{"Solution" if solution else "Puzzle"}.pdf')
-        print(d['id'],'dots',len(d['points']),'minimum centers',round(min(dist(p,q) for i,p in enumerate(d['points']) for q in d['points'][i+1:]),3))
+        print(d['id'],'dots',d['count'],'frozen per-paper layouts' if 'paperLayouts' in d else 'shared mm geometry')
 if __name__=='__main__':main()

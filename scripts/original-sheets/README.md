@@ -12,3 +12,9 @@ Separate from the legacy generator, catalog and dynamic printable route.
 © 2026 ConnectTheDotsPrintable.online. Usage for this release: personal and educational downloading and printing; commercial use requires prior written permission. See the website Terms of Service. This pipeline is original source code supplied with the product repository. No competitor images, AI image-generation outputs or old site art are inputs. C08 effort and private QA evidence belong in the private reporting repository.
 
 Existing versioned geometry is authoritative during re-export: preserve its points, label boxes, fixed details, sequence and dimensions. This usage statement applies to this release; it does not claim to revoke rights granted previously. Historical evidence and earlier Git versions remain preserved.
+
+## Frozen C09 imports
+
+Wave B uses schemaVersion 2 geometry with exact native per-paper points/label baselines and the original normalized source hash. It is not resampled through the authoring sampler or fitted into the Wave A common-mm frame. `original-source.json` preserves the frozen accepted source; per-paper coordinates and all marker/answer parameters are in `geometry.json`. Export with `python scripts/original-sheets/build.py --ids flamingo-150 chameleon-160 cactus-160 swan-90 maple-leaf-90` using this same renderer. Compact headers respect the original top art margin. Footer usage/ruler are added in the reserved lower margin. Validate final outputs against frozen native layouts and prior PDF drawing/text primitives, not a new design.
+
+Do not run the Wave A-only audit to claim Wave B passed: its common-frame assumptions differ. Original C09 geometry feasibility is reusable; changed final PDF/PNG outputs, native sizes, exact numbering, labels, solution geometry, margins, current usage and UI clicked downloads must be audited against the final integration tree. Source labor/physical/human-solve unknowns do not become passes.
