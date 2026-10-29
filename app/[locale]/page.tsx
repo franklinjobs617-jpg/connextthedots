@@ -4,7 +4,7 @@ import { getAlternates, getUrl } from "@/lib/metadata";
 import { getTranslations } from "next-intl/server";
 import Script from "next/script";
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
