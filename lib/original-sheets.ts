@@ -1,4 +1,13 @@
-/** New English-only resource contract. Intentionally separate from legacy data. */
+import { segmentedSheetIds } from "@/lib/segmented-sheet-ids";
+
+export type SheetSegment = {
+    name: string;
+    start: number;
+    end: number;
+    closed: boolean;
+};
+
+/** English-only resource contract. Omitted task retains the original closed path. */
 export type OriginalSheet = {
     id: string;
     title: string;
@@ -8,6 +17,8 @@ export type OriginalSheet = {
     solveTip: string;
     learningNote: string;
     hasPreDrawnDetails?: boolean;
+    assetStem?: string;
+    task?: { type: "segmented"; segments: readonly SheetSegment[] };
 };
 
 export const originalSheets: readonly OriginalSheet[] = [
@@ -104,11 +115,11 @@ export function originalSheet(id: string): OriginalSheet {
     return item;
 }
 export function sheetAsset(item: OriginalSheet, paper: "A4" | "Letter", kind: "Puzzle" | "Solution", extension: "pdf" | "png" = "pdf") {
-    return `/printables/${item.id}/v1/${item.id}-${paper}-${kind}.${extension}`;
+    return `/printables/${item.id}/v1/${item.assetStem ?? item.id}-${paper}-${kind}.${extension}`;
 }
 
 /** A language switch on a new English sheet leads to the selected home page. */
 export function sheetLanguageTarget(pathname: string, locale: string): string {
-    const isOriginal = originalSheets.some((item) => pathname.replace(/\/$/, "") === `/printables/${item.id}`);
+    const isOriginal = [...originalSheetIds, ...segmentedSheetIds].some((id) => pathname.replace(/\/$/, "") === `/printables/${id}`);
     return isOriginal && locale !== "en" ? "/" : pathname;
 }
