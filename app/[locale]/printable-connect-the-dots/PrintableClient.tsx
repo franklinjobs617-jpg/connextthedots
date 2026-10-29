@@ -636,6 +636,11 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                             <li><Link href="/printables/seahorse-100/" className="text-brand-blue underline">Seahorse · 100 dots</Link></li>
                             <li><Link href="/printables/hummingbird-120/" className="text-brand-blue underline">Hummingbird · 120 dots</Link></li>
                             <li><Link href="/printables/shark-140/" className="text-brand-blue underline">Shark · 140 dots</Link></li>
+                            <li><Link href="/printables/flamingo-150/" className="text-brand-blue underline">Flamingo · 150 dots</Link></li>
+                            <li><Link href="/printables/chameleon-160/" className="text-brand-blue underline">Chameleon · 160 dots</Link></li>
+                            <li><Link href="/printables/cactus-160/" className="text-brand-blue underline">Cactus · 160 dots</Link></li>
+                            <li><Link href="/printables/swan-90/" className="text-brand-blue underline">Swan · 90 dots</Link></li>
+                            <li><Link href="/printables/maple-leaf-90/" className="text-brand-blue underline">Maple Leaf · 90 dots</Link></li>
                         </ul>
                     </div>
                 </section>}
