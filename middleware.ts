@@ -20,9 +20,10 @@ export default function middleware(request: NextRequest) {
   const match = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?printables\/([^/]+)\/?$/);
   const isWaveA = Boolean(match && waveAIds.has(match[2]));
   const hundredMatch = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?connect-the-dots-1-to-100\/?$/);
+  const alphabetMatch = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?alphabet-dot-to-dot\/?$/);
   const skipMatch = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?skip-counting-dot-to-dot\/?$/);
-  const isEnglishResource = isWaveA || Boolean(hundredMatch) || Boolean(skipMatch);
-  const response = isEnglishResource && !(match?.[1] || hundredMatch?.[1] || skipMatch?.[1]) ? handleEnglishSheet(request) : handleI18n(request);
+  const isEnglishResource = isWaveA || Boolean(hundredMatch) || Boolean(alphabetMatch) || Boolean(skipMatch);
+  const response = isEnglishResource && !(match?.[1] || hundredMatch?.[1] || alphabetMatch?.[1] || skipMatch?.[1]) ? handleEnglishSheet(request) : handleI18n(request);
   // This new worksheet exists only in English; do not advertise untranslated URLs.
   if (/^\/(?:(?:en|de|es|pt|fr|it|nl)\/)?printables\/mountain-landscape-120\/?$/.test(request.nextUrl.pathname)) {
     response.headers.delete('link');

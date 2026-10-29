@@ -111,6 +111,7 @@ export function sheetAsset(item: OriginalSheet, paper: "A4" | "Letter", kind: "P
 export function sheetLanguageTarget(pathname: string, locale: string): string {
     const isOriginal = originalSheets.some((item) => pathname.replace(/\/$/, "") === `/printables/${item.id}`);
     const isHundredCollection = pathname.replace(/\/$/, "") === "/connect-the-dots-1-to-100";
+    const isAlphabetCollection = pathname.replace(/\/$/, "") === "/alphabet-dot-to-dot";
     const isSkipCollection = pathname.replace(/\/$/, "") === "/skip-counting-dot-to-dot";
-    return (isOriginal || isHundredCollection || isSkipCollection) && locale !== "en" ? "/" : pathname;
+    return (isOriginal || isHundredCollection || isAlphabetCollection || isSkipCollection) && locale !== "en" ? "/" : pathname;
 }
