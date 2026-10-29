@@ -631,6 +631,8 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                         <h2 id="original-pdfs" className="text-xl font-bold">Original numbered PDF worksheets</h2>
                         <p className="mt-3">Each has free A4 and US Letter puzzles and matching answers.</p>
                         <ul className="mt-4 space-y-2">
+                            <li><Link href="/connect-the-dots-1-to-100/" className="text-brand-blue underline">Exactly 100 dots · three puzzles and answers</Link></li>
+                            <li><Link href="/skip-counting-dot-to-dot/" className="text-brand-blue underline">Skip-counting · 2s, 5s and 10s · 6 original worksheets</Link></li>
                             <li><Link href="/printables/elephant-100/" className="text-brand-blue underline">Elephant · 100 dots</Link></li>
                             <li><Link href="/printables/hot-air-balloon-100/" className="text-brand-blue underline">Hot-air Balloon · 100 dots</Link></li>
                             <li><Link href="/printables/seahorse-100/" className="text-brand-blue underline">Seahorse · 100 dots</Link></li>

@@ -74,6 +74,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
 
     return [...staticUrls, ...dynamicUrls, {
+        url: `${baseUrl}/connect-the-dots-1-to-100/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/skip-counting-dot-to-dot/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
         url: `${baseUrl}/printables/elephant-100/`,
         changeFrequency: 'monthly' as const,
         priority: 0.6,
