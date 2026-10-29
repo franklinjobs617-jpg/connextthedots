@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { originalSheets, sheetAsset, type OriginalSheet } from "@/lib/original-sheets";
+import { originalSheets, sheetAsset, sheetSource, type OriginalSheet } from "@/lib/original-sheets";
 import { siteConfig } from "@/lib/metadata";
 
 export type OriginalSheetProps = { params: Promise<{ locale: string }> };
@@ -22,7 +22,7 @@ export async function originalSheetMetadata(item: OriginalSheet, props: Original
 
 export async function OriginalSheetPage({ item, params, related = originalSheets }: OriginalSheetProps & { item: OriginalSheet; related?: readonly OriginalSheet[] }) {
     if ((await params).locale !== "en") notFound();
-    const source = `/printables/${item.id}/v1`;
+    const source = sheetSource(item);
     const segmented = item.task?.type === "segmented" ? item.task : undefined;
     return <main className="bg-slate-50 text-slate-900">
         <div className="mx-auto max-w-6xl px-4 py-10 md:py-16">
@@ -92,6 +92,7 @@ export async function OriginalSheetPage({ item, params, related = originalSheets
                 <p className="mt-3 leading-relaxed">© 2026 ConnectTheDotsPrintable.online. Free to download and print for personal and educational use. Commercial use requires prior written permission. See <Link href="/terms/" className="text-brand-blue underline">Terms of Service</Link>. The same geometry produces both paper formats and the matching answers.</p>
                 <div className="mt-3 flex flex-wrap gap-5 text-sm text-brand-blue underline">
                     <a href={`${source}/SOURCE.md`}>Source and limitations</a><a href={`${source}/geometry.json`} download>Download numbered source geometry</a>
+                    {item.assetVersion === "v2" && <a href={`/printables/${item.id}/VERSIONS.json`}>Asset version history</a>}
                 </div>
             </section>
             <section aria-labelledby="other-sheets" className="mt-8">

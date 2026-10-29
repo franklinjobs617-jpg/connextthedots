@@ -18,6 +18,7 @@ export type OriginalSheet = {
     learningNote: string;
     hasPreDrawnDetails?: boolean;
     assetStem?: string;
+    assetVersion?: "v1" | "v2";
     task?: { type: "segmented"; segments: readonly SheetSegment[] };
 };
 
@@ -115,7 +116,11 @@ export function originalSheet(id: string): OriginalSheet {
     return item;
 }
 export function sheetAsset(item: OriginalSheet, paper: "A4" | "Letter", kind: "Puzzle" | "Solution", extension: "pdf" | "png" = "pdf") {
-    return `/printables/${item.id}/v1/${item.assetStem ?? item.id}-${paper}-${kind}.${extension}`;
+    return `${sheetSource(item)}/${item.assetStem ?? item.id}-${paper}-${kind}.${extension}`;
+}
+
+export function sheetSource(item: OriginalSheet) {
+    return `/printables/${item.id}/${item.assetVersion ?? "v1"}`;
 }
 
 /** A language switch on a new English sheet leads to the selected home page. */
