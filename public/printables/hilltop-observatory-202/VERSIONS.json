@@ -1,0 +1,64 @@
+{
+  "id": "hilltop-observatory-202",
+  "title": "Hilltop observatory",
+  "current_asset_version": "v2",
+  "v1_status": "preserved prototype",
+  "v2_status": "public-title preparation; not a publication claim",
+  "prototype_source_commit": "89275ec9292ade02002c8b01a582bb35bd153bb9",
+  "parent_product_commit": "536f49604271683a5f3f338886f2167e73988662",
+  "change": "Replace PRIVATE PROTOTYPE subtitle token with exact worksheet title; no layout/geometry regeneration",
+  "geometry_sha256_v1_and_v2": "b9978fbb77d520b090490d37f79747f694823f905145ef27ad6a3097b2db1d6b",
+  "physical_print": "NOT TESTED",
+  "independent_human_full_solve": "NOT TESTED",
+  "waiver": "NOT CLAIMED",
+  "exports": [
+    {
+      "paper": "A4",
+      "kind": "Puzzle",
+      "v1_pdf": "v1/hilltop-observatory-A4-Puzzle.pdf",
+      "v1_pdf_sha256": "013467cbe5b4d160aea1b96365a9e84acee2bb63901610717533867f76a0e7be",
+      "v2_pdf": "v2/hilltop-observatory-A4-Puzzle.pdf",
+      "v2_pdf_sha256": "1f8b19e70ede057b7d49be427562c8fc24d622d4d3479bf0149b49a804b8463c",
+      "v1_preview": "v1/hilltop-observatory-A4-Puzzle.png",
+      "v1_preview_sha256": "8a999b25af7cc7e67847ef378f04c4f99182856e9f511f83cb23f251b31c7f0a",
+      "v2_preview": "v2/hilltop-observatory-A4-Puzzle.png",
+      "v2_preview_sha256": "c85d07bb303b286a728664ba9e2704ad5f32832a404b38b36a12f52d1d9e24ce"
+    },
+    {
+      "paper": "A4",
+      "kind": "Solution",
+      "v1_pdf": "v1/hilltop-observatory-A4-Solution.pdf",
+      "v1_pdf_sha256": "cb443df4f02abc11df19f5bb9d887c006a129d561be12cd001284f10164d53b0",
+      "v2_pdf": "v2/hilltop-observatory-A4-Solution.pdf",
+      "v2_pdf_sha256": "8a3e50a99b40dc6618feb6dde991a4541571b8bfb6092edc7f80b6470801db5b",
+      "v1_preview": "v1/hilltop-observatory-A4-Solution.png",
+      "v1_preview_sha256": "550641f1c9be4bfde587711e7100c5e425af0e1e9cedbcc61114b1558abd682a",
+      "v2_preview": "v2/hilltop-observatory-A4-Solution.png",
+      "v2_preview_sha256": "787d05c76581beb86e00f1141bbab961330cd62d6bebcac6cb6ff9284a3acf7c"
+    },
+    {
+      "paper": "Letter",
+      "kind": "Puzzle",
+      "v1_pdf": "v1/hilltop-observatory-Letter-Puzzle.pdf",
+      "v1_pdf_sha256": "a5e3dcc66dd0a2682cae90fda2d46721dea88f5a26a6ff6b3a6958739c7b0b07",
+      "v2_pdf": "v2/hilltop-observatory-Letter-Puzzle.pdf",
+      "v2_pdf_sha256": "bd8a02d5b8b03d0be030d9bed2258b7f45dc32a3cb2fac29a2e90031f30109b9",
+      "v1_preview": "v1/hilltop-observatory-Letter-Puzzle.png",
+      "v1_preview_sha256": "552609b68286b261e293c66753fdc14015a4b477193619b5d93c413f0ace80f2",
+      "v2_preview": "v2/hilltop-observatory-Letter-Puzzle.png",
+      "v2_preview_sha256": "f3722c156298baf82e1be587aa549ca3b746510a25e3dd09c8464e2306f1437c"
+    },
+    {
+      "paper": "Letter",
+      "kind": "Solution",
+      "v1_pdf": "v1/hilltop-observatory-Letter-Solution.pdf",
+      "v1_pdf_sha256": "a470a939a867e9defb484d1d0bcf18a67bd720eebe95dc99a792d946404ebf86",
+      "v2_pdf": "v2/hilltop-observatory-Letter-Solution.pdf",
+      "v2_pdf_sha256": "87883fa197a4b56fb1c4e337f39454abdb7b0f9084df46b385e637a8bb6dba3e",
+      "v1_preview": "v1/hilltop-observatory-Letter-Solution.png",
+      "v1_preview_sha256": "9a6a047e969643423521cf1355fb1931e2a6195663eafa6432f56736305b7cde",
+      "v2_preview": "v2/hilltop-observatory-Letter-Solution.png",
+      "v2_preview_sha256": "9094c13ae14b6df1728d80550478996d2f5206638830867750acc5a1b05ab274"
+    }
+  ]
+}
