@@ -646,6 +646,13 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                     </div>
                 </section>}
 
+                {locale === "en" && <section className="py-8 bg-white">
+                    <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+                        <h2 className="text-xl font-bold">Alphabet dot-to-dot</h2>
+                        <p className="mt-3"><Link href="/alphabet-dot-to-dot/" className="text-brand-blue underline">English A–Z and a–z collection</Link> · Three original 26-dot pictures, with A4 and US Letter puzzles and answers.</p>
+                    </div>
+                </section>}
+
                 {/* ── FAQ ── */}
                 <section className="py-12 md:py-16 bg-slate-50 border-t border-slate-100">
                     <div className="container max-w-3xl mx-auto px-4 sm:px-6">

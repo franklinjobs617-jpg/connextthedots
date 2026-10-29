@@ -127,5 +127,6 @@ export function sheetSource(item: OriginalSheet) {
 export function sheetLanguageTarget(pathname: string, locale: string): string {
     const isOriginal = [...originalSheetIds, ...segmentedSheetIds].some((id) => pathname.replace(/\/$/, "") === `/printables/${id}`);
     const isHundredCollection = pathname.replace(/\/$/, "") === "/connect-the-dots-1-to-100";
-    return (isOriginal || isHundredCollection) && locale !== "en" ? "/" : pathname;
+    const isAlphabetCollection = pathname.replace(/\/$/, "") === "/alphabet-dot-to-dot";
+    return (isOriginal || isHundredCollection || isAlphabetCollection) && locale !== "en" ? "/" : pathname;
 }
