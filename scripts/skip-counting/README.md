@@ -1,0 +1,7 @@
+# C13 skip-counting originals v1
+
+Run `python scripts/skip-counting/build.py` with reportlab and PyMuPDF. This task-local adaptation copies the project's C08 geometric sampling/constraint approach without changing its renderer, data contract or components. Six newly authored anchor polygons are in designs.json. No external images, tracing, stock, competitor or generated raster art are inputs. © 2026 ConnectTheDotsPrintable.online. Personal and educational downloading/printing; commercial use requires written permission (website Terms).
+
+The longest edges receive extra points while retaining every original corner. Each final geometry.json records exact points, 12 pt Helvetica label boxes, orderedLabels, step, startValue, endValue, dotCount and explicit closed sequence. A4/Letter share physical geometry centered in their paper. PDF standard Helvetica is used without distributing fonts. Each PNG is rasterized directly from its final PDF at 108 dpi. Geometry remains versioned with its exports; change version on released revisions.
+
+`python scripts/skip-counting/audit.py` independently reads final PDF text and vector drawings and compares the source contract, ordered label values, centers, answer lines, margins, dimensions, collision clearance and preview pixels. Private evidence includes failure cases and visual review. Physical print and independent human full solve remain NOT TESTED. Person-time UNKNOWN. No Large Print, age, curriculum or outcome claim.
