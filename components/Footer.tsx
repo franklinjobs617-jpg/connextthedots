@@ -5,7 +5,6 @@ import { sheetLanguageTarget } from "@/lib/original-sheets";
 
 import { useTranslations } from "next-intl";
 import { Shapes, Twitter, Linkedin, Facebook, Share2 } from "lucide-react";
-import Image from "next/image";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -23,21 +22,6 @@ export default function Footer() {
               <span className="font-bold text-lg">Connectthedotsprintable</span>
             </div>
             <p className="leading-relaxed">{t("description")}</p>
-            <div className="mt-4">
-              <Link
-                href="https://dang.ai/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png"
-                  alt="Dang.ai"
-                  width={150}
-                  height={54}
-                />
-              </Link>
-            </div>
-
             {/* 语言切换器 */}
             <div className="mt-6 flex items-center gap-3">
               <span className="text-white font-bold text-xs tracking-widest">
@@ -114,22 +98,6 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/convert-photo-to-beads/"
-                  className="hover:text-white transition"
-                >
-                  {t("beadTool")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/convert-photo-to-beads/gallery/"
-                  className="hover:text-white transition"
-                >
-                  {t("beadGallery")}
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/connect-the-dots-coloring-pages/"
                   className="hover:text-white transition"
                 >
@@ -166,14 +134,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="https://enjoy4game.com/"
-                  className="hover:text-white transition"
-                >
-                  enjoy4game.com
-                </Link>
-              </li>
-              <li>
                 {" "}
                 <Link
                   href="/popular-character-dot-to-dot-printable-worksheets/"
@@ -189,36 +149,6 @@ export default function Footer() {
                 >
                   {t("animalPdf")}
                 </Link>
-              </li>
-              <li>
-                <a
-                  href="https://aiclotheschangers.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition"
-                >
-                  AI Clothes Changer
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://gridmakeronline.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition"
-                >
-                  gridmakeronline.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://ipooket.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition"
-                >
-                  Romestead
-                </a>
               </li>
             </ul>
           </div>
@@ -271,16 +201,7 @@ export default function Footer() {
         {/* 版权信息 */}
         <div className="text-center text-xs">
           <p>&copy; 2026 ConnectTheDotsPrintable.online. {t("rights")}</p>
-          <p className="mt-2">
-            <a
-              href="https://seed3dlabs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-100 hover:text-white transition"
-            >
-              Powered by Seed3DLabs
-            </a>
-          </p>
+
           <p className="mt-2 opacity-50">{t("disclaimer")}</p>
         </div>
       </div>

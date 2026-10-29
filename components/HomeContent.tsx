@@ -1,24 +1,21 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Wand2, Brain, Sparkles, ArrowRight, Download, RefreshCw, Loader2, Lock, Grid3X3, Image as ImageIcon } from "lucide-react";
+import { Wand2, Brain, Sparkles, ArrowRight, Download, RefreshCw, Loader2, Lock, Image as ImageIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import Image from 'next/image';
 import { useLocale } from "next-intl";
-import BeadComparisonSlider from "./BeadComparisonSlider";
+import PrintableCollections from "./PrintableCollections";
 import { Link } from "@/i18n/routing";
 import { useAuth } from "@/lib/auth-context";
 import { getAllPrintables, PrintableItem } from "@/lib/printables-data";
 import { jsPDF } from "jspdf";
-import { loadGalleryPatterns, GalleryPattern } from "@/app/[locale]/convert-photo-to-beads/gallery-data";
-import BeadPreviewCanvas from "@/app/[locale]/convert-photo-to-beads/components/BeadPreviewCanvas";
 
 export default function HomeContent() {
     const { user, login, isLoggingIn } = useAuth();
     const locale = useLocale();
     const [activeTab, setActiveTab] = useState("upload")
-    const [beadPatterns, setBeadPatterns] = useState<GalleryPattern[]>([]);
     const tHero = useTranslations("hero");
     const tHowToGuide = useTranslations("howToGuide");
     const tCategories = useTranslations("categories");
@@ -29,7 +26,6 @@ export default function HomeContent() {
     const tFaq = useTranslations("faq");
     const tContact = useTranslations("contact");
     const tAiFeatures = useTranslations("aiFeatures");
-    const tBeadFeatures = useTranslations("beadFeatures");
     const tInstant = useTranslations("instantDownloads");
     // NOTE: These namespaces were not in your provided JSON, 
     // but are required for the "Custom Generator" section and "Editor" view found in the HTML.
@@ -107,13 +103,6 @@ export default function HomeContent() {
     useEffect(() => {
         setRandomPuzzles(getRandomPuzzles());
         console.log(randomPuzzles)
-    }, []);
-
-    // 加载拼豆图案
-    useEffect(() => {
-        loadGalleryPatterns().then((patterns) => {
-            setBeadPatterns(patterns.slice(0, 4));
-        });
     }, []);
 
     // 5. 处理“换一批”点击
@@ -235,17 +224,15 @@ export default function HomeContent() {
                                     {/* Tabs (React Controlled) */}
                                     <div className="p-2 bg-slate-50 border-b border-slate-100">
                                         <div className="relative flex w-full bg-slate-200/60 p-1 rounded-xl">
-                                            {/* 滑块动画 (3 Tabs Version) */}
+                                            {/* Two visible generator modes */}
                                             <div
-                                                className={`absolute top-1 bottom-1 w-[calc(33.33%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300 ease-out 
-                                                ${activeTab === 'upload' ? 'left-1' :
-                                                        activeTab === 'ai' ? 'left-[calc(33.33%+1px)]' :
-                                                            'left-[calc(66.66%+1px)]'}`}
+                                                className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300 ease-out
+                                                ${activeTab === 'upload' ? 'left-1' : 'left-1/2'}`}
                                             ></div>
 
                                             <button
                                                 onClick={() => setActiveTab("upload")}
-                                                className={`relative z-10 w-1/3 py-2.5 text-xs sm:text-sm font-bold transition-colors flex justify-center items-center gap-1.5 ${activeTab === 'upload' ? 'text-slate-800' : 'text-slate-500'}`}
+                                                className={`relative z-10 w-1/2 py-2.5 text-xs sm:text-sm font-bold transition-colors flex justify-center items-center gap-1.5 ${activeTab === 'upload' ? 'text-slate-800' : 'text-slate-500'}`}
                                             >
                                                 <ImageIcon className="w-4 h-4" />
                                                 {tHero("tabUpload")}
@@ -253,22 +240,13 @@ export default function HomeContent() {
 
                                             <button
                                                 onClick={() => setActiveTab("ai")}
-                                                className={`relative z-10 w-1/3 py-2.5 text-xs sm:text-sm font-bold transition-colors flex justify-center items-center gap-1.5 ${activeTab === 'ai' ? 'text-slate-800' : 'text-slate-500'}`}
+                                                className={`relative z-10 w-1/2 py-2.5 text-xs sm:text-sm font-bold transition-colors flex justify-center items-center gap-1.5 ${activeTab === 'ai' ? 'text-slate-800' : 'text-slate-500'}`}
                                             >
                                                 <Wand2 className="w-4 h-4" />
                                                 {tHero("tabAi")}
                                             </button>
 
-                                            <button
-                                                onClick={() => setActiveTab("bead")}
-                                                className={`relative z-10 w-1/3 py-2.5 text-xs sm:text-sm font-bold transition-colors flex justify-center items-center gap-1.5 ${activeTab === 'bead' ? 'text-slate-800' : 'text-slate-500'}`}
-                                            >
-                                                <div className="flex items-center gap-1 relative">
-                                                    <Grid3X3 className="w-4 h-4" />
-                                                    {tHero("tabBead")}
-                                                    <span className="absolute -top-3.5 -right-3 px-1 py-0.5 bg-zinc-950 text-[8px] text-white rounded font-black scale-90 shadow-sm">{tHero("beadBadge")}</span>
-                                                </div>
-                                            </button>
+
                                         </div>
                                     </div>
                                     <div className="p-6 min-h-[160px] flex flex-col justify-center">
@@ -389,33 +367,7 @@ export default function HomeContent() {
                                             </div>
                                         </div>
 
-                                        {/* MODE C: BEAD ART - New Diversion Section */}
-                                        <div id="panel-bead" className={`${activeTab === 'bead' ? 'block' : 'hidden'} w-full animate-in fade-in slide-in-from-bottom-2 duration-300`}>
-                                            <div className="flex flex-col sm:flex-row items-center gap-5 p-4 rounded-2xl bg-zinc-50 border border-zinc-100">
-                                                <div className="w-24 h-24 bg-white border border-zinc-200 rounded-xl shadow-sm flex items-center justify-center overflow-hidden shrink-0 group">
-                                                    <Image
-                                                        src="/transformar-foto-em-desenho-anime-online.webp"
-                                                        width={96} height={96}
-                                                        alt="Bead Art Preview"
-                                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                                    />
-                                                </div>
-                                                <div className="flex-1 text-center sm:text-left space-y-1.5">
-                                                    <h3 className="text-base sm:text-lg font-bold text-zinc-900 tracking-tight">{tHero("beadTitle")}</h3>
-                                                    <p className="text-xs text-zinc-500 font-medium leading-relaxed">{tHero("beadDesc")}</p>
 
-                                                    <div className="pt-2">
-                                                        <Link
-                                                            href="/convert-photo-to-beads/editor/"
-                                                            className="inline-flex items-center gap-2 px-5 py-2 bg-zinc-950 text-white rounded-lg text-xs font-bold hover:bg-zinc-800 hover:shadow-lg hover:-translate-y-0.5 transition-all"
-                                                        >
-                                                            {tHero("beadCta")}
-                                                            <ArrowRight size={14} strokeWidth={3} />
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -424,10 +376,7 @@ export default function HomeContent() {
                             <div className="lg:w-1/2 w-full flex justify-center perspective-1000">
                                 <div className="relative w-full max-w-lg aspect-square rounded-[2.5rem] shadow-floating bg-white p-3 transform rotate-2 hover:rotate-0 transition-transform duration-500 border border-slate-100">
                                     <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-100 group">
-                                        {activeTab === 'bead' ? (
-                                            <BeadComparisonSlider />
-                                        ) : (
-                                            <>
+                                        <>
                                                 <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/result-cupcake-illustration-connect-the-dots-maker.webp" className="absolute inset-0 w-full h-full object-cover" width="500" height="500" alt="Result" />
                                                 <div id="hero-before-layer" className="absolute inset-0 w-full h-full overflow-hidden border-r-4 border-white" style={{ clipPath: "inset(0 50% 0 0)" }}>
                                                     <Image src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker-hd.webp" className="absolute inset-0 w-full h-full object-cover" width="500" height="500" alt="Original" />
@@ -453,14 +402,15 @@ export default function HomeContent() {
                                                         if (handle) handle.style.left = `${val}%`;
                                                     }}
                                                 />
-                                            </>
-                                        )}
+                                        </>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+
+                <PrintableCollections locale={locale} />
 
                 {/* 2. How-To Guide Section */}
                 <section
@@ -738,81 +688,6 @@ export default function HomeContent() {
                         </div>
                     </div>
                 </section>
-
-                {/* Bead Features Section */}
-                <section className="py-24 bg-gradient-to-br from-pink-50 via-white to-purple-50 relative overflow-hidden">
-                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-pink-50/50 blur-[100px] rounded-full pointer-events-none"></div>
-                    <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-50/50 blur-[100px] rounded-full pointer-events-none"></div>
-
-                    <div className="max-w-7xl mx-auto px-6 relative z-10">
-                        <div className="text-center mb-12">
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-100 text-pink-600 text-xs font-bold uppercase tracking-wider mb-6">
-                                <Sparkles className="w-3.5 h-3.5 fill-current" />
-                                {tBeadFeatures("badge")}
-                            </div>
-                            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight tracking-tight">
-                                {tBeadFeatures("title")}
-                            </h2>
-                            <p className="text-lg text-slate-500 mb-10 leading-relaxed max-w-2xl mx-auto">
-                                {tBeadFeatures("description")}
-                            </p>
-                        </div>
-
-                        {/* Pattern Gallery Preview */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                            {beadPatterns.map((pattern, i) => (
-                                <Link key={i} href={`/convert-photo-to-beads/gallery/${pattern.slug}`} className="group relative aspect-square rounded-2xl overflow-hidden bg-white border-2 border-slate-100 hover:border-pink-300 transition-all hover:shadow-lg">
-                                    {pattern.grid && (
-                                        <BeadPreviewCanvas
-                                            grid={pattern.grid}
-                                            maxWidth={300}
-                                            detailed={false}
-                                            className="w-full h-full"
-                                        />
-                                    )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <div className="absolute bottom-3 left-3 text-white font-bold text-sm">{pattern.title}</div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                            <div className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
-                                <div className="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center text-pink-600 mb-4">
-                                    <ImageIcon className="w-5 h-5" />
-                                </div>
-                                <h4 className="font-bold text-lg text-slate-800 mb-2">{tBeadFeatures("f1Title")}</h4>
-                                <p className="text-sm text-slate-500 leading-relaxed">{tBeadFeatures("f1Desc")}</p>
-                            </div>
-                            <div className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
-                                <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 mb-4">
-                                    <Grid3X3 className="w-5 h-5" />
-                                </div>
-                                <h4 className="font-bold text-lg text-slate-800 mb-2">{tBeadFeatures("f2Title")}</h4>
-                                <p className="text-sm text-slate-500 leading-relaxed">{tBeadFeatures("f2Desc")}</p>
-                            </div>
-                            <div className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
-                                <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-4">
-                                    <Download className="w-5 h-5" />
-                                </div>
-                                <h4 className="font-bold text-lg text-slate-800 mb-2">{tBeadFeatures("f3Title")}</h4>
-                                <p className="text-sm text-slate-500 leading-relaxed">{tBeadFeatures("f3Desc")}</p>
-                            </div>
-                        </div>
-
-                        <div className="flex justify-center">
-                            <Link
-                                href="/convert-photo-to-beads"
-                                className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-2xl hover:from-pink-600 hover:to-purple-700 transition-all active:scale-95 shadow-lg shadow-purple-200"
-                            >
-                                {tBeadFeatures("cta")}
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                        </div>
-                    </div>
-                </section>
-
 
                 <section className="py-24 bg-white relative" id="printable-guide">
                     {/* 柔和的背景装饰 */}
