@@ -631,6 +631,7 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                         <h2 id="original-pdfs" className="text-xl font-bold">Original numbered PDF worksheets</h2>
                         <p className="mt-3">Each has free A4 and US Letter puzzles and matching answers.</p>
                         <ul className="mt-4 space-y-2">
+                            <li><Link href="/connect-the-dots-1-to-100/" className="text-brand-blue underline">Exactly 100 dots · three puzzles and answers</Link></li>
                             <li><Link href="/printables/elephant-100/" className="text-brand-blue underline">Elephant · 100 dots</Link></li>
                             <li><Link href="/printables/hot-air-balloon-100/" className="text-brand-blue underline">Hot-air Balloon · 100 dots</Link></li>
                             <li><Link href="/printables/seahorse-100/" className="text-brand-blue underline">Seahorse · 100 dots</Link></li>
@@ -642,6 +643,13 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                             <li><Link href="/printables/swan-90/" className="text-brand-blue underline">Swan · 90 dots</Link></li>
                             <li><Link href="/printables/maple-leaf-90/" className="text-brand-blue underline">Maple Leaf · 90 dots</Link></li>
                         </ul>
+                    </div>
+                </section>}
+
+                {locale === "en" && <section className="py-8 bg-white">
+                    <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+                        <h2 className="text-xl font-bold">Alphabet dot-to-dot</h2>
+                        <p className="mt-3"><Link href="/alphabet-dot-to-dot/" className="text-brand-blue underline">English A–Z and a–z collection</Link> · Three original 26-dot pictures, with A4 and US Letter puzzles and answers.</p>
                     </div>
                 </section>}
 

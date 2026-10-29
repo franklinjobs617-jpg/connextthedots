@@ -19,14 +19,17 @@ const handleEnglishSheet = createMiddleware({
 export default function middleware(request: NextRequest) {
   const match = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?printables\/([^/]+)\/?$/);
   const isWaveA = Boolean(match && waveAIds.has(match[2]));
-  const response = isWaveA && !match?.[1] ? handleEnglishSheet(request) : handleI18n(request);
+  const hundredMatch = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?connect-the-dots-1-to-100\/?$/);
+  const alphabetMatch = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?alphabet-dot-to-dot\/?$/);
+  const isEnglishResource = isWaveA || Boolean(hundredMatch) || Boolean(alphabetMatch);
+  const response = isEnglishResource && !(match?.[1] || hundredMatch?.[1] || alphabetMatch?.[1]) ? handleEnglishSheet(request) : handleI18n(request);
   // This new worksheet exists only in English; do not advertise untranslated URLs.
   if (/^\/(?:(?:en|de|es|pt|fr|it|nl)\/)?printables\/mountain-landscape-120\/?$/.test(request.nextUrl.pathname)) {
     response.headers.delete('link');
   }
-  // Remove only language alternatives on explicit Wave A locale requests.
+  // Remove only language alternatives on these explicit English resources.
   // Preserve any unrelated Link values (for example image preloads).
-  if (isWaveA) {
+  if (isEnglishResource) {
     const link = response.headers.get('link');
     if (link) {
       const retained = link.split(/,(?=\s*<)/).filter((value) => !/;\s*hreflang\s*=/i.test(value)).join(',');

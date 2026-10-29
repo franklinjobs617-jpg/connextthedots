@@ -110,5 +110,7 @@ export function sheetAsset(item: OriginalSheet, paper: "A4" | "Letter", kind: "P
 /** A language switch on a new English sheet leads to the selected home page. */
 export function sheetLanguageTarget(pathname: string, locale: string): string {
     const isOriginal = originalSheets.some((item) => pathname.replace(/\/$/, "") === `/printables/${item.id}`);
-    return isOriginal && locale !== "en" ? "/" : pathname;
+    const isHundredCollection = pathname.replace(/\/$/, "") === "/connect-the-dots-1-to-100";
+    const isAlphabetCollection = pathname.replace(/\/$/, "") === "/alphabet-dot-to-dot";
+    return (isOriginal || isHundredCollection || isAlphabetCollection) && locale !== "en" ? "/" : pathname;
 }
