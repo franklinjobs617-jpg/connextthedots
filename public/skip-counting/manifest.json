@@ -1,0 +1,170 @@
+[
+  {
+    "path": "skip-counting/rocket-by-2/v1/rocket-by-2-A4-Puzzle.pdf",
+    "sha256": "6431f933d47a1aeb109f2f718f438bc177f0fe8058fa832254eedd351f1fbce3",
+    "paper": "A4",
+    "kind": "Puzzle",
+    "id": "rocket-by-2"
+  },
+  {
+    "path": "skip-counting/rocket-by-2/v1/rocket-by-2-A4-Answer.pdf",
+    "sha256": "f166580daea2a79579bc273ce12156e7411df3c5924159bd19136046aa46a4a9",
+    "paper": "A4",
+    "kind": "Answer",
+    "id": "rocket-by-2"
+  },
+  {
+    "path": "skip-counting/rocket-by-2/v1/rocket-by-2-Letter-Puzzle.pdf",
+    "sha256": "c6062228babe56d008e7ab0da6603a3a7e90dd7b71f76e9b872136fe4e4ec035",
+    "paper": "Letter",
+    "kind": "Puzzle",
+    "id": "rocket-by-2"
+  },
+  {
+    "path": "skip-counting/rocket-by-2/v1/rocket-by-2-Letter-Answer.pdf",
+    "sha256": "5f368002a7e7fb7b94405aabcd9d00bbb553e483064b983ce94eefa91301994d",
+    "paper": "Letter",
+    "kind": "Answer",
+    "id": "rocket-by-2"
+  },
+  {
+    "path": "skip-counting/sailboat-by-2/v1/sailboat-by-2-A4-Puzzle.pdf",
+    "sha256": "9494a2af9d032bd0bc347d8ca3a7ee25f16e557f69d4f721cdbd64279caca623",
+    "paper": "A4",
+    "kind": "Puzzle",
+    "id": "sailboat-by-2"
+  },
+  {
+    "path": "skip-counting/sailboat-by-2/v1/sailboat-by-2-A4-Answer.pdf",
+    "sha256": "6c417df5cb9a8a7d1e60f3422591136452fbee37902f87c7122de3b8b7c54a2e",
+    "paper": "A4",
+    "kind": "Answer",
+    "id": "sailboat-by-2"
+  },
+  {
+    "path": "skip-counting/sailboat-by-2/v1/sailboat-by-2-Letter-Puzzle.pdf",
+    "sha256": "39bb9b45f28ae9a8b18db9672f189d175249156aae902c60fc36f79239619f52",
+    "paper": "Letter",
+    "kind": "Puzzle",
+    "id": "sailboat-by-2"
+  },
+  {
+    "path": "skip-counting/sailboat-by-2/v1/sailboat-by-2-Letter-Answer.pdf",
+    "sha256": "b51b3f21d8680173ca140ead415f8ce5ca0292d16a034458a8a15bf9bc6f80be",
+    "paper": "Letter",
+    "kind": "Answer",
+    "id": "sailboat-by-2"
+  },
+  {
+    "path": "skip-counting/fish-by-5/v1/fish-by-5-A4-Puzzle.pdf",
+    "sha256": "afc2c52159c5153c301effc25db9df58b9621f9cc029fced1ecc0a0b6f9a5059",
+    "paper": "A4",
+    "kind": "Puzzle",
+    "id": "fish-by-5"
+  },
+  {
+    "path": "skip-counting/fish-by-5/v1/fish-by-5-A4-Answer.pdf",
+    "sha256": "72451cb2e87e2145e97bc472456890510efd3eaa99eedcabb7796a618653ab01",
+    "paper": "A4",
+    "kind": "Answer",
+    "id": "fish-by-5"
+  },
+  {
+    "path": "skip-counting/fish-by-5/v1/fish-by-5-Letter-Puzzle.pdf",
+    "sha256": "209ea2f8d73b129314a123318b6ffdd495be2c3516dece03a9ad97394c200657",
+    "paper": "Letter",
+    "kind": "Puzzle",
+    "id": "fish-by-5"
+  },
+  {
+    "path": "skip-counting/fish-by-5/v1/fish-by-5-Letter-Answer.pdf",
+    "sha256": "a19b2464c3dc2cb966687421c19375f8fb0cafbeb057aa22e5330dcb2d51b4b7",
+    "paper": "Letter",
+    "kind": "Answer",
+    "id": "fish-by-5"
+  },
+  {
+    "path": "skip-counting/tulip-by-5/v1/tulip-by-5-A4-Puzzle.pdf",
+    "sha256": "e03e6f4027f34a99e90c571b8d9065895c7a29edf1cd239f3b309edbf3798969",
+    "paper": "A4",
+    "kind": "Puzzle",
+    "id": "tulip-by-5"
+  },
+  {
+    "path": "skip-counting/tulip-by-5/v1/tulip-by-5-A4-Answer.pdf",
+    "sha256": "0663bd1d58ea77d98fdd5cfed6e5b0bf403d7f6a87b43680440f787a28697a72",
+    "paper": "A4",
+    "kind": "Answer",
+    "id": "tulip-by-5"
+  },
+  {
+    "path": "skip-counting/tulip-by-5/v1/tulip-by-5-Letter-Puzzle.pdf",
+    "sha256": "690eb4a844e3d2c3b9e0b0e30f1e584b5442fcc455c9b2633ada5aba76ad194e",
+    "paper": "Letter",
+    "kind": "Puzzle",
+    "id": "tulip-by-5"
+  },
+  {
+    "path": "skip-counting/tulip-by-5/v1/tulip-by-5-Letter-Answer.pdf",
+    "sha256": "9a99f828a6cd8bd68ee6d8b0d308c86647cfe0a91e557900066d615cc445f794",
+    "paper": "Letter",
+    "kind": "Answer",
+    "id": "tulip-by-5"
+  },
+  {
+    "path": "skip-counting/star-by-10/v1/star-by-10-A4-Puzzle.pdf",
+    "sha256": "a25f8db66d48886e82f172761240a736d55ccefd611c948adcf6154bcd9406fe",
+    "paper": "A4",
+    "kind": "Puzzle",
+    "id": "star-by-10"
+  },
+  {
+    "path": "skip-counting/star-by-10/v1/star-by-10-A4-Answer.pdf",
+    "sha256": "a4a31393db5730f3f12b469740f57fd9cf900909769c082fadbc685fd4f57c1f",
+    "paper": "A4",
+    "kind": "Answer",
+    "id": "star-by-10"
+  },
+  {
+    "path": "skip-counting/star-by-10/v1/star-by-10-Letter-Puzzle.pdf",
+    "sha256": "00b688cf35d213a8a1981595a87fb5b9203d971886ce1db14f7fec944e601591",
+    "paper": "Letter",
+    "kind": "Puzzle",
+    "id": "star-by-10"
+  },
+  {
+    "path": "skip-counting/star-by-10/v1/star-by-10-Letter-Answer.pdf",
+    "sha256": "39d32ba7859c22fd3ef542121f3a8fb56102545dea26e27191076b0d3800134a",
+    "paper": "Letter",
+    "kind": "Answer",
+    "id": "star-by-10"
+  },
+  {
+    "path": "skip-counting/house-by-10/v1/house-by-10-A4-Puzzle.pdf",
+    "sha256": "389c7ea7eb689b22b8de37306c89bb11748051b1d9a90ba9845209ec6563ea7d",
+    "paper": "A4",
+    "kind": "Puzzle",
+    "id": "house-by-10"
+  },
+  {
+    "path": "skip-counting/house-by-10/v1/house-by-10-A4-Answer.pdf",
+    "sha256": "f0dcacdfd66f5a2a3c739acb383df56e02d2e0d8e296af0dc184b5423c0ca4eb",
+    "paper": "A4",
+    "kind": "Answer",
+    "id": "house-by-10"
+  },
+  {
+    "path": "skip-counting/house-by-10/v1/house-by-10-Letter-Puzzle.pdf",
+    "sha256": "ab0fdde0bdf93e67985990f1d7df352f66aecaa4e5163dbf0b7587c1682fe6b6",
+    "paper": "Letter",
+    "kind": "Puzzle",
+    "id": "house-by-10"
+  },
+  {
+    "path": "skip-counting/house-by-10/v1/house-by-10-Letter-Answer.pdf",
+    "sha256": "2babb763bcddccbdad5385359ba27b1ae0c89200953fa6880128d7324f56099e",
+    "paper": "Letter",
+    "kind": "Answer",
+    "id": "house-by-10"
+  }
+]
