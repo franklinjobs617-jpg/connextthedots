@@ -7,6 +7,7 @@ import DotGeneratorClient from "@/components/DotGeneratorClient";
 import Image from 'next/image';
 import { useLocale } from "next-intl";
 import PrintableCollections from "./PrintableCollections";
+import LocalizedHomeGuide from "./LocalizedHomeGuide";
 import { Link } from "@/i18n/routing";
 import { useAuth } from "@/lib/auth-context";
 import { getAllPrintables, PrintableItem } from "@/lib/printables-data";
@@ -411,6 +412,7 @@ export default function HomeContent() {
                 </section>
 
                 <PrintableCollections locale={locale} />
+                <LocalizedHomeGuide locale={locale} />
 
                 {/* 2. How-To Guide Section */}
                 <section

@@ -6,6 +6,7 @@ import { ChevronRight, Download, Filter, Sparkles, Star } from "lucide-react";
 import PrintableCard from "@/components/PrintableCard";
 import PrintableCollections from "@/components/PrintableCollections";
 import OriginalWorksheetCards from "@/components/OriginalWorksheetCards";
+import LocalizedWorksheetCards from "@/components/LocalizedWorksheetCards";
 import { useAuth } from "@/lib/auth-context";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import type { PrintableItem } from "@/lib/printables-data";
@@ -524,6 +525,7 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                 </section>
 
                 <PrintableCollections locale={locale} />
+                <LocalizedWorksheetCards locale={locale} />
                 <OriginalWorksheetCards locale={locale} />
 
                 {/* ── Filter + Grid ── */}
