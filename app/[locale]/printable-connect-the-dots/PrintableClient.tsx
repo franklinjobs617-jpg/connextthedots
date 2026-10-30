@@ -631,6 +631,10 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                     </div>
                 </section>
 
+                {locale === "en" && <p className="container max-w-6xl mx-auto px-4 sm:px-6 py-6">
+                    <Link href="/skip-counting-dot-to-dot/" className="text-brand-blue underline">Skip-counting · 2s, 5s and 10s · 6 original worksheets</Link>
+                </p>}
+
                 {locale === "en" && <section className="py-8 bg-white">
                     <div className="container max-w-6xl mx-auto px-4 sm:px-6">
                         <h2 className="text-xl font-bold">Alphabet dot-to-dot</h2>
