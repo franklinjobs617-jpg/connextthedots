@@ -1,0 +1,526 @@
+[
+  {
+    "locale": "fr",
+    "id": "tufted-owl-study-207",
+    "title": "Hibou à aigrettes",
+    "count": 207,
+    "segments": [
+      {
+        "name": "body and ear tufts",
+        "start": 1,
+        "end": 76,
+        "closed": true
+      },
+      {
+        "name": "left facial disc",
+        "start": 77,
+        "end": 108,
+        "closed": true
+      },
+      {
+        "name": "right facial disc",
+        "start": 109,
+        "end": 140,
+        "closed": true
+      },
+      {
+        "name": "left eye",
+        "start": 141,
+        "end": 148,
+        "closed": true
+      },
+      {
+        "name": "right eye",
+        "start": 149,
+        "end": 156,
+        "closed": true
+      },
+      {
+        "name": "beak",
+        "start": 157,
+        "end": 161,
+        "closed": true
+      },
+      {
+        "name": "left flight feathers",
+        "start": 162,
+        "end": 173,
+        "closed": false
+      },
+      {
+        "name": "right flight feathers",
+        "start": 174,
+        "end": 185,
+        "closed": false
+      },
+      {
+        "name": "breast chevrons",
+        "start": 186,
+        "end": 198,
+        "closed": false
+      },
+      {
+        "name": "lower plumage",
+        "start": 199,
+        "end": 207,
+        "closed": false
+      }
+    ],
+    "sourceGeometry": "/printables/tufted-owl-study-207/v2/geometry.json",
+    "sourceGeometrySha256": "e908910f87bf02a9e5c5139d3f214be2c73ace727638eb27fd39a656fd035080",
+    "exports": [
+      {
+        "paper": "A4",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/fr/tufted-owl-study-207/v1/tufted-owl-study-207-fr-A4-Puzzle.pdf",
+        "preview": "/localized-printables/fr/tufted-owl-study-207/v1/tufted-owl-study-207-fr-A4-Puzzle.png",
+        "sha256": "760d755b4e4f396a78e05aff99b0acb63d397c0853e1ff9c113f914b000e08a1",
+        "previewSha256": "3a30cae40dce575bf7018098556f9d31e21682feab5fd20aed64d9fd1be0de7f",
+        "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-A4-Puzzle.pdf",
+        "sourcePdfSha256": "23afe88012c2a829bb2b599a203128db35637b6d0e3fa47a88f5e9d8ff910765"
+      },
+      {
+        "paper": "A4",
+        "kind": "Solution",
+        "pdf": "/localized-printables/fr/tufted-owl-study-207/v1/tufted-owl-study-207-fr-A4-Solution.pdf",
+        "preview": "/localized-printables/fr/tufted-owl-study-207/v1/tufted-owl-study-207-fr-A4-Solution.png",
+        "sha256": "7e784db09417be05cc43ba176597ec61a3f16b12f09615a000fa66fb58f82ffa",
+        "previewSha256": "000453dd85033b48f79cfce2d824ddc1c49b5469886e4961353f0c7c29ee49f9",
+        "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-A4-Solution.pdf",
+        "sourcePdfSha256": "ca2a820267be261c5b8a3911e31baa9d82475234fd6aaedb4db646a30ee2c4fa"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/fr/tufted-owl-study-207/v1/tufted-owl-study-207-fr-Letter-Puzzle.pdf",
+        "preview": "/localized-printables/fr/tufted-owl-study-207/v1/tufted-owl-study-207-fr-Letter-Puzzle.png",
+        "sha256": "687658e8cc7be5cd8fac8e4dc8cd108d8322a55aa70439e288e7a521652b922f",
+        "previewSha256": "d41a5cec3efedcfd70941540780a146b6a23a36d208a4f05cbb01bfd70da66bc",
+        "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-Letter-Puzzle.pdf",
+        "sourcePdfSha256": "25aa7ce3330a73a028dbe4bf7c235f621a41c2cdcea4f7067209ee8ae52465c4"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Solution",
+        "pdf": "/localized-printables/fr/tufted-owl-study-207/v1/tufted-owl-study-207-fr-Letter-Solution.pdf",
+        "preview": "/localized-printables/fr/tufted-owl-study-207/v1/tufted-owl-study-207-fr-Letter-Solution.png",
+        "sha256": "616b1a7a46ac8051847bf14f95e351bce13236a502a9396345fda2c9516ecfd0",
+        "previewSha256": "59d82ed12bd15f4e3bb75599b3c453ab1e97d3c787ba346c2d32d01ed81dc359",
+        "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-Letter-Solution.pdf",
+        "sourcePdfSha256": "63c4d4c1b74dff082b28e29ed41926171003ccb7e6996eaa048c97d880af7578"
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "id": "hilltop-observatory-202",
+    "title": "Observatoire sur la colline",
+    "count": 202,
+    "segments": [
+      {
+        "name": "dome and building",
+        "start": 1,
+        "end": 55,
+        "closed": false
+      },
+      {
+        "name": "dome shutter",
+        "start": 56,
+        "end": 84,
+        "closed": true
+      },
+      {
+        "name": "left dome ribs",
+        "start": 85,
+        "end": 93,
+        "closed": false
+      },
+      {
+        "name": "right dome ribs",
+        "start": 94,
+        "end": 102,
+        "closed": false
+      },
+      {
+        "name": "left window",
+        "start": 103,
+        "end": 114,
+        "closed": true
+      },
+      {
+        "name": "right window",
+        "start": 115,
+        "end": 126,
+        "closed": true
+      },
+      {
+        "name": "arched door",
+        "start": 127,
+        "end": 147,
+        "closed": false
+      },
+      {
+        "name": "telescope tube",
+        "start": 148,
+        "end": 159,
+        "closed": true
+      },
+      {
+        "name": "foundation steps",
+        "start": 160,
+        "end": 202,
+        "closed": true
+      }
+    ],
+    "sourceGeometry": "/printables/hilltop-observatory-202/v2/geometry.json",
+    "sourceGeometrySha256": "b9978fbb77d520b090490d37f79747f694823f905145ef27ad6a3097b2db1d6b",
+    "exports": [
+      {
+        "paper": "A4",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/fr/hilltop-observatory-202/v1/hilltop-observatory-202-fr-A4-Puzzle.pdf",
+        "preview": "/localized-printables/fr/hilltop-observatory-202/v1/hilltop-observatory-202-fr-A4-Puzzle.png",
+        "sha256": "b04dd29c37fb30f4dfe1192d0c039ed3e1b3dbeca2ef5d93fdb154e15625d3c0",
+        "previewSha256": "b2b5906d2d4433cd3a3182aa10e0627197a9ed302c7f2d00018157a4da89cd2f",
+        "sourcePdf": "/printables/hilltop-observatory-202/v2/hilltop-observatory-A4-Puzzle.pdf",
+        "sourcePdfSha256": "1f8b19e70ede057b7d49be427562c8fc24d622d4d3479bf0149b49a804b8463c"
+      },
+      {
+        "paper": "A4",
+        "kind": "Solution",
+        "pdf": "/localized-printables/fr/hilltop-observatory-202/v1/hilltop-observatory-202-fr-A4-Solution.pdf",
+        "preview": "/localized-printables/fr/hilltop-observatory-202/v1/hilltop-observatory-202-fr-A4-Solution.png",
+        "sha256": "4f18debf8852067313a9034041e93e5e87d8d098e69a3fb03d33a7d2843154df",
+        "previewSha256": "6903f67125fe988f9ee5c2467a92d5e4b99acb8be79baabf94cde98622121282",
+        "sourcePdf": "/printables/hilltop-observatory-202/v2/hilltop-observatory-A4-Solution.pdf",
+        "sourcePdfSha256": "8a3e50a99b40dc6618feb6dde991a4541571b8bfb6092edc7f80b6470801db5b"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/fr/hilltop-observatory-202/v1/hilltop-observatory-202-fr-Letter-Puzzle.pdf",
+        "preview": "/localized-printables/fr/hilltop-observatory-202/v1/hilltop-observatory-202-fr-Letter-Puzzle.png",
+        "sha256": "42a9d60b2fd52927032a6d5c8b4992368877d71334b4a6844752a8916c0965de",
+        "previewSha256": "13e14a766f0633ee6727a5f10a5d23fd1b086679a831b8ffa82d643c91a06d4d",
+        "sourcePdf": "/printables/hilltop-observatory-202/v2/hilltop-observatory-Letter-Puzzle.pdf",
+        "sourcePdfSha256": "bd8a02d5b8b03d0be030d9bed2258b7f45dc32a3cb2fac29a2e90031f30109b9"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Solution",
+        "pdf": "/localized-printables/fr/hilltop-observatory-202/v1/hilltop-observatory-202-fr-Letter-Solution.pdf",
+        "preview": "/localized-printables/fr/hilltop-observatory-202/v1/hilltop-observatory-202-fr-Letter-Solution.png",
+        "sha256": "a9315580a872c952f62c6167c06e07a62422346bf705e4b94f9a19165eaf1944",
+        "previewSha256": "752b87b623c58c7d53432ffd5bbb02fc268c0ad4b031759ae704711c3addc87b",
+        "sourcePdf": "/printables/hilltop-observatory-202/v2/hilltop-observatory-Letter-Solution.pdf",
+        "sourcePdfSha256": "87883fa197a4b56fb1c4e337f39454abdb7b0f9084df46b385e637a8bb6dba3e"
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "id": "elephant-100",
+    "title": "Elefante",
+    "count": 100,
+    "segments": [],
+    "sourceGeometry": "/printables/elephant-100/v1/geometry.json",
+    "sourceGeometrySha256": "b3539826600ba4f0f5b186fd81fde7a1bbfcaf349b9b765dc1e1109ff18f1d37",
+    "exports": [
+      {
+        "paper": "A4",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/it/elephant-100/v1/elephant-100-it-A4-Puzzle.pdf",
+        "preview": "/localized-printables/it/elephant-100/v1/elephant-100-it-A4-Puzzle.png",
+        "sha256": "ecdc30cf463709d50f6d93fcf31db971bb9d71bd8179d03c310b0934a919bd0b",
+        "previewSha256": "908d53d2ba7aea817be23948f157c46d7306dfd7812c79538194fe38661937e2",
+        "sourcePdf": "/printables/elephant-100/v1/elephant-100-A4-Puzzle.pdf",
+        "sourcePdfSha256": "8f85eabedd97f0c9638ce00e2d98c620fa5d833e442877a2a7fca499c28c407d"
+      },
+      {
+        "paper": "A4",
+        "kind": "Solution",
+        "pdf": "/localized-printables/it/elephant-100/v1/elephant-100-it-A4-Solution.pdf",
+        "preview": "/localized-printables/it/elephant-100/v1/elephant-100-it-A4-Solution.png",
+        "sha256": "1284960f2015d75c05e5e059cd77f92e102e10cd6a7f6fc9c9534df43b699c5d",
+        "previewSha256": "487dc8840b1e9d2d28389cd70536b3e9417dde9fe554ebfe30022517ce305ba9",
+        "sourcePdf": "/printables/elephant-100/v1/elephant-100-A4-Solution.pdf",
+        "sourcePdfSha256": "2259f79d4847265fe2710db3929f056250eca454c1abc2f28c234ef816debff9"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/it/elephant-100/v1/elephant-100-it-Letter-Puzzle.pdf",
+        "preview": "/localized-printables/it/elephant-100/v1/elephant-100-it-Letter-Puzzle.png",
+        "sha256": "0ae7e68b3eead26cf959147e82a2b448156d0712211e404a6f7caa085f84c0dd",
+        "previewSha256": "dca4013a3152fff4bc6bb77731c4386d10613639ba9766c11184ff3940c03d47",
+        "sourcePdf": "/printables/elephant-100/v1/elephant-100-Letter-Puzzle.pdf",
+        "sourcePdfSha256": "54f433a266010dc5c0e8d304e8379db23cda0bd49a05176b31fba5fb2a597dd0"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Solution",
+        "pdf": "/localized-printables/it/elephant-100/v1/elephant-100-it-Letter-Solution.pdf",
+        "preview": "/localized-printables/it/elephant-100/v1/elephant-100-it-Letter-Solution.png",
+        "sha256": "e8ae0ad814e4689b68296bde685dc26349fa131e3f8eb9d878505002a71e8579",
+        "previewSha256": "74d6c0ca96cb84b4104c68bb8ff11823d7477cc0075509670f5addec94ef72a8",
+        "sourcePdf": "/printables/elephant-100/v1/elephant-100-Letter-Solution.pdf",
+        "sourcePdfSha256": "a6ebc9dfee4c84a73349fbdb1844c514fa3deb516d9b7ff661366938789bc677"
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "id": "hot-air-balloon-100",
+    "title": "Mongolfiera",
+    "count": 100,
+    "segments": [],
+    "sourceGeometry": "/printables/hot-air-balloon-100/v1/geometry.json",
+    "sourceGeometrySha256": "4eef399b48ecfd2d62420461fd5d7f9803db7296bf38fc06255ef2924653143c",
+    "exports": [
+      {
+        "paper": "A4",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/it/hot-air-balloon-100/v1/hot-air-balloon-100-it-A4-Puzzle.pdf",
+        "preview": "/localized-printables/it/hot-air-balloon-100/v1/hot-air-balloon-100-it-A4-Puzzle.png",
+        "sha256": "11cdea46f9340c22791e1e7d767ca2e6f019944b2987af605a4e8521b6d8b40c",
+        "previewSha256": "c63d5131564b4ea20da8355faf29e54fd10dc4630c0fad75638cc146f7d0197f",
+        "sourcePdf": "/printables/hot-air-balloon-100/v1/hot-air-balloon-100-A4-Puzzle.pdf",
+        "sourcePdfSha256": "c5f1c3e6d0bdde3f690e5841e184cc2c0e436b0916717838c9aabef2160fa949"
+      },
+      {
+        "paper": "A4",
+        "kind": "Solution",
+        "pdf": "/localized-printables/it/hot-air-balloon-100/v1/hot-air-balloon-100-it-A4-Solution.pdf",
+        "preview": "/localized-printables/it/hot-air-balloon-100/v1/hot-air-balloon-100-it-A4-Solution.png",
+        "sha256": "e9e83e0cbb5e94fe6aa974f9142c4c9f91306e645c03d33ae2e7ddfab80422e8",
+        "previewSha256": "46d6f2e9a91e1a8ba958e699b483cdfba0c23d3691650a99c8f73a197910233c",
+        "sourcePdf": "/printables/hot-air-balloon-100/v1/hot-air-balloon-100-A4-Solution.pdf",
+        "sourcePdfSha256": "33fb103ae6bb6b4f3ce4f0a15c9f3bc14badf60accbf24aa1dcab79e1da0ec98"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/it/hot-air-balloon-100/v1/hot-air-balloon-100-it-Letter-Puzzle.pdf",
+        "preview": "/localized-printables/it/hot-air-balloon-100/v1/hot-air-balloon-100-it-Letter-Puzzle.png",
+        "sha256": "795392cb3d13a2e1aeaaeb4593ee43dcf45b215006da1d965e60bdaa0f11a59e",
+        "previewSha256": "f4e465df2d4df371eb12d4cae9e71284a61ffd99ce27917c9a68faa7d933e312",
+        "sourcePdf": "/printables/hot-air-balloon-100/v1/hot-air-balloon-100-Letter-Puzzle.pdf",
+        "sourcePdfSha256": "0b8cf1ed03927371c80b59bd251d68cc3f4724445cc4236460164cdd70f097f7"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Solution",
+        "pdf": "/localized-printables/it/hot-air-balloon-100/v1/hot-air-balloon-100-it-Letter-Solution.pdf",
+        "preview": "/localized-printables/it/hot-air-balloon-100/v1/hot-air-balloon-100-it-Letter-Solution.png",
+        "sha256": "33317224834e6eae3bcff33a40ee843ee1ac8214235afb05e2e79c0a20419662",
+        "previewSha256": "a999a1b11cb25288c608fc3934e8e8e7da9986131ffec0b58cdce25c58eb0c67",
+        "sourcePdf": "/printables/hot-air-balloon-100/v1/hot-air-balloon-100-Letter-Solution.pdf",
+        "sourcePdfSha256": "04d4ac4c7ecbabba66e9a40f51643b7fa8c66547ab851ce59e501ba4a24f28a5"
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "id": "seahorse-100",
+    "title": "Cavalluccio marino",
+    "count": 100,
+    "segments": [],
+    "sourceGeometry": "/printables/seahorse-100/v1/geometry.json",
+    "sourceGeometrySha256": "5b638444e09c369e79edc2a42e4a66d10585079820b67c633ebbae2e3a28cb8d",
+    "exports": [
+      {
+        "paper": "A4",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/it/seahorse-100/v1/seahorse-100-it-A4-Puzzle.pdf",
+        "preview": "/localized-printables/it/seahorse-100/v1/seahorse-100-it-A4-Puzzle.png",
+        "sha256": "18944787cc965f308346080f29deba8ac8761301fea665bfd34510d814c9bfa1",
+        "previewSha256": "9febce53893cbc362303122397e2c9dcca22902a3175f925f355acf81c4a1845",
+        "sourcePdf": "/printables/seahorse-100/v1/seahorse-100-A4-Puzzle.pdf",
+        "sourcePdfSha256": "b75622a323d30234a003977558fdd5caabdba4cc9e91476eb55725718223f2a7"
+      },
+      {
+        "paper": "A4",
+        "kind": "Solution",
+        "pdf": "/localized-printables/it/seahorse-100/v1/seahorse-100-it-A4-Solution.pdf",
+        "preview": "/localized-printables/it/seahorse-100/v1/seahorse-100-it-A4-Solution.png",
+        "sha256": "726ca780cb8767b5bdc892fa2e229e4c5328d0e4c7d38efa0a20e228c428eb84",
+        "previewSha256": "61e9e5b7577308542adbe4a23fa9c24b6d4ac174bc6d9feaba009f3e67075284",
+        "sourcePdf": "/printables/seahorse-100/v1/seahorse-100-A4-Solution.pdf",
+        "sourcePdfSha256": "e747df04c05db016e131d23ceae5a1a02291c9c42ca2ae2aa3e5553605bf19de"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/it/seahorse-100/v1/seahorse-100-it-Letter-Puzzle.pdf",
+        "preview": "/localized-printables/it/seahorse-100/v1/seahorse-100-it-Letter-Puzzle.png",
+        "sha256": "c631f25522263b3eb7650d709afc35ee1a24398cebeb013d01f821b7dd7e3fd2",
+        "previewSha256": "e5ae2952ec4df42cd578833c39e7d597ff029c432a8ccd7fca9107242ee784c2",
+        "sourcePdf": "/printables/seahorse-100/v1/seahorse-100-Letter-Puzzle.pdf",
+        "sourcePdfSha256": "a3a1630b680f7e70ec89ff9f4b115a42b6add81cb10c93b65896192228b31f78"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Solution",
+        "pdf": "/localized-printables/it/seahorse-100/v1/seahorse-100-it-Letter-Solution.pdf",
+        "preview": "/localized-printables/it/seahorse-100/v1/seahorse-100-it-Letter-Solution.png",
+        "sha256": "38f996e1304762f66735dca983e97dc8a934091ae4a689c44e28b2e653739039",
+        "previewSha256": "f6b71cb3460f5d942eb4637027b3d544a5df5d73043cec1e806f6279657fb95e",
+        "sourcePdf": "/printables/seahorse-100/v1/seahorse-100-Letter-Solution.pdf",
+        "sourcePdfSha256": "773ac5ee9a1593c2fd49c441453eeb4c5dca17dab325577280f1fde782a0e7f2"
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "id": "elephant-100",
+    "title": "Elefante",
+    "count": 100,
+    "segments": [],
+    "sourceGeometry": "/printables/elephant-100/v1/geometry.json",
+    "sourceGeometrySha256": "b3539826600ba4f0f5b186fd81fde7a1bbfcaf349b9b765dc1e1109ff18f1d37",
+    "exports": [
+      {
+        "paper": "A4",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/es/elephant-100/v1/elephant-100-es-A4-Puzzle.pdf",
+        "preview": "/localized-printables/es/elephant-100/v1/elephant-100-es-A4-Puzzle.png",
+        "sha256": "ee300969c5184601bea14dca554d3375df7dc427831830c579854f12f401c10d",
+        "previewSha256": "9fe4bfabafafc767fef20710c20e0b742cdbb9a289a9e365edde3b4520067c26",
+        "sourcePdf": "/printables/elephant-100/v1/elephant-100-A4-Puzzle.pdf",
+        "sourcePdfSha256": "8f85eabedd97f0c9638ce00e2d98c620fa5d833e442877a2a7fca499c28c407d"
+      },
+      {
+        "paper": "A4",
+        "kind": "Solution",
+        "pdf": "/localized-printables/es/elephant-100/v1/elephant-100-es-A4-Solution.pdf",
+        "preview": "/localized-printables/es/elephant-100/v1/elephant-100-es-A4-Solution.png",
+        "sha256": "17737dbaa78db791bd04a0576afc79424579aea06067025fed8809438b52298e",
+        "previewSha256": "c2426e2f9ac9f2ca31e91aae0fde38aab0a44d34c8efee77c8c97354b74a377d",
+        "sourcePdf": "/printables/elephant-100/v1/elephant-100-A4-Solution.pdf",
+        "sourcePdfSha256": "2259f79d4847265fe2710db3929f056250eca454c1abc2f28c234ef816debff9"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/es/elephant-100/v1/elephant-100-es-Letter-Puzzle.pdf",
+        "preview": "/localized-printables/es/elephant-100/v1/elephant-100-es-Letter-Puzzle.png",
+        "sha256": "b45d28e834a1df0a0be2fed8e45ab1a43812abc44d495311729cf69a656662de",
+        "previewSha256": "ee19f6e208177e348b68f7b9cfe31f5a3b0411b6c0806b686624690ab85f873f",
+        "sourcePdf": "/printables/elephant-100/v1/elephant-100-Letter-Puzzle.pdf",
+        "sourcePdfSha256": "54f433a266010dc5c0e8d304e8379db23cda0bd49a05176b31fba5fb2a597dd0"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Solution",
+        "pdf": "/localized-printables/es/elephant-100/v1/elephant-100-es-Letter-Solution.pdf",
+        "preview": "/localized-printables/es/elephant-100/v1/elephant-100-es-Letter-Solution.png",
+        "sha256": "5a508423f98d5466c0c198edd1339aa596b1184cca0ae5a8d1c8241b2e4d86c6",
+        "previewSha256": "5d2e933f487768bc95a6ca8ab9c2d719bbc9263d1f49d91e46624424e733a7f2",
+        "sourcePdf": "/printables/elephant-100/v1/elephant-100-Letter-Solution.pdf",
+        "sourcePdfSha256": "a6ebc9dfee4c84a73349fbdb1844c514fa3deb516d9b7ff661366938789bc677"
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "id": "hot-air-balloon-100",
+    "title": "Globo aerostático",
+    "count": 100,
+    "segments": [],
+    "sourceGeometry": "/printables/hot-air-balloon-100/v1/geometry.json",
+    "sourceGeometrySha256": "4eef399b48ecfd2d62420461fd5d7f9803db7296bf38fc06255ef2924653143c",
+    "exports": [
+      {
+        "paper": "A4",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/es/hot-air-balloon-100/v1/hot-air-balloon-100-es-A4-Puzzle.pdf",
+        "preview": "/localized-printables/es/hot-air-balloon-100/v1/hot-air-balloon-100-es-A4-Puzzle.png",
+        "sha256": "4fd200a1d397c0881d6424e033adfe13246a51a9e4a491f0b8368d22e1321b19",
+        "previewSha256": "5df00c0282660091172b243111701f7775ec5eb2491253cb089d74b338c8c054",
+        "sourcePdf": "/printables/hot-air-balloon-100/v1/hot-air-balloon-100-A4-Puzzle.pdf",
+        "sourcePdfSha256": "c5f1c3e6d0bdde3f690e5841e184cc2c0e436b0916717838c9aabef2160fa949"
+      },
+      {
+        "paper": "A4",
+        "kind": "Solution",
+        "pdf": "/localized-printables/es/hot-air-balloon-100/v1/hot-air-balloon-100-es-A4-Solution.pdf",
+        "preview": "/localized-printables/es/hot-air-balloon-100/v1/hot-air-balloon-100-es-A4-Solution.png",
+        "sha256": "f52078a3793bbfd032132ee18e4d19eded07f20f22af30e7c4fd4109a3106c8d",
+        "previewSha256": "13749c506f58b38dc1da634b3fcdb29f22006656cc1dcfd2817f0f86f89cb3ab",
+        "sourcePdf": "/printables/hot-air-balloon-100/v1/hot-air-balloon-100-A4-Solution.pdf",
+        "sourcePdfSha256": "33fb103ae6bb6b4f3ce4f0a15c9f3bc14badf60accbf24aa1dcab79e1da0ec98"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/es/hot-air-balloon-100/v1/hot-air-balloon-100-es-Letter-Puzzle.pdf",
+        "preview": "/localized-printables/es/hot-air-balloon-100/v1/hot-air-balloon-100-es-Letter-Puzzle.png",
+        "sha256": "b8233537ac2b55a199ec39019862ca16c281d0e57a5d9ca012ee881c72bb0c42",
+        "previewSha256": "b049dde9ea543151c2cef6be01a81045f47d438eab9c823e83095d94d6fb596e",
+        "sourcePdf": "/printables/hot-air-balloon-100/v1/hot-air-balloon-100-Letter-Puzzle.pdf",
+        "sourcePdfSha256": "0b8cf1ed03927371c80b59bd251d68cc3f4724445cc4236460164cdd70f097f7"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Solution",
+        "pdf": "/localized-printables/es/hot-air-balloon-100/v1/hot-air-balloon-100-es-Letter-Solution.pdf",
+        "preview": "/localized-printables/es/hot-air-balloon-100/v1/hot-air-balloon-100-es-Letter-Solution.png",
+        "sha256": "021d4062ad2b1ef4a01493ac513a59cde558e389fc2b64b87a0b9c4ab2f28e46",
+        "previewSha256": "3b05bead77e280e26fc9b2bb6055adfb476b2054331520f717871f8d946620dd",
+        "sourcePdf": "/printables/hot-air-balloon-100/v1/hot-air-balloon-100-Letter-Solution.pdf",
+        "sourcePdfSha256": "04d4ac4c7ecbabba66e9a40f51643b7fa8c66547ab851ce59e501ba4a24f28a5"
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "id": "seahorse-100",
+    "title": "Caballito de mar",
+    "count": 100,
+    "segments": [],
+    "sourceGeometry": "/printables/seahorse-100/v1/geometry.json",
+    "sourceGeometrySha256": "5b638444e09c369e79edc2a42e4a66d10585079820b67c633ebbae2e3a28cb8d",
+    "exports": [
+      {
+        "paper": "A4",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/es/seahorse-100/v1/seahorse-100-es-A4-Puzzle.pdf",
+        "preview": "/localized-printables/es/seahorse-100/v1/seahorse-100-es-A4-Puzzle.png",
+        "sha256": "9c57a68393d9d748793607a0d5f4c9a0a1ae8955a8c092c45b576d34d03a0bb6",
+        "previewSha256": "55acef4ed4168379468c34c31459197aebd3c91447d5be1a1072f0990e1620e1",
+        "sourcePdf": "/printables/seahorse-100/v1/seahorse-100-A4-Puzzle.pdf",
+        "sourcePdfSha256": "b75622a323d30234a003977558fdd5caabdba4cc9e91476eb55725718223f2a7"
+      },
+      {
+        "paper": "A4",
+        "kind": "Solution",
+        "pdf": "/localized-printables/es/seahorse-100/v1/seahorse-100-es-A4-Solution.pdf",
+        "preview": "/localized-printables/es/seahorse-100/v1/seahorse-100-es-A4-Solution.png",
+        "sha256": "3612e6dd2b39f1301db9759aaea078308e0d226dba7089abf350cf122dd5750d",
+        "previewSha256": "d6dec49a9118472656eed94988b6789ca7469ae14632d61cccb7b022af916136",
+        "sourcePdf": "/printables/seahorse-100/v1/seahorse-100-A4-Solution.pdf",
+        "sourcePdfSha256": "e747df04c05db016e131d23ceae5a1a02291c9c42ca2ae2aa3e5553605bf19de"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Puzzle",
+        "pdf": "/localized-printables/es/seahorse-100/v1/seahorse-100-es-Letter-Puzzle.pdf",
+        "preview": "/localized-printables/es/seahorse-100/v1/seahorse-100-es-Letter-Puzzle.png",
+        "sha256": "bc9f007da0adeca8762fa250f6b3108d1d8f10d7958d9d6698e7f496993c6fc1",
+        "previewSha256": "062aee66aa3d97bb956acd2f993f5d0146a2462ab53c3a6524b08a7d60291947",
+        "sourcePdf": "/printables/seahorse-100/v1/seahorse-100-Letter-Puzzle.pdf",
+        "sourcePdfSha256": "a3a1630b680f7e70ec89ff9f4b115a42b6add81cb10c93b65896192228b31f78"
+      },
+      {
+        "paper": "Letter",
+        "kind": "Solution",
+        "pdf": "/localized-printables/es/seahorse-100/v1/seahorse-100-es-Letter-Solution.pdf",
+        "preview": "/localized-printables/es/seahorse-100/v1/seahorse-100-es-Letter-Solution.png",
+        "sha256": "a3616c438751201e4baf7433d78eb12e87e43382a150c7201c679a5d9568dc43",
+        "previewSha256": "5b72913925e45fb22d536dd08e997cfacbf6d5fb44ce3ad89b48912ff8f746c4",
+        "sourcePdf": "/printables/seahorse-100/v1/seahorse-100-Letter-Solution.pdf",
+        "sourcePdfSha256": "773ac5ee9a1593c2fd49c441453eeb4c5dca17dab325577280f1fde782a0e7f2"
+      }
+    ]
+  }
+]
