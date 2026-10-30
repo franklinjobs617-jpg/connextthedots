@@ -50,6 +50,7 @@
     "description": "Téléchargez une fiche PDF haute résolution maintenant. Cliquez sur n'importe quelle image pour télécharger instantanément, ou appuyez sur le bouton Mélanger pour découvrir de nouveaux choix aléatoires !",
     "btnShuffle": "Mélanger",
     "btnViewLibrary": "Voir la Bibliothèque",
+    "btnBrowseAll": "Parcourir toutes les fiches",
     "overlayDownloading": "Téléchargement du PDF...",
     "overlayDownload": "Télécharger PDF"
   },
