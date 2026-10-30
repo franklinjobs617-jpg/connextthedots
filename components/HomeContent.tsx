@@ -8,6 +8,8 @@ import Image from 'next/image';
 import { useLocale } from "next-intl";
 import PrintableCollections from "./PrintableCollections";
 import LocalizedHomeGuide from "./LocalizedHomeGuide";
+import { generatorExamples } from "@/lib/generator-examples";
+import { getGeneratorUi } from "@/lib/generator-ui-copy";
 import { Link } from "@/i18n/routing";
 import { useAuth } from "@/lib/auth-context";
 import { getAllPrintables, PrintableItem } from "@/lib/printables-data";
@@ -16,6 +18,7 @@ import { jsPDF } from "jspdf";
 export default function HomeContent() {
     const { user, login, isLoggingIn } = useAuth();
     const locale = useLocale();
+    const generatorUi = getGeneratorUi(locale);
     const [activeTab, setActiveTab] = useState("upload")
     const tHero = useTranslations("hero");
     const tHowToGuide = useTranslations("howToGuide");
@@ -271,7 +274,7 @@ export default function HomeContent() {
                                                     </span>
                                                 </div>
 
-                                                <input type="file" id="hero-file-input" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" accept="image/*" aria-label="Upload Image File" />
+                                                <input type="file" id="hero-file-input" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" accept="image/*" aria-label={generatorUi.uploadFile} />
                                             </button>
 
                                             <div className="mt-6 text-center lg:text-left w-full border-t border-slate-100 pt-4">
@@ -279,18 +282,12 @@ export default function HomeContent() {
                                                     {tHero("noImageLabel")}
                                                 </p>
                                                 <div className="flex justify-center gap-3" id="examples-content">
-                                                    <button className="preset-btn w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-slate-100 shadow-sm hover:border-brand-blue transition-all transform hover:scale-105" data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cartoon-animal-dog-dot-to-dot-generator-hd.webp">
-                                                        <Image width={100} height={100} src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cartoon-animal-dog-dot-to-dot-generator.webp" className="w-full h-full object-cover" alt="Example 1" />
-                                                    </button>
-                                                    <button className="preset-btn w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-slate-100 shadow-sm hover:border-brand-blue transition-all transform hover:scale-105" data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker-hd.webp">
-                                                        <Image width={100} height={100} src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/cupcake-illustration-connect-the-dots-maker.webp" className="w-full h-full object-cover" alt="Example 2" />
-                                                    </button>
-                                                    <button className="preset-btn w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-slate-100 shadow-sm hover:border-brand-blue transition-all transform hover:scale-105" data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/realistic-animal-custom-dot-to-dot-generator-printable-hd.webp">
-                                                        <Image width={100} height={100} src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/realistic-animal-custom-dot-to-dot-generator-printable.webp" className="w-full h-full object-cover" alt="Example 3" />
-                                                    </button>
-                                                    <button className="preset-btn w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-slate-100 shadow-sm hover:border-brand-blue transition-all transform hover:scale-105" data-src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/statue-of-liberty-dot-to-dot-generator-hd.webp">
-                                                        <Image width={100} height={100} src="https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/image/statue-of-liberty-dot-to-dot-generator.webp" className="w-full h-full object-cover" alt="Example 4" />
-                                                    </button>
+                                                    {generatorExamples.map((example) => {
+                                                        const alt = ({ puppy: generatorUi.examplePuppy, cupcake: generatorUi.exampleCupcake, leaf: generatorUi.exampleLeaf, rocket: generatorUi.exampleRocket })[example.id];
+                                                        return <button key={example.id} className="preset-btn w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-slate-100 shadow-sm hover:border-brand-blue transition-all transform hover:scale-105" data-src={example.source} aria-label={alt}>
+                                                            <Image width={100} height={100} src={example.source} className="w-full h-full object-cover" alt={alt} />
+                                                        </button>;
+                                                    })}
                                                 </div>
                                             </div>
                                         </div>
@@ -1534,6 +1531,8 @@ export default function HomeContent() {
                         <div className="relative flex-grow w-full min-h-[348px] flex items-center justify-center">
                             <div
                                 id="canvas-loader"
+                                role="status"
+                                aria-live="polite"
                                 className="absolute inset-0 bg-white/95 z-30 flex flex-col items-center justify-center hidden"
                             >
                                 <div className="w-12 h-12 border-4 border-brand-blue border-t-transparent rounded-full animate-spin mb-3"></div>
@@ -1553,7 +1552,7 @@ export default function HomeContent() {
                                 <button
                                     id="tool-add"
                                     className="w-9 h-9 rounded-full bg-slate-600 hover:bg-brand-blue flex items-center justify-center transition text-white"
-                                    title="Add Dot"
+                                    title={generatorUi.toolAdd}
                                 >
                                     <svg
                                         width="14"
@@ -1567,7 +1566,7 @@ export default function HomeContent() {
                                 <button
                                     id="tool-move"
                                     className="w-9 h-9 rounded-full hover:bg-brand-blue flex items-center justify-center transition text-white"
-                                    title="Move Dot"
+                                    title={generatorUi.toolMove}
                                 >
                                     <svg
                                         width="14"
@@ -1581,7 +1580,7 @@ export default function HomeContent() {
                                 <button
                                     id="tool-del"
                                     className="w-9 h-9 rounded-full hover:bg-red-500 flex items-center justify-center transition text-white"
-                                    title="Delete Dot"
+                                    title={generatorUi.toolDelete}
                                 >
                                     <svg
                                         width="14"
@@ -1596,7 +1595,7 @@ export default function HomeContent() {
                                 <button
                                     id="undo-btn"
                                     className="w-9 h-9 rounded-full hover:bg-slate-600 flex items-center justify-center transition text-white"
-                                    title="Undo"
+                                    title={generatorUi.undo}
                                 >
                                     <svg
                                         width="14"

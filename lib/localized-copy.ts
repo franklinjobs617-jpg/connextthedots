@@ -44,7 +44,7 @@ export function localizedLocale(locale: string): keyof typeof localizedCopy | nu
   return locale === "fr" || locale === "it" || locale === "es" ? locale : null;
 }
 
-/** Prepared copy vocabulary. The Generator adapter awaits its stable interface;
+/** Semantic vocabulary consumed by the Generator UI adapter;
  * these strings do not introduce a new processing state machine or service. */
 export const generatorCopy = {
   fr: { upload: "Importer une image", points: "Nombre de points", preparing: "Préparation de l’image…", generating: "Création des points…", ready: "Aperçu prêt", failed: "Le traitement a échoué. Réessayez ou choisissez une autre image.", retry: "Réessayer", changeImage: "Changer d’image", downloadPng: "Télécharger le PNG", downloadPdf: "Télécharger le PDF" },

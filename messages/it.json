@@ -167,26 +167,26 @@
     "f3Title": "Design personalizzati in secondi",
     "f3Desc": "Trasforma qualsiasi immagine in uno stampabile",
     "button": "Prova Generatore Personalizzato",
-    "enhanceTitle": "Migliorare l'Immagine?",
-    "enhanceDesc": "È una foto reale? Possiamo rimuovere automaticamente lo sfondo per un migliore posizionamento dei punti.",
-    "btnRemoveBg": "Sì, Rimuovi Sfondo",
-    "btnKeepOriginal": "No, Mantieni Originale",
-    "removingBg": "Rimozione sfondo in corso..."
+    "enhanceTitle": "Tipo di immagine",
+    "enhanceDesc": "Una foto può richiedere una preparazione. Se non riesce, riprova o scegli un disegno dai contorni nitidi.",
+    "btnRemoveBg": "Prepara la foto",
+    "btnKeepOriginal": "Usa il disegno",
+    "removingBg": "Rimozione dello sfondo…"
   },
   "editor": {
-    "uploadNew": "Carica Nuova Immagine",
-    "downloadImage": "Scarica Immagine",
+    "uploadNew": "Carica un’altra immagine",
+    "downloadImage": "Scarica PNG",
     "downloadPdf": "Scarica PDF",
     "recommended": "Consigliato",
     "generating": "Generazione in corso...",
-    "difficulty": "Difficoltà Regolabile per Tutti i Livelli di Abilità",
+    "difficulty": "Numero di punti",
     "easy": "Facile",
     "medium": "Medio",
     "hard": "Difficile",
     "presetDesc": {
-      "easy": "Perfetto per bambini (20-30 punti, carattere grande)",
-      "medium": "Difficoltà standard (50-60 punti)",
-      "hard": "Sfida esperta (80+ punti, nessun suggerimento)"
+      "easy": "25 punti",
+      "medium": "55 punti",
+      "hard": "90 punti"
     },
     "bgHintTitle": "Suggerimento Sfondo",
     "smartHint": "Suggerimento Intelligente",

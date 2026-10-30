@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/routing";
 import { jsPDF } from "jspdf";
 import { layoutGeneratorLabels } from "@/lib/generator-label-layout";
+import { getGeneratorUi } from "@/lib/generator-ui-copy";
 
 interface DotGeneratorProps {
   locale: string;
@@ -55,13 +56,17 @@ export default function DotGeneratorClient({
 }: DotGeneratorProps) {
   const router = useRouter();
   const userRef = useRef(user);
+  const uiRef = useRef(getGeneratorUi(locale));
+
+  useEffect(() => { uiRef.current = getGeneratorUi(locale); }, [locale]);
 
   useEffect(() => {
     userRef.current = user;
   }, [user]);
 
   useEffect(() => {
-    // 逻辑代码保持不变，仅修复类型
+    const ui = () => uiRef.current;
+    // Processing and recovery logic is inherited unchanged.
     const DEFAULT_CONFIG: Config = {
       fontSize: 20,
       dotRadius: 6,
@@ -209,7 +214,7 @@ export default function DotGeneratorClient({
       text.textContent = message;
       const button = document.createElement("button");
       button.type = "button";
-      button.textContent = "Retry";
+      button.textContent = ui().retry;
       button.className = "mt-3 rounded-lg bg-slate-900 px-4 py-2 font-bold text-white";
       button.addEventListener("click", retry);
       panel.append(text, button);
@@ -217,7 +222,7 @@ export default function DotGeneratorClient({
       showTip(message, "error");
     };
 
-    const toggleLoader = (show: boolean, text: string = "Processing...") => {
+    const toggleLoader = (show: boolean, text: string = ui().processing) => {
       processing = show;
       [sidebarPngBtn, sidebarPdfBtn, mobilePngBtn, mobilePdfBtn].forEach((button) => {
         if (button instanceof HTMLButtonElement) button.disabled = show;
@@ -524,7 +529,7 @@ export default function DotGeneratorClient({
     const handleFile = async (file: File) => {
       if (!file || !file.type.startsWith("image/")) {
         toggleLoader(false);
-        return showTip("Please upload a valid image file.", "error");
+        return showTip(ui().invalidFile, "error");
       }
 
       trackEvent("user_upload_image", {
@@ -535,7 +540,7 @@ export default function DotGeneratorClient({
       resetState();
       const requestId = operationId;
       switchView("editor");
-      toggleLoader(true, "Loading image processor...");
+      toggleLoader(true, ui().loadingProcessor);
       let failureStage: "dependency" | "decode" | "photo" = "dependency";
       let sourceImage: HTMLImageElement | null = null;
 
@@ -546,7 +551,7 @@ export default function DotGeneratorClient({
 
         if (requestId !== operationId) return;
         failureStage = "decode";
-        toggleLoader(true, "Opening image...");
+        toggleLoader(true, ui().openingImage);
         sourceImage = await loadImageEl(file);
         if (requestId !== operationId) return;
         const tempImg = sourceImage;
@@ -555,11 +560,11 @@ export default function DotGeneratorClient({
 
         if (isPhoto) {
           failureStage = "photo";
-          toggleLoader(true, "Removing background...");
+          toggleLoader(true, ui().removingBackground);
           try {
             const noBgBlob = await removeBackgroundApi(file);
             if (requestId !== operationId) return;
-            toggleLoader(true, "Refining sketch...");
+            toggleLoader(true, ui().refiningSketch);
             const noBgImg = await loadImageEl(noBgBlob);
             try {
               if (requestId !== operationId) return;
@@ -575,17 +580,17 @@ export default function DotGeneratorClient({
         }
 
         if (requestId !== operationId) return;
-        toggleLoader(true, "Creating dots...");
+        toggleLoader(true, ui().creatingDots);
         await loadFileToCanvas(fileToProcess, requestId);
       } catch (e) {
         console.error("DEBUG - Global Workflow Error:", e);
         if (requestId !== operationId) return;
         switchView("landing");
         const message = failureStage === "photo"
-          ? "Photo processing failed. Retry, or choose a clear line drawing instead."
+          ? ui().photoFailed
           : failureStage === "dependency"
-          ? "The image processor could not load. Check your connection, retry, or choose another image."
-          : "This image could not be opened. Retry, or choose another PNG or JPG.";
+          ? ui().dependencyFailed
+          : ui().imageFailed;
         showWorkflowError(message, () => { void handleFile(file); });
       } finally {
         if (sourceImage) URL.revokeObjectURL(sourceImage.src);
@@ -597,12 +602,12 @@ export default function DotGeneratorClient({
       const cv = window.cv;
       if (typeof cv === "undefined" || !cvReady) {
         toggleLoader(false);
-        showTip("Image processing is unavailable. Go back and upload again.", "error");
+        showTip(ui().unavailable, "error");
         return;
       }
 
       try {
-        toggleLoader(true, "Detecting lines...");
+        toggleLoader(true, ui().detectingLines);
 
         const tempCanvas = document.createElement("canvas");
         const processWidth = 1000;
@@ -701,13 +706,13 @@ export default function DotGeneratorClient({
         redraw();
         updateDotCountUI();
         if (state.dots.length === 0) {
-          showTip("No outline found. Try a clearer image or add dots manually.", "error");
+          showTip(ui().noOutline, "error");
         }
       } catch (e) {
         state.dots = [];
         redraw();
         updateDotCountUI();
-        showTip("Could not detect an outline. Try another image or add dots manually.", "error");
+        showTip(ui().outlineFailed, "error");
         console.error("Auto detect runtime error:", e);
       } finally {
         toggleLoader(false);
@@ -949,7 +954,7 @@ export default function DotGeneratorClient({
 
     const updateDotCountUI = () => {
       if (dotCountDisplay) {
-        dotCountDisplay.textContent = `${state.dots.length} Dots`;
+        dotCountDisplay.textContent = `${state.dots.length} ${ui().dotsUnit}`;
       }
     };
 
@@ -1076,11 +1081,11 @@ export default function DotGeneratorClient({
         if (dotCountDisplay)
           dotCountDisplay.textContent = `${
             (e.target as HTMLInputElement).value
-          } Dots`;
+          } ${ui().dotsUnit}`;
       });
       dotCountSlider.addEventListener("change", () => {
         if (typeof window.cv !== "undefined" && state.originalImage) {
-          toggleLoader(true, "Updating dots...");
+          toggleLoader(true, ui().updatingDots);
           setTimeout(runAutoDetect, 50);
         }
       });
@@ -1091,7 +1096,7 @@ export default function DotGeneratorClient({
         let val = parseInt(dotCountSlider.value, 10);
         if (val < 200) {
           dotCountSlider.value = `${++val}`;
-          dotCountDisplay.textContent = `${val} Dots`;
+          dotCountDisplay.textContent = `${val} ${ui().dotsUnit}`;
           dotCountSlider.dispatchEvent(new Event("change"));
         }
       });
@@ -1102,7 +1107,7 @@ export default function DotGeneratorClient({
         let val = parseInt(dotCountSlider.value, 10);
         if (val > 5) {
           dotCountSlider.value = `${--val}`;
-          dotCountDisplay.textContent = `${val} Dots`;
+          dotCountDisplay.textContent = `${val} ${ui().dotsUnit}`;
           dotCountSlider.dispatchEvent(new Event("change"));
         }
       });
@@ -1116,7 +1121,7 @@ export default function DotGeneratorClient({
         if (
           typeof window !== "undefined" &&
           window.confirm(
-            "Are you sure you want to clear all dots? This cannot be undone."
+            ui().clearConfirm
           )
         ) {
           trackEvent("clear_canvas", { dots_before: state.dots.length });
@@ -1127,7 +1132,7 @@ export default function DotGeneratorClient({
           if (dotCountSlider) {
             dotCountSlider.value = "0";
           }
-          showTip("Canvas cleared. You can Undo if needed.", "success");
+          showTip(ui().cleared, "success");
         }
       });
     }
@@ -1224,7 +1229,7 @@ export default function DotGeneratorClient({
             <div class="flex justify-between items-start mb-2">
                 <h4 class="font-bold text-brand-blue flex items-center gap-2">
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-                    Download Complete!
+                    ${ui().downloadComplete}
                 </h4>
                 <button id="close-toast" class="text-slate-400 hover:text-white"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"></path></svg></button>
             </div>
@@ -1249,9 +1254,9 @@ export default function DotGeneratorClient({
       }, 10000);
     };
     const dl = async (fmt: "png" | "pdf", event?: Event) => {
-      if (processing) return showTip("Please wait for the current puzzle to finish.");
+      if (processing) return showTip(ui().waitCurrent);
       if (!state.originalImage || !drawCanvas || state.dots.length < 2)
-        return showTip("Please create a puzzle with at least two dots first!", "error");
+        return showTip(ui().needDots, "error");
       // Flush pending hint/line-thickness changes before taking the export snapshot.
       if (debounceTimer) {
         clearTimeout(debounceTimer);
@@ -1259,7 +1264,7 @@ export default function DotGeneratorClient({
         if (state.config.hint === "internal") state.internalHintImage = generateInternalHintImage();
       }
       redraw();
-      if (crowdedLabels) showTip("Some labels are crowded. Reduce the dot count or font size before printing.");
+      if (crowdedLabels) showTip(ui().crowded);
 
       const activeBtn = event?.currentTarget as HTMLButtonElement | null;
       const originalText = activeBtn ? activeBtn.innerHTML : "";
@@ -1267,7 +1272,7 @@ export default function DotGeneratorClient({
       if (activeBtn) {
         activeBtn.disabled = true;
         activeBtn.innerHTML =
-          '<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...</span>';
+          `<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>${ui().processing}</span>`;
       }
 
       trackEvent("download_result", {
@@ -1376,7 +1381,7 @@ export default function DotGeneratorClient({
         setTimeout(showUpsellTip, 1500);
       } catch (err) {
         console.error("Download failed:", err);
-        showTip("Download failed. Please try again.", "error");
+        showTip(ui().downloadFailed, "error");
       } finally {
         if (activeBtn) {
           activeBtn.disabled = false;
@@ -1684,21 +1689,21 @@ export default function DotGeneratorClient({
           font: 28,
           dotRadius: 8,
           hint: "trace",
-          desc: "Perfect for kids (20-30 dots, large font)",
+          desc: ui().presetEasy,
         },
         medium: {
           count: 55,
           font: 20,
           dotRadius: 6,
           hint: "trace",
-          desc: "Standard difficulty (50-60 dots)",
+          desc: ui().presetMedium,
         },
         hard: {
           count: 90,
           font: 14,
           dotRadius: 4,
           hint: "trace",
-          desc: "Expert challenge (80+ dots, no hints)",
+          desc: ui().presetHard,
         },
       };
 
@@ -1728,7 +1733,7 @@ export default function DotGeneratorClient({
           if (dotCountSlider) {
             dotCountSlider.value = `${config.count}`;
             if (dotCountDisplay)
-              dotCountDisplay.textContent = `${config.count} Dots`;
+              dotCountDisplay.textContent = `${config.count} ${ui().dotsUnit}`;
           }
           if (fontSizeSlider) {
             fontSizeSlider.value = `${config.font}`;
@@ -1757,7 +1762,7 @@ export default function DotGeneratorClient({
           }
 
           if (state.originalImage && typeof window.cv !== "undefined") {
-            toggleLoader(true, "Updating...");
+            toggleLoader(true, ui().updating);
             setTimeout(runAutoDetect, 50);
           } else {
             redraw();
@@ -1883,9 +1888,9 @@ export default function DotGeneratorClient({
       progress.id = "generator-example-progress";
       progress.className = "mb-3 text-sm text-slate-600";
       progress.setAttribute("role", "status");
-      progress.textContent = "Loading example...";
+      progress.textContent = ui().loadingExample;
       getEl("hero-upload-btn")?.before(progress);
-      toggleLoader(true, "Loading example...");
+      toggleLoader(true, ui().loadingExample);
       try {
         const res = await fetch(src, { cache: "no-store", signal: AbortSignal.timeout(15000) });
         if (!res.ok) throw new Error("Example unavailable");
@@ -1895,7 +1900,7 @@ export default function DotGeneratorClient({
       } catch {
         if (requestId !== operationId) return;
         switchView("landing");
-        showWorkflowError("This example could not load. Retry, or upload your own image.", () => { void loadPreset(src); });
+        showWorkflowError(ui().exampleFailed, () => { void loadPreset(src); });
       } finally {
         progress.remove();
       }
