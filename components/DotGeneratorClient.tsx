@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/routing";
 import { jsPDF } from "jspdf";
+import { layoutGeneratorLabels } from "@/lib/generator-label-layout";
 
 interface DotGeneratorProps {
   locale: string;
@@ -89,7 +90,10 @@ export default function DotGeneratorClient({
       pendingFile: null,
     };
 
-    let cvReady = false;
+    let cvReady = Boolean(window.cv?.Mat);
+    let operationId = 0;
+    let processing = false;
+    let crowdedLabels = false;
     let debounceTimer: NodeJS.Timeout | null = null;
     const MAX_DAILY_LIMIT = 1;
     const STORAGE_KEY = "ai_gen_daily_usage";
@@ -176,7 +180,11 @@ export default function DotGeneratorClient({
           : "bg-slate-800";
 
       tip.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[9999] ${bgClass} text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-0`;
-      tip.innerHTML = `<span class="font-medium text-sm">${message}</span>`;
+      tip.setAttribute("role", type === "error" ? "alert" : "status");
+      const tipText = document.createElement("span");
+      tipText.className = "font-medium text-sm";
+      tipText.textContent = message;
+      tip.appendChild(tipText);
       document.body.appendChild(tip);
 
       requestAnimationFrame(() => {
@@ -190,7 +198,30 @@ export default function DotGeneratorClient({
       }, 3000);
     };
 
+    const clearWorkflowError = () => getEl("generator-workflow-status")?.remove();
+    const showWorkflowError = (message: string, retry: () => void) => {
+      clearWorkflowError();
+      const panel = document.createElement("div");
+      panel.id = "generator-workflow-status";
+      panel.className = "mb-4 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-900";
+      panel.setAttribute("role", "alert");
+      const text = document.createElement("p");
+      text.textContent = message;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = "Retry";
+      button.className = "mt-3 rounded-lg bg-slate-900 px-4 py-2 font-bold text-white";
+      button.addEventListener("click", retry);
+      panel.append(text, button);
+      getEl("hero-upload-btn")?.before(panel);
+      showTip(message, "error");
+    };
+
     const toggleLoader = (show: boolean, text: string = "Processing...") => {
+      processing = show;
+      [sidebarPngBtn, sidebarPdfBtn, mobilePngBtn, mobilePdfBtn].forEach((button) => {
+        if (button instanceof HTMLButtonElement) button.disabled = show;
+      });
       if (!canvasLoader) return;
       if (show) {
         canvasLoader.classList.remove("hidden");
@@ -236,6 +267,7 @@ export default function DotGeneratorClient({
         const res = await fetch(RMBG_API_URL, {
           method: "POST",
           body: formData,
+          signal: AbortSignal.timeout(15000),
         });
         if (!res.ok) throw new Error("API Error");
         return await res.blob();
@@ -390,12 +422,16 @@ export default function DotGeneratorClient({
         contours.delete();
         hierarchy.delete();
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => reject(new Error("Sketch encoding timed out")), 10000);
           outputCanvas.toBlob((blob) => {
+            clearTimeout(timeout);
             if (blob) {
               resolve(
                 new File([blob], "processed_sketch.png", { type: "image/png" })
               );
+            } else {
+              reject(new Error("Sketch encoding failed"));
             }
           }, "image/png");
         });
@@ -418,8 +454,14 @@ export default function DotGeneratorClient({
       return new Promise((resolve, reject) => {
         const img = new Image();
         const url = URL.createObjectURL(f);
-        img.onload = () => resolve(img);
+        const timeout = setTimeout(() => {
+          img.src = "";
+          URL.revokeObjectURL(url);
+          reject(new Error("Image decoding timed out"));
+        }, 15000);
+        img.onload = () => { clearTimeout(timeout); resolve(img); };
         img.onerror = () => {
+          clearTimeout(timeout);
           URL.revokeObjectURL(url);
           reject(new Error("Image load failed"));
         };
@@ -443,96 +485,110 @@ export default function DotGeneratorClient({
     };
 
     const resetState = () => {
+      operationId++;
+      clearWorkflowError();
+      getEl("generator-example-progress")?.remove();
+      if (debounceTimer) clearTimeout(debounceTimer);
+      toggleLoader(false);
       state.originalImage = null;
       state.internalHintImage = null;
       state.dots = [];
       state.history = [];
+      redraw();
+      updateDotCountUI();
       if (heroFileInput) heroFileInput.value = "";
     };
 
-    const loadFileToCanvas = (file: File | Blob) => {
+    const loadFileToCanvas = async (file: File | Blob, requestId = operationId) => {
       if (!drawCanvas) return;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const img = new Image();
-        img.onload = () => {
-          state.originalImage = img;
-          const TARGET_MIN_WIDTH = 2000;
-          const scale =
-            Math.max(
-              1,
-              TARGET_MIN_WIDTH / Math.max(img.naturalWidth, img.naturalHeight)
-            ) || 1;
-
-          drawCanvas.width = Math.floor(img.naturalWidth * scale);
-          drawCanvas.height = Math.floor(img.naturalHeight * scale);
-
-          state.dots = [];
-          state.history = [];
-          state.internalHintImage = null;
-
-          if (
-            state.config.hint === "internal" &&
-            typeof window.cv !== "undefined"
-          ) {
-            state.internalHintImage = generateInternalHintImage();
-          }
-
-          redraw();
-
-          if (canvasLoader) {
-            canvasLoader.classList.remove("hidden");
-            setTimeout(runAutoDetect, 200);
-          }
-        };
-        img.src = e.target?.result as string;
-      };
-      reader.readAsDataURL(file);
+      const img = await loadImageEl(file);
+      try {
+        if (requestId !== operationId) return;
+        state.originalImage = img;
+        const scale = 2000 / Math.max(img.naturalWidth, img.naturalHeight);
+        drawCanvas.width = Math.floor(img.naturalWidth * scale);
+        drawCanvas.height = Math.floor(img.naturalHeight * scale);
+        state.dots = [];
+        state.history = [];
+        state.internalHintImage = null;
+        if (state.config.hint === "internal" && cvReady) {
+          state.internalHintImage = generateInternalHintImage();
+        }
+        redraw();
+        runAutoDetect();
+      } finally {
+        URL.revokeObjectURL(img.src);
+      }
     };
 
     const handleFile = async (file: File) => {
-      if (!file || !file.type.startsWith("image/"))
+      if (!file || !file.type.startsWith("image/")) {
+        toggleLoader(false);
         return showTip("Please upload a valid image file.", "error");
+      }
 
       trackEvent("user_upload_image", {
         file_type: file.type,
         file_size: Math.round(file.size / 1024) + "KB",
       });
 
+      resetState();
+      const requestId = operationId;
       switchView("editor");
-      toggleLoader(true, "Analyzing image...");
+      toggleLoader(true, "Loading image processor...");
+      let failureStage: "dependency" | "decode" | "photo" = "dependency";
+      let sourceImage: HTMLImageElement | null = null;
 
       try {
         if (typeof window.cv === "undefined" || !cvReady) {
-          await new Promise<void>((resolve) => loadOpenCv(resolve));
+          await loadOpenCv();
         }
 
-        const tempImg = await loadImageEl(file);
+        if (requestId !== operationId) return;
+        failureStage = "decode";
+        toggleLoader(true, "Opening image...");
+        sourceImage = await loadImageEl(file);
+        if (requestId !== operationId) return;
+        const tempImg = sourceImage;
         const isPhoto = detectIsPhoto(tempImg);
         let fileToProcess: File | Blob = file;
 
         if (isPhoto) {
+          failureStage = "photo";
           toggleLoader(true, "Removing background...");
           try {
             const noBgBlob = await removeBackgroundApi(file);
+            if (requestId !== operationId) return;
             toggleLoader(true, "Refining sketch...");
             const noBgImg = await loadImageEl(noBgBlob);
-            fileToProcess = await applyHighDefSketchLogic(noBgImg);
-            URL.revokeObjectURL(noBgImg.src);
+            try {
+              if (requestId !== operationId) return;
+              fileToProcess = await applyHighDefSketchLogic(noBgImg);
+            } finally {
+              URL.revokeObjectURL(noBgImg.src);
+            }
           } catch (err) {
+            if (requestId !== operationId) return;
             console.error("DEBUG - Photo Process Failed:", err);
-            showTip("Sketch conversion failed, using original.", "info");
-            fileToProcess = file;
+            throw new Error("Photo preprocessing failed");
           }
         }
 
+        if (requestId !== operationId) return;
         toggleLoader(true, "Creating dots...");
-        loadFileToCanvas(fileToProcess);
-        URL.revokeObjectURL(tempImg.src);
+        await loadFileToCanvas(fileToProcess, requestId);
       } catch (e) {
         console.error("DEBUG - Global Workflow Error:", e);
-        showTip("An error occurred.", "error");
-        toggleLoader(false);
+        if (requestId !== operationId) return;
+        switchView("landing");
+        const message = failureStage === "photo"
+          ? "Photo processing failed. Retry, or choose a clear line drawing instead."
+          : failureStage === "dependency"
+          ? "The image processor could not load. Check your connection, retry, or choose another image."
+          : "This image could not be opened. Retry, or choose another PNG or JPG.";
+        showWorkflowError(message, () => { void handleFile(file); });
+      } finally {
+        if (sourceImage) URL.revokeObjectURL(sourceImage.src);
       }
     };
 
@@ -540,7 +596,8 @@ export default function DotGeneratorClient({
       if (!state.originalImage || !drawCanvas) return;
       const cv = window.cv;
       if (typeof cv === "undefined" || !cvReady) {
-        setTimeout(runAutoDetect, 500);
+        toggleLoader(false);
+        showTip("Image processing is unavailable. Go back and upload again.", "error");
         return;
       }
 
@@ -643,7 +700,14 @@ export default function DotGeneratorClient({
         saveHistory();
         redraw();
         updateDotCountUI();
+        if (state.dots.length === 0) {
+          showTip("No outline found. Try a clearer image or add dots manually.", "error");
+        }
       } catch (e) {
+        state.dots = [];
+        redraw();
+        updateDotCountUI();
+        showTip("Could not detect an outline. Try another image or add dots manually.", "error");
         console.error("Auto detect runtime error:", e);
       } finally {
         toggleLoader(false);
@@ -778,6 +842,9 @@ export default function DotGeneratorClient({
     const redraw = () => {
       if (!ctx || !drawCanvas) return;
       ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+      // Match the white editor surface in PNG/PDF exports, including "No hint".
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
 
       if (state.config.hint !== "no" && state.originalImage) {
         ctx.save();
@@ -818,21 +885,7 @@ export default function DotGeneratorClient({
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      let centerX = 0,
-        centerY = 0;
-      if (state.dots.length > 0) {
-        state.dots.forEach((d) => {
-          centerX += d.x;
-          centerY += d.y;
-        });
-        centerX /= state.dots.length;
-        centerY /= state.dots.length;
-      } else {
-        centerX = drawCanvas.width / 2;
-        centerY = drawCanvas.height / 2;
-      }
-
-      state.dots.forEach((dot, i) => {
+      state.dots.forEach((dot) => {
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, r, 0, Math.PI * 2);
         ctx.fillStyle = state.config.dotColor;
@@ -840,19 +893,15 @@ export default function DotGeneratorClient({
         ctx.strokeStyle = "#fff";
         ctx.lineWidth = 2 * scale;
         ctx.stroke();
-
-        const dx = dot.x - centerX || 1,
-          dy = dot.y - centerY || 1;
-        const len = Math.hypot(dx, dy);
-        const offset = r + fontSize * 0.8;
-        const labelX = dot.x + (dx / len) * offset,
-          labelY = dot.y + (dy / len) * offset;
-
+      });
+      const layout = layoutGeneratorLabels(state.dots, drawCanvas.width, drawCanvas.height, fontSize, r, (text) => ctx.measureText(text).width);
+      crowdedLabels = layout.crowded;
+      layout.labels.forEach((label) => {
         ctx.fillStyle = "#000";
         ctx.strokeStyle = "white";
         ctx.lineWidth = 3 * scale;
-        ctx.strokeText((i + 1).toString(), labelX, labelY);
-        ctx.fillText((i + 1).toString(), labelX, labelY);
+        ctx.strokeText(label.text, label.x, label.y);
+        ctx.fillText(label.text, label.x, label.y);
       });
     };
 
@@ -1200,8 +1249,17 @@ export default function DotGeneratorClient({
       }, 10000);
     };
     const dl = async (fmt: "png" | "pdf", event?: Event) => {
-      if (!state.originalImage || !drawCanvas)
-        return showTip("Please create a puzzle first!", "error");
+      if (processing) return showTip("Please wait for the current puzzle to finish.");
+      if (!state.originalImage || !drawCanvas || state.dots.length < 2)
+        return showTip("Please create a puzzle with at least two dots first!", "error");
+      // Flush pending hint/line-thickness changes before taking the export snapshot.
+      if (debounceTimer) {
+        clearTimeout(debounceTimer);
+        debounceTimer = null;
+        if (state.config.hint === "internal") state.internalHintImage = generateInternalHintImage();
+      }
+      redraw();
+      if (crowdedLabels) showTip("Some labels are crowded. Reduce the dot count or font size before printing.");
 
       const activeBtn = event?.currentTarget as HTMLButtonElement | null;
       const originalText = activeBtn ? activeBtn.innerHTML : "";
@@ -1225,7 +1283,7 @@ export default function DotGeneratorClient({
           String(currentUser.plan || "free").toLowerCase() !== "free";
 
         if (fmt === "png") {
-          await new Promise<void>((resolve) => {
+          await new Promise<void>((resolve, reject) => {
             // ★ 核心逻辑：离屏渲染加水印
             let exportCanvas = drawCanvas;
 
@@ -1267,8 +1325,10 @@ export default function DotGeneratorClient({
                 link.click();
                 document.body.removeChild(link);
                 setTimeout(() => URL.revokeObjectURL(url), 1000);
+                resolve();
+              } else {
+                reject(new Error("PNG export failed"));
               }
-              resolve();
             }, "image/png");
           });
         } else if (fmt === "pdf") {
@@ -1316,6 +1376,7 @@ export default function DotGeneratorClient({
         setTimeout(showUpsellTip, 1500);
       } catch (err) {
         console.error("Download failed:", err);
+        showTip("Download failed. Please try again.", "error");
       } finally {
         if (activeBtn) {
           activeBtn.disabled = false;
@@ -1419,31 +1480,46 @@ export default function DotGeneratorClient({
       }
     };
 
-    let cvCallbacks: Array<() => void> = [];
-    const loadOpenCv = (cb?: () => void) => {
-      if (cvReady) {
-        if (cb) cb();
-        return;
+    let cvLoadPromise: Promise<void> | null = null;
+    const loadOpenCv = (): Promise<void> => {
+      if (window.cv?.Mat) {
+        cvReady = true;
+        return Promise.resolve();
       }
-      if (cb) cvCallbacks.push(cb);
-      if (document.querySelector('script[src*="opencv.js"]')) return;
-
-      const script = document.createElement("script");
-      script.src =
-        "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js";
-      script.async = true;
-      window.Module = {
-        onRuntimeInitialized: function () {
-          cvReady = true;
-          console.log("OpenCV Ready");
-          window.cv = (window as any).cv; // 确保全局引用
-          while (cvCallbacks.length > 0) {
-            const callback = cvCallbacks.shift();
-            if (callback) callback();
+      if (cvLoadPromise) return cvLoadPromise;
+      cvLoadPromise = new Promise<void>((resolve, reject) => {
+        let script = document.querySelector<HTMLScriptElement>('script[src*="opencv.js"]');
+        let settled = false;
+        const finish = (error?: Error) => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timeout);
+          clearInterval(poll);
+          if (error) {
+            script?.remove();
+            cvLoadPromise = null;
+            reject(error);
+          } else {
+            cvReady = true;
+            resolve();
           }
-        },
-      };
-      document.body.appendChild(script);
+        };
+        const checkReady = () => {
+          if (window.cv?.Mat) finish();
+        };
+        const timeout = setTimeout(() => finish(new Error("Image processor timed out")), 20000);
+        const poll = setInterval(checkReady, 100);
+        if (!script) {
+          script = document.createElement("script");
+          script.src = "https://pub-476193f3c5084ebaabd517e2c8788715.r2.dev/opencv.js";
+          script.async = true;
+          window.Module = { onRuntimeInitialized: checkReady };
+          script.onerror = () => finish(new Error("Image processor failed to load"));
+          document.body.appendChild(script);
+        }
+        checkReady();
+      });
+      return cvLoadPromise;
     };
     const setupAiHandler = () => {
       // 轮询检查按钮是否存在 (因为 React 渲染可能比这个 useEffect 慢一点点)
@@ -1530,10 +1606,9 @@ export default function DotGeneratorClient({
                 type: blob.type,
               });
 
-              // ★ 3. 延迟一点点，给 DOM 渲染留出时间
-              setTimeout(() => {
-                loadFileToCanvas(aiFile);
-              }, 100);
+              // Use the same awaited decode/render path as local uploads.
+              await loadOpenCv();
+              await loadFileToCanvas(aiFile);
             } catch (e: any) {
               console.error(e);
               showTip(e.message, "error");
@@ -1746,7 +1821,7 @@ export default function DotGeneratorClient({
     const init = () => {
       setupHeroTabs();
       setupToolbar();
-      loadOpenCv();
+      void loadOpenCv().catch(() => { /* Upload retries and reports the failure. */ });
       setupPresets();
       updateDemoVideoOverlay();
       updateDemoTabs();
@@ -1783,6 +1858,16 @@ export default function DotGeneratorClient({
       if (defaultPresetBtn) (defaultPresetBtn as HTMLElement).click();
     };
 
+    const uploadDropTarget = getEl("hero-upload-btn");
+    if (uploadDropTarget) {
+      uploadDropTarget.addEventListener("dragover", (event) => event.preventDefault());
+      uploadDropTarget.addEventListener("drop", (event) => {
+        event.preventDefault();
+        const file = event.dataTransfer?.files[0];
+        if (file) void handleFile(file);
+      });
+    }
+
     if (heroFileInput) {
       heroFileInput.addEventListener("change", (e) => {
         const target = e.target as HTMLInputElement;
@@ -1790,21 +1875,35 @@ export default function DotGeneratorClient({
       });
     }
 
+    const loadPreset = async (src: string) => {
+      const requestId = ++operationId;
+      clearWorkflowError();
+      getEl("generator-example-progress")?.remove();
+      const progress = document.createElement("p");
+      progress.id = "generator-example-progress";
+      progress.className = "mb-3 text-sm text-slate-600";
+      progress.setAttribute("role", "status");
+      progress.textContent = "Loading example...";
+      getEl("hero-upload-btn")?.before(progress);
+      toggleLoader(true, "Loading example...");
+      try {
+        const res = await fetch(src, { cache: "no-store", signal: AbortSignal.timeout(15000) });
+        if (!res.ok) throw new Error("Example unavailable");
+        const blob = await res.blob();
+        if (requestId !== operationId) return;
+        await handleFile(new File([blob], "example.png", { type: blob.type }));
+      } catch {
+        if (requestId !== operationId) return;
+        switchView("landing");
+        showWorkflowError("This example could not load. Retry, or upload your own image.", () => { void loadPreset(src); });
+      } finally {
+        progress.remove();
+      }
+    };
     document.querySelectorAll(".preset-btn").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        try {
-          toggleLoader(true, "Loading preset...");
-          const src = (btn as HTMLElement).dataset.src;
-          if (!src) return;
-          const res = await fetch(src, { cache: "no-store" });
-          const blob = await res.blob();
-
-          switchView("editor");
-          handleFile(new File([blob], "preset.webp", { type: blob.type }));
-        } catch (e) {
-          showTip("Failed to load preset.", "error");
-          toggleLoader(false);
-        }
+      btn.addEventListener("click", () => {
+        const src = (btn as HTMLElement).dataset.src;
+        if (src) void loadPreset(src);
       });
     });
 
