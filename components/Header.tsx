@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import { Link, usePathname } from "@/i18n/routing";
 import { sheetLanguageTarget } from "@/lib/original-sheets";
 import Image from "next/image";
+import FreePrintablesMenu from "./FreePrintablesMenu";
+import { collectionCopy } from "@/lib/printable-collections";
 import { useTranslations, useLocale } from "next-intl";
 import { useAuth } from "@/lib/auth-context";
 import {
@@ -40,14 +42,6 @@ export default function Header() {
       href: "/printable-connect-the-dots/",
     },
     {
-      labelKey: "beadTool",
-      href: "/convert-photo-to-beads/",
-    },
-    {
-      labelKey: "beadGallery",
-      href: "/convert-photo-to-beads/gallery/",
-    },
-    {
       labelKey: "pricing",
       href: "/pricing/",
     },
@@ -61,6 +55,9 @@ export default function Header() {
     },
   ];
   const t = useTranslations("header");
+  const locale = useLocale();
+  const mobileTrigger = useRef<HTMLButtonElement>(null);
+  const mobileId = useId();
   const pathname = usePathname(); // 获取当前纯净路径（不含语言前缀）
   const { user, isLoggedIn, login, logout, isLoggingIn } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -189,6 +186,8 @@ export default function Header() {
     // 1. 增加一个状态控制显示
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const langTrigger = useRef<HTMLButtonElement>(null);
+    const langId = useId();
 
     // 2. 点击外部自动关闭（可选但推荐）
     useEffect(() => {
@@ -206,9 +205,14 @@ export default function Header() {
     }, []);
 
     return (
-      <div className={`relative ${className}`} ref={dropdownRef}>
+      <div className={`relative ${className}`} ref={dropdownRef}
+        onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false); }}
+        onKeyDown={event => { if (event.key === "Escape" && isOpen) { event.preventDefault(); event.stopPropagation(); setIsOpen(false); langTrigger.current?.focus(); } }}>
         {/* 改为 button 并绑定 onClick */}
         <button
+          ref={langTrigger}
+          aria-expanded={isOpen}
+          aria-controls={langId}
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 font-semibold text-slate-600 hover:bg-slate-200 transition-colors"
         >
@@ -218,7 +222,7 @@ export default function Header() {
 
         {/* 根据状态显示，而不是 group-hover */}
         {isOpen && (
-          <div className="absolute right-0 top-full pt-2 w-[140px] z-[70]">
+          <div id={langId} className="absolute right-0 top-full pt-2 w-[140px] z-[70]">
             <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden flex flex-col">
               <Link
                 href={sheetLanguageTarget(pathname, "en")}
@@ -283,7 +287,9 @@ export default function Header() {
     );
   };
   return (
-    <header className="relative w-full">
+    <header className="relative w-full" onKeyDown={event => {
+      if (event.key === "Escape" && isMobileMenuOpen) { setIsMobileMenuOpen(false); mobileTrigger.current?.focus(); }
+    }}>
       <nav className="w-full py-4 px-6 md:px-12 flex justify-between items-center z-50 bg-white/90 backdrop-blur-md sticky top-0 border-b border-gray-100 transition-all duration-300">
         <Link href="/" className="flex items-center gap-2 group no-underline">
           <div className="w-9 h-9 rounded-xl flex items-center justify-center text-brand-blue bg-indigo-50 group-hover:bg-indigo-100 transition-colors">
@@ -299,6 +305,10 @@ export default function Header() {
         </div>
 
         <button
+          ref={mobileTrigger}
+          aria-label={collectionCopy(locale).menu}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls={mobileId}
           onClick={toggleMenu}
           className="lg:hidden text-slate-600 hover:text-brand-blue p-1 transition-colors"
         >
@@ -310,7 +320,9 @@ export default function Header() {
         </button>
 
         <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
-          {LinkArr.map((item) => (
+          {LinkArr.map((item) => item.labelKey === "allPrintables" ? (
+            <FreePrintablesMenu key={item.href} locale={locale} />
+          ) : (
             <Link
               key={item.href}
               href={item.href}
@@ -342,9 +354,11 @@ export default function Header() {
       </nav>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-gray-100 p-4 fixed top-[69px] left-0 w-full z-40 shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto animate-in slide-in-from-top-2 duration-200">
+        <div id={mobileId} className="lg:hidden bg-white border-b border-gray-100 p-4 fixed top-[69px] left-0 w-full z-40 shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto animate-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col space-y-4 font-medium text-slate-600">
-            {LinkArr.map((item) => (
+            {LinkArr.map((item) => item.labelKey === "allPrintables" ? (
+              <FreePrintablesMenu key={item.href} locale={locale} mobile onNavigate={() => setIsMobileMenuOpen(false)} />
+            ) : (
               <Link
                 key={item.href}
                 href={item.href}

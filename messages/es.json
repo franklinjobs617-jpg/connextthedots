@@ -167,26 +167,26 @@
     "f3Title": "Diseños personalizados en segundos",
     "f3Desc": "Convierte cualquier imagen en una ficha de unir puntos para imprimir.",
     "button": "Probar Generador Personalizado",
-    "enhanceTitle": "¿Mejorar Imagen?",
-    "enhanceDesc": "¿Es una foto real? Podemos eliminar el fondo automáticamente para colocar mejor los puntos.",
-    "btnRemoveBg": "Sí, Eliminar Fondo",
-    "btnKeepOriginal": "No, Mantener Original",
-    "removingBg": "Eliminando fondo..."
+    "enhanceTitle": "Tipo de imagen",
+    "enhanceDesc": "Una foto puede necesitar preparación. Si falla, vuelve a intentarlo o elige un dibujo de contornos claros.",
+    "btnRemoveBg": "Preparar la foto",
+    "btnKeepOriginal": "Usar el dibujo",
+    "removingBg": "Eliminando el fondo…"
   },
   "editor": {
-    "uploadNew": "Subir Nueva Imagen",
-    "downloadImage": "Descargar Imagen",
+    "uploadNew": "Subir otra imagen",
+    "downloadImage": "Descargar PNG",
     "downloadPdf": "Descargar PDF",
     "recommended": "Recomendado",
     "generating": "Generando...",
-    "difficulty": "Dificultad Ajustable para Todos los Niveles",
+    "difficulty": "Cantidad de puntos",
     "easy": "Fácil",
     "medium": "Medio",
     "hard": "Difícil",
     "presetDesc": {
-      "easy": "Perfecto para niños (20-30 puntos, fuente grande)",
-      "medium": "Dificultad estándar (50-60 puntos)",
-      "hard": "Desafío experto (más de 80 puntos, sin pistas)"
+      "easy": "25 puntos",
+      "medium": "55 puntos",
+      "hard": "90 puntos"
     },
     "bgHintTitle": "Ayuda de Fondo",
     "smartHint": "Pista Inteligente",

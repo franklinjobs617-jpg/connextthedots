@@ -4,6 +4,9 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ChevronRight, Download, Filter, Sparkles, Star } from "lucide-react";
 import PrintableCard from "@/components/PrintableCard";
+import PrintableCollections from "@/components/PrintableCollections";
+import OriginalWorksheetCards from "@/components/OriginalWorksheetCards";
+import LocalizedWorksheetCards from "@/components/LocalizedWorksheetCards";
 import { useAuth } from "@/lib/auth-context";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import type { PrintableItem } from "@/lib/printables-data";
@@ -521,6 +524,10 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                     </div>
                 </section>
 
+                <PrintableCollections locale={locale} />
+                <LocalizedWorksheetCards locale={locale} />
+                <OriginalWorksheetCards locale={locale} />
+
                 {/* ── Filter + Grid ── */}
                 <section id="printable-grid" className="py-12 md:py-16">
                     <div className="container max-w-6xl mx-auto px-4 sm:px-6">
@@ -626,26 +633,9 @@ export default function PrintableClient({ locale, data, allItems }: Props) {
                     </div>
                 </section>
 
-                {locale === "en" && <section aria-labelledby="original-pdfs" className="py-10 bg-white">
-                    <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-                        <h2 id="original-pdfs" className="text-xl font-bold">Original numbered PDF worksheets</h2>
-                        <p className="mt-3">Each has free A4 and US Letter puzzles and matching answers.</p>
-                        <ul className="mt-4 space-y-2">
-                            <li><Link href="/connect-the-dots-1-to-100/" className="text-brand-blue underline">Exactly 100 dots · three puzzles and answers</Link></li>
-                            <li><Link href="/skip-counting-dot-to-dot/" className="text-brand-blue underline">Skip-counting · 2s, 5s and 10s · 6 original worksheets</Link></li>
-                            <li><Link href="/printables/elephant-100/" className="text-brand-blue underline">Elephant · 100 dots</Link></li>
-                            <li><Link href="/printables/hot-air-balloon-100/" className="text-brand-blue underline">Hot-air Balloon · 100 dots</Link></li>
-                            <li><Link href="/printables/seahorse-100/" className="text-brand-blue underline">Seahorse · 100 dots</Link></li>
-                            <li><Link href="/printables/hummingbird-120/" className="text-brand-blue underline">Hummingbird · 120 dots</Link></li>
-                            <li><Link href="/printables/shark-140/" className="text-brand-blue underline">Shark · 140 dots</Link></li>
-                            <li><Link href="/printables/flamingo-150/" className="text-brand-blue underline">Flamingo · 150 dots</Link></li>
-                            <li><Link href="/printables/chameleon-160/" className="text-brand-blue underline">Chameleon · 160 dots</Link></li>
-                            <li><Link href="/printables/cactus-160/" className="text-brand-blue underline">Cactus · 160 dots</Link></li>
-                            <li><Link href="/printables/swan-90/" className="text-brand-blue underline">Swan · 90 dots</Link></li>
-                            <li><Link href="/printables/maple-leaf-90/" className="text-brand-blue underline">Maple Leaf · 90 dots</Link></li>
-                        </ul>
-                    </div>
-                </section>}
+                {locale === "en" && <p className="container max-w-6xl mx-auto px-4 sm:px-6 py-6">
+                    <Link href="/skip-counting-dot-to-dot/" className="text-brand-blue underline">Skip-counting · 2s, 5s and 10s · 6 original worksheets</Link>
+                </p>}
 
                 {locale === "en" && <section className="py-8 bg-white">
                     <div className="container max-w-6xl mx-auto px-4 sm:px-6">

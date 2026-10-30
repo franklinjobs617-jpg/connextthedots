@@ -50,6 +50,7 @@
     "description": "Téléchargez une fiche PDF haute résolution maintenant. Cliquez sur n'importe quelle image pour télécharger instantanément, ou appuyez sur le bouton Mélanger pour découvrir de nouveaux choix aléatoires !",
     "btnShuffle": "Mélanger",
     "btnViewLibrary": "Voir la Bibliothèque",
+    "btnBrowseAll": "Parcourir toutes les fiches",
     "overlayDownloading": "Téléchargement du PDF...",
     "overlayDownload": "Télécharger PDF"
   },
@@ -162,22 +163,27 @@
   },
   "customGenerator": {
     "title": "Créez Vos Propres Fiches Points à Relier",
-    "subtitle": "Notre générateur personnalisé vous permet de transformer n'importe quelle image en fiche imprimable. Parfait pour créer des activités personnalisées pour enfants, du matériel éducatif ou des pages de coloriage uniques pour adultes."
+    "subtitle": "Notre générateur personnalisé vous permet de transformer n'importe quelle image en fiche imprimable. Parfait pour créer des activités personnalisées pour enfants, du matériel éducatif ou des pages de coloriage uniques pour adultes.",
+    "enhanceTitle": "Type d’image",
+    "enhanceDesc": "Une photo peut nécessiter un prétraitement. Si celui-ci échoue, réessayez ou choisissez un dessin au trait.",
+    "btnRemoveBg": "Prétraiter la photo",
+    "btnKeepOriginal": "Utiliser le dessin",
+    "removingBg": "Suppression de l’arrière-plan…"
   },
   "editor": {
-    "uploadNew": "Télécharger Nouvelle Image",
-    "downloadImage": "Télécharger Image",
-    "downloadPdf": "Télécharger PDF",
+    "uploadNew": "Importer une autre image",
+    "downloadImage": "Télécharger le PNG",
+    "downloadPdf": "Télécharger le PDF",
     "recommended": "Recommandé",
     "generating": "Génération...",
-    "difficulty": "Difficulté Ajustable pour Tous Niveaux",
+    "difficulty": "Nombre de points",
     "easy": "Facile",
     "medium": "Moyen",
     "hard": "Difficile",
     "presetDesc": {
-      "easy": "Parfait pour enfants (20-30 points, grande police)",
-      "medium": "Difficulté standard (50-60 points)",
-      "hard": "Défi expert (plus de 80 points, sans indices)"
+      "easy": "25 points",
+      "medium": "55 points",
+      "hard": "90 points"
     },
     "bgHintTitle": "Indice d'Arrière-plan",
     "smartHint": "Indice Intelligent",
