@@ -1,0 +1,64 @@
+{
+  "id": "tufted-owl-study-207",
+  "title": "Tufted owl study",
+  "current_asset_version": "v2",
+  "v1_status": "preserved prototype",
+  "v2_status": "public-title preparation; not a publication claim",
+  "prototype_source_commit": "89275ec9292ade02002c8b01a582bb35bd153bb9",
+  "parent_product_commit": "536f49604271683a5f3f338886f2167e73988662",
+  "change": "Replace PRIVATE PROTOTYPE subtitle token with exact worksheet title; no layout/geometry regeneration",
+  "geometry_sha256_v1_and_v2": "e908910f87bf02a9e5c5139d3f214be2c73ace727638eb27fd39a656fd035080",
+  "physical_print": "NOT TESTED",
+  "independent_human_full_solve": "NOT TESTED",
+  "waiver": "NOT CLAIMED",
+  "exports": [
+    {
+      "paper": "A4",
+      "kind": "Puzzle",
+      "v1_pdf": "v1/tufted-owl-study-A4-Puzzle.pdf",
+      "v1_pdf_sha256": "62bccf7c3d16a13d05b6fd6078c9dd429b8707fe66fe5b31caf525d5d1170c4b",
+      "v2_pdf": "v2/tufted-owl-study-A4-Puzzle.pdf",
+      "v2_pdf_sha256": "23afe88012c2a829bb2b599a203128db35637b6d0e3fa47a88f5e9d8ff910765",
+      "v1_preview": "v1/tufted-owl-study-A4-Puzzle.png",
+      "v1_preview_sha256": "0c4defcf321cb19eeb2d5f8e596b7a5f143691934dff28cafeb384cc3e296a70",
+      "v2_preview": "v2/tufted-owl-study-A4-Puzzle.png",
+      "v2_preview_sha256": "f8ed8d8cbf006468f8df9de88d2d4fb9fc3ba43433f0d980d47a6785f929f331"
+    },
+    {
+      "paper": "A4",
+      "kind": "Solution",
+      "v1_pdf": "v1/tufted-owl-study-A4-Solution.pdf",
+      "v1_pdf_sha256": "edab290fd37e288fd9503ba072d860acc8d5f2042774de9806632c6fa950ce35",
+      "v2_pdf": "v2/tufted-owl-study-A4-Solution.pdf",
+      "v2_pdf_sha256": "ca2a820267be261c5b8a3911e31baa9d82475234fd6aaedb4db646a30ee2c4fa",
+      "v1_preview": "v1/tufted-owl-study-A4-Solution.png",
+      "v1_preview_sha256": "b66344afa8a1cc2e023eb15a6a9d6d664c132a88f315b52820fd475debc23039",
+      "v2_preview": "v2/tufted-owl-study-A4-Solution.png",
+      "v2_preview_sha256": "88af4cbf3771f8b62d5fad155d9ced5da7270ef1ec2749efe3f5e7dd3151cfe2"
+    },
+    {
+      "paper": "Letter",
+      "kind": "Puzzle",
+      "v1_pdf": "v1/tufted-owl-study-Letter-Puzzle.pdf",
+      "v1_pdf_sha256": "05a85038a22644e69a1e1e222d5a7c7d7e6d05ca3c926743ff8e45d3f8f6e70d",
+      "v2_pdf": "v2/tufted-owl-study-Letter-Puzzle.pdf",
+      "v2_pdf_sha256": "25aa7ce3330a73a028dbe4bf7c235f621a41c2cdcea4f7067209ee8ae52465c4",
+      "v1_preview": "v1/tufted-owl-study-Letter-Puzzle.png",
+      "v1_preview_sha256": "1073cefd81247fd04d1b09c2df0fdd25e7d97698c321d3c842239c439deb2783",
+      "v2_preview": "v2/tufted-owl-study-Letter-Puzzle.png",
+      "v2_preview_sha256": "3f1ed632dbed884b4d0a8a15eda5fef20a13a926e3a71ee40c931d7da83c6459"
+    },
+    {
+      "paper": "Letter",
+      "kind": "Solution",
+      "v1_pdf": "v1/tufted-owl-study-Letter-Solution.pdf",
+      "v1_pdf_sha256": "3bb37245935438a6090adc7e907678ed182b6c527ea6b0b6e14429ab35eb6f5c",
+      "v2_pdf": "v2/tufted-owl-study-Letter-Solution.pdf",
+      "v2_pdf_sha256": "63c4d4c1b74dff082b28e29ed41926171003ccb7e6996eaa048c97d880af7578",
+      "v1_preview": "v1/tufted-owl-study-Letter-Solution.png",
+      "v1_preview_sha256": "579f4812724c08ad0e98ee97a32d1e19bbfe0cd3f6ca86c83fcd7929910bdaf1",
+      "v2_preview": "v2/tufted-owl-study-Letter-Solution.png",
+      "v2_preview_sha256": "ef4f8649fb0b104b0691d371fd152a7674d579dc37cbba7f1f7a350ea0e09d61"
+    }
+  ]
+}

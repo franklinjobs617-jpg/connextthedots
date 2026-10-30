@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { originalSheets, sheetAsset, type OriginalSheet } from "@/lib/original-sheets";
+import { originalSheets, sheetAsset, sheetSource, type OriginalSheet } from "@/lib/original-sheets";
 import { siteConfig } from "@/lib/metadata";
 
 export type OriginalSheetProps = { params: Promise<{ locale: string }> };
@@ -20,9 +20,10 @@ export async function originalSheetMetadata(item: OriginalSheet, props: Original
     };
 }
 
-export async function OriginalSheetPage({ item, params }: OriginalSheetProps & { item: OriginalSheet }) {
+export async function OriginalSheetPage({ item, params, related = originalSheets }: OriginalSheetProps & { item: OriginalSheet; related?: readonly OriginalSheet[] }) {
     if ((await params).locale !== "en") notFound();
-    const source = `/printables/${item.id}/v1`;
+    const source = sheetSource(item);
+    const segmented = item.task?.type === "segmented" ? item.task : undefined;
     return <main className="bg-slate-50 text-slate-900">
         <div className="mx-auto max-w-6xl px-4 py-10 md:py-16">
             <nav aria-label="Breadcrumb" className="mb-6 text-sm text-brand-blue">
@@ -35,12 +36,12 @@ export async function OriginalSheetPage({ item, params }: OriginalSheetProps & {
                 <section aria-labelledby="puzzle-preview" className="rounded-2xl border border-slate-200 bg-white p-4 md:p-6">
                     <h2 id="puzzle-preview" className="text-xl font-bold">Puzzle preview</h2>
                     <a href={sheetAsset(item, "A4", "Puzzle", "png")} aria-label={`Open full-size ${item.title} puzzle preview`}>
-                        <Image src={sheetAsset(item, "A4", "Puzzle", "png")} alt={`Actual A4 puzzle PDF preview: ${item.title}, numbers 1–${item.count}, ${item.hasPreDrawnDetails === false ? "outline only" : "with pre-drawn details"}`} width={893} height={1263} unoptimized priority className="mt-4 h-auto w-full" />
+                        <Image src={sheetAsset(item, "A4", "Puzzle", "png")} alt={segmented ? `Actual A4 puzzle PDF preview: ${item.title}, ${item.count} dots in ${segmented.segments.length} separate numbered segments` : `Actual A4 puzzle PDF preview: ${item.title}, numbers 1–${item.count}, ${item.hasPreDrawnDetails === false ? "outline only" : "with pre-drawn details"}`} width={893} height={1263} unoptimized priority className="mt-4 h-auto w-full" />
                     </a>
                     <p className="mt-3 text-sm text-slate-600">Rasterized from the A4 Puzzle PDF. Open the image to inspect labels; use a PDF below for printing.</p>
                     <details className="mt-5 border-t border-slate-200 pt-4">
                         <summary className="cursor-pointer font-semibold">Show matching answer preview</summary>
-                        <Image src={sheetAsset(item, "A4", "Solution", "png")} alt={`${item.title} answer joining the same ${item.count} points in order and back to 1`} width={893} height={1263} unoptimized className="mt-4 h-auto w-full" />
+                        <Image src={sheetAsset(item, "A4", "Solution", "png")} alt={segmented ? `${item.title} answer using the same ${item.count} points, closing only the C ranges and leaving O ranges open` : `${item.title} answer joining the same ${item.count} points in order and back to 1`} width={893} height={1263} unoptimized className="mt-4 h-auto w-full" />
                     </details>
                 </section>
                 <div className="space-y-6">
@@ -50,7 +51,7 @@ export async function OriginalSheetPage({ item, params }: OriginalSheetProps & {
                         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
                             <dt>Numbered dots</dt><dd className="font-semibold">{item.count} · 1–{item.count}, each once</dd>
                             <dt>Label font size</dt><dd>9 pt at 100% print scale</dd>
-                            <dt>Connection</dt><dd>One closed path; {item.count} back to 1</dd>
+                            <dt>Connection</dt><dd>{segmented ? `${segmented.segments.length} separate segments; lift your pen between ranges` : <>One closed path; {item.count} back to 1</>}</dd>
                             <dt>Difficulty / age</dt><dd>Not rated</dd>
                         </dl>
                         {(["A4", "Letter"] as const).map((paper) => <div key={paper} className="mt-6 border-t border-slate-200 pt-4">
@@ -65,13 +66,24 @@ export async function OriginalSheetPage({ item, params }: OriginalSheetProps & {
                         <ol className="mt-4 list-decimal space-y-3 pl-5 leading-relaxed">
                             <li>Choose the Puzzle PDF for your paper. Select the matching paper size and Actual size / 100% in your print dialog.</li>
                             <li>Measure the footer check line: it should be 50 mm. Fit-to-page can change the printed number size.</li>
-                            <li>Connect 1 through {item.count} in order, then join {item.count} back to 1. {item.hasPreDrawnDetails === false ? "No interior details are pre-drawn." : "Solid details are already drawn."}</li>
+                            <li>{segmented ? "Connect consecutive numbers within one range at a time. C means connect the last point back to the first point of that range. O means stop at its last point. Lift your pen between every range; never bridge ranges." : <>Connect 1 through {item.count} in order, then join {item.count} back to 1. {item.hasPreDrawnDetails === false ? "No interior details are pre-drawn." : "Solid details are already drawn."}</>}</li>
                             <li>{item.solveTip}</li>
                         </ol>
                         <p className="mt-4 text-sm leading-relaxed text-slate-600">Physical A4 and Letter printing and independent human full-solve are NOT TESTED. Printer margins vary. This is not a verified large-print resource; age suitability and solve time are unmeasured.</p>
                     </section>
                 </div>
             </div>
+            {segmented && <section aria-labelledby="segment-rules" className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 md:p-8">
+                <h2 id="segment-rules" className="text-2xl font-bold">Numbered segments and pen lifts</h2>
+                <p className="mt-4 leading-relaxed">Use these ranges on both the puzzle and answer. Complete one range before starting the next. After closing a C range or stopping at the end of an O range, lift your pen. Stop after the final range.</p>
+                <ol aria-label="Numbered segments" className="mt-5 grid gap-4 md:grid-cols-2">
+                    {segmented.segments.map((segment) => <li key={segment.start} data-segment-start={segment.start} data-segment-end={segment.end} data-segment-closed={segment.closed} className="rounded-xl border border-slate-200 p-4">
+                        <h3 className="font-bold">{segment.start}–{segment.end} · {segment.closed ? "C — closed" : "O — open"}</h3>
+                        <p className="mt-2 capitalize">{segment.name}</p>
+                        <p className="mt-2 text-sm leading-relaxed">Connect {segment.start} through {segment.end} in order. {segment.closed ? `Then connect ${segment.end} back to ${segment.start}.` : `Stop at ${segment.end}; do not close this range.`} Lift your pen{segment.end < item.count ? ` before starting ${segment.end + 1}.` : "; the worksheet is complete."}</p>
+                    </li>)}
+                </ol>
+            </section>}
             <section aria-labelledby="about-sheet" className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 md:p-8">
                 <h2 id="about-sheet" className="text-2xl font-bold">Inside this {item.title.toLowerCase()} worksheet</h2>
                 <p className="mt-4 max-w-4xl leading-relaxed">{item.reveal}</p>
@@ -80,11 +92,12 @@ export async function OriginalSheetPage({ item, params }: OriginalSheetProps & {
                 <p className="mt-3 leading-relaxed">© 2026 ConnectTheDotsPrintable.online. Free to download and print for personal and educational use. Commercial use requires prior written permission. See <Link href="/terms/" className="text-brand-blue underline">Terms of Service</Link>. The same geometry produces both paper formats and the matching answers.</p>
                 <div className="mt-3 flex flex-wrap gap-5 text-sm text-brand-blue underline">
                     <a href={`${source}/SOURCE.md`}>Source and limitations</a><a href={`${source}/geometry.json`} download>Download numbered source geometry</a>
+                    {item.assetVersion === "v2" && <a href={`/printables/${item.id}/VERSIONS.json`}>Asset version history</a>}
                 </div>
             </section>
             <section aria-labelledby="other-sheets" className="mt-8">
                 <h2 id="other-sheets" className="text-xl font-bold">Other original worksheets</h2>
-                <div className="mt-4 flex flex-wrap gap-4 text-brand-blue underline">{originalSheets.filter((other) => other.id !== item.id).map((other) => <Link key={other.id} href={`/printables/${other.id}/`}>{other.title} · {other.count} dots</Link>)}</div>
+                <div className="mt-4 flex flex-wrap gap-4 text-brand-blue underline">{related.filter((other) => other.id !== item.id).map((other) => <Link key={other.id} href={`/printables/${other.id}/`}>{other.title} · {other.count} dots</Link>)}</div>
             </section>
         </div>
     </main>;

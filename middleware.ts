@@ -2,11 +2,13 @@
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 import type { NextRequest } from 'next/server';
+import { segmentedSheetIds } from './lib/segmented-sheet-ids';
 // Explicit English-only routes: five accepted Wave A plus five approved Wave B routes.
 const waveAIds = new Set([
   'elephant-100', 'hot-air-balloon-100', 'seahorse-100',
   'hummingbird-120', 'shark-140',
   'flamingo-150', 'chameleon-160', 'cactus-160', 'swan-90', 'maple-leaf-90',
+  ...segmentedSheetIds,
 ]);
 
 const handleI18n = createMiddleware(routing);
