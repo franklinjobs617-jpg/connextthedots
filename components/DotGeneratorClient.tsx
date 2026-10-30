@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/routing";
 import { jsPDF } from "jspdf";
+import { layoutGeneratorLabels } from "@/lib/generator-label-layout";
 
 interface DotGeneratorProps {
   locale: string;
@@ -92,6 +93,7 @@ export default function DotGeneratorClient({
     let cvReady = Boolean(window.cv?.Mat);
     let operationId = 0;
     let processing = false;
+    let crowdedLabels = false;
     let debounceTimer: NodeJS.Timeout | null = null;
     const MAX_DAILY_LIMIT = 1;
     const STORAGE_KEY = "ai_gen_daily_usage";
@@ -194,6 +196,25 @@ export default function DotGeneratorClient({
         tip.classList.add("opacity-0");
         setTimeout(() => tip.remove(), 300);
       }, 3000);
+    };
+
+    const clearWorkflowError = () => getEl("generator-workflow-status")?.remove();
+    const showWorkflowError = (message: string, retry: () => void) => {
+      clearWorkflowError();
+      const panel = document.createElement("div");
+      panel.id = "generator-workflow-status";
+      panel.className = "mb-4 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-900";
+      panel.setAttribute("role", "alert");
+      const text = document.createElement("p");
+      text.textContent = message;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = "Retry";
+      button.className = "mt-3 rounded-lg bg-slate-900 px-4 py-2 font-bold text-white";
+      button.addEventListener("click", retry);
+      panel.append(text, button);
+      getEl("hero-upload-btn")?.before(panel);
+      showTip(message, "error");
     };
 
     const toggleLoader = (show: boolean, text: string = "Processing...") => {
@@ -401,12 +422,16 @@ export default function DotGeneratorClient({
         contours.delete();
         hierarchy.delete();
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => reject(new Error("Sketch encoding timed out")), 10000);
           outputCanvas.toBlob((blob) => {
+            clearTimeout(timeout);
             if (blob) {
               resolve(
                 new File([blob], "processed_sketch.png", { type: "image/png" })
               );
+            } else {
+              reject(new Error("Sketch encoding failed"));
             }
           }, "image/png");
         });
@@ -429,8 +454,14 @@ export default function DotGeneratorClient({
       return new Promise((resolve, reject) => {
         const img = new Image();
         const url = URL.createObjectURL(f);
-        img.onload = () => resolve(img);
+        const timeout = setTimeout(() => {
+          img.src = "";
+          URL.revokeObjectURL(url);
+          reject(new Error("Image decoding timed out"));
+        }, 15000);
+        img.onload = () => { clearTimeout(timeout); resolve(img); };
         img.onerror = () => {
+          clearTimeout(timeout);
           URL.revokeObjectURL(url);
           reject(new Error("Image load failed"));
         };
@@ -455,6 +486,8 @@ export default function DotGeneratorClient({
 
     const resetState = () => {
       operationId++;
+      clearWorkflowError();
+      getEl("generator-example-progress")?.remove();
       if (debounceTimer) clearTimeout(debounceTimer);
       toggleLoader(false);
       state.originalImage = null;
@@ -472,7 +505,7 @@ export default function DotGeneratorClient({
       try {
         if (requestId !== operationId) return;
         state.originalImage = img;
-        const scale = Math.max(1, 2000 / Math.max(img.naturalWidth, img.naturalHeight));
+        const scale = 2000 / Math.max(img.naturalWidth, img.naturalHeight);
         drawCanvas.width = Math.floor(img.naturalWidth * scale);
         drawCanvas.height = Math.floor(img.naturalHeight * scale);
         state.dots = [];
@@ -502,7 +535,8 @@ export default function DotGeneratorClient({
       resetState();
       const requestId = operationId;
       switchView("editor");
-      toggleLoader(true, "Analyzing image...");
+      toggleLoader(true, "Loading image processor...");
+      let failureStage: "dependency" | "decode" | "photo" = "dependency";
       let sourceImage: HTMLImageElement | null = null;
 
       try {
@@ -511,6 +545,8 @@ export default function DotGeneratorClient({
         }
 
         if (requestId !== operationId) return;
+        failureStage = "decode";
+        toggleLoader(true, "Opening image...");
         sourceImage = await loadImageEl(file);
         if (requestId !== operationId) return;
         const tempImg = sourceImage;
@@ -518,6 +554,7 @@ export default function DotGeneratorClient({
         let fileToProcess: File | Blob = file;
 
         if (isPhoto) {
+          failureStage = "photo";
           toggleLoader(true, "Removing background...");
           try {
             const noBgBlob = await removeBackgroundApi(file);
@@ -533,8 +570,7 @@ export default function DotGeneratorClient({
           } catch (err) {
             if (requestId !== operationId) return;
             console.error("DEBUG - Photo Process Failed:", err);
-            showTip("Sketch conversion failed, using original.", "info");
-            fileToProcess = file;
+            throw new Error("Photo preprocessing failed");
           }
         }
 
@@ -545,7 +581,12 @@ export default function DotGeneratorClient({
         console.error("DEBUG - Global Workflow Error:", e);
         if (requestId !== operationId) return;
         switchView("landing");
-        showTip("Could not create a puzzle. Check the image and connection, then upload again.", "error");
+        const message = failureStage === "photo"
+          ? "Photo processing failed. Retry, or choose a clear line drawing instead."
+          : failureStage === "dependency"
+          ? "The image processor could not load. Check your connection, retry, or choose another image."
+          : "This image could not be opened. Retry, or choose another PNG or JPG.";
+        showWorkflowError(message, () => { void handleFile(file); });
       } finally {
         if (sourceImage) URL.revokeObjectURL(sourceImage.src);
       }
@@ -844,21 +885,7 @@ export default function DotGeneratorClient({
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      let centerX = 0,
-        centerY = 0;
-      if (state.dots.length > 0) {
-        state.dots.forEach((d) => {
-          centerX += d.x;
-          centerY += d.y;
-        });
-        centerX /= state.dots.length;
-        centerY /= state.dots.length;
-      } else {
-        centerX = drawCanvas.width / 2;
-        centerY = drawCanvas.height / 2;
-      }
-
-      state.dots.forEach((dot, i) => {
+      state.dots.forEach((dot) => {
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, r, 0, Math.PI * 2);
         ctx.fillStyle = state.config.dotColor;
@@ -866,19 +893,15 @@ export default function DotGeneratorClient({
         ctx.strokeStyle = "#fff";
         ctx.lineWidth = 2 * scale;
         ctx.stroke();
-
-        const dx = dot.x - centerX || 1,
-          dy = dot.y - centerY || 1;
-        const len = Math.hypot(dx, dy);
-        const offset = r + fontSize * 0.8;
-        const labelX = dot.x + (dx / len) * offset,
-          labelY = dot.y + (dy / len) * offset;
-
+      });
+      const layout = layoutGeneratorLabels(state.dots, drawCanvas.width, drawCanvas.height, fontSize, r, (text) => ctx.measureText(text).width);
+      crowdedLabels = layout.crowded;
+      layout.labels.forEach((label) => {
         ctx.fillStyle = "#000";
         ctx.strokeStyle = "white";
         ctx.lineWidth = 3 * scale;
-        ctx.strokeText((i + 1).toString(), labelX, labelY);
-        ctx.fillText((i + 1).toString(), labelX, labelY);
+        ctx.strokeText(label.text, label.x, label.y);
+        ctx.fillText(label.text, label.x, label.y);
       });
     };
 
@@ -1236,6 +1259,7 @@ export default function DotGeneratorClient({
         if (state.config.hint === "internal") state.internalHintImage = generateInternalHintImage();
       }
       redraw();
+      if (crowdedLabels) showTip("Some labels are crowded. Reduce the dot count or font size before printing.");
 
       const activeBtn = event?.currentTarget as HTMLButtonElement | null;
       const originalText = activeBtn ? activeBtn.innerHTML : "";
@@ -1851,22 +1875,35 @@ export default function DotGeneratorClient({
       });
     }
 
+    const loadPreset = async (src: string) => {
+      const requestId = ++operationId;
+      clearWorkflowError();
+      getEl("generator-example-progress")?.remove();
+      const progress = document.createElement("p");
+      progress.id = "generator-example-progress";
+      progress.className = "mb-3 text-sm text-slate-600";
+      progress.setAttribute("role", "status");
+      progress.textContent = "Loading example...";
+      getEl("hero-upload-btn")?.before(progress);
+      toggleLoader(true, "Loading example...");
+      try {
+        const res = await fetch(src, { cache: "no-store", signal: AbortSignal.timeout(15000) });
+        if (!res.ok) throw new Error("Example unavailable");
+        const blob = await res.blob();
+        if (requestId !== operationId) return;
+        await handleFile(new File([blob], "example.png", { type: blob.type }));
+      } catch {
+        if (requestId !== operationId) return;
+        switchView("landing");
+        showWorkflowError("This example could not load. Retry, or upload your own image.", () => { void loadPreset(src); });
+      } finally {
+        progress.remove();
+      }
+    };
     document.querySelectorAll(".preset-btn").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        try {
-          toggleLoader(true, "Loading preset...");
-          const src = (btn as HTMLElement).dataset.src;
-          if (!src) throw new Error("Preset unavailable");
-          const res = await fetch(src, { cache: "no-store", signal: AbortSignal.timeout(15000) });
-          if (!res.ok) throw new Error("Preset unavailable");
-          const blob = await res.blob();
-
-          switchView("editor");
-          await handleFile(new File([blob], "preset.webp", { type: blob.type }));
-        } catch (e) {
-          showTip("Failed to load preset.", "error");
-          toggleLoader(false);
-        }
+      btn.addEventListener("click", () => {
+        const src = (btn as HTMLElement).dataset.src;
+        if (src) void loadPreset(src);
       });
     });
 
