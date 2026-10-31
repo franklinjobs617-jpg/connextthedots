@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ChevronRight, Brain, Clock, ShieldCheck, ExternalLink } from "lucide-react";
 import PrintableCard from "@/components/PrintableCard";
+import AdultNumberedChallenges from "@/components/AdultNumberedChallenges";
 import { useAuth } from "@/lib/auth-context";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import type { PrintableItem } from "@/lib/printables-data";
@@ -238,12 +239,13 @@ const copy: Record<string, LocaleCopy> = {
 // Apply only to /connect-the-dots-for-adults/; preserve locale fallback output.
 const englishL1Copy: Partial<LocaleCopy> = {
     heroBody: "Explore connect-the-dots activities for adults and browse Hard and Extreme themes. Open an entry to inspect its artwork and download options, or make a worksheet from your own image using the homepage upload flow.",
-    ctaFeatured: "Browse featured entries ↓",
+    ctaFeatured: "Browse numbered worksheets ↓",
+    featuredTitle: "Reference line art — not numbered worksheets",
     toolBoxTitle: "Make a puzzle from your own image",
     signInCta: "AI generation: sign in for credits",
     featuredSub: "Mountain and Mandala currently provide reference line art, not playable numbered worksheets. Numbered versions and matching solutions still need repair; do not treat their old catalog ranges as confirmed dot counts.",
     difficultySub: "Compare the numbered sequence, number spacing and outline detail when choosing a worksheet. Difficulty labels describe the intended level, not a measured completion time.",
-    difficultyTable: copy.en.difficultyTable.map(row => ({ ...row, dots: row.level === "Hard" || row.level === "Extreme" ? "Reference art below" : "See worksheet labels", time: "Depends on worksheet" })),
+    difficultyTable: copy.en.difficultyTable.map(row => ({ ...row, dots: row.level === "Hard" || row.level === "Extreme" ? "Reference art only" : "See worksheet labels", time: "Depends on worksheet" })),
     whyItems: copy.en.whyItems.map((item, i) => i === 1 ? { ...item, body: "Choose a numbered worksheet, print it at a comfortable size and work through the sequence at your own pace." } : i === 2 ? { ...item, body: "Open a worksheet detail to preview the image and use its free static downloads. Basic image upload is also available on the homepage without an account." } : item),
     faqItems: copy.en.faqItems.map((item, i) => ({ ...item, a: [
         "An adult dot-to-dot worksheet uses a numbered sequence to form an outline. Detail and number spacing influence the challenge, so start with the worksheet preview.",
@@ -358,7 +360,7 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                                 <p className="text-xs text-slate-500 mb-6">{c.lastUpdatedLabel}</p>
                                 <div className="flex flex-wrap gap-3 mb-2">
                                     <button
-                                        onClick={() => document.getElementById("featured-puzzles")?.scrollIntoView({ behavior: "smooth" })}
+                                        onClick={() => document.getElementById(locale === "en" ? "numbered-challenges" : "featured-puzzles")?.scrollIntoView({ behavior: "smooth" })}
                                         className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 text-white font-semibold rounded-full hover:bg-white/20 transition-colors text-sm"
                                     >
                                         {c.ctaFeatured}
@@ -393,8 +395,10 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                     </div>
                 </section>
 
-                {/* ── Featured extreme puzzles ── */}
-                <section id="featured-puzzles" className="py-12 bg-white border-b border-slate-100">
+                {locale === "en" && <AdultNumberedChallenges />}
+
+                {/* Existing reference entries remain available after the numbered worksheets. */}
+                <section id={locale === "en" ? "reference-line-art" : "featured-puzzles"} className="py-12 bg-white border-b border-slate-100">
                     <div className="container max-w-6xl mx-auto px-4 sm:px-6">
                         <h2 className="text-2xl font-extrabold text-slate-900 mb-2">
                             {c.featuredTitle}
@@ -409,7 +413,7 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                                         ...item,
                                         dotRange: "Not applicable (reference art)",
                                         description: "Reference line art. Numbered worksheet and matching solution repair pending.",
-                                    } : item} priority />
+                                    } : item} priority={locale !== "en"} />
                                 ))}
                             </div>
                         ) : (
@@ -428,23 +432,7 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                     </div>
                 </section>
 
-                {locale === "en" && <section id="numbered-challenges" aria-labelledby="numbered-challenges-title" className="py-12 bg-white border-b border-slate-100">
-                    <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-                        <h2 id="numbered-challenges-title" className="text-2xl font-extrabold text-slate-900">Detailed numbered challenges</h2>
-                        <p className="mt-3 max-w-3xl text-slate-600">Two original worksheets include numbered internal features as well as their main contours. Each has separate A4 and US Letter puzzle and matching answer PDFs. Lift your pen between the numbered ranges; close only ranges marked C and stop at the end of ranges marked O.</p>
-                        <ul className="mt-6 grid gap-6 sm:grid-cols-2">
-                            <li className="rounded-2xl border border-slate-200 p-6">
-                                <h3 className="text-xl font-bold"><Link href="/printables/tufted-owl-study-207/" className="text-brand-blue underline">Tufted owl study — 207 dots, 10 segments</Link></h3>
-                                <p className="mt-3">Connect the body, facial discs, eyes, beak and feather markings using the listed open and closed ranges.</p>
-                            </li>
-                            <li className="rounded-2xl border border-slate-200 p-6">
-                                <h3 className="text-xl font-bold"><Link href="/printables/hilltop-observatory-202/" className="text-brand-blue underline">Hilltop observatory — 202 dots, 9 segments</Link></h3>
-                                <p className="mt-3">Build the dome, telescope, windows, doorway and steps. Some architectural ranges remain open.</p>
-                            </li>
-                        </ul>
-                        <p className="mt-5 text-sm text-slate-600">9 pt numbers at 100% print scale. Difficulty and solve time are unmeasured. Physical printing and independent human full-solve are NOT TESTED.</p>
-                    </div>
-                </section>}
+
 
                 {/* ── Difficulty comparison table ── */}
                 <section className="py-12 bg-slate-50 border-b border-slate-100">
@@ -520,6 +508,7 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                         <h2 className="text-2xl font-extrabold text-slate-900 mb-8 text-center">
                             {c.faqTitle}
                         </h2>
+                        {locale === "en" && <p className="mb-6 text-sm leading-7 text-slate-600">For the numbered owl and observatory worksheets above, use the supplied static A4 or US Letter puzzle and matching answer PDFs at Actual size / 100%. The browser-generated export guidance below concerns older reference entries, not these numbered downloads.</p>}
                         <div className="space-y-5">
                             {c.faqItems.map((item) => (
                                 <article
