@@ -3,12 +3,15 @@
 import { Link, usePathname } from "@/i18n/routing";
 import { sheetLanguageTarget } from "@/lib/original-sheets";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { collectionCopy, collectionHref, printableCollections } from "@/lib/printable-collections";
 import { Shapes, Twitter, Linkedin, Facebook, Share2 } from "lucide-react";
 
 export default function Footer() {
   const t = useTranslations("footer");
   const pricing = useTranslations("header");
+  const locale = useLocale();
+  const collections = collectionCopy(locale);
   const pathname = usePathname(); // 获取当前纯净路径（不含语言前缀）
 
   return (
@@ -72,14 +75,12 @@ export default function Footer() {
                   {t("dots1to10")}
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/printable-connect-the-dots/"
-                  className="hover:text-white transition"
-                >
-                  {t("allPrintables")}
-                </Link>
-              </li>
+              {printableCollections.map(item => <li key={item.id}>
+                <a href={collectionHref(item, locale)} hrefLang={item.englishOnly ? "en" : locale}
+                  className="hover:text-white transition">
+                  {collections[item.id]}{item.englishOnly && <span className="ml-1">({collections.english})</span>}
+                </a>
+              </li>)}
               <li>
                 <Link
                   href="/how-to-make/"
