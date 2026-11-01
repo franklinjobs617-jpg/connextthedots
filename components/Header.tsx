@@ -90,13 +90,16 @@ export default function Header() {
     });
 
     const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnHistory = () => setIsMobileMenuOpen(false);
     const closeOnDesktop = () => {
       if (desktop.matches) setIsMobileMenuOpen(false);
     };
     desktop.addEventListener("change", closeOnDesktop);
+    window.addEventListener("popstate", closeOnHistory);
     closeOnDesktop();
     return () => {
       desktop.removeEventListener("change", closeOnDesktop);
+      window.removeEventListener("popstate", closeOnHistory);
       previous.forEach(({ property, value, priority }) => {
         if (value) body.style.setProperty(property, value, priority);
         else body.style.removeProperty(property);
