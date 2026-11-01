@@ -65,8 +65,47 @@ export default function Header() {
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen(open => !open);
   };
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    // Keep the page in place (including touch browsers) while the drawer scrolls.
+    const { scrollX, scrollY } = window;
+    const body = document.body;
+    const html = document.documentElement;
+    const properties = ["position", "top", "left", "width", "overflow"];
+    const previous = properties.map(property => ({
+      property,
+      value: body.style.getPropertyValue(property),
+      priority: body.style.getPropertyPriority(property),
+    }));
+    const overflow = html.style.getPropertyValue("overflow");
+    const overflowPriority = html.style.getPropertyPriority("overflow");
+    html.style.setProperty("overflow", "hidden");
+    Object.assign(body.style, {
+      position: "fixed", top: `-${scrollY}px`, left: `-${scrollX}px`,
+      width: "100%", overflow: "hidden",
+    });
+
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setIsMobileMenuOpen(false);
+    };
+    desktop.addEventListener("change", closeOnDesktop);
+    closeOnDesktop();
+    return () => {
+      desktop.removeEventListener("change", closeOnDesktop);
+      previous.forEach(({ property, value, priority }) => {
+        if (value) body.style.setProperty(property, value, priority);
+        else body.style.removeProperty(property);
+      });
+      if (overflow) html.style.setProperty("overflow", overflow, overflowPriority);
+      else html.style.removeProperty("overflow");
+      window.scrollTo({ left: scrollX, top: scrollY, behavior: "instant" });
+    };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -287,20 +326,39 @@ export default function Header() {
     );
   };
   return (
-    <header className="relative w-full" onKeyDown={event => {
-      if (event.key === "Escape" && isMobileMenuOpen) { setIsMobileMenuOpen(false); mobileTrigger.current?.focus(); }
+    <header className="relative w-full min-h-[77px] lg:min-h-0" onClick={event => {
+      if ((event.target as Element).closest("a")) setIsMobileMenuOpen(false);
+    }} onKeyDown={event => {
+      if (!isMobileMenuOpen) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setIsMobileMenuOpen(false);
+        mobileTrigger.current?.focus({ preventScroll: true });
+      }
+      if (event.key === "Tab") {
+        const controls = Array.from(event.currentTarget.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex="0"]'
+        )).filter(element => element.getClientRects().length > 0);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault(); last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault(); first?.focus();
+        }
+      }
     }}>
-      <nav className="w-full py-4 px-6 md:px-12 flex justify-between items-center z-50 bg-white/90 backdrop-blur-md sticky top-0 border-b border-gray-100 transition-all duration-300">
-        <Link href="/" className="flex items-center gap-2 group no-underline">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center text-brand-blue bg-indigo-50 group-hover:bg-indigo-100 transition-colors">
+      <nav className={`w-full h-[77px] lg:h-auto py-4 px-4 sm:px-6 md:px-12 flex justify-between items-center z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300 ${isMobileMenuOpen ? "fixed inset-x-0 top-0" : "sticky top-0"}`}>
+        <Link href="/" className="min-w-0 flex-1 lg:flex-none flex items-center gap-2 group no-underline">
+          <div className="w-9 h-9 shrink-0 rounded-xl flex items-center justify-center text-brand-blue bg-indigo-50 group-hover:bg-indigo-100 transition-colors">
             <Image src="/logo.png" width={24} height={24} alt={t("logoAlt")} />
           </div>
-          <span className="font-bold text-xl tracking-tight text-brand-text">
+          <span className="truncate font-bold text-xl tracking-tight text-brand-text">
             {t("logo")}
           </span>
         </Link>
 
-        <div className="lg:hidden ml-auto mr-4 flex items-center gap-3">
+        <div className="lg:hidden shrink-0 mx-2 flex items-center gap-3">
           <LanguageDropdown />
         </div>
 
@@ -310,7 +368,7 @@ export default function Header() {
           aria-expanded={isMobileMenuOpen}
           aria-controls={mobileId}
           onClick={toggleMenu}
-          className="lg:hidden text-slate-600 hover:text-brand-blue p-1 transition-colors"
+          className="lg:hidden shrink-0 w-11 h-11 inline-flex items-center justify-center text-slate-600 hover:text-brand-blue rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors"
         >
           {isMobileMenuOpen ? (
             <X className="w-6 h-6" />
@@ -354,7 +412,7 @@ export default function Header() {
       </nav>
 
       {isMobileMenuOpen && (
-        <div id={mobileId} className="lg:hidden bg-white border-b border-gray-100 p-4 fixed top-[69px] left-0 w-full z-40 shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto animate-in slide-in-from-top-2 duration-200">
+        <div id={mobileId} className="lg:hidden bg-white border-b border-gray-100 p-4 fixed top-[77px] left-0 w-full z-40 shadow-lg max-h-[calc(100dvh-77px)] overflow-y-auto overscroll-contain animate-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col space-y-4 font-medium text-slate-600">
             {LinkArr.map((item) => item.labelKey === "allPrintables" ? (
               <FreePrintablesMenu key={item.href} locale={locale} mobile onNavigate={() => setIsMobileMenuOpen(false)} />
