@@ -3,16 +3,17 @@
  * Exactly 100: 02 Work production browser + 12 PDF downloads, 2026-10-29,
  * deployment FovqtU67qKFXsw4CxjdgwcvuMtYG / bd2ad512. Full D0 still has
  * HTTP/mobile gaps. C14 rechecks local routes and unchanged asset bytes.
- * 2026-10-31: Alphabet and Skip Counting are both in deployed main. Current
- * production route/PDF checks are access-blocked; HQ evidence is pending.
- * Keep their existing factual body links; promote only after that evidence.
+ * Alphabet/Skip Counting: 02 Work production browser QA, 2026-10-31:
+ * both pages, representative previews and 8 A4/Letter puzzle/answer downloads.
+ * HQ accepted this limited availability evidence; enabled 2026-11-01.
+ * Source SHA, full D0/mobile/material QA are not established by that evidence.
  */
 export const collectionCatalog = [
   { id: "all", path: "/printable-connect-the-dots/", englishOnly: false, productionVerified: true },
   { id: "adults", path: "/connect-the-dots-for-adults/", englishOnly: false, productionVerified: true },
   { id: "hundred", path: "/connect-the-dots-1-to-100/", englishOnly: true, productionVerified: true },
-  { id: "alphabet", path: "/alphabet-dot-to-dot/", englishOnly: true, productionVerified: false },
-  { id: "skip", path: "/skip-counting-dot-to-dot/", englishOnly: true, productionVerified: false },
+  { id: "alphabet", path: "/alphabet-dot-to-dot/", englishOnly: true, productionVerified: true },
+  { id: "skip", path: "/skip-counting-dot-to-dot/", englishOnly: true, productionVerified: true },
 ] as const;
 
 export const printableCollections = collectionCatalog.filter(item => item.productionVerified);
