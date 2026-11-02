@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PrivacyContent from "./PrivacyContent";
 import { getAlternates, getUrl } from "@/lib/metadata";
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 
 

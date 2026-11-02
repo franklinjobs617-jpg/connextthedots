@@ -4,7 +4,7 @@ import ChristmasPageClient from "./ChristmasPageClient";
 import { getAlternates, getUrl } from "@/lib/metadata";
 
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 
 
