@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { ENTRY_PATH } from './settings';
-const robots = 'noindex, nofollow'; // Draft stays noindex even in production. Release needs a separate reviewed diff.
+const robots = 'noindex, nofollow'; // Error and alias responses stay noindex; the clean production document is handled below.
 export function nameTracingResponse(request: NextRequest): NextResponse | null {
   const match = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?name-tracing-worksheet\/?$/);
   if (!match) return null;
@@ -18,5 +18,7 @@ export function nameTracingResponse(request: NextRequest): NextResponse | null {
   const response = NextResponse.next({ request: { headers: forwarded } });
   for (const [key, value] of Object.entries(headers)) response.headers.set(key, value);
   response.headers.set('Content-Security-Policy', csp);
+  // Only the clean English production document may be indexed. Error/alias responses stay noindex.
+  if (process.env.VERCEL_ENV === 'production') response.headers.set('X-Robots-Tag', 'index, follow');
   return response;
 }
