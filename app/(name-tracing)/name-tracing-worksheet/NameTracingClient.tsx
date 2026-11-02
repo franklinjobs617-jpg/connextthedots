@@ -7,7 +7,7 @@ import { errorMessage, generateWorksheet, releaseCanvas, type GenerationPhase, t
 
 type Status = 'idle' | 'working' | 'ready' | 'error';
 type CurrentResult = WorksheetResult & { version: number; key: string };
-const phaseText: Record<GenerationPhase, string> = { font: 'Loading dotted lettering…', render: 'Drawing your worksheet…', pdf: 'Preparing your PDF…' };
+const phaseText: Record<GenerationPhase, string> = { font: 'Loading dotted lettering…', render: 'Drawing your worksheet…', pdf: 'Preparing your PDF… The page may pause during this step.' };
 
 export default function NameTracingClient() {
   const hydrated = useSyncExternalStore(() => () => {}, () => true, () => false);
@@ -104,7 +104,7 @@ export default function NameTracingClient() {
           <div className="nt-status" aria-live="polite" role="status">{status === 'working' ? phaseText[phase] : status === 'ready' ? 'Ready to download. Your preview matches this PDF.' : status === 'error' ? 'The worksheet is not ready yet.' : 'Generate a worksheet to see your current settings.'}</div>
           <div className="nt-paper" style={{ aspectRatio: `${PAPER[settings.paper].width} / ${PAPER[settings.paper].height}` }}>
             <canvas id="nt-canvas" ref={canvas} width={1} height={1} className="nt-canvas" hidden={status !== 'ready'} role="img" aria-label="Current name tracing worksheet preview" />
-            {status !== 'ready' && <div className="nt-preview-placeholder"><div className="nt-paper-icon" aria-hidden="true">Aa</div><p>{status === 'working' ? 'Creating your printable page…' : 'A little practice starts here.'}</p><span>{status === 'working' ? 'You can cancel or change the settings.' : 'Enter a name and select Generate worksheet.'}</span>{status === 'working' && <button type="button" className="nt-text-button" onClick={() => { invalidate(); setMessage('Generation cancelled. You can adjust the settings and try again.'); }}>Cancel generation</button>}</div>}
+            {status !== 'ready' && <div className="nt-preview-placeholder"><div className="nt-paper-icon" aria-hidden="true">Aa</div><p>{status === 'working' ? 'Creating your printable page…' : 'A little practice starts here.'}</p><span>{status === 'working' ? phase === 'pdf' ? 'Please wait for completion or an error. Cancellation is unavailable during PDF preparation.' : 'You can cancel before PDF preparation starts.' : 'Enter a name and select Generate worksheet.'}</span>{status === 'working' && phase !== 'pdf' && <button type="button" className="nt-text-button" onClick={() => { invalidate(); setMessage('Generation cancelled. You can adjust the settings and try again.'); }}>Cancel generation</button>}</div>}
           </div>
           {status === 'error' && <div className="nt-error" role="alert"><p>{message}</p><button type="button" className="nt-button nt-secondary" onClick={() => void generate()} disabled={!validation.ok}>Try again</button><button type="button" className="nt-text-button" onClick={() => nameInput.current?.focus()}>Change the name</button></div>}
           {summary && <p className="nt-preview-caption">{summary.rows} {summary.rows === 1 ? 'row' : 'rows'} · {summary.paper} · {summary.guides ? 'Guide lines on' : 'No guide lines'} · {Math.round(summary.fontSize)} pt lettering</p>}
