@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Download } from "lucide-react"
 import { getAlternates, getUrl } from "@/lib/metadata";
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
