@@ -11,7 +11,7 @@ export async function generateWorksheet(canvas: HTMLCanvasElement, raw: Workshee
   checkAbort(signal); phase('render'); await nextFrame(signal);
   const paper = PAPER[settings.paper], scale = 300 / 72;
   canvas.width = Math.ceil(paper.width * scale); canvas.height = Math.ceil(paper.height * scale);
-  const ctx = canvas.getContext('2d'); if (!ctx) throw new Error('RENDER');
+  const ctx = canvas.getContext('2d', { alpha: false }); if (!ctx) throw new Error('RENDER');
   // Paint all integer pixels before scaling, including the fractional paper edge.
   ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.scale(scale, scale);
   ctx.font = `48px ${FONT_FAMILY}`;
