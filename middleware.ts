@@ -1,3 +1,4 @@
+import { nameTracingResponse } from './lib/name-tracing/route-policy';
 // middleware.ts
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
@@ -19,6 +20,8 @@ const handleEnglishSheet = createMiddleware({
 });
 
 export default function middleware(request: NextRequest) {
+  const nameTracing = nameTracingResponse(request);
+  if (nameTracing) return nameTracing;
   const match = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?printables\/([^/]+)\/?$/);
   const isWaveA = Boolean(match && waveAIds.has(match[2]));
   const hundredMatch = request.nextUrl.pathname.match(/^\/(?:(en|de|es|pt|fr|it|nl)\/)?connect-the-dots-1-to-100\/?$/);

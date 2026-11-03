@@ -73,7 +73,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         };
     });
 
-    return [...staticUrls, ...dynamicUrls, {
+    // One production-only English tool URL, without language alternates.
+    const nameTracingUrls: MetadataRoute.Sitemap = process.env.VERCEL_ENV === 'production' ? [{
+        url: `${baseUrl}/name-tracing-worksheet/`,
+        changeFrequency: 'monthly',
+        priority: 0.6,
+    }] : [];
+
+    return [...staticUrls, ...dynamicUrls, ...nameTracingUrls, {
         // English-only alphabet collection; no translated alternates.
         url: `${baseUrl}/alphabet-dot-to-dot/`,
         changeFrequency: 'monthly' as const,
