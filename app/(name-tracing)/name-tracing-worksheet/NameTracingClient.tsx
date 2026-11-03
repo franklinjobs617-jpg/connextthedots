@@ -31,9 +31,13 @@ export default function NameTracingClient() {
 
   useEffect(() => {
     // Recovery reduces later propagation; it cannot erase a prior request or hosting log.
-    if (window.location.pathname === ENTRY_PATH && (window.location.search || (window.location.hash && !['#name-tracing-main', '#name-tracing-examples'].includes(window.location.hash)))) window.location.replace(ENTRY_PATH);
+    const recoverAddress = () => {
+      if (window.location.pathname === ENTRY_PATH && (window.location.search || (window.location.hash && !['#name-tracing-main', '#name-tracing-examples'].includes(window.location.hash)))) window.location.replace(ENTRY_PATH);
+    };
+    recoverAddress();
+    window.addEventListener('hashchange', recoverAddress);
     const node = canvas.current, urls = downloadUrls.current, timers = downloadTimers.current;
-    return () => { running.current?.abort(); current.current = null; releaseCanvas(node); for (const url of urls) URL.revokeObjectURL(url); for (const timer of timers) clearTimeout(timer); };
+    return () => { window.removeEventListener('hashchange', recoverAddress); running.current?.abort(); current.current = null; releaseCanvas(node); for (const url of urls) URL.revokeObjectURL(url); for (const timer of timers) clearTimeout(timer); };
   }, []);
 
   const invalidate = () => {
