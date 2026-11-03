@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { connection } from 'next/server';
 import { CANONICAL_URL } from '@/lib/name-tracing/settings';
 import NameTracingClient from './NameTracingClient';
+import NameTracingChrome from '@/components/name-tracing/NameTracingChrome';
+import { EXAMPLE_RESOURCES } from '@/lib/name-tracing/example-resources';
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Name Tracing Worksheet Generator — A4 & US Letter',
@@ -11,5 +13,5 @@ export const metadata: Metadata = {
 };
 export default async function NameTracingPage() {
   await connection();
-  return <NameTracingClient />;
+  return <NameTracingChrome tool={<NameTracingClient />} examples={EXAMPLE_RESOURCES} />;
 }
