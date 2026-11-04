@@ -6,6 +6,7 @@ import { sheetLanguageTarget } from "@/lib/original-sheets";
 import Image from "next/image";
 import FreePrintablesMenu from "./FreePrintablesMenu";
 import { collectionCopy } from "@/lib/printable-collections";
+import { NAME_TRACING_HREF, nameTracingLink } from "@/lib/tool-navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { useAuth } from "@/lib/auth-context";
 import {
@@ -42,6 +43,10 @@ export default function Header() {
       href: "/printable-connect-the-dots/",
     },
     {
+      labelKey: "nameTracing",
+      href: NAME_TRACING_HREF,
+    },
+    {
       labelKey: "pricing",
       href: "/pricing/",
     },
@@ -56,6 +61,7 @@ export default function Header() {
   ];
   const t = useTranslations("header");
   const locale = useLocale();
+  const nameTracing = nameTracingLink(locale);
   const mobileTrigger = useRef<HTMLButtonElement>(null);
   const mobileId = useId();
   const pathname = usePathname(); // 获取当前纯净路径（不含语言前缀）
@@ -380,14 +386,19 @@ export default function Header() {
           )}
         </button>
 
-        <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <div className="hidden lg:flex min-w-0 flex-1 flex-wrap justify-end items-center gap-x-4 gap-y-2 pl-4 text-sm font-medium text-slate-600 xl:gap-x-6 [&>*]:shrink-0">
           {LinkArr.map((item) => item.labelKey === "allPrintables" ? (
             <FreePrintablesMenu key={item.href} locale={locale} />
+          ) : item.labelKey === "nameTracing" ? (
+            <a key={item.href} href={nameTracing.href} hrefLang={nameTracing.hrefLang} rel="noreferrer"
+              className="inline-flex min-h-11 items-center whitespace-nowrap hover:text-brand-blue transition-colors no-underline">
+              {nameTracing.label}
+            </a>
           ) : (
             <Link
               key={item.href}
               href={item.href}
-              className="hover:text-brand-blue transition-colors no-underline"
+              className="whitespace-nowrap hover:text-brand-blue transition-colors no-underline"
             >
               {t(item.labelKey)}
             </Link>
@@ -419,6 +430,12 @@ export default function Header() {
           <div className="flex flex-col space-y-4 font-medium text-slate-600">
             {LinkArr.map((item) => item.labelKey === "allPrintables" ? (
               <FreePrintablesMenu key={item.href} locale={locale} mobile onNavigate={() => setIsMobileMenuOpen(false)} />
+            ) : item.labelKey === "nameTracing" ? (
+              <a key={item.href} href={nameTracing.href} hrefLang={nameTracing.hrefLang} rel="noreferrer"
+                className="flex min-h-11 items-center py-2 hover:text-brand-blue no-underline"
+                onClick={() => setIsMobileMenuOpen(false)}>
+                {nameTracing.label}
+              </a>
             ) : (
               <Link
                 key={item.href}

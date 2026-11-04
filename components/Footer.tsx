@@ -5,12 +5,14 @@ import { sheetLanguageTarget } from "@/lib/original-sheets";
 
 import { useLocale, useTranslations } from "next-intl";
 import { collectionCopy, collectionHref, printableCollections } from "@/lib/printable-collections";
+import { nameTracingLink } from "@/lib/tool-navigation";
 import { Shapes, Twitter, Linkedin, Facebook, Share2 } from "lucide-react";
 
 export default function Footer() {
   const t = useTranslations("footer");
   const pricing = useTranslations("header");
   const locale = useLocale();
+  const nameTracing = nameTracingLink(locale);
   const collections = collectionCopy(locale);
   const pathname = usePathname(); // 获取当前纯净路径（不含语言前缀）
 
@@ -81,6 +83,12 @@ export default function Footer() {
                   {collections[item.id]}{item.englishOnly && <span className="ml-1">({collections.english})</span>}
                 </a>
               </li>)}
+              <li>
+                <a href={nameTracing.href} hrefLang={nameTracing.hrefLang} rel="noreferrer"
+                  className="inline-flex min-h-11 items-center hover:text-white transition">
+                  {nameTracing.label}
+                </a>
+              </li>
               <li>
                 <Link
                   href="/how-to-make/"
