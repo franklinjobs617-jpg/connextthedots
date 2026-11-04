@@ -3,18 +3,7 @@ import { bounded, checkAbort, nextFrame } from './async';
 import { validatedSettings } from './input';
 import { ensureLettering } from './font';
 import { resolveWorksheetLayout, type WorksheetLayout } from './layout';
-// A rejected Turbopack import can remain cached. An explicit later attempt uses
-// the same locked library's independent browser entry instead of the rejected import.
-let useRecoveryImport = false;
-async function loadPdf(signal: AbortSignal): Promise<{ jsPDF: typeof import('jspdf').jsPDF }> {
-  checkAbort(signal);
-  try {
-    return await bounded<{ jsPDF: typeof import('jspdf').jsPDF }>(useRecoveryImport ? import('jspdf/dist/jspdf.umd.min.js') : import('jspdf'), 15000, signal, 'PDF');
-  } catch (error) {
-    if (!signal.aborted) useRecoveryImport = true;
-    throw error;
-  }
-}
+import { loadPdf } from './pdf-loader';
 export type GenerationPhase = 'font' | 'render' | 'pdf';
 export type WorksheetResult = { blob: Blob; fontSize: number; width: number; height: number; settings: WorksheetSettings; layout: WorksheetLayout };
 export async function generateWorksheet(canvas: HTMLCanvasElement, raw: WorksheetSettings, signal: AbortSignal, phase: (value: GenerationPhase) => void): Promise<WorksheetResult> {
