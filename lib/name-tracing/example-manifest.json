@@ -1,0 +1,130 @@
+[
+  {
+    "id": "emma-a4",
+    "sampleName": "Emma",
+    "paper": "a4",
+    "status": "ready",
+    "pdfPath": "/name-tracing/examples/v1/name-tracing-emma-a4.pdf",
+    "rows": 8,
+    "guides": true,
+    "pages": 1,
+    "fontSizePt": 48,
+    "rowPitchPt": 102.97571428571429,
+    "rendererCommit": "2a11494c3ce8f802f07a11d3c3e672aaccf79f86",
+    "pdfSha256": "60acb76c799537cc1b1381331a86997c9f93dc46afd1ff9dcbe3a528980bb809",
+    "previewSha256": "f7cb9dfded85d99c758e40fbc03802ff1558d8cedfbe97cda9057e7bd67134bd",
+    "pdfBytes": 88347,
+    "previewBytes": 27614,
+    "previewWidth": 596,
+    "previewHeight": 842,
+    "paperPoints": [
+      595.280029296875,
+      841.8900146484375
+    ],
+    "canvasPixels": [
+      2481,
+      3508
+    ],
+    "dpi": [
+      300.08061955479036,
+      300.0106850126646
+    ],
+    "safeMarginPt": 36
+  },
+  {
+    "id": "emma-letter",
+    "sampleName": "Emma",
+    "paper": "letter",
+    "status": "ready",
+    "pdfPath": "/name-tracing/examples/v1/name-tracing-emma-letter.pdf",
+    "rows": 8,
+    "guides": true,
+    "pages": 1,
+    "fontSizePt": 48,
+    "rowPitchPt": 95.84857142857143,
+    "rendererCommit": "2a11494c3ce8f802f07a11d3c3e672aaccf79f86",
+    "pdfSha256": "161e19f00fe9fd617b10212a380cb8d7fd519b86bf34469e57a9da1837241e3d",
+    "previewSha256": "e5d27055d1d5dfb3b4b496ac9297186f2f7d12fe4a08349e74d4bf7572428fcc",
+    "pdfBytes": 97421,
+    "previewBytes": 25961,
+    "previewWidth": 612,
+    "previewHeight": 792,
+    "paperPoints": [
+      612.0,
+      792.0
+    ],
+    "canvasPixels": [
+      2550,
+      3301
+    ],
+    "dpi": [
+      300.0,
+      300.0909090909091
+    ],
+    "safeMarginPt": 36
+  },
+  {
+    "id": "alex-a4",
+    "sampleName": "Alex",
+    "paper": "a4",
+    "status": "ready",
+    "pdfPath": "/name-tracing/examples/v1/name-tracing-alex-a4.pdf",
+    "rows": 8,
+    "guides": true,
+    "pages": 1,
+    "fontSizePt": 48,
+    "rowPitchPt": 102.97571428571429,
+    "rendererCommit": "2a11494c3ce8f802f07a11d3c3e672aaccf79f86",
+    "pdfSha256": "fbcb919a4ea79853791abaf3cc8981988a644b1c74c3270811a6a48cd5f0f67f",
+    "previewSha256": "c8c4d6c441b6c185a10c516a83af06f17e6bfbbda4d67901ae408b2a559118bb",
+    "pdfBytes": 93841,
+    "previewBytes": 23024,
+    "previewWidth": 596,
+    "previewHeight": 842,
+    "paperPoints": [
+      595.280029296875,
+      841.8900146484375
+    ],
+    "canvasPixels": [
+      2481,
+      3508
+    ],
+    "dpi": [
+      300.08061955479036,
+      300.0106850126646
+    ],
+    "safeMarginPt": 36
+  },
+  {
+    "id": "alex-letter",
+    "sampleName": "Alex",
+    "paper": "letter",
+    "status": "ready",
+    "pdfPath": "/name-tracing/examples/v1/name-tracing-alex-letter.pdf",
+    "rows": 8,
+    "guides": true,
+    "pages": 1,
+    "fontSizePt": 48,
+    "rowPitchPt": 95.84857142857143,
+    "rendererCommit": "2a11494c3ce8f802f07a11d3c3e672aaccf79f86",
+    "pdfSha256": "74fcf64871a2e8fd35e7e4c63def58d6663686a6e572be2ea572d850ca2cf005",
+    "previewSha256": "0133900046ae5860104c44f7c747079d3e441926d16d8c9d92a217084f2edd00",
+    "pdfBytes": 96543,
+    "previewBytes": 21481,
+    "previewWidth": 612,
+    "previewHeight": 792,
+    "paperPoints": [
+      612.0,
+      792.0
+    ],
+    "canvasPixels": [
+      2550,
+      3301
+    ],
+    "dpi": [
+      300.0,
+      300.0909090909091
+    ],
+    "safeMarginPt": 36
+  }
+]

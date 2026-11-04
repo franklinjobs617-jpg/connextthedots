@@ -17,7 +17,7 @@ export default function NameTracingClient() {
   const [message, setMessage] = useState('');
   const [touched, setTouched] = useState(false);
   const [composing, setComposing] = useState(false);
-  const [summary, setSummary] = useState<{ paper: string; rows: number; fontSize: number; guides: boolean } | null>(null);
+  const [summary, setSummary] = useState<{ paper: string; rows: number; fontSize: number; guides: boolean; pitch: number; reason: string | null } | null>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const nameInput = useRef<HTMLInputElement>(null);
   const version = useRef(0);
@@ -31,9 +31,13 @@ export default function NameTracingClient() {
 
   useEffect(() => {
     // Recovery reduces later propagation; it cannot erase a prior request or hosting log.
-    if (window.location.pathname === ENTRY_PATH && (window.location.search || window.location.hash)) window.location.replace(ENTRY_PATH);
+    const recoverAddress = () => {
+      if (window.location.pathname === ENTRY_PATH && (window.location.search || (window.location.hash && !['#name-tracing-main', '#name-tracing-examples'].includes(window.location.hash)))) window.location.replace(ENTRY_PATH);
+    };
+    recoverAddress();
+    window.addEventListener('hashchange', recoverAddress);
     const node = canvas.current, urls = downloadUrls.current, timers = downloadTimers.current;
-    return () => { running.current?.abort(); current.current = null; releaseCanvas(node); for (const url of urls) URL.revokeObjectURL(url); for (const timer of timers) clearTimeout(timer); };
+    return () => { window.removeEventListener('hashchange', recoverAddress); running.current?.abort(); current.current = null; releaseCanvas(node); for (const url of urls) URL.revokeObjectURL(url); for (const timer of timers) clearTimeout(timer); };
   }, []);
 
   const invalidate = () => {
@@ -53,7 +57,7 @@ export default function NameTracingClient() {
       const result = await generateWorksheet(canvas.current, normalized, controller.signal, value => { if (id === version.current) setPhase(value); });
       if (id !== version.current || controller.signal.aborted) return;
       current.current = { ...result, version: id, key: settingsKey(normalized) };
-      setSummary({ paper: PAPER[result.settings.paper].label, rows: result.settings.rows, fontSize: result.fontSize, guides: result.settings.guides });
+      setSummary({ paper: PAPER[result.settings.paper].label, rows: result.layout.actualRows, fontSize: result.fontSize, guides: result.settings.guides, pitch: result.layout.rowPitchPt, reason: result.layout.resolutionReason });
       setStatus('ready');
     } catch (error) {
       if (id !== version.current || controller.signal.aborted) return;
@@ -75,11 +79,7 @@ export default function NameTracingClient() {
   };
   const startOver = () => { invalidate(); setSettings({ ...DEFAULT_SETTINGS }); setTouched(false); setComposing(false); nameInput.current?.focus(); };
 
-  return <div className="nt-page">
-    <a className="nt-skip" href="#name-tracing-main">Skip to the worksheet generator</a>
-    {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- Native document links preserve root isolation and avoid RSC under connect-src none. */}
-    <header className="nt-brand"><a href="/" rel="noreferrer">ConnectTheDotsPrintable</a><a href="/printable-connect-the-dots/" rel="noreferrer">Printable activities <span aria-hidden="true">↗</span></a></header>
-    <main id="name-tracing-main">
+  return <>
       <div className="nt-heading"><p className="nt-eyebrow">ONE NAME. ONE PRINTABLE PAGE.</p><h1>Name Tracing Worksheet Generator</h1><p className="nt-intro">Make a dotted name worksheet in A4 or US Letter. Choose your practice rows and guide lines, then preview and download a PDF.</p></div>
       <div className="nt-workspace" data-clarity-mask="true">
         <section className="nt-panel nt-controls" aria-labelledby="nt-customize">
@@ -91,7 +91,7 @@ export default function NameTracingClient() {
             <p id="nt-name-error" className="nt-field-error" aria-live="polite">{fieldError || '\u00a0'}</p>
             <div className="nt-fields">
               <div><label className="nt-label" htmlFor="nt-paper">Paper size</label><select id="nt-paper" value={settings.paper} onChange={event => update({ paper: event.target.value as WorksheetSettings['paper'] })}><option value="a4">A4 · 210 × 297 mm</option><option value="letter">US Letter · 8.5 × 11 in</option></select></div>
-              <div><label className="nt-label" htmlFor="nt-rows">Practice rows</label><select id="nt-rows" value={settings.rows} onChange={event => update({ rows: Number(event.target.value) })}>{[1,2,3,4,5,6].map(count => <option value={count} key={count}>{count} {count === 1 ? 'row' : 'rows'}</option>)}</select></div>
+              <div><label className="nt-label" htmlFor="nt-rows">Practice rows</label><select id="nt-rows" value={settings.rows} onChange={event => update({ rows: (event.target.value === 'full' ? 'full' : Number(event.target.value)) as WorksheetSettings['rows'] })}><option value="full">Full page · Recommended</option>{[1,2,3,4,5,6,7,8].map(count => <option value={count} key={count}>{count} {count === 1 ? 'row' : 'rows'}</option>)}</select></div>
             </div>
             <label className="nt-check" htmlFor="nt-guides"><input id="nt-guides" type="checkbox" checked={settings.guides} onChange={event => update({ guides: event.target.checked })} /><span><strong>Show guide lines</strong><small>Top, middle and baseline guides</small></span></label>
             <div className="nt-form-actions"><button id="nt-generate" className="nt-button nt-primary" type="submit" disabled={!hydrated || !validation.ok || composing || status === 'working'}>{status === 'working' ? 'Preparing worksheet…' : 'Generate worksheet'}</button><button className="nt-text-button" type="button" onClick={startOver}>Start over</button></div>
@@ -106,15 +106,11 @@ export default function NameTracingClient() {
             <canvas id="nt-canvas" ref={canvas} width={1} height={1} className="nt-canvas" hidden={status !== 'ready'} role="img" aria-label="Current name tracing worksheet preview" />
             {status !== 'ready' && <div className="nt-preview-placeholder"><div className="nt-paper-icon" aria-hidden="true">Aa</div><p>{status === 'working' ? 'Creating your printable page…' : 'A little practice starts here.'}</p><span>{status === 'working' ? phase === 'pdf' ? 'Please wait for completion or an error. Cancellation is unavailable during PDF preparation.' : 'You can cancel before PDF preparation starts.' : 'Enter a name and select Generate worksheet.'}</span>{status === 'working' && phase !== 'pdf' && <button type="button" className="nt-text-button" onClick={() => { invalidate(); setMessage('Generation cancelled. You can adjust the settings and try again.'); }}>Cancel generation</button>}</div>}
           </div>
-          {status === 'error' && <div className="nt-error" role="alert"><p>{message}</p><button type="button" className="nt-button nt-secondary" onClick={() => void generate()} disabled={!validation.ok}>Try again</button><button type="button" className="nt-text-button" onClick={() => nameInput.current?.focus()}>Change the name</button></div>}
-          {summary && <p className="nt-preview-caption">{summary.rows} {summary.rows === 1 ? 'row' : 'rows'} · {summary.paper} · {summary.guides ? 'Guide lines on' : 'No guide lines'} · {Math.round(summary.fontSize)} pt lettering</p>}
+          {status === 'error' && <div className="nt-error" role="alert"><p>{message}</p><button type="button" className="nt-button nt-secondary" onClick={() => void generate()} disabled={!validation.ok}>Try again</button><button type="button" className="nt-text-button" onClick={() => nameInput.current?.focus()}>Change the name</button><p className="nt-reopen">If retrying still fails, <a href={ENTRY_PATH} rel="noreferrer">reopen the clean tool</a>. This clears the entered name and current result.</p></div>}
+          {summary && <p className="nt-preview-caption">{summary.rows} {summary.rows === 1 ? 'row' : 'rows'} · {summary.paper} · {summary.guides ? 'Guide lines on' : 'No guide lines'} · {Number(summary.fontSize.toFixed(1))} pt lettering · {summary.pitch.toFixed(1)} pt row spacing{summary.reason && <> · {summary.reason}</>}</p>}
           <button id="nt-download" type="button" className="nt-button nt-download" disabled={status !== 'ready'} onClick={download}>Download PDF <span aria-hidden="true">↓</span></button>
           {status !== 'error' && <p className="nt-message" aria-live="polite">{message || 'One page · Black and white · Print at actual size (100%)'}</p>}
         </section>
       </div>
-      <section className="nt-info" aria-labelledby="nt-about"><h2 id="nt-about">Simple settings, a clear printable</h2><div className="nt-info-grid"><div><h3>Choose your page</h3><p>Use A4 or US Letter paper. Print at actual size (100%) to keep the page dimensions and margins.</p></div><div><h3>Keep longer names readable</h3><p>Lettering fits the available width. If a name would become too small, the tool asks you to shorten it instead of cutting it off.</p></div><div><h3>Dotted letters, optional guides</h3><p>Guide lines help position the lettering. This worksheet does not show stroke order or provide handwriting instruction.</p></div></div></section>
-      <section className="nt-privacy" aria-labelledby="nt-privacy-title"><h2 id="nt-privacy-title">About your name and privacy</h2><p>The name you type is used in this browser to make the preview and PDF. This tool does not add it to the web address or download file name, or send it to an application API.</p><p>Keep names out of links. A name placed manually in a web address may reach hosting logs or appear in an initial framework response before the clean entry opens. Clearing the address later does not undo that initial handling.</p><p className="nt-font-credit">Dotted lettering: Raleway Dots, under the <a href="/fonts/name-tracing/v1/OFL.txt" rel="noreferrer">SIL Open Font License</a>.</p></section>
-    </main>
-    <footer className="nt-footer"><span>ConnectTheDotsPrintable</span><a href={ENTRY_PATH} rel="noreferrer">Open a clean worksheet</a></footer>
-  </div>;
+  </>;
 }

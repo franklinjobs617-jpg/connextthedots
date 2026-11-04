@@ -16,6 +16,6 @@ export function validateName(raw: string): InputResult {
 export function validatedSettings(settings: WorksheetSettings): WorksheetSettings {
   const name = validateName(settings.name);
   if (!name.ok) throw new Error('INPUT');
-  if (!['a4', 'letter'].includes(settings.paper) || !Number.isInteger(settings.rows) || settings.rows < 1 || settings.rows > 6) throw new Error('SETTINGS');
+  if (!['a4', 'letter'].includes(settings.paper) || (settings.rows !== 'full' && (!Number.isInteger(settings.rows) || settings.rows < 1 || settings.rows > 8))) throw new Error('SETTINGS');
   return { ...settings, name: name.value };
 }
