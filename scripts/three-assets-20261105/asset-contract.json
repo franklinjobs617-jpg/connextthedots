@@ -57,7 +57,14 @@
             1188
           ]
         }
-      ]
+      ],
+      "locale": "en",
+      "count": 50,
+      "assetStem": "turkey-50",
+      "assetVersion": "v1",
+      "hasPreDrawnDetails": true,
+      "geometry": "/printables/turkey-50/v1/geometry.json",
+      "geometrySha256": "4b44bbd8b8f598fb71a50b08f394f539b25037b0ffc74300075975c8ec71c394"
     },
     {
       "id": "snowflake-60",
@@ -114,10 +121,17 @@
             1188
           ]
         }
-      ]
+      ],
+      "locale": "en",
+      "count": 60,
+      "assetStem": "snowflake-60",
+      "assetVersion": "v1",
+      "hasPreDrawnDetails": false,
+      "geometry": "/printables/snowflake-60/v1/geometry.json",
+      "geometrySha256": "568f3e7d9c7c8126e0452038785522801c555635ba1c6e1783c3a33652fcb1ea"
     },
     {
-      "id": "tufted-owl-study-207-it",
+      "id": "tufted-owl-study-207",
       "exports": [
         {
           "paper": "A4",
@@ -171,7 +185,11 @@
             1188
           ]
         }
-      ]
+      ],
+      "locale": "it",
+      "count": 207,
+      "manifestFragment": "/localized-printables/it/tufted-owl-study-207/v1/manifest-fragment.json",
+      "taskContract": "/localized-printables/it/tufted-owl-study-207/v1/task-contract.json"
     }
   ],
   "review": {
