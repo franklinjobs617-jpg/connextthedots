@@ -87,6 +87,26 @@
       "previewSha256": "ac31a7062a116befc04ac6913d75c9fcd11c5c1a31d0f249096b83dd57c2a308",
       "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-A4-Solution.pdf",
       "sourcePdfSha256": "ca2a820267be261c5b8a3911e31baa9d82475234fd6aaedb4db646a30ee2c4fa"
+    },
+    {
+      "paper": "Letter",
+      "kind": "Puzzle",
+      "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Puzzle.pdf",
+      "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Puzzle.png",
+      "sha256": "bedba0d93addfe74ed06a2282943d29dbab622bdd2eb6571b6c72cd3b03ca1ad",
+      "previewSha256": "513dc2cc33be8caf74c2ed7a5f45225f480241564804f5fb4e181bfc62b1eb35",
+      "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-Letter-Puzzle.pdf",
+      "sourcePdfSha256": "25aa7ce3330a73a028dbe4bf7c235f621a41c2cdcea4f7067209ee8ae52465c4"
+    },
+    {
+      "paper": "Letter",
+      "kind": "Solution",
+      "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Solution.pdf",
+      "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Solution.png",
+      "sha256": "3bb0fe80a8567445d98dfd2234707ee06b67fd9dc12e796ac1242787a20dc3bc",
+      "previewSha256": "265cc395b50567d1dd3d58d9faf74fdcb016ff341ea068b11ff58f645ae3bbeb",
+      "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-Letter-Solution.pdf",
+      "sourcePdfSha256": "63c4d4c1b74dff082b28e29ed41926171003ccb7e6996eaa048c97d880af7578"
     }
   ]
 }

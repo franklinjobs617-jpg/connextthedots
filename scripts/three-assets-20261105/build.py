@@ -17,7 +17,11 @@ def export_original(id,papers):
  (folder/'geometry.json').write_text(json.dumps(d,indent=2)+'\n')
  (folder/'SOURCE.md').write_text(f'# {d["title"]}: original November 2026 source\n\nOriginal coordinates authored in the C11 Founder-approved three-resource task; no competitor tracing or image-generation input. Source anchors: scripts/three-assets-20261105/designs.json. {d["count"]} unique sequential points, close {d["count"]} to 1; fixed details are explicitly recorded in geometry.json.\n\n'+original.SOURCE_USAGE+'\n\n9pt standard Helvetica; minimum center spacing 3.3mm. Each PNG is rasterized from its own final PDF. Physical print, independent human full solve, difficulty/age/solve time: NOT TESTED / NOT MEASURED. Approval to produce is not release approval.\n')
  for paper in papers:
-  for kind in ['Puzzle','Solution']:original.render(d,paper,kind=='Solution',folder/f'{id}-{paper}-{kind}.pdf')
+  for kind in ['Puzzle','Solution']:
+   target=folder/f'{id}-{paper}-{kind}.pdf';original.render(d,paper,kind=='Solution',target)
+   if not d['details'] and not d['eyes']:
+    pdf=fitz.open(target);page=pdf[0];phrase='Solid details are already drawn.';rect=page.search_for(phrase)[0];span=next(s for block in page.get_text('dict')['blocks'] for line in block.get('lines',[]) for s in line['spans'] if phrase in s['text']);page.add_redact_annot(rect,fill=False);page.apply_redactions(images=0,graphics=0,text=0);page.insert_text((rect.x0,span['origin'][1]),'No pre-drawn details.',fontname='helv',fontsize=9);data=pdf.tobytes(garbage=4,deflate=True,no_new_id=True);pdf.close();target.write_bytes(data)
+    with fitz.open(target)as final:final[0].get_pixmap(matrix=fitz.Matrix(1.5,1.5),alpha=False).save(target.with_suffix('.png'))
  return d
 IT={ 'points':'punti','Puzzle':'SCHEDA','Solution':'SOLUZIONE','paper':'Letter USA',
 'range':'Collega i numeri in ogni intervallo. Solleva la matita tra gli intervalli.',

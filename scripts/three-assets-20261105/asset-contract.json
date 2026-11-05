@@ -1,0 +1,183 @@
+{
+  "base": "e4a46c7158ccb73cd3544015c5663bab385127ed",
+  "owner": "C11 asset export; C14 sole page/catalog/manifest integration",
+  "groups": [
+    {
+      "id": "turkey-50",
+      "exports": [
+        {
+          "paper": "A4",
+          "kind": "Puzzle",
+          "pdf": "/printables/turkey-50/v1/turkey-50-A4-Puzzle.pdf",
+          "preview": "/printables/turkey-50/v1/turkey-50-A4-Puzzle.png",
+          "pdfSha256": "fc3db92861f029d3c59207c80f693ba3d4756712b251b2a676f71259eb5ec94c",
+          "previewSha256": "1c802a9020aac89db0c78f60f7f35f59607057436903a45da95e3f2133424efe",
+          "pages": 1,
+          "previewPixels": [
+            893,
+            1263
+          ]
+        },
+        {
+          "paper": "A4",
+          "kind": "Solution",
+          "pdf": "/printables/turkey-50/v1/turkey-50-A4-Solution.pdf",
+          "preview": "/printables/turkey-50/v1/turkey-50-A4-Solution.png",
+          "pdfSha256": "8a52e7374562aafba8281458d3f33a1fc74e2be9f94d880d26ce039323c8f046",
+          "previewSha256": "6497ad6197132dfa98f35edfef8f60d36b2324afbf5419155a0d7803faab9515",
+          "pages": 1,
+          "previewPixels": [
+            893,
+            1263
+          ]
+        },
+        {
+          "paper": "Letter",
+          "kind": "Puzzle",
+          "pdf": "/printables/turkey-50/v1/turkey-50-Letter-Puzzle.pdf",
+          "preview": "/printables/turkey-50/v1/turkey-50-Letter-Puzzle.png",
+          "pdfSha256": "02ad53b77a2e97b1505471e9de6becd8d3c9e6c5798c1a86507212bf796f9569",
+          "previewSha256": "f751ae30fe2885606c9c78af2bb3fdc8d0f333d37c94bba8583c1fbdef9e188b",
+          "pages": 1,
+          "previewPixels": [
+            918,
+            1188
+          ]
+        },
+        {
+          "paper": "Letter",
+          "kind": "Solution",
+          "pdf": "/printables/turkey-50/v1/turkey-50-Letter-Solution.pdf",
+          "preview": "/printables/turkey-50/v1/turkey-50-Letter-Solution.png",
+          "pdfSha256": "d0c94874e7761059f10087034e08eb304a1ab6e0f6d452cde0b7127f8f7cce90",
+          "previewSha256": "870ad1819b88f88b842e34466bb2c6bb9705c17e84a6827b24573cb874064e03",
+          "pages": 1,
+          "previewPixels": [
+            918,
+            1188
+          ]
+        }
+      ]
+    },
+    {
+      "id": "snowflake-60",
+      "exports": [
+        {
+          "paper": "A4",
+          "kind": "Puzzle",
+          "pdf": "/printables/snowflake-60/v1/snowflake-60-A4-Puzzle.pdf",
+          "preview": "/printables/snowflake-60/v1/snowflake-60-A4-Puzzle.png",
+          "pdfSha256": "3d51c49db9fea668413378389d8bb7bbd1c4d959bc4f13dba7dc673e1b922428",
+          "previewSha256": "b5a6582d8bade050aaaae846762519e06dec2d60fc99b2936c7aac64f273b27f",
+          "pages": 1,
+          "previewPixels": [
+            893,
+            1263
+          ]
+        },
+        {
+          "paper": "A4",
+          "kind": "Solution",
+          "pdf": "/printables/snowflake-60/v1/snowflake-60-A4-Solution.pdf",
+          "preview": "/printables/snowflake-60/v1/snowflake-60-A4-Solution.png",
+          "pdfSha256": "359d66d36fba119bfa48580a7941dfff2f0b35c8b3f8d47f44d0345bfa2c9bd1",
+          "previewSha256": "387b0eddee4e080d56143481cfc1c8bdc8a74ef8b3c76577e5248d8df37fbf31",
+          "pages": 1,
+          "previewPixels": [
+            893,
+            1263
+          ]
+        },
+        {
+          "paper": "Letter",
+          "kind": "Puzzle",
+          "pdf": "/printables/snowflake-60/v1/snowflake-60-Letter-Puzzle.pdf",
+          "preview": "/printables/snowflake-60/v1/snowflake-60-Letter-Puzzle.png",
+          "pdfSha256": "16b6307ef1be78cdc17cfe340fb7eb15a3b3964c2e894d29cb67c214e82c622a",
+          "previewSha256": "abd4b7fc863003efbd46d44b5eb17ab6e1b2ccc589ca32014b835d484b1b0be8",
+          "pages": 1,
+          "previewPixels": [
+            918,
+            1188
+          ]
+        },
+        {
+          "paper": "Letter",
+          "kind": "Solution",
+          "pdf": "/printables/snowflake-60/v1/snowflake-60-Letter-Solution.pdf",
+          "preview": "/printables/snowflake-60/v1/snowflake-60-Letter-Solution.png",
+          "pdfSha256": "647be39bdb4e4fb9b6d20eebdb596567a117986786fd519fdea8461a64a997e8",
+          "previewSha256": "0a0b017d5cce4383676f74b5780ca531c6a597389f71add8c90a0d69f84d79d3",
+          "pages": 1,
+          "previewPixels": [
+            918,
+            1188
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tufted-owl-study-207-it",
+      "exports": [
+        {
+          "paper": "A4",
+          "kind": "Puzzle",
+          "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-A4-Puzzle.pdf",
+          "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-A4-Puzzle.png",
+          "pdfSha256": "a38f7b27aee2976c4b2398e1866d8758b639cfc435a9e017c699abc6dc268921",
+          "previewSha256": "4451a23ebeb09024ab60dc111bbc3abfed90c24911c10437ff039a85034b7b9e",
+          "pages": 1,
+          "previewPixels": [
+            893,
+            1263
+          ]
+        },
+        {
+          "paper": "A4",
+          "kind": "Solution",
+          "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-A4-Solution.pdf",
+          "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-A4-Solution.png",
+          "pdfSha256": "95745ab84d2807abc3e099fe42909c96e09397ce5f1c32c3af9aee3f7b44b4e6",
+          "previewSha256": "ac31a7062a116befc04ac6913d75c9fcd11c5c1a31d0f249096b83dd57c2a308",
+          "pages": 1,
+          "previewPixels": [
+            893,
+            1263
+          ]
+        },
+        {
+          "paper": "Letter",
+          "kind": "Puzzle",
+          "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Puzzle.pdf",
+          "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Puzzle.png",
+          "pdfSha256": "bedba0d93addfe74ed06a2282943d29dbab622bdd2eb6571b6c72cd3b03ca1ad",
+          "previewSha256": "513dc2cc33be8caf74c2ed7a5f45225f480241564804f5fb4e181bfc62b1eb35",
+          "pages": 1,
+          "previewPixels": [
+            918,
+            1188
+          ]
+        },
+        {
+          "paper": "Letter",
+          "kind": "Solution",
+          "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Solution.pdf",
+          "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Solution.png",
+          "pdfSha256": "3bb0fe80a8567445d98dfd2234707ee06b67fd9dc12e796ac1242787a20dc3bc",
+          "previewSha256": "265cc395b50567d1dd3d58d9faf74fdcb016ff341ea068b11ff58f645ae3bbeb",
+          "pages": 1,
+          "previewPixels": [
+            918,
+            1188
+          ]
+        }
+      ]
+    }
+  ],
+  "review": {
+    "independentHumanSolve": "NOT TESTED",
+    "physicalPrint": "NOT TESTED",
+    "independentItalianReview": "NOT TESTED",
+    "mobileFinalIntegration": "NOT TESTED"
+  }
+}
