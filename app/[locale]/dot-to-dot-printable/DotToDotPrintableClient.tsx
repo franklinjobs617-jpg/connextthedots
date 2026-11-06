@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { BookOpen, ChevronRight, Download, Pencil, Sparkles, Zap } from "lucide-react";
 import PrintableCard from "@/components/PrintableCard";
@@ -11,6 +11,7 @@ import type { PrintableItem } from "@/lib/printables-data";
 type Props = {
     locale: string;
     allItems: PrintableItem[];
+    discovery?: ReactNode;
 };
 
 // ─── Static content ────────────────────────────────────────────────────────────
@@ -195,7 +196,7 @@ const FILTERS = [
 ] as const;
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export default function DotToDotPrintableClient({ locale, allItems }: Props) {
+export default function DotToDotPrintableClient({ locale, allItems, discovery }: Props) {
     const { user, login, isLoggingIn } = useAuth();
     const credits = user ? parseInt(user.credits || "0", 10) : 0;
     const [activeFilter, setActiveFilter] = useState<string>("all");
@@ -363,11 +364,15 @@ export default function DotToDotPrintableClient({ locale, allItems }: Props) {
                 {/* ── Puzzle gallery ── */}
                 <section id="puzzle-gallery" className="py-12 md:py-16 bg-slate-50">
                     <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+                        {isL1 && discovery && <>
+                            <h2 className="text-2xl font-extrabold text-slate-900">Free Dot to Dot PDFs</h2>
+                            {discovery}
+                        </>}
                         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 pb-4 border-b border-slate-200">
                             <div>
-                                <h2 className="text-2xl font-extrabold text-slate-900">
+                                {(!isL1 || !discovery) && <h2 className="text-2xl font-extrabold text-slate-900">
                                     Free Dot to Dot PDFs
-                                </h2>
+                                </h2>}
                                 <p className="text-sm text-slate-500 mt-1">
                                     {displayedItems.length} {isL1 ? `catalog entries shown of ${allItems.length} · open a card to view details and downloads` : "puzzles · click any card to download"}
                                 </p>
