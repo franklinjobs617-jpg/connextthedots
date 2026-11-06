@@ -7,7 +7,7 @@ export default function OriginalWorksheetCards({ locale }: { locale: string }) {
   return <section aria-labelledby="original-pdfs" className="mx-auto max-w-6xl px-6 py-10">
     <h2 id="original-pdfs" className="text-2xl font-bold text-slate-900">{copy.worksheets} <span className="text-base font-normal">({copy.english})</span></h2>
     <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {originalSheets.map(sheet => <article key={sheet.id} data-worksheet={sheet.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      {originalSheets.filter(sheet => locale === "en" || !["turkey-50", "snowflake-60"].includes(sheet.id)).map(sheet => <article key={sheet.id} data-worksheet={sheet.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <a href={`/printables/${sheet.id}/`} hrefLang="en" className="block bg-slate-100 p-3 focus-visible:outline-2">
           {/* These PNGs are the existing final-PDF previews, shown without cropping. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}

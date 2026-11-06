@@ -81,6 +81,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }] : [];
 
     return [...staticUrls, ...dynamicUrls, ...nameTracingUrls, {
+        // Two approved English-only originals; no translated HTML pages.
+        url: `${baseUrl}/printables/turkey-50/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
+        url: `${baseUrl}/printables/snowflake-60/`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }, {
         // English-only alphabet collection; no translated alternates.
         url: `${baseUrl}/alphabet-dot-to-dot/`,
         changeFrequency: 'monthly' as const,

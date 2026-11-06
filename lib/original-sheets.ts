@@ -108,6 +108,22 @@ export const originalSheets: readonly OriginalSheet[] = [
         learningNote: "Alternating tips and notches make this an angular tracing task distinct from the animal profiles. The leaf is stylized. Labels are ordinary 9 pt; print readability has not been independently tested.",
         hasPreDrawnDetails: false,
     },
+    {
+        id: "turkey-50", title: "Fan-tail Turkey", count: 50,
+        description: "Connect 50 numbered dots around a fan-tail turkey. Download free A4 and US Letter puzzle PDFs with separate matching answers.",
+        reveal: "One closed outline traces the turkey and its fan-shaped tail. The eye, feather lines, wing and wattle details are already drawn; connect the numbered outside contour.",
+        solveTip: "Follow consecutive numbers around the fan and the short turns of the body. After 50, join back to 1 to close the outline.",
+        learningNote: "This original stylized turkey is a 50-point counting and tracing task. Age suitability, difficulty and completion time have not been measured.",
+        hasPreDrawnDetails: true,
+    },
+    {
+        id: "snowflake-60", title: "Six-arm Snowflake", count: 60,
+        description: "Follow 60 numbered dots around a six-arm snowflake. Free A4 and US Letter puzzle PDFs each have a separate matching answer.",
+        reveal: "The six arms and their inward notches form one closed numbered outline. No interior details are pre-drawn; the connected contour provides the whole design.",
+        solveTip: "Keep following the numbers into each notch and out to the next arm. Join 60 back to 1 to finish; do not jump directly between nearby arm tips.",
+        learningNote: "The repeating six-arm shape offers an angular tracing task with exactly 60 points. It is not rated by age or difficulty, and solve time has not been measured.",
+        hasPreDrawnDetails: false,
+    },
 ];
 export const originalSheetIds = originalSheets.map((item) => item.id);
 export function originalSheet(id: string): OriginalSheet {
