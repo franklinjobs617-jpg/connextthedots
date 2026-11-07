@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import DotToDotPrintableClient from "./DotToDotPrintableClient";
+import DotDiscoverySection from "./DotDiscoverySection";
 import { getAllPrintables } from "@/lib/printables-data";
 import { getAlternates, getUrl } from "@/lib/metadata";
 
@@ -35,5 +36,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
     const { locale } = await params;
     const allItems = getAllPrintables();
-    return <DotToDotPrintableClient locale={locale} allItems={allItems} />;
+    return <DotToDotPrintableClient locale={locale} allItems={allItems} discovery={locale === "en" ? <DotDiscoverySection /> : undefined} />;
 }
