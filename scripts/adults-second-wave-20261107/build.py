@@ -43,6 +43,11 @@ def export(id, papers, evidence):
     minimum = min(math.dist(a, b) for i, a in enumerate(points) for b in points[i + 1:])
     assert minimum >= 3.3, ("point centers", minimum)
     d["labels"] = adapter.u.layout(points, edges)
+    # Explicit authored label corrections, audited against the unchanged constraints.
+    for number, (dx, dy) in design.get("labelAdjustmentsMm", {}).items():
+        label = d["labels"][int(number) - 1]
+        b = label["box"]
+        label["box"] = [b[0] + dx, b[1] + dy, b[2] + dx, b[3] + dy]
     folder = ROOT / "public/printables" / id / "v1"
     folder.mkdir(parents=True, exist_ok=True)
     geometry = json.dumps(d, indent=2) + "\n"

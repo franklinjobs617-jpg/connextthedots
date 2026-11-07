@@ -83,7 +83,7 @@
     ]
   },
   "geometry": "/printables/christmas-candle-window/v1/geometry.json",
-  "geometrySha256": "921b0535308ed66bb5bba23a0dd4bfe06be3d15401bf940aec01875955ec26b1",
+  "geometrySha256": "1b4b7f43e4edb38158ea74f6cd5faa6521b238d6d3ec21ac4ca3a6c2815ca710",
   "labelFontPtByPaper": {
     "A4": 9,
     "Letter": 9
@@ -95,8 +95,8 @@
       "pdf": "/printables/christmas-candle-window/v1/christmas-candle-window-A4-Puzzle.pdf",
       "preview": "/printables/christmas-candle-window/v1/christmas-candle-window-A4-Puzzle.png",
       "mime": "application/pdf",
-      "bytes": 10248,
-      "sha256": "bd46ad845c77dea1c4217bb805318738497407bcd1a18eac8f96560dc31da2a0",
+      "bytes": 10249,
+      "sha256": "f81f8e71ea571b4d82e8c8e89743c061cb24e136cda9597dc3a44b50a0db78ef",
       "previewSha256": "b645ecee2b6bafdced3e5d1e4e4c156aed856b6019d04b694862856ec4fb6d9e",
       "previewPixels": [
         893,
@@ -117,8 +117,8 @@
       "pdf": "/printables/christmas-candle-window/v1/christmas-candle-window-A4-Solution.pdf",
       "preview": "/printables/christmas-candle-window/v1/christmas-candle-window-A4-Solution.png",
       "mime": "application/pdf",
-      "bytes": 11039,
-      "sha256": "31f1894e9b4d16bfa5673b06982cc8c39e64dce209343e780ac1a70035a8e209",
+      "bytes": 11040,
+      "sha256": "e07913ee93491f1f865f3cc00fd64d268eaef6e65a8ab4805abbad06236469b3",
       "previewSha256": "990864fe830e7687972132f4650e83cc8bd9bc7d250a1d3f03c4beaefb110bd6",
       "previewPixels": [
         893,
@@ -139,9 +139,9 @@
       "pdf": "/printables/christmas-candle-window/v1/christmas-candle-window-Letter-Puzzle.pdf",
       "preview": "/printables/christmas-candle-window/v1/christmas-candle-window-Letter-Puzzle.png",
       "mime": "application/pdf",
-      "bytes": 10264,
-      "sha256": "c7ee76fdf79b6af49771e5466a06311882033c947c4bf0135b56f5a3323436c8",
-      "previewSha256": "4fc7c0d3033b78846b096c1ba8c00c8549a54b90b22eb54230db24ebe119ba32",
+      "bytes": 10265,
+      "sha256": "711d36ca5f283ca9d104127084ed26db06ed0ab6df982dd4c1bb7246801dbbf3",
+      "previewSha256": "cf8f25807e3af27e8c2636f7b597a4699d4ba178435f39a333e3efa8b17c9e80",
       "previewPixels": [
         918,
         1188
@@ -162,8 +162,8 @@
       "preview": "/printables/christmas-candle-window/v1/christmas-candle-window-Letter-Solution.png",
       "mime": "application/pdf",
       "bytes": 11075,
-      "sha256": "77d6e25b7968ba012d1a89a79ee1c0bb8779ddbedf7dfe906b7bd7ec3764df70",
-      "previewSha256": "16eb8abd449f315903dbfd377a04825b3f3fc5170fa7573028930b26e69bc2b8",
+      "sha256": "2d2fa7ca4c7d87cbeb5830ce54a7e58bd53f6b4aee7e9324e87f5c842ebec88a",
+      "previewSha256": "4b4d560e36e6848665184401801a644e17f7972d66dcfd6241aa030e2fd39374",
       "previewPixels": [
         918,
         1188

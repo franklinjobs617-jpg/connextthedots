@@ -943,6 +943,12 @@
         "closed": false,
         "maxStepMm": 200
       }
-    ]
+    ],
+    "labelAdjustmentsMm": {
+      "72": [
+        0,
+        0.2
+      ]
+    }
   }
 }

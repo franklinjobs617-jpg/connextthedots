@@ -2399,7 +2399,7 @@
   "dotRadiusMm": 0.48,
   "license": "\u00a9 2026 ConnectTheDotsPrintable.online. Usage for this release: personal and educational downloading and printing; commercial use requires prior written permission. See the website Terms of Service.",
   "provenance": "Original coordinates authored for Founder-approved C11 Adults second wave, 2026-11-07; no external artwork, tracing or image-generation inputs.",
-  "authoringDesignSha256": "6c8dd42807b114dc1a7989a1d436381ece343921579518110a2a6800adad449c",
+  "authoringDesignSha256": "acd0cc0a3f043e92481455bcb9a94bcd3135cd31d2c5a506f359fcf64e0ab321",
   "labels": [
     {
       "number": 1,
@@ -3332,9 +3332,9 @@
       ],
       "box": [
         46.59339,
-        158.13807,
+        158.33807,
         50.12399,
-        161.31307
+        161.51307
       ]
     },
     {
