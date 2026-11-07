@@ -9,6 +9,7 @@ const waveAIds = new Set([
   'elephant-100', 'hot-air-balloon-100', 'seahorse-100',
   'hummingbird-120', 'shark-140',
   'flamingo-150', 'chameleon-160', 'cactus-160', 'swan-90', 'maple-leaf-90',
+  'turkey-50', 'snowflake-60',
   ...segmentedSheetIds,
 ]);
 

@@ -1,0 +1,112 @@
+{
+  "locale": "it",
+  "id": "tufted-owl-study-207",
+  "title": "Gufo con ciuffi auricolari",
+  "count": 207,
+  "segments": [
+    {
+      "name": "body and ear tufts",
+      "start": 1,
+      "end": 76,
+      "closed": true
+    },
+    {
+      "name": "left facial disc",
+      "start": 77,
+      "end": 108,
+      "closed": true
+    },
+    {
+      "name": "right facial disc",
+      "start": 109,
+      "end": 140,
+      "closed": true
+    },
+    {
+      "name": "left eye",
+      "start": 141,
+      "end": 148,
+      "closed": true
+    },
+    {
+      "name": "right eye",
+      "start": 149,
+      "end": 156,
+      "closed": true
+    },
+    {
+      "name": "beak",
+      "start": 157,
+      "end": 161,
+      "closed": true
+    },
+    {
+      "name": "left flight feathers",
+      "start": 162,
+      "end": 173,
+      "closed": false
+    },
+    {
+      "name": "right flight feathers",
+      "start": 174,
+      "end": 185,
+      "closed": false
+    },
+    {
+      "name": "breast chevrons",
+      "start": 186,
+      "end": 198,
+      "closed": false
+    },
+    {
+      "name": "lower plumage",
+      "start": 199,
+      "end": 207,
+      "closed": false
+    }
+  ],
+  "sourceGeometry": "/printables/tufted-owl-study-207/v2/geometry.json",
+  "sourceGeometrySha256": "e908910f87bf02a9e5c5139d3f214be2c73ace727638eb27fd39a656fd035080",
+  "exports": [
+    {
+      "paper": "A4",
+      "kind": "Puzzle",
+      "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-A4-Puzzle.pdf",
+      "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-A4-Puzzle.png",
+      "sha256": "a38f7b27aee2976c4b2398e1866d8758b639cfc435a9e017c699abc6dc268921",
+      "previewSha256": "4451a23ebeb09024ab60dc111bbc3abfed90c24911c10437ff039a85034b7b9e",
+      "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-A4-Puzzle.pdf",
+      "sourcePdfSha256": "23afe88012c2a829bb2b599a203128db35637b6d0e3fa47a88f5e9d8ff910765"
+    },
+    {
+      "paper": "A4",
+      "kind": "Solution",
+      "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-A4-Solution.pdf",
+      "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-A4-Solution.png",
+      "sha256": "95745ab84d2807abc3e099fe42909c96e09397ce5f1c32c3af9aee3f7b44b4e6",
+      "previewSha256": "ac31a7062a116befc04ac6913d75c9fcd11c5c1a31d0f249096b83dd57c2a308",
+      "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-A4-Solution.pdf",
+      "sourcePdfSha256": "ca2a820267be261c5b8a3911e31baa9d82475234fd6aaedb4db646a30ee2c4fa"
+    },
+    {
+      "paper": "Letter",
+      "kind": "Puzzle",
+      "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Puzzle.pdf",
+      "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Puzzle.png",
+      "sha256": "bedba0d93addfe74ed06a2282943d29dbab622bdd2eb6571b6c72cd3b03ca1ad",
+      "previewSha256": "513dc2cc33be8caf74c2ed7a5f45225f480241564804f5fb4e181bfc62b1eb35",
+      "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-Letter-Puzzle.pdf",
+      "sourcePdfSha256": "25aa7ce3330a73a028dbe4bf7c235f621a41c2cdcea4f7067209ee8ae52465c4"
+    },
+    {
+      "paper": "Letter",
+      "kind": "Solution",
+      "pdf": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Solution.pdf",
+      "preview": "/localized-printables/it/tufted-owl-study-207/v1/tufted-owl-study-207-it-Letter-Solution.png",
+      "sha256": "3bb0fe80a8567445d98dfd2234707ee06b67fd9dc12e796ac1242787a20dc3bc",
+      "previewSha256": "265cc395b50567d1dd3d58d9faf74fdcb016ff341ea068b11ff58f645ae3bbeb",
+      "sourcePdf": "/printables/tufted-owl-study-207/v2/tufted-owl-study-Letter-Solution.pdf",
+      "sourcePdfSha256": "63c4d4c1b74dff082b28e29ed41926171003ccb7e6996eaa048c97d880af7578"
+    }
+  ]
+}
