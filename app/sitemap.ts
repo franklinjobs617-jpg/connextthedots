@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllPrintables } from '@/lib/printables-data';
+import { segmentedSheetIds } from '@/lib/segmented-sheet-ids';
 
 const baseUrl = 'https://connectthedotsprintable.online';
 const siteLocales = ['en', 'de', 'es', 'pt', 'fr', 'it', 'nl'];
@@ -80,7 +81,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.6,
     }] : [];
 
-    return [...staticUrls, ...dynamicUrls, ...nameTracingUrls, {
+    const approvedAdultIds = new Set<string>(['dragonfly-water-lily', 'christmas-candle-window']);
+    const additionalAdultUrls: MetadataRoute.Sitemap = segmentedSheetIds.filter(id => approvedAdultIds.has(id)).map(id => ({
+        url: `${baseUrl}/printables/${id}/`,
+        changeFrequency: 'monthly',
+        priority: 0.6,
+    }));
+
+    return [...staticUrls, ...dynamicUrls, ...nameTracingUrls, ...additionalAdultUrls, {
         // Two approved English-only originals; no translated HTML pages.
         url: `${baseUrl}/printables/turkey-50/`,
         changeFrequency: 'monthly' as const,

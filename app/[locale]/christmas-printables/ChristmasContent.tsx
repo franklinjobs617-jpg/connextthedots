@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import ChristmasPrintableDownloads, { getChristmasFaqs } from "./ChristmasPrintableDownloads";
+import { getChristmasSegmentedSheet } from "./ChristmasSegmentedEntry";
 
 const schemaNames = {
   "en": "Free Christmas Connect-the-Dots Printables",
@@ -50,12 +51,15 @@ const legacyFallbackSchema = {
 export default function ChristmasContent({ locale }: { locale: string }) {
     const approvedLocale = locale === "en" || locale === "es" || locale === "it" ? locale : null;
     const path = locale === "en" ? "/christmas-printables/" : `/${locale}/christmas-printables/`;
+    const segmented = locale === "en" ? getChristmasSegmentedSheet() : undefined;
     const collectionSchema = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         name: approvedLocale ? schemaNames[approvedLocale] : legacyFallbackSchema.schemaName,
         url: `https://connectthedotsprintable.online${path}`,
-        about: approvedLocale ? approvedAbout[approvedLocale] : legacyFallbackSchema.schemaAbout,
+        about: segmented?.task?.type === "segmented"
+            ? `Three free Christmas dot-to-dot worksheets: the 40-point tree and presents, the 150-point ornament, and ${segmented.title} with ${segmented.count} points in ${segmented.task.segments.length} separate segments. Each has matching A4 and US Letter puzzle and answer PDFs.`
+            : approvedLocale ? approvedAbout[approvedLocale] : legacyFallbackSchema.schemaAbout,
         inLanguage: locale,
     };
     const faqItems = approvedLocale ? getChristmasFaqs(locale) : legacyFallbackSchema.faqItems;
