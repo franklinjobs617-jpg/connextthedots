@@ -1,0 +1,187 @@
+{
+  "id": "dragonfly-water-lily",
+  "assetStem": "dragonfly-water-lily",
+  "assetVersion": "v1",
+  "title": "Dragonfly and Water Lily",
+  "count": 177,
+  "hasPreDrawnDetails": false,
+  "task": {
+    "type": "segmented",
+    "segments": [
+      {
+        "name": "dragonfly body",
+        "start": 1,
+        "end": 22,
+        "closed": true
+      },
+      {
+        "name": "upper left wing",
+        "start": 23,
+        "end": 41,
+        "closed": true
+      },
+      {
+        "name": "upper right wing",
+        "start": 42,
+        "end": 60,
+        "closed": true
+      },
+      {
+        "name": "lower left wing",
+        "start": 61,
+        "end": 78,
+        "closed": true
+      },
+      {
+        "name": "lower right wing",
+        "start": 79,
+        "end": 96,
+        "closed": true
+      },
+      {
+        "name": "water lily flower",
+        "start": 97,
+        "end": 124,
+        "closed": true
+      },
+      {
+        "name": "water lily leaf",
+        "start": 125,
+        "end": 148,
+        "closed": true
+      },
+      {
+        "name": "upper left wing main vein",
+        "start": 149,
+        "end": 154,
+        "closed": false
+      },
+      {
+        "name": "upper right wing main vein",
+        "start": 155,
+        "end": 160,
+        "closed": false
+      },
+      {
+        "name": "lower left wing main vein",
+        "start": 161,
+        "end": 165,
+        "closed": false
+      },
+      {
+        "name": "lower right wing main vein",
+        "start": 166,
+        "end": 170,
+        "closed": false
+      },
+      {
+        "name": "flower stem",
+        "start": 171,
+        "end": 177,
+        "closed": false
+      }
+    ]
+  },
+  "geometry": "/printables/dragonfly-water-lily/v1/geometry.json",
+  "geometrySha256": "7f3bbcb1807f2e393295043da378eeffbbd6f501f875c2cff3db99f3d42a962b",
+  "labelFontPtByPaper": {
+    "A4": 9,
+    "Letter": 9
+  },
+  "exports": [
+    {
+      "paper": "A4",
+      "kind": "Puzzle",
+      "pdf": "/printables/dragonfly-water-lily/v1/dragonfly-water-lily-A4-Puzzle.pdf",
+      "preview": "/printables/dragonfly-water-lily/v1/dragonfly-water-lily-A4-Puzzle.png",
+      "mime": "application/pdf",
+      "bytes": 16361,
+      "sha256": "9663433020cbc30db055f3c4c3bc1c7d51bdf3e8058437c932c6fc4d1a25acab",
+      "previewSha256": "956d4facefdb39789f836c21eb9631089fb36e54d11e2b1c0075f4a85713a7db",
+      "previewPixels": [
+        893,
+        1263
+      ],
+      "pages": 1,
+      "pageBoxPt": [
+        0.0,
+        0.0,
+        595.2755737304688,
+        841.8897705078125
+      ],
+      "labelFontPt": 9
+    },
+    {
+      "paper": "A4",
+      "kind": "Solution",
+      "pdf": "/printables/dragonfly-water-lily/v1/dragonfly-water-lily-A4-Solution.pdf",
+      "preview": "/printables/dragonfly-water-lily/v1/dragonfly-water-lily-A4-Solution.png",
+      "mime": "application/pdf",
+      "bytes": 17979,
+      "sha256": "b20521b2c0806d143a6f70e3069d034691787e3b8703dfe3bf30b73bfb22130e",
+      "previewSha256": "9ab3afbcca6cdf1216c0d34c1232fcdd303d25f1865b7337c5e4cfe08b06ff37",
+      "previewPixels": [
+        893,
+        1263
+      ],
+      "pages": 1,
+      "pageBoxPt": [
+        0.0,
+        0.0,
+        595.2755737304688,
+        841.8897705078125
+      ],
+      "labelFontPt": 9
+    },
+    {
+      "paper": "Letter",
+      "kind": "Puzzle",
+      "pdf": "/printables/dragonfly-water-lily/v1/dragonfly-water-lily-Letter-Puzzle.pdf",
+      "preview": "/printables/dragonfly-water-lily/v1/dragonfly-water-lily-Letter-Puzzle.png",
+      "mime": "application/pdf",
+      "bytes": 16302,
+      "sha256": "0c0f331354ce3bfb756e477c6d331d6a8e52e5c94884898b3092c0d91b3b2928",
+      "previewSha256": "043712c92384e6fe655f223c100c0f03c2ef2506214a60da79496c30d39f0bdc",
+      "previewPixels": [
+        918,
+        1188
+      ],
+      "pages": 1,
+      "pageBoxPt": [
+        0.0,
+        0.0,
+        612.0,
+        792.0
+      ],
+      "labelFontPt": 9
+    },
+    {
+      "paper": "Letter",
+      "kind": "Solution",
+      "pdf": "/printables/dragonfly-water-lily/v1/dragonfly-water-lily-Letter-Solution.pdf",
+      "preview": "/printables/dragonfly-water-lily/v1/dragonfly-water-lily-Letter-Solution.png",
+      "mime": "application/pdf",
+      "bytes": 17888,
+      "sha256": "6304072804ebf15ba859ae048d9c2090522ed1881919830595256a30647be3ef",
+      "previewSha256": "65091d46fe381e051ed7fc5312a4c2f742952c0da856eefad9a2567dce96fc5e",
+      "previewPixels": [
+        918,
+        1188
+      ],
+      "pages": 1,
+      "pageBoxPt": [
+        0.0,
+        0.0,
+        612.0,
+        792.0
+      ],
+      "labelFontPt": 9
+    }
+  ],
+  "notTested": [
+    "physical printing",
+    "independent human full solve",
+    "real mobile",
+    "integrated browser download"
+  ]
+}

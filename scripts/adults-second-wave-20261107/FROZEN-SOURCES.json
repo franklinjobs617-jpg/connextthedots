@@ -1,0 +1,14 @@
+[
+  {
+    "file": "frozen-adapter.py",
+    "sha256": "a4309b5b206bd98f83c2150e047622ac7cc67975330e5b64bb0746554cb79429",
+    "sourceCommit": "89275ec9292ade02002c8b01a582bb35bd153bb9",
+    "sourcePath": "poc/adults-extreme/2026-10-29/source/build.py"
+  },
+  {
+    "file": "upstream-build.py",
+    "sha256": "b772cef46a907cf18e313d8fa6a4302dd4ae79e526835b098e347db96995b67b",
+    "sourceCommit": "89275ec9292ade02002c8b01a582bb35bd153bb9",
+    "sourcePath": "poc/adults-extreme/2026-10-29/source/upstream-build.py"
+  }
+]
