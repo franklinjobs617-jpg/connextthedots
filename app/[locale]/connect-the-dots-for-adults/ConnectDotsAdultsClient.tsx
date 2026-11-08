@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronRight, Brain, Clock, ShieldCheck, ExternalLink } from "lucide-react";
 import PrintableCard from "@/components/PrintableCard";
 import AdultNumberedChallenges from "@/components/AdultNumberedChallenges";
+import { adultDiscoverySheetIds } from "@/lib/segmented-sheet-ids";
 import { useAuth } from "@/lib/auth-context";
 import DotGeneratorClient from "@/components/DotGeneratorClient";
 import type { PrintableItem } from "@/lib/printables-data";
@@ -395,7 +396,7 @@ export default function ConnectDotsAdultsClient({ locale, featuredItems }: Props
                     </div>
                 </section>
 
-                {locale === "en" && <AdultNumberedChallenges />}
+                {locale === "en" && <AdultNumberedChallenges sheetIds={adultDiscoverySheetIds} />}
 
                 {/* Existing reference entries remain available after the numbered worksheets. */}
                 <section id={locale === "en" ? "reference-line-art" : "featured-puzzles"} className="py-12 bg-white border-b border-slate-100">

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ChristmasSegmentedEntry, { getChristmasSegmentedSheet } from "./ChristmasSegmentedEntry";
 
 const copy = {
   "en": {
@@ -153,6 +154,12 @@ const approvedFaqs = {
 // B approval applies only to the three named locales. Preserve A's existing
 // English-copy fallback FAQ for all other locale routes.
 export function getChristmasFaqs(locale: string): FaqItem[] {
+    const segmented = locale === "en" ? getChristmasSegmentedSheet() : undefined;
+    if (segmented?.task?.type === "segmented") return approvedFaqs.en.map((faq, index) => {
+        if (index === 0) return { ...faq, a: `Three original designs are available: the 40-point tree and presents, the 150-point ornament, and ${segmented.title} with ${segmented.count} dots in ${segmented.task!.segments.length} separate segments. Each has separate A4 and US Letter puzzle and answer PDFs.` };
+        if (index === 3) return { ...faq, a: `The original tree and ornament have 40 and 150 dots. ${segmented.title} has ${segmented.count} dots in separate numbered ranges: close only C ranges, stop at the end of O ranges, and lift your pen between ranges. Age suitability, difficulty and completion time are not independently rated; physical printing and independent full solving remain NOT TESTED.` };
+        return faq;
+    });
     if (locale === "en" || locale === "es" || locale === "it") return approvedFaqs[locale];
     const c = copy.en;
     const included = items.map(i => `${i.name.en} (${i.count})`).join("; ");
@@ -164,6 +171,7 @@ export default function ChristmasPrintableDownloads({ locale }: { locale: string
     const c = copy[lang];
     const prefix = locale === "en" ? "" : `/${locale}`;
     const faqs = getChristmasFaqs(locale);
+    const segmented = locale === "en" ? getChristmasSegmentedSheet() : undefined;
     return <main className="bg-slate-50 py-10 text-slate-800">
         <div className="mx-auto max-w-6xl space-y-8 px-5">
             <section className="rounded-3xl bg-white p-7 shadow-sm">
@@ -172,6 +180,7 @@ export default function ChristmasPrintableDownloads({ locale }: { locale: string
                 <p className="mt-5 text-lg leading-8">{c.intro}</p>
                 <nav aria-label={c.label} className="mt-5 flex flex-wrap gap-4">
                     {items.map(item => <a className="font-semibold text-brand-blue underline" key={item.slug} href={`#${item.slug}`}>{item.name[lang]} · {item.count}</a>)}
+                    {segmented && <a className="font-semibold text-brand-blue underline" href={`#${segmented.id}`}>{segmented.title} · {segmented.count}</a>}
                 </nav>
                 <a href="/ChristmasDottoDot.pdf" download className="mt-5 inline-block text-sm font-semibold text-brand-blue underline">{c.legacy}</a>
             </section>
@@ -201,6 +210,7 @@ export default function ChristmasPrintableDownloads({ locale }: { locale: string
                     </div>
                 </article>;
             })}
+            {locale === "en" && <ChristmasSegmentedEntry />}
             <section className="rounded-3xl bg-white p-7">
                 <p className="leading-7">{c.note}</p>
                 <div className="mt-6 space-y-5">{faqs.map(f => <div key={f.q}><h2 className="text-lg font-bold">{f.q}</h2><p className="mt-2 leading-7">{f.a}</p></div>)}</div>
